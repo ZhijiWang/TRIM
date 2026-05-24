@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "trim-method"
+version = "0.1.1"
+description = "Threshold–Rationale Interpretive Modelling for human-created annotations."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [
+  { name = "Zhiji Wang" }
+]
+dependencies = [
+  "pandas",
+  "networkx"
+]
+
+[project.scripts]
+trim = "trim.cli:main"
+trim-validate = "trim.cli:main"
+trim-report = "trim.cli:main"
+trim-graph = "trim.cli:main"
+trim-compare = "trim.cli:main"
+
+[project.optional-dependencies]
+test = [
+  "pytest"
+]
+
+[tool.setuptools.packages.find]
+include = ["trim*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
