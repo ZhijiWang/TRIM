@@ -1,0 +1,4 @@
+segment_id,case_id,source,language,segment_order,original_text,translation_or_paraphrase,location_note,segment_note
+GROVE_TAJOMARU_01,GROVE_TAJOMARU,In a Grove,Japanese,1,Tajōmaru testimony section,"Tajōmaru presents the event as confession, contest narration, and self-display.",Tajōmaru testimony,Source segment used as evidence anchor for operation_function / reframes.
+GROVE_MASAGO_01,GROVE_MASAGO,In a Grove,Japanese,1,Masago testimony section,"Masago's account combines victim-position, shame, accusation, self-blame, and failed self-destruction.",Masago testimony,Source segment used as evidence anchor for perspective_assignment / qualifies.
+GROVE_TAKEHIRO_01,GROVE_TAKEHIRO,In a Grove,Japanese,1,Takehiro testimony through a medium,Takehiro's posthumous testimony adds an incompatible warrant through medium speech.,Takehiro testimony,Source segment used as evidence anchor for warrant_relation / contradicts+suspends.
