@@ -1,6 +1,6 @@
 # TRIM: Threshold–Rationale Interpretive Modelling
 
-![Tests](https://img.shields.io/badge/tests-pytest-blue)
+[![Tests](https://github.com/ZhijiWang/TRIM/actions/workflows/tests.yml/badge.svg)](https://github.com/ZhijiWang/TRIM/actions/workflows/tests.yml)
 ![License: MIT](https://img.shields.io/badge/license-MIT-green)
 ![Python](https://img.shields.io/badge/python-3.11%2B-blue)
 
@@ -9,6 +9,8 @@ human-created annotations of evidence-to-function conversion in narrative
 analysis. It supports well-formed, comparable, and reviewable annotation through
 controlled vocabulary checks, friction signature parsing, comparison tables,
 graph export, contested-threshold review, and intercoder comparison utilities.
+
+Current release: v0.1.1 demonstration package.
 
 ## What TRIM Provides
 
@@ -96,10 +98,15 @@ annotations from multiple coders.
 
 ## Documentation
 
+The package version is v0.1.1. The `friction_locus` coding manual is versioned
+separately as v0.2 because it develops coder-facing guidance for the controlled
+field.
+
 - [`docs/TRIM_codebook_v0_1_1.md`](docs/TRIM_codebook_v0_1_1.md)
 - [`docs/TRIM_Coding_Manual_v0_2_friction_locus_final.md`](docs/TRIM_Coding_Manual_v0_2_friction_locus_final.md)
 - [`docs/software_scope.md`](docs/software_scope.md)
 - [`docs/demo_dataset_notes.md`](docs/demo_dataset_notes.md)
+- [`docs/release_instructions.md`](docs/release_instructions.md)
 - [`CHANGELOG.md`](CHANGELOG.md)
 - [`CONTRIBUTING.md`](CONTRIBUTING.md)
 
