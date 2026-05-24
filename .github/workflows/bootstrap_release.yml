@@ -1,0 +1,61 @@
+name: Bootstrap TRIM release contents
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/bootstrap_release.yml"
+      - ".github/trim_release_payload/**"
+
+permissions:
+  contents: write
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Expand release payload
+        run: |
+          set -euo pipefail
+          cat \
+            .github/trim_release_payload/part_aa \
+            .github/trim_release_payload/part_ab \
+            .github/trim_release_payload/part_ab_tail \
+            .github/trim_release_payload/part_ac \
+            .github/trim_release_payload/part_ad \
+            .github/trim_release_payload/part_ae0 \
+            .github/trim_release_payload/part_ae1 \
+            | tr -d '\n' > /tmp/trim_core.b64
+          base64 -d /tmp/trim_core.b64 > /tmp/trim_core.tar.gz
+          mkdir -p /tmp/trim_extract
+          tar -xzf /tmp/trim_core.tar.gz -C /tmp/trim_extract
+          cp -R /tmp/trim_extract/. ./
+
+      - name: Install and verify
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install -e .
+          python -m pytest
+          python examples/demo_trim_workflow.py
+
+      - name: Commit release contents
+        run: |
+          set -euo pipefail
+          rm -rf .github/trim_release_payload
+          rm -f .github/workflows/bootstrap_release.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No release content changes to commit."
+          else
+            git commit -m "Add TRIM v0.1.1 release contents"
+            git push
+          fi
