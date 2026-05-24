@@ -22,6 +22,8 @@ Current release: v0.1.1 demonstration package.
 - Contested-threshold review workflow using `alternative_signature` and
   `rationale_note`.
 - Intercoder comparison utilities for multi-coder annotation projects.
+- Optional source-segmentation workflow for auditable textual units.
+- Second-coder onboarding materials for reliability pilots.
 
 ## Core Model
 
@@ -85,6 +87,10 @@ The dataset supports comparison patterns for same function / different
 signature, same cue / different function, broad testimonial form / different
 signature, and contested dominant threshold review.
 
+Optional source segmentation can be used upstream of TRIM annotation to make
+textual evidence units auditable before validation, comparison, and graph
+export.
+
 ## Scope
 
 The validator checks schema conformance and comparability. Human scholarly
@@ -104,8 +110,14 @@ field.
 
 - [`docs/TRIM_codebook_v0_1_1.md`](docs/TRIM_codebook_v0_1_1.md)
 - [`docs/TRIM_Coding_Manual_v0_2_friction_locus_final.md`](docs/TRIM_Coding_Manual_v0_2_friction_locus_final.md)
+- [`docs/TRIM_Coding_Manual_v0_2_rationale_mechanism.md`](docs/TRIM_Coding_Manual_v0_2_rationale_mechanism.md)
 - [`docs/software_scope.md`](docs/software_scope.md)
 - [`docs/demo_dataset_notes.md`](docs/demo_dataset_notes.md)
+- [`docs/segmentation_workflow.md`](docs/segmentation_workflow.md)
+- [`docs/second_coder_onboarding.md`](docs/second_coder_onboarding.md)
+- [`docs/intercoder_workflow.md`](docs/intercoder_workflow.md)
+- [`docs/methodological_position.md`](docs/methodological_position.md)
+- [`docs/article_use.md`](docs/article_use.md)
 - [`docs/release_instructions.md`](docs/release_instructions.md)
 - [`CHANGELOG.md`](CHANGELOG.md)
 - [`CONTRIBUTING.md`](CONTRIBUTING.md)
