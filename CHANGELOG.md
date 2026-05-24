@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- Optional source segmentation workflow and example data.
+- Second-coder onboarding materials and template files.
+- Coder-facing manual for `rationale_mechanism`.
+- Minimal demonstration notebook.
+- Methodological positioning and article-use documentation.
+
 ## v0.1.1
 
 TRIM v0.1.1 prepares the package for public research software release as a
