@@ -546,17 +546,14 @@ is to identify the dominant converter from evidence to function.
    - Yes → `perspective_assignment`.
    - No → continue.
 
-3. Does later fulfilment, retrospective framing, historical readability, or
-   reuse across time reclassify earlier evidence?
-   - Yes → consider `temporal_layering`.
-   - Before choosing it, ask whether local cross-warrant conflict is the more
-     direct converter. If local warrant conflict is decisive, use
-     `warrant_relation`.
-   - No → continue.
-
-4. Are multiple warrants interacting, conflicting, ranking, qualifying, or
+3. Are multiple warrants interacting, conflicting, ranking, qualifying, or
    suspending one another?
    - Yes → `warrant_relation`.
+   - No → continue.
+
+4. Does later fulfilment, retrospective framing, historical readability, or
+   reuse across time reclassify earlier evidence?
+   - Yes → `temporal_layering`.
    - No → continue.
 
 5. Is one source, medium, speaker, or result being granted warranting standing?
@@ -574,3 +571,9 @@ is to identify the dominant converter from evidence to function.
 
 8. If none of the above applies, consider reserved `cue_function` with
    project-lead review.
+
+This ordering is a coding convention for reliability work. It gives coders a
+stable route through cases where multiple thresholds are present. The order
+prioritizes boundary and perspective conditions first, then local warrant
+relations, then temporal reclassification, then source attribution and local
+operations. Alternative orderings may be tested in future reliability studies.
