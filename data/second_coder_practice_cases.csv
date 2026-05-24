@@ -1,0 +1,4 @@
+case_id,text,case_label,source,language,case_type,function_label,cue_family,broad_function_family,evidence_anchor,evidence_nodes,anchor_node,friction_locus,rationale_mechanism,epistemic_support,discourse_level,temporal_orientation,uncertainty_flag,rationale_note,alternative_signature,coder_id,status
+GROVE_TAJOMARU,In a Grove,Tajōmaru's testimony,In a Grove,Japanese,testimony,,testimony,self-exculpatory testimony,GROVE_TAJOMARU_01: Tajōmaru testimony section,,,,,,,,,,,second_coder,pilot
+GROVE_MASAGO,In a Grove,Masago's testimony,In a Grove,Japanese,testimony,,testimony,self-exculpatory testimony,GROVE_MASAGO_01: Masago testimony section,,,,,,,,,,,second_coder,pilot
+GROVE_TAKEHIRO,In a Grove,Takehiro's posthumous testimony,In a Grove,Japanese,testimony,,testimony,incompatible testimonial warrant,GROVE_TAKEHIRO_01: Takehiro testimony through a medium,,,,,,,,,,,second_coder,pilot
