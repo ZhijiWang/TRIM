@@ -1,0 +1,1471 @@
+{
+  "directed": true,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "case_id": "ZZ_XIANG_7",
+      "node_type": "case",
+      "label": "Xiang 7, 三卜郊不從",
+      "source": "Zuo zhuan",
+      "text": "Zuo zhuan",
+      "id": "ZZ_XIANG_7::case"
+    },
+    {
+      "case_id": "ZZ_XIANG_7",
+      "node_type": "evidence",
+      "label": "failed_divination",
+      "source": "Zuo zhuan",
+      "text": "failed_divination",
+      "id": "ZZ_XIANG_7::evidence::1"
+    },
+    {
+      "case_id": "ZZ_XIANG_7",
+      "node_type": "evidence",
+      "label": "ritual_timing",
+      "source": "Zuo zhuan",
+      "text": "ritual_timing",
+      "id": "ZZ_XIANG_7::evidence::2"
+    },
+    {
+      "case_id": "ZZ_XIANG_7",
+      "node_type": "evidence",
+      "label": "Meng_Xianzi_interpretation",
+      "source": "Zuo zhuan",
+      "text": "Meng_Xianzi_interpretation",
+      "id": "ZZ_XIANG_7::evidence::3"
+    },
+    {
+      "case_id": "ZZ_XIANG_7",
+      "node_type": "anchor",
+      "label": "Meng_Xianzi_interpretation",
+      "source": "Zuo zhuan",
+      "text": "三卜郊不從; Meng Xianzi's ritual-timing explanation",
+      "id": "ZZ_XIANG_7::anchor"
+    },
+    {
+      "case_id": "ZZ_XIANG_7",
+      "node_type": "threshold_rationale",
+      "label": "operation_function / stabilizes / textual_anchor+ritual_sequence / intradiegetic / immediate / low",
+      "source": "Zuo zhuan",
+      "text": "Interpretation converts the failed divination into procedural intelligibility by restoring ritual sequence.",
+      "friction_locus": "operation_function",
+      "rationale_mechanism": "stabilizes",
+      "epistemic_support": "textual_anchor+ritual_sequence",
+      "discourse_level": "intradiegetic",
+      "temporal_orientation": "immediate",
+      "uncertainty_flag": "low",
+      "rationale_note": "Interpretation converts the failed divination into procedural intelligibility by restoring ritual sequence.",
+      "id": "ZZ_XIANG_7::threshold_rationale"
+    },
+    {
+      "case_id": "ZZ_XIANG_7",
+      "node_type": "function",
+      "label": "immediate_stabilization",
+      "source": "Zuo zhuan",
+      "text": "immediate_stabilization",
+      "id": "ZZ_XIANG_7::function"
+    },
+    {
+      "case_id": "ZZ_MIN_1",
+      "node_type": "case",
+      "label": "Min 1, 畢萬筮仕於晉",
+      "source": "Zuo zhuan",
+      "text": "",
+      "id": "ZZ_MIN_1::case"
+    },
+    {
+      "case_id": "ZZ_MIN_1",
+      "node_type": "evidence",
+      "label": "milfoil_divination",
+      "source": "Zuo zhuan",
+      "text": "milfoil_divination",
+      "id": "ZZ_MIN_1::evidence::1"
+    },
+    {
+      "case_id": "ZZ_MIN_1",
+      "node_type": "evidence",
+      "label": "Yi_related_result",
+      "source": "Zuo zhuan",
+      "text": "Yi_related_result",
+      "id": "ZZ_MIN_1::evidence::2"
+    },
+    {
+      "case_id": "ZZ_MIN_1",
+      "node_type": "evidence",
+      "label": "Xin_Liao_interpretation",
+      "source": "Zuo zhuan",
+      "text": "Xin_Liao_interpretation",
+      "id": "ZZ_MIN_1::evidence::3"
+    },
+    {
+      "case_id": "ZZ_MIN_1",
+      "node_type": "evidence",
+      "label": "lineage_projection",
+      "source": "Zuo zhuan",
+      "text": "lineage_projection",
+      "id": "ZZ_MIN_1::evidence::4"
+    },
+    {
+      "case_id": "ZZ_MIN_1",
+      "node_type": "anchor",
+      "label": "Xin_Liao_interpretation",
+      "source": "Zuo zhuan",
+      "text": "畢萬筮仕於晉; 屯之比; Xin Liao's auspicious interpretation",
+      "id": "ZZ_MIN_1::anchor"
+    },
+    {
+      "case_id": "ZZ_MIN_1",
+      "node_type": "threshold_rationale",
+      "label": "warrant_attribution / stabilizes+projects / textual_anchor+internal_sequence / intradiegetic / prospective / medium",
+      "source": "Zuo zhuan",
+      "text": "The Yi-related result is accepted as a stable prospective lineage judgement without reopening local deliberation.",
+      "friction_locus": "warrant_attribution",
+      "rationale_mechanism": "stabilizes+projects",
+      "epistemic_support": "textual_anchor+internal_sequence",
+      "discourse_level": "intradiegetic",
+      "temporal_orientation": "prospective",
+      "uncertainty_flag": "medium",
+      "rationale_note": "The Yi-related result is accepted as a stable prospective lineage judgement without reopening local deliberation.",
+      "id": "ZZ_MIN_1::threshold_rationale"
+    },
+    {
+      "case_id": "ZZ_MIN_1",
+      "node_type": "function",
+      "label": "immediate_stabilization",
+      "source": "Zuo zhuan",
+      "text": "immediate_stabilization",
+      "id": "ZZ_MIN_1::function"
+    },
+    {
+      "case_id": "ZZ_XI_4",
+      "node_type": "case",
+      "label": "Xi 4, 初，晉獻公欲以驪姬為夫人：卜筮相違",
+      "source": "Zuo zhuan",
+      "text": "",
+      "id": "ZZ_XI_4::case"
+    },
+    {
+      "case_id": "ZZ_XI_4",
+      "node_type": "evidence",
+      "label": "turtle_result_unfavourable",
+      "source": "Zuo zhuan",
+      "text": "turtle_result_unfavourable",
+      "id": "ZZ_XI_4::evidence::1"
+    },
+    {
+      "case_id": "ZZ_XI_4",
+      "node_type": "evidence",
+      "label": "milfoil_result_favourable",
+      "source": "Zuo zhuan",
+      "text": "milfoil_result_favourable",
+      "id": "ZZ_XI_4::evidence::2"
+    },
+    {
+      "case_id": "ZZ_XI_4",
+      "node_type": "evidence",
+      "label": "ranking_speech",
+      "source": "Zuo zhuan",
+      "text": "ranking_speech",
+      "id": "ZZ_XI_4::evidence::3"
+    },
+    {
+      "case_id": "ZZ_XI_4",
+      "node_type": "evidence",
+      "label": "ominous_line_text",
+      "source": "Zuo zhuan",
+      "text": "ominous_line_text",
+      "id": "ZZ_XI_4::evidence::4"
+    },
+    {
+      "case_id": "ZZ_XI_4",
+      "node_type": "evidence",
+      "label": "retrospective_frame",
+      "source": "Zuo zhuan",
+      "text": "retrospective_frame",
+      "id": "ZZ_XI_4::evidence::5"
+    },
+    {
+      "case_id": "ZZ_XI_4",
+      "node_type": "anchor",
+      "label": "ranking_speech",
+      "source": "Zuo zhuan",
+      "text": "卜不吉，筮吉; 筮短龜長; 一薰一蕕，十年尚猶有臭",
+      "id": "ZZ_XI_4::anchor"
+    },
+    {
+      "case_id": "ZZ_XI_4",
+      "node_type": "threshold_rationale",
+      "label": "warrant_relation / extends / textual_anchor+internal_sequence / intradiegetic / recursive / medium",
+      "source": "Zuo zhuan",
+      "text": "The dominant threshold is warrant_relation because conflict among turtle result, milfoil result, ranking speech, and line text prevents clean closure. Temporal layering is a meaningful secondary observation.",
+      "friction_locus": "warrant_relation",
+      "rationale_mechanism": "extends",
+      "epistemic_support": "textual_anchor+internal_sequence",
+      "discourse_level": "intradiegetic",
+      "temporal_orientation": "recursive",
+      "uncertainty_flag": "medium",
+      "rationale_note": "The dominant threshold is warrant_relation because conflict among turtle result, milfoil result, ranking speech, and line text prevents clean closure. Temporal layering is a meaningful secondary observation.",
+      "id": "ZZ_XI_4::threshold_rationale"
+    },
+    {
+      "case_id": "ZZ_XI_4",
+      "node_type": "function",
+      "label": "extended_deliberation",
+      "source": "Zuo zhuan",
+      "text": "extended_deliberation",
+      "id": "ZZ_XI_4::function"
+    },
+    {
+      "case_id": "ZZ_ZHUANG_22",
+      "node_type": "case",
+      "label": "Zhuang 22, 陳厲公生敬仲：卜妻與周易觀之否",
+      "source": "Zuo zhuan",
+      "text": "",
+      "id": "ZZ_ZHUANG_22::case"
+    },
+    {
+      "case_id": "ZZ_ZHUANG_22",
+      "node_type": "evidence",
+      "label": "marriage_divination",
+      "source": "Zuo zhuan",
+      "text": "marriage_divination",
+      "id": "ZZ_ZHUANG_22::evidence::1"
+    },
+    {
+      "case_id": "ZZ_ZHUANG_22",
+      "node_type": "evidence",
+      "label": "Zhouyi_result",
+      "source": "Zuo zhuan",
+      "text": "Zhouyi_result",
+      "id": "ZZ_ZHUANG_22::evidence::2"
+    },
+    {
+      "case_id": "ZZ_ZHUANG_22",
+      "node_type": "evidence",
+      "label": "generational_prediction",
+      "source": "Zuo zhuan",
+      "text": "generational_prediction",
+      "id": "ZZ_ZHUANG_22::evidence::3"
+    },
+    {
+      "case_id": "ZZ_ZHUANG_22",
+      "node_type": "evidence",
+      "label": "later_confirmation",
+      "source": "Zuo zhuan",
+      "text": "later_confirmation",
+      "id": "ZZ_ZHUANG_22::evidence::4"
+    },
+    {
+      "case_id": "ZZ_ZHUANG_22",
+      "node_type": "anchor",
+      "label": "generational_prediction",
+      "source": "Zuo zhuan",
+      "text": "卜妻敬仲; 觀之否; five/eight-generation prediction; later Chen lineage rise",
+      "id": "ZZ_ZHUANG_22::anchor"
+    },
+    {
+      "case_id": "ZZ_ZHUANG_22",
+      "node_type": "threshold_rationale",
+      "label": "temporal_layering / extends+projects / textual_anchor+internal_sequence / commentarial_discourse / prospective-retrospective / medium",
+      "source": "Zuo zhuan",
+      "text": "The sign remains active across projected descent and later historical readability.",
+      "friction_locus": "temporal_layering",
+      "rationale_mechanism": "extends+projects",
+      "epistemic_support": "textual_anchor+internal_sequence",
+      "discourse_level": "commentarial_discourse",
+      "temporal_orientation": "prospective-retrospective",
+      "uncertainty_flag": "medium",
+      "rationale_note": "The sign remains active across projected descent and later historical readability.",
+      "id": "ZZ_ZHUANG_22::threshold_rationale"
+    },
+    {
+      "case_id": "ZZ_ZHUANG_22",
+      "node_type": "function",
+      "label": "extended_deliberation",
+      "source": "Zuo zhuan",
+      "text": "extended_deliberation",
+      "id": "ZZ_ZHUANG_22::function"
+    },
+    {
+      "case_id": "MAC_1_3",
+      "node_type": "case",
+      "label": "Act 1.3, witches' prophecy and Cawdor confirmation",
+      "source": "Macbeth",
+      "text": "Macbeth",
+      "id": "MAC_1_3::case"
+    },
+    {
+      "case_id": "MAC_1_3",
+      "node_type": "evidence",
+      "label": "prophetic_salutation",
+      "source": "Macbeth",
+      "text": "prophetic_salutation",
+      "id": "MAC_1_3::evidence::1"
+    },
+    {
+      "case_id": "MAC_1_3",
+      "node_type": "evidence",
+      "label": "partial_confirmation",
+      "source": "Macbeth",
+      "text": "partial_confirmation",
+      "id": "MAC_1_3::evidence::2"
+    },
+    {
+      "case_id": "MAC_1_3",
+      "node_type": "evidence",
+      "label": "Macbeth_uptake",
+      "source": "Macbeth",
+      "text": "Macbeth_uptake",
+      "id": "MAC_1_3::evidence::3"
+    },
+    {
+      "case_id": "MAC_1_3",
+      "node_type": "anchor",
+      "label": "partial_confirmation",
+      "source": "Macbeth",
+      "text": "Witches hail Macbeth as Cawdor and future king; Ross and Angus confirm Cawdor.",
+      "id": "MAC_1_3::anchor"
+    },
+    {
+      "case_id": "MAC_1_3",
+      "node_type": "threshold_rationale",
+      "label": "warrant_attribution / authorizes+reframes / textual_anchor+internal_sequence / dramatic_present / prospective / medium",
+      "source": "Macbeth",
+      "text": "Partial confirmation gives prophetic speech warranting force and reframes kingship as actionable possibility.",
+      "friction_locus": "warrant_attribution",
+      "rationale_mechanism": "authorizes+reframes",
+      "epistemic_support": "textual_anchor+internal_sequence",
+      "discourse_level": "dramatic_present",
+      "temporal_orientation": "prospective",
+      "uncertainty_flag": "medium",
+      "rationale_note": "Partial confirmation gives prophetic speech warranting force and reframes kingship as actionable possibility.",
+      "id": "MAC_1_3::threshold_rationale"
+    },
+    {
+      "case_id": "MAC_1_3",
+      "node_type": "function",
+      "label": "ambition_trigger_authorization",
+      "source": "Macbeth",
+      "text": "ambition_trigger_authorization",
+      "id": "MAC_1_3::function"
+    },
+    {
+      "case_id": "MAC_4_1",
+      "node_type": "case",
+      "label": "Act 4.1, apparition prophecies",
+      "source": "Macbeth",
+      "text": "",
+      "id": "MAC_4_1::case"
+    },
+    {
+      "case_id": "MAC_4_1",
+      "node_type": "evidence",
+      "label": "apparition_warning",
+      "source": "Macbeth",
+      "text": "apparition_warning",
+      "id": "MAC_4_1::evidence::1"
+    },
+    {
+      "case_id": "MAC_4_1",
+      "node_type": "evidence",
+      "label": "woman_born_condition",
+      "source": "Macbeth",
+      "text": "woman_born_condition",
+      "id": "MAC_4_1::evidence::2"
+    },
+    {
+      "case_id": "MAC_4_1",
+      "node_type": "evidence",
+      "label": "Birnam_Wood_condition",
+      "source": "Macbeth",
+      "text": "Birnam_Wood_condition",
+      "id": "MAC_4_1::evidence::3"
+    },
+    {
+      "case_id": "MAC_4_1",
+      "node_type": "evidence",
+      "label": "Macbeth_interpretation",
+      "source": "Macbeth",
+      "text": "Macbeth_interpretation",
+      "id": "MAC_4_1::evidence::4"
+    },
+    {
+      "case_id": "MAC_4_1",
+      "node_type": "anchor",
+      "label": "Macbeth_interpretation",
+      "source": "Macbeth",
+      "text": "none of woman born; Birnam Wood prophecy",
+      "id": "MAC_4_1::anchor"
+    },
+    {
+      "case_id": "MAC_4_1",
+      "node_type": "threshold_rationale",
+      "label": "operation_function / reframes+narrows / textual_anchor+internal_sequence / dramatic_present / prospective-retrospective / low",
+      "source": "Macbeth",
+      "text": "Macbeth converts equivocal conditional prophecy into practical security.",
+      "friction_locus": "operation_function",
+      "rationale_mechanism": "reframes+narrows",
+      "epistemic_support": "textual_anchor+internal_sequence",
+      "discourse_level": "dramatic_present",
+      "temporal_orientation": "prospective-retrospective",
+      "uncertainty_flag": "low",
+      "rationale_note": "Macbeth converts equivocal conditional prophecy into practical security.",
+      "id": "MAC_4_1::threshold_rationale"
+    },
+    {
+      "case_id": "MAC_4_1",
+      "node_type": "function",
+      "label": "false_security",
+      "source": "Macbeth",
+      "text": "false_security",
+      "id": "MAC_4_1::function"
+    },
+    {
+      "case_id": "MAC_5_8",
+      "node_type": "case",
+      "label": "Act 5.8, Macduff disclosure and double sense",
+      "source": "Macbeth",
+      "text": "",
+      "id": "MAC_5_8::case"
+    },
+    {
+      "case_id": "MAC_5_8",
+      "node_type": "evidence",
+      "label": "Macduff_disclosure",
+      "source": "Macbeth",
+      "text": "Macduff_disclosure",
+      "id": "MAC_5_8::evidence::1"
+    },
+    {
+      "case_id": "MAC_5_8",
+      "node_type": "evidence",
+      "label": "fulfilled_prophecy",
+      "source": "Macbeth",
+      "text": "fulfilled_prophecy",
+      "id": "MAC_5_8::evidence::2"
+    },
+    {
+      "case_id": "MAC_5_8",
+      "node_type": "evidence",
+      "label": "Macbeth_recognition",
+      "source": "Macbeth",
+      "text": "Macbeth_recognition",
+      "id": "MAC_5_8::evidence::3"
+    },
+    {
+      "case_id": "MAC_5_8",
+      "node_type": "anchor",
+      "label": "Macduff_disclosure",
+      "source": "Macbeth",
+      "text": "Macduff reveals he was untimely ripped; Macbeth recognizes the double sense.",
+      "id": "MAC_5_8::anchor"
+    },
+    {
+      "case_id": "MAC_5_8",
+      "node_type": "threshold_rationale",
+      "label": "temporal_layering / reframes / textual_anchor+internal_sequence / dramatic_present / retrospective / low",
+      "source": "Macbeth",
+      "text": "Later fulfilment reclassifies Macbeth's earlier assurance as equivocal trap.",
+      "friction_locus": "temporal_layering",
+      "rationale_mechanism": "reframes",
+      "epistemic_support": "textual_anchor+internal_sequence",
+      "discourse_level": "dramatic_present",
+      "temporal_orientation": "retrospective",
+      "uncertainty_flag": "low",
+      "rationale_note": "Later fulfilment reclassifies Macbeth's earlier assurance as equivocal trap.",
+      "id": "MAC_5_8::threshold_rationale"
+    },
+    {
+      "case_id": "MAC_5_8",
+      "node_type": "function",
+      "label": "retrospective_trap",
+      "source": "Macbeth",
+      "text": "retrospective_trap",
+      "id": "MAC_5_8::function"
+    },
+    {
+      "case_id": "GROVE_TAJOMARU",
+      "node_type": "case",
+      "label": "Tajōmaru's testimony",
+      "source": "In a Grove",
+      "text": "In a Grove",
+      "id": "GROVE_TAJOMARU::case"
+    },
+    {
+      "case_id": "GROVE_TAJOMARU",
+      "node_type": "evidence",
+      "label": "confession",
+      "source": "In a Grove",
+      "text": "confession",
+      "id": "GROVE_TAJOMARU::evidence::1"
+    },
+    {
+      "case_id": "GROVE_TAJOMARU",
+      "node_type": "evidence",
+      "label": "self_display",
+      "source": "In a Grove",
+      "text": "self_display",
+      "id": "GROVE_TAJOMARU::evidence::2"
+    },
+    {
+      "case_id": "GROVE_TAJOMARU",
+      "node_type": "evidence",
+      "label": "contest_narration",
+      "source": "In a Grove",
+      "text": "contest_narration",
+      "id": "GROVE_TAJOMARU::evidence::3"
+    },
+    {
+      "case_id": "GROVE_TAJOMARU",
+      "node_type": "anchor",
+      "label": "confession",
+      "source": "In a Grove",
+      "text": "Tajōmaru's confession/testimony section",
+      "id": "GROVE_TAJOMARU::anchor"
+    },
+    {
+      "case_id": "GROVE_TAJOMARU",
+      "node_type": "threshold_rationale",
+      "label": "operation_function / reframes / textual_anchor+narrative_context / frame_narrative / retrospective / medium",
+      "source": "In a Grove",
+      "text": "Confession is converted from apparent truth-disclosure into self-justifying self-display.",
+      "friction_locus": "operation_function",
+      "rationale_mechanism": "reframes",
+      "epistemic_support": "textual_anchor+narrative_context",
+      "discourse_level": "frame_narrative",
+      "temporal_orientation": "retrospective",
+      "uncertainty_flag": "medium",
+      "rationale_note": "Confession is converted from apparent truth-disclosure into self-justifying self-display.",
+      "id": "GROVE_TAJOMARU::threshold_rationale"
+    },
+    {
+      "case_id": "GROVE_TAJOMARU",
+      "node_type": "function",
+      "label": "self_justification",
+      "source": "In a Grove",
+      "text": "self_justification",
+      "id": "GROVE_TAJOMARU::function"
+    },
+    {
+      "case_id": "GROVE_MASAGO",
+      "node_type": "case",
+      "label": "Masago's testimony",
+      "source": "In a Grove",
+      "text": "",
+      "id": "GROVE_MASAGO::case"
+    },
+    {
+      "case_id": "GROVE_MASAGO",
+      "node_type": "evidence",
+      "label": "shame_narrative",
+      "source": "In a Grove",
+      "text": "shame_narrative",
+      "id": "GROVE_MASAGO::evidence::1"
+    },
+    {
+      "case_id": "GROVE_MASAGO",
+      "node_type": "evidence",
+      "label": "accusation",
+      "source": "In a Grove",
+      "text": "accusation",
+      "id": "GROVE_MASAGO::evidence::2"
+    },
+    {
+      "case_id": "GROVE_MASAGO",
+      "node_type": "evidence",
+      "label": "self_blame",
+      "source": "In a Grove",
+      "text": "self_blame",
+      "id": "GROVE_MASAGO::evidence::3"
+    },
+    {
+      "case_id": "GROVE_MASAGO",
+      "node_type": "evidence",
+      "label": "failed_self_destruction",
+      "source": "In a Grove",
+      "text": "failed_self_destruction",
+      "id": "GROVE_MASAGO::evidence::4"
+    },
+    {
+      "case_id": "GROVE_MASAGO",
+      "node_type": "anchor",
+      "label": "shame_narrative",
+      "source": "In a Grove",
+      "text": "Masago's confession/testimony section",
+      "id": "GROVE_MASAGO::anchor"
+    },
+    {
+      "case_id": "GROVE_MASAGO",
+      "node_type": "threshold_rationale",
+      "label": "perspective_assignment / qualifies / textual_anchor+narrative_context / frame_narrative / retrospective / high",
+      "source": "In a Grove",
+      "text": "The testimony does not stabilize around one testimonial role because victim-position, shame, accusation, and self-blame qualify one another.",
+      "friction_locus": "perspective_assignment",
+      "rationale_mechanism": "qualifies",
+      "epistemic_support": "textual_anchor+narrative_context",
+      "discourse_level": "frame_narrative",
+      "temporal_orientation": "retrospective",
+      "uncertainty_flag": "high",
+      "rationale_note": "The testimony does not stabilize around one testimonial role because victim-position, shame, accusation, and self-blame qualify one another.",
+      "id": "GROVE_MASAGO::threshold_rationale"
+    },
+    {
+      "case_id": "GROVE_MASAGO",
+      "node_type": "function",
+      "label": "self_defence_self_accusation",
+      "source": "In a Grove",
+      "text": "self_defence_self_accusation",
+      "id": "GROVE_MASAGO::function"
+    },
+    {
+      "case_id": "GROVE_TAKEHIRO",
+      "node_type": "case",
+      "label": "Takehiro's posthumous testimony",
+      "source": "In a Grove",
+      "text": "",
+      "id": "GROVE_TAKEHIRO::case"
+    },
+    {
+      "case_id": "GROVE_TAKEHIRO",
+      "node_type": "evidence",
+      "label": "posthumous_testimony",
+      "source": "In a Grove",
+      "text": "posthumous_testimony",
+      "id": "GROVE_TAKEHIRO::evidence::1"
+    },
+    {
+      "case_id": "GROVE_TAKEHIRO",
+      "node_type": "evidence",
+      "label": "medium_speech",
+      "source": "In a Grove",
+      "text": "medium_speech",
+      "id": "GROVE_TAKEHIRO::evidence::2"
+    },
+    {
+      "case_id": "GROVE_TAKEHIRO",
+      "node_type": "evidence",
+      "label": "incompatible_account",
+      "source": "In a Grove",
+      "text": "incompatible_account",
+      "id": "GROVE_TAKEHIRO::evidence::3"
+    },
+    {
+      "case_id": "GROVE_TAKEHIRO",
+      "node_type": "anchor",
+      "label": "posthumous_testimony",
+      "source": "In a Grove",
+      "text": "murdered man's testimony through a medium",
+      "id": "GROVE_TAKEHIRO::anchor"
+    },
+    {
+      "case_id": "GROVE_TAKEHIRO",
+      "node_type": "threshold_rationale",
+      "label": "warrant_relation / contradicts+suspends / textual_anchor+narrative_context / frame_narrative / retrospective / high",
+      "source": "In a Grove",
+      "text": "Posthumous testimony adds an extraordinary warrant that contradicts rather than resolves the preceding accounts.",
+      "friction_locus": "warrant_relation",
+      "rationale_mechanism": "contradicts+suspends",
+      "epistemic_support": "textual_anchor+narrative_context",
+      "discourse_level": "frame_narrative",
+      "temporal_orientation": "retrospective",
+      "uncertainty_flag": "high",
+      "rationale_note": "Posthumous testimony adds an extraordinary warrant that contradicts rather than resolves the preceding accounts.",
+      "id": "GROVE_TAKEHIRO::threshold_rationale"
+    },
+    {
+      "case_id": "GROVE_TAKEHIRO",
+      "node_type": "function",
+      "label": "epistemic_suspension",
+      "source": "In a Grove",
+      "text": "epistemic_suspension",
+      "id": "GROVE_TAKEHIRO::function"
+    }
+  ],
+  "edges": [
+    {
+      "case_id": "ZZ_XIANG_7",
+      "edge_type": "contains_evidence",
+      "label": "contains_evidence",
+      "source": "ZZ_XIANG_7::case",
+      "target": "ZZ_XIANG_7::evidence::1"
+    },
+    {
+      "case_id": "ZZ_XIANG_7",
+      "edge_type": "contains_evidence",
+      "label": "contains_evidence",
+      "source": "ZZ_XIANG_7::case",
+      "target": "ZZ_XIANG_7::evidence::2"
+    },
+    {
+      "case_id": "ZZ_XIANG_7",
+      "edge_type": "contains_evidence",
+      "label": "contains_evidence",
+      "source": "ZZ_XIANG_7::case",
+      "target": "ZZ_XIANG_7::evidence::3"
+    },
+    {
+      "case_id": "ZZ_XIANG_7",
+      "edge_type": "contributes_to_anchor",
+      "label": "contributes_to_anchor",
+      "source": "ZZ_XIANG_7::evidence::1",
+      "target": "ZZ_XIANG_7::anchor"
+    },
+    {
+      "case_id": "ZZ_XIANG_7",
+      "edge_type": "contributes_to_anchor",
+      "label": "contributes_to_anchor",
+      "source": "ZZ_XIANG_7::evidence::2",
+      "target": "ZZ_XIANG_7::anchor"
+    },
+    {
+      "case_id": "ZZ_XIANG_7",
+      "edge_type": "contributes_to_anchor",
+      "label": "contributes_to_anchor",
+      "source": "ZZ_XIANG_7::evidence::3",
+      "target": "ZZ_XIANG_7::anchor"
+    },
+    {
+      "case_id": "ZZ_XIANG_7",
+      "edge_type": "has_threshold_rationale",
+      "label": "has_threshold_rationale",
+      "source": "ZZ_XIANG_7::anchor",
+      "target": "ZZ_XIANG_7::threshold_rationale"
+    },
+    {
+      "case_id": "ZZ_XIANG_7",
+      "edge_type": "converts_to",
+      "label": "converts_to",
+      "friction_locus": "operation_function",
+      "rationale_mechanism": "stabilizes",
+      "epistemic_support": "textual_anchor+ritual_sequence",
+      "discourse_level": "intradiegetic",
+      "temporal_orientation": "immediate",
+      "uncertainty_flag": "low",
+      "rationale_note": "Interpretation converts the failed divination into procedural intelligibility by restoring ritual sequence.",
+      "source": "ZZ_XIANG_7::anchor",
+      "target": "ZZ_XIANG_7::function"
+    },
+    {
+      "case_id": "ZZ_XIANG_7",
+      "edge_type": "points_to_function",
+      "label": "points_to_function",
+      "source": "ZZ_XIANG_7::threshold_rationale",
+      "target": "ZZ_XIANG_7::function"
+    },
+    {
+      "case_id": "ZZ_MIN_1",
+      "edge_type": "contains_evidence",
+      "label": "contains_evidence",
+      "source": "ZZ_MIN_1::case",
+      "target": "ZZ_MIN_1::evidence::1"
+    },
+    {
+      "case_id": "ZZ_MIN_1",
+      "edge_type": "contains_evidence",
+      "label": "contains_evidence",
+      "source": "ZZ_MIN_1::case",
+      "target": "ZZ_MIN_1::evidence::2"
+    },
+    {
+      "case_id": "ZZ_MIN_1",
+      "edge_type": "contains_evidence",
+      "label": "contains_evidence",
+      "source": "ZZ_MIN_1::case",
+      "target": "ZZ_MIN_1::evidence::3"
+    },
+    {
+      "case_id": "ZZ_MIN_1",
+      "edge_type": "contains_evidence",
+      "label": "contains_evidence",
+      "source": "ZZ_MIN_1::case",
+      "target": "ZZ_MIN_1::evidence::4"
+    },
+    {
+      "case_id": "ZZ_MIN_1",
+      "edge_type": "contributes_to_anchor",
+      "label": "contributes_to_anchor",
+      "source": "ZZ_MIN_1::evidence::1",
+      "target": "ZZ_MIN_1::anchor"
+    },
+    {
+      "case_id": "ZZ_MIN_1",
+      "edge_type": "contributes_to_anchor",
+      "label": "contributes_to_anchor",
+      "source": "ZZ_MIN_1::evidence::2",
+      "target": "ZZ_MIN_1::anchor"
+    },
+    {
+      "case_id": "ZZ_MIN_1",
+      "edge_type": "contributes_to_anchor",
+      "label": "contributes_to_anchor",
+      "source": "ZZ_MIN_1::evidence::3",
+      "target": "ZZ_MIN_1::anchor"
+    },
+    {
+      "case_id": "ZZ_MIN_1",
+      "edge_type": "contributes_to_anchor",
+      "label": "contributes_to_anchor",
+      "source": "ZZ_MIN_1::evidence::4",
+      "target": "ZZ_MIN_1::anchor"
+    },
+    {
+      "case_id": "ZZ_MIN_1",
+      "edge_type": "has_threshold_rationale",
+      "label": "has_threshold_rationale",
+      "source": "ZZ_MIN_1::anchor",
+      "target": "ZZ_MIN_1::threshold_rationale"
+    },
+    {
+      "case_id": "ZZ_MIN_1",
+      "edge_type": "converts_to",
+      "label": "converts_to",
+      "friction_locus": "warrant_attribution",
+      "rationale_mechanism": "stabilizes+projects",
+      "epistemic_support": "textual_anchor+internal_sequence",
+      "discourse_level": "intradiegetic",
+      "temporal_orientation": "prospective",
+      "uncertainty_flag": "medium",
+      "rationale_note": "The Yi-related result is accepted as a stable prospective lineage judgement without reopening local deliberation.",
+      "source": "ZZ_MIN_1::anchor",
+      "target": "ZZ_MIN_1::function"
+    },
+    {
+      "case_id": "ZZ_MIN_1",
+      "edge_type": "points_to_function",
+      "label": "points_to_function",
+      "source": "ZZ_MIN_1::threshold_rationale",
+      "target": "ZZ_MIN_1::function"
+    },
+    {
+      "case_id": "ZZ_XI_4",
+      "edge_type": "contains_evidence",
+      "label": "contains_evidence",
+      "source": "ZZ_XI_4::case",
+      "target": "ZZ_XI_4::evidence::1"
+    },
+    {
+      "case_id": "ZZ_XI_4",
+      "edge_type": "contains_evidence",
+      "label": "contains_evidence",
+      "source": "ZZ_XI_4::case",
+      "target": "ZZ_XI_4::evidence::2"
+    },
+    {
+      "case_id": "ZZ_XI_4",
+      "edge_type": "contains_evidence",
+      "label": "contains_evidence",
+      "source": "ZZ_XI_4::case",
+      "target": "ZZ_XI_4::evidence::3"
+    },
+    {
+      "case_id": "ZZ_XI_4",
+      "edge_type": "contains_evidence",
+      "label": "contains_evidence",
+      "source": "ZZ_XI_4::case",
+      "target": "ZZ_XI_4::evidence::4"
+    },
+    {
+      "case_id": "ZZ_XI_4",
+      "edge_type": "contains_evidence",
+      "label": "contains_evidence",
+      "source": "ZZ_XI_4::case",
+      "target": "ZZ_XI_4::evidence::5"
+    },
+    {
+      "case_id": "ZZ_XI_4",
+      "edge_type": "contributes_to_anchor",
+      "label": "contributes_to_anchor",
+      "source": "ZZ_XI_4::evidence::1",
+      "target": "ZZ_XI_4::anchor"
+    },
+    {
+      "case_id": "ZZ_XI_4",
+      "edge_type": "contributes_to_anchor",
+      "label": "contributes_to_anchor",
+      "source": "ZZ_XI_4::evidence::2",
+      "target": "ZZ_XI_4::anchor"
+    },
+    {
+      "case_id": "ZZ_XI_4",
+      "edge_type": "contributes_to_anchor",
+      "label": "contributes_to_anchor",
+      "source": "ZZ_XI_4::evidence::3",
+      "target": "ZZ_XI_4::anchor"
+    },
+    {
+      "case_id": "ZZ_XI_4",
+      "edge_type": "contributes_to_anchor",
+      "label": "contributes_to_anchor",
+      "source": "ZZ_XI_4::evidence::4",
+      "target": "ZZ_XI_4::anchor"
+    },
+    {
+      "case_id": "ZZ_XI_4",
+      "edge_type": "contributes_to_anchor",
+      "label": "contributes_to_anchor",
+      "source": "ZZ_XI_4::evidence::5",
+      "target": "ZZ_XI_4::anchor"
+    },
+    {
+      "case_id": "ZZ_XI_4",
+      "edge_type": "has_threshold_rationale",
+      "label": "has_threshold_rationale",
+      "source": "ZZ_XI_4::anchor",
+      "target": "ZZ_XI_4::threshold_rationale"
+    },
+    {
+      "case_id": "ZZ_XI_4",
+      "edge_type": "converts_to",
+      "label": "converts_to",
+      "friction_locus": "warrant_relation",
+      "rationale_mechanism": "extends",
+      "epistemic_support": "textual_anchor+internal_sequence",
+      "discourse_level": "intradiegetic",
+      "temporal_orientation": "recursive",
+      "uncertainty_flag": "medium",
+      "rationale_note": "The dominant threshold is warrant_relation because conflict among turtle result, milfoil result, ranking speech, and line text prevents clean closure. Temporal layering is a meaningful secondary observation.",
+      "source": "ZZ_XI_4::anchor",
+      "target": "ZZ_XI_4::function"
+    },
+    {
+      "case_id": "ZZ_XI_4",
+      "edge_type": "points_to_function",
+      "label": "points_to_function",
+      "source": "ZZ_XI_4::threshold_rationale",
+      "target": "ZZ_XI_4::function"
+    },
+    {
+      "case_id": "ZZ_ZHUANG_22",
+      "edge_type": "contains_evidence",
+      "label": "contains_evidence",
+      "source": "ZZ_ZHUANG_22::case",
+      "target": "ZZ_ZHUANG_22::evidence::1"
+    },
+    {
+      "case_id": "ZZ_ZHUANG_22",
+      "edge_type": "contains_evidence",
+      "label": "contains_evidence",
+      "source": "ZZ_ZHUANG_22::case",
+      "target": "ZZ_ZHUANG_22::evidence::2"
+    },
+    {
+      "case_id": "ZZ_ZHUANG_22",
+      "edge_type": "contains_evidence",
+      "label": "contains_evidence",
+      "source": "ZZ_ZHUANG_22::case",
+      "target": "ZZ_ZHUANG_22::evidence::3"
+    },
+    {
+      "case_id": "ZZ_ZHUANG_22",
+      "edge_type": "contains_evidence",
+      "label": "contains_evidence",
+      "source": "ZZ_ZHUANG_22::case",
+      "target": "ZZ_ZHUANG_22::evidence::4"
+    },
+    {
+      "case_id": "ZZ_ZHUANG_22",
+      "edge_type": "contributes_to_anchor",
+      "label": "contributes_to_anchor",
+      "source": "ZZ_ZHUANG_22::evidence::1",
+      "target": "ZZ_ZHUANG_22::anchor"
+    },
+    {
+      "case_id": "ZZ_ZHUANG_22",
+      "edge_type": "contributes_to_anchor",
+      "label": "contributes_to_anchor",
+      "source": "ZZ_ZHUANG_22::evidence::2",
+      "target": "ZZ_ZHUANG_22::anchor"
+    },
+    {
+      "case_id": "ZZ_ZHUANG_22",
+      "edge_type": "contributes_to_anchor",
+      "label": "contributes_to_anchor",
+      "source": "ZZ_ZHUANG_22::evidence::3",
+      "target": "ZZ_ZHUANG_22::anchor"
+    },
+    {
+      "case_id": "ZZ_ZHUANG_22",
+      "edge_type": "contributes_to_anchor",
+      "label": "contributes_to_anchor",
+      "source": "ZZ_ZHUANG_22::evidence::4",
+      "target": "ZZ_ZHUANG_22::anchor"
+    },
+    {
+      "case_id": "ZZ_ZHUANG_22",
+      "edge_type": "has_threshold_rationale",
+      "label": "has_threshold_rationale",
+      "source": "ZZ_ZHUANG_22::anchor",
+      "target": "ZZ_ZHUANG_22::threshold_rationale"
+    },
+    {
+      "case_id": "ZZ_ZHUANG_22",
+      "edge_type": "converts_to",
+      "label": "converts_to",
+      "friction_locus": "temporal_layering",
+      "rationale_mechanism": "extends+projects",
+      "epistemic_support": "textual_anchor+internal_sequence",
+      "discourse_level": "commentarial_discourse",
+      "temporal_orientation": "prospective-retrospective",
+      "uncertainty_flag": "medium",
+      "rationale_note": "The sign remains active across projected descent and later historical readability.",
+      "source": "ZZ_ZHUANG_22::anchor",
+      "target": "ZZ_ZHUANG_22::function"
+    },
+    {
+      "case_id": "ZZ_ZHUANG_22",
+      "edge_type": "points_to_function",
+      "label": "points_to_function",
+      "source": "ZZ_ZHUANG_22::threshold_rationale",
+      "target": "ZZ_ZHUANG_22::function"
+    },
+    {
+      "case_id": "MAC_1_3",
+      "edge_type": "contains_evidence",
+      "label": "contains_evidence",
+      "source": "MAC_1_3::case",
+      "target": "MAC_1_3::evidence::1"
+    },
+    {
+      "case_id": "MAC_1_3",
+      "edge_type": "contains_evidence",
+      "label": "contains_evidence",
+      "source": "MAC_1_3::case",
+      "target": "MAC_1_3::evidence::2"
+    },
+    {
+      "case_id": "MAC_1_3",
+      "edge_type": "contains_evidence",
+      "label": "contains_evidence",
+      "source": "MAC_1_3::case",
+      "target": "MAC_1_3::evidence::3"
+    },
+    {
+      "case_id": "MAC_1_3",
+      "edge_type": "contributes_to_anchor",
+      "label": "contributes_to_anchor",
+      "source": "MAC_1_3::evidence::1",
+      "target": "MAC_1_3::anchor"
+    },
+    {
+      "case_id": "MAC_1_3",
+      "edge_type": "contributes_to_anchor",
+      "label": "contributes_to_anchor",
+      "source": "MAC_1_3::evidence::2",
+      "target": "MAC_1_3::anchor"
+    },
+    {
+      "case_id": "MAC_1_3",
+      "edge_type": "contributes_to_anchor",
+      "label": "contributes_to_anchor",
+      "source": "MAC_1_3::evidence::3",
+      "target": "MAC_1_3::anchor"
+    },
+    {
+      "case_id": "MAC_1_3",
+      "edge_type": "has_threshold_rationale",
+      "label": "has_threshold_rationale",
+      "source": "MAC_1_3::anchor",
+      "target": "MAC_1_3::threshold_rationale"
+    },
+    {
+      "case_id": "MAC_1_3",
+      "edge_type": "converts_to",
+      "label": "converts_to",
+      "friction_locus": "warrant_attribution",
+      "rationale_mechanism": "authorizes+reframes",
+      "epistemic_support": "textual_anchor+internal_sequence",
+      "discourse_level": "dramatic_present",
+      "temporal_orientation": "prospective",
+      "uncertainty_flag": "medium",
+      "rationale_note": "Partial confirmation gives prophetic speech warranting force and reframes kingship as actionable possibility.",
+      "source": "MAC_1_3::anchor",
+      "target": "MAC_1_3::function"
+    },
+    {
+      "case_id": "MAC_1_3",
+      "edge_type": "points_to_function",
+      "label": "points_to_function",
+      "source": "MAC_1_3::threshold_rationale",
+      "target": "MAC_1_3::function"
+    },
+    {
+      "case_id": "MAC_4_1",
+      "edge_type": "contains_evidence",
+      "label": "contains_evidence",
+      "source": "MAC_4_1::case",
+      "target": "MAC_4_1::evidence::1"
+    },
+    {
+      "case_id": "MAC_4_1",
+      "edge_type": "contains_evidence",
+      "label": "contains_evidence",
+      "source": "MAC_4_1::case",
+      "target": "MAC_4_1::evidence::2"
+    },
+    {
+      "case_id": "MAC_4_1",
+      "edge_type": "contains_evidence",
+      "label": "contains_evidence",
+      "source": "MAC_4_1::case",
+      "target": "MAC_4_1::evidence::3"
+    },
+    {
+      "case_id": "MAC_4_1",
+      "edge_type": "contains_evidence",
+      "label": "contains_evidence",
+      "source": "MAC_4_1::case",
+      "target": "MAC_4_1::evidence::4"
+    },
+    {
+      "case_id": "MAC_4_1",
+      "edge_type": "contributes_to_anchor",
+      "label": "contributes_to_anchor",
+      "source": "MAC_4_1::evidence::1",
+      "target": "MAC_4_1::anchor"
+    },
+    {
+      "case_id": "MAC_4_1",
+      "edge_type": "contributes_to_anchor",
+      "label": "contributes_to_anchor",
+      "source": "MAC_4_1::evidence::2",
+      "target": "MAC_4_1::anchor"
+    },
+    {
+      "case_id": "MAC_4_1",
+      "edge_type": "contributes_to_anchor",
+      "label": "contributes_to_anchor",
+      "source": "MAC_4_1::evidence::3",
+      "target": "MAC_4_1::anchor"
+    },
+    {
+      "case_id": "MAC_4_1",
+      "edge_type": "contributes_to_anchor",
+      "label": "contributes_to_anchor",
+      "source": "MAC_4_1::evidence::4",
+      "target": "MAC_4_1::anchor"
+    },
+    {
+      "case_id": "MAC_4_1",
+      "edge_type": "has_threshold_rationale",
+      "label": "has_threshold_rationale",
+      "source": "MAC_4_1::anchor",
+      "target": "MAC_4_1::threshold_rationale"
+    },
+    {
+      "case_id": "MAC_4_1",
+      "edge_type": "converts_to",
+      "label": "converts_to",
+      "friction_locus": "operation_function",
+      "rationale_mechanism": "reframes+narrows",
+      "epistemic_support": "textual_anchor+internal_sequence",
+      "discourse_level": "dramatic_present",
+      "temporal_orientation": "prospective-retrospective",
+      "uncertainty_flag": "low",
+      "rationale_note": "Macbeth converts equivocal conditional prophecy into practical security.",
+      "source": "MAC_4_1::anchor",
+      "target": "MAC_4_1::function"
+    },
+    {
+      "case_id": "MAC_4_1",
+      "edge_type": "points_to_function",
+      "label": "points_to_function",
+      "source": "MAC_4_1::threshold_rationale",
+      "target": "MAC_4_1::function"
+    },
+    {
+      "case_id": "MAC_5_8",
+      "edge_type": "contains_evidence",
+      "label": "contains_evidence",
+      "source": "MAC_5_8::case",
+      "target": "MAC_5_8::evidence::1"
+    },
+    {
+      "case_id": "MAC_5_8",
+      "edge_type": "contains_evidence",
+      "label": "contains_evidence",
+      "source": "MAC_5_8::case",
+      "target": "MAC_5_8::evidence::2"
+    },
+    {
+      "case_id": "MAC_5_8",
+      "edge_type": "contains_evidence",
+      "label": "contains_evidence",
+      "source": "MAC_5_8::case",
+      "target": "MAC_5_8::evidence::3"
+    },
+    {
+      "case_id": "MAC_5_8",
+      "edge_type": "contributes_to_anchor",
+      "label": "contributes_to_anchor",
+      "source": "MAC_5_8::evidence::1",
+      "target": "MAC_5_8::anchor"
+    },
+    {
+      "case_id": "MAC_5_8",
+      "edge_type": "contributes_to_anchor",
+      "label": "contributes_to_anchor",
+      "source": "MAC_5_8::evidence::2",
+      "target": "MAC_5_8::anchor"
+    },
+    {
+      "case_id": "MAC_5_8",
+      "edge_type": "contributes_to_anchor",
+      "label": "contributes_to_anchor",
+      "source": "MAC_5_8::evidence::3",
+      "target": "MAC_5_8::anchor"
+    },
+    {
+      "case_id": "MAC_5_8",
+      "edge_type": "has_threshold_rationale",
+      "label": "has_threshold_rationale",
+      "source": "MAC_5_8::anchor",
+      "target": "MAC_5_8::threshold_rationale"
+    },
+    {
+      "case_id": "MAC_5_8",
+      "edge_type": "converts_to",
+      "label": "converts_to",
+      "friction_locus": "temporal_layering",
+      "rationale_mechanism": "reframes",
+      "epistemic_support": "textual_anchor+internal_sequence",
+      "discourse_level": "dramatic_present",
+      "temporal_orientation": "retrospective",
+      "uncertainty_flag": "low",
+      "rationale_note": "Later fulfilment reclassifies Macbeth's earlier assurance as equivocal trap.",
+      "source": "MAC_5_8::anchor",
+      "target": "MAC_5_8::function"
+    },
+    {
+      "case_id": "MAC_5_8",
+      "edge_type": "points_to_function",
+      "label": "points_to_function",
+      "source": "MAC_5_8::threshold_rationale",
+      "target": "MAC_5_8::function"
+    },
+    {
+      "case_id": "GROVE_TAJOMARU",
+      "edge_type": "contains_evidence",
+      "label": "contains_evidence",
+      "source": "GROVE_TAJOMARU::case",
+      "target": "GROVE_TAJOMARU::evidence::1"
+    },
+    {
+      "case_id": "GROVE_TAJOMARU",
+      "edge_type": "contains_evidence",
+      "label": "contains_evidence",
+      "source": "GROVE_TAJOMARU::case",
+      "target": "GROVE_TAJOMARU::evidence::2"
+    },
+    {
+      "case_id": "GROVE_TAJOMARU",
+      "edge_type": "contains_evidence",
+      "label": "contains_evidence",
+      "source": "GROVE_TAJOMARU::case",
+      "target": "GROVE_TAJOMARU::evidence::3"
+    },
+    {
+      "case_id": "GROVE_TAJOMARU",
+      "edge_type": "contributes_to_anchor",
+      "label": "contributes_to_anchor",
+      "source": "GROVE_TAJOMARU::evidence::1",
+      "target": "GROVE_TAJOMARU::anchor"
+    },
+    {
+      "case_id": "GROVE_TAJOMARU",
+      "edge_type": "contributes_to_anchor",
+      "label": "contributes_to_anchor",
+      "source": "GROVE_TAJOMARU::evidence::2",
+      "target": "GROVE_TAJOMARU::anchor"
+    },
+    {
+      "case_id": "GROVE_TAJOMARU",
+      "edge_type": "contributes_to_anchor",
+      "label": "contributes_to_anchor",
+      "source": "GROVE_TAJOMARU::evidence::3",
+      "target": "GROVE_TAJOMARU::anchor"
+    },
+    {
+      "case_id": "GROVE_TAJOMARU",
+      "edge_type": "has_threshold_rationale",
+      "label": "has_threshold_rationale",
+      "source": "GROVE_TAJOMARU::anchor",
+      "target": "GROVE_TAJOMARU::threshold_rationale"
+    },
+    {
+      "case_id": "GROVE_TAJOMARU",
+      "edge_type": "converts_to",
+      "label": "converts_to",
+      "friction_locus": "operation_function",
+      "rationale_mechanism": "reframes",
+      "epistemic_support": "textual_anchor+narrative_context",
+      "discourse_level": "frame_narrative",
+      "temporal_orientation": "retrospective",
+      "uncertainty_flag": "medium",
+      "rationale_note": "Confession is converted from apparent truth-disclosure into self-justifying self-display.",
+      "source": "GROVE_TAJOMARU::anchor",
+      "target": "GROVE_TAJOMARU::function"
+    },
+    {
+      "case_id": "GROVE_TAJOMARU",
+      "edge_type": "points_to_function",
+      "label": "points_to_function",
+      "source": "GROVE_TAJOMARU::threshold_rationale",
+      "target": "GROVE_TAJOMARU::function"
+    },
+    {
+      "case_id": "GROVE_MASAGO",
+      "edge_type": "contains_evidence",
+      "label": "contains_evidence",
+      "source": "GROVE_MASAGO::case",
+      "target": "GROVE_MASAGO::evidence::1"
+    },
+    {
+      "case_id": "GROVE_MASAGO",
+      "edge_type": "contains_evidence",
+      "label": "contains_evidence",
+      "source": "GROVE_MASAGO::case",
+      "target": "GROVE_MASAGO::evidence::2"
+    },
+    {
+      "case_id": "GROVE_MASAGO",
+      "edge_type": "contains_evidence",
+      "label": "contains_evidence",
+      "source": "GROVE_MASAGO::case",
+      "target": "GROVE_MASAGO::evidence::3"
+    },
+    {
+      "case_id": "GROVE_MASAGO",
+      "edge_type": "contains_evidence",
+      "label": "contains_evidence",
+      "source": "GROVE_MASAGO::case",
+      "target": "GROVE_MASAGO::evidence::4"
+    },
+    {
+      "case_id": "GROVE_MASAGO",
+      "edge_type": "contributes_to_anchor",
+      "label": "contributes_to_anchor",
+      "source": "GROVE_MASAGO::evidence::1",
+      "target": "GROVE_MASAGO::anchor"
+    },
+    {
+      "case_id": "GROVE_MASAGO",
+      "edge_type": "contributes_to_anchor",
+      "label": "contributes_to_anchor",
+      "source": "GROVE_MASAGO::evidence::2",
+      "target": "GROVE_MASAGO::anchor"
+    },
+    {
+      "case_id": "GROVE_MASAGO",
+      "edge_type": "contributes_to_anchor",
+      "label": "contributes_to_anchor",
+      "source": "GROVE_MASAGO::evidence::3",
+      "target": "GROVE_MASAGO::anchor"
+    },
+    {
+      "case_id": "GROVE_MASAGO",
+      "edge_type": "contributes_to_anchor",
+      "label": "contributes_to_anchor",
+      "source": "GROVE_MASAGO::evidence::4",
+      "target": "GROVE_MASAGO::anchor"
+    },
+    {
+      "case_id": "GROVE_MASAGO",
+      "edge_type": "has_threshold_rationale",
+      "label": "has_threshold_rationale",
+      "source": "GROVE_MASAGO::anchor",
+      "target": "GROVE_MASAGO::threshold_rationale"
+    },
+    {
+      "case_id": "GROVE_MASAGO",
+      "edge_type": "converts_to",
+      "label": "converts_to",
+      "friction_locus": "perspective_assignment",
+      "rationale_mechanism": "qualifies",
+      "epistemic_support": "textual_anchor+narrative_context",
+      "discourse_level": "frame_narrative",
+      "temporal_orientation": "retrospective",
+      "uncertainty_flag": "high",
+      "rationale_note": "The testimony does not stabilize around one testimonial role because victim-position, shame, accusation, and self-blame qualify one another.",
+      "source": "GROVE_MASAGO::anchor",
+      "target": "GROVE_MASAGO::function"
+    },
+    {
+      "case_id": "GROVE_MASAGO",
+      "edge_type": "points_to_function",
+      "label": "points_to_function",
+      "source": "GROVE_MASAGO::threshold_rationale",
+      "target": "GROVE_MASAGO::function"
+    },
+    {
+      "case_id": "GROVE_TAKEHIRO",
+      "edge_type": "contains_evidence",
+      "label": "contains_evidence",
+      "source": "GROVE_TAKEHIRO::case",
+      "target": "GROVE_TAKEHIRO::evidence::1"
+    },
+    {
+      "case_id": "GROVE_TAKEHIRO",
+      "edge_type": "contains_evidence",
+      "label": "contains_evidence",
+      "source": "GROVE_TAKEHIRO::case",
+      "target": "GROVE_TAKEHIRO::evidence::2"
+    },
+    {
+      "case_id": "GROVE_TAKEHIRO",
+      "edge_type": "contains_evidence",
+      "label": "contains_evidence",
+      "source": "GROVE_TAKEHIRO::case",
+      "target": "GROVE_TAKEHIRO::evidence::3"
+    },
+    {
+      "case_id": "GROVE_TAKEHIRO",
+      "edge_type": "contributes_to_anchor",
+      "label": "contributes_to_anchor",
+      "source": "GROVE_TAKEHIRO::evidence::1",
+      "target": "GROVE_TAKEHIRO::anchor"
+    },
+    {
+      "case_id": "GROVE_TAKEHIRO",
+      "edge_type": "contributes_to_anchor",
+      "label": "contributes_to_anchor",
+      "source": "GROVE_TAKEHIRO::evidence::2",
+      "target": "GROVE_TAKEHIRO::anchor"
+    },
+    {
+      "case_id": "GROVE_TAKEHIRO",
+      "edge_type": "contributes_to_anchor",
+      "label": "contributes_to_anchor",
+      "source": "GROVE_TAKEHIRO::evidence::3",
+      "target": "GROVE_TAKEHIRO::anchor"
+    },
+    {
+      "case_id": "GROVE_TAKEHIRO",
+      "edge_type": "has_threshold_rationale",
+      "label": "has_threshold_rationale",
+      "source": "GROVE_TAKEHIRO::anchor",
+      "target": "GROVE_TAKEHIRO::threshold_rationale"
+    },
+    {
+      "case_id": "GROVE_TAKEHIRO",
+      "edge_type": "converts_to",
+      "label": "converts_to",
+      "friction_locus": "warrant_relation",
+      "rationale_mechanism": "contradicts+suspends",
+      "epistemic_support": "textual_anchor+narrative_context",
+      "discourse_level": "frame_narrative",
+      "temporal_orientation": "retrospective",
+      "uncertainty_flag": "high",
+      "rationale_note": "Posthumous testimony adds an extraordinary warrant that contradicts rather than resolves the preceding accounts.",
+      "source": "GROVE_TAKEHIRO::anchor",
+      "target": "GROVE_TAKEHIRO::function"
+    },
+    {
+      "case_id": "GROVE_TAKEHIRO",
+      "edge_type": "points_to_function",
+      "label": "points_to_function",
+      "source": "GROVE_TAKEHIRO::threshold_rationale",
+      "target": "GROVE_TAKEHIRO::function"
+    }
+  ]
+}
