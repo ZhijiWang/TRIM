@@ -14,6 +14,10 @@ python examples/demo_trim_workflow.py
 
 Result: demo workflow completed successfully.
 
+## GitHub Actions
+
+A fresh GitHub Actions test run was requested on May 24, 2026 against the completed `main` branch release files.
+
 ## Workflow Outputs
 
 - Loaded 10 CSV annotations.
