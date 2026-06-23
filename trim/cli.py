@@ -50,6 +50,14 @@ def _build_parser() -> argparse.ArgumentParser:
         required=True,
         help="Output validation report CSV.",
     )
+    validate_parser.add_argument(
+        "--always-zero",
+        action="store_true",
+        help=(
+            "Write the validation report but return exit code 0 even when "
+            "validation errors are present."
+        ),
+    )
     validate_parser.set_defaults(func=_cmd_validate)
 
     report_parser = subparsers.add_parser(
@@ -106,6 +114,13 @@ def _cmd_validate(args: argparse.Namespace) -> int:
     output_path.parent.mkdir(parents=True, exist_ok=True)
     report.to_csv(output_path, index=False)
     print(f"Wrote validation report to {output_path}.")
+    has_errors = (
+        not report.empty
+        and "severity" in report.columns
+        and (report["severity"] == "error").any()
+    )
+    if has_errors and not args.always_zero:
+        return 1
     return 0
 
 
