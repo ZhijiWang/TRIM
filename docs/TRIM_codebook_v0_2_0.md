@@ -25,9 +25,11 @@ Interpretive friction marks the point where evidence requires additional warrant
 
 `friction_locus` identifies where the conversion requires its main inferential work. `epistemic_support` identifies the support used to sustain that conversion.
 
+`context_inference` applies when the missing contextual bridge is itself the main threshold. Ordinary contextual evidence belongs in `epistemic_support` or the rationale note.
+
 ## Project Fields
 
-Standard annotations also contain `function_label`, `source`, `evidence_anchor`, `evidence_nodes`, `anchor_node`, and `rationale_note`. Optional project fields include `cue_family`, `broad_function_family`, `case_type`, and `language`.
+Standard annotations contain `function_label`, `source`, `evidence_anchor`, `evidence_nodes`, `anchor_node`, and `rationale_note`. Optional project fields include `cue_family`, `broad_function_family`, `case_type`, and `language`.
 
 `evidence_anchor` preserves textual location. `evidence_nodes` preserve decomposition. `anchor_node` gives the evidence a normalized analytic centre.
 
@@ -44,7 +46,7 @@ Allowed values:
 - `perspective_assignment`
 - `context_inference`
 
-The ten-case corpus demonstrates five values: `warrant_attribution`, `warrant_relation`, `operation_function`, `temporal_layering`, and `perspective_assignment`. `boundary_setting` and `context_inference` await positive out-of-sample testing. `cue_function` remains provisional until positive cases establish a stable rule.
+The ten-case corpus demonstrates `warrant_attribution`, `warrant_relation`, `operation_function`, `temporal_layering`, and `perspective_assignment`. `boundary_setting` and `context_inference` await positive out-of-sample testing. `cue_function` remains provisional until positive cases establish a stable rule.
 
 ## `rationale_mechanism`
 
@@ -87,7 +89,9 @@ Allowed values:
 
 ## Compound Rules
 
-`rationale_mechanism` and `epistemic_support` may contain one value or two values joined by `+`. For mechanisms, the first value records the main conversion and the second records a consequential modification. Validation rejects empty, duplicate, and overlong compounds.
+`rationale_mechanism` and `epistemic_support` may contain one value or two values joined by `+`. For mechanisms, the first value records the main conversion and the second records a consequential modification. Order therefore preserves the primary/secondary distinction.
+
+Validation rejects empty compounds, duplicate values, values outside the controlled set, and compounds longer than two elements.
 
 ## Dominant Threshold
 
@@ -99,9 +103,11 @@ Each annotation records one main threshold-rationale signature. When several loc
 
 A case that remains unresolved receives `uncertainty_flag=high`, an `alternative_signature` where possible, and a rationale note explaining the competing pathways.
 
+Rationale notes shorter than 30 characters generate a review warning. An annotation with `alternative_signature` requires a complete valid six-field alternative and a rationale note of at least 60 characters.
+
 ## Contested Review
 
-An `alternative_signature` records a second complete six-field pathway. Review asks whether the threshold is locatable, whether the rationale is coherent, and whether the disagreement resists simple refinement. Original annotations remain available alongside adjudicated results.
+The review asks whether the threshold is locatable, whether the rationale is coherent, and whether the disagreement resists simple refinement. Original annotations remain available alongside adjudicated results.
 
 ## Current Stage
 
