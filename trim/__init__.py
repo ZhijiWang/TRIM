@@ -33,9 +33,11 @@ from trim.graph import (
 )
 from trim.intercoder import (
     cohen_kappa_if_two_coders,
+    compound_value_metrics,
     contested_disagreement_report,
     disagreement_table,
     pairwise_agreement,
+    pairwise_compound_agreement,
     percent_agreement,
     pivot_coder_annotations,
 )
@@ -78,6 +80,7 @@ __all__ = [
     "build_corpus_graph",
     "compare_annotations",
     "compare_case_pair",
+    "compound_value_metrics",
     "contested_cases_table",
     "cohen_kappa_if_two_coders",
     "contested_disagreement_report",
@@ -95,6 +98,7 @@ __all__ = [
     "load_csv",
     "load_json",
     "pairwise_agreement",
+    "pairwise_compound_agreement",
     "percent_agreement",
     "parse_signature",
     "pivot_coder_annotations",
