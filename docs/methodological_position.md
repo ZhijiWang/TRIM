@@ -1,106 +1,108 @@
 # Methodological Position
 
-## TRIM as Structured Interpretive Annotation
+## Structured Interpretive Annotation
 
 TRIM sits between close reading, qualitative coding, graph modelling, and
-intercoder review. It begins from human interpretive work and gives selected
+intercoder review. It begins with human interpretation and gives selected
 judgements a structured form that can be inspected, compared, exported, and
-revisited. The package is designed for digital humanities projects in which the
-evidence is textual and the target of analysis is a narrative or discursive
-function rather than a surface feature alone.
+revisited. The method is designed for digital humanities projects in which
+textual evidence is converted into a narrative or discursive function.
 
-TRIM annotation records how a coder moves from evidence to function. The method
-asks coders to identify evidence nodes, an anchor node, a threshold-rationale
-relation, and a function label. The resulting record is not a replacement for
-close reading; it is a disciplined representation of a reading that can be
-validated for form, compared across cases, and reviewed by other coders.
+A TRIM record follows that conversion. The coder identifies evidence nodes,
+constructs an anchor node, assigns a threshold-rationale relation, and names the
+function supported by the passage. The resulting annotation preserves the
+reading as a scholarly object with a visible evidential route.
 
-TRIM's defensible contribution is specific: it makes the warranted conversion
-from textual evidence to interpretive function an explicit, locatable,
-reviewable, and comparable annotation object.
+TRIM's central contribution is precise: it makes the warranted conversion from
+textual evidence to interpretive function explicit, locatable, reviewable, and
+comparable.
 
-## Core Distinction
+## Evidence, Function, and Threshold
 
-TRIM distinguishes surface evidence from narrative function. A passage may
-contain prophecy, divination, testimony, report, recognition, confession, or
-commentary, but the presence of such evidence does not by itself determine what
-function the passage has in a particular annotation. The threshold-rationale
-relation records the conversion from evidence to function: the locus of
-friction, the mechanism of conversion, the epistemic support used by the coder,
-the discourse level, the temporal orientation, and the uncertainty flag.
+A passage may contain prophecy, divination, testimony, report, recognition,
+confession, or commentary. These materials become analytically consequential
+through the function assigned to them in context. TRIM records the point at
+which that conversion requires judgement.
 
-This distinction supports comparative analysis. Two cases can share a function
-while differing in signature. Two cases can share a cue family while producing
-different functions. A broad family can hold together while individual cases
-show different threshold-rationale paths. TRIM makes these patterns explicit in
-tables and graph outputs.
+The threshold-rationale relation brings together:
 
-## What the Package Operationalizes
+- the locus where interpretive pressure concentrates;
+- the mechanism through which the conversion proceeds;
+- the epistemic support that sustains it;
+- the discourse level at which it operates;
+- its temporal orientation;
+- the coder's uncertainty.
 
-The package operationalizes the following method components:
+This structure creates a comparative field. Cases may converge in function
+while diverging in signature. They may share a cue family while producing
+different functions. They may occupy the same friction locus while following
+different mechanisms. TRIM renders these relations through tables, reports, and
+graph outputs.
+
+## Operational Architecture
+
+The package organizes six connected components:
 
 - controlled annotation fields;
 - evidence-to-function signatures;
 - comparison patterns;
 - graph representations;
 - contested-threshold documentation;
-- intercoder comparison preparation.
+- intercoder preparation and review.
 
-Controlled vocabulary validation checks whether selected fields conform to the
-codebook. Signature parsing gives each annotation a compact representation of
-its threshold-rationale path. Comparison utilities generate structural tables
-for same-function, same-cue, broad-family, and contested-case patterns.
-Graph export represents each annotation as a path from evidence nodes to anchor
-node to threshold-rationale relation to function node, with threshold
-attributes also available on a direct anchor-to-function edge.
+Vocabulary validation checks selected values against the codebook. Signature
+parsing gives each annotation a compact account of its conversion path.
+Comparison utilities group cases by shared function, shared cue, broad family,
+and contested threshold. Graph export represents the route from evidence nodes
+through the anchor and threshold relation to the function node.
 
-Contested thresholds are recorded through `alternative_signature` and
-`rationale_note`. This supports a review workflow in which alternative readings
-remain visible and can be discussed by human coders or reviewers. Intercoder
-utilities prepare multi-coder data for field-level comparison, disagreement
-tables, and later reliability evaluation.
+`alternative_signature` and `rationale_note` preserve viable competing readings.
+Their presence keeps disagreement visible and supports later discussion across
+coders and reviewers.
 
-## Relation to Close Reading
+## Close Reading as Methodological Ground
 
-TRIM begins from close reading. Coders identify relevant passages, create
-evidence nodes, decide where the anchor lies, assign controlled fields, and
-write rationale notes. The method preserves rationale prose alongside
-structured fields so that interpretation remains inspectable rather than
-flattened into a label alone.
+TRIM begins with close reading. Coders select passages, define evidence nodes,
+construct anchors, assign controlled values, and write rationale notes. The
+structured fields and prose rationale remain connected, allowing every
+comparison to return to the textual basis of the judgement.
 
-Interpretive friction is a locatable difficulty in the warranted conversion
-from textual evidence to an analytic function under an explicit interpretive
-scheme. It is relational, not a context-free property naturally embedded in a
-text. It arises through the relation among textual evidence, the analytic task,
-the project's function vocabulary, and the coder's stated rationale. This
-formulation keeps friction evidence-constrained and operational: coders must
-locate the obstacle, identify the support used to cross it, and leave a
-reviewable rationale.
+Interpretive friction names a locatable difficulty in the warranted movement
+from evidence to function under an explicit analytic scheme. It arises through
+the relation among textual evidence, the project's function vocabulary, the
+analytic task, and the coder's stated rationale. The coder identifies where the
+conversion becomes difficult, what support sustains it, and how confidently the
+judgement can be maintained.
 
-The optional source segmentation workflow strengthens the link to close
-reading. Source passages can be segmented into stable units before annotation,
-allowing coders and reviewers to cite the same textual anchors when discussing
-agreement, disagreement, or contested thresholds.
+Source segmentation strengthens this relation by giving passages stable units
+before annotation. Coders and reviewers can then return to the same locations
+when examining agreement, disagreement, and alternative pathways.
 
-## Relation to DH Method
+## Digital Humanities Contribution
 
-As a digital humanities method package, TRIM treats interpretive thresholds as
-structured data while preserving the reviewable character of scholarly
-judgement. It supports reproducible workflow steps: source segmentation,
-annotation, validation, comparison, reporting, graph export, and intercoder
-preparation. Its outputs can be read as tables, reports, or graph data, making
-the same interpretive annotations available to different forms of analysis.
+TRIM treats interpretive thresholds as structured data while preserving the
+reviewable character of scholarly judgement. Its workflow connects source
+segmentation, annotation, validation, comparison, reporting, graph export, and
+intercoder analysis.
 
-The method is especially suited to projects where recurring narrative cues do
-not map directly onto stable functions. TRIM gives researchers a way to record
-the rationale by which a cue becomes functional in context, then compare those
-rationales across a corpus.
+The method is especially useful when recurring narrative cues acquire different
+functions across cases. By recording the warranting route behind each function,
+TRIM allows researchers to compare how interpretation is stabilized, extended,
+qualified, redirected, or held open across a corpus.
+
+The same architecture supports cross-traditional comparison. Cases from
+different genres, languages, and historical settings can converge at the level
+of threshold while retaining distinct mechanisms, functions, and textual
+histories.
 
 ## Conceptual Neighbours
 
-TRIM does not claim as novel the general observation that annotators can agree
-on a label while offering different explanations. It also does not primarily
-classify free-text explanations by reasoning type or capture hidden cognitive
-processes. See [`related_methods.md`](related_methods.md) for positioning
-against within-label variation, LiveNLI, LiTEx, qualitative coding, provenance
-systems, and computational hermeneutics.
+TRIM develops alongside research on within-label variation, qualitative coding,
+computational grounded theory, provenance, computational hermeneutics, and
+graph-based digital humanities. Its specific object is the human-coded
+conversion from textual evidence to interpretive function. The surrounding
+literature clarifies adjacent problems and helps define the scale of TRIM's
+contribution.
+
+See [`related_methods.md`](related_methods.md) for the full positioning and
+verified references.
