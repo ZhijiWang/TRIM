@@ -10,10 +10,10 @@ Validation passed with no issues.
 
 ## Same Function / Different Signature
 
-| function_label | case_ids | case_labels | signature_count | signatures | interpretive_payoff |
+| function_label | case_ids | case_labels | signature_count | signatures | comparison_prompt |
 | --- | --- | --- | --- | --- | --- |
-| immediate_stabilization | ZZ_XIANG_7; ZZ_MIN_1 | Xiang 7, 三卜郊不從; Min 1, 畢萬筮仕於晉 | 2 | operation_function / stabilizes / textual_anchor+ritual_sequence / intradiegetic / immediate / low; warrant_attribution / stabilizes+projects / textual_anchor+internal_sequence / intradiegetic / prospective / medium | Same function label appears with different threshold-rationale signatures. |
-| extended_deliberation | ZZ_XI_4; ZZ_ZHUANG_22 | Xi 4, 初，晉獻公欲以驪姬為夫人：卜筮相違; Zhuang 22, 陳厲公生敬仲：卜妻與周易觀之否 | 2 | warrant_relation / extends / textual_anchor+internal_sequence / intradiegetic / recursive / medium; temporal_layering / extends+projects / textual_anchor+internal_sequence / commentarial_discourse / prospective-retrospective / medium | Same function label appears with different threshold-rationale signatures. |
+| immediate_stabilization | ZZ_XIANG_7; ZZ_MIN_1 | Xiang 7, 三卜郊不從; Min 1, 畢萬筮仕於晉 | 2 | operation_function / stabilizes / textual_anchor+ritual_sequence / intradiegetic / immediate / low; warrant_attribution / stabilizes+projects / textual_anchor+internal_sequence / intradiegetic / prospective / medium | Shared function label; differing threshold-rationale signatures. Interpret the substantive significance of the differing evidence-to-function pathways. |
+| extended_deliberation | ZZ_XI_4; ZZ_ZHUANG_22 | Xi 4, 初，晉獻公欲以驪姬為夫人：卜筮相違; Zhuang 22, 陳厲公生敬仲：卜妻與周易觀之否 | 2 | warrant_relation / extends / textual_anchor+internal_sequence / intradiegetic / recursive / medium; temporal_layering / extends+projects / textual_anchor+internal_sequence / commentarial_discourse / prospective-retrospective / medium | Shared function label; differing threshold-rationale signatures. Interpret the substantive significance of the differing evidence-to-function pathways. |
 
 ## Same Cue / Different Function
 
@@ -40,9 +40,9 @@ Validation passed with no issues.
 
 ## Broad Family / Different Signature
 
-| broad_function_family | case_ids | case_labels | signature_count | signatures | interpretive_payoff |
+| broad_function_family | case_ids | case_labels | signature_count | signatures | comparison_prompt |
 | --- | --- | --- | --- | --- | --- |
-| self-exculpatory testimony | GROVE_TAJOMARU; GROVE_MASAGO | Tajōmaru's testimony; Masago's testimony | 2 | operation_function / reframes / textual_anchor+narrative_context / frame_narrative / retrospective / medium; perspective_assignment / qualifies / textual_anchor+narrative_context / frame_narrative / retrospective / high | Same broad function family appears with different threshold-rationale signatures. |
+| self-exculpatory testimony | GROVE_TAJOMARU; GROVE_MASAGO | Tajōmaru's testimony; Masago's testimony | 2 | operation_function / reframes / textual_anchor+narrative_context / frame_narrative / retrospective / medium; perspective_assignment / qualifies / textual_anchor+narrative_context / frame_narrative / retrospective / high | Shared broad function family; differing threshold-rationale signatures. Interpret the substantive significance of the differing evidence-to-function pathways. |
 
 ## Contested Cases
 

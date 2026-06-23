@@ -60,6 +60,12 @@ def test_same_function_different_signature_expected_cases():
     assert extended["signature_count"] == 2
     assert "ZZ_XI_4" in extended["case_ids"]
     assert "ZZ_ZHUANG_22" in extended["case_ids"]
+    assert "interpretive_payoff" not in table.columns
+    assert immediate["comparison_prompt"] == (
+        "Shared function label; differing threshold-rationale signatures. "
+        "Interpret the substantive significance of the differing "
+        "evidence-to-function pathways."
+    )
 
 
 def test_same_cue_different_function_includes_prophecy_cases():
@@ -96,6 +102,10 @@ def test_broad_family_different_signature_includes_self_exculpatory_testimony():
     assert testimony["signature_count"] == 2
     assert "GROVE_TAJOMARU" in testimony["case_ids"]
     assert "GROVE_MASAGO" in testimony["case_ids"]
+    assert "interpretive_payoff" not in table.columns
+    assert testimony["comparison_prompt"].startswith(
+        "Shared broad function family; differing threshold-rationale signatures."
+    )
 
 
 def test_contested_cases_include_xi_4():
