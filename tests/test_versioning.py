@@ -17,7 +17,7 @@ def test_unreleased_version_metadata_is_consistent():
     assert pyproject["project"]["version"] == EXPECTED_VERSION
     assert f'version: "{EXPECTED_VERSION}"' in citation
     assert "date-released:" not in citation
-    assert f"Current package version: {EXPECTED_VERSION}." in readme
+    assert f"Current source version: {EXPECTED_VERSION} (unreleased)." in readme
     assert f"## {EXPECTED_VERSION} - Unreleased" in changelog
 
 

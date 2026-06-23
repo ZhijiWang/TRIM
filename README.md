@@ -7,7 +7,7 @@
 TRIM structures the warranted conversion from textual evidence to interpretive
 function as a locatable, reviewable, and comparable annotation pathway.
 
-Current package version: 0.2.0. No formal GitHub Release has been published.
+Current source version: 0.2.0 (unreleased). No formal GitHub Release has been published.
 
 ## What TRIM Annotates
 
