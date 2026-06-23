@@ -107,16 +107,18 @@ revisited if a substantially revised journal version appears.
 - Hong, Pingjun, Beiduo Chen, Siyao Peng, Marie-Catherine de Marneffe, and
   Barbara Plank. 2025. "LiTEx: A Linguistic Taxonomy of Explanations for
   Understanding Within-Label Variation in Natural Language Inference."
-  arXiv:2505.22848. Accepted to the EMNLP 2025 main conference.
+  arXiv:2505.22848. The arXiv record reports acceptance to the EMNLP 2025 main
+  conference.
   https://doi.org/10.48550/arXiv.2505.22848
 - Jiang, Nan-Jiang, Chenhao Tan, and Marie-Catherine de Marneffe. 2023.
   "Ecologically Valid Explanations for Label Variation in NLI."
-  arXiv:2310.13850. Findings of EMNLP 2023.
+  arXiv:2310.13850. The arXiv record identifies this paper as appearing in
+  Findings of EMNLP 2023.
   https://doi.org/10.48550/arXiv.2310.13850
 - Kleymann, Rabea, and Jan-Erik Stange. 2021. "Towards Hermeneutic
   Visualization in Digital Literary Studies." *Digital Humanities Quarterly*
   15 (2), article 000547.
-  https://www.digitalhumanities.org/dhq/vol/15/2/000547/000547.html
+  https://doi.org/10.63744/ekkjwp88jksx
 - Mohr, John W., Robin Wagner-Pacifici, and Ronald L. Breiger. 2015. "Toward a
   Computational Hermeneutics." *Big Data & Society*. First published online
   December 1, 2015. https://doi.org/10.1177/2053951715613809
@@ -134,6 +136,7 @@ revisited if a substantially revised journal version appears.
 - No claim is made that Rockwell and Sinclair's use of "breakdown" is the direct
   philosophical source of TRIM's `friction_locus`; that claim remains
   unsupported without an exact passage and contextual reading.
-- Proceedings pagination for LiveNLI and LiTEx should be substituted for the
-  arXiv citations only after the corresponding anthology records are available
-  and verified.
+- The current LiveNLI and LiTEx entries cite the verified arXiv versions. They
+  should be replaced with directly verified ACL Anthology proceedings records,
+  including pagination and anthology identifiers, once those records have been
+  checked.
