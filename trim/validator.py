@@ -11,9 +11,13 @@ from typing import Any, Iterable, Mapping
 
 import pandas as pd
 
-from trim.schema import TrimAnnotation
-from trim.signature import SIGNATURE_FIELDS, FrictionSignature, parse_signature
-from trim.vocabulary import CONTROLLED_VOCABULARIES
+from trim.schema import TrimAnnotation, coerce_string_list
+from trim.signature import (
+    SIGNATURE_FIELDS,
+    FrictionSignature,
+    parse_signature,
+    validate_signature_values,
+)
 
 
 REQUIRED_FIELDS: tuple[str, ...] = (
@@ -29,29 +33,21 @@ REQUIRED_FIELDS: tuple[str, ...] = (
     "discourse_level",
     "temporal_orientation",
     "uncertainty_flag",
-    "rationale_note",
     "coder_id",
 )
 
-CONTROLLED_FIELDS: tuple[str, ...] = (
-    "friction_locus",
-    "rationale_mechanism",
-    "epistemic_support",
-    "discourse_level",
-    "temporal_orientation",
-    "uncertainty_flag",
-)
-
-COMPOUND_FIELDS: tuple[str, ...] = (
-    "rationale_mechanism",
-    "epistemic_support",
-)
-
 RATIONALE_NOTE_MIN_LENGTH = 30
-ALTERNATIVE_NOTE_TERMS: tuple[str, ...] = ("alternative", "contested", "dominant")
+ALTERNATIVE_RATIONALE_MIN_LENGTH = 60
 SHORT_RATIONALE_NOTE_MESSAGE = (
     "rationale_note is too short to support review; minimum recommended length "
     "is 30 characters."
+)
+SHORT_ALTERNATIVE_RATIONALE_MESSAGE = (
+    "alternative_signature requires rationale_note documentation of at least "
+    "60 characters."
+)
+EVIDENCE_NODES_REQUIRED_MESSAGE = (
+    "evidence_nodes requires at least one non-empty evidence node."
 )
 
 
@@ -146,7 +142,10 @@ def validate_signature(signature: str) -> list[ValidationIssue]:
             )
         ]
 
-    return _validate_signature_values(_signature_to_values(parsed), case_id="<signature>")
+    return _signature_validation_issues(
+        _signature_to_values(parsed),
+        case_id="<signature>",
+    )
 
 
 def validate_record(record: TrimAnnotation | Mapping[str, Any]) -> list[ValidationIssue]:
@@ -156,11 +155,18 @@ def validate_record(record: TrimAnnotation | Mapping[str, Any]) -> list[Validati
     issues: list[ValidationIssue] = []
 
     issues.extend(_validate_required_fields(record, case_id))
+    issues.extend(_validate_evidence_nodes(record, case_id))
     signature_values = {
         field_name: _field_value(record, field_name)
         for field_name in SIGNATURE_FIELDS
     }
-    issues.extend(_validate_signature_values(signature_values, case_id=case_id))
+    issues.extend(
+        _signature_validation_issues(
+            signature_values,
+            case_id=case_id,
+            include_required=False,
+        )
+    )
     issues.extend(_validate_rationale_note(record, case_id))
     issues.extend(_validate_alternative_signature(record, case_id))
 
@@ -221,106 +227,46 @@ def _validate_required_fields(
     return issues
 
 
-def _validate_signature_values(
-    values: Mapping[str, str],
+def _validate_evidence_nodes(
+    record: TrimAnnotation | Mapping[str, Any],
+    case_id: str,
+) -> list[ValidationIssue]:
+    evidence_nodes = coerce_string_list(_raw_field_value(record, "evidence_nodes"))
+    if evidence_nodes:
+        return []
+    return [
+        ValidationIssue(
+            case_id=case_id,
+            field="evidence_nodes",
+            severity="error",
+            message=EVIDENCE_NODES_REQUIRED_MESSAGE,
+        )
+    ]
+
+
+def _signature_validation_issues(
+    values: Mapping[str, Any],
     case_id: str,
     field_prefix: str = "",
+    *,
+    include_required: bool = True,
 ) -> list[ValidationIssue]:
     issues: list[ValidationIssue] = []
-
-    for field_name in CONTROLLED_FIELDS:
-        value = _clean_value(values.get(field_name, ""))
-        if not value:
-            continue
-
-        allowed_values = CONTROLLED_VOCABULARIES[field_name]
+    errors_by_field = validate_signature_values(
+        values,
+        include_required=include_required,
+    )
+    for field_name, messages in errors_by_field.items():
         issue_field = f"{field_prefix}{field_name}"
-
-        if field_name in COMPOUND_FIELDS:
-            issues.extend(
-                _validate_compound_value(
-                    case_id=case_id,
-                    field_name=issue_field,
-                    value=value,
-                    allowed_values=allowed_values,
-                )
-            )
-        elif value not in allowed_values:
-            issues.append(
-                ValidationIssue(
-                    case_id=case_id,
-                    field=issue_field,
-                    severity="error",
-                    message=(
-                        f"{field_name} value {value!r} is not controlled vocabulary. "
-                        f"Allowed values: {', '.join(sorted(allowed_values))}."
-                    ),
-                )
-            )
-
-    return issues
-
-
-def _validate_compound_value(
-    case_id: str,
-    field_name: str,
-    value: str,
-    allowed_values: frozenset[str],
-) -> list[ValidationIssue]:
-    issues: list[ValidationIssue] = []
-    parts = [part.strip() for part in value.split("+")]
-
-    if any(not part for part in parts):
-        issues.append(
+        issues.extend(
             ValidationIssue(
                 case_id=case_id,
-                field=field_name,
+                field=issue_field,
                 severity="error",
-                message=f"{field_name} contains an empty compound value.",
+                message=message,
             )
+            for message in messages
         )
-
-    if len(parts) > 2:
-        issues.append(
-            ValidationIssue(
-                case_id=case_id,
-                field=field_name,
-                severity="error",
-                message=(
-                    f"{field_name} contains {len(parts)} values; "
-                    "no more than 2 are allowed."
-                ),
-            )
-        )
-
-    seen: set[str] = set()
-    for part in parts:
-        if not part:
-            continue
-        if part in seen:
-            issues.append(
-                ValidationIssue(
-                    case_id=case_id,
-                    field=field_name,
-                    severity="error",
-                    message=f"{field_name} contains duplicate compound value {part!r}.",
-                )
-            )
-        seen.add(part)
-
-        if part not in allowed_values:
-            issues.append(
-                ValidationIssue(
-                    case_id=case_id,
-                    field=field_name,
-                    severity="error",
-                    message=(
-                        f"{field_name} value {part!r} is not controlled vocabulary. "
-                        f"Allowed values: {', '.join(sorted(allowed_values))}."
-                    ),
-                )
-            )
-
     return issues
 
 
@@ -329,7 +275,31 @@ def _validate_rationale_note(
     case_id: str,
 ) -> list[ValidationIssue]:
     rationale_note = _field_value(record, "rationale_note")
-    if not rationale_note or len(rationale_note) >= RATIONALE_NOTE_MIN_LENGTH:
+    alternative_signature = _field_value(record, "alternative_signature")
+
+    if alternative_signature:
+        if len(rationale_note) >= ALTERNATIVE_RATIONALE_MIN_LENGTH:
+            return []
+        return [
+            ValidationIssue(
+                case_id=case_id,
+                field="rationale_note",
+                severity="error",
+                message=SHORT_ALTERNATIVE_RATIONALE_MESSAGE,
+            )
+        ]
+
+    if not rationale_note:
+        return [
+            ValidationIssue(
+                case_id=case_id,
+                field="rationale_note",
+                severity="error",
+                message="rationale_note is required.",
+            )
+        ]
+
+    if len(rationale_note) >= RATIONALE_NOTE_MIN_LENGTH:
         return []
 
     return [
@@ -364,24 +334,10 @@ def _validate_alternative_signature(
         )
     else:
         issues.extend(
-            _validate_signature_values(
+            _signature_validation_issues(
                 _signature_to_values(parsed),
                 case_id=case_id,
                 field_prefix="alternative_signature.",
-            )
-        )
-
-    rationale_note = _field_value(record, "rationale_note").lower()
-    if not any(term in rationale_note for term in ALTERNATIVE_NOTE_TERMS):
-        issues.append(
-            ValidationIssue(
-                case_id=case_id,
-                field="alternative_signature",
-                severity="error",
-                message=(
-                    "Alternative signature requires rationale note to mention "
-                    "'alternative', 'contested', or 'dominant'."
-                ),
             )
         )
 
@@ -389,11 +345,18 @@ def _validate_alternative_signature(
 
 
 def _field_value(record: TrimAnnotation | Mapping[str, Any], field_name: str) -> str:
+    return _clean_value(_raw_field_value(record, field_name))
+
+
+def _raw_field_value(
+    record: TrimAnnotation | Mapping[str, Any],
+    field_name: str,
+) -> Any:
     if isinstance(record, TrimAnnotation):
-        return _clean_value(getattr(record, field_name, ""))
+        return getattr(record, field_name, "")
     if isinstance(record, Mapping):
-        return _clean_value(record.get(field_name, ""))
-    return _clean_value(getattr(record, field_name, ""))
+        return record.get(field_name, "")
+    return getattr(record, field_name, "")
 
 
 def _signature_to_values(signature: FrictionSignature) -> dict[str, str]:

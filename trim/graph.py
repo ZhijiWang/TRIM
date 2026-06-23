@@ -15,7 +15,7 @@ import networkx as nx
 import pandas as pd
 from networkx.readwrite import json_graph
 
-from trim.schema import TrimAnnotation
+from trim.schema import TrimAnnotation, coerce_string_list
 from trim.signature import SIGNATURE_FIELDS
 
 
@@ -51,7 +51,13 @@ def build_case_graph(record: TrimAnnotation | Mapping[str, Any] | pd.Series) -> 
         text=_record_value(record, "text"),
     )
 
-    evidence_nodes = _split_evidence_nodes(_raw_record_value(record, "evidence_nodes"))
+    evidence_nodes = list(
+        coerce_string_list(_raw_record_value(record, "evidence_nodes"))
+    )
+    if not evidence_nodes:
+        raise ValueError(
+            "evidence_nodes requires at least one non-empty evidence node."
+        )
     for index, evidence_text in enumerate(evidence_nodes, start=1):
         evidence_node_id = _node_id(case_id, "evidence", str(index))
         graph.add_node(
@@ -70,14 +76,15 @@ def build_case_graph(record: TrimAnnotation | Mapping[str, Any] | pd.Series) -> 
             label="contains_evidence",
         )
 
-    anchor_label = _record_value(record, "anchor_node")
+    evidence_anchor = _required_record_value(record, "evidence_anchor")
+    anchor_label = _required_record_value(record, "anchor_node")
     graph.add_node(
         anchor_node_id,
         case_id=case_id,
         node_type="anchor",
         label=anchor_label,
         source=source,
-        text=_record_value(record, "evidence_anchor") or anchor_label,
+        text=evidence_anchor,
     )
 
     for index in range(1, len(evidence_nodes) + 1):
@@ -224,30 +231,18 @@ def _safe_node_piece(value: str) -> str:
     return cleaned.replace("::", "_")
 
 
-def _split_evidence_nodes(value: Any) -> list[str]:
-    if isinstance(value, (list, tuple, set)):
-        return [_clean_value(item) for item in value if _clean_value(item)]
-
-    text = _clean_value(value)
-    if not text:
-        return []
-
-    if text.startswith("["):
-        try:
-            decoded = json.loads(text)
-        except json.JSONDecodeError:
-            decoded = None
-        if isinstance(decoded, list):
-            return [_clean_value(item) for item in decoded if _clean_value(item)]
-
-    delimiter = ";"
-    if ";" not in text and "|" in text:
-        delimiter = "|"
-    return [part.strip() for part in text.split(delimiter) if part.strip()]
-
-
 def _record_value(record: TrimAnnotation | Mapping[str, Any] | pd.Series, field_name: str) -> str:
     return _clean_value(_raw_record_value(record, field_name))
+
+
+def _required_record_value(
+    record: TrimAnnotation | Mapping[str, Any] | pd.Series,
+    field_name: str,
+) -> str:
+    value = _record_value(record, field_name)
+    if not value:
+        raise ValueError(f"{field_name} is required for graph conversion.")
+    return value
 
 
 def _raw_record_value(record: TrimAnnotation | Mapping[str, Any] | pd.Series, field_name: str) -> Any:

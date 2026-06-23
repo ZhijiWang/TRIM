@@ -141,8 +141,16 @@ def validate_compound_value(
             f"{max_parts} are allowed."
         )
 
+    seen: set[str] = set()
     for part in parts:
-        if part and part not in allowed_set:
+        if not part:
+            continue
+        if part in seen:
+            errors.append(
+                f"{field_name} contains duplicate compound value {part!r}."
+            )
+        seen.add(part)
+        if part not in allowed_set:
             errors.append(
                 f"{field_name} value {part!r} is not controlled vocabulary. "
                 f"Allowed values: {', '.join(sorted(allowed_set))}."
