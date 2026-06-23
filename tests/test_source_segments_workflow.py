@@ -1,4 +1,6 @@
 from pathlib import Path
+import subprocess
+import sys
 
 import pandas as pd
 
@@ -43,6 +45,19 @@ def test_source_segment_case_ids_match_demo_annotations():
 
 def test_source_segment_example_script_exists():
     assert EXAMPLE_PATH.exists()
+
+
+def test_source_segment_example_runs_directly(tmp_path):
+    result = subprocess.run(
+        [sys.executable, str(EXAMPLE_PATH)],
+        cwd=tmp_path,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stderr
+    assert "linked_annotations:" in result.stdout
 
 
 def test_source_segment_linking_helper_updates_evidence_anchor():

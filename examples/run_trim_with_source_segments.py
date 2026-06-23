@@ -2,9 +2,15 @@
 
 from __future__ import annotations
 
+import sys
 from pathlib import Path
 
 import pandas as pd
+
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
 from trim.compare import (
     broad_family_table,
@@ -55,7 +61,7 @@ def load_and_link_segments(
 def run_workflow(repo_root: Path | None = None) -> dict[str, Path]:
     """Run validation, comparison, reporting, and graph export for linked cases."""
 
-    root = repo_root or Path(__file__).resolve().parents[1]
+    root = repo_root or PROJECT_ROOT
     data_dir = root / "data"
     outputs_dir = root / "outputs"
     table_dir = outputs_dir / "tables" / "in_a_grove_segments"

@@ -1,1209 +1,1206 @@
 <?xml version='1.0' encoding='utf-8'?>
-<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
-  <key id="d21" for="edge" attr.name="rationale_note" attr.type="string" />
-  <key id="d20" for="edge" attr.name="uncertainty_flag" attr.type="string" />
-  <key id="d19" for="edge" attr.name="temporal_orientation" attr.type="string" />
-  <key id="d18" for="edge" attr.name="discourse_level" attr.type="string" />
-  <key id="d17" for="edge" attr.name="epistemic_support" attr.type="string" />
-  <key id="d16" for="edge" attr.name="rationale_mechanism" attr.type="string" />
-  <key id="d15" for="edge" attr.name="friction_locus" attr.type="string" />
-  <key id="d14" for="edge" attr.name="label" attr.type="string" />
-  <key id="d13" for="edge" attr.name="edge_type" attr.type="string" />
-  <key id="d12" for="edge" attr.name="case_id" attr.type="string" />
-  <key id="d11" for="node" attr.name="rationale_note" attr.type="string" />
-  <key id="d10" for="node" attr.name="uncertainty_flag" attr.type="string" />
-  <key id="d9" for="node" attr.name="temporal_orientation" attr.type="string" />
-  <key id="d8" for="node" attr.name="discourse_level" attr.type="string" />
-  <key id="d7" for="node" attr.name="epistemic_support" attr.type="string" />
-  <key id="d6" for="node" attr.name="rationale_mechanism" attr.type="string" />
-  <key id="d5" for="node" attr.name="friction_locus" attr.type="string" />
-  <key id="d4" for="node" attr.name="text" attr.type="string" />
-  <key id="d3" for="node" attr.name="source" attr.type="string" />
-  <key id="d2" for="node" attr.name="label" attr.type="string" />
-  <key id="d1" for="node" attr.name="node_type" attr.type="string" />
-  <key id="d0" for="node" attr.name="case_id" attr.type="string" />
-  <graph edgedefault="directed">
-    <node id="ZZ_XIANG_7::case">
-      <data key="d0">ZZ_XIANG_7</data>
-      <data key="d1">case</data>
-      <data key="d2">Xiang 7, 三卜郊不從</data>
-      <data key="d3">Zuo zhuan</data>
-      <data key="d4">Zuo zhuan</data>
-    </node>
-    <node id="ZZ_XIANG_7::evidence::1">
-      <data key="d0">ZZ_XIANG_7</data>
-      <data key="d1">evidence</data>
-      <data key="d2">failed_divination</data>
-      <data key="d3">Zuo zhuan</data>
-      <data key="d4">failed_divination</data>
-    </node>
-    <node id="ZZ_XIANG_7::evidence::2">
-      <data key="d0">ZZ_XIANG_7</data>
-      <data key="d1">evidence</data>
-      <data key="d2">ritual_timing</data>
-      <data key="d3">Zuo zhuan</data>
-      <data key="d4">ritual_timing</data>
-    </node>
-    <node id="ZZ_XIANG_7::evidence::3">
-      <data key="d0">ZZ_XIANG_7</data>
-      <data key="d1">evidence</data>
-      <data key="d2">Meng_Xianzi_interpretation</data>
-      <data key="d3">Zuo zhuan</data>
-      <data key="d4">Meng_Xianzi_interpretation</data>
-    </node>
-    <node id="ZZ_XIANG_7::anchor">
-      <data key="d0">ZZ_XIANG_7</data>
-      <data key="d1">anchor</data>
-      <data key="d2">Meng_Xianzi_interpretation</data>
-      <data key="d3">Zuo zhuan</data>
-      <data key="d4">三卜郊不從; Meng Xianzi's ritual-timing explanation</data>
-    </node>
-    <node id="ZZ_XIANG_7::threshold_rationale">
-      <data key="d0">ZZ_XIANG_7</data>
-      <data key="d1">threshold_rationale</data>
-      <data key="d2">operation_function / stabilizes / textual_anchor+ritual_sequence / intradiegetic / immediate / low</data>
-      <data key="d3">Zuo zhuan</data>
-      <data key="d4">Interpretation converts the failed divination into procedural intelligibility by restoring ritual sequence.</data>
-      <data key="d5">operation_function</data>
-      <data key="d6">stabilizes</data>
-      <data key="d7">textual_anchor+ritual_sequence</data>
-      <data key="d8">intradiegetic</data>
-      <data key="d9">immediate</data>
-      <data key="d10">low</data>
-      <data key="d11">Interpretation converts the failed divination into procedural intelligibility by restoring ritual sequence.</data>
-    </node>
-    <node id="ZZ_XIANG_7::function">
-      <data key="d0">ZZ_XIANG_7</data>
-      <data key="d1">function</data>
-      <data key="d2">immediate_stabilization</data>
-      <data key="d3">Zuo zhuan</data>
-      <data key="d4">immediate_stabilization</data>
-    </node>
-    <node id="ZZ_MIN_1::case">
-      <data key="d0">ZZ_MIN_1</data>
-      <data key="d1">case</data>
-      <data key="d2">Min 1, 畢萬筮仕於晉</data>
-      <data key="d3">Zuo zhuan</data>
-      <data key="d4" />
-    </node>
-    <node id="ZZ_MIN_1::evidence::1">
-      <data key="d0">ZZ_MIN_1</data>
-      <data key="d1">evidence</data>
-      <data key="d2">milfoil_divination</data>
-      <data key="d3">Zuo zhuan</data>
-      <data key="d4">milfoil_divination</data>
-    </node>
-    <node id="ZZ_MIN_1::evidence::2">
-      <data key="d0">ZZ_MIN_1</data>
-      <data key="d1">evidence</data>
-      <data key="d2">Yi_related_result</data>
-      <data key="d3">Zuo zhuan</data>
-      <data key="d4">Yi_related_result</data>
-    </node>
-    <node id="ZZ_MIN_1::evidence::3">
-      <data key="d0">ZZ_MIN_1</data>
-      <data key="d1">evidence</data>
-      <data key="d2">Xin_Liao_interpretation</data>
-      <data key="d3">Zuo zhuan</data>
-      <data key="d4">Xin_Liao_interpretation</data>
-    </node>
-    <node id="ZZ_MIN_1::evidence::4">
-      <data key="d0">ZZ_MIN_1</data>
-      <data key="d1">evidence</data>
-      <data key="d2">lineage_projection</data>
-      <data key="d3">Zuo zhuan</data>
-      <data key="d4">lineage_projection</data>
-    </node>
-    <node id="ZZ_MIN_1::anchor">
-      <data key="d0">ZZ_MIN_1</data>
-      <data key="d1">anchor</data>
-      <data key="d2">Xin_Liao_interpretation</data>
-      <data key="d3">Zuo zhuan</data>
-      <data key="d4">畢萬筮仕於晉; 屯之比; Xin Liao's auspicious interpretation</data>
-    </node>
-    <node id="ZZ_MIN_1::threshold_rationale">
-      <data key="d0">ZZ_MIN_1</data>
-      <data key="d1">threshold_rationale</data>
-      <data key="d2">warrant_attribution / stabilizes+projects / textual_anchor+internal_sequence / intradiegetic / prospective / medium</data>
-      <data key="d3">Zuo zhuan</data>
-      <data key="d4">The Yi-related result is accepted as a stable prospective lineage judgement without reopening local deliberation.</data>
-      <data key="d5">warrant_attribution</data>
-      <data key="d6">stabilizes+projects</data>
-      <data key="d7">textual_anchor+internal_sequence</data>
-      <data key="d8">intradiegetic</data>
-      <data key="d9">prospective</data>
-      <data key="d10">medium</data>
-      <data key="d11">The Yi-related result is accepted as a stable prospective lineage judgement without reopening local deliberation.</data>
-    </node>
-    <node id="ZZ_MIN_1::function">
-      <data key="d0">ZZ_MIN_1</data>
-      <data key="d1">function</data>
-      <data key="d2">immediate_stabilization</data>
-      <data key="d3">Zuo zhuan</data>
-      <data key="d4">immediate_stabilization</data>
-    </node>
-    <node id="ZZ_XI_4::case">
-      <data key="d0">ZZ_XI_4</data>
-      <data key="d1">case</data>
-      <data key="d2">Xi 4, 初，晉獻公欲以驪姬為夫人：卜筮相違</data>
-      <data key="d3">Zuo zhuan</data>
-      <data key="d4" />
-    </node>
-    <node id="ZZ_XI_4::evidence::1">
-      <data key="d0">ZZ_XI_4</data>
-      <data key="d1">evidence</data>
-      <data key="d2">turtle_result_unfavourable</data>
-      <data key="d3">Zuo zhuan</data>
-      <data key="d4">turtle_result_unfavourable</data>
-    </node>
-    <node id="ZZ_XI_4::evidence::2">
-      <data key="d0">ZZ_XI_4</data>
-      <data key="d1">evidence</data>
-      <data key="d2">milfoil_result_favourable</data>
-      <data key="d3">Zuo zhuan</data>
-      <data key="d4">milfoil_result_favourable</data>
-    </node>
-    <node id="ZZ_XI_4::evidence::3">
-      <data key="d0">ZZ_XI_4</data>
-      <data key="d1">evidence</data>
-      <data key="d2">ranking_speech</data>
-      <data key="d3">Zuo zhuan</data>
-      <data key="d4">ranking_speech</data>
-    </node>
-    <node id="ZZ_XI_4::evidence::4">
-      <data key="d0">ZZ_XI_4</data>
-      <data key="d1">evidence</data>
-      <data key="d2">ominous_line_text</data>
-      <data key="d3">Zuo zhuan</data>
-      <data key="d4">ominous_line_text</data>
-    </node>
-    <node id="ZZ_XI_4::evidence::5">
-      <data key="d0">ZZ_XI_4</data>
-      <data key="d1">evidence</data>
-      <data key="d2">retrospective_frame</data>
-      <data key="d3">Zuo zhuan</data>
-      <data key="d4">retrospective_frame</data>
-    </node>
-    <node id="ZZ_XI_4::anchor">
-      <data key="d0">ZZ_XI_4</data>
-      <data key="d1">anchor</data>
-      <data key="d2">ranking_speech</data>
-      <data key="d3">Zuo zhuan</data>
-      <data key="d4">卜不吉，筮吉; 筮短龜長; 一薰一蕕，十年尚猶有臭</data>
-    </node>
-    <node id="ZZ_XI_4::threshold_rationale">
-      <data key="d0">ZZ_XI_4</data>
-      <data key="d1">threshold_rationale</data>
-      <data key="d2">warrant_relation / extends / textual_anchor+internal_sequence / intradiegetic / recursive / medium</data>
-      <data key="d3">Zuo zhuan</data>
-      <data key="d4">The dominant threshold is warrant_relation because conflict among turtle result, milfoil result, ranking speech, and line text prevents clean closure. Temporal layering is a meaningful secondary observation.</data>
-      <data key="d5">warrant_relation</data>
-      <data key="d6">extends</data>
-      <data key="d7">textual_anchor+internal_sequence</data>
-      <data key="d8">intradiegetic</data>
-      <data key="d9">recursive</data>
-      <data key="d10">medium</data>
-      <data key="d11">The dominant threshold is warrant_relation because conflict among turtle result, milfoil result, ranking speech, and line text prevents clean closure. Temporal layering is a meaningful secondary observation.</data>
-    </node>
-    <node id="ZZ_XI_4::function">
-      <data key="d0">ZZ_XI_4</data>
-      <data key="d1">function</data>
-      <data key="d2">extended_deliberation</data>
-      <data key="d3">Zuo zhuan</data>
-      <data key="d4">extended_deliberation</data>
-    </node>
-    <node id="ZZ_ZHUANG_22::case">
-      <data key="d0">ZZ_ZHUANG_22</data>
-      <data key="d1">case</data>
-      <data key="d2">Zhuang 22, 陳厲公生敬仲：卜妻與周易觀之否</data>
-      <data key="d3">Zuo zhuan</data>
-      <data key="d4" />
-    </node>
-    <node id="ZZ_ZHUANG_22::evidence::1">
-      <data key="d0">ZZ_ZHUANG_22</data>
-      <data key="d1">evidence</data>
-      <data key="d2">marriage_divination</data>
-      <data key="d3">Zuo zhuan</data>
-      <data key="d4">marriage_divination</data>
-    </node>
-    <node id="ZZ_ZHUANG_22::evidence::2">
-      <data key="d0">ZZ_ZHUANG_22</data>
-      <data key="d1">evidence</data>
-      <data key="d2">Zhouyi_result</data>
-      <data key="d3">Zuo zhuan</data>
-      <data key="d4">Zhouyi_result</data>
-    </node>
-    <node id="ZZ_ZHUANG_22::evidence::3">
-      <data key="d0">ZZ_ZHUANG_22</data>
-      <data key="d1">evidence</data>
-      <data key="d2">generational_prediction</data>
-      <data key="d3">Zuo zhuan</data>
-      <data key="d4">generational_prediction</data>
-    </node>
-    <node id="ZZ_ZHUANG_22::evidence::4">
-      <data key="d0">ZZ_ZHUANG_22</data>
-      <data key="d1">evidence</data>
-      <data key="d2">later_confirmation</data>
-      <data key="d3">Zuo zhuan</data>
-      <data key="d4">later_confirmation</data>
-    </node>
-    <node id="ZZ_ZHUANG_22::anchor">
-      <data key="d0">ZZ_ZHUANG_22</data>
-      <data key="d1">anchor</data>
-      <data key="d2">generational_prediction</data>
-      <data key="d3">Zuo zhuan</data>
-      <data key="d4">卜妻敬仲; 觀之否; five/eight-generation prediction; later Chen lineage rise</data>
-    </node>
-    <node id="ZZ_ZHUANG_22::threshold_rationale">
-      <data key="d0">ZZ_ZHUANG_22</data>
-      <data key="d1">threshold_rationale</data>
-      <data key="d2">temporal_layering / extends+projects / textual_anchor+internal_sequence / commentarial_discourse / prospective-retrospective / medium</data>
-      <data key="d3">Zuo zhuan</data>
-      <data key="d4">The sign remains active across projected descent and later historical readability.</data>
-      <data key="d5">temporal_layering</data>
-      <data key="d6">extends+projects</data>
-      <data key="d7">textual_anchor+internal_sequence</data>
-      <data key="d8">commentarial_discourse</data>
-      <data key="d9">prospective-retrospective</data>
-      <data key="d10">medium</data>
-      <data key="d11">The sign remains active across projected descent and later historical readability.</data>
-    </node>
-    <node id="ZZ_ZHUANG_22::function">
-      <data key="d0">ZZ_ZHUANG_22</data>
-      <data key="d1">function</data>
-      <data key="d2">extended_deliberation</data>
-      <data key="d3">Zuo zhuan</data>
-      <data key="d4">extended_deliberation</data>
-    </node>
-    <node id="MAC_1_3::case">
-      <data key="d0">MAC_1_3</data>
-      <data key="d1">case</data>
-      <data key="d2">Act 1.3, witches' prophecy and Cawdor confirmation</data>
-      <data key="d3">Macbeth</data>
-      <data key="d4">Macbeth</data>
-    </node>
-    <node id="MAC_1_3::evidence::1">
-      <data key="d0">MAC_1_3</data>
-      <data key="d1">evidence</data>
-      <data key="d2">prophetic_salutation</data>
-      <data key="d3">Macbeth</data>
-      <data key="d4">prophetic_salutation</data>
-    </node>
-    <node id="MAC_1_3::evidence::2">
-      <data key="d0">MAC_1_3</data>
-      <data key="d1">evidence</data>
-      <data key="d2">partial_confirmation</data>
-      <data key="d3">Macbeth</data>
-      <data key="d4">partial_confirmation</data>
-    </node>
-    <node id="MAC_1_3::evidence::3">
-      <data key="d0">MAC_1_3</data>
-      <data key="d1">evidence</data>
-      <data key="d2">Macbeth_uptake</data>
-      <data key="d3">Macbeth</data>
-      <data key="d4">Macbeth_uptake</data>
-    </node>
-    <node id="MAC_1_3::anchor">
-      <data key="d0">MAC_1_3</data>
-      <data key="d1">anchor</data>
-      <data key="d2">partial_confirmation</data>
-      <data key="d3">Macbeth</data>
-      <data key="d4">Witches hail Macbeth as Cawdor and future king; Ross and Angus confirm Cawdor.</data>
-    </node>
-    <node id="MAC_1_3::threshold_rationale">
-      <data key="d0">MAC_1_3</data>
-      <data key="d1">threshold_rationale</data>
-      <data key="d2">warrant_attribution / authorizes+reframes / textual_anchor+internal_sequence / dramatic_present / prospective / medium</data>
-      <data key="d3">Macbeth</data>
-      <data key="d4">Partial confirmation gives prophetic speech warranting force and reframes kingship as actionable possibility.</data>
-      <data key="d5">warrant_attribution</data>
-      <data key="d6">authorizes+reframes</data>
-      <data key="d7">textual_anchor+internal_sequence</data>
-      <data key="d8">dramatic_present</data>
-      <data key="d9">prospective</data>
-      <data key="d10">medium</data>
-      <data key="d11">Partial confirmation gives prophetic speech warranting force and reframes kingship as actionable possibility.</data>
-    </node>
-    <node id="MAC_1_3::function">
-      <data key="d0">MAC_1_3</data>
-      <data key="d1">function</data>
-      <data key="d2">ambition_trigger_authorization</data>
-      <data key="d3">Macbeth</data>
-      <data key="d4">ambition_trigger_authorization</data>
-    </node>
-    <node id="MAC_4_1::case">
-      <data key="d0">MAC_4_1</data>
-      <data key="d1">case</data>
-      <data key="d2">Act 4.1, apparition prophecies</data>
-      <data key="d3">Macbeth</data>
-      <data key="d4" />
-    </node>
-    <node id="MAC_4_1::evidence::1">
-      <data key="d0">MAC_4_1</data>
-      <data key="d1">evidence</data>
-      <data key="d2">apparition_warning</data>
-      <data key="d3">Macbeth</data>
-      <data key="d4">apparition_warning</data>
-    </node>
-    <node id="MAC_4_1::evidence::2">
-      <data key="d0">MAC_4_1</data>
-      <data key="d1">evidence</data>
-      <data key="d2">woman_born_condition</data>
-      <data key="d3">Macbeth</data>
-      <data key="d4">woman_born_condition</data>
-    </node>
-    <node id="MAC_4_1::evidence::3">
-      <data key="d0">MAC_4_1</data>
-      <data key="d1">evidence</data>
-      <data key="d2">Birnam_Wood_condition</data>
-      <data key="d3">Macbeth</data>
-      <data key="d4">Birnam_Wood_condition</data>
-    </node>
-    <node id="MAC_4_1::evidence::4">
-      <data key="d0">MAC_4_1</data>
-      <data key="d1">evidence</data>
-      <data key="d2">Macbeth_interpretation</data>
-      <data key="d3">Macbeth</data>
-      <data key="d4">Macbeth_interpretation</data>
-    </node>
-    <node id="MAC_4_1::anchor">
-      <data key="d0">MAC_4_1</data>
-      <data key="d1">anchor</data>
-      <data key="d2">Macbeth_interpretation</data>
-      <data key="d3">Macbeth</data>
-      <data key="d4">none of woman born; Birnam Wood prophecy</data>
-    </node>
-    <node id="MAC_4_1::threshold_rationale">
-      <data key="d0">MAC_4_1</data>
-      <data key="d1">threshold_rationale</data>
-      <data key="d2">operation_function / reframes+narrows / textual_anchor+internal_sequence / dramatic_present / prospective-retrospective / low</data>
-      <data key="d3">Macbeth</data>
-      <data key="d4">Macbeth converts equivocal conditional prophecy into practical security.</data>
-      <data key="d5">operation_function</data>
-      <data key="d6">reframes+narrows</data>
-      <data key="d7">textual_anchor+internal_sequence</data>
-      <data key="d8">dramatic_present</data>
-      <data key="d9">prospective-retrospective</data>
-      <data key="d10">low</data>
-      <data key="d11">Macbeth converts equivocal conditional prophecy into practical security.</data>
-    </node>
-    <node id="MAC_4_1::function">
-      <data key="d0">MAC_4_1</data>
-      <data key="d1">function</data>
-      <data key="d2">false_security</data>
-      <data key="d3">Macbeth</data>
-      <data key="d4">false_security</data>
-    </node>
-    <node id="MAC_5_8::case">
-      <data key="d0">MAC_5_8</data>
-      <data key="d1">case</data>
-      <data key="d2">Act 5.8, Macduff disclosure and double sense</data>
-      <data key="d3">Macbeth</data>
-      <data key="d4" />
-    </node>
-    <node id="MAC_5_8::evidence::1">
-      <data key="d0">MAC_5_8</data>
-      <data key="d1">evidence</data>
-      <data key="d2">Macduff_disclosure</data>
-      <data key="d3">Macbeth</data>
-      <data key="d4">Macduff_disclosure</data>
-    </node>
-    <node id="MAC_5_8::evidence::2">
-      <data key="d0">MAC_5_8</data>
-      <data key="d1">evidence</data>
-      <data key="d2">fulfilled_prophecy</data>
-      <data key="d3">Macbeth</data>
-      <data key="d4">fulfilled_prophecy</data>
-    </node>
-    <node id="MAC_5_8::evidence::3">
-      <data key="d0">MAC_5_8</data>
-      <data key="d1">evidence</data>
-      <data key="d2">Macbeth_recognition</data>
-      <data key="d3">Macbeth</data>
-      <data key="d4">Macbeth_recognition</data>
-    </node>
-    <node id="MAC_5_8::anchor">
-      <data key="d0">MAC_5_8</data>
-      <data key="d1">anchor</data>
-      <data key="d2">Macduff_disclosure</data>
-      <data key="d3">Macbeth</data>
-      <data key="d4">Macduff reveals he was untimely ripped; Macbeth recognizes the double sense.</data>
-    </node>
-    <node id="MAC_5_8::threshold_rationale">
-      <data key="d0">MAC_5_8</data>
-      <data key="d1">threshold_rationale</data>
-      <data key="d2">temporal_layering / reframes / textual_anchor+internal_sequence / dramatic_present / retrospective / low</data>
-      <data key="d3">Macbeth</data>
-      <data key="d4">Later fulfilment reclassifies Macbeth's earlier assurance as equivocal trap.</data>
-      <data key="d5">temporal_layering</data>
-      <data key="d6">reframes</data>
-      <data key="d7">textual_anchor+internal_sequence</data>
-      <data key="d8">dramatic_present</data>
-      <data key="d9">retrospective</data>
-      <data key="d10">low</data>
-      <data key="d11">Later fulfilment reclassifies Macbeth's earlier assurance as equivocal trap.</data>
-    </node>
-    <node id="MAC_5_8::function">
-      <data key="d0">MAC_5_8</data>
-      <data key="d1">function</data>
-      <data key="d2">retrospective_trap</data>
-      <data key="d3">Macbeth</data>
-      <data key="d4">retrospective_trap</data>
-    </node>
-    <node id="GROVE_TAJOMARU::case">
-      <data key="d0">GROVE_TAJOMARU</data>
-      <data key="d1">case</data>
-      <data key="d2">Tajōmaru's testimony</data>
-      <data key="d3">In a Grove</data>
-      <data key="d4">In a Grove</data>
-    </node>
-    <node id="GROVE_TAJOMARU::evidence::1">
-      <data key="d0">GROVE_TAJOMARU</data>
-      <data key="d1">evidence</data>
-      <data key="d2">confession</data>
-      <data key="d3">In a Grove</data>
-      <data key="d4">confession</data>
-    </node>
-    <node id="GROVE_TAJOMARU::evidence::2">
-      <data key="d0">GROVE_TAJOMARU</data>
-      <data key="d1">evidence</data>
-      <data key="d2">self_display</data>
-      <data key="d3">In a Grove</data>
-      <data key="d4">self_display</data>
-    </node>
-    <node id="GROVE_TAJOMARU::evidence::3">
-      <data key="d0">GROVE_TAJOMARU</data>
-      <data key="d1">evidence</data>
-      <data key="d2">contest_narration</data>
-      <data key="d3">In a Grove</data>
-      <data key="d4">contest_narration</data>
-    </node>
-    <node id="GROVE_TAJOMARU::anchor">
-      <data key="d0">GROVE_TAJOMARU</data>
-      <data key="d1">anchor</data>
-      <data key="d2">confession</data>
-      <data key="d3">In a Grove</data>
-      <data key="d4">Tajōmaru's confession/testimony section</data>
-    </node>
-    <node id="GROVE_TAJOMARU::threshold_rationale">
-      <data key="d0">GROVE_TAJOMARU</data>
-      <data key="d1">threshold_rationale</data>
-      <data key="d2">operation_function / reframes / textual_anchor+narrative_context / frame_narrative / retrospective / medium</data>
-      <data key="d3">In a Grove</data>
-      <data key="d4">Confession is converted from apparent truth-disclosure into self-justifying self-display.</data>
-      <data key="d5">operation_function</data>
-      <data key="d6">reframes</data>
-      <data key="d7">textual_anchor+narrative_context</data>
-      <data key="d8">frame_narrative</data>
-      <data key="d9">retrospective</data>
-      <data key="d10">medium</data>
-      <data key="d11">Confession is converted from apparent truth-disclosure into self-justifying self-display.</data>
-    </node>
-    <node id="GROVE_TAJOMARU::function">
-      <data key="d0">GROVE_TAJOMARU</data>
-      <data key="d1">function</data>
-      <data key="d2">self_justification</data>
-      <data key="d3">In a Grove</data>
-      <data key="d4">self_justification</data>
-    </node>
-    <node id="GROVE_MASAGO::case">
-      <data key="d0">GROVE_MASAGO</data>
-      <data key="d1">case</data>
-      <data key="d2">Masago's testimony</data>
-      <data key="d3">In a Grove</data>
-      <data key="d4" />
-    </node>
-    <node id="GROVE_MASAGO::evidence::1">
-      <data key="d0">GROVE_MASAGO</data>
-      <data key="d1">evidence</data>
-      <data key="d2">shame_narrative</data>
-      <data key="d3">In a Grove</data>
-      <data key="d4">shame_narrative</data>
-    </node>
-    <node id="GROVE_MASAGO::evidence::2">
-      <data key="d0">GROVE_MASAGO</data>
-      <data key="d1">evidence</data>
-      <data key="d2">accusation</data>
-      <data key="d3">In a Grove</data>
-      <data key="d4">accusation</data>
-    </node>
-    <node id="GROVE_MASAGO::evidence::3">
-      <data key="d0">GROVE_MASAGO</data>
-      <data key="d1">evidence</data>
-      <data key="d2">self_blame</data>
-      <data key="d3">In a Grove</data>
-      <data key="d4">self_blame</data>
-    </node>
-    <node id="GROVE_MASAGO::evidence::4">
-      <data key="d0">GROVE_MASAGO</data>
-      <data key="d1">evidence</data>
-      <data key="d2">failed_self_destruction</data>
-      <data key="d3">In a Grove</data>
-      <data key="d4">failed_self_destruction</data>
-    </node>
-    <node id="GROVE_MASAGO::anchor">
-      <data key="d0">GROVE_MASAGO</data>
-      <data key="d1">anchor</data>
-      <data key="d2">shame_narrative</data>
-      <data key="d3">In a Grove</data>
-      <data key="d4">Masago's confession/testimony section</data>
-    </node>
-    <node id="GROVE_MASAGO::threshold_rationale">
-      <data key="d0">GROVE_MASAGO</data>
-      <data key="d1">threshold_rationale</data>
-      <data key="d2">perspective_assignment / qualifies / textual_anchor+narrative_context / frame_narrative / retrospective / high</data>
-      <data key="d3">In a Grove</data>
-      <data key="d4">The testimony does not stabilize around one testimonial role because victim-position, shame, accusation, and self-blame qualify one another.</data>
-      <data key="d5">perspective_assignment</data>
-      <data key="d6">qualifies</data>
-      <data key="d7">textual_anchor+narrative_context</data>
-      <data key="d8">frame_narrative</data>
-      <data key="d9">retrospective</data>
-      <data key="d10">high</data>
-      <data key="d11">The testimony does not stabilize around one testimonial role because victim-position, shame, accusation, and self-blame qualify one another.</data>
-    </node>
-    <node id="GROVE_MASAGO::function">
-      <data key="d0">GROVE_MASAGO</data>
-      <data key="d1">function</data>
-      <data key="d2">self_defence_self_accusation</data>
-      <data key="d3">In a Grove</data>
-      <data key="d4">self_defence_self_accusation</data>
-    </node>
-    <node id="GROVE_TAKEHIRO::case">
-      <data key="d0">GROVE_TAKEHIRO</data>
-      <data key="d1">case</data>
-      <data key="d2">Takehiro's posthumous testimony</data>
-      <data key="d3">In a Grove</data>
-      <data key="d4" />
-    </node>
-    <node id="GROVE_TAKEHIRO::evidence::1">
-      <data key="d0">GROVE_TAKEHIRO</data>
-      <data key="d1">evidence</data>
-      <data key="d2">posthumous_testimony</data>
-      <data key="d3">In a Grove</data>
-      <data key="d4">posthumous_testimony</data>
-    </node>
-    <node id="GROVE_TAKEHIRO::evidence::2">
-      <data key="d0">GROVE_TAKEHIRO</data>
-      <data key="d1">evidence</data>
-      <data key="d2">medium_speech</data>
-      <data key="d3">In a Grove</data>
-      <data key="d4">medium_speech</data>
-    </node>
-    <node id="GROVE_TAKEHIRO::evidence::3">
-      <data key="d0">GROVE_TAKEHIRO</data>
-      <data key="d1">evidence</data>
-      <data key="d2">incompatible_account</data>
-      <data key="d3">In a Grove</data>
-      <data key="d4">incompatible_account</data>
-    </node>
-    <node id="GROVE_TAKEHIRO::anchor">
-      <data key="d0">GROVE_TAKEHIRO</data>
-      <data key="d1">anchor</data>
-      <data key="d2">posthumous_testimony</data>
-      <data key="d3">In a Grove</data>
-      <data key="d4">murdered man's testimony through a medium</data>
-    </node>
-    <node id="GROVE_TAKEHIRO::threshold_rationale">
-      <data key="d0">GROVE_TAKEHIRO</data>
-      <data key="d1">threshold_rationale</data>
-      <data key="d2">warrant_relation / contradicts+suspends / textual_anchor+narrative_context / frame_narrative / retrospective / high</data>
-      <data key="d3">In a Grove</data>
-      <data key="d4">Posthumous testimony adds an extraordinary warrant that contradicts rather than resolves the preceding accounts.</data>
-      <data key="d5">warrant_relation</data>
-      <data key="d6">contradicts+suspends</data>
-      <data key="d7">textual_anchor+narrative_context</data>
-      <data key="d8">frame_narrative</data>
-      <data key="d9">retrospective</data>
-      <data key="d10">high</data>
-      <data key="d11">Posthumous testimony adds an extraordinary warrant that contradicts rather than resolves the preceding accounts.</data>
-    </node>
-    <node id="GROVE_TAKEHIRO::function">
-      <data key="d0">GROVE_TAKEHIRO</data>
-      <data key="d1">function</data>
-      <data key="d2">epistemic_suspension</data>
-      <data key="d3">In a Grove</data>
-      <data key="d4">epistemic_suspension</data>
-    </node>
-    <edge source="ZZ_XIANG_7::case" target="ZZ_XIANG_7::evidence::1">
-      <data key="d12">ZZ_XIANG_7</data>
-      <data key="d13">contains_evidence</data>
-      <data key="d14">contains_evidence</data>
-    </edge>
-    <edge source="ZZ_XIANG_7::case" target="ZZ_XIANG_7::evidence::2">
-      <data key="d12">ZZ_XIANG_7</data>
-      <data key="d13">contains_evidence</data>
-      <data key="d14">contains_evidence</data>
-    </edge>
-    <edge source="ZZ_XIANG_7::case" target="ZZ_XIANG_7::evidence::3">
-      <data key="d12">ZZ_XIANG_7</data>
-      <data key="d13">contains_evidence</data>
-      <data key="d14">contains_evidence</data>
-    </edge>
-    <edge source="ZZ_XIANG_7::evidence::1" target="ZZ_XIANG_7::anchor">
-      <data key="d12">ZZ_XIANG_7</data>
-      <data key="d13">contributes_to_anchor</data>
-      <data key="d14">contributes_to_anchor</data>
-    </edge>
-    <edge source="ZZ_XIANG_7::evidence::2" target="ZZ_XIANG_7::anchor">
-      <data key="d12">ZZ_XIANG_7</data>
-      <data key="d13">contributes_to_anchor</data>
-      <data key="d14">contributes_to_anchor</data>
-    </edge>
-    <edge source="ZZ_XIANG_7::evidence::3" target="ZZ_XIANG_7::anchor">
-      <data key="d12">ZZ_XIANG_7</data>
-      <data key="d13">contributes_to_anchor</data>
-      <data key="d14">contributes_to_anchor</data>
-    </edge>
-    <edge source="ZZ_XIANG_7::anchor" target="ZZ_XIANG_7::threshold_rationale">
-      <data key="d12">ZZ_XIANG_7</data>
-      <data key="d13">has_threshold_rationale</data>
-      <data key="d14">has_threshold_rationale</data>
-    </edge>
-    <edge source="ZZ_XIANG_7::anchor" target="ZZ_XIANG_7::function">
-      <data key="d12">ZZ_XIANG_7</data>
-      <data key="d13">converts_to</data>
-      <data key="d14">converts_to</data>
-      <data key="d15">operation_function</data>
-      <data key="d16">stabilizes</data>
-      <data key="d17">textual_anchor+ritual_sequence</data>
-      <data key="d18">intradiegetic</data>
-      <data key="d19">immediate</data>
-      <data key="d20">low</data>
-      <data key="d21">Interpretation converts the failed divination into procedural intelligibility by restoring ritual sequence.</data>
-    </edge>
-    <edge source="ZZ_XIANG_7::threshold_rationale" target="ZZ_XIANG_7::function">
-      <data key="d12">ZZ_XIANG_7</data>
-      <data key="d13">points_to_function</data>
-      <data key="d14">points_to_function</data>
-    </edge>
-    <edge source="ZZ_MIN_1::case" target="ZZ_MIN_1::evidence::1">
-      <data key="d12">ZZ_MIN_1</data>
-      <data key="d13">contains_evidence</data>
-      <data key="d14">contains_evidence</data>
-    </edge>
-    <edge source="ZZ_MIN_1::case" target="ZZ_MIN_1::evidence::2">
-      <data key="d12">ZZ_MIN_1</data>
-      <data key="d13">contains_evidence</data>
-      <data key="d14">contains_evidence</data>
-    </edge>
-    <edge source="ZZ_MIN_1::case" target="ZZ_MIN_1::evidence::3">
-      <data key="d12">ZZ_MIN_1</data>
-      <data key="d13">contains_evidence</data>
-      <data key="d14">contains_evidence</data>
-    </edge>
-    <edge source="ZZ_MIN_1::case" target="ZZ_MIN_1::evidence::4">
-      <data key="d12">ZZ_MIN_1</data>
-      <data key="d13">contains_evidence</data>
-      <data key="d14">contains_evidence</data>
-    </edge>
-    <edge source="ZZ_MIN_1::evidence::1" target="ZZ_MIN_1::anchor">
-      <data key="d12">ZZ_MIN_1</data>
-      <data key="d13">contributes_to_anchor</data>
-      <data key="d14">contributes_to_anchor</data>
-    </edge>
-    <edge source="ZZ_MIN_1::evidence::2" target="ZZ_MIN_1::anchor">
-      <data key="d12">ZZ_MIN_1</data>
-      <data key="d13">contributes_to_anchor</data>
-      <data key="d14">contributes_to_anchor</data>
-    </edge>
-    <edge source="ZZ_MIN_1::evidence::3" target="ZZ_MIN_1::anchor">
-      <data key="d12">ZZ_MIN_1</data>
-      <data key="d13">contributes_to_anchor</data>
-      <data key="d14">contributes_to_anchor</data>
-    </edge>
-    <edge source="ZZ_MIN_1::evidence::4" target="ZZ_MIN_1::anchor">
-      <data key="d12">ZZ_MIN_1</data>
-      <data key="d13">contributes_to_anchor</data>
-      <data key="d14">contributes_to_anchor</data>
-    </edge>
-    <edge source="ZZ_MIN_1::anchor" target="ZZ_MIN_1::threshold_rationale">
-      <data key="d12">ZZ_MIN_1</data>
-      <data key="d13">has_threshold_rationale</data>
-      <data key="d14">has_threshold_rationale</data>
-    </edge>
-    <edge source="ZZ_MIN_1::anchor" target="ZZ_MIN_1::function">
-      <data key="d12">ZZ_MIN_1</data>
-      <data key="d13">converts_to</data>
-      <data key="d14">converts_to</data>
-      <data key="d15">warrant_attribution</data>
-      <data key="d16">stabilizes+projects</data>
-      <data key="d17">textual_anchor+internal_sequence</data>
-      <data key="d18">intradiegetic</data>
-      <data key="d19">prospective</data>
-      <data key="d20">medium</data>
-      <data key="d21">The Yi-related result is accepted as a stable prospective lineage judgement without reopening local deliberation.</data>
-    </edge>
-    <edge source="ZZ_MIN_1::threshold_rationale" target="ZZ_MIN_1::function">
-      <data key="d12">ZZ_MIN_1</data>
-      <data key="d13">points_to_function</data>
-      <data key="d14">points_to_function</data>
-    </edge>
-    <edge source="ZZ_XI_4::case" target="ZZ_XI_4::evidence::1">
-      <data key="d12">ZZ_XI_4</data>
-      <data key="d13">contains_evidence</data>
-      <data key="d14">contains_evidence</data>
-    </edge>
-    <edge source="ZZ_XI_4::case" target="ZZ_XI_4::evidence::2">
-      <data key="d12">ZZ_XI_4</data>
-      <data key="d13">contains_evidence</data>
-      <data key="d14">contains_evidence</data>
-    </edge>
-    <edge source="ZZ_XI_4::case" target="ZZ_XI_4::evidence::3">
-      <data key="d12">ZZ_XI_4</data>
-      <data key="d13">contains_evidence</data>
-      <data key="d14">contains_evidence</data>
-    </edge>
-    <edge source="ZZ_XI_4::case" target="ZZ_XI_4::evidence::4">
-      <data key="d12">ZZ_XI_4</data>
-      <data key="d13">contains_evidence</data>
-      <data key="d14">contains_evidence</data>
-    </edge>
-    <edge source="ZZ_XI_4::case" target="ZZ_XI_4::evidence::5">
-      <data key="d12">ZZ_XI_4</data>
-      <data key="d13">contains_evidence</data>
-      <data key="d14">contains_evidence</data>
-    </edge>
-    <edge source="ZZ_XI_4::evidence::1" target="ZZ_XI_4::anchor">
-      <data key="d12">ZZ_XI_4</data>
-      <data key="d13">contributes_to_anchor</data>
-      <data key="d14">contributes_to_anchor</data>
-    </edge>
-    <edge source="ZZ_XI_4::evidence::2" target="ZZ_XI_4::anchor">
-      <data key="d12">ZZ_XI_4</data>
-      <data key="d13">contributes_to_anchor</data>
-      <data key="d14">contributes_to_anchor</data>
-    </edge>
-    <edge source="ZZ_XI_4::evidence::3" target="ZZ_XI_4::anchor">
-      <data key="d12">ZZ_XI_4</data>
-      <data key="d13">contributes_to_anchor</data>
-      <data key="d14">contributes_to_anchor</data>
-    </edge>
-    <edge source="ZZ_XI_4::evidence::4" target="ZZ_XI_4::anchor">
-      <data key="d12">ZZ_XI_4</data>
-      <data key="d13">contributes_to_anchor</data>
-      <data key="d14">contributes_to_anchor</data>
-    </edge>
-    <edge source="ZZ_XI_4::evidence::5" target="ZZ_XI_4::anchor">
-      <data key="d12">ZZ_XI_4</data>
-      <data key="d13">contributes_to_anchor</data>
-      <data key="d14">contributes_to_anchor</data>
-    </edge>
-    <edge source="ZZ_XI_4::anchor" target="ZZ_XI_4::threshold_rationale">
-      <data key="d12">ZZ_XI_4</data>
-      <data key="d13">has_threshold_rationale</data>
-      <data key="d14">has_threshold_rationale</data>
-    </edge>
-    <edge source="ZZ_XI_4::anchor" target="ZZ_XI_4::function">
-      <data key="d12">ZZ_XI_4</data>
-      <data key="d13">converts_to</data>
-      <data key="d14">converts_to</data>
-      <data key="d15">warrant_relation</data>
-      <data key="d16">extends</data>
-      <data key="d17">textual_anchor+internal_sequence</data>
-      <data key="d18">intradiegetic</data>
-      <data key="d19">recursive</data>
-      <data key="d20">medium</data>
-      <data key="d21">The dominant threshold is warrant_relation because conflict among turtle result, milfoil result, ranking speech, and line text prevents clean closure. Temporal layering is a meaningful secondary observation.</data>
-    </edge>
-    <edge source="ZZ_XI_4::threshold_rationale" target="ZZ_XI_4::function">
-      <data key="d12">ZZ_XI_4</data>
-      <data key="d13">points_to_function</data>
-      <data key="d14">points_to_function</data>
-    </edge>
-    <edge source="ZZ_ZHUANG_22::case" target="ZZ_ZHUANG_22::evidence::1">
-      <data key="d12">ZZ_ZHUANG_22</data>
-      <data key="d13">contains_evidence</data>
-      <data key="d14">contains_evidence</data>
-    </edge>
-    <edge source="ZZ_ZHUANG_22::case" target="ZZ_ZHUANG_22::evidence::2">
-      <data key="d12">ZZ_ZHUANG_22</data>
-      <data key="d13">contains_evidence</data>
-      <data key="d14">contains_evidence</data>
-    </edge>
-    <edge source="ZZ_ZHUANG_22::case" target="ZZ_ZHUANG_22::evidence::3">
-      <data key="d12">ZZ_ZHUANG_22</data>
-      <data key="d13">contains_evidence</data>
-      <data key="d14">contains_evidence</data>
-    </edge>
-    <edge source="ZZ_ZHUANG_22::case" target="ZZ_ZHUANG_22::evidence::4">
-      <data key="d12">ZZ_ZHUANG_22</data>
-      <data key="d13">contains_evidence</data>
-      <data key="d14">contains_evidence</data>
-    </edge>
-    <edge source="ZZ_ZHUANG_22::evidence::1" target="ZZ_ZHUANG_22::anchor">
-      <data key="d12">ZZ_ZHUANG_22</data>
-      <data key="d13">contributes_to_anchor</data>
-      <data key="d14">contributes_to_anchor</data>
-    </edge>
-    <edge source="ZZ_ZHUANG_22::evidence::2" target="ZZ_ZHUANG_22::anchor">
-      <data key="d12">ZZ_ZHUANG_22</data>
-      <data key="d13">contributes_to_anchor</data>
-      <data key="d14">contributes_to_anchor</data>
-    </edge>
-    <edge source="ZZ_ZHUANG_22::evidence::3" target="ZZ_ZHUANG_22::anchor">
-      <data key="d12">ZZ_ZHUANG_22</data>
-      <data key="d13">contributes_to_anchor</data>
-      <data key="d14">contributes_to_anchor</data>
-    </edge>
-    <edge source="ZZ_ZHUANG_22::evidence::4" target="ZZ_ZHUANG_22::anchor">
-      <data key="d12">ZZ_ZHUANG_22</data>
-      <data key="d13">contributes_to_anchor</data>
-      <data key="d14">contributes_to_anchor</data>
-    </edge>
-    <edge source="ZZ_ZHUANG_22::anchor" target="ZZ_ZHUANG_22::threshold_rationale">
-      <data key="d12">ZZ_ZHUANG_22</data>
-      <data key="d13">has_threshold_rationale</data>
-      <data key="d14">has_threshold_rationale</data>
-    </edge>
-    <edge source="ZZ_ZHUANG_22::anchor" target="ZZ_ZHUANG_22::function">
-      <data key="d12">ZZ_ZHUANG_22</data>
-      <data key="d13">converts_to</data>
-      <data key="d14">converts_to</data>
-      <data key="d15">temporal_layering</data>
-      <data key="d16">extends+projects</data>
-      <data key="d17">textual_anchor+internal_sequence</data>
-      <data key="d18">commentarial_discourse</data>
-      <data key="d19">prospective-retrospective</data>
-      <data key="d20">medium</data>
-      <data key="d21">The sign remains active across projected descent and later historical readability.</data>
-    </edge>
-    <edge source="ZZ_ZHUANG_22::threshold_rationale" target="ZZ_ZHUANG_22::function">
-      <data key="d12">ZZ_ZHUANG_22</data>
-      <data key="d13">points_to_function</data>
-      <data key="d14">points_to_function</data>
-    </edge>
-    <edge source="MAC_1_3::case" target="MAC_1_3::evidence::1">
-      <data key="d12">MAC_1_3</data>
-      <data key="d13">contains_evidence</data>
-      <data key="d14">contains_evidence</data>
-    </edge>
-    <edge source="MAC_1_3::case" target="MAC_1_3::evidence::2">
-      <data key="d12">MAC_1_3</data>
-      <data key="d13">contains_evidence</data>
-      <data key="d14">contains_evidence</data>
-    </edge>
-    <edge source="MAC_1_3::case" target="MAC_1_3::evidence::3">
-      <data key="d12">MAC_1_3</data>
-      <data key="d13">contains_evidence</data>
-      <data key="d14">contains_evidence</data>
-    </edge>
-    <edge source="MAC_1_3::evidence::1" target="MAC_1_3::anchor">
-      <data key="d12">MAC_1_3</data>
-      <data key="d13">contributes_to_anchor</data>
-      <data key="d14">contributes_to_anchor</data>
-    </edge>
-    <edge source="MAC_1_3::evidence::2" target="MAC_1_3::anchor">
-      <data key="d12">MAC_1_3</data>
-      <data key="d13">contributes_to_anchor</data>
-      <data key="d14">contributes_to_anchor</data>
-    </edge>
-    <edge source="MAC_1_3::evidence::3" target="MAC_1_3::anchor">
-      <data key="d12">MAC_1_3</data>
-      <data key="d13">contributes_to_anchor</data>
-      <data key="d14">contributes_to_anchor</data>
-    </edge>
-    <edge source="MAC_1_3::anchor" target="MAC_1_3::threshold_rationale">
-      <data key="d12">MAC_1_3</data>
-      <data key="d13">has_threshold_rationale</data>
-      <data key="d14">has_threshold_rationale</data>
-    </edge>
-    <edge source="MAC_1_3::anchor" target="MAC_1_3::function">
-      <data key="d12">MAC_1_3</data>
-      <data key="d13">converts_to</data>
-      <data key="d14">converts_to</data>
-      <data key="d15">warrant_attribution</data>
-      <data key="d16">authorizes+reframes</data>
-      <data key="d17">textual_anchor+internal_sequence</data>
-      <data key="d18">dramatic_present</data>
-      <data key="d19">prospective</data>
-      <data key="d20">medium</data>
-      <data key="d21">Partial confirmation gives prophetic speech warranting force and reframes kingship as actionable possibility.</data>
-    </edge>
-    <edge source="MAC_1_3::threshold_rationale" target="MAC_1_3::function">
-      <data key="d12">MAC_1_3</data>
-      <data key="d13">points_to_function</data>
-      <data key="d14">points_to_function</data>
-    </edge>
-    <edge source="MAC_4_1::case" target="MAC_4_1::evidence::1">
-      <data key="d12">MAC_4_1</data>
-      <data key="d13">contains_evidence</data>
-      <data key="d14">contains_evidence</data>
-    </edge>
-    <edge source="MAC_4_1::case" target="MAC_4_1::evidence::2">
-      <data key="d12">MAC_4_1</data>
-      <data key="d13">contains_evidence</data>
-      <data key="d14">contains_evidence</data>
-    </edge>
-    <edge source="MAC_4_1::case" target="MAC_4_1::evidence::3">
-      <data key="d12">MAC_4_1</data>
-      <data key="d13">contains_evidence</data>
-      <data key="d14">contains_evidence</data>
-    </edge>
-    <edge source="MAC_4_1::case" target="MAC_4_1::evidence::4">
-      <data key="d12">MAC_4_1</data>
-      <data key="d13">contains_evidence</data>
-      <data key="d14">contains_evidence</data>
-    </edge>
-    <edge source="MAC_4_1::evidence::1" target="MAC_4_1::anchor">
-      <data key="d12">MAC_4_1</data>
-      <data key="d13">contributes_to_anchor</data>
-      <data key="d14">contributes_to_anchor</data>
-    </edge>
-    <edge source="MAC_4_1::evidence::2" target="MAC_4_1::anchor">
-      <data key="d12">MAC_4_1</data>
-      <data key="d13">contributes_to_anchor</data>
-      <data key="d14">contributes_to_anchor</data>
-    </edge>
-    <edge source="MAC_4_1::evidence::3" target="MAC_4_1::anchor">
-      <data key="d12">MAC_4_1</data>
-      <data key="d13">contributes_to_anchor</data>
-      <data key="d14">contributes_to_anchor</data>
-    </edge>
-    <edge source="MAC_4_1::evidence::4" target="MAC_4_1::anchor">
-      <data key="d12">MAC_4_1</data>
-      <data key="d13">contributes_to_anchor</data>
-      <data key="d14">contributes_to_anchor</data>
-    </edge>
-    <edge source="MAC_4_1::anchor" target="MAC_4_1::threshold_rationale">
-      <data key="d12">MAC_4_1</data>
-      <data key="d13">has_threshold_rationale</data>
-      <data key="d14">has_threshold_rationale</data>
-    </edge>
-    <edge source="MAC_4_1::anchor" target="MAC_4_1::function">
-      <data key="d12">MAC_4_1</data>
-      <data key="d13">converts_to</data>
-      <data key="d14">converts_to</data>
-      <data key="d15">operation_function</data>
-      <data key="d16">reframes+narrows</data>
-      <data key="d17">textual_anchor+internal_sequence</data>
-      <data key="d18">dramatic_present</data>
-      <data key="d19">prospective-retrospective</data>
-      <data key="d20">low</data>
-      <data key="d21">Macbeth converts equivocal conditional prophecy into practical security.</data>
-    </edge>
-    <edge source="MAC_4_1::threshold_rationale" target="MAC_4_1::function">
-      <data key="d12">MAC_4_1</data>
-      <data key="d13">points_to_function</data>
-      <data key="d14">points_to_function</data>
-    </edge>
-    <edge source="MAC_5_8::case" target="MAC_5_8::evidence::1">
-      <data key="d12">MAC_5_8</data>
-      <data key="d13">contains_evidence</data>
-      <data key="d14">contains_evidence</data>
-    </edge>
-    <edge source="MAC_5_8::case" target="MAC_5_8::evidence::2">
-      <data key="d12">MAC_5_8</data>
-      <data key="d13">contains_evidence</data>
-      <data key="d14">contains_evidence</data>
-    </edge>
-    <edge source="MAC_5_8::case" target="MAC_5_8::evidence::3">
-      <data key="d12">MAC_5_8</data>
-      <data key="d13">contains_evidence</data>
-      <data key="d14">contains_evidence</data>
-    </edge>
-    <edge source="MAC_5_8::evidence::1" target="MAC_5_8::anchor">
-      <data key="d12">MAC_5_8</data>
-      <data key="d13">contributes_to_anchor</data>
-      <data key="d14">contributes_to_anchor</data>
-    </edge>
-    <edge source="MAC_5_8::evidence::2" target="MAC_5_8::anchor">
-      <data key="d12">MAC_5_8</data>
-      <data key="d13">contributes_to_anchor</data>
-      <data key="d14">contributes_to_anchor</data>
-    </edge>
-    <edge source="MAC_5_8::evidence::3" target="MAC_5_8::anchor">
-      <data key="d12">MAC_5_8</data>
-      <data key="d13">contributes_to_anchor</data>
-      <data key="d14">contributes_to_anchor</data>
-    </edge>
-    <edge source="MAC_5_8::anchor" target="MAC_5_8::threshold_rationale">
-      <data key="d12">MAC_5_8</data>
-      <data key="d13">has_threshold_rationale</data>
-      <data key="d14">has_threshold_rationale</data>
-    </edge>
-    <edge source="MAC_5_8::anchor" target="MAC_5_8::function">
-      <data key="d12">MAC_5_8</data>
-      <data key="d13">converts_to</data>
-      <data key="d14">converts_to</data>
-      <data key="d15">temporal_layering</data>
-      <data key="d16">reframes</data>
-      <data key="d17">textual_anchor+internal_sequence</data>
-      <data key="d18">dramatic_present</data>
-      <data key="d19">retrospective</data>
-      <data key="d20">low</data>
-      <data key="d21">Later fulfilment reclassifies Macbeth's earlier assurance as equivocal trap.</data>
-    </edge>
-    <edge source="MAC_5_8::threshold_rationale" target="MAC_5_8::function">
-      <data key="d12">MAC_5_8</data>
-      <data key="d13">points_to_function</data>
-      <data key="d14">points_to_function</data>
-    </edge>
-    <edge source="GROVE_TAJOMARU::case" target="GROVE_TAJOMARU::evidence::1">
-      <data key="d12">GROVE_TAJOMARU</data>
-      <data key="d13">contains_evidence</data>
-      <data key="d14">contains_evidence</data>
-    </edge>
-    <edge source="GROVE_TAJOMARU::case" target="GROVE_TAJOMARU::evidence::2">
-      <data key="d12">GROVE_TAJOMARU</data>
-      <data key="d13">contains_evidence</data>
-      <data key="d14">contains_evidence</data>
-    </edge>
-    <edge source="GROVE_TAJOMARU::case" target="GROVE_TAJOMARU::evidence::3">
-      <data key="d12">GROVE_TAJOMARU</data>
-      <data key="d13">contains_evidence</data>
-      <data key="d14">contains_evidence</data>
-    </edge>
-    <edge source="GROVE_TAJOMARU::evidence::1" target="GROVE_TAJOMARU::anchor">
-      <data key="d12">GROVE_TAJOMARU</data>
-      <data key="d13">contributes_to_anchor</data>
-      <data key="d14">contributes_to_anchor</data>
-    </edge>
-    <edge source="GROVE_TAJOMARU::evidence::2" target="GROVE_TAJOMARU::anchor">
-      <data key="d12">GROVE_TAJOMARU</data>
-      <data key="d13">contributes_to_anchor</data>
-      <data key="d14">contributes_to_anchor</data>
-    </edge>
-    <edge source="GROVE_TAJOMARU::evidence::3" target="GROVE_TAJOMARU::anchor">
-      <data key="d12">GROVE_TAJOMARU</data>
-      <data key="d13">contributes_to_anchor</data>
-      <data key="d14">contributes_to_anchor</data>
-    </edge>
-    <edge source="GROVE_TAJOMARU::anchor" target="GROVE_TAJOMARU::threshold_rationale">
-      <data key="d12">GROVE_TAJOMARU</data>
-      <data key="d13">has_threshold_rationale</data>
-      <data key="d14">has_threshold_rationale</data>
-    </edge>
-    <edge source="GROVE_TAJOMARU::anchor" target="GROVE_TAJOMARU::function">
-      <data key="d12">GROVE_TAJOMARU</data>
-      <data key="d13">converts_to</data>
-      <data key="d14">converts_to</data>
-      <data key="d15">operation_function</data>
-      <data key="d16">reframes</data>
-      <data key="d17">textual_anchor+narrative_context</data>
-      <data key="d18">frame_narrative</data>
-      <data key="d19">retrospective</data>
-      <data key="d20">medium</data>
-      <data key="d21">Confession is converted from apparent truth-disclosure into self-justifying self-display.</data>
-    </edge>
-    <edge source="GROVE_TAJOMARU::threshold_rationale" target="GROVE_TAJOMARU::function">
-      <data key="d12">GROVE_TAJOMARU</data>
-      <data key="d13">points_to_function</data>
-      <data key="d14">points_to_function</data>
-    </edge>
-    <edge source="GROVE_MASAGO::case" target="GROVE_MASAGO::evidence::1">
-      <data key="d12">GROVE_MASAGO</data>
-      <data key="d13">contains_evidence</data>
-      <data key="d14">contains_evidence</data>
-    </edge>
-    <edge source="GROVE_MASAGO::case" target="GROVE_MASAGO::evidence::2">
-      <data key="d12">GROVE_MASAGO</data>
-      <data key="d13">contains_evidence</data>
-      <data key="d14">contains_evidence</data>
-    </edge>
-    <edge source="GROVE_MASAGO::case" target="GROVE_MASAGO::evidence::3">
-      <data key="d12">GROVE_MASAGO</data>
-      <data key="d13">contains_evidence</data>
-      <data key="d14">contains_evidence</data>
-    </edge>
-    <edge source="GROVE_MASAGO::case" target="GROVE_MASAGO::evidence::4">
-      <data key="d12">GROVE_MASAGO</data>
-      <data key="d13">contains_evidence</data>
-      <data key="d14">contains_evidence</data>
-    </edge>
-    <edge source="GROVE_MASAGO::evidence::1" target="GROVE_MASAGO::anchor">
-      <data key="d12">GROVE_MASAGO</data>
-      <data key="d13">contributes_to_anchor</data>
-      <data key="d14">contributes_to_anchor</data>
-    </edge>
-    <edge source="GROVE_MASAGO::evidence::2" target="GROVE_MASAGO::anchor">
-      <data key="d12">GROVE_MASAGO</data>
-      <data key="d13">contributes_to_anchor</data>
-      <data key="d14">contributes_to_anchor</data>
-    </edge>
-    <edge source="GROVE_MASAGO::evidence::3" target="GROVE_MASAGO::anchor">
-      <data key="d12">GROVE_MASAGO</data>
-      <data key="d13">contributes_to_anchor</data>
-      <data key="d14">contributes_to_anchor</data>
-    </edge>
-    <edge source="GROVE_MASAGO::evidence::4" target="GROVE_MASAGO::anchor">
-      <data key="d12">GROVE_MASAGO</data>
-      <data key="d13">contributes_to_anchor</data>
-      <data key="d14">contributes_to_anchor</data>
-    </edge>
-    <edge source="GROVE_MASAGO::anchor" target="GROVE_MASAGO::threshold_rationale">
-      <data key="d12">GROVE_MASAGO</data>
-      <data key="d13">has_threshold_rationale</data>
-      <data key="d14">has_threshold_rationale</data>
-    </edge>
-    <edge source="GROVE_MASAGO::anchor" target="GROVE_MASAGO::function">
-      <data key="d12">GROVE_MASAGO</data>
-      <data key="d13">converts_to</data>
-      <data key="d14">converts_to</data>
-      <data key="d15">perspective_assignment</data>
-      <data key="d16">qualifies</data>
-      <data key="d17">textual_anchor+narrative_context</data>
-      <data key="d18">frame_narrative</data>
-      <data key="d19">retrospective</data>
-      <data key="d20">high</data>
-      <data key="d21">The testimony does not stabilize around one testimonial role because victim-position, shame, accusation, and self-blame qualify one another.</data>
-    </edge>
-    <edge source="GROVE_MASAGO::threshold_rationale" target="GROVE_MASAGO::function">
-      <data key="d12">GROVE_MASAGO</data>
-      <data key="d13">points_to_function</data>
-      <data key="d14">points_to_function</data>
-    </edge>
-    <edge source="GROVE_TAKEHIRO::case" target="GROVE_TAKEHIRO::evidence::1">
-      <data key="d12">GROVE_TAKEHIRO</data>
-      <data key="d13">contains_evidence</data>
-      <data key="d14">contains_evidence</data>
-    </edge>
-    <edge source="GROVE_TAKEHIRO::case" target="GROVE_TAKEHIRO::evidence::2">
-      <data key="d12">GROVE_TAKEHIRO</data>
-      <data key="d13">contains_evidence</data>
-      <data key="d14">contains_evidence</data>
-    </edge>
-    <edge source="GROVE_TAKEHIRO::case" target="GROVE_TAKEHIRO::evidence::3">
-      <data key="d12">GROVE_TAKEHIRO</data>
-      <data key="d13">contains_evidence</data>
-      <data key="d14">contains_evidence</data>
-    </edge>
-    <edge source="GROVE_TAKEHIRO::evidence::1" target="GROVE_TAKEHIRO::anchor">
-      <data key="d12">GROVE_TAKEHIRO</data>
-      <data key="d13">contributes_to_anchor</data>
-      <data key="d14">contributes_to_anchor</data>
-    </edge>
-    <edge source="GROVE_TAKEHIRO::evidence::2" target="GROVE_TAKEHIRO::anchor">
-      <data key="d12">GROVE_TAKEHIRO</data>
-      <data key="d13">contributes_to_anchor</data>
-      <data key="d14">contributes_to_anchor</data>
-    </edge>
-    <edge source="GROVE_TAKEHIRO::evidence::3" target="GROVE_TAKEHIRO::anchor">
-      <data key="d12">GROVE_TAKEHIRO</data>
-      <data key="d13">contributes_to_anchor</data>
-      <data key="d14">contributes_to_anchor</data>
-    </edge>
-    <edge source="GROVE_TAKEHIRO::anchor" target="GROVE_TAKEHIRO::threshold_rationale">
-      <data key="d12">GROVE_TAKEHIRO</data>
-      <data key="d13">has_threshold_rationale</data>
-      <data key="d14">has_threshold_rationale</data>
-    </edge>
-    <edge source="GROVE_TAKEHIRO::anchor" target="GROVE_TAKEHIRO::function">
-      <data key="d12">GROVE_TAKEHIRO</data>
-      <data key="d13">converts_to</data>
-      <data key="d14">converts_to</data>
-      <data key="d15">warrant_relation</data>
-      <data key="d16">contradicts+suspends</data>
-      <data key="d17">textual_anchor+narrative_context</data>
-      <data key="d18">frame_narrative</data>
-      <data key="d19">retrospective</data>
-      <data key="d20">high</data>
-      <data key="d21">Posthumous testimony adds an extraordinary warrant that contradicts rather than resolves the preceding accounts.</data>
-    </edge>
-    <edge source="GROVE_TAKEHIRO::threshold_rationale" target="GROVE_TAKEHIRO::function">
-      <data key="d12">GROVE_TAKEHIRO</data>
-      <data key="d13">points_to_function</data>
-      <data key="d14">points_to_function</data>
-    </edge>
-  </graph>
-</graphml>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d21" for="edge" attr.name="rationale_note" attr.type="string"/>
+<key id="d20" for="edge" attr.name="uncertainty_flag" attr.type="string"/>
+<key id="d19" for="edge" attr.name="temporal_orientation" attr.type="string"/>
+<key id="d18" for="edge" attr.name="discourse_level" attr.type="string"/>
+<key id="d17" for="edge" attr.name="epistemic_support" attr.type="string"/>
+<key id="d16" for="edge" attr.name="rationale_mechanism" attr.type="string"/>
+<key id="d15" for="edge" attr.name="friction_locus" attr.type="string"/>
+<key id="d14" for="edge" attr.name="label" attr.type="string"/>
+<key id="d13" for="edge" attr.name="edge_type" attr.type="string"/>
+<key id="d12" for="edge" attr.name="case_id" attr.type="string"/>
+<key id="d11" for="node" attr.name="rationale_note" attr.type="string"/>
+<key id="d10" for="node" attr.name="uncertainty_flag" attr.type="string"/>
+<key id="d9" for="node" attr.name="temporal_orientation" attr.type="string"/>
+<key id="d8" for="node" attr.name="discourse_level" attr.type="string"/>
+<key id="d7" for="node" attr.name="epistemic_support" attr.type="string"/>
+<key id="d6" for="node" attr.name="rationale_mechanism" attr.type="string"/>
+<key id="d5" for="node" attr.name="friction_locus" attr.type="string"/>
+<key id="d4" for="node" attr.name="text" attr.type="string"/>
+<key id="d3" for="node" attr.name="source" attr.type="string"/>
+<key id="d2" for="node" attr.name="label" attr.type="string"/>
+<key id="d1" for="node" attr.name="node_type" attr.type="string"/>
+<key id="d0" for="node" attr.name="case_id" attr.type="string"/>
+<graph edgedefault="directed"><node id="ZZ_XIANG_7::case">
+  <data key="d0">ZZ_XIANG_7</data>
+  <data key="d1">case</data>
+  <data key="d2">Xiang 7, 三卜郊不從</data>
+  <data key="d3">Zuo zhuan</data>
+  <data key="d4">Zuo zhuan</data>
+</node>
+<node id="ZZ_XIANG_7::evidence::1">
+  <data key="d0">ZZ_XIANG_7</data>
+  <data key="d1">evidence</data>
+  <data key="d2">failed_divination</data>
+  <data key="d3">Zuo zhuan</data>
+  <data key="d4">failed_divination</data>
+</node>
+<node id="ZZ_XIANG_7::evidence::2">
+  <data key="d0">ZZ_XIANG_7</data>
+  <data key="d1">evidence</data>
+  <data key="d2">ritual_timing</data>
+  <data key="d3">Zuo zhuan</data>
+  <data key="d4">ritual_timing</data>
+</node>
+<node id="ZZ_XIANG_7::evidence::3">
+  <data key="d0">ZZ_XIANG_7</data>
+  <data key="d1">evidence</data>
+  <data key="d2">Meng_Xianzi_interpretation</data>
+  <data key="d3">Zuo zhuan</data>
+  <data key="d4">Meng_Xianzi_interpretation</data>
+</node>
+<node id="ZZ_XIANG_7::anchor">
+  <data key="d0">ZZ_XIANG_7</data>
+  <data key="d1">anchor</data>
+  <data key="d2">Meng_Xianzi_interpretation</data>
+  <data key="d3">Zuo zhuan</data>
+  <data key="d4">三卜郊不從; Meng Xianzi's ritual-timing explanation</data>
+</node>
+<node id="ZZ_XIANG_7::threshold_rationale">
+  <data key="d0">ZZ_XIANG_7</data>
+  <data key="d1">threshold_rationale</data>
+  <data key="d2">operation_function / stabilizes / textual_anchor+ritual_sequence / intradiegetic / immediate / low</data>
+  <data key="d3">Zuo zhuan</data>
+  <data key="d4">Interpretation converts the failed divination into procedural intelligibility by restoring ritual sequence.</data>
+  <data key="d5">operation_function</data>
+  <data key="d6">stabilizes</data>
+  <data key="d7">textual_anchor+ritual_sequence</data>
+  <data key="d8">intradiegetic</data>
+  <data key="d9">immediate</data>
+  <data key="d10">low</data>
+  <data key="d11">Interpretation converts the failed divination into procedural intelligibility by restoring ritual sequence.</data>
+</node>
+<node id="ZZ_XIANG_7::function">
+  <data key="d0">ZZ_XIANG_7</data>
+  <data key="d1">function</data>
+  <data key="d2">immediate_stabilization</data>
+  <data key="d3">Zuo zhuan</data>
+  <data key="d4">immediate_stabilization</data>
+</node>
+<node id="ZZ_MIN_1::case">
+  <data key="d0">ZZ_MIN_1</data>
+  <data key="d1">case</data>
+  <data key="d2">Min 1, 畢萬筮仕於晉</data>
+  <data key="d3">Zuo zhuan</data>
+  <data key="d4"></data>
+</node>
+<node id="ZZ_MIN_1::evidence::1">
+  <data key="d0">ZZ_MIN_1</data>
+  <data key="d1">evidence</data>
+  <data key="d2">milfoil_divination</data>
+  <data key="d3">Zuo zhuan</data>
+  <data key="d4">milfoil_divination</data>
+</node>
+<node id="ZZ_MIN_1::evidence::2">
+  <data key="d0">ZZ_MIN_1</data>
+  <data key="d1">evidence</data>
+  <data key="d2">Yi_related_result</data>
+  <data key="d3">Zuo zhuan</data>
+  <data key="d4">Yi_related_result</data>
+</node>
+<node id="ZZ_MIN_1::evidence::3">
+  <data key="d0">ZZ_MIN_1</data>
+  <data key="d1">evidence</data>
+  <data key="d2">Xin_Liao_interpretation</data>
+  <data key="d3">Zuo zhuan</data>
+  <data key="d4">Xin_Liao_interpretation</data>
+</node>
+<node id="ZZ_MIN_1::evidence::4">
+  <data key="d0">ZZ_MIN_1</data>
+  <data key="d1">evidence</data>
+  <data key="d2">lineage_projection</data>
+  <data key="d3">Zuo zhuan</data>
+  <data key="d4">lineage_projection</data>
+</node>
+<node id="ZZ_MIN_1::anchor">
+  <data key="d0">ZZ_MIN_1</data>
+  <data key="d1">anchor</data>
+  <data key="d2">Xin_Liao_interpretation</data>
+  <data key="d3">Zuo zhuan</data>
+  <data key="d4">畢萬筮仕於晉; 屯之比; Xin Liao's auspicious interpretation</data>
+</node>
+<node id="ZZ_MIN_1::threshold_rationale">
+  <data key="d0">ZZ_MIN_1</data>
+  <data key="d1">threshold_rationale</data>
+  <data key="d2">warrant_attribution / stabilizes+projects / textual_anchor+internal_sequence / intradiegetic / prospective / medium</data>
+  <data key="d3">Zuo zhuan</data>
+  <data key="d4">The Yi-related result is accepted as a stable prospective lineage judgement without reopening local deliberation.</data>
+  <data key="d5">warrant_attribution</data>
+  <data key="d6">stabilizes+projects</data>
+  <data key="d7">textual_anchor+internal_sequence</data>
+  <data key="d8">intradiegetic</data>
+  <data key="d9">prospective</data>
+  <data key="d10">medium</data>
+  <data key="d11">The Yi-related result is accepted as a stable prospective lineage judgement without reopening local deliberation.</data>
+</node>
+<node id="ZZ_MIN_1::function">
+  <data key="d0">ZZ_MIN_1</data>
+  <data key="d1">function</data>
+  <data key="d2">immediate_stabilization</data>
+  <data key="d3">Zuo zhuan</data>
+  <data key="d4">immediate_stabilization</data>
+</node>
+<node id="ZZ_XI_4::case">
+  <data key="d0">ZZ_XI_4</data>
+  <data key="d1">case</data>
+  <data key="d2">Xi 4, 初，晉獻公欲以驪姬為夫人：卜筮相違</data>
+  <data key="d3">Zuo zhuan</data>
+  <data key="d4"></data>
+</node>
+<node id="ZZ_XI_4::evidence::1">
+  <data key="d0">ZZ_XI_4</data>
+  <data key="d1">evidence</data>
+  <data key="d2">turtle_result_unfavourable</data>
+  <data key="d3">Zuo zhuan</data>
+  <data key="d4">turtle_result_unfavourable</data>
+</node>
+<node id="ZZ_XI_4::evidence::2">
+  <data key="d0">ZZ_XI_4</data>
+  <data key="d1">evidence</data>
+  <data key="d2">milfoil_result_favourable</data>
+  <data key="d3">Zuo zhuan</data>
+  <data key="d4">milfoil_result_favourable</data>
+</node>
+<node id="ZZ_XI_4::evidence::3">
+  <data key="d0">ZZ_XI_4</data>
+  <data key="d1">evidence</data>
+  <data key="d2">ranking_speech</data>
+  <data key="d3">Zuo zhuan</data>
+  <data key="d4">ranking_speech</data>
+</node>
+<node id="ZZ_XI_4::evidence::4">
+  <data key="d0">ZZ_XI_4</data>
+  <data key="d1">evidence</data>
+  <data key="d2">ominous_line_text</data>
+  <data key="d3">Zuo zhuan</data>
+  <data key="d4">ominous_line_text</data>
+</node>
+<node id="ZZ_XI_4::evidence::5">
+  <data key="d0">ZZ_XI_4</data>
+  <data key="d1">evidence</data>
+  <data key="d2">retrospective_frame</data>
+  <data key="d3">Zuo zhuan</data>
+  <data key="d4">retrospective_frame</data>
+</node>
+<node id="ZZ_XI_4::anchor">
+  <data key="d0">ZZ_XI_4</data>
+  <data key="d1">anchor</data>
+  <data key="d2">ranking_speech</data>
+  <data key="d3">Zuo zhuan</data>
+  <data key="d4">卜不吉，筮吉; 筮短龜長; 一薰一蕕，十年尚猶有臭</data>
+</node>
+<node id="ZZ_XI_4::threshold_rationale">
+  <data key="d0">ZZ_XI_4</data>
+  <data key="d1">threshold_rationale</data>
+  <data key="d2">warrant_relation / extends / textual_anchor+internal_sequence / intradiegetic / recursive / medium</data>
+  <data key="d3">Zuo zhuan</data>
+  <data key="d4">The dominant threshold is warrant_relation because conflict among turtle result, milfoil result, ranking speech, and line text prevents clean closure. Temporal layering is a meaningful secondary observation.</data>
+  <data key="d5">warrant_relation</data>
+  <data key="d6">extends</data>
+  <data key="d7">textual_anchor+internal_sequence</data>
+  <data key="d8">intradiegetic</data>
+  <data key="d9">recursive</data>
+  <data key="d10">medium</data>
+  <data key="d11">The dominant threshold is warrant_relation because conflict among turtle result, milfoil result, ranking speech, and line text prevents clean closure. Temporal layering is a meaningful secondary observation.</data>
+</node>
+<node id="ZZ_XI_4::function">
+  <data key="d0">ZZ_XI_4</data>
+  <data key="d1">function</data>
+  <data key="d2">extended_deliberation</data>
+  <data key="d3">Zuo zhuan</data>
+  <data key="d4">extended_deliberation</data>
+</node>
+<node id="ZZ_ZHUANG_22::case">
+  <data key="d0">ZZ_ZHUANG_22</data>
+  <data key="d1">case</data>
+  <data key="d2">Zhuang 22, 陳厲公生敬仲：卜妻與周易觀之否</data>
+  <data key="d3">Zuo zhuan</data>
+  <data key="d4"></data>
+</node>
+<node id="ZZ_ZHUANG_22::evidence::1">
+  <data key="d0">ZZ_ZHUANG_22</data>
+  <data key="d1">evidence</data>
+  <data key="d2">marriage_divination</data>
+  <data key="d3">Zuo zhuan</data>
+  <data key="d4">marriage_divination</data>
+</node>
+<node id="ZZ_ZHUANG_22::evidence::2">
+  <data key="d0">ZZ_ZHUANG_22</data>
+  <data key="d1">evidence</data>
+  <data key="d2">Zhouyi_result</data>
+  <data key="d3">Zuo zhuan</data>
+  <data key="d4">Zhouyi_result</data>
+</node>
+<node id="ZZ_ZHUANG_22::evidence::3">
+  <data key="d0">ZZ_ZHUANG_22</data>
+  <data key="d1">evidence</data>
+  <data key="d2">generational_prediction</data>
+  <data key="d3">Zuo zhuan</data>
+  <data key="d4">generational_prediction</data>
+</node>
+<node id="ZZ_ZHUANG_22::evidence::4">
+  <data key="d0">ZZ_ZHUANG_22</data>
+  <data key="d1">evidence</data>
+  <data key="d2">later_confirmation</data>
+  <data key="d3">Zuo zhuan</data>
+  <data key="d4">later_confirmation</data>
+</node>
+<node id="ZZ_ZHUANG_22::anchor">
+  <data key="d0">ZZ_ZHUANG_22</data>
+  <data key="d1">anchor</data>
+  <data key="d2">generational_prediction</data>
+  <data key="d3">Zuo zhuan</data>
+  <data key="d4">卜妻敬仲; 觀之否; five/eight-generation prediction; later Chen lineage rise</data>
+</node>
+<node id="ZZ_ZHUANG_22::threshold_rationale">
+  <data key="d0">ZZ_ZHUANG_22</data>
+  <data key="d1">threshold_rationale</data>
+  <data key="d2">temporal_layering / extends+projects / textual_anchor+internal_sequence / commentarial_discourse / prospective-retrospective / medium</data>
+  <data key="d3">Zuo zhuan</data>
+  <data key="d4">The sign remains active across projected descent and later historical readability.</data>
+  <data key="d5">temporal_layering</data>
+  <data key="d6">extends+projects</data>
+  <data key="d7">textual_anchor+internal_sequence</data>
+  <data key="d8">commentarial_discourse</data>
+  <data key="d9">prospective-retrospective</data>
+  <data key="d10">medium</data>
+  <data key="d11">The sign remains active across projected descent and later historical readability.</data>
+</node>
+<node id="ZZ_ZHUANG_22::function">
+  <data key="d0">ZZ_ZHUANG_22</data>
+  <data key="d1">function</data>
+  <data key="d2">extended_deliberation</data>
+  <data key="d3">Zuo zhuan</data>
+  <data key="d4">extended_deliberation</data>
+</node>
+<node id="MAC_1_3::case">
+  <data key="d0">MAC_1_3</data>
+  <data key="d1">case</data>
+  <data key="d2">Act 1.3, witches' prophecy and Cawdor confirmation</data>
+  <data key="d3">Macbeth</data>
+  <data key="d4">Macbeth</data>
+</node>
+<node id="MAC_1_3::evidence::1">
+  <data key="d0">MAC_1_3</data>
+  <data key="d1">evidence</data>
+  <data key="d2">prophetic_salutation</data>
+  <data key="d3">Macbeth</data>
+  <data key="d4">prophetic_salutation</data>
+</node>
+<node id="MAC_1_3::evidence::2">
+  <data key="d0">MAC_1_3</data>
+  <data key="d1">evidence</data>
+  <data key="d2">partial_confirmation</data>
+  <data key="d3">Macbeth</data>
+  <data key="d4">partial_confirmation</data>
+</node>
+<node id="MAC_1_3::evidence::3">
+  <data key="d0">MAC_1_3</data>
+  <data key="d1">evidence</data>
+  <data key="d2">Macbeth_uptake</data>
+  <data key="d3">Macbeth</data>
+  <data key="d4">Macbeth_uptake</data>
+</node>
+<node id="MAC_1_3::anchor">
+  <data key="d0">MAC_1_3</data>
+  <data key="d1">anchor</data>
+  <data key="d2">partial_confirmation</data>
+  <data key="d3">Macbeth</data>
+  <data key="d4">Witches hail Macbeth as Cawdor and future king; Ross and Angus confirm Cawdor.</data>
+</node>
+<node id="MAC_1_3::threshold_rationale">
+  <data key="d0">MAC_1_3</data>
+  <data key="d1">threshold_rationale</data>
+  <data key="d2">warrant_attribution / authorizes+reframes / textual_anchor+internal_sequence / dramatic_present / prospective / medium</data>
+  <data key="d3">Macbeth</data>
+  <data key="d4">Partial confirmation gives prophetic speech warranting force and reframes kingship as actionable possibility.</data>
+  <data key="d5">warrant_attribution</data>
+  <data key="d6">authorizes+reframes</data>
+  <data key="d7">textual_anchor+internal_sequence</data>
+  <data key="d8">dramatic_present</data>
+  <data key="d9">prospective</data>
+  <data key="d10">medium</data>
+  <data key="d11">Partial confirmation gives prophetic speech warranting force and reframes kingship as actionable possibility.</data>
+</node>
+<node id="MAC_1_3::function">
+  <data key="d0">MAC_1_3</data>
+  <data key="d1">function</data>
+  <data key="d2">ambition_trigger_authorization</data>
+  <data key="d3">Macbeth</data>
+  <data key="d4">ambition_trigger_authorization</data>
+</node>
+<node id="MAC_4_1::case">
+  <data key="d0">MAC_4_1</data>
+  <data key="d1">case</data>
+  <data key="d2">Act 4.1, apparition prophecies</data>
+  <data key="d3">Macbeth</data>
+  <data key="d4"></data>
+</node>
+<node id="MAC_4_1::evidence::1">
+  <data key="d0">MAC_4_1</data>
+  <data key="d1">evidence</data>
+  <data key="d2">apparition_warning</data>
+  <data key="d3">Macbeth</data>
+  <data key="d4">apparition_warning</data>
+</node>
+<node id="MAC_4_1::evidence::2">
+  <data key="d0">MAC_4_1</data>
+  <data key="d1">evidence</data>
+  <data key="d2">woman_born_condition</data>
+  <data key="d3">Macbeth</data>
+  <data key="d4">woman_born_condition</data>
+</node>
+<node id="MAC_4_1::evidence::3">
+  <data key="d0">MAC_4_1</data>
+  <data key="d1">evidence</data>
+  <data key="d2">Birnam_Wood_condition</data>
+  <data key="d3">Macbeth</data>
+  <data key="d4">Birnam_Wood_condition</data>
+</node>
+<node id="MAC_4_1::evidence::4">
+  <data key="d0">MAC_4_1</data>
+  <data key="d1">evidence</data>
+  <data key="d2">Macbeth_interpretation</data>
+  <data key="d3">Macbeth</data>
+  <data key="d4">Macbeth_interpretation</data>
+</node>
+<node id="MAC_4_1::anchor">
+  <data key="d0">MAC_4_1</data>
+  <data key="d1">anchor</data>
+  <data key="d2">Macbeth_interpretation</data>
+  <data key="d3">Macbeth</data>
+  <data key="d4">none of woman born; Birnam Wood prophecy</data>
+</node>
+<node id="MAC_4_1::threshold_rationale">
+  <data key="d0">MAC_4_1</data>
+  <data key="d1">threshold_rationale</data>
+  <data key="d2">operation_function / reframes+narrows / textual_anchor+internal_sequence / dramatic_present / prospective-retrospective / low</data>
+  <data key="d3">Macbeth</data>
+  <data key="d4">Macbeth converts equivocal conditional prophecy into practical security.</data>
+  <data key="d5">operation_function</data>
+  <data key="d6">reframes+narrows</data>
+  <data key="d7">textual_anchor+internal_sequence</data>
+  <data key="d8">dramatic_present</data>
+  <data key="d9">prospective-retrospective</data>
+  <data key="d10">low</data>
+  <data key="d11">Macbeth converts equivocal conditional prophecy into practical security.</data>
+</node>
+<node id="MAC_4_1::function">
+  <data key="d0">MAC_4_1</data>
+  <data key="d1">function</data>
+  <data key="d2">false_security</data>
+  <data key="d3">Macbeth</data>
+  <data key="d4">false_security</data>
+</node>
+<node id="MAC_5_8::case">
+  <data key="d0">MAC_5_8</data>
+  <data key="d1">case</data>
+  <data key="d2">Act 5.8, Macduff disclosure and double sense</data>
+  <data key="d3">Macbeth</data>
+  <data key="d4"></data>
+</node>
+<node id="MAC_5_8::evidence::1">
+  <data key="d0">MAC_5_8</data>
+  <data key="d1">evidence</data>
+  <data key="d2">Macduff_disclosure</data>
+  <data key="d3">Macbeth</data>
+  <data key="d4">Macduff_disclosure</data>
+</node>
+<node id="MAC_5_8::evidence::2">
+  <data key="d0">MAC_5_8</data>
+  <data key="d1">evidence</data>
+  <data key="d2">fulfilled_prophecy</data>
+  <data key="d3">Macbeth</data>
+  <data key="d4">fulfilled_prophecy</data>
+</node>
+<node id="MAC_5_8::evidence::3">
+  <data key="d0">MAC_5_8</data>
+  <data key="d1">evidence</data>
+  <data key="d2">Macbeth_recognition</data>
+  <data key="d3">Macbeth</data>
+  <data key="d4">Macbeth_recognition</data>
+</node>
+<node id="MAC_5_8::anchor">
+  <data key="d0">MAC_5_8</data>
+  <data key="d1">anchor</data>
+  <data key="d2">Macduff_disclosure</data>
+  <data key="d3">Macbeth</data>
+  <data key="d4">Macduff reveals he was untimely ripped; Macbeth recognizes the double sense.</data>
+</node>
+<node id="MAC_5_8::threshold_rationale">
+  <data key="d0">MAC_5_8</data>
+  <data key="d1">threshold_rationale</data>
+  <data key="d2">temporal_layering / reframes / textual_anchor+internal_sequence / dramatic_present / retrospective / low</data>
+  <data key="d3">Macbeth</data>
+  <data key="d4">Later fulfilment reclassifies Macbeth's earlier assurance as equivocal trap.</data>
+  <data key="d5">temporal_layering</data>
+  <data key="d6">reframes</data>
+  <data key="d7">textual_anchor+internal_sequence</data>
+  <data key="d8">dramatic_present</data>
+  <data key="d9">retrospective</data>
+  <data key="d10">low</data>
+  <data key="d11">Later fulfilment reclassifies Macbeth's earlier assurance as equivocal trap.</data>
+</node>
+<node id="MAC_5_8::function">
+  <data key="d0">MAC_5_8</data>
+  <data key="d1">function</data>
+  <data key="d2">retrospective_trap</data>
+  <data key="d3">Macbeth</data>
+  <data key="d4">retrospective_trap</data>
+</node>
+<node id="GROVE_TAJOMARU::case">
+  <data key="d0">GROVE_TAJOMARU</data>
+  <data key="d1">case</data>
+  <data key="d2">Tajōmaru's testimony</data>
+  <data key="d3">In a Grove</data>
+  <data key="d4">In a Grove</data>
+</node>
+<node id="GROVE_TAJOMARU::evidence::1">
+  <data key="d0">GROVE_TAJOMARU</data>
+  <data key="d1">evidence</data>
+  <data key="d2">confession</data>
+  <data key="d3">In a Grove</data>
+  <data key="d4">confession</data>
+</node>
+<node id="GROVE_TAJOMARU::evidence::2">
+  <data key="d0">GROVE_TAJOMARU</data>
+  <data key="d1">evidence</data>
+  <data key="d2">self_display</data>
+  <data key="d3">In a Grove</data>
+  <data key="d4">self_display</data>
+</node>
+<node id="GROVE_TAJOMARU::evidence::3">
+  <data key="d0">GROVE_TAJOMARU</data>
+  <data key="d1">evidence</data>
+  <data key="d2">contest_narration</data>
+  <data key="d3">In a Grove</data>
+  <data key="d4">contest_narration</data>
+</node>
+<node id="GROVE_TAJOMARU::anchor">
+  <data key="d0">GROVE_TAJOMARU</data>
+  <data key="d1">anchor</data>
+  <data key="d2">confession</data>
+  <data key="d3">In a Grove</data>
+  <data key="d4">Tajōmaru's confession/testimony section</data>
+</node>
+<node id="GROVE_TAJOMARU::threshold_rationale">
+  <data key="d0">GROVE_TAJOMARU</data>
+  <data key="d1">threshold_rationale</data>
+  <data key="d2">operation_function / reframes / textual_anchor+narrative_context / frame_narrative / retrospective / medium</data>
+  <data key="d3">In a Grove</data>
+  <data key="d4">Confession is converted from apparent truth-disclosure into self-justifying self-display.</data>
+  <data key="d5">operation_function</data>
+  <data key="d6">reframes</data>
+  <data key="d7">textual_anchor+narrative_context</data>
+  <data key="d8">frame_narrative</data>
+  <data key="d9">retrospective</data>
+  <data key="d10">medium</data>
+  <data key="d11">Confession is converted from apparent truth-disclosure into self-justifying self-display.</data>
+</node>
+<node id="GROVE_TAJOMARU::function">
+  <data key="d0">GROVE_TAJOMARU</data>
+  <data key="d1">function</data>
+  <data key="d2">self_justification</data>
+  <data key="d3">In a Grove</data>
+  <data key="d4">self_justification</data>
+</node>
+<node id="GROVE_MASAGO::case">
+  <data key="d0">GROVE_MASAGO</data>
+  <data key="d1">case</data>
+  <data key="d2">Masago's testimony</data>
+  <data key="d3">In a Grove</data>
+  <data key="d4"></data>
+</node>
+<node id="GROVE_MASAGO::evidence::1">
+  <data key="d0">GROVE_MASAGO</data>
+  <data key="d1">evidence</data>
+  <data key="d2">shame_narrative</data>
+  <data key="d3">In a Grove</data>
+  <data key="d4">shame_narrative</data>
+</node>
+<node id="GROVE_MASAGO::evidence::2">
+  <data key="d0">GROVE_MASAGO</data>
+  <data key="d1">evidence</data>
+  <data key="d2">accusation</data>
+  <data key="d3">In a Grove</data>
+  <data key="d4">accusation</data>
+</node>
+<node id="GROVE_MASAGO::evidence::3">
+  <data key="d0">GROVE_MASAGO</data>
+  <data key="d1">evidence</data>
+  <data key="d2">self_blame</data>
+  <data key="d3">In a Grove</data>
+  <data key="d4">self_blame</data>
+</node>
+<node id="GROVE_MASAGO::evidence::4">
+  <data key="d0">GROVE_MASAGO</data>
+  <data key="d1">evidence</data>
+  <data key="d2">failed_self_destruction</data>
+  <data key="d3">In a Grove</data>
+  <data key="d4">failed_self_destruction</data>
+</node>
+<node id="GROVE_MASAGO::anchor">
+  <data key="d0">GROVE_MASAGO</data>
+  <data key="d1">anchor</data>
+  <data key="d2">shame_narrative</data>
+  <data key="d3">In a Grove</data>
+  <data key="d4">Masago's confession/testimony section</data>
+</node>
+<node id="GROVE_MASAGO::threshold_rationale">
+  <data key="d0">GROVE_MASAGO</data>
+  <data key="d1">threshold_rationale</data>
+  <data key="d2">perspective_assignment / qualifies / textual_anchor+narrative_context / frame_narrative / retrospective / high</data>
+  <data key="d3">In a Grove</data>
+  <data key="d4">The testimony does not stabilize around one testimonial role because victim-position, shame, accusation, and self-blame qualify one another.</data>
+  <data key="d5">perspective_assignment</data>
+  <data key="d6">qualifies</data>
+  <data key="d7">textual_anchor+narrative_context</data>
+  <data key="d8">frame_narrative</data>
+  <data key="d9">retrospective</data>
+  <data key="d10">high</data>
+  <data key="d11">The testimony does not stabilize around one testimonial role because victim-position, shame, accusation, and self-blame qualify one another.</data>
+</node>
+<node id="GROVE_MASAGO::function">
+  <data key="d0">GROVE_MASAGO</data>
+  <data key="d1">function</data>
+  <data key="d2">self_defence_self_accusation</data>
+  <data key="d3">In a Grove</data>
+  <data key="d4">self_defence_self_accusation</data>
+</node>
+<node id="GROVE_TAKEHIRO::case">
+  <data key="d0">GROVE_TAKEHIRO</data>
+  <data key="d1">case</data>
+  <data key="d2">Takehiro's posthumous testimony</data>
+  <data key="d3">In a Grove</data>
+  <data key="d4"></data>
+</node>
+<node id="GROVE_TAKEHIRO::evidence::1">
+  <data key="d0">GROVE_TAKEHIRO</data>
+  <data key="d1">evidence</data>
+  <data key="d2">posthumous_testimony</data>
+  <data key="d3">In a Grove</data>
+  <data key="d4">posthumous_testimony</data>
+</node>
+<node id="GROVE_TAKEHIRO::evidence::2">
+  <data key="d0">GROVE_TAKEHIRO</data>
+  <data key="d1">evidence</data>
+  <data key="d2">medium_speech</data>
+  <data key="d3">In a Grove</data>
+  <data key="d4">medium_speech</data>
+</node>
+<node id="GROVE_TAKEHIRO::evidence::3">
+  <data key="d0">GROVE_TAKEHIRO</data>
+  <data key="d1">evidence</data>
+  <data key="d2">incompatible_account</data>
+  <data key="d3">In a Grove</data>
+  <data key="d4">incompatible_account</data>
+</node>
+<node id="GROVE_TAKEHIRO::anchor">
+  <data key="d0">GROVE_TAKEHIRO</data>
+  <data key="d1">anchor</data>
+  <data key="d2">posthumous_testimony</data>
+  <data key="d3">In a Grove</data>
+  <data key="d4">murdered man's testimony through a medium</data>
+</node>
+<node id="GROVE_TAKEHIRO::threshold_rationale">
+  <data key="d0">GROVE_TAKEHIRO</data>
+  <data key="d1">threshold_rationale</data>
+  <data key="d2">warrant_relation / contradicts+suspends / textual_anchor+narrative_context / frame_narrative / retrospective / high</data>
+  <data key="d3">In a Grove</data>
+  <data key="d4">Posthumous testimony adds an extraordinary warrant that contradicts rather than resolves the preceding accounts.</data>
+  <data key="d5">warrant_relation</data>
+  <data key="d6">contradicts+suspends</data>
+  <data key="d7">textual_anchor+narrative_context</data>
+  <data key="d8">frame_narrative</data>
+  <data key="d9">retrospective</data>
+  <data key="d10">high</data>
+  <data key="d11">Posthumous testimony adds an extraordinary warrant that contradicts rather than resolves the preceding accounts.</data>
+</node>
+<node id="GROVE_TAKEHIRO::function">
+  <data key="d0">GROVE_TAKEHIRO</data>
+  <data key="d1">function</data>
+  <data key="d2">epistemic_suspension</data>
+  <data key="d3">In a Grove</data>
+  <data key="d4">epistemic_suspension</data>
+</node>
+<edge source="ZZ_XIANG_7::case" target="ZZ_XIANG_7::evidence::1">
+  <data key="d12">ZZ_XIANG_7</data>
+  <data key="d13">contains_evidence</data>
+  <data key="d14">contains_evidence</data>
+</edge>
+<edge source="ZZ_XIANG_7::case" target="ZZ_XIANG_7::evidence::2">
+  <data key="d12">ZZ_XIANG_7</data>
+  <data key="d13">contains_evidence</data>
+  <data key="d14">contains_evidence</data>
+</edge>
+<edge source="ZZ_XIANG_7::case" target="ZZ_XIANG_7::evidence::3">
+  <data key="d12">ZZ_XIANG_7</data>
+  <data key="d13">contains_evidence</data>
+  <data key="d14">contains_evidence</data>
+</edge>
+<edge source="ZZ_XIANG_7::evidence::1" target="ZZ_XIANG_7::anchor">
+  <data key="d12">ZZ_XIANG_7</data>
+  <data key="d13">contributes_to_anchor</data>
+  <data key="d14">contributes_to_anchor</data>
+</edge>
+<edge source="ZZ_XIANG_7::evidence::2" target="ZZ_XIANG_7::anchor">
+  <data key="d12">ZZ_XIANG_7</data>
+  <data key="d13">contributes_to_anchor</data>
+  <data key="d14">contributes_to_anchor</data>
+</edge>
+<edge source="ZZ_XIANG_7::evidence::3" target="ZZ_XIANG_7::anchor">
+  <data key="d12">ZZ_XIANG_7</data>
+  <data key="d13">contributes_to_anchor</data>
+  <data key="d14">contributes_to_anchor</data>
+</edge>
+<edge source="ZZ_XIANG_7::anchor" target="ZZ_XIANG_7::threshold_rationale">
+  <data key="d12">ZZ_XIANG_7</data>
+  <data key="d13">has_threshold_rationale</data>
+  <data key="d14">has_threshold_rationale</data>
+</edge>
+<edge source="ZZ_XIANG_7::anchor" target="ZZ_XIANG_7::function">
+  <data key="d12">ZZ_XIANG_7</data>
+  <data key="d13">converts_to</data>
+  <data key="d14">converts_to</data>
+  <data key="d15">operation_function</data>
+  <data key="d16">stabilizes</data>
+  <data key="d17">textual_anchor+ritual_sequence</data>
+  <data key="d18">intradiegetic</data>
+  <data key="d19">immediate</data>
+  <data key="d20">low</data>
+  <data key="d21">Interpretation converts the failed divination into procedural intelligibility by restoring ritual sequence.</data>
+</edge>
+<edge source="ZZ_XIANG_7::threshold_rationale" target="ZZ_XIANG_7::function">
+  <data key="d12">ZZ_XIANG_7</data>
+  <data key="d13">points_to_function</data>
+  <data key="d14">points_to_function</data>
+</edge>
+<edge source="ZZ_MIN_1::case" target="ZZ_MIN_1::evidence::1">
+  <data key="d12">ZZ_MIN_1</data>
+  <data key="d13">contains_evidence</data>
+  <data key="d14">contains_evidence</data>
+</edge>
+<edge source="ZZ_MIN_1::case" target="ZZ_MIN_1::evidence::2">
+  <data key="d12">ZZ_MIN_1</data>
+  <data key="d13">contains_evidence</data>
+  <data key="d14">contains_evidence</data>
+</edge>
+<edge source="ZZ_MIN_1::case" target="ZZ_MIN_1::evidence::3">
+  <data key="d12">ZZ_MIN_1</data>
+  <data key="d13">contains_evidence</data>
+  <data key="d14">contains_evidence</data>
+</edge>
+<edge source="ZZ_MIN_1::case" target="ZZ_MIN_1::evidence::4">
+  <data key="d12">ZZ_MIN_1</data>
+  <data key="d13">contains_evidence</data>
+  <data key="d14">contains_evidence</data>
+</edge>
+<edge source="ZZ_MIN_1::evidence::1" target="ZZ_MIN_1::anchor">
+  <data key="d12">ZZ_MIN_1</data>
+  <data key="d13">contributes_to_anchor</data>
+  <data key="d14">contributes_to_anchor</data>
+</edge>
+<edge source="ZZ_MIN_1::evidence::2" target="ZZ_MIN_1::anchor">
+  <data key="d12">ZZ_MIN_1</data>
+  <data key="d13">contributes_to_anchor</data>
+  <data key="d14">contributes_to_anchor</data>
+</edge>
+<edge source="ZZ_MIN_1::evidence::3" target="ZZ_MIN_1::anchor">
+  <data key="d12">ZZ_MIN_1</data>
+  <data key="d13">contributes_to_anchor</data>
+  <data key="d14">contributes_to_anchor</data>
+</edge>
+<edge source="ZZ_MIN_1::evidence::4" target="ZZ_MIN_1::anchor">
+  <data key="d12">ZZ_MIN_1</data>
+  <data key="d13">contributes_to_anchor</data>
+  <data key="d14">contributes_to_anchor</data>
+</edge>
+<edge source="ZZ_MIN_1::anchor" target="ZZ_MIN_1::threshold_rationale">
+  <data key="d12">ZZ_MIN_1</data>
+  <data key="d13">has_threshold_rationale</data>
+  <data key="d14">has_threshold_rationale</data>
+</edge>
+<edge source="ZZ_MIN_1::anchor" target="ZZ_MIN_1::function">
+  <data key="d12">ZZ_MIN_1</data>
+  <data key="d13">converts_to</data>
+  <data key="d14">converts_to</data>
+  <data key="d15">warrant_attribution</data>
+  <data key="d16">stabilizes+projects</data>
+  <data key="d17">textual_anchor+internal_sequence</data>
+  <data key="d18">intradiegetic</data>
+  <data key="d19">prospective</data>
+  <data key="d20">medium</data>
+  <data key="d21">The Yi-related result is accepted as a stable prospective lineage judgement without reopening local deliberation.</data>
+</edge>
+<edge source="ZZ_MIN_1::threshold_rationale" target="ZZ_MIN_1::function">
+  <data key="d12">ZZ_MIN_1</data>
+  <data key="d13">points_to_function</data>
+  <data key="d14">points_to_function</data>
+</edge>
+<edge source="ZZ_XI_4::case" target="ZZ_XI_4::evidence::1">
+  <data key="d12">ZZ_XI_4</data>
+  <data key="d13">contains_evidence</data>
+  <data key="d14">contains_evidence</data>
+</edge>
+<edge source="ZZ_XI_4::case" target="ZZ_XI_4::evidence::2">
+  <data key="d12">ZZ_XI_4</data>
+  <data key="d13">contains_evidence</data>
+  <data key="d14">contains_evidence</data>
+</edge>
+<edge source="ZZ_XI_4::case" target="ZZ_XI_4::evidence::3">
+  <data key="d12">ZZ_XI_4</data>
+  <data key="d13">contains_evidence</data>
+  <data key="d14">contains_evidence</data>
+</edge>
+<edge source="ZZ_XI_4::case" target="ZZ_XI_4::evidence::4">
+  <data key="d12">ZZ_XI_4</data>
+  <data key="d13">contains_evidence</data>
+  <data key="d14">contains_evidence</data>
+</edge>
+<edge source="ZZ_XI_4::case" target="ZZ_XI_4::evidence::5">
+  <data key="d12">ZZ_XI_4</data>
+  <data key="d13">contains_evidence</data>
+  <data key="d14">contains_evidence</data>
+</edge>
+<edge source="ZZ_XI_4::evidence::1" target="ZZ_XI_4::anchor">
+  <data key="d12">ZZ_XI_4</data>
+  <data key="d13">contributes_to_anchor</data>
+  <data key="d14">contributes_to_anchor</data>
+</edge>
+<edge source="ZZ_XI_4::evidence::2" target="ZZ_XI_4::anchor">
+  <data key="d12">ZZ_XI_4</data>
+  <data key="d13">contributes_to_anchor</data>
+  <data key="d14">contributes_to_anchor</data>
+</edge>
+<edge source="ZZ_XI_4::evidence::3" target="ZZ_XI_4::anchor">
+  <data key="d12">ZZ_XI_4</data>
+  <data key="d13">contributes_to_anchor</data>
+  <data key="d14">contributes_to_anchor</data>
+</edge>
+<edge source="ZZ_XI_4::evidence::4" target="ZZ_XI_4::anchor">
+  <data key="d12">ZZ_XI_4</data>
+  <data key="d13">contributes_to_anchor</data>
+  <data key="d14">contributes_to_anchor</data>
+</edge>
+<edge source="ZZ_XI_4::evidence::5" target="ZZ_XI_4::anchor">
+  <data key="d12">ZZ_XI_4</data>
+  <data key="d13">contributes_to_anchor</data>
+  <data key="d14">contributes_to_anchor</data>
+</edge>
+<edge source="ZZ_XI_4::anchor" target="ZZ_XI_4::threshold_rationale">
+  <data key="d12">ZZ_XI_4</data>
+  <data key="d13">has_threshold_rationale</data>
+  <data key="d14">has_threshold_rationale</data>
+</edge>
+<edge source="ZZ_XI_4::anchor" target="ZZ_XI_4::function">
+  <data key="d12">ZZ_XI_4</data>
+  <data key="d13">converts_to</data>
+  <data key="d14">converts_to</data>
+  <data key="d15">warrant_relation</data>
+  <data key="d16">extends</data>
+  <data key="d17">textual_anchor+internal_sequence</data>
+  <data key="d18">intradiegetic</data>
+  <data key="d19">recursive</data>
+  <data key="d20">medium</data>
+  <data key="d21">The dominant threshold is warrant_relation because conflict among turtle result, milfoil result, ranking speech, and line text prevents clean closure. Temporal layering is a meaningful secondary observation.</data>
+</edge>
+<edge source="ZZ_XI_4::threshold_rationale" target="ZZ_XI_4::function">
+  <data key="d12">ZZ_XI_4</data>
+  <data key="d13">points_to_function</data>
+  <data key="d14">points_to_function</data>
+</edge>
+<edge source="ZZ_ZHUANG_22::case" target="ZZ_ZHUANG_22::evidence::1">
+  <data key="d12">ZZ_ZHUANG_22</data>
+  <data key="d13">contains_evidence</data>
+  <data key="d14">contains_evidence</data>
+</edge>
+<edge source="ZZ_ZHUANG_22::case" target="ZZ_ZHUANG_22::evidence::2">
+  <data key="d12">ZZ_ZHUANG_22</data>
+  <data key="d13">contains_evidence</data>
+  <data key="d14">contains_evidence</data>
+</edge>
+<edge source="ZZ_ZHUANG_22::case" target="ZZ_ZHUANG_22::evidence::3">
+  <data key="d12">ZZ_ZHUANG_22</data>
+  <data key="d13">contains_evidence</data>
+  <data key="d14">contains_evidence</data>
+</edge>
+<edge source="ZZ_ZHUANG_22::case" target="ZZ_ZHUANG_22::evidence::4">
+  <data key="d12">ZZ_ZHUANG_22</data>
+  <data key="d13">contains_evidence</data>
+  <data key="d14">contains_evidence</data>
+</edge>
+<edge source="ZZ_ZHUANG_22::evidence::1" target="ZZ_ZHUANG_22::anchor">
+  <data key="d12">ZZ_ZHUANG_22</data>
+  <data key="d13">contributes_to_anchor</data>
+  <data key="d14">contributes_to_anchor</data>
+</edge>
+<edge source="ZZ_ZHUANG_22::evidence::2" target="ZZ_ZHUANG_22::anchor">
+  <data key="d12">ZZ_ZHUANG_22</data>
+  <data key="d13">contributes_to_anchor</data>
+  <data key="d14">contributes_to_anchor</data>
+</edge>
+<edge source="ZZ_ZHUANG_22::evidence::3" target="ZZ_ZHUANG_22::anchor">
+  <data key="d12">ZZ_ZHUANG_22</data>
+  <data key="d13">contributes_to_anchor</data>
+  <data key="d14">contributes_to_anchor</data>
+</edge>
+<edge source="ZZ_ZHUANG_22::evidence::4" target="ZZ_ZHUANG_22::anchor">
+  <data key="d12">ZZ_ZHUANG_22</data>
+  <data key="d13">contributes_to_anchor</data>
+  <data key="d14">contributes_to_anchor</data>
+</edge>
+<edge source="ZZ_ZHUANG_22::anchor" target="ZZ_ZHUANG_22::threshold_rationale">
+  <data key="d12">ZZ_ZHUANG_22</data>
+  <data key="d13">has_threshold_rationale</data>
+  <data key="d14">has_threshold_rationale</data>
+</edge>
+<edge source="ZZ_ZHUANG_22::anchor" target="ZZ_ZHUANG_22::function">
+  <data key="d12">ZZ_ZHUANG_22</data>
+  <data key="d13">converts_to</data>
+  <data key="d14">converts_to</data>
+  <data key="d15">temporal_layering</data>
+  <data key="d16">extends+projects</data>
+  <data key="d17">textual_anchor+internal_sequence</data>
+  <data key="d18">commentarial_discourse</data>
+  <data key="d19">prospective-retrospective</data>
+  <data key="d20">medium</data>
+  <data key="d21">The sign remains active across projected descent and later historical readability.</data>
+</edge>
+<edge source="ZZ_ZHUANG_22::threshold_rationale" target="ZZ_ZHUANG_22::function">
+  <data key="d12">ZZ_ZHUANG_22</data>
+  <data key="d13">points_to_function</data>
+  <data key="d14">points_to_function</data>
+</edge>
+<edge source="MAC_1_3::case" target="MAC_1_3::evidence::1">
+  <data key="d12">MAC_1_3</data>
+  <data key="d13">contains_evidence</data>
+  <data key="d14">contains_evidence</data>
+</edge>
+<edge source="MAC_1_3::case" target="MAC_1_3::evidence::2">
+  <data key="d12">MAC_1_3</data>
+  <data key="d13">contains_evidence</data>
+  <data key="d14">contains_evidence</data>
+</edge>
+<edge source="MAC_1_3::case" target="MAC_1_3::evidence::3">
+  <data key="d12">MAC_1_3</data>
+  <data key="d13">contains_evidence</data>
+  <data key="d14">contains_evidence</data>
+</edge>
+<edge source="MAC_1_3::evidence::1" target="MAC_1_3::anchor">
+  <data key="d12">MAC_1_3</data>
+  <data key="d13">contributes_to_anchor</data>
+  <data key="d14">contributes_to_anchor</data>
+</edge>
+<edge source="MAC_1_3::evidence::2" target="MAC_1_3::anchor">
+  <data key="d12">MAC_1_3</data>
+  <data key="d13">contributes_to_anchor</data>
+  <data key="d14">contributes_to_anchor</data>
+</edge>
+<edge source="MAC_1_3::evidence::3" target="MAC_1_3::anchor">
+  <data key="d12">MAC_1_3</data>
+  <data key="d13">contributes_to_anchor</data>
+  <data key="d14">contributes_to_anchor</data>
+</edge>
+<edge source="MAC_1_3::anchor" target="MAC_1_3::threshold_rationale">
+  <data key="d12">MAC_1_3</data>
+  <data key="d13">has_threshold_rationale</data>
+  <data key="d14">has_threshold_rationale</data>
+</edge>
+<edge source="MAC_1_3::anchor" target="MAC_1_3::function">
+  <data key="d12">MAC_1_3</data>
+  <data key="d13">converts_to</data>
+  <data key="d14">converts_to</data>
+  <data key="d15">warrant_attribution</data>
+  <data key="d16">authorizes+reframes</data>
+  <data key="d17">textual_anchor+internal_sequence</data>
+  <data key="d18">dramatic_present</data>
+  <data key="d19">prospective</data>
+  <data key="d20">medium</data>
+  <data key="d21">Partial confirmation gives prophetic speech warranting force and reframes kingship as actionable possibility.</data>
+</edge>
+<edge source="MAC_1_3::threshold_rationale" target="MAC_1_3::function">
+  <data key="d12">MAC_1_3</data>
+  <data key="d13">points_to_function</data>
+  <data key="d14">points_to_function</data>
+</edge>
+<edge source="MAC_4_1::case" target="MAC_4_1::evidence::1">
+  <data key="d12">MAC_4_1</data>
+  <data key="d13">contains_evidence</data>
+  <data key="d14">contains_evidence</data>
+</edge>
+<edge source="MAC_4_1::case" target="MAC_4_1::evidence::2">
+  <data key="d12">MAC_4_1</data>
+  <data key="d13">contains_evidence</data>
+  <data key="d14">contains_evidence</data>
+</edge>
+<edge source="MAC_4_1::case" target="MAC_4_1::evidence::3">
+  <data key="d12">MAC_4_1</data>
+  <data key="d13">contains_evidence</data>
+  <data key="d14">contains_evidence</data>
+</edge>
+<edge source="MAC_4_1::case" target="MAC_4_1::evidence::4">
+  <data key="d12">MAC_4_1</data>
+  <data key="d13">contains_evidence</data>
+  <data key="d14">contains_evidence</data>
+</edge>
+<edge source="MAC_4_1::evidence::1" target="MAC_4_1::anchor">
+  <data key="d12">MAC_4_1</data>
+  <data key="d13">contributes_to_anchor</data>
+  <data key="d14">contributes_to_anchor</data>
+</edge>
+<edge source="MAC_4_1::evidence::2" target="MAC_4_1::anchor">
+  <data key="d12">MAC_4_1</data>
+  <data key="d13">contributes_to_anchor</data>
+  <data key="d14">contributes_to_anchor</data>
+</edge>
+<edge source="MAC_4_1::evidence::3" target="MAC_4_1::anchor">
+  <data key="d12">MAC_4_1</data>
+  <data key="d13">contributes_to_anchor</data>
+  <data key="d14">contributes_to_anchor</data>
+</edge>
+<edge source="MAC_4_1::evidence::4" target="MAC_4_1::anchor">
+  <data key="d12">MAC_4_1</data>
+  <data key="d13">contributes_to_anchor</data>
+  <data key="d14">contributes_to_anchor</data>
+</edge>
+<edge source="MAC_4_1::anchor" target="MAC_4_1::threshold_rationale">
+  <data key="d12">MAC_4_1</data>
+  <data key="d13">has_threshold_rationale</data>
+  <data key="d14">has_threshold_rationale</data>
+</edge>
+<edge source="MAC_4_1::anchor" target="MAC_4_1::function">
+  <data key="d12">MAC_4_1</data>
+  <data key="d13">converts_to</data>
+  <data key="d14">converts_to</data>
+  <data key="d15">operation_function</data>
+  <data key="d16">reframes+narrows</data>
+  <data key="d17">textual_anchor+internal_sequence</data>
+  <data key="d18">dramatic_present</data>
+  <data key="d19">prospective-retrospective</data>
+  <data key="d20">low</data>
+  <data key="d21">Macbeth converts equivocal conditional prophecy into practical security.</data>
+</edge>
+<edge source="MAC_4_1::threshold_rationale" target="MAC_4_1::function">
+  <data key="d12">MAC_4_1</data>
+  <data key="d13">points_to_function</data>
+  <data key="d14">points_to_function</data>
+</edge>
+<edge source="MAC_5_8::case" target="MAC_5_8::evidence::1">
+  <data key="d12">MAC_5_8</data>
+  <data key="d13">contains_evidence</data>
+  <data key="d14">contains_evidence</data>
+</edge>
+<edge source="MAC_5_8::case" target="MAC_5_8::evidence::2">
+  <data key="d12">MAC_5_8</data>
+  <data key="d13">contains_evidence</data>
+  <data key="d14">contains_evidence</data>
+</edge>
+<edge source="MAC_5_8::case" target="MAC_5_8::evidence::3">
+  <data key="d12">MAC_5_8</data>
+  <data key="d13">contains_evidence</data>
+  <data key="d14">contains_evidence</data>
+</edge>
+<edge source="MAC_5_8::evidence::1" target="MAC_5_8::anchor">
+  <data key="d12">MAC_5_8</data>
+  <data key="d13">contributes_to_anchor</data>
+  <data key="d14">contributes_to_anchor</data>
+</edge>
+<edge source="MAC_5_8::evidence::2" target="MAC_5_8::anchor">
+  <data key="d12">MAC_5_8</data>
+  <data key="d13">contributes_to_anchor</data>
+  <data key="d14">contributes_to_anchor</data>
+</edge>
+<edge source="MAC_5_8::evidence::3" target="MAC_5_8::anchor">
+  <data key="d12">MAC_5_8</data>
+  <data key="d13">contributes_to_anchor</data>
+  <data key="d14">contributes_to_anchor</data>
+</edge>
+<edge source="MAC_5_8::anchor" target="MAC_5_8::threshold_rationale">
+  <data key="d12">MAC_5_8</data>
+  <data key="d13">has_threshold_rationale</data>
+  <data key="d14">has_threshold_rationale</data>
+</edge>
+<edge source="MAC_5_8::anchor" target="MAC_5_8::function">
+  <data key="d12">MAC_5_8</data>
+  <data key="d13">converts_to</data>
+  <data key="d14">converts_to</data>
+  <data key="d15">temporal_layering</data>
+  <data key="d16">reframes</data>
+  <data key="d17">textual_anchor+internal_sequence</data>
+  <data key="d18">dramatic_present</data>
+  <data key="d19">retrospective</data>
+  <data key="d20">low</data>
+  <data key="d21">Later fulfilment reclassifies Macbeth's earlier assurance as equivocal trap.</data>
+</edge>
+<edge source="MAC_5_8::threshold_rationale" target="MAC_5_8::function">
+  <data key="d12">MAC_5_8</data>
+  <data key="d13">points_to_function</data>
+  <data key="d14">points_to_function</data>
+</edge>
+<edge source="GROVE_TAJOMARU::case" target="GROVE_TAJOMARU::evidence::1">
+  <data key="d12">GROVE_TAJOMARU</data>
+  <data key="d13">contains_evidence</data>
+  <data key="d14">contains_evidence</data>
+</edge>
+<edge source="GROVE_TAJOMARU::case" target="GROVE_TAJOMARU::evidence::2">
+  <data key="d12">GROVE_TAJOMARU</data>
+  <data key="d13">contains_evidence</data>
+  <data key="d14">contains_evidence</data>
+</edge>
+<edge source="GROVE_TAJOMARU::case" target="GROVE_TAJOMARU::evidence::3">
+  <data key="d12">GROVE_TAJOMARU</data>
+  <data key="d13">contains_evidence</data>
+  <data key="d14">contains_evidence</data>
+</edge>
+<edge source="GROVE_TAJOMARU::evidence::1" target="GROVE_TAJOMARU::anchor">
+  <data key="d12">GROVE_TAJOMARU</data>
+  <data key="d13">contributes_to_anchor</data>
+  <data key="d14">contributes_to_anchor</data>
+</edge>
+<edge source="GROVE_TAJOMARU::evidence::2" target="GROVE_TAJOMARU::anchor">
+  <data key="d12">GROVE_TAJOMARU</data>
+  <data key="d13">contributes_to_anchor</data>
+  <data key="d14">contributes_to_anchor</data>
+</edge>
+<edge source="GROVE_TAJOMARU::evidence::3" target="GROVE_TAJOMARU::anchor">
+  <data key="d12">GROVE_TAJOMARU</data>
+  <data key="d13">contributes_to_anchor</data>
+  <data key="d14">contributes_to_anchor</data>
+</edge>
+<edge source="GROVE_TAJOMARU::anchor" target="GROVE_TAJOMARU::threshold_rationale">
+  <data key="d12">GROVE_TAJOMARU</data>
+  <data key="d13">has_threshold_rationale</data>
+  <data key="d14">has_threshold_rationale</data>
+</edge>
+<edge source="GROVE_TAJOMARU::anchor" target="GROVE_TAJOMARU::function">
+  <data key="d12">GROVE_TAJOMARU</data>
+  <data key="d13">converts_to</data>
+  <data key="d14">converts_to</data>
+  <data key="d15">operation_function</data>
+  <data key="d16">reframes</data>
+  <data key="d17">textual_anchor+narrative_context</data>
+  <data key="d18">frame_narrative</data>
+  <data key="d19">retrospective</data>
+  <data key="d20">medium</data>
+  <data key="d21">Confession is converted from apparent truth-disclosure into self-justifying self-display.</data>
+</edge>
+<edge source="GROVE_TAJOMARU::threshold_rationale" target="GROVE_TAJOMARU::function">
+  <data key="d12">GROVE_TAJOMARU</data>
+  <data key="d13">points_to_function</data>
+  <data key="d14">points_to_function</data>
+</edge>
+<edge source="GROVE_MASAGO::case" target="GROVE_MASAGO::evidence::1">
+  <data key="d12">GROVE_MASAGO</data>
+  <data key="d13">contains_evidence</data>
+  <data key="d14">contains_evidence</data>
+</edge>
+<edge source="GROVE_MASAGO::case" target="GROVE_MASAGO::evidence::2">
+  <data key="d12">GROVE_MASAGO</data>
+  <data key="d13">contains_evidence</data>
+  <data key="d14">contains_evidence</data>
+</edge>
+<edge source="GROVE_MASAGO::case" target="GROVE_MASAGO::evidence::3">
+  <data key="d12">GROVE_MASAGO</data>
+  <data key="d13">contains_evidence</data>
+  <data key="d14">contains_evidence</data>
+</edge>
+<edge source="GROVE_MASAGO::case" target="GROVE_MASAGO::evidence::4">
+  <data key="d12">GROVE_MASAGO</data>
+  <data key="d13">contains_evidence</data>
+  <data key="d14">contains_evidence</data>
+</edge>
+<edge source="GROVE_MASAGO::evidence::1" target="GROVE_MASAGO::anchor">
+  <data key="d12">GROVE_MASAGO</data>
+  <data key="d13">contributes_to_anchor</data>
+  <data key="d14">contributes_to_anchor</data>
+</edge>
+<edge source="GROVE_MASAGO::evidence::2" target="GROVE_MASAGO::anchor">
+  <data key="d12">GROVE_MASAGO</data>
+  <data key="d13">contributes_to_anchor</data>
+  <data key="d14">contributes_to_anchor</data>
+</edge>
+<edge source="GROVE_MASAGO::evidence::3" target="GROVE_MASAGO::anchor">
+  <data key="d12">GROVE_MASAGO</data>
+  <data key="d13">contributes_to_anchor</data>
+  <data key="d14">contributes_to_anchor</data>
+</edge>
+<edge source="GROVE_MASAGO::evidence::4" target="GROVE_MASAGO::anchor">
+  <data key="d12">GROVE_MASAGO</data>
+  <data key="d13">contributes_to_anchor</data>
+  <data key="d14">contributes_to_anchor</data>
+</edge>
+<edge source="GROVE_MASAGO::anchor" target="GROVE_MASAGO::threshold_rationale">
+  <data key="d12">GROVE_MASAGO</data>
+  <data key="d13">has_threshold_rationale</data>
+  <data key="d14">has_threshold_rationale</data>
+</edge>
+<edge source="GROVE_MASAGO::anchor" target="GROVE_MASAGO::function">
+  <data key="d12">GROVE_MASAGO</data>
+  <data key="d13">converts_to</data>
+  <data key="d14">converts_to</data>
+  <data key="d15">perspective_assignment</data>
+  <data key="d16">qualifies</data>
+  <data key="d17">textual_anchor+narrative_context</data>
+  <data key="d18">frame_narrative</data>
+  <data key="d19">retrospective</data>
+  <data key="d20">high</data>
+  <data key="d21">The testimony does not stabilize around one testimonial role because victim-position, shame, accusation, and self-blame qualify one another.</data>
+</edge>
+<edge source="GROVE_MASAGO::threshold_rationale" target="GROVE_MASAGO::function">
+  <data key="d12">GROVE_MASAGO</data>
+  <data key="d13">points_to_function</data>
+  <data key="d14">points_to_function</data>
+</edge>
+<edge source="GROVE_TAKEHIRO::case" target="GROVE_TAKEHIRO::evidence::1">
+  <data key="d12">GROVE_TAKEHIRO</data>
+  <data key="d13">contains_evidence</data>
+  <data key="d14">contains_evidence</data>
+</edge>
+<edge source="GROVE_TAKEHIRO::case" target="GROVE_TAKEHIRO::evidence::2">
+  <data key="d12">GROVE_TAKEHIRO</data>
+  <data key="d13">contains_evidence</data>
+  <data key="d14">contains_evidence</data>
+</edge>
+<edge source="GROVE_TAKEHIRO::case" target="GROVE_TAKEHIRO::evidence::3">
+  <data key="d12">GROVE_TAKEHIRO</data>
+  <data key="d13">contains_evidence</data>
+  <data key="d14">contains_evidence</data>
+</edge>
+<edge source="GROVE_TAKEHIRO::evidence::1" target="GROVE_TAKEHIRO::anchor">
+  <data key="d12">GROVE_TAKEHIRO</data>
+  <data key="d13">contributes_to_anchor</data>
+  <data key="d14">contributes_to_anchor</data>
+</edge>
+<edge source="GROVE_TAKEHIRO::evidence::2" target="GROVE_TAKEHIRO::anchor">
+  <data key="d12">GROVE_TAKEHIRO</data>
+  <data key="d13">contributes_to_anchor</data>
+  <data key="d14">contributes_to_anchor</data>
+</edge>
+<edge source="GROVE_TAKEHIRO::evidence::3" target="GROVE_TAKEHIRO::anchor">
+  <data key="d12">GROVE_TAKEHIRO</data>
+  <data key="d13">contributes_to_anchor</data>
+  <data key="d14">contributes_to_anchor</data>
+</edge>
+<edge source="GROVE_TAKEHIRO::anchor" target="GROVE_TAKEHIRO::threshold_rationale">
+  <data key="d12">GROVE_TAKEHIRO</data>
+  <data key="d13">has_threshold_rationale</data>
+  <data key="d14">has_threshold_rationale</data>
+</edge>
+<edge source="GROVE_TAKEHIRO::anchor" target="GROVE_TAKEHIRO::function">
+  <data key="d12">GROVE_TAKEHIRO</data>
+  <data key="d13">converts_to</data>
+  <data key="d14">converts_to</data>
+  <data key="d15">warrant_relation</data>
+  <data key="d16">contradicts+suspends</data>
+  <data key="d17">textual_anchor+narrative_context</data>
+  <data key="d18">frame_narrative</data>
+  <data key="d19">retrospective</data>
+  <data key="d20">high</data>
+  <data key="d21">Posthumous testimony adds an extraordinary warrant that contradicts rather than resolves the preceding accounts.</data>
+</edge>
+<edge source="GROVE_TAKEHIRO::threshold_rationale" target="GROVE_TAKEHIRO::function">
+  <data key="d12">GROVE_TAKEHIRO</data>
+  <data key="d13">points_to_function</data>
+  <data key="d14">points_to_function</data>
+</edge>
+</graph></graphml>
