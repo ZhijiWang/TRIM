@@ -6,9 +6,12 @@ Independent coding is used to evaluate how consistently coders can apply TRIM
 fields. This packet prepares a second coder to work from source segments and
 the coding manuals, then return a completed CSV for comparison.
 
+The repository currently provides pilot infrastructure, not a completed
+reliability study.
+
 ## Materials to Read
 
-- `docs/TRIM_codebook_v0_1_1.md`
+- `docs/TRIM_codebook_v0_1_2.md`
 - `docs/TRIM_Coding_Manual_v0_2_friction_locus_final.md`
 - `docs/TRIM_Coding_Manual_v0_2_rationale_mechanism.md`
 - `docs/segmentation_workflow.md`
@@ -37,17 +40,62 @@ fields are:
 - Contested readings should be recorded through `alternative_signature` when
   appropriate.
 
-## Output Format
+## Available Templates
 
-Use `data/second_coder_template.csv`. The file uses the same columns as
-`data/demo_annotations.csv`, with coder-assigned fields left blank for
+- `data/second_coder_template.csv` contains three In a Grove cases and is suited
+  to a software and onboarding demonstration.
+- `data/demo_annotations_second_coder_template.csv` contains all ten
+  demonstration case IDs as a schema scaffold. It must be paired with a
+  separately prepared, blinded source packet before it can support a
+  preliminary usability pilot.
+
+Both files use the TRIM schema, with coder-assigned fields left blank for
 independent completion.
 
-## Suggested Pilot
+## Staged Pilot Procedure
 
-Use the ten demonstration cases or a smaller pilot subset. For a first test,
-code only `friction_locus` and `rationale_note`; then expand to all signature
-fields.
+1. First round: code `friction_locus` and `rationale_note`.
+2. Second round: code the full signature fields.
+3. Complete all independent coding before viewing the primary coder's labels.
+4. Compute initial metrics before adjudication.
+5. Review disagreements only after the independent comparison is preserved.
+
+If the dominant-threshold protocol does not resolve a case, set
+`uncertainty_flag=high`, provide `alternative_signature` when possible, and
+explain the unresolved choice in `rationale_note`.
+
+## TRIM-Specific Ten-Case Pilot
+
+After a blinded source packet is prepared, using all ten demonstration cases
+provides a compact preliminary design that covers:
+
+- Zuo zhuan, Macbeth, and In a Grove;
+- all five currently demonstrated `friction_locus` values;
+- `warrant_attribution` versus `warrant_relation`;
+- `operation_function` versus `temporal_layering`;
+- `operation_function` versus `perspective_assignment`;
+- the contested Xi 4 annotation;
+- low, medium, and high uncertainty levels.
+
+This is a usability or preliminary pilot, not a definitive reliability sample.
+A smaller subset should retain all three traditions, at least one contested
+case, more than one uncertainty level, and the confusable pairs relevant to the
+research question.
+
+## What the Pilot Can and Cannot Establish
+
+A small pilot can test whether:
+
+- the manuals are usable;
+- field boundaries are intelligible;
+- disagreements can be located and described;
+- the data and adjudication workflow function.
+
+It cannot establish:
+
+- domain-general reliability;
+- stable population-level agreement;
+- universal reproducibility.
 
 ## Returning Data
 
