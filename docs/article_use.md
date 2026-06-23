@@ -2,60 +2,33 @@
 
 ## Software Citation
 
-No formal GitHub Release currently exists. Until one is published, cite the
-exact commit used and the repository URL. Once a fixed GitHub Release or Zenodo
-DOI exists, prefer that archival identifier. The repository includes
-`CITATION.cff` for citation metadata.
+The current source version is 0.2.0. Before a formal release, cite the exact commit used together with the repository URL. `CITATION.cff` provides the repository metadata. A later GitHub Release or Zenodo DOI can supply the archival identifier.
 
 ## Suggested Method-Section Language
 
-TRIM is implemented as a lightweight Python package accompanying this article.
-The package encodes the annotation schema, validates controlled vocabulary
-conformance, parses friction signatures, generates comparison tables, and
-exports graph representations of evidence-to-function paths. It also includes
-pilot-scale intercoder comparison utilities. The implementation supports
-reviewable human annotation: coders assign interpretive labels and rationale
-notes, while the package checks schema conformance and comparability. The
-software-generated comparison prompts are structural; substantive
-interpretation remains researcher-authored.
+TRIM is implemented as a lightweight Python package accompanying the article. The package encodes the annotation schema, validates controlled fields, parses friction signatures, generates comparison tables, and exports graph representations of evidence-to-function paths. It also supports pilot-scale intercoder comparison.
+
+Coders assign evidence, function labels, and rationale notes. The package preserves those judgements in a form that can be validated and compared. Generated `comparison_prompt` text identifies structural patterns; substantive interpretation is developed in the article.
 
 ## Reproducibility Statement
 
-The repository contains:
+The repository contains the demonstration annotations, source-segment examples, codebook, coding manuals, scripts, tests, generated-output paths, and blinded-pilot materials.
 
-- `data/demo_annotations.csv`;
-- source segment examples;
-- codebook;
-- coding manuals;
-- scripts;
-- tests;
-- generated output paths.
-
-The demonstration workflow can be rerun with:
+Run the main workflow with:
 
 ```bash
 python -m pytest
 python examples/demo_trim_workflow.py
 ```
 
-The optional source-segment workflow can be rerun with:
+Run the source-segment workflow with:
 
 ```bash
 python examples/run_trim_with_source_segments.py
 ```
 
-For automation, `trim validate` returns non-zero when errors are present after
-writing its CSV report. Warnings alone return zero. `--always-zero` is available
-for report-only pipelines.
+`trim validate` writes its CSV report before returning. Errors produce a non-zero status; warnings-only reports return zero. `--always-zero` supports pipelines that manage status separately.
 
-## Claim Boundary
+## Present Claim Scale
 
-The current source version is 0.2.0 (unreleased). It is not a formal GitHub
-Release. Coding
-manuals may have independent versions when they develop coder-facing guidance
-for specific controlled fields.
-
-The ten-case demonstration establishes schema expressivity and workflow
-traceability, not domain-general reliability. A three-case workflow can verify
-software operation; a ten-case preliminary pilot can identify usability and
-boundary problems. Neither supports population-level reliability claims.
+The ten-case demonstration establishes schema expressivity, workflow traceability, and comparative payoff. The blinded packet establishes pilot readiness. Independent coding will evaluate field-level agreement and the replication of the three pre-specified comparative patterns. Larger out-of-sample work will test stability across a wider corpus.
