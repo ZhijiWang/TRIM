@@ -5,8 +5,8 @@ interpretations below are researcher-authored worked demonstrations based on the
 checked fields in `data/demo_annotations.csv`. They show what becomes visible
 when signatures are compared across cases rather than read as isolated labels.
 
-The current examples are provisional, single-coder findings. Their purpose is to
-establish comparative payoff and identify concrete propositions for later
+The current examples are provisional, single-coder comparisons. Their purpose is
+to establish comparative payoff and identify concrete propositions for later
 reliability testing.
 
 ## Generated and Curated Layers
@@ -98,7 +98,7 @@ judgement narratively active.
 In `GROVE_TAKEHIRO`, Takehiro's posthumous testimony enters an already
 incompatible testimonial field. Its extraordinary status does not resolve the
 preceding accounts. It adds another warrant that contradicts them and deepens
-the impossibility of adjudication.
+the difficulty of adjudication.
 
 ### Worked interpretation
 
@@ -152,9 +152,8 @@ The cases differ in tradition, genre, cue family, function label, and narrative
 consequence. Yet both place the dominant threshold at warrant attribution and
 both orient that threshold prospectively.
 
-The shared pattern is that each sign becomes narratively consequential through a
-comparable threshold: sufficient warranting force must be attached before the
-prospective claim can shape interpretation and action.
+In both cases, the consequential threshold lies where warranting force enables
+the prospective claim to shape interpretation and action.
 
 The conversion pathways then separate:
 
