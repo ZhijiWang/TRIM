@@ -1,36 +1,28 @@
 # Release Instructions
 
-1. Confirm tests pass:
+The repository currently has no formal GitHub Release. Package version 0.1.2 is
+an unreleased source version.
 
-```bash
-python -m pytest
-python examples/demo_trim_workflow.py
-```
+Before publishing a future release:
 
-2. Update version if needed in:
+1. Confirm the package version is consistent in `pyproject.toml`,
+   `CITATION.cff`, `CHANGELOG.md`, and the README.
+2. Replace the changelog's `Unreleased` marker with the release date.
+3. Run:
 
-- `pyproject.toml`
-- `CITATION.cff`
-- `CHANGELOG.md`
+   ```bash
+   python -m pytest
+   python examples/demo_trim_workflow.py
+   python examples/run_trim_with_source_segments.py
+   python examples/run_intercoder_demo.py
+   ```
 
-3. Commit changes.
+4. Confirm regenerated outputs are committed and documentation links resolve.
+5. Create a signed or annotated version tag only after the release commit is
+   reviewed.
+6. Publish the GitHub Release from that tag.
+7. If Zenodo archiving is enabled, archive the release and add the verified DOI
+   to `CITATION.cff` and the README.
 
-4. Create GitHub release:
-
-- Tag: `v0.1.1`
-- Title: `TRIM v0.1.1: Demonstration Package`
-
-Release notes:
-
-TRIM v0.1.1 provides the first stable demonstration package for
-Threshold–Rationale Interpretive Modelling. It includes the annotation schema,
-controlled vocabulary validation, friction signature parsing, comparison
-utilities, graph export, intercoder comparison utilities, a ten-case
-demonstration dataset, and coder-facing documentation for `friction_locus`.
-
-5. Archive release through Zenodo.
-
-6. Add the Zenodo DOI to:
-
-- `CITATION.cff`
-- `README.md`
+Do not describe a package version as a GitHub Release until the corresponding
+tag and release page exist.

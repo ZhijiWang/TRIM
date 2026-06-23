@@ -1,11 +1,10 @@
 cff-version: 1.2.0
 message: "If you use TRIM, please cite it using this metadata."
 title: "TRIM: Threshold–Rationale Interpretive Modelling"
-version: "0.1.1"
+version: "0.1.2"
 authors:
   - family-names: "Wang"
     given-names: "Zhiji"
-date-released: "2026-05-24"
 license: "MIT"
 repository-code: "https://github.com/ZhijiWang/TRIM"
 url: "https://github.com/ZhijiWang/TRIM"
