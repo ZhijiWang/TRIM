@@ -15,7 +15,7 @@ TRIM supports:
 - contested-case documentation;
 - comparison patterns across annotated cases;
 - graph outputs for evidence-to-anchor-to-function structures;
-- intercoder comparison utilities for future multi-coder validation.
+- pilot-scale intercoder comparison utilities.
 
 ## Human Review Workflow
 
@@ -24,9 +24,14 @@ Interpretive judgement is handled through human scholarly review. Contested
 thresholds can be recorded through `alternative_signature` and documented in
 `rationale_note`, making the annotation reviewable across cases and coders.
 
-## Current Release Scope
+TRIM does not objectively detect friction, infer a coder's hidden cognitive
+process, or generate substantive interpretations. It structures selected
+human-created judgements and checks their form.
 
-Version 0.1.1 supports proof-of-concept demonstration and prepares the data
-model for future intercoder validation. The included demonstration corpus shows
-how controlled signatures, comparison tables, graph exports, and contested-case
-records work together in a research workflow.
+## Current Package Scope
+
+Version 0.1.2 supports proof-of-concept demonstration and pilot infrastructure.
+The ten-case corpus shows how controlled signatures, comparison tables, graph
+exports, and contested-case records work together. The three-case second-coder
+workflow demonstrates software preparation. Neither establishes general
+intercoder reliability.

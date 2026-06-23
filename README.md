@@ -4,69 +4,58 @@
 ![License: MIT](https://img.shields.io/badge/license-MIT-green)
 ![Python](https://img.shields.io/badge/python-3.11%2B-blue)
 
-TRIM is a Python package for structuring, validating, comparing, and exporting
-human-created annotations of evidence-to-function conversion in narrative
-analysis. It supports well-formed, comparable, and reviewable annotation through
-controlled vocabulary checks, friction signature parsing, comparison tables,
-graph export, contested-threshold review, and intercoder comparison utilities.
+TRIM structures the warranted conversion from textual evidence to interpretive
+function as a locatable, reviewable, and comparable annotation pathway.
 
-Current release: v0.1.1 demonstration package.
+Current package version: 0.1.2. No formal GitHub Release has been published.
 
-## What TRIM Provides
-
-- Controlled vocabulary validation for threshold-rationale fields.
-- Friction signature parsing and formatting.
-- Comparison tables for shared functions, shared cues, broad families, and
-  contested cases.
-- Graph export to GraphML and node-link JSON.
-- Contested-threshold review workflow using `alternative_signature` and
-  `rationale_note`.
-- Intercoder comparison utilities for multi-coder annotation projects.
-- Optional source-segmentation workflow for auditable textual units.
-- Second-coder onboarding materials for reliability pilots.
-
-## Core Model
+## What TRIM Annotates
 
 ```text
-Evidence nodes → anchor node → threshold–rationale edge → function node
+Evidence nodes → anchor node → threshold–rationale relation → function node
 ```
 
-Each annotation records human-selected evidence nodes, an anchor node, the
-threshold-rationale conversion, and a project-specific function label. Graph
-exports include both an explicit `anchor → threshold_rationale → function` path
-for node-based visualization and a direct `anchor → function` edge carrying the
-same threshold attributes for edge-based querying.
+Human coders select the evidence, anchor, function label, and rationale. The
+main friction signature records:
 
-## Installation
+- `friction_locus`;
+- `rationale_mechanism`;
+- `epistemic_support`;
+- `discourse_level`;
+- `temporal_orientation`;
+- `uncertainty_flag`.
+
+Annotations may also include `alternative_signature` and `rationale_note` for
+contested-threshold review.
+
+Interpretive friction is relational: it is a locatable difficulty in the
+warranted conversion from evidence to function under an explicit interpretive
+scheme, not a context-free property automatically detected in a text.
+
+## What the Software Does
+
+- validates required fields, controlled values, and compound signatures;
+- parses and compares friction signatures;
+- generates same-function, same-cue, broad-family, and contested-case tables;
+- exports evidence-to-function graphs as GraphML and JSON;
+- supports optional source segmentation;
+- provides raw and compound-aware intercoder comparison utilities.
+
+The software does not choose function labels, adjudicate interpretations,
+generate literary claims, or capture a coder's full reasoning process.
+
+## Installation and Quick Start
 
 TRIM requires Python 3.11 or newer.
-
-Install locally from the project root:
-
-```bash
-python -m pip install -e .
-```
-
-For test development:
 
 ```bash
 python -m pip install -e .
 python -m pip install pytest
-```
-
-## Quick Start
-
-Run the test suite and demonstration workflow:
-
-```bash
 python -m pytest
 python examples/demo_trim_workflow.py
 ```
 
-The demo workflow loads the CSV and JSON demonstration annotations, validates
-them, writes comparison tables, generates reports, and exports corpus graphs.
-
-## Command-Line Examples
+Command-line examples:
 
 ```bash
 trim validate data/demo_annotations.csv --out outputs/reports/validation.csv
@@ -75,57 +64,56 @@ trim graph data/demo_annotations.csv --graphml outputs/graphs/demo.graphml --jso
 trim compare data/demo_annotations.csv --outdir outputs/tables
 ```
 
-## Demonstration Dataset
+## Demonstration and Validation Status
 
-The included dataset contains ten method demonstration annotations:
+The ten-case demonstration corpus contains four Zuo zhuan divination cases,
+three Macbeth prophecy cases, and three In a Grove testimony cases. It
+demonstrates schema expressivity, traceable comparison, graph export, and one
+contested threshold.
 
-- four Zuo zhuan divination cases;
-- three Macbeth prophecy cases;
-- three In a Grove testimony cases.
+Generated comparison tables provide structural `comparison_prompt` text only.
+Researcher-authored worked interpretations are kept separately in
+[`docs/substantive_demo_interpretations.md`](docs/substantive_demo_interpretations.md).
 
-The dataset supports comparison patterns for same function / different
-signature, same cue / different function, broad testimonial form / different
-signature, and contested dominant threshold review.
+The repository also includes:
 
-Optional source segmentation can be used upstream of TRIM annotation to make
-textual evidence units auditable before validation, comparison, and graph
-export.
+- a three-case software/onboarding demonstration for second-coder workflow;
+- a ten-case template scaffold that requires a separate blinded source packet
+  before use in a preliminary usability pilot;
+- intercoder agreement and disagreement utilities.
 
-## Scope
+These materials can test manual usability, field boundaries, and workflow
+operation. They do not establish domain-general reliability, stable
+population-level agreement, or universal reproducibility.
 
-The validator checks schema conformance and comparability. Human scholarly
-review handles interpretive adjudication. Intercoder reliability is evaluated
-through separate multi-coder annotation.
+## Methodological Position
 
-Human coders assign interpretive labels; the package validates and compares
-those annotations. The current demonstration corpus establishes expressivity and
-traceability. Reliability evaluation proceeds through independently coded
-annotations from multiple coders.
+TRIM does not claim as novel the general observation that label agreement can
+coexist with explanatory disagreement. It does not primarily classify
+free-text explanations by linguistic reasoning type, and it is not an LLM
+chain-of-thought or hidden-cognition system. Its contribution is the combined
+evidence, anchor, conversion, support, discourse, temporal, uncertainty, and
+alternative-path structure for reviewable human scholarly interpretation.
+
+See [`docs/related_methods.md`](docs/related_methods.md) and
+[`docs/methodological_position.md`](docs/methodological_position.md).
 
 ## Documentation
 
-The package version is v0.1.1. The `friction_locus` coding manual is versioned
-separately as v0.2 because it develops coder-facing guidance for the controlled
-field.
-
-- [`docs/TRIM_codebook_v0_1_1.md`](docs/TRIM_codebook_v0_1_1.md)
+- [`docs/TRIM_codebook_v0_1_2.md`](docs/TRIM_codebook_v0_1_2.md)
 - [`docs/TRIM_Coding_Manual_v0_2_friction_locus_final.md`](docs/TRIM_Coding_Manual_v0_2_friction_locus_final.md)
 - [`docs/TRIM_Coding_Manual_v0_2_rationale_mechanism.md`](docs/TRIM_Coding_Manual_v0_2_rationale_mechanism.md)
-- [`docs/software_scope.md`](docs/software_scope.md)
 - [`docs/demo_dataset_notes.md`](docs/demo_dataset_notes.md)
+- [`docs/substantive_demo_interpretations.md`](docs/substantive_demo_interpretations.md)
 - [`docs/segmentation_workflow.md`](docs/segmentation_workflow.md)
 - [`docs/second_coder_onboarding.md`](docs/second_coder_onboarding.md)
 - [`docs/intercoder_workflow.md`](docs/intercoder_workflow.md)
-- [`docs/methodological_position.md`](docs/methodological_position.md)
+- [`docs/software_scope.md`](docs/software_scope.md)
 - [`docs/article_use.md`](docs/article_use.md)
-- [`docs/release_instructions.md`](docs/release_instructions.md)
 - [`CHANGELOG.md`](CHANGELOG.md)
-- [`CONTRIBUTING.md`](CONTRIBUTING.md)
 
-## Citing
+## Citing and License
 
-Citation metadata is provided in [`CITATION.cff`](CITATION.cff).
-
-## License
-
-MIT. See [`LICENSE`](LICENSE).
+Citation metadata is provided in [`CITATION.cff`](CITATION.cff). Until a formal
+release exists, cite the exact commit used. TRIM is licensed under the MIT
+License; see [`LICENSE`](LICENSE).

@@ -15,6 +15,10 @@ relation, and a function label. The resulting record is not a replacement for
 close reading; it is a disciplined representation of a reading that can be
 validated for form, compared across cases, and reviewed by other coders.
 
+TRIM's defensible contribution is specific: it makes the warranted conversion
+from textual evidence to interpretive function an explicit, locatable,
+reviewable, and comparable annotation object.
+
 ## Core Distinction
 
 TRIM distinguishes surface evidence from narrative function. A passage may
@@ -44,8 +48,8 @@ The package operationalizes the following method components:
 
 Controlled vocabulary validation checks whether selected fields conform to the
 codebook. Signature parsing gives each annotation a compact representation of
-its threshold-rationale path. Comparison utilities generate article-ready
-tables for same-function, same-cue, broad-family, and contested-case patterns.
+its threshold-rationale path. Comparison utilities generate structural tables
+for same-function, same-cue, broad-family, and contested-case patterns.
 Graph export represents each annotation as a path from evidence nodes to anchor
 node to threshold-rationale relation to function node, with threshold
 attributes also available on a direct anchor-to-function edge.
@@ -63,6 +67,15 @@ evidence nodes, decide where the anchor lies, assign controlled fields, and
 write rationale notes. The method preserves rationale prose alongside
 structured fields so that interpretation remains inspectable rather than
 flattened into a label alone.
+
+Interpretive friction is a locatable difficulty in the warranted conversion
+from textual evidence to an analytic function under an explicit interpretive
+scheme. It is relational, not a context-free property naturally embedded in a
+text. It arises through the relation among textual evidence, the analytic task,
+the project's function vocabulary, and the coder's stated rationale. This
+formulation keeps friction evidence-constrained and operational: coders must
+locate the obstacle, identify the support used to cross it, and leave a
+reviewable rationale.
 
 The optional source segmentation workflow strengthens the link to close
 reading. Source passages can be segmented into stable units before annotation,
@@ -82,3 +95,12 @@ The method is especially suited to projects where recurring narrative cues do
 not map directly onto stable functions. TRIM gives researchers a way to record
 the rationale by which a cue becomes functional in context, then compare those
 rationales across a corpus.
+
+## Conceptual Neighbours
+
+TRIM does not claim as novel the general observation that annotators can agree
+on a label while offering different explanations. It also does not primarily
+classify free-text explanations by reasoning type or capture hidden cognitive
+processes. See [`related_methods.md`](related_methods.md) for positioning
+against within-label variation, LiveNLI, LiTEx, qualitative coding, provenance
+systems, and computational hermeneutics.

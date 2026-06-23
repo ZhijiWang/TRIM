@@ -2,10 +2,10 @@
 
 ## Software Citation
 
-Cite a fixed GitHub release or Zenodo DOI rather than the mutable `main` branch.
-The repository includes `CITATION.cff` for software citation metadata. When a
-Zenodo DOI is available, use the DOI for article references and archival
-citations.
+No formal GitHub Release currently exists. Until one is published, cite the
+exact commit used and the repository URL. Once a fixed GitHub Release or Zenodo
+DOI exists, prefer that archival identifier. The repository includes
+`CITATION.cff` for citation metadata.
 
 ## Suggested Method-Section Language
 
@@ -13,9 +13,11 @@ TRIM is implemented as a lightweight Python package accompanying this article.
 The package encodes the annotation schema, validates controlled vocabulary
 conformance, parses friction signatures, generates comparison tables, and
 exports graph representations of evidence-to-function paths. It also includes
-utilities for future intercoder comparison. The implementation supports
+pilot-scale intercoder comparison utilities. The implementation supports
 reviewable human annotation: coders assign interpretive labels and rationale
-notes, while the package checks schema conformance and comparability.
+notes, while the package checks schema conformance and comparability. The
+software-generated comparison prompts are structural; substantive
+interpretation remains researcher-authored.
 
 ## Reproducibility Statement
 
@@ -42,8 +44,13 @@ The optional source-segment workflow can be rerun with:
 python examples/run_trim_with_source_segments.py
 ```
 
-## Versioning
+## Claim Boundary
 
-The current package release is v0.1.1. Coding manuals may have independent
-versions when they develop coder-facing guidance for specific controlled
-fields. Articles should cite the software release version used for the analysis.
+The current package version is 0.1.2. It is not a formal GitHub Release. Coding
+manuals may have independent versions when they develop coder-facing guidance
+for specific controlled fields.
+
+The ten-case demonstration establishes schema expressivity and workflow
+traceability, not domain-general reliability. A three-case workflow can verify
+software operation; a ten-case preliminary pilot can identify usability and
+boundary problems. Neither supports population-level reliability claims.
