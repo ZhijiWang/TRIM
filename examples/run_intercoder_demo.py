@@ -2,18 +2,29 @@
 
 from __future__ import annotations
 
+import sys
 from pathlib import Path
 
 import pandas as pd
 
-from trim.intercoder import DEFAULT_DISAGREEMENT_FIELDS, disagreement_table, pairwise_agreement
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+from trim.intercoder import (
+    DEFAULT_DISAGREEMENT_FIELDS,
+    disagreement_table,
+    pairwise_agreement,
+    pairwise_compound_agreement,
+)
 from trim.schema import ANNOTATION_FIELDS
 
 
 def run_intercoder_demo(repo_root: Path | None = None) -> Path:
     """Check the second-coder template and write a preparation report."""
 
-    root = repo_root or Path(__file__).resolve().parents[1]
+    root = repo_root or PROJECT_ROOT
     data_dir = root / "data"
     report_dir = root / "outputs" / "reports"
     report_dir.mkdir(parents=True, exist_ok=True)
@@ -27,6 +38,10 @@ def run_intercoder_demo(repo_root: Path | None = None) -> Path:
 
     template_columns_match = list(template.columns) == list(ANNOTATION_FIELDS)
     pairwise = pairwise_agreement(combined, "friction_locus")
+    compound_pairwise = pairwise_compound_agreement(
+        combined,
+        "rationale_mechanism",
+    )
     disagreements = disagreement_table(combined, DEFAULT_DISAGREEMENT_FIELDS)
 
     report_path = report_dir / "intercoder_demo_report.md"
@@ -41,16 +56,20 @@ def run_intercoder_demo(repo_root: Path | None = None) -> Path:
         "",
         "## Current Comparison Status",
         "",
-        "The included second-coder file is a template. Field-level reliability "
-        "statistics become meaningful after independent labels are completed.",
+        "The included three-case second-coder file is a blank software and "
+        "onboarding template. It does not provide reliability evidence.",
         "",
         f"- Pairwise rows currently available for `friction_locus`: {len(pairwise)}",
+        "- Compound-aware pairwise rows currently available for "
+        f"`rationale_mechanism`: {len(compound_pairwise)}",
         f"- Disagreement rows currently available: {len(disagreements)}",
         "",
         "## Next Step",
         "",
-        "Return a completed second-coder CSV with a distinct `coder_id`, then "
-        "run `trim.intercoder` utilities on the combined annotations.",
+        "Return independently completed annotations with a distinct `coder_id`, "
+        "then run `trim.intercoder` utilities before adjudication. Treat a "
+        "ten-case run as a preliminary usability pilot, not a definitive "
+        "reliability study.",
         "",
     ]
     report_path.write_text("\n".join(report_lines), encoding="utf-8")

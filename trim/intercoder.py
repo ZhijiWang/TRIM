@@ -1,7 +1,7 @@
 """Intercoder comparison utilities for multi-coder TRIM annotations.
 
-Human coders provide annotation values. These functions support reliability
-analysis when multiple coders annotate the same cases.
+Human coders provide annotation values. These functions support agreement and
+disagreement analysis when multiple coders annotate the same cases.
 """
 
 from __future__ import annotations
@@ -27,6 +27,20 @@ PAIRWISE_COLUMNS: tuple[str, ...] = (
     "comparable_cases",
     "agreements",
     "percent_agreement",
+)
+
+COMPOUND_PAIRWISE_COLUMNS: tuple[str, ...] = (
+    "field",
+    "coder_id_1",
+    "coder_id_2",
+    "comparable_cases",
+    "exact_set_agreements",
+    "exact_set_agreement",
+    "primary_agreements",
+    "primary_agreement",
+    "any_overlap_agreements",
+    "any_overlap_agreement",
+    "mean_jaccard_overlap",
 )
 
 DISAGREEMENT_COLUMNS: tuple[str, ...] = (
@@ -84,7 +98,7 @@ def percent_agreement(df: pd.DataFrame, field: str) -> float:
 
 
 def pairwise_agreement(df: pd.DataFrame, field: str) -> pd.DataFrame:
-    """Return pairwise coder agreement for one field."""
+    """Return pairwise raw-string agreement for one field."""
 
     pivot = pivot_coder_annotations(df, field)
     if len(pivot.columns) < 2:
@@ -109,6 +123,87 @@ def pairwise_agreement(df: pd.DataFrame, field: str) -> pd.DataFrame:
         )
 
     return pd.DataFrame(rows, columns=PAIRWISE_COLUMNS)
+
+
+def compound_value_metrics(left: str, right: str) -> dict[str, bool | float]:
+    """Compare two ordered ``+``-joined values without collapsing their roles."""
+
+    left_parts = _compound_parts(left)
+    right_parts = _compound_parts(right)
+    if not left_parts or not right_parts:
+        raise ValueError("Compound agreement requires two non-empty values.")
+
+    left_set = set(left_parts)
+    right_set = set(right_parts)
+    intersection = left_set & right_set
+    union = left_set | right_set
+    return {
+        "exact_set_agreement": left_set == right_set,
+        "primary_agreement": left_parts[0] == right_parts[0],
+        "any_overlap_agreement": bool(intersection),
+        "jaccard_overlap": len(intersection) / len(union),
+    }
+
+
+def pairwise_compound_agreement(df: pd.DataFrame, field: str) -> pd.DataFrame:
+    """Return compound-aware pairwise agreement for a ``+``-joined field."""
+
+    pivot = pivot_coder_annotations(df, field)
+    if len(pivot.columns) < 2:
+        return pd.DataFrame(columns=COMPOUND_PAIRWISE_COLUMNS)
+
+    rows: list[dict[str, Any]] = []
+    for coder_id_1, coder_id_2 in combinations(pivot.columns, 2):
+        pair = pivot[[coder_id_1, coder_id_2]]
+        pair = pair[(pair[coder_id_1] != "") & (pair[coder_id_2] != "")]
+        metrics = [
+            compound_value_metrics(row[coder_id_1], row[coder_id_2])
+            for _, row in pair.iterrows()
+        ]
+        comparable_cases = len(metrics)
+        exact_set_agreements = sum(
+            bool(metric["exact_set_agreement"]) for metric in metrics
+        )
+        primary_agreements = sum(
+            bool(metric["primary_agreement"]) for metric in metrics
+        )
+        any_overlap_agreements = sum(
+            bool(metric["any_overlap_agreement"]) for metric in metrics
+        )
+        rows.append(
+            {
+                "field": field,
+                "coder_id_1": coder_id_1,
+                "coder_id_2": coder_id_2,
+                "comparable_cases": comparable_cases,
+                "exact_set_agreements": exact_set_agreements,
+                "exact_set_agreement": (
+                    exact_set_agreements / comparable_cases
+                    if comparable_cases
+                    else float("nan")
+                ),
+                "primary_agreements": primary_agreements,
+                "primary_agreement": (
+                    primary_agreements / comparable_cases
+                    if comparable_cases
+                    else float("nan")
+                ),
+                "any_overlap_agreements": any_overlap_agreements,
+                "any_overlap_agreement": (
+                    any_overlap_agreements / comparable_cases
+                    if comparable_cases
+                    else float("nan")
+                ),
+                "mean_jaccard_overlap": (
+                    sum(float(metric["jaccard_overlap"]) for metric in metrics)
+                    / comparable_cases
+                    if comparable_cases
+                    else float("nan")
+                ),
+            }
+        )
+
+    return pd.DataFrame(rows, columns=COMPOUND_PAIRWISE_COLUMNS)
 
 
 def cohen_kappa_if_two_coders(df: pd.DataFrame, field: str) -> dict[str, Any]:
@@ -236,6 +331,14 @@ def _format_coder_values(values_by_coder: dict[str, str]) -> str:
     return "; ".join(
         f"{coder_id}={value}"
         for coder_id, value in values_by_coder.items()
+    )
+
+
+def _compound_parts(value: Any) -> tuple[str, ...]:
+    return tuple(
+        cleaned
+        for part in _clean_value(value).split("+")
+        if (cleaned := _clean_value(part))
     )
 
 

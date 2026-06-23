@@ -104,4 +104,6 @@ def test_export_graphml_and_json_graph(tmp_path):
 
     assert "case-1::case" in loaded_graphml
     assert payload["directed"] is True
+    assert "edges" in payload
+    assert "links" not in payload
     assert any(node["id"] == "case-1::anchor" for node in payload["nodes"])

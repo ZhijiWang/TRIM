@@ -7,6 +7,11 @@ function. It names the action performed by the threshold-rationale relation:
 settling, extending, reframing, qualifying, authorizing, narrowing, projecting,
 or otherwise changing how evidence becomes functional.
 
+The vocabulary is intentionally cross-dimensional. Values may name logical
+relations, interpretive operations, epistemic effects, or temporal effects.
+This is a controlled descriptive vocabulary, not a claim that every value
+belongs to one philosophical type.
+
 ## Allowed Values
 
 - `supports`
@@ -28,7 +33,12 @@ One primary mechanism is required. One optional secondary mechanism may be added
 with `+`. Use compound values when the secondary mechanism clarifies temporal,
 logical, or perspectival reach. Avoid stacking more than two mechanisms. The
 primary mechanism should name the main conversion. The secondary mechanism
-should name the important modification.
+should name a consequential modification. Order therefore records the
+primary/secondary distinction.
+
+For intercoder review, raw-string agreement remains available for backward
+compatibility. Compound-aware reporting can additionally compare exact sets,
+primary mechanisms, any overlap, and Jaccard overlap.
 
 ## `supports`
 
@@ -547,5 +557,5 @@ Use this sequence when selecting the primary mechanism:
 11. Does one warrant displace another? → `overrides`.
 12. Does it add evidential backing without authorizing action? → `supports`.
 
-This ordering is a coding convention for reliability work and can be tested in
-future reliability studies.
+This ordering is a coding convention for pilot testing and can be evaluated in
+a future reliability study.

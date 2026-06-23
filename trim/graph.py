@@ -157,6 +157,8 @@ def export_json_graph(G: nx.DiGraph, path: str | Path) -> None:
     output_path = Path(path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     data = json_graph.node_link_data(G)
+    if "links" in data and "edges" not in data:
+        data["edges"] = data.pop("links")
     with output_path.open("w", encoding="utf-8") as handle:
         json.dump(data, handle, indent=2, ensure_ascii=False)
         handle.write("\n")

@@ -82,9 +82,14 @@ def test_cli_compare_writes_tables(tmp_path):
     output_dir = tmp_path / "tables"
 
     result = main(["compare", str(DEMO_CSV), "--outdir", str(output_dir)])
+    same_function = pd.read_csv(
+        output_dir / "same_function_different_signature.csv"
+    )
 
     assert result == 0
     assert (output_dir / "same_function_different_signature.csv").exists()
+    assert "comparison_prompt" in same_function.columns
+    assert "interpretive_payoff" not in same_function.columns
     assert (output_dir / "same_cue_different_function.csv").exists()
     assert (output_dir / "broad_family_different_signature.csv").exists()
     assert (output_dir / "contested_cases.csv").exists()

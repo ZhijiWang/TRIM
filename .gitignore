@@ -1,5 +1,7 @@
 ._*
 .DS_Store
+.AppleDouble/
+__MACOSX/
 __pycache__/
 *.py[cod]
 .pytest_cache/

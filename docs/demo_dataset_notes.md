@@ -28,3 +28,10 @@ The dataset supports the following comparison patterns:
 
 The dataset is a compact demonstration set rather than a full corpus. It is
 intended for method illustration, software testing, and reproducible examples.
+It establishes neither domain-general reliability nor universal
+reproducibility.
+
+Software-generated comparison tables identify structural patterns and provide
+`comparison_prompt` text. Researcher-authored worked interpretations of the two
+same-function groups are documented in
+[`substantive_demo_interpretations.md`](substantive_demo_interpretations.md).

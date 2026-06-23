@@ -6,6 +6,12 @@ Use `friction_locus` to mark where the main threshold problem lies in a human
 annotation. This field records the coder's judgement about which part of the
 evidence-to-function path most needs the threshold-rationale explanation.
 
+Interpretive friction is a locatable difficulty in the warranted conversion
+from textual evidence to an analytic function under an explicit interpretive
+scheme. It is not a context-free property embedded in a passage. It arises
+through the relation among textual evidence, the analytic task, the project's
+function vocabulary, and the coder's stated rationale.
+
 Each annotation receives one `friction_locus`. The value records the dominant
 threshold that most directly explains evidence-to-function conversion.
 Secondary difficulties go in `rationale_note` or `alternative_signature`.
@@ -22,9 +28,10 @@ Allowed values:
 - `context_inference`
 
 The current demo annotations contain positive coded examples for five of the
-eight values. For values without a current positive coded example, this manual
-states that directly and gives a contrast from the existing demo cases. Use the
-contrast as a boundary marker rather than as a positive example.
+eight values. `boundary_setting` and `context_inference` are operational but
+await positive out-of-sample testing. `cue_function` is a provisional reserved
+value. For values without a positive demo example, use the documented contrast
+as a boundary marker rather than as positive evidence.
 
 Current examples are in-sample training examples from the demo annotations.
 Out-of-sample coding is required for actual reliability testing.
@@ -37,8 +44,9 @@ Use `cue_function` when the main friction is the function of the cue type
 itself: what kind of work a cue such as divination, prophecy, or testimony is
 doing in the annotation.
 
-In the current demonstration-stage codebook, `cue_function` is a reserved
-value. It has no positive demo example.
+Status: provisional reserved value. It should not be treated as empirically
+established in reliability reporting until supported by positive out-of-sample
+cases and a stable decision rule. It has no positive demo example.
 
 ### Use when
 
@@ -237,6 +245,9 @@ earlier evidence, use `temporal_layering`.
 Use `boundary_setting` when the main friction is where the case, interpretive
 unit, category, or applicable scope begins and ends.
 
+Status: operational value awaiting positive out-of-sample testing. It has no
+positive demo example.
+
 ### Use when
 
 - The coder must decide what counts as the relevant annotation unit.
@@ -364,13 +375,18 @@ incompatibility among multiple accounts as warrants, use `warrant_relation`.
 Use `context_inference` when the main friction depends on contextual inference
 beyond the immediate textual anchor.
 
-`context_inference` is a last-resort value. Use it for dominant contextual
-conversion rather than for background knowledge alone.
+Status: operational value awaiting positive out-of-sample testing. It has no
+positive demo example.
+
+`context_inference` is a last-resort value. Do not assign it merely because
+contextual evidence is used. Assign it only when the absence of a contextual
+bridge is itself the dominant obstacle to evidence-to-function conversion.
 
 ### Use when
 
 - The annotation requires metadata, historical context, parallel material, or
-  other contextual framing as the dominant basis for conversion.
+  other contextual framing, and the missing bridge is the dominant obstacle to
+  conversion.
 - The immediate cue requires a contextual bridge to support the function.
 - The dominant conversion requires justification beyond local anchor, internal
   sequence, temporal layering, perspective, operation, or warrant relation.
@@ -406,11 +422,25 @@ annotation treats the time-layered activation of the sign as dominant and uses
 ### Decision tip
 
 Ask whether the judgement depends mostly on contextual information outside the
-immediate anchor after the more specific loci have been excluded. If yes,
-consider `context_inference`. If later readability is the decisive feature, use
-`temporal_layering`.
+immediate anchor because the local evidence cannot sustain the function without
+a contextual bridge. If yes, consider `context_inference`. If contextual
+evidence merely supports a conversion whose obstacle lies elsewhere, record it
+in `epistemic_support` and use the more specific locus. If later readability is
+the decisive feature, use `temporal_layering`.
 
 ## Key Distinctions
+
+### `friction_locus` vs `epistemic_support`
+
+- `friction_locus` answers where the conversion is blocked or requires added
+  inferential work.
+- `epistemic_support` answers what evidence or support is used to cross that
+  threshold.
+
+For example, `narrative_context` or `external_historical_context` may be used as
+`epistemic_support` while the dominant locus remains `warrant_relation`,
+`temporal_layering`, or another more specific value. Contextual support does not
+by itself justify `context_inference`.
 
 ### `warrant_attribution` vs `warrant_relation`
 
@@ -572,8 +602,19 @@ is to identify the dominant converter from evidence to function.
 8. If none of the above applies, consider reserved `cue_function` with
    project-lead review.
 
-This ordering is a coding convention for reliability work. It gives coders a
-stable route through cases where multiple thresholds are present. The order
-prioritizes boundary and perspective conditions first, then local warrant
-relations, then temporal reclassification, then source attribution and local
-operations. Alternative orderings may be tested in future reliability studies.
+Then apply the dominant-threshold protocol to the leading candidates:
+
+1. **Counterfactual test:** which candidate locus, if removed, would make the
+   function label hardest to sustain?
+2. **Proximity test:** which locus most directly mediates the
+   anchor-to-function conversion?
+3. **Explanatory sufficiency test:** which locus explains the conversion with
+   the fewest additional assumptions?
+
+If the tests do not resolve the case, set `uncertainty_flag=high`, provide an
+`alternative_signature` whenever possible, explain the unresolved choice in
+`rationale_note`, and route the case to contested review.
+
+This ordering is a coding convention for pilot testing. It gives coders a
+stable route through cases where multiple thresholds are present. Alternative
+orderings may be evaluated in a future reliability study.

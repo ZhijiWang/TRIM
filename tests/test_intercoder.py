@@ -1,12 +1,16 @@
 from pathlib import Path
+import subprocess
+import sys
 
 import pandas as pd
 
 from trim.intercoder import (
     cohen_kappa_if_two_coders,
+    compound_value_metrics,
     contested_disagreement_report,
     disagreement_table,
     pairwise_agreement,
+    pairwise_compound_agreement,
     percent_agreement,
     pivot_coder_annotations,
 )
@@ -85,6 +89,75 @@ def test_pairwise_agreement():
     assert row["comparable_cases"] == 2
     assert row["agreements"] == 1
     assert row["percent_agreement"] == 0.5
+
+
+def test_compound_value_metrics_preserve_primary_and_set_distinctions():
+    reordered = compound_value_metrics(
+        "authorizes+reframes",
+        "reframes+authorizes",
+    )
+    partial = compound_value_metrics(
+        "authorizes+reframes",
+        "authorizes+projects",
+    )
+
+    assert reordered == {
+        "exact_set_agreement": True,
+        "primary_agreement": False,
+        "any_overlap_agreement": True,
+        "jaccard_overlap": 1.0,
+    }
+    assert partial["exact_set_agreement"] is False
+    assert partial["primary_agreement"] is True
+    assert partial["any_overlap_agreement"] is True
+    assert partial["jaccard_overlap"] == 1 / 3
+
+
+def test_pairwise_compound_agreement_reports_multiple_views():
+    frame = pd.DataFrame(
+        [
+            {
+                "case_id": "case-1",
+                "coder_id": "coder_a",
+                "rationale_mechanism": "authorizes+reframes",
+            },
+            {
+                "case_id": "case-1",
+                "coder_id": "coder_b",
+                "rationale_mechanism": "reframes+authorizes",
+            },
+            {
+                "case_id": "case-2",
+                "coder_id": "coder_a",
+                "rationale_mechanism": "stabilizes+projects",
+            },
+            {
+                "case_id": "case-2",
+                "coder_id": "coder_b",
+                "rationale_mechanism": "stabilizes",
+            },
+        ]
+    )
+
+    row = pairwise_compound_agreement(
+        frame,
+        "rationale_mechanism",
+    ).iloc[0]
+
+    assert row["comparable_cases"] == 2
+    assert row["exact_set_agreement"] == 0.5
+    assert row["primary_agreement"] == 0.5
+    assert row["any_overlap_agreement"] == 1.0
+    assert row["mean_jaccard_overlap"] == 0.75
+
+
+def test_compound_value_metrics_require_nonempty_values():
+    try:
+        compound_value_metrics("", "supports")
+    except ValueError as exc:
+        assert "non-empty" in str(exc)
+    else:
+        raise AssertionError("Expected ValueError for an empty compound value.")
 
 
 def test_cohen_kappa_if_two_coders_is_optional():
@@ -180,3 +253,17 @@ def test_second_coder_template_has_no_annotation_values():
         "uncertainty_flag",
     ]
     assert all((template[column] == "").all() for column in annotation_columns)
+
+
+def test_intercoder_demo_runs_directly(tmp_path):
+    script = PROJECT_ROOT / "examples" / "run_intercoder_demo.py"
+    result = subprocess.run(
+        [sys.executable, str(script)],
+        cwd=tmp_path,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stderr
+    assert "intercoder_report:" in result.stdout

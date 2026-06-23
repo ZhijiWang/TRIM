@@ -1,4 +1,4 @@
-# TRIM Codebook v0.1.1
+# TRIM Codebook v0.2.0
 
 ## Purpose
 
@@ -27,6 +27,14 @@ threshold-rationale relation, and a function label. Human coders provide the
 interpretive labels; the package validates and compares the resulting
 annotations.
 
+Interpretive friction is a locatable difficulty in the warranted conversion
+from textual evidence to an analytic function under an explicit interpretive
+scheme. It is relational rather than a context-free property embedded in a
+text. It arises through the relation among textual evidence, the analytic task,
+the project's function vocabulary, and the coder's stated rationale. TRIM
+preserves that difficulty as evidence-constrained, locatable, reviewable, and
+comparable.
+
 ## Field Name Note
 
 In article prose, the `discourse_level` field may be described as
@@ -43,6 +51,17 @@ In article prose, the `discourse_level` field may be described as
 | `discourse_level` | controlled |
 | `temporal_orientation` | controlled |
 | `uncertainty_flag` | controlled |
+
+`friction_locus` and `epistemic_support` answer different questions:
+
+- `friction_locus` records where the conversion is blocked or requires added
+  inferential work.
+- `epistemic_support` records what evidence or support the coder uses to cross
+  that threshold.
+
+Do not assign `context_inference` merely because contextual evidence is used.
+Assign it only when the absence of a contextual bridge is itself the dominant
+obstacle to evidence-to-function conversion.
 
 ## Structured Free-Text / Project-Specific Fields
 
@@ -72,6 +91,20 @@ global package vocabulary.
 - `temporal_layering`
 - `perspective_assignment`
 - `context_inference`
+
+## `friction_locus` Demonstration Status
+
+| Status | Values |
+| --- | --- |
+| Active and demonstrated in the ten-case corpus | `warrant_attribution`, `warrant_relation`, `operation_function`, `temporal_layering`, `perspective_assignment` |
+| Operational but awaiting positive out-of-sample testing | `boundary_setting`, `context_inference` |
+| Provisional reserved value | `cue_function` |
+
+`cue_function` should not be treated as empirically established in reliability
+reporting until it is supported by positive out-of-sample cases and a stable
+decision rule. `boundary_setting` and `context_inference` have operational
+definitions but no positive demonstration cases; their stability remains to be
+tested.
 
 ## `rationale_mechanism` Closed Set
 
@@ -130,6 +163,13 @@ global package vocabulary.
 Values must be in the controlled set. More than two values, empty values, and
 duplicate compound values are rejected by validation.
 
+The vocabulary is intentionally cross-dimensional. Values may name logical
+relations, interpretive operations, epistemic effects, or temporal effects. The
+primary value records the dominant conversion, while an optional secondary
+value records a consequential modification. Order therefore matters for the
+primary/secondary distinction even when compound-aware intercoder analysis also
+compares the values as sets.
+
 ## Compound `epistemic_support` Rule
 
 `epistemic_support` may contain one value, or two values joined by `+`. Values
@@ -142,6 +182,19 @@ Each annotation records one dominant threshold-rationale signature. The selected
 `friction_locus` should identify the dominant converter from evidence to
 function. Secondary difficulties can be recorded in `rationale_note` or, for a
 contested reading, in `alternative_signature`.
+
+When more than one locus is plausible, apply these tests:
+
+1. **Counterfactual test:** which candidate locus, if removed, would make the
+   function label hardest to sustain?
+2. **Proximity test:** which locus most directly mediates the
+   anchor-to-function conversion?
+3. **Explanatory sufficiency test:** which locus explains the conversion with
+   the fewest additional assumptions?
+
+If the tests do not resolve the case, set `uncertainty_flag=high`, provide an
+`alternative_signature` whenever possible, explain the unresolved choice in
+`rationale_note`, and route the annotation to contested review.
 
 Short `rationale_note` values generate a review warning:
 
@@ -164,12 +217,15 @@ criterion:
 
 Adjudication is carried out through the human scholarly review workflow.
 
-## Expressivity And Reliability
+## Expressivity And Pilot Reliability Work
 
 The current demonstration corpus establishes expressivity and traceability.
-Intercoder reliability is evaluated through independently coded annotations
-from two or more coders. The included second-coder CSV is a template for that
-future validation stage.
+The repository provides infrastructure for a three-case software demonstration
+and a possible ten-case preliminary usability pilot. These can test whether the
+manuals and workflow are usable and show where disagreements occur. They cannot
+establish domain-general reliability, stable population-level agreement, or
+universal reproducibility. A properly designed reliability evaluation remains
+future work.
 
 ## Validator Review Boundary
 

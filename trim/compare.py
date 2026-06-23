@@ -11,6 +11,16 @@ from trim.signature import SIGNATURE_FIELDS
 
 
 TABLE_SEPARATOR = "; "
+SAME_FUNCTION_COMPARISON_PROMPT = (
+    "Shared function label; differing threshold-rationale signatures. "
+    "Interpret the substantive significance of the differing "
+    "evidence-to-function pathways."
+)
+BROAD_FAMILY_COMPARISON_PROMPT = (
+    "Shared broad function family; differing threshold-rationale signatures. "
+    "Interpret the substantive significance of the differing "
+    "evidence-to-function pathways."
+)
 
 
 def signature_string(row: pd.Series | Mapping[str, Any] | TrimAnnotation) -> str:
@@ -70,10 +80,7 @@ def find_same_function_different_signature(df: pd.DataFrame) -> pd.DataFrame:
                 "case_labels": _join_unique(group["case_label"]),
                 "signature_count": len(signatures),
                 "signatures": _join_values(signatures),
-                "interpretive_payoff": (
-                    "Same function label appears with different threshold-rationale "
-                    "signatures."
-                ),
+                "comparison_prompt": SAME_FUNCTION_COMPARISON_PROMPT,
             }
         )
     return pd.DataFrame(
@@ -84,7 +91,7 @@ def find_same_function_different_signature(df: pd.DataFrame) -> pd.DataFrame:
             "case_labels",
             "signature_count",
             "signatures",
-            "interpretive_payoff",
+            "comparison_prompt",
         ],
     )
 
@@ -151,10 +158,7 @@ def find_same_broad_family_different_signature(df: pd.DataFrame) -> pd.DataFrame
                 "case_labels": _join_unique(group["case_label"]),
                 "signature_count": len(signatures),
                 "signatures": _join_values(signatures),
-                "interpretive_payoff": (
-                    "Same broad function family appears with different "
-                    "threshold-rationale signatures."
-                ),
+                "comparison_prompt": BROAD_FAMILY_COMPARISON_PROMPT,
             }
         )
     return pd.DataFrame(
@@ -165,7 +169,7 @@ def find_same_broad_family_different_signature(df: pd.DataFrame) -> pd.DataFrame
             "case_labels",
             "signature_count",
             "signatures",
-            "interpretive_payoff",
+            "comparison_prompt",
         ],
     )
 

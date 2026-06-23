@@ -32,9 +32,9 @@ _No rows._
 
 ## Broad Family / Different Signature
 
-| broad_function_family | case_ids | case_labels | signature_count | signatures | interpretive_payoff |
+| broad_function_family | case_ids | case_labels | signature_count | signatures | comparison_prompt |
 | --- | --- | --- | --- | --- | --- |
-| self-exculpatory testimony | GROVE_TAJOMARU; GROVE_MASAGO | Tajōmaru's testimony; Masago's testimony | 2 | operation_function / reframes / textual_anchor+narrative_context / frame_narrative / retrospective / medium; perspective_assignment / qualifies / textual_anchor+narrative_context / frame_narrative / retrospective / high | Same broad function family appears with different threshold-rationale signatures. |
+| self-exculpatory testimony | GROVE_TAJOMARU; GROVE_MASAGO | Tajōmaru's testimony; Masago's testimony | 2 | operation_function / reframes / textual_anchor+narrative_context / frame_narrative / retrospective / medium; perspective_assignment / qualifies / textual_anchor+narrative_context / frame_narrative / retrospective / high | Shared broad function family; differing threshold-rationale signatures. Interpret the substantive significance of the differing evidence-to-function pathways. |
 
 ## Contested Cases
 
