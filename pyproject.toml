@@ -28,6 +28,9 @@ trim-compare = "trim.cli:main"
 test = [
   "pytest"
 ]
+reliability = [
+  "scikit-learn"
+]
 
 [tool.setuptools.packages.find]
 include = ["trim*"]
