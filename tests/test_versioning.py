@@ -30,3 +30,14 @@ def test_codebook_filename_and_heading_match_package_version():
     assert codebook.read_text(encoding="utf-8").startswith(
         "# TRIM Codebook v0.2.0"
     )
+
+
+def test_reliability_extra_declares_scikit_learn_without_core_dependency():
+    pyproject = tomllib.loads(
+        (PROJECT_ROOT / "pyproject.toml").read_text(encoding="utf-8")
+    )
+
+    assert pyproject["project"]["optional-dependencies"]["reliability"] == [
+        "scikit-learn"
+    ]
+    assert "scikit-learn" not in pyproject["project"]["dependencies"]
