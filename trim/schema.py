@@ -221,6 +221,15 @@ class TrimAnnotation:
     def to_core_components(self) -> dict[str, Any]:
         """Represent the flat annotation as the TRIM core graph components."""
 
+        if not self.evidence_nodes:
+            raise ValueError(
+                "evidence_nodes requires at least one non-empty evidence node."
+            )
+        if not self.evidence_anchor:
+            raise ValueError("evidence_anchor is required for graph conversion.")
+        if not self.anchor_node:
+            raise ValueError("anchor_node is required for graph conversion.")
+
         case_prefix = self.case_id or "unidentified_case"
         evidence = tuple(
             EvidenceNode(
@@ -232,8 +241,9 @@ class TrimAnnotation:
         )
         anchor = AnchorNode(
             node_id=f"{case_prefix}:anchor",
-            text=self.anchor_node or self.evidence_anchor,
+            text=self.anchor_node,
             evidence_node_ids=tuple(node.node_id for node in evidence),
+            metadata={"evidence_anchor": self.evidence_anchor},
         )
         function = FunctionNode(
             node_id=f"{case_prefix}:function",

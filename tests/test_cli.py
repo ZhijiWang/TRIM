@@ -10,6 +10,15 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DEMO_CSV = PROJECT_ROOT / "data" / "demo_annotations.csv"
 
 
+def _write_modified_demo(tmp_path, **updates):
+    frame = pd.read_csv(DEMO_CSV, dtype=str, keep_default_na=False)
+    for field_name, value in updates.items():
+        frame.loc[0, field_name] = value
+    path = tmp_path / "annotations.csv"
+    frame.to_csv(path, index=False)
+    return path
+
+
 def test_cli_validate_writes_report(tmp_path):
     output_path = tmp_path / "validation_report.csv"
 
@@ -29,6 +38,49 @@ def test_cli_validate_alias_writes_report(tmp_path):
 
     assert result == 0
     assert output_path.exists()
+
+
+def test_cli_validate_returns_nonzero_and_writes_report_on_error(tmp_path):
+    input_path = _write_modified_demo(tmp_path, evidence_nodes="")
+    output_path = tmp_path / "validation_report.csv"
+
+    result = main(["validate", str(input_path), "--out", str(output_path)])
+    report = pd.read_csv(output_path, dtype=str, keep_default_na=False)
+
+    assert result == 1
+    assert output_path.exists()
+    assert "error" in set(report["severity"])
+    assert "evidence_nodes" in set(report["field"])
+
+
+def test_cli_validate_warnings_only_returns_zero(tmp_path):
+    input_path = _write_modified_demo(tmp_path, rationale_note="Too short.")
+    output_path = tmp_path / "validation_report.csv"
+
+    result = main(["validate", str(input_path), "--out", str(output_path)])
+    report = pd.read_csv(output_path, dtype=str, keep_default_na=False)
+
+    assert result == 0
+    assert set(report["severity"]) == {"warning"}
+
+
+def test_cli_validate_always_zero_preserves_report_workflow(tmp_path):
+    input_path = _write_modified_demo(tmp_path, evidence_nodes="")
+    output_path = tmp_path / "validation_report.csv"
+
+    result = main(
+        [
+            "validate",
+            str(input_path),
+            "--out",
+            str(output_path),
+            "--always-zero",
+        ]
+    )
+    report = pd.read_csv(output_path, dtype=str, keep_default_na=False)
+
+    assert result == 0
+    assert "error" in set(report["severity"])
 
 
 def test_cli_executable_alias_writes_report(tmp_path, monkeypatch):

@@ -3,6 +3,7 @@ from pathlib import Path
 
 import networkx as nx
 import pandas as pd
+import pytest
 
 from trim.graph import (
     build_case_graph,
@@ -73,6 +74,23 @@ def test_build_corpus_graph_does_not_collapse_same_labels():
     assert "case-2::function" in graph
     assert graph.nodes["case-1::function"]["label"] == "shared_function"
     assert graph.nodes["case-2::function"]["label"] == "shared_function"
+
+
+def test_build_case_graph_rejects_zero_evidence_nodes():
+    with pytest.raises(
+        ValueError,
+        match="evidence_nodes requires at least one non-empty evidence node",
+    ):
+        build_case_graph(_record(evidence_nodes=""))
+
+
+@pytest.mark.parametrize("field_name", ["evidence_anchor", "anchor_node"])
+def test_build_case_graph_requires_distinct_anchor_fields(field_name):
+    with pytest.raises(
+        ValueError,
+        match=f"{field_name} is required for graph conversion",
+    ):
+        build_case_graph(_record(**{field_name: ""}))
 
 
 def test_graph_summary_counts_demo_graph():

@@ -17,6 +17,7 @@ def _valid_record(**overrides):
         "source": "demo",
         "function_label": "demo function",
         "evidence_anchor": "demo anchor",
+        "evidence_nodes": "first evidence|second evidence",
         "anchor_node": "demo anchor node",
         "friction_locus": "cue_function",
         "rationale_mechanism": "supports",
@@ -68,6 +69,35 @@ def test_duplicate_compound_mechanism():
     assert any("duplicate compound value" in issue.message for issue in _errors(issues))
 
 
+def test_signature_record_and_dataframe_validation_use_same_compound_rules():
+    signature = (
+        "cue_function / extends+extends / textual_anchor / intradiegetic / "
+        "immediate / low"
+    )
+    record = _valid_record(rationale_mechanism="extends+extends")
+
+    standalone_errors = _errors(validate_signature(signature))
+    direct_errors = parse_signature(signature).validate()
+    record_errors = _errors(validate_record(record))
+    dataframe_errors = _errors(validate_dataframe(pd.DataFrame([record])))
+
+    expected_message = (
+        "rationale_mechanism contains duplicate compound value 'extends'."
+    )
+    assert direct_errors == [expected_message]
+    assert [issue.message for issue in standalone_errors] == [expected_message]
+    assert [
+        issue.message
+        for issue in record_errors
+        if issue.field == "rationale_mechanism"
+    ] == [expected_message]
+    assert [
+        issue.message
+        for issue in dataframe_errors
+        if issue.field == "rationale_mechanism"
+    ] == [expected_message]
+
+
 def test_invalid_friction_locus():
     issues = validate_record(_valid_record(friction_locus="automatic_guess"))
 
@@ -98,6 +128,94 @@ def test_short_rationale_note_warns_without_quality_claim():
         )
         and issue.severity == "warning"
         for issue in issues
+    )
+
+
+def test_multilingual_contested_rationale_does_not_require_english_keywords():
+    rationale = (
+        "此处记录第二种阈值路径，因为时间层次与凭据关系都能解释证据到功能的转换。"
+        "编码者保留两种结构，以便后续审议时比较它们的解释充分性与文本位置。"
+    )
+    issues = validate_record(
+        _valid_record(
+            rationale_note=rationale,
+            alternative_signature=(
+                "temporal_layering / extends / textual_anchor / "
+                "commentarial_discourse / retrospective / medium"
+            ),
+        )
+    )
+
+    assert len(rationale) >= 60
+    assert _errors(issues) == []
+
+
+def test_too_short_contested_rationale_fails():
+    rationale = "说明第二路径的文本依据与转换理由。" * 3
+    issues = validate_record(
+        _valid_record(
+            rationale_note=rationale,
+            alternative_signature=(
+                "temporal_layering / extends / textual_anchor / "
+                "commentarial_discourse / retrospective / medium"
+            ),
+        )
+    )
+
+    assert 30 <= len(rationale) < 60
+    assert any(
+        issue.field == "rationale_note"
+        and issue.message
+        == (
+            "alternative_signature requires rationale_note documentation of "
+            "at least 60 characters."
+        )
+        for issue in _errors(issues)
+    )
+
+
+def test_malformed_alternative_signature_fails():
+    issues = validate_record(
+        _valid_record(
+            rationale_note=(
+                "This rationale is intentionally long enough to document the "
+                "second pathway without depending on any required keywords."
+            ),
+            alternative_signature=(
+                "temporal_layering / extends / textual_anchor / retrospective"
+            ),
+        )
+    )
+
+    assert any(
+        issue.field == "alternative_signature"
+        and "require 6 fields" in issue.message
+        for issue in _errors(issues)
+    )
+
+
+def test_evidence_nodes_require_at_least_one_nonempty_node():
+    issues = validate_record(_valid_record(evidence_nodes=" | "))
+
+    assert any(
+        issue.field == "evidence_nodes"
+        and issue.message
+        == "evidence_nodes requires at least one non-empty evidence node."
+        for issue in _errors(issues)
+    )
+
+
+def test_evidence_anchor_and_anchor_node_are_both_required():
+    missing_evidence_anchor = validate_record(
+        _valid_record(evidence_anchor="")
+    )
+    missing_anchor_node = validate_record(_valid_record(anchor_node=""))
+
+    assert any(
+        issue.field == "evidence_anchor" for issue in _errors(missing_evidence_anchor)
+    )
+    assert any(
+        issue.field == "anchor_node" for issue in _errors(missing_anchor_node)
     )
 
 

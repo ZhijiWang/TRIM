@@ -102,6 +102,7 @@ def build_annotation_graph(annotations: Iterable[TrimAnnotation]) -> nx.MultiDiG
             anchor_node.node_id,
             kind="anchor",
             text=anchor_node.text,
+            evidence_anchor=annotation.evidence_anchor,
             case_id=annotation.case_id,
         )
         graph.add_node(

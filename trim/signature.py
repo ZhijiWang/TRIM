@@ -8,6 +8,7 @@ from typing import Any, Mapping
 
 from trim.schema import TrimAnnotation
 from trim.vocabulary import (
+    COMPOUND_FIELDS,
     CONTROLLED_VOCABULARIES,
     validate_closed_value,
     validate_compound_value,
@@ -81,53 +82,41 @@ class FrictionSignature:
         return separator.join(getattr(self, field_name) for field_name in SIGNATURE_FIELDS)
 
     def validate(self) -> list[str]:
-        errors: list[str] = []
-        errors.extend(
-            validate_closed_value(
-                "friction_locus",
-                self.friction_locus,
-                CONTROLLED_VOCABULARIES["friction_locus"],
+        return [
+            message
+            for messages in validate_signature_values(self.to_dict()).values()
+            for message in messages
+        ]
+
+
+def validate_signature_values(
+    values: Mapping[str, Any],
+    *,
+    include_required: bool = True,
+) -> dict[str, list[str]]:
+    """Validate six signature fields through the canonical vocabulary helpers."""
+
+    errors_by_field: dict[str, list[str]] = {}
+    for field_name in SIGNATURE_FIELDS:
+        value = _clean_value(values.get(field_name, ""))
+        if not value and not include_required:
+            continue
+
+        if field_name in COMPOUND_FIELDS:
+            errors = validate_compound_value(
+                field_name,
+                value,
+                CONTROLLED_VOCABULARIES[field_name],
             )
-        )
-        errors.extend(
-            validate_compound_value(
-                "rationale_mechanism",
-                self.rationale_mechanism,
-                CONTROLLED_VOCABULARIES["rationale_mechanism"],
+        else:
+            errors = validate_closed_value(
+                field_name,
+                value,
+                CONTROLLED_VOCABULARIES[field_name],
             )
-        )
-        errors.extend(
-            _validate_compound_duplicates(
-                "rationale_mechanism",
-                self.rationale_mechanism,
-            )
-        )
-        errors.extend(
-            validate_compound_value(
-                "epistemic_support",
-                self.epistemic_support,
-                CONTROLLED_VOCABULARIES["epistemic_support"],
-            )
-        )
-        errors.extend(
-            _validate_compound_duplicates(
-                "epistemic_support",
-                self.epistemic_support,
-            )
-        )
-        for field_name in (
-            "discourse_level",
-            "temporal_orientation",
-            "uncertainty_flag",
-        ):
-            errors.extend(
-                validate_closed_value(
-                    field_name,
-                    getattr(self, field_name),
-                    CONTROLLED_VOCABULARIES[field_name],
-                )
-            )
-        return errors
+        if errors:
+            errors_by_field[field_name] = errors
+    return errors_by_field
 
 
 def parse_signature(text: str) -> FrictionSignature:
@@ -241,10 +230,7 @@ def _parse_compact_signature(text: str) -> FrictionSignature:
     return FrictionSignature(**dict(zip(SIGNATURE_FIELDS, parts, strict=True)))
 
 
-def _validate_compound_duplicates(field_name: str, value: str) -> list[str]:
-    parts = [part.strip() for part in str(value).split("+") if part.strip()]
-    duplicates = sorted({part for part in parts if parts.count(part) > 1})
-    return [
-        f"{field_name} contains duplicate compound value {duplicate!r}."
-        for duplicate in duplicates
-    ]
+def _clean_value(value: Any) -> str:
+    if value is None:
+        return ""
+    return str(value).strip()

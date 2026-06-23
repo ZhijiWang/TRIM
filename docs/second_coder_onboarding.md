@@ -50,7 +50,9 @@ fields are:
   preliminary usability pilot.
 
 Both files use the TRIM schema, with coder-assigned fields left blank for
-independent completion.
+independent completion. They are incomplete scaffolds, not valid standard
+annotations: `evidence_nodes`, `anchor_node`, signature fields, and rationale
+documentation must be completed before validation succeeds.
 
 ## Staged Pilot Procedure
 
