@@ -7,7 +7,7 @@
 TRIM structures the warranted conversion from textual evidence to interpretive
 function as a locatable, reviewable, and comparable annotation pathway.
 
-Current package version: 0.1.2. No formal GitHub Release has been published.
+Current package version: 0.2.0. No formal GitHub Release has been published.
 
 ## What TRIM Annotates
 
@@ -100,7 +100,7 @@ See [`docs/related_methods.md`](docs/related_methods.md) and
 
 ## Documentation
 
-- [`docs/TRIM_codebook_v0_1_2.md`](docs/TRIM_codebook_v0_1_2.md)
+- [`docs/TRIM_codebook_v0_2_0.md`](docs/TRIM_codebook_v0_2_0.md)
 - [`docs/TRIM_Coding_Manual_v0_2_friction_locus_final.md`](docs/TRIM_Coding_Manual_v0_2_friction_locus_final.md)
 - [`docs/TRIM_Coding_Manual_v0_2_rationale_mechanism.md`](docs/TRIM_Coding_Manual_v0_2_rationale_mechanism.md)
 - [`docs/demo_dataset_notes.md`](docs/demo_dataset_notes.md)

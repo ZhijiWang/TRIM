@@ -30,7 +30,7 @@ human-created judgements and checks their form.
 
 ## Current Package Scope
 
-Version 0.1.2 supports proof-of-concept demonstration and pilot infrastructure.
+Version 0.2.0 supports proof-of-concept demonstration and pilot infrastructure.
 The ten-case corpus shows how controlled signatures, comparison tables, graph
 exports, and contested-case records work together. The three-case second-coder
 workflow demonstrates software preparation. Neither establishes general

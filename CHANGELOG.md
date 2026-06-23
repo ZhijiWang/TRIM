@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.2 - Unreleased
+## 0.2.0 - Unreleased
 
 ### Added
 
@@ -32,7 +32,7 @@
   `comparison_prompt`. This is a deliberate output-schema migration: the
   software now emits structural prompts, while substantive interpretation is
   maintained separately.
-- Bumped the package and citation metadata to 0.1.2 without creating a GitHub
+- Bumped the package and citation metadata to 0.2.0 without creating a GitHub
   Release.
 
 ### Removed

@@ -59,14 +59,16 @@ print(disagreement_table(combined, ["friction_locus", "rationale_mechanism"]))
 controlled fields. For compound fields such as `rationale_mechanism`, the
 compound-aware report adds:
 
-- exact set agreement;
-- primary-mechanism agreement;
+- exact-set agreement, which treats the compound as an unordered set and
+  ignores value order;
+- primary-mechanism agreement, which compares the first ordered mechanism;
 - any-overlap agreement;
 - mean Jaccard overlap.
 
 This preserves the distinction between `authorizes+reframes` and
-`reframes+authorizes`: they have exact set agreement but not primary-mechanism
-agreement.
+`reframes+authorizes`: they have exact-set agreement because order is ignored
+for that metric, but not primary-mechanism agreement because their first
+ordered mechanisms differ.
 
 ## Reviewing Disagreements
 

@@ -46,7 +46,7 @@ python examples/run_trim_with_source_segments.py
 
 ## Claim Boundary
 
-The current package version is 0.1.2. It is not a formal GitHub Release. Coding
+The current package version is 0.2.0. It is not a formal GitHub Release. Coding
 manuals may have independent versions when they develop coder-facing guidance
 for specific controlled fields.
 

@@ -1,4 +1,4 @@
-# TRIM Codebook v0.1.2
+# TRIM Codebook v0.2.0
 
 ## Purpose
 

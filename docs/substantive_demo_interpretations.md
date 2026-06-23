@@ -13,7 +13,7 @@ The generated same-function table reports:
 > Shared function label; differing threshold-rationale signatures. Interpret
 > the substantive significance of the differing evidence-to-function pathways.
 
-The table column is named `comparison_prompt`. Before package version 0.1.2,
+The table column is named `comparison_prompt`. Before package version 0.2.0,
 the same structural text appeared under the misleading column name
 `interpretive_payoff`. Consumers should migrate to `comparison_prompt`.
 

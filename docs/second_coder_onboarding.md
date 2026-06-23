@@ -11,7 +11,7 @@ reliability study.
 
 ## Materials to Read
 
-- `docs/TRIM_codebook_v0_1_2.md`
+- `docs/TRIM_codebook_v0_2_0.md`
 - `docs/TRIM_Coding_Manual_v0_2_friction_locus_final.md`
 - `docs/TRIM_Coding_Manual_v0_2_rationale_mechanism.md`
 - `docs/segmentation_workflow.md`

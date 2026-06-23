@@ -1,6 +1,6 @@
 # Release Instructions
 
-The repository currently has no formal GitHub Release. Package version 0.1.2 is
+The repository currently has no formal GitHub Release. Package version 0.2.0 is
 an unreleased source version.
 
 Before publishing a future release:
