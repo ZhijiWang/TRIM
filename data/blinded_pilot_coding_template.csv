@@ -1,0 +1,11 @@
+case_id,text,case_label,source,language,case_type,function_label,cue_family,broad_function_family,evidence_anchor,evidence_nodes,anchor_node,friction_locus,rationale_mechanism,epistemic_support,discourse_level,temporal_orientation,uncertainty_flag,rationale_note,alternative_signature,coder_id,status
+ZZ_XIANG_7,,"Xiang 7, suburban-sacrifice consultation",Zuo zhuan,Classical Chinese,divination,,,,,,,,,,,,,,,second_coder,pilot
+ZZ_MIN_1,,"Min 1, Bi Wan consultation",Zuo zhuan,Classical Chinese,divination,,,,,,,,,,,,,,,second_coder,pilot
+ZZ_XI_4,,"Xi 4, Li Ji consultations",Zuo zhuan,Classical Chinese,divination,,,,,,,,,,,,,,,second_coder,pilot
+ZZ_ZHUANG_22,,"Zhuang 22, Jingzhong consultations",Zuo zhuan,Classical Chinese,divination,,,,,,,,,,,,,,,second_coder,pilot
+MAC_1_3,,"Act 1.3, witches and royal messengers",Macbeth,English,prophecy,,,,,,,,,,,,,,,second_coder,pilot
+MAC_4_1,,"Act 4.1, apparitions",Macbeth,English,prophecy,,,,,,,,,,,,,,,second_coder,pilot
+MAC_5_8,,"Act 5.8, Macbeth and Macduff",Macbeth,English,prophecy,,,,,,,,,,,,,,,second_coder,pilot
+GROVE_TAJOMARU,,Tajōmaru testimony,In a Grove,Japanese,testimony,,,,,,,,,,,,,,,second_coder,pilot
+GROVE_MASAGO,,Masago testimony,In a Grove,Japanese,testimony,,,,,,,,,,,,,,,second_coder,pilot
+GROVE_TAKEHIRO,,Takehiro testimony,In a Grove,Japanese,testimony,,,,,,,,,,,,,,,second_coder,pilot
