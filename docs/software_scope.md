@@ -17,6 +17,11 @@ TRIM supports:
 - graph outputs for evidence-to-anchor-to-function structures;
 - pilot-scale intercoder comparison utilities.
 
+Standard validated annotations require one or more evidence nodes, a
+source-facing `evidence_anchor`, and a distinct normalized `anchor_node`. Graph
+construction rejects records that omit these components rather than silently
+falling back to an anchor-only model.
+
 ## Human Review Workflow
 
 The validator checks whether annotation records conform to the coding schema.
@@ -30,7 +35,8 @@ human-created judgements and checks their form.
 
 ## Current Package Scope
 
-Version 0.2.0 supports proof-of-concept demonstration and pilot infrastructure.
+Source version 0.2.0 remains unreleased and supports proof-of-concept
+demonstration and pilot infrastructure.
 The ten-case corpus shows how controlled signatures, comparison tables, graph
 exports, and contested-case records work together. The three-case second-coder
 workflow demonstrates software preparation. Neither establishes general

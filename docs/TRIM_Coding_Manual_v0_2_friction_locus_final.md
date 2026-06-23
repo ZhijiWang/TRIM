@@ -615,6 +615,10 @@ If the tests do not resolve the case, set `uncertainty_flag=high`, provide an
 `alternative_signature` whenever possible, explain the unresolved choice in
 `rationale_note`, and route the case to contested review.
 
+When `alternative_signature` is recorded, the rationale must document the
+competing pathway in at least 60 characters. This is a language-neutral minimum
+for reviewability, not a quality score; no English keywords are required.
+
 This ordering is a coding convention for pilot testing. It gives coders a
 stable route through cases where multiple thresholds are present. Alternative
 orderings may be evaluated in a future reliability study.

@@ -65,21 +65,36 @@ obstacle to evidence-to-function conversion.
 
 ## Structured Free-Text / Project-Specific Fields
 
-| Field | Status |
-| --- | --- |
-| `function_label` | project-specific free text |
-| `cue_family` | project-specific free text |
-| `broad_function_family` | project-specific free text |
-| `case_type` | project-specific free text |
-| `language` | project-specific free text |
-| `source` | project-specific free text |
-| `evidence_anchor` | project-specific free text |
-| `evidence_nodes` | project-specific free text |
-| `anchor_node` | project-specific free text |
-| `rationale_note` | project-specific free text |
+| Field | Status | Standard annotation requirement |
+| --- | --- | --- |
+| `function_label` | project-specific free text | required |
+| `cue_family` | project-specific free text | optional |
+| `broad_function_family` | project-specific free text | optional |
+| `case_type` | project-specific free text | optional |
+| `language` | project-specific free text | optional |
+| `source` | project-specific free text | required |
+| `evidence_anchor` | project-specific free text | required |
+| `evidence_nodes` | structured list / delimited text | at least one non-empty node required |
+| `anchor_node` | project-specific free text | required |
+| `rationale_note` | project-specific free text | required |
 
 `function_label` is defined by the research project using TRIM rather than by a
 global package vocabulary.
+
+### Evidence and Anchor Fields
+
+- `evidence_anchor` is the source-facing locatable span, quotation, passage
+  label, or segment reference used to return to the text.
+- `evidence_nodes` decomposes the selected evidence into one or more non-empty
+  human-defined units that contribute to the anchor.
+- `anchor_node` is the normalized analytic label around which those evidence
+  nodes are organized.
+
+TRIM does not define an anchor-only standard mode. Valid standard annotations
+must supply all three fields. `evidence_anchor` and `anchor_node` may be closely
+related, but they must not be treated as automatic substitutes: one preserves
+source location, while the other supplies the analytic node label used in graph
+construction.
 
 ## `friction_locus` Closed Set
 
@@ -207,9 +222,13 @@ The warning marks records that would benefit from fuller review documentation.
 ## Contested Annotation Workflow
 
 TRIM operationalizes the recording-and-review workflow for contested thresholds.
-It stores `alternative_signature`, requires documentation through
-`rationale_note`, and prepares human-review fields for the demarcation
-criterion:
+If `alternative_signature` is present, it must parse and validate as a complete
+six-field signature, and `rationale_note` must contain at least 60 characters.
+This language-neutral character threshold is only a minimal documentation
+safeguard; it is not evidence of interpretive quality. No English or
+language-specific keywords are required.
+
+TRIM also prepares human-review fields for the demarcation criterion:
 
 - locatable?
 - rationale-coherent?
@@ -237,8 +256,9 @@ adjudication is carried out through the human review workflow.
 The validator checks:
 
 - required fields;
+- at least one non-empty evidence node;
 - controlled vocabulary conformance;
 - compound value shape;
 - well-formed friction signatures;
-- contested-case documentation;
+- language-neutral contested-case documentation length;
 - cross-case comparability.

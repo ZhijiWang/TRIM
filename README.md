@@ -28,6 +28,16 @@ main friction signature records:
 Annotations may also include `alternative_signature` and `rationale_note` for
 contested-threshold review.
 
+Standard TRIM annotations require:
+
+- at least one non-empty `evidence_nodes` value;
+- `evidence_anchor`, a source-facing textual span, quotation, or segment
+  reference;
+- `anchor_node`, a normalized analytic label around which the evidence is
+  organized.
+
+The two anchor fields are intentionally distinct and are not interchangeable.
+
 Interpretive friction is relational: it is a locatable difficulty in the
 warranted conversion from evidence to function under an explicit interpretive
 scheme, not a context-free property automatically detected in a text.
@@ -55,6 +65,12 @@ python -m pytest
 python examples/demo_trim_workflow.py
 ```
 
+Install optional Cohen's kappa support with:
+
+```bash
+python -m pip install -e ".[reliability]"
+```
+
 Command-line examples:
 
 ```bash
@@ -63,6 +79,11 @@ trim report data/demo_annotations.csv --out outputs/reports/demo_report.md
 trim graph data/demo_annotations.csv --graphml outputs/graphs/demo.graphml --json outputs/graphs/demo.json
 trim compare data/demo_annotations.csv --outdir outputs/tables
 ```
+
+`trim validate` writes its CSV report before returning. It exits with status 1
+when validation errors are present and status 0 for valid or warnings-only
+input. Use `--always-zero` only when a reporting pipeline must not stop on
+validation errors.
 
 ## Demonstration and Validation Status
 
@@ -109,6 +130,7 @@ See [`docs/related_methods.md`](docs/related_methods.md) and
 - [`docs/second_coder_onboarding.md`](docs/second_coder_onboarding.md)
 - [`docs/intercoder_workflow.md`](docs/intercoder_workflow.md)
 - [`docs/software_scope.md`](docs/software_scope.md)
+- [`docs/schema_validation_migration.md`](docs/schema_validation_migration.md)
 - [`docs/article_use.md`](docs/article_use.md)
 - [`CHANGELOG.md`](CHANGELOG.md)
 

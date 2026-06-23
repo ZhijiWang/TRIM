@@ -15,6 +15,8 @@
   demonstration groups.
 - Compound-aware intercoder metrics for exact sets, primary mechanisms, any
   overlap, and Jaccard overlap.
+- Optional `reliability` dependency group for scikit-learn-backed Cohen's
+  kappa.
 
 ### Changed
 
@@ -34,6 +36,16 @@
   maintained separately.
 - Bumped the package and citation metadata to 0.2.0 without creating a GitHub
   Release.
+- Made contested-case rationale validation language-neutral, with a 60-character
+  minimum when `alternative_signature` is present.
+- Required at least one evidence node for standard annotations and made graph
+  construction reject zero-evidence or incomplete anchor records.
+- Defined `evidence_anchor` as source-facing location and `anchor_node` as the
+  normalized analytic node label; both remain required.
+- Unified standalone, record, and DataFrame signature validation through the
+  canonical vocabulary helpers.
+- Made `trim validate` return status 1 for validation errors after writing its
+  report, with `--always-zero` for report-only pipelines.
 
 ### Removed
 

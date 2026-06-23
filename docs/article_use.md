@@ -44,9 +44,14 @@ The optional source-segment workflow can be rerun with:
 python examples/run_trim_with_source_segments.py
 ```
 
+For automation, `trim validate` returns non-zero when errors are present after
+writing its CSV report. Warnings alone return zero. `--always-zero` is available
+for report-only pipelines.
+
 ## Claim Boundary
 
-The current package version is 0.2.0. It is not a formal GitHub Release. Coding
+The current source version is 0.2.0 (unreleased). It is not a formal GitHub
+Release. Coding
 manuals may have independent versions when they develop coder-facing guidance
 for specific controlled fields.
 

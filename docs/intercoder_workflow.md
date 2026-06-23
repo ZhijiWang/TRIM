@@ -36,6 +36,14 @@ The module `trim.intercoder` provides:
 - `disagreement_table(df, fields)`
 - `contested_disagreement_report(df)`
 
+Install the optional dependency required to compute Cohen's kappa with:
+
+```bash
+python -m pip install -e ".[reliability]"
+```
+
+Core TRIM installation does not require `scikit-learn`.
+
 Example:
 
 ```python

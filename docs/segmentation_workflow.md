@@ -12,7 +12,8 @@ The source-segment layer and the TRIM annotation layer remain separate:
 
 - `source_segments.csv` records source passages, locations,
   translations/paraphrases, and notes.
-- TRIM annotation records evidence nodes, anchor node, `friction_locus`,
+- TRIM annotation records evidence nodes, source-facing evidence anchor,
+  normalized anchor node, `friction_locus`,
   `rationale_mechanism`, `function_label`, and `rationale_note`.
 - `case_id` links the source-segment layer and the TRIM annotation layer.
 - `segment_id` can be cited inside `evidence_anchor` or `rationale_note`.
@@ -39,13 +40,17 @@ source passages → auditable segments → TRIM annotation → validation, compa
 
 1. Segment source passages.
 2. Assign stable segment IDs.
-3. Create TRIM annotations using the existing schema.
-4. Link annotation `evidence_anchor` to `segment_id` where useful.
-5. Run `trim validate`.
-6. Run `trim report`.
-7. Run `trim compare`.
-8. Run `trim graph`.
-9. Use linked outputs for review and second-coder work.
+3. Create at least one explicit `evidence_nodes` value for each standard TRIM
+   annotation. Evidence nodes may be derived from one or more source segments,
+   but the derivation remains a human coding decision.
+4. Link the source-facing `evidence_anchor` to `segment_id` where useful.
+5. Assign `anchor_node` as a normalized analytic label rather than duplicating
+   the source reference.
+6. Run `trim validate`.
+7. Run `trim report`.
+8. Run `trim compare`.
+9. Run `trim graph`.
+10. Use linked outputs for review and second-coder work.
 
 ## Example
 
@@ -58,8 +63,9 @@ The demonstration source-segment file includes three In a Grove cases:
 | `GROVE_TAKEHIRO_01` | `GROVE_TAKEHIRO` | In a Grove | Source segment used as evidence anchor for `warrant_relation / contradicts+suspends`. |
 
 The script `examples/run_trim_with_source_segments.py` links these segment IDs
-to the existing demonstration annotations and writes validation, comparison,
-report, and graph outputs.
+to the existing demonstration annotations, preserves their explicit evidence
+nodes and normalized anchor nodes, and writes validation, comparison, report,
+and graph outputs.
 
 ## Scope
 
