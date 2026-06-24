@@ -203,6 +203,51 @@ Choose this value when ambiguity is converted into a restricted operational read
 
 - `MAC_4_1`: Macbeth narrows equivocal conditions into a usable sense of security.
 
+## Key Distinctions
+
+### `reframes` and `narrows`
+
+`reframes` changes the interpretive frame through which evidence functions. `narrows` reduces the available meanings or uses within a frame. Macbeth Act 4.1 combines both because Macbeth treats conditional prophecy as guarantee and restricts equivocation to a practical sense of security.
+
+### `supports` and `authorizes`
+
+`supports` adds evidential backing. `authorizes` gives the evidence standing for action, legitimacy, or uptake. Macbeth Act 1.3 uses `authorizes+reframes` because partial confirmation makes the prophecy usable as warrant and changes kingship into an actionable possibility.
+
+### `stabilizes` and `extends`
+
+`stabilizes` settles evidence into a usable judgement. `extends` keeps it active, open, or unresolved. Xiang 7 and Min 1 illustrate stabilization; Xi 4 and Zhuang 22 illustrate extension.
+
+### `projects` and `reactivates`
+
+`projects` gives evidence forward reach from the current moment. `reactivates` returns previously settled or inactive evidence to use. Min 1 and Zhuang 22 illustrate projection. The present corpus contains no primary `reactivates` case.
+
+### `contradicts` and `suspends`
+
+`contradicts` introduces incompatibility. `suspends` prevents closure. Takehiro's posthumous testimony combines both mechanisms.
+
+### `qualifies` and `reframes`
+
+`qualifies` modifies or limits a function while preserving its frame. `reframes` changes the frame itself. Masago illustrates qualification; Tajōmaru illustrates reframing.
+
+## Decision Tree
+
+Use this sequence when selecting the primary mechanism:
+
+1. Does the threshold settle evidence into usable judgement? → `stabilizes`.
+2. Does it keep evidence active or prolonged? → `extends`.
+3. Does it make evidence actionable or legitimate? → `authorizes`.
+4. Does it change the interpretive frame? → `reframes`.
+5. Does it restrict equivocal possibilities? → `narrows`.
+6. Does it modify or complicate a function while preserving the frame? → `qualifies`.
+7. Does it introduce incompatibility? → `contradicts`.
+8. Does it prevent closure? → `suspends`.
+9. Does it push significance forward? → `projects`.
+10. Does it bring earlier settled evidence back into use? → `reactivates`.
+11. Does one warrant displace another? → `overrides`.
+12. Does it add evidential backing without granting action-guiding standing? → `supports`.
+
+This ordering is a pilot coding convention. Reliability analysis can evaluate whether coders follow it consistently and whether a different ordering would improve the manual.
+
 ## Selection Sequence
 
 When two mechanisms appear plausible, ask:
