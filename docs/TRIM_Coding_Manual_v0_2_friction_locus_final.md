@@ -194,6 +194,53 @@ Ordinary use of narrative, historical, ritual, or scholarly context belongs in `
 
 The value awaits a positive out-of-sample demonstration. Its use should identify the precise contextual bridge and explain why the function depends on it.
 
+## Key Distinctions
+
+### `friction_locus` and `epistemic_support`
+
+`friction_locus` identifies where the conversion requires added inferential work. `epistemic_support` identifies what carries the judgement across that threshold. Narrative or historical context can support an annotation whose locus remains `warrant_relation`, `temporal_layering`, or another more specific value.
+
+### `warrant_attribution` and `warrant_relation`
+
+`warrant_attribution` centres one source receiving warranting force. `warrant_relation` centres the interaction among several warrants. Min 1 and Macbeth Act 1.3 illustrate attribution; Xi 4 and Takehiro illustrate relation.
+
+### `operation_function` and `warrant_attribution`
+
+Choose `operation_function` when evidence already has standing and the decisive question is what a visible operation does with it. Choose `warrant_attribution` when the operation grants standing to a source, medium, speaker, or result.
+
+Xiang 7 uses `operation_function` because the failed divination already counts as the relevant result and Meng Xianzi transforms its meaning. Min 1 uses `warrant_attribution` because Xin Liao's interpretation makes the result usable as warrant.
+
+### `operation_function` and `warrant_relation`
+
+Choose `operation_function` when the visible act performs the conversion. Choose `warrant_relation` when the act matters because it creates, ranks, or intensifies a relation among warrants. In Xi 4, the ranking speech matters through the hierarchy it creates between turtle-shell and milfoil results.
+
+### `warrant_relation` and `temporal_layering`
+
+Choose `warrant_relation` when local conflict among warrants produces the function. Choose `temporal_layering` when later fulfilment, historical readability, or retrospective framing reclassifies earlier evidence. Xi 4 centres cross-warrant conflict; Zhuang 22 centres time-layered uptake.
+
+### `operation_function` and `temporal_layering`
+
+Choose `operation_function` when a local act converts the evidence. Choose `temporal_layering` when a later moment changes the status of earlier evidence. Macbeth Act 5.8 centres the later fulfilment that reclassifies the earlier prophecy.
+
+### `perspective_assignment` and `warrant_relation`
+
+Choose `perspective_assignment` when one testimonial standpoint determines the function. Choose `warrant_relation` when incompatibility among several accounts determines the function. Masago illustrates perspective; Takehiro illustrates warrant relation.
+
+## Decision Tree
+
+Use this sequence when several loci remain plausible:
+
+1. Does the annotation unit or case boundary determine the result? → `boundary_setting`.
+2. Does speaker position or testimonial standpoint determine the function? → `perspective_assignment`.
+3. Do several warrants interact, conflict, rank, qualify, or suspend one another? → `warrant_relation`.
+4. Does later fulfilment, retrospective framing, or historical readability reclassify earlier evidence? → `temporal_layering`.
+5. Does one source, medium, speaker, or result receive warranting standing? → `warrant_attribution`.
+6. Does a visible operation locally convert evidence into function? → `operation_function`.
+7. Does a missing contextual bridge remain the dominant obstacle after the more specific loci have been considered? → `context_inference`.
+8. When the cue type itself remains the dominant unresolved problem, consider provisional `cue_function` through project review.
+
+Apply the counterfactual, proximity, and explanatory-sufficiency tests to the leading candidates. A remaining tie receives high uncertainty, an alternative signature where possible, and contested review.
+
 ## Reporting
 
 Report the selected locus together with its evidence basis, mechanism, support, discourse position, temporal orientation, and uncertainty. Reliability analysis should preserve both exact agreement and the case-level location of disagreement.
