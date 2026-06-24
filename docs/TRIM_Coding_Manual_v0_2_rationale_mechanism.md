@@ -2,17 +2,11 @@
 
 ## Purpose
 
-`rationale_mechanism` records how the dominant threshold converts evidence into
-function. It names the action performed by the threshold-rationale relation:
-settling, extending, reframing, qualifying, authorizing, narrowing, projecting,
-or otherwise changing how evidence becomes functional.
+`rationale_mechanism` records what the dominant threshold does as evidence becomes functional. It names the conversion itself: supporting, contradicting, overriding, qualifying, reframing, stabilizing, extending, reactivating, suspending, projecting, authorizing, or narrowing.
 
-The vocabulary is intentionally cross-dimensional. Values may name logical
-relations, interpretive operations, epistemic effects, or temporal effects.
-This is a controlled descriptive vocabulary, not a claim that every value
-belongs to one philosophical type.
+The vocabulary crosses logical, interpretive, epistemic, and temporal dimensions because the mechanism field describes the action performed by the threshold-rationale relation.
 
-## Allowed Values
+Allowed values:
 
 - `supports`
 - `contradicts`
@@ -27,206 +21,86 @@ belongs to one philosophical type.
 - `authorizes`
 - `narrows`
 
-## Compound Mechanism Rule
+## Compound Mechanisms
 
-One primary mechanism is required. One optional secondary mechanism may be added
-with `+`. Use compound values when the secondary mechanism clarifies temporal,
-logical, or perspectival reach. Avoid stacking more than two mechanisms. The
-primary mechanism should name the main conversion. The secondary mechanism
-should name a consequential modification. Order therefore records the
-primary/secondary distinction.
+Each annotation records one main mechanism. A second mechanism may be added with `+` when it captures a consequential modification.
 
-For intercoder review, raw-string agreement remains available for backward
-compatibility. Compound-aware reporting can additionally compare exact sets,
-primary mechanisms, any overlap, and Jaccard overlap.
+The first value names the dominant conversion. The second records an additional effect. Order therefore matters: `authorizes+reframes` and `reframes+authorizes` share a set but assign a different primary operation.
+
+Intercoder reporting compares raw strings, exact sets, primary mechanisms, any overlap, and Jaccard overlap.
 
 ## `supports`
 
 ### Definition
 
-Use `supports` when the threshold adds evidential backing to a function without
-making that function actionable or changing its frame.
+Use `supports` when the threshold adds evidential backing to a function while leaving its frame and actionability largely stable.
 
-### Use when
+### Selection logic
 
-- Evidence strengthens an existing judgement.
-- The mechanism is evidential backing rather than authorization.
-- The function is helped by the evidence but remains otherwise stable.
+Choose this value when evidence strengthens an existing judgement. `authorizes` fits when the evidence grants standing for action. `stabilizes` fits when uncertainty settles into usable judgement. `reframes` fits when the interpretive frame changes.
 
-### Use another value when
+### Demonstration status
 
-- The evidence makes a function actionable or legitimate. Use `authorizes`.
-- The evidence settles uncertainty into usable judgement. Use `stabilizes`.
-- The evidence changes the frame. Use `reframes`.
-
-### Positive example from existing demo cases
-
-No current demo annotation uses `supports` as its coded mechanism.
-
-Contrast: Macbeth Act 1.3 uses `authorizes+reframes` because partial
-confirmation gives the prophecy warranting force and changes kingship into an
-actionable possibility.
-
-### Confusable with
-
-- `authorizes`
-- `stabilizes`
-
-### Decision tip
-
-Ask whether the evidence adds backing or grants standing for action. If it adds
-backing, use `supports`. If it grants standing, use `authorizes`.
+The current corpus contains no primary `supports` case. `MAC_1_3` offers a contrast because confirmation authorizes and reframes the prophecy rather than merely adding backing.
 
 ## `contradicts`
 
 ### Definition
 
-Use `contradicts` when the mechanism introduces incompatibility between a
-warrant and another account, expectation, or interpretive path.
+Use `contradicts` when the mechanism introduces incompatibility between a warrant and another account, expectation, or interpretive path.
 
-### Use when
+### Selection logic
 
-- A later or alternative warrant conflicts with another warrant.
-- The conversion depends on incompatibility rather than synthesis.
-- Contradiction is the main mechanism that makes the function visible.
+Choose this value when contradiction organizes the function. Add `suspends` when the incompatibility also prevents closure. `qualifies` fits a modification that leaves the claim recognizable. `overrides` fits a case in which one warrant displaces another.
 
-### Use another value when
+### Demonstrated case
 
-- The effect is to prevent closure without direct incompatibility. Use
-  `suspends`.
-- The effect is to modify or limit a claim. Use `qualifies`.
-- One warrant displaces another. Use `overrides`.
-
-### Positive example from existing demo cases
-
-Takehiro's posthumous testimony uses `contradicts+suspends`: posthumous medium
-speech introduces an extraordinary warrant that contradicts the preceding
-accounts and prevents closure.
-
-### Confusable with
-
-- `suspends`
-- `qualifies`
-- `overrides`
-
-### Decision tip
-
-Use `contradicts` when incompatibility is explicit enough to organize the
-function. Add `suspends` when that incompatibility also blocks closure.
+- `GROVE_TAKEHIRO`: posthumous testimony contradicts preceding accounts and, together with `suspends`, keeps adjudication open.
 
 ## `overrides`
 
 ### Definition
 
-Use `overrides` when one warrant, operation, or threshold displaces another as
-the basis for function.
+Use `overrides` when one warrant, operation, or judgement displaces another as the operative basis for function.
 
-### Use when
+### Selection logic
 
-- One warrant becomes dominant over a competing warrant.
-- A later judgement cancels or displaces a prior one.
-- The function depends on replacement rather than coexistence.
+Choose this value when replacement is decisive and one pathway remains active after another loses force. `contradicts` fits unresolved incompatibility. `qualifies` fits continued but reduced force. `extends` fits a conflict that remains active.
 
-### Use another value when
+### Demonstration status
 
-- Warrants remain in conflict without one clearly displacing the other. Use
-  `contradicts` or `warrant_relation` with an appropriate mechanism.
-- A warrant is ranked but still remains active. Use `extends` or `qualifies`
-  where appropriate.
-
-### Positive example from existing demo cases
-
-No current demo annotation uses `overrides` as its coded mechanism.
-
-Contrast: Xi 4 uses `extends` because conflict among turtle result, milfoil
-result, ranking speech, and line text keeps deliberation open rather than
-allowing one warrant to fully replace the others.
-
-### Confusable with
-
-- `contradicts`
-- `qualifies`
-- `stabilizes`
-
-### Decision tip
-
-Ask whether one warrant remains as the operative basis after another is
-displaced. If so, use `overrides`.
+The current corpus contains no primary `overrides` case. `ZZ_XI_4` offers a contrast because competing warrants extend deliberation without producing a complete replacement.
 
 ## `qualifies`
 
 ### Definition
 
-Use `qualifies` when the mechanism modifies, limits, or complicates a function
-without fully changing the frame.
+Use `qualifies` when the mechanism modifies, limits, or complicates a function while keeping its basic frame recognizable.
 
-### Use when
+### Selection logic
 
-- A testimony or warrant takes on a function but remains internally limited.
-- The annotation depends on complication rather than full reframing.
-- The mechanism narrows the force of a claim without reducing possibilities in
-  the manner of `narrows`.
+Choose this value when the function remains usable but carries internal limits. `reframes` fits a change in interpretive frame. `narrows` fits a reduction in available meanings or uses. `suspends` fits blocked closure.
 
-### Use another value when
+### Demonstrated case
 
-- The interpretive frame changes. Use `reframes`.
-- Equivocal possibilities are reduced into a restricted use. Use `narrows`.
-- A claim is blocked from closure. Use `suspends`.
-
-### Positive example from existing demo cases
-
-Masago's testimony uses `qualifies`: victim-position, shame, accusation, and
-self-blame qualify one another rather than settling into a single testimonial
-role.
-
-### Confusable with
-
-- `reframes`
-- `narrows`
-- `suspends`
-
-### Decision tip
-
-Use `qualifies` when the function remains recognizable but becomes limited or
-complicated.
+- `GROVE_MASAGO`: victim-position, shame, accusation, and self-blame qualify one another within the testimony.
 
 ## `reframes`
 
 ### Definition
 
-Use `reframes` when the mechanism changes the interpretive frame through which
-evidence becomes functional.
+Use `reframes` when the mechanism changes the interpretive frame through which evidence becomes functional.
 
-### Use when
+### Selection logic
 
-- A confession becomes self-display.
-- A prophecy becomes an actionable possibility or a retrospective trap.
-- The same evidence is treated through a new interpretive frame.
+Choose this value when the same evidence acquires a new kind of significance: confession becomes self-display, prophecy becomes actionable, or earlier assurance becomes a retrospective trap. `qualifies` retains the frame while modifying it. `narrows` reduces possibilities within a frame. `stabilizes` settles evidence into a usable judgement.
 
-### Use another value when
+### Demonstrated cases
 
-- The range of possibilities is restricted. Use `narrows`.
-- Evidence is settled into usable judgement. Use `stabilizes`.
-- A function is modified without frame change. Use `qualifies`.
-
-### Positive example from existing demo cases
-
-Macbeth Act 5.8 uses `reframes`: later fulfilment reclassifies Macbeth's
-earlier assurance as an equivocal trap.
-
-Tajōmaru's testimony uses `reframes`: confession is converted from apparent
-truth-disclosure into self-justifying self-display.
-
-### Confusable with
-
-- `qualifies`
-- `narrows`
-- `authorizes`
-
-### Decision tip
-
-Ask whether the evidence is being understood through a different frame. If the
-frame changes, use `reframes`.
+- `MAC_1_3`: confirmation reframes kingship as actionable.
+- `MAC_4_1`: Macbeth reframes equivocal conditions as security.
+- `MAC_5_8`: fulfilment reframes earlier assurance as a trap.
+- `GROVE_TAJOMARU`: confession becomes self-justifying self-display.
 
 ## `stabilizes`
 
@@ -234,328 +108,156 @@ frame changes, use `reframes`.
 
 Use `stabilizes` when the mechanism settles evidence into a usable judgement.
 
-### Use when
+### Selection logic
 
-- A sign, result, or interpretation becomes procedurally intelligible.
-- Uncertainty is reduced enough for the annotation's function to hold.
-- The function is produced by restoring sequence, standing, or judgement.
+Choose this value when sequence, standing, or interpretation becomes coherent enough for the function to hold. `extends` fits evidence that remains open. `projects` gives the judgement forward reach. `authorizes` grants standing for action.
 
-### Use another value when
+### Demonstrated cases
 
-- Evidence remains open or prolonged. Use `extends`.
-- The mechanism pushes significance forward. Use `projects`.
-- The mechanism authorizes action. Use `authorizes`.
-
-### Positive example from existing demo cases
-
-Xiang 7 uses `stabilizes`: Meng Xianzi's explanation converts failed divination
-into procedural intelligibility by restoring ritual sequence.
-
-Min 1 uses `stabilizes+projects`: Xin Liao's auspicious interpretation settles
-the Yi-related result while projecting lineage significance forward.
-
-### Confusable with
-
-- `extends`
-- `supports`
-- `authorizes`
-
-### Decision tip
-
-Use `stabilizes` when the threshold makes the evidence usable by settling its
-force.
+- `ZZ_XIANG_7`: ritual sequence makes failed divination procedurally intelligible.
+- `ZZ_MIN_1`: Xin Liao's reading stabilizes the result and, together with `projects`, gives it lineage significance.
 
 ## `extends`
 
 ### Definition
 
-Use `extends` when the mechanism keeps evidence active, open, prolonged, or
-unresolved across the local sequence.
+Use `extends` when the mechanism keeps evidence active, open, prolonged, or unresolved across the local sequence.
 
-### Use when
+### Selection logic
 
-- Conflict prevents clean closure.
-- A sign remains active across later readability.
-- The mechanism prolongs significance rather than settling it.
+Choose this value when significance continues because closure is delayed or the sign remains available for later uptake. `stabilizes` settles the evidence. `projects` directs it forward. `reactivates` brings previously inactive evidence back into use.
 
-### Use another value when
+### Demonstrated cases
 
-- The evidence settles into usable judgement. Use `stabilizes`.
-- Significance is pushed forward as prediction or expectation. Use `projects`.
-- Earlier evidence is brought back into use. Use `reactivates`.
-
-### Positive example from existing demo cases
-
-Xi 4 uses `extends`: conflict among turtle result, milfoil result, ranking
-speech, and line text prevents clean closure.
-
-Zhuang 22 uses `extends+projects`: the sign remains active across projected
-descent and later historical readability.
-
-### Confusable with
-
-- `stabilizes`
-- `projects`
-- `reactivates`
-
-### Decision tip
-
-Use `extends` when the threshold keeps evidence active rather than settling it.
+- `ZZ_XI_4`: competing warrants extend deliberation.
+- `ZZ_ZHUANG_22`: the sign remains active across descent and later readability, combined with `projects`.
 
 ## `reactivates`
 
 ### Definition
 
-Use `reactivates` when the mechanism brings previously settled or earlier
-evidence back into functional use.
+Use `reactivates` when earlier or previously settled evidence returns to functional use in a later context.
 
-### Use when
+### Selection logic
 
-- A prior sign returns to relevance.
-- Earlier evidence gains renewed function in a later context.
-- The mechanism depends on renewed activation rather than simple continuation.
+Choose this value when the evidence regains force after a period of reduced activity. `extends` fits continuous activity. `projects` moves significance forward from the present. `reframes` changes the meaning of earlier evidence.
 
-### Use another value when
+### Demonstration status
 
-- The sign remains continuously active. Use `extends`.
-- Significance is projected forward from the current moment. Use `projects`.
-- A later frame reclassifies earlier evidence. Use `reframes` or pair with the
-  relevant temporal coding.
-
-### Positive example from existing demo cases
-
-No current demo annotation uses `reactivates` as its coded mechanism.
-
-Contrast: Zhuang 22 uses `extends+projects` because the sign remains active
-across projected descent and later readability rather than returning after a
-settled interval.
-
-### Confusable with
-
-- `extends`
-- `projects`
-- `reframes`
-
-### Decision tip
-
-Use `reactivates` when the evidence had become settled or inactive and then
-returns to functional use.
+The current corpus contains no primary `reactivates` case. `ZZ_ZHUANG_22` offers a contrast because the sign remains continuously active across projection and later uptake.
 
 ## `suspends`
 
 ### Definition
 
-Use `suspends` when the mechanism prevents closure.
+Use `suspends` when the mechanism prevents closure and keeps adjudication unresolved.
 
-### Use when
+### Selection logic
 
-- Conflicting warrants keep the case unresolved.
-- The annotation foregrounds blocked adjudication.
-- A warrant adds uncertainty rather than settling the function.
+Choose this value when the central effect is blocked resolution. `contradicts` identifies explicit incompatibility. `extends` keeps significance active across time or sequence. `qualifies` limits a function that remains usable.
 
-### Use another value when
+### Demonstrated case
 
-- The mechanism directly introduces incompatibility. Use `contradicts`.
-- The mechanism keeps significance open over time. Use `extends`.
-- A function is limited but remains usable. Use `qualifies`.
-
-### Positive example from existing demo cases
-
-Takehiro's posthumous testimony uses `contradicts+suspends`: posthumous medium
-speech contradicts prior testimony and prevents closure.
-
-### Confusable with
-
-- `contradicts`
-- `extends`
-- `qualifies`
-
-### Decision tip
-
-Use `suspends` when closure is the issue. Pair with `contradicts` when the
-blocked closure comes from incompatibility.
+- `GROVE_TAKEHIRO`: posthumous testimony combines `contradicts+suspends`, adding incompatibility and preventing closure.
 
 ## `projects`
 
 ### Definition
 
-Use `projects` when the mechanism pushes significance forward from the current
-moment.
+Use `projects` when the mechanism gives evidence prospective reach.
 
-### Use when
+### Selection logic
 
-- A sign supports prospective expectation.
-- A result becomes meaningful through future lineage, fulfilment, or outcome.
-- The mechanism gives evidence forward reach.
+Choose this value when a sign, judgement, or interpretation becomes meaningful through future lineage, fulfilment, or outcome. `reactivates` returns earlier evidence to use. `extends` keeps significance open. `stabilizes` settles it in the present.
 
-### Use another value when
+### Demonstrated cases
 
-- Earlier evidence returns to functional use. Use `reactivates`.
-- Evidence remains open without clear forward projection. Use `extends`.
-- Evidence is settled in the present. Use `stabilizes`.
-
-### Positive example from existing demo cases
-
-Min 1 uses `stabilizes+projects`: the Yi-related result is accepted as a stable
-prospective lineage judgement.
-
-Zhuang 22 uses `extends+projects`: the sign remains active across projected
-descent and later historical readability.
-
-### Confusable with
-
-- `extends`
-- `reactivates`
-- `stabilizes`
-
-### Decision tip
-
-Use `projects` when the threshold gives evidence prospective reach.
+- `ZZ_MIN_1`: the stabilized judgement projects lineage significance.
+- `ZZ_ZHUANG_22`: the sign extends across time and projects future descent.
 
 ## `authorizes`
 
 ### Definition
 
-Use `authorizes` when the mechanism makes a function actionable, legitimate, or
-warranted.
+Use `authorizes` when the mechanism gives a function standing for action, uptake, or legitimate use.
 
-### Use when
+### Selection logic
 
-- A source or result receives standing that can guide action.
-- Evidence authorizes uptake rather than simply supporting an existing claim.
-- The threshold changes what can now be treated as usable warrant.
+Choose this value when evidence changes what can now be treated as an actionable warrant. `supports` adds backing. `stabilizes` settles judgement. `reframes` changes the interpretive frame.
 
-### Use another value when
+### Demonstrated case
 
-- Evidence only adds backing. Use `supports`.
-- Evidence is settled into judgement. Use `stabilizes`.
-- The main effect is frame change. Use `reframes`.
-
-### Positive example from existing demo cases
-
-Macbeth Act 1.3 uses `authorizes+reframes`: confirmation of Cawdor gives the
-witches' speech warranting force and reframes kingship as an actionable
-possibility.
-
-### Confusable with
-
-- `supports`
-- `stabilizes`
-- `reframes`
-
-### Decision tip
-
-Use `authorizes` when evidence gains force as warrant for action, legitimacy,
-or uptake.
+- `MAC_1_3`: confirmation of Cawdor authorizes the prophecy and reframes kingship as actionable.
 
 ## `narrows`
 
 ### Definition
 
-Use `narrows` when the mechanism reduces equivocal, conditional, or plural
-possibilities into a more restricted functional use.
+Use `narrows` when the mechanism reduces the range of meanings, possibilities, or practical uses available to the evidence.
 
-### Use when
+### Selection logic
 
-- A conditional prophecy is treated as practical security.
-- An equivocal field is reduced into a narrower action-guiding reading.
-- The function depends on restriction rather than broad reframing alone.
+Choose this value when ambiguity is converted into a restricted operational reading. `qualifies` limits a claim while preserving several possibilities. `reframes` changes the frame. `stabilizes` settles the judgement without necessarily reducing its range.
 
-### Use another value when
+### Demonstrated case
 
-- The evidence is understood through a new frame. Use `reframes`.
-- The function is modified or limited without restricting possibilities. Use
-  `qualifies`.
-- The evidence settles into judgement. Use `stabilizes`.
-
-### Positive example from existing demo cases
-
-Macbeth Act 4.1 uses `reframes+narrows`: Macbeth converts equivocal conditional
-prophecy into practical security.
-
-### Confusable with
-
-- `reframes`
-- `qualifies`
-- `stabilizes`
-
-### Decision tip
-
-Use `narrows` when the main effect is reducing the range of possible meanings
-or uses.
+- `MAC_4_1`: Macbeth narrows equivocal conditions into a usable sense of security.
 
 ## Key Distinctions
 
-### `reframes` vs `narrows`
+### `reframes` and `narrows`
 
-- `reframes`: changes the interpretive frame through which evidence functions.
-- `narrows`: reduces equivocal, conditional, or plural possibilities into a
-  more restricted functional use.
+`reframes` changes the interpretive frame through which evidence functions. `narrows` reduces the available meanings or uses within a frame. Macbeth Act 4.1 combines both because Macbeth treats conditional prophecy as guarantee and restricts equivocation to a practical sense of security.
 
-Counterfactual test: if the passage changes what the evidence is taken to mean,
-use `reframes`. If the passage reduces the range of possible meanings or uses,
-use `narrows`.
+### `supports` and `authorizes`
 
-Macbeth Act 4.1 uses `reframes+narrows` because Macbeth reframes conditional
-prophecy as guarantee and narrows equivocation into practical security.
+`supports` adds evidential backing. `authorizes` gives the evidence standing for action, legitimacy, or uptake. Macbeth Act 1.3 uses `authorizes+reframes` because partial confirmation makes the prophecy usable as warrant and changes kingship into an actionable possibility.
 
-### `supports` vs `authorizes`
+### `stabilizes` and `extends`
 
-- `supports`: adds evidential backing.
-- `authorizes`: makes a function actionable, legitimate, or warranted.
+`stabilizes` settles evidence into a usable judgement. `extends` keeps it active, open, or unresolved. Xiang 7 and Min 1 illustrate stabilization; Xi 4 and Zhuang 22 illustrate extension.
 
-Macbeth Act 1.3 uses `authorizes+reframes` because partial confirmation makes
-the prophecy usable as warrant and changes kingship into an actionable
-possibility.
+### `projects` and `reactivates`
 
-### `stabilizes` vs `extends`
+`projects` gives evidence forward reach from the current moment. `reactivates` returns previously settled or inactive evidence to use. Min 1 and Zhuang 22 illustrate projection. The present corpus contains no primary `reactivates` case.
 
-- `stabilizes`: settles the evidence into a usable judgement.
-- `extends`: keeps the evidence active, open, prolonged, or unresolved across
-  the local sequence.
+### `contradicts` and `suspends`
 
-Use Xiang 7 and Min 1 for stabilization. Use Xi 4 and Zhuang 22 for extension.
+`contradicts` introduces incompatibility. `suspends` prevents closure. Takehiro's posthumous testimony combines both mechanisms.
 
-### `projects` vs `reactivates`
+### `qualifies` and `reframes`
 
-- `projects`: pushes significance forward from the current moment.
-- `reactivates`: brings a previously settled or earlier sign back into
-  functional use.
-
-Use Min 1 and Zhuang 22 for projection. No current demo annotation uses
-`reactivates`.
-
-### `contradicts` vs `suspends`
-
-- `contradicts`: introduces incompatibility.
-- `suspends`: prevents closure.
-
-Takehiro's posthumous testimony uses `contradicts+suspends`.
-
-### `qualifies` vs `reframes`
-
-- `qualifies`: modifies, limits, or complicates a function without fully
-  changing the frame.
-- `reframes`: changes the frame through which evidence becomes functional.
-
-Use Masago for `qualifies` and Tajōmaru for `reframes`.
+`qualifies` modifies or limits a function while preserving its frame. `reframes` changes the frame itself. Masago illustrates qualification; Tajōmaru illustrates reframing.
 
 ## Decision Tree
 
 Use this sequence when selecting the primary mechanism:
 
 1. Does the threshold settle evidence into usable judgement? → `stabilizes`.
-2. Does it keep evidence open or prolonged? → `extends`.
+2. Does it keep evidence active or prolonged? → `extends`.
 3. Does it make evidence actionable or legitimate? → `authorizes`.
 4. Does it change the interpretive frame? → `reframes`.
 5. Does it restrict equivocal possibilities? → `narrows`.
-6. Does it modify or complicate a function? → `qualifies`.
+6. Does it modify or complicate a function while preserving the frame? → `qualifies`.
 7. Does it introduce incompatibility? → `contradicts`.
 8. Does it prevent closure? → `suspends`.
 9. Does it push significance forward? → `projects`.
 10. Does it bring earlier settled evidence back into use? → `reactivates`.
 11. Does one warrant displace another? → `overrides`.
-12. Does it add evidential backing without authorizing action? → `supports`.
+12. Does it add evidential backing without granting action-guiding standing? → `supports`.
 
-This ordering is a coding convention for pilot testing and can be evaluated in
-a future reliability study.
+This ordering is a pilot coding convention. Reliability analysis can evaluate whether coders follow it consistently and whether a different ordering would improve the manual.
+
+## Selection Sequence
+
+When two mechanisms appear plausible, ask:
+
+1. What is the main change between the evidence and the function?
+2. Which value names that change most directly?
+3. Does a second mechanism record a consequential effect that remains necessary to the explanation?
+
+The first value records the primary conversion. The second value records the additional effect. A case that remains genuinely ambiguous should preserve the competing pathway through `alternative_signature` and `uncertainty_flag`.
+
+## Reporting
+
+Report mechanisms together with locus, evidence, support, discourse level, temporality, and uncertainty. Compound-aware analysis should preserve both the selected set and the primary-secondary order.

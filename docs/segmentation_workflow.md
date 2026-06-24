@@ -2,23 +2,16 @@
 
 ## Purpose
 
-TRIM can be used after source passages have been segmented into auditable
-textual units. Source segmentation gives coders and reviewers a stable evidence
-layer before TRIM annotation.
+Source segmentation gives TRIM a stable evidential layer before annotation. It turns passages into auditable textual units that coders and reviewers can cite, compare, and revisit.
 
-## Two-Layer Workflow
+## Two Connected Layers
 
-The source-segment layer and the TRIM annotation layer remain separate:
+The workflow links two forms of structure:
 
-- `source_segments.csv` records source passages, locations,
-  translations/paraphrases, and notes.
-- TRIM annotation records evidence nodes, source-facing evidence anchor,
-  normalized anchor node, `friction_locus`,
-  `rationale_mechanism`, `function_label`, and `rationale_note`.
-- `case_id` links the source-segment layer and the TRIM annotation layer.
-- `segment_id` can be cited inside `evidence_anchor` or `rationale_note`.
+- `source_segments.csv` records passages, locations, translations or paraphrases, and review notes;
+- TRIM annotations record evidence nodes, source-facing evidence anchors, normalized anchor nodes, function labels, and threshold-rationale fields.
 
-This structure supports the workflow:
+`case_id` links the two layers. `segment_id` gives each passage a stable reference that can appear in `evidence_anchor` and `rationale_note`.
 
 ```text
 source passages → auditable segments → TRIM annotation → validation, comparison, graph export
@@ -26,49 +19,43 @@ source passages → auditable segments → TRIM annotation → validation, compa
 
 ## Recommended Fields
 
-- `segment_id`: stable identifier for the source segment.
-- `case_id`: TRIM case identifier linked to the annotation row.
-- `source`: source text or corpus.
-- `language`: source language.
-- `segment_order`: local order within the case.
-- `original_text`: concise source anchor or passage label.
-- `translation_or_paraphrase`: short translation, paraphrase, or content note.
-- `location_note`: source location or testimony section.
-- `segment_note`: brief note about how the segment supports review.
+- `segment_id`: stable identifier for the source segment;
+- `case_id`: TRIM case identifier;
+- `source`: source text or corpus;
+- `language`: source language;
+- `segment_order`: local order within the case;
+- `original_text`: concise source anchor or passage label;
+- `translation_or_paraphrase`: short translation, paraphrase, or content note;
+- `location_note`: source location or testimony section;
+- `segment_note`: brief note supporting review.
 
-## Workflow Steps
+## Workflow
 
-1. Segment source passages.
+1. Segment the source passages.
 2. Assign stable segment IDs.
-3. Create at least one explicit `evidence_nodes` value for each standard TRIM
-   annotation. Evidence nodes may be derived from one or more source segments,
-   but the derivation remains a human coding decision.
-4. Link the source-facing `evidence_anchor` to `segment_id` where useful.
-5. Assign `anchor_node` as a normalized analytic label rather than duplicating
-   the source reference.
+3. Create one or more evidence nodes for each annotation.
+4. Link `evidence_anchor` to the relevant segment IDs.
+5. Assign `anchor_node` as the normalized analytic centre of the selected evidence.
 6. Run `trim validate`.
 7. Run `trim report`.
 8. Run `trim compare`.
 9. Run `trim graph`.
-10. Use linked outputs for review and second-coder work.
+10. Use the linked outputs for review and intercoder analysis.
 
-## Example
+Evidence nodes may draw on one or several source segments. Their construction remains part of the interpretive act, while the segment layer preserves the textual basis from which that act proceeds.
 
-The demonstration source-segment file includes three In a Grove cases:
+## Demonstration
+
+The demonstration file includes three *In a Grove* cases:
 
 | segment_id | case_id | source | segment note |
 | --- | --- | --- | --- |
-| `GROVE_TAJOMARU_01` | `GROVE_TAJOMARU` | In a Grove | Source segment used as evidence anchor for `operation_function / reframes`. |
-| `GROVE_MASAGO_01` | `GROVE_MASAGO` | In a Grove | Source segment used as evidence anchor for `perspective_assignment / qualifies`. |
-| `GROVE_TAKEHIRO_01` | `GROVE_TAKEHIRO` | In a Grove | Source segment used as evidence anchor for `warrant_relation / contradicts+suspends`. |
+| `GROVE_TAJOMARU_01` | `GROVE_TAJOMARU` | In a Grove | Tajōmaru testimony section. |
+| `GROVE_MASAGO_01` | `GROVE_MASAGO` | In a Grove | Masago testimony section. |
+| `GROVE_TAKEHIRO_01` | `GROVE_TAKEHIRO` | In a Grove | Takehiro testimony section. |
 
-The script `examples/run_trim_with_source_segments.py` links these segment IDs
-to the existing demonstration annotations, preserves their explicit evidence
-nodes and normalized anchor nodes, and writes validation, comparison, report,
-and graph outputs.
+`examples/run_trim_with_source_segments.py` links these segments to the demonstration annotations and writes validation, comparison, report, and graph outputs.
 
-## Scope
+## Analytic Role
 
-Source segmentation supports auditability and second-coder review. The TRIM
-validator continues to validate the annotation schema. Interpretive
-adjudication remains part of the human review workflow.
+Segmentation supports auditability, textual return, and intercoder review. Validation checks the annotation schema; scholarly adjudication evaluates the interpretation built from those segments.

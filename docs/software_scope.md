@@ -1,8 +1,6 @@
 # TRIM Software Scope
 
-TRIM supports structured humanistic annotation for Threshold–Rationale
-Interpretive Modelling. It provides a Python schema and supporting utilities for
-human-created annotations of evidence-to-function conversion.
+TRIM provides a Python schema and supporting utilities for structured annotations of evidence-to-function conversion.
 
 ## Supported Workflows
 
@@ -13,31 +11,20 @@ TRIM supports:
 - compound signature validation;
 - friction signature parsing;
 - contested-case documentation;
-- comparison patterns across annotated cases;
-- graph outputs for evidence-to-anchor-to-function structures;
-- pilot-scale intercoder comparison utilities.
+- comparison across annotated cases;
+- graph export for evidence-to-anchor-to-function structures;
+- pilot-scale intercoder analysis.
 
-Standard validated annotations require one or more evidence nodes, a
-source-facing `evidence_anchor`, and a distinct normalized `anchor_node`. Graph
-construction rejects records that omit these components rather than silently
-falling back to an anchor-only model.
+A standard annotation contains one or more evidence nodes, a source-facing `evidence_anchor`, and a normalized `anchor_node`. These fields preserve both textual location and analytic organization. Graph construction uses the full pathway.
 
-## Human Review Workflow
+## Review Workflow
 
-The validator checks whether annotation records conform to the coding schema.
-Interpretive judgement is handled through human scholarly review. Contested
-thresholds can be recorded through `alternative_signature` and documented in
-`rationale_note`, making the annotation reviewable across cases and coders.
+Validation checks the formal integrity of each record. Scholarly review evaluates the interpretation. `alternative_signature` and `rationale_note` preserve competing pathways and keep their evidential basis available for comparison and adjudication.
 
-TRIM does not objectively detect friction, infer a coder's hidden cognitive
-process, or generate substantive interpretations. It structures selected
-human-created judgements and checks their form.
+The package structures selected scholarly judgements and checks their form. Function labels, substantive interpretation, and final adjudication remain part of the research process.
 
-## Current Package Scope
+## Current Scope
 
-Source version 0.2.0 remains unreleased and supports proof-of-concept
-demonstration and pilot infrastructure.
-The ten-case corpus shows how controlled signatures, comparison tables, graph
-exports, and contested-case records work together. The three-case second-coder
-workflow demonstrates software preparation. Neither establishes general
-intercoder reliability.
+Source version 0.2.0 supports proof-of-concept demonstration and pilot infrastructure. The ten-case corpus establishes schema expressivity, traceable comparison, and graph-based representation. The blinded materials establish pilot readiness through a protocol, source packet, neutral manifest, and blank coding template.
+
+Independent coding and out-of-sample testing form the next empirical stages.

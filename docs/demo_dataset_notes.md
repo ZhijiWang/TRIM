@@ -1,37 +1,26 @@
 # Demonstration Dataset Notes
 
-The TRIM demonstration dataset is a method demonstration corpus with ten
-annotations. It is designed to show how the schema, controlled vocabulary,
-comparison utilities, graph export, and contested-threshold workflow operate
-together.
+The TRIM demonstration dataset is a ten-case method corpus showing how the schema, controlled vocabulary, comparison utilities, graph export, and contested-threshold workflow operate together.
 
 ## Dataset Composition
 
-The dataset contains:
+The corpus contains:
 
-- four Zuo zhuan divination cases;
-- three Macbeth prophecy cases;
-- three In a Grove testimony cases.
+- four *Zuo zhuan* divination cases;
+- three *Macbeth* prophecy cases;
+- three *In a Grove* testimony cases.
 
-Each row represents one TRIM annotation with human-selected evidence nodes,
-anchor node, threshold-rationale signature, function label, rationale note, and
-coder metadata.
+Each row records human-selected evidence nodes, an anchor node, a threshold-rationale signature, a function label, a rationale note, and coder metadata.
 
 ## Demonstration Patterns
 
-The dataset supports the following comparison patterns:
+The corpus supports four comparison patterns:
 
-- same function / different signature;
-- same cue / different function;
-- broad testimonial form / different signature;
-- contested dominant threshold review.
+- shared function with different signatures;
+- shared cue with different functions;
+- shared broad form with different signatures;
+- contested dominant-threshold review.
 
-The dataset is a compact demonstration set rather than a full corpus. It is
-intended for method illustration, software testing, and reproducible examples.
-It establishes neither domain-general reliability nor universal
-reproducibility.
+These patterns establish schema expressivity, workflow traceability, and comparative payoff. Software-generated tables locate structural relations through `comparison_prompt`. Researcher-authored interpretations appear in [`substantive_demo_interpretations.md`](substantive_demo_interpretations.md).
 
-Software-generated comparison tables identify structural patterns and provide
-`comparison_prompt` text. Researcher-authored worked interpretations of the two
-same-function groups are documented in
-[`substantive_demo_interpretations.md`](substantive_demo_interpretations.md).
+Independent coding and larger out-of-sample work form the next empirical stages.

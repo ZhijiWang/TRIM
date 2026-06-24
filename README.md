@@ -7,52 +7,51 @@
 TRIM structures the warranted conversion from textual evidence to interpretive
 function as a locatable, reviewable, and comparable annotation pathway.
 
-Current source version: 0.2.0 (unreleased). No formal GitHub Release has been published.
+Current source version: 0.2.0 (unreleased).
 
-## What TRIM Annotates
+## Core Model
 
 ```text
 Evidence nodes → anchor node → threshold–rationale relation → function node
 ```
 
-Human coders select the evidence, anchor, function label, and rationale. The
-main friction signature records:
+A TRIM annotation records a human interpretive judgement in six connected
+fields:
 
-- `friction_locus`;
-- `rationale_mechanism`;
-- `epistemic_support`;
-- `discourse_level`;
-- `temporal_orientation`;
-- `uncertainty_flag`.
+- `friction_locus` locates the dominant threshold;
+- `rationale_mechanism` records what the conversion does;
+- `epistemic_support` identifies the support that carries the judgement;
+- `discourse_level` places the conversion within the text's discursive structure;
+- `temporal_orientation` records its temporal direction;
+- `uncertainty_flag` marks the coder's level of confidence.
 
-Annotations may also include `alternative_signature` and `rationale_note` for
-contested-threshold review.
+`alternative_signature` and `rationale_note` preserve competing pathways and the
+reasoning that keeps them in view.
 
-Standard TRIM annotations require:
+Standard annotations also include:
 
-- at least one non-empty `evidence_nodes` value;
-- `evidence_anchor`, a source-facing textual span, quotation, or segment
-  reference;
-- `anchor_node`, a normalized analytic label around which the evidence is
-  organized.
+- one or more `evidence_nodes`;
+- `evidence_anchor`, which returns the record to a source-facing span, quotation,
+  or segment reference;
+- `anchor_node`, which gives that evidence a normalized analytic centre.
 
-The two anchor fields are intentionally distinct and are not interchangeable.
+Interpretive friction emerges where textual evidence, analytic function, and
+warranting support meet. TRIM turns that point of pressure into an explicit
+comparative object.
 
-Interpretive friction is relational: it is a locatable difficulty in the
-warranted conversion from evidence to function under an explicit interpretive
-scheme, not a context-free property automatically detected in a text.
+## Software Workflow
 
-## What the Software Does
+The package:
 
 - validates required fields, controlled values, and compound signatures;
 - parses and compares friction signatures;
 - generates same-function, same-cue, broad-family, and contested-case tables;
 - exports evidence-to-function graphs as GraphML and JSON;
-- supports optional source segmentation;
-- provides raw and compound-aware intercoder comparison utilities.
+- supports source segmentation;
+- prepares pilot-scale intercoder comparison and disagreement reports.
 
-The software does not choose function labels, adjudicate interpretations,
-generate literary claims, or capture a coder's full reasoning process.
+Human coders define the evidence, function, and rationale. The software preserves
+those choices in a form that can be checked, compared, and revisited.
 
 ## Installation and Quick Start
 
@@ -65,7 +64,7 @@ python -m pytest
 python examples/demo_trim_workflow.py
 ```
 
-Install optional Cohen's kappa support with:
+Install Cohen's kappa support with:
 
 ```bash
 python -m pip install -e ".[reliability]"
@@ -80,41 +79,45 @@ trim graph data/demo_annotations.csv --graphml outputs/graphs/demo.graphml --jso
 trim compare data/demo_annotations.csv --outdir outputs/tables
 ```
 
-`trim validate` writes its CSV report before returning. It exits with status 1
-when validation errors are present and status 0 for valid or warnings-only
-input. Use `--always-zero` only when a reporting pipeline must not stop on
-validation errors.
+`trim validate` writes its CSV report before returning. Validation errors produce
+status 1; valid and warnings-only input produce status 0. `--always-zero` supports
+reporting pipelines that handle status outside the command.
 
-## Demonstration and Validation Status
+## Demonstration Corpus
 
-The ten-case demonstration corpus contains four Zuo zhuan divination cases,
-three Macbeth prophecy cases, and three In a Grove testimony cases. It
-demonstrates schema expressivity, traceable comparison, graph export, and one
-contested threshold.
+The ten-case corpus brings together:
 
-Generated comparison tables provide structural `comparison_prompt` text only.
-Researcher-authored worked interpretations are kept separately in
+- four *Zuo zhuan* divination cases;
+- three *Macbeth* prophecy cases;
+- three *In a Grove* testimony cases.
+
+It demonstrates schema expressivity, traceable comparison, graph export, and
+contested-threshold review. Generated tables provide structural
+`comparison_prompt` text. Researcher-authored interpretations appear in
 [`docs/substantive_demo_interpretations.md`](docs/substantive_demo_interpretations.md).
 
-The repository also includes:
+The repository also contains:
 
-- a three-case software/onboarding demonstration for second-coder workflow;
-- a ten-case template scaffold that requires a separate blinded source packet
-  before use in a preliminary usability pilot;
-- intercoder agreement and disagreement utilities.
+- a three-case software and onboarding demonstration;
+- a complete ten-case blinded pilot protocol;
+- a neutral case manifest;
+- a blank second-coder template;
+- a source packet for independent coding;
+- field-level and compound-aware agreement utilities;
+- a cross-language construct-validity protocol and
+  [companion template](data/cross_language_validity_template.csv).
 
-These materials can test manual usability, field boundaries, and workflow
-operation. They do not establish domain-general reliability, stable
-population-level agreement, or universal reproducibility.
+These materials establish a proof of concept and a fully specified validation
+infrastructure. Independent second-coder execution forms the next empirical
+stage.
 
-## Methodological Position
+## Methodological Contribution
 
-TRIM does not claim as novel the general observation that label agreement can
-coexist with explanatory disagreement. It does not primarily classify
-free-text explanations by linguistic reasoning type, and it is not an LLM
-chain-of-thought or hidden-cognition system. Its contribution is the combined
-evidence, anchor, conversion, support, discourse, temporal, uncertainty, and
-alternative-path structure for reviewable human scholarly interpretation.
+TRIM contributes a structured account of how scholarly interpretation moves
+from evidence to function. Its analytic object combines evidence, anchor,
+conversion, support, discourse position, temporality, uncertainty, and viable
+alternatives. This structure makes within-label variation, cross-case
+convergence, and divergent conversion pathways available to direct comparison.
 
 See [`docs/related_methods.md`](docs/related_methods.md) and
 [`docs/methodological_position.md`](docs/methodological_position.md).
@@ -129,6 +132,9 @@ See [`docs/related_methods.md`](docs/related_methods.md) and
 - [`docs/segmentation_workflow.md`](docs/segmentation_workflow.md)
 - [`docs/second_coder_onboarding.md`](docs/second_coder_onboarding.md)
 - [`docs/intercoder_workflow.md`](docs/intercoder_workflow.md)
+- [`docs/blinded_pilot_protocol.md`](docs/blinded_pilot_protocol.md)
+- [`docs/cross_language_validity.md`](docs/cross_language_validity.md)
+- [`data/cross_language_validity_template.csv`](data/cross_language_validity_template.csv)
 - [`docs/software_scope.md`](docs/software_scope.md)
 - [`docs/schema_validation_migration.md`](docs/schema_validation_migration.md)
 - [`docs/article_use.md`](docs/article_use.md)
@@ -136,6 +142,6 @@ See [`docs/related_methods.md`](docs/related_methods.md) and
 
 ## Citing and License
 
-Citation metadata is provided in [`CITATION.cff`](CITATION.cff). Until a formal
-release exists, cite the exact commit used. TRIM is licensed under the MIT
-License; see [`LICENSE`](LICENSE).
+Citation metadata is provided in [`CITATION.cff`](CITATION.cff). Before a formal
+release, cite the exact commit used together with the repository URL. TRIM is
+licensed under the MIT License; see [`LICENSE`](LICENSE).
