@@ -1,10 +1,10 @@
 # TRIM Article Working Notes
 
-## Status
+## Status and purpose
 
-This is a paper-development document, not a normative method specification. It records the current novelty audit, the closest prior work, the pilot decision rules, and the ablation design that will determine the eventual scale of the article’s contribution.
+This is the single authoritative paper-development note for the TRIM article. It does not modify the TRIM schema, codebook, controlled vocabularies, pilot materials, or software. It records the current novelty audit, evidence status, ablation design, pilot decision rules, and demonstration-corpus strategy.
 
-Do not use this file to revise the TRIM schema before the independent pilot. The validation object must remain stable until pilot results are available.
+Do not revise the validation object before the independent pilot. The next schema decision must follow observed evidence.
 
 ## Current central claim under test
 
@@ -25,7 +25,7 @@ The pathway records:
 - which viable competing pathway remains available (`alternative_signature`);
 - and the prose rationale and source-facing evidence that make the record reviewable.
 
-This claim remains provisional. It survives only if the pilot shows that the structured fields provide information that cannot be recovered adequately from a simpler source-span, function-label, and free-text-memo workflow.
+This claim remains provisional. It survives only if the pilot shows that the structured fields provide information that cannot be recovered adequately from a simpler source-span, function-label, and free-text-memo workflow without substantial secondary recoding.
 
 ## Claims already abandoned
 
@@ -43,97 +43,97 @@ The article must not claim that TRIM is:
 
 TRIM records accountable scholarly commitments: the reasons a coder is prepared to state, defend, compare, and revise. It does not provide psychological ground truth.
 
-# 1. Closest prior work
+# 1. Mandatory closest prior work
 
 ## 1.1 LiTEx and within-label explanation variation
 
-### Established prior contribution
+LiTEx and related work already establish that:
 
-The LiTEx line of work already turns free-text explanations into a controlled, reliability-tested taxonomy and studies variation concealed by shared outcome labels. It therefore directly occupies the territory of:
+- shared outcome labels can conceal different reasoning;
+- similar or identical evidence spans may be selected for different reasons;
+- free-text rationales can be converted into controlled categories;
+- and rationale categories can be reliability-tested.
 
-- same label, different reasons;
-- same or similar evidence spans selected for different reasons;
-- rationale categorization;
-- rationale-level agreement;
-- and systematic analysis of within-label variation.
+TRIM cannot claim novelty for any of those results.
 
-### Consequence for TRIM
+Its candidate difference is not simply that it uses more fields. The paper must show that the fields form an interpretable conversion structure rather than a larger collection of independent rationale categories.
 
-TRIM cannot present within-label reasoning variation as a discovery. Its remaining distinction is that it represents a coordinated, multidimensional conversion pathway for humanities interpretation rather than assigning one or more explanation-strategy categories to benchmark rationales.
+The pilot must therefore ask whether the joint signature reveals stable relations among locus, mechanism, support, discourse, temporality, uncertainty, and alternatives.
 
-### Question the pilot must answer
+Before submission, verify all bibliographic metadata, taxonomy sizes, percentages, task details, and reliability statistics from primary ACL or publisher records.
 
-Does the joint signature reveal stable relations among locus, mechanism, support, discourse, temporality, uncertainty, and alternatives, or is it merely a larger collection of independent rationale categories?
+## 1.2 Gius and Jacke / CATMA
 
-### Bibliographic verification required
-
-Before submission, replace working references with checked ACL Anthology or publisher records and verify all reported percentages, taxonomy sizes, task details, and reliability statistics from the papers themselves.
-
-## 1.2 Gius and Jacke, CATMA, and hermeneutic annotation disagreement
-
-### Established prior contribution
-
-Digital-hermeneutic annotation has already argued that disagreement can be epistemically productive rather than merely erroneous. Gius and Jacke’s work is especially close because it asks when annotation disagreement reflects:
+Gius and Jacke’s work on the hermeneutic profit of annotation is a mandatory humanities-side comparison. Their discussion distinguishes four recurrent sources of annotation disagreement:
 
 - misreading;
-- inadequate category definition;
-- dependence on prior analysis;
-- textual ambiguity or polysemy;
-- and legitimate interpretive plurality.
+- inadequate category definitions;
+- categories dependent on prior interpretive analysis;
+- textual ambiguity or polysemy.
 
-CATMA and related work already support source-linked, overlapping, contradictory, collaborative, and theory-guided humanities annotation.
+Broader questions of legitimate interpretive plurality are a consequence and interpretive implication of this discussion, not a fifth category to be attributed to the authors.
 
-### Consequence for TRIM
+CATMA and related digital-hermeneutic workflows already support source-linked, overlapping, contradictory, collaborative, theory-guided, and meta-annotated interpretation.
 
-TRIM cannot claim that it first preserves plurality or makes literary disagreement inspectable. The more specific distinction is prospective and record-internal: each coder identifies the dominant pressure point within the evidence-to-function conversion before comparison with another coder.
+TRIM therefore must concede that:
 
-### Question the pilot must answer
+- productive disagreement in humanities annotation is not new;
+- inspectable interpretive plurality is not new;
+- source-linked collaborative literary annotation is not new;
+- and annotation rationale or meta-annotation is not new.
 
-Does prospective `friction_locus` coding produce useful information beyond post hoc classification of disagreement sources?
+TRIM’s remaining distinction is narrower:
 
-### Bibliographic verification required
+> `friction_locus` is assigned prospectively within each independent record, before any observed coder disagreement, to identify the dominant pressure point in a source-anchored evidence-to-project-defined-function conversion.
 
-Verify the exact four-part disagreement classification, article title, venue, pagination, CATMA version context, and the relation to SANTA or other shared-task materials from primary sources.
+This difference must be established empirically rather than asserted conceptually.
 
-## 1.3 Walton-style critical questions and defeasible argumentation
+Verify the exact article title, venue, pagination, CATMA version context, and the relation to SANTA or other shared-task materials from primary sources before article drafting.
 
-### Established prior contribution
+## 1.3 Walton critical questions and defeasible argumentation
 
-Argument schemes already associate inference patterns with critical questions that identify assumptions or conditions under which a premise-to-claim move may be challenged. Toulmin-style modelling and AIF also provide explicit evidence, warrant, qualifier, rebuttal, support, conflict, and alternative-path structures.
+Walton-style argument schemes and their critical questions are the strongest formal analogue for `friction_locus`. Critical questions identify assumptions or points at which a premise-to-claim inference may be challenged. Toulmin-style modelling and AIF also provide explicit evidence, warrant, qualifier, rebuttal, support, conflict, and alternative-path structures.
 
-### Consequence for TRIM
+TRIM must therefore concede that locating contestable points in a reasoning route is not new.
 
-`friction_locus` is not a new discovery of contestability. Its candidate contribution is an operational migration:
+The defensible migration claim is:
 
-> a prospective, single-coder, record-internal field locating the dominant interpretive pressure in a source-anchored evidence-to-project-defined-function conversion.
+> TRIM adapts the intuition of scheme-specific contestability into a prospective, single-coder, record-internal field for non-propositional humanities evidence-to-function assignments.
 
-The target is not necessarily a proposition, the source need not be an argument, and the function may be narratological, historiographical, ethical, testimonial, mantic, or reception-oriented.
+The difference lies in the conjunction of:
 
-### Question the pilot must answer
+- non-propositional source material;
+- project-defined interpretive functions;
+- prospective coding;
+- single-record applicability;
+- controlled cross-case comparison;
+- and later evaluation against disagreement and adjudication.
 
-Does `friction_locus` behave as a coherent field across non-propositional humanities cases, and does it localize later adjudication difficulty?
+Identify the most relevant Walton sources and distinguish critical questions from undercutting defeaters, rhetorical stasis, ambiguity taxonomies, and general disagreement-source classifications.
 
-### Bibliographic verification required
+## 1.4 Sources-of-disagreement and ambiguity-locus taxonomies
 
-Identify the most relevant Walton sources on argument schemes and critical questions, and distinguish critical questions from undercutting defeaters, stasis, ambiguity taxonomies, and general disagreement-source classifications.
+Annotation-disagreement research already classifies disagreement sources such as:
 
-## 1.4 Expert rationale disagreement
+- genuine ambiguity;
+- narrative uncertainty;
+- annotator assumptions;
+- task framing;
+- insufficient context;
+- category-definition problems;
+- and multiple legitimate readings.
 
-### Established prior contribution
+This literature directly threatens any claim that TRIM first identifies where interpretation becomes difficult.
+
+TRIM’s narrower distinction is that `friction_locus` is not merely a post hoc explanation of observed disagreement. It is a prospective field attached to each annotation before coder comparison.
+
+## 1.5 Expert rationale disagreement
 
 Expert-annotation research has already built taxonomies of disagreement in specialist rationales, including legal interpretation. TRIM therefore cannot defend itself by contrasting expert humanities judgement with lay or crowdsourced annotation alone.
 
-### Remaining distinction
+Its remaining distinction is prospective: the conversion structure is recorded within every independent annotation rather than only diagnosed after two experts diverge.
 
-TRIM structures the conversion prospectively within every record rather than only diagnosing divergence after two experts disagree.
-
-### Question the pilot must answer
-
-Do independently completed signatures reveal systematic structure even where coders agree on the final function label?
-
-## 1.5 Qualitative codebook plus memo
-
-### Established prior contribution
+## 1.6 Qualitative codebook plus memo
 
 A conventional CAQDAS workflow can already preserve:
 
@@ -148,21 +148,13 @@ A conventional CAQDAS workflow can already preserve:
 
 This is the strongest practical baseline because it is cheaper and familiar to humanities and qualitative researchers.
 
-### Central substitution challenge
-
 A sceptical reviewer can compress TRIM to:
 
 > an elaborate qualitative codebook with auxiliary fields and a graph export.
 
-TRIM survives only if its field structure yields comparative results that a free-text memo workflow cannot produce without a substantial second round of manual recoding.
+TRIM survives only if its field structure yields comparative results that a free-text memo workflow cannot produce directly without a substantial second round of manual recoding.
 
-### Question the pilot must answer
-
-Can the full signature localize disagreement, support field-level reliability, reveal cross-case clusters, or predict adjudication difficulty beyond span + function + memo?
-
-## 1.6 CATMA, annotation graphs, provenance, CRMinf, and nanopublications
-
-### Established prior contribution
+## 1.7 CATMA, annotation graphs, provenance, CRMinf, and nanopublications
 
 These infrastructures already provide various combinations of:
 
@@ -174,37 +166,21 @@ These infrastructures already provide various combinations of:
 - agent and activity attribution;
 - queryability;
 - interoperability;
-- atomic scholarly claims.
-
-### Consequence for TRIM
+- and atomic scholarly claims.
 
 TRIM should not be presented as an alternative to general annotation or provenance standards. It is better described as a lightweight, task-specific interpretive annotation profile that could be implemented in CATMA or mapped onto broader provenance and knowledge-representation models.
 
-### Remaining distinction
-
 The candidate contribution is the domain-specific internal structure of the interpretive conversion record, not its storage or serialization technology.
 
-## 1.7 Narrative and drama annotation
-
-### Established prior contribution
+## 1.8 Narrative and drama annotation
 
 Story Workbench, DramaBank, SIG, Drammar, and related projects already operationalize high-level narrative theory into structured, graphable, reliability-tested annotations of events, intentions, goals, agency, affect, temporal relations, and narrative structure.
 
-### Consequence for TRIM
-
 Theory-driven humanities annotation is not new. TRIM’s object must remain at a different level: not the narrative-world structure alone, but the scholarly warranting route through which textual evidence is assigned a project-defined function.
 
-### Question the pilot and demonstrations must answer
-
-Can two cases share a narrative or interpretive function while showing consequentially different conversion signatures?
-
-## 1.8 RST and discourse-relation annotation
-
-### Established prior contribution
+## 1.9 RST and discourse-relation annotation
 
 RST and related frameworks already model functional relations among text spans and support systematic, controlled, and graph-based discourse analysis.
-
-### Consequence for TRIM
 
 The distinction cannot be “function versus no function.” It must be:
 
@@ -212,11 +188,49 @@ The distinction cannot be “function versus no function.” It must be:
 - textual coherence structure versus accountable scholarly function assignment;
 - relation classification versus conversion-path modelling.
 
-### Required demonstration
-
 The article should include at least one example where discourse annotation can represent the source relation but does not capture the project-specific interpretive conversion or its dominant pressure point.
 
-# 2. `friction_locus` claim boundary
+# 2. Current evidence status
+
+## 2.1 What the repository currently demonstrates
+
+The current repository demonstrates:
+
+- schema expressivity;
+- software correctness;
+- source anchoring;
+- graph and table generation;
+- author-constructed same-function/different-signature examples;
+- contested-case representation;
+- pilot-ready documentation;
+- and a fully specified independent-coding workflow.
+
+## 2.2 What the repository does not yet demonstrate
+
+The current repository does not yet demonstrate:
+
+- independent field-level reliability;
+- independent reproduction of same-function/different-route distinctions;
+- added value over span + function + memo;
+- stable signature topology across coders;
+- prospective prediction of adjudication difficulty;
+- or cross-language construct validity.
+
+The current intercoder demonstration contains no paired independent rows for `friction_locus` or `rationale_mechanism`. Therefore it is a workflow demonstration, not reliability evidence.
+
+## 2.3 Correct evidence-level statement
+
+The article must distinguish:
+
+> **Expressivity demonstrated:** the schema can represent multiple conversion pathways.
+
+from:
+
+> **Independent validity not yet demonstrated:** the pilot has not yet shown that another coder can reproduce, distinguish, or use those pathways in a non-arbitrary way.
+
+Author-constructed examples can establish possibility and intelligibility. They cannot establish reproducibility or necessity.
+
+# 3. `friction_locus` claim boundary
 
 ## What it is not
 
@@ -242,20 +256,9 @@ Its candidate distinctiveness lies in the conjunction of five properties:
 4. encoded as a controlled cross-case field;
 5. evaluated through later comparison and adjudication.
 
-## Conditions for retaining it as a central contribution
+If the pilot does not show reliable, diagnostic, relational, or predictive value, `friction_locus` should be downgraded from central contribution to optional diagnostic field.
 
-At least one of the following should be observed in the pilot:
-
-- locus agreement differs meaningfully from function agreement;
-- locus disagreement localizes adjudication to identifiable conversion stages;
-- some locus values are associated with higher uncertainty or alternative-signature use;
-- some locus values predict disagreement or adjudication difficulty;
-- original/gloss pairs preserve function while relocating locus;
-- locus-mechanism combinations form interpretable cross-case clusters.
-
-If none occurs, `friction_locus` should be downgraded from central contribution to optional diagnostic field.
-
-# 3. Ablation design
+# 4. Ablation design
 
 ## Baseline A: outcome only
 
@@ -263,18 +266,7 @@ If none occurs, `friction_locus` should be downgraded from central contribution 
 source span + function label
 ```
 
-Captures:
-
-- evidence location;
-- final analytic assignment;
-- function-level agreement.
-
-Cannot directly capture:
-
-- reasons;
-- disagreement source;
-- alternative pathway;
-- field-level reliability.
+This captures evidence location, final analytic assignment, and function-level agreement, but not reasons, disagreement source, alternative pathway, or field-level reliability.
 
 ## Baseline B: conventional interpretive record
 
@@ -282,15 +274,7 @@ Cannot directly capture:
 source span + function label + free-text rationale memo + confidence
 ```
 
-Captures:
-
-- evidence;
-- final assignment;
-- prose reasoning;
-- broad confidence;
-- reviewable qualitative interpretation.
-
-Can recover structured distinctions only through later manual memo coding.
+This captures evidence, assignment, prose reasoning, broad confidence, and reviewable qualitative interpretation. Structured distinctions can be recovered only through later manual memo coding.
 
 ## Full TRIM
 
@@ -298,7 +282,7 @@ Can recover structured distinctions only through later manual memo coding.
 source span + function label + structured conversion signature + rationale memo
 ```
 
-Candidate additional value:
+Candidate additional value includes:
 
 - field-level agreement;
 - prospective disagreement localization;
@@ -306,194 +290,200 @@ Candidate additional value:
 - compound pathway comparison;
 - alternative-signature analysis;
 - original/gloss relocation analysis;
-- prediction or diagnosis of adjudication difficulty.
-
-## Required comparison
+- and prediction or diagnosis of adjudication difficulty.
 
 The paper should not merely assert that Full TRIM is richer. It should compare what each design permits researchers to observe and report.
 
-### Minimum ablation outputs
+Minimum ablation outputs:
 
-1. Function agreement under all three representations.
-2. Whether same-function cases split into distinct signature patterns.
-3. Whether memo review independently recovers the same distinctions as the structured fields.
-4. Time or labour required to recover structured patterns from memos.
-5. Field-level agreement and confusion pairs.
-6. Association between uncertainty, alternative signature, and adjudication.
-7. Original/gloss function alignment versus signature alignment.
+1. function agreement under all three representations;
+2. whether same-function cases split into distinct signature patterns;
+3. whether memo review independently recovers the same distinctions as the structured fields;
+4. time or labour required to recover structured patterns from memos;
+5. field-level agreement and confusion pairs;
+6. association between uncertainty, alternative signature, and adjudication;
+7. original/gloss function alignment versus signature alignment.
 
-# 4. Pilot decision rules
+# 5. Pilot success and failure conditions
 
-The pilot is not merely a check that a second coder can fill the form. It determines what article can honestly be written.
+Field-level differential reliability is the most direct success condition, but it is not the only result that could justify the full model.
 
-## Decision line 1: differential field reliability
+TRIM passes the deletion test if the pilot produces at least one independently reviewable structural result that is not available directly from span + function + memo without substantial secondary recoding.
 
-### Evidence that supports the full model
+## 5.1 Differential field reliability
 
-- high or moderate function agreement;
-- non-uniform agreement across signature fields;
-- disagreement concentrated in theoretically intelligible fields;
-- confusion pairs that correspond to known boundary distinctions;
-- stable coder use of alternatives and uncertainty.
+Examples:
 
-### Evidence against the full model
+- function agreement is high while mechanism agreement is lower but structured;
+- locus agreement differs meaningfully from function agreement;
+- disagreement concentrates in theoretically intelligible confusion pairs;
+- uncertainty and alternative-signature use are stable enough to interpret.
 
-- uniformly low field agreement;
-- arbitrary field use;
-- systematic coder collapse of multiple fields into the memo;
-- inability to distinguish locus from mechanism;
-- agreement achieved only through extensive author coaching.
+## 5.2 Stable signature topology
 
-## Decision line 2: queryable cross-case patterns
+The full signature may form interpretable recurring structures, for example:
 
-### Evidence that supports the full model
+```text
+warrant_attribution + authorizes + retrospective
 
-At least one pattern should emerge that is difficult to identify from outcome labels alone, such as:
+temporal_layering + reframes + retrospective
 
-- same function, different locus clusters;
-- same locus, different mechanism clusters;
-- same mechanism, different epistemic support;
-- tradition- or genre-linked signature patterns;
-- contested cases concentrated in specific locus-mechanism combinations;
-- cross-language function alignment with threshold relocation.
+perspective_assignment + qualifies + retrospective
+```
 
-### Evidence against the full model
+Evidence for topology would include:
 
-- signatures merely restate the memo;
-- every case is effectively unique;
-- no cross-case pattern survives close reading;
-- field combinations do not add interpretive meaning.
+- recurring locus-mechanism-support combinations;
+- clusters that survive close reading;
+- genre- or tradition-linked pathway structures;
+- same-function cases dividing into stable route families;
+- or partially shared routes beneath different function labels.
 
-## Decision line 3: adjudication difficulty
+Merely having more coded variables is insufficient. The joint structure must add interpretable value.
 
-### Candidate indicators
+## 5.3 Cross-language relocation
 
-Test whether the following are associated with later adjudication:
+A strong result occurs when original and gloss layers agree at function level but differ systematically in:
 
-- low initial uncertainty confidence;
-- presence of `alternative_signature`;
+- `friction_locus`;
+- `rationale_mechanism`;
+- epistemic support;
+- temporal orientation;
+- or alternative pathway.
+
+This would show that outcome-label equivalence can conceal translation-mediated construct movement.
+
+## 5.4 Prospective adjudication prediction or localization
+
+Candidate predictors include:
+
 - particular `friction_locus` values;
+- initial uncertainty;
+- presence of `alternative_signature`;
 - compound mechanisms;
 - original/gloss divergence;
-- long or highly qualified rationale notes.
+- and unusually qualified rationale notes.
 
-### Strongest possible result
+The strongest result would show that these fields predict or localize later adjudication difficulty beyond the function label.
 
-`friction_locus` or specific signature structures predict which cases require adjudication even after accounting for function label.
+## 5.5 Partial-route convergence under function disagreement
 
-### Weak result
+Two coders may assign different final functions while agreeing on part of the conversion pathway, such as:
 
-Fields explain disagreement after the fact but do not predict or localize it prospectively.
+- same locus, different function;
+- same mechanism, different function;
+- shared epistemic support but different temporal interpretation.
 
-## Decision line 4: cross-language construct validity
+This can reveal common interpretive structure hidden by outcome-level disagreement.
 
-Classify original/gloss pairs into:
+## 5.6 Failure condition
 
-- function and signature aligned;
-- function aligned, locus or mechanism shifted;
-- source friction softened in gloss;
-- friction introduced by gloss;
-- function itself changed;
-- unresolved due to source-language interpretation.
+The full model fails the deletion test if:
 
-The most informative result is function-level agreement with signature-level relocation, because it demonstrates variation hidden by the outcome label.
+- fields merely restate the memo;
+- coders cannot distinguish locus from mechanism;
+- each case produces an idiosyncratic signature with no cross-case value;
+- independent coding requires extensive author coaching;
+- structured outputs add no interpretable information;
+- or all findings can be recovered easily from the simpler memo baseline.
 
-# 5. Pilot result typology
+# 6. Demonstration-corpus strategy
 
-## Type 1: full convergence
+The three traditions should not be treated as interchangeable examples. Each carries a distinct burden in the methods argument.
 
-Function, source span, and signature agree.
+## 6.1 *In a Grove*: intuitive route variation
 
-Interpretation:
+*In a Grove* provides the most accessible demonstration of:
 
-- evidence of usability and reproducibility;
-- not by itself proof that all fields are necessary.
+- one event represented through multiple testimonies;
+- broad functional convergence with different warranting routes;
+- contradiction, qualification, suspension, and reframing;
+- and same-cue or same-event comparison.
 
-## Type 2: same function, different route
+Because it naturally concerns perspective and explanation variation, it can be compressed into a literary version of within-label variation and placed directly beside LiTEx or disagreement taxonomies. Use it to make route variation intuitive, but do not let it carry the whole novelty claim.
 
-Function agrees, but locus, mechanism, support, temporality, or alternative pathway differs.
+## 6.2 *Zuo zhuan*: non-propositional, project-defined conversion
 
-Interpretation:
+The *Zuo zhuan* cases provide the strongest evidence that TRIM extends beyond benchmark rationale categorization and proposition-centred argument mapping.
 
-- strongest evidence for TRIM’s core argument;
-- requires close case analysis to establish that the difference is substantive rather than coder noise.
+They involve:
 
-## Type 3: different function, partially shared route
+- divinatory results;
+- ritual sequence;
+- omen interpretation;
+- ranked warrants;
+- retrospective fulfilment;
+- recalled signs;
+- projected lineage consequence;
+- and narrative uptake.
 
-Function differs, but part of the signature converges.
+The source material is not simply a premise supporting a claim. The target function is also not necessarily a proposition asserted in the text. It is a project-defined historiographical or narrative function assigned through scholarly interpretation.
 
-Interpretation:
+At least one *Zuo zhuan* comparison must show why evidence-to-function conversion cannot be reduced adequately to discourse relation, argument scheme, or rationale category alone.
 
-- may show shared interpretive pressure beneath divergent outcomes;
-- potentially important for adjudication and theory revision.
+## 6.3 *Macbeth*: temporal and retrospective conversion
 
-## Type 4: original/gloss relocation
+The current demonstration dataset already contains three fully populated *Macbeth* annotations:
 
-Function agrees across layers, but dominant locus or mechanism changes.
+- `MAC_1_3`, coded as prospective and centred on partial confirmation, authorization, and reframing;
+- `MAC_4_1`, coded as prospective-retrospective and centred on Macbeth’s narrowing of equivocal prophecy into false security;
+- `MAC_5_8`, coded as retrospective and centred on later fulfilment reclassifying earlier assurance as an equivocal trap.
 
-Interpretation:
+The *Macbeth* cases therefore do not exist only as a future plan. They already provide demonstration material for:
 
-- strongest cross-language construct-validity result;
-- shows why function-level equivalence is insufficient.
+- authorization;
+- equivocal narrowing;
+- retrospective reframing;
+- fulfilment changing the force of earlier evidence;
+- and temporally distributed conversion.
 
-## Type 5: schema failure
+Their current evidential status is still author-constructed demonstration, not independent validation.
 
-Coders cannot distinguish fields, fields are redundant, or the signature adds no cross-case information.
+Use *Macbeth* to demonstrate why temporal orientation and mechanism may matter when the same prophetic material changes force across narrative time.
 
-Interpretation:
+## 6.4 Combined logic
 
-- simplify or ablate the model;
-- do not protect fields merely because they required substantial development.
+The corpus supports a three-part methods demonstration:
 
-# 6. Article-scale outcomes
+- *In a Grove* makes route variation legible;
+- *Zuo zhuan* establishes non-propositional and project-defined conversion;
+- *Macbeth* establishes temporally distributed and retrospective conversion.
+
+No single corpus component should be asked to prove the entire method.
+
+# 7. Article-scale outcomes
 
 ## Outcome A: full TRIM article
 
-Use only if the pilot shows:
+Use only if the pilot shows usable field-level reliability, substantive route variation, at least one queryable structural pattern, and added value beyond memo.
 
-- usable field-level reliability;
-- substantive same-function/different-route cases;
-- at least one queryable cross-case signature pattern;
-- and evidence that structured fields add value beyond memo.
-
-Article claim:
+Possible article claim:
 
 > a multidimensional annotation model makes interpretive conversion pathways directly comparable and localizes variation concealed by shared function labels.
 
 ## Outcome B: narrower fielded-rationale article
 
-Use if:
+Use if some fields work but the full signature is over-specified.
 
-- some fields work but the full signature is over-specified;
-- locus and mechanism remain useful;
-- other fields are mostly descriptive or redundant.
-
-Article claim:
+Possible article claim:
 
 > a small set of structured rationale fields improves the comparison of humanities annotations beyond labels and prose memos.
 
 ## Outcome C: friction-locus diagnostic article
 
-Use if:
+Use if `friction_locus` is reliable or predicts adjudication while the remaining signature provides limited added value.
 
-- `friction_locus` is reliable or predicts adjudication;
-- the remaining signature provides limited added value.
-
-Article claim:
+Possible article claim:
 
 > prospective coding of interpretive pressure helps identify and compare difficult evidence-to-function assignments.
 
 ## Outcome D: negative or reflective methods article
 
-Use if:
+Use if independent coding exposes serious instability but the failure reveals important limits of formalizing interpretation.
 
-- independent coding exposes serious instability;
-- the fields cannot be reliably separated;
-- but the failure reveals important limits of formalizing interpretation.
+This remains publishable if reported honestly, but it would be a different article.
 
-This outcome is still publishable if reported honestly, but it would be a different article.
-
-# 7. Current research questions
+# 8. Current research questions
 
 ## RQ1
 
@@ -515,11 +505,13 @@ Do structured pathway fields provide analytically consequential information beyo
 
 To what extent are interpretive conversion pathways preserved, softened, introduced, or relocated when source-language passages are mediated through close glosses?
 
-# 8. Current safe contribution statement
+# 9. Current safe contribution statement
 
-> TRIM is a source-anchored interpretive annotation model that structures selected scholarly commitments involved in assigning project-defined functions to textual evidence. It combines practices established in discourse annotation, argument modelling, qualitative coding, narratological annotation, provenance, and disagreement-aware rationale analysis. Its contribution, if supported by the pilot, is the operationalization of the evidence-to-function conversion as a multidimensional comparative record, including a prospective field for locating dominant interpretive pressure.
+> TRIM proposes a source-anchored, multidimensional representation of selected scholarly commitments involved in assigning project-defined interpretive functions to textual evidence. Its distinctiveness is not the discovery of rationale variation, annotation disagreement, contestability, or graph-based provenance. It lies in bringing these concerns into a prospective conversion record whose internal fields can be tested independently for reliability, cross-case structure, adjudication value, and cross-language stability.
 
-# 9. Epistemic boundaries
+The final contribution claim must be selected from the observed pilot result rather than fixed in advance.
+
+# 10. Epistemic boundaries
 
 The article must state that:
 
@@ -534,49 +526,50 @@ The article must state that:
 - graphability does not imply causal, logical, or objective necessity;
 - and simplification after pilot failure is a valid methodological result.
 
-# 10. Literature verification queue
+# 11. Literature verification queue
 
 ## Priority 1: closest threats
 
-- LiTEx: primary paper, taxonomy, reliability, same-span/different-reason evidence.
-- Agree, Disagree, Explain: final venue and across-label findings.
-- Gius and Jacke 2017: exact disagreement model and its relation to CATMA/SANTA.
-- Walton: argument schemes and critical questions most directly comparable to `friction_locus`.
-- From Dissonance to Insights: expert-rationale disagreement taxonomy and study design.
+- LiTEx: primary paper, taxonomy, reliability, same-span/different-reason evidence;
+- Agree, Disagree, Explain: final venue and across-label findings;
+- Gius and Jacke 2017: exact disagreement model and relation to CATMA/SANTA;
+- Walton: argument schemes and critical questions most directly comparable to `friction_locus`;
+- expert-rationale disagreement research, including legal interpretation;
+- sources-of-disagreement and ambiguity-locus taxonomies.
 
 ## Priority 2: infrastructure and humanities annotation
 
-- CATMA and heureCLÉA meta-annotation.
-- Annotation Graphs.
-- W3C Web Annotation and PROV-O.
-- CRMinf and relevant CIDOC-CRM inference/belief classes.
-- Story Workbench, DramaBank, SIG, and Drammar.
-- RST and enhanced RST signalling.
-- Nanopublications.
+- CATMA and heureCLÉA meta-annotation;
+- Annotation Graphs;
+- W3C Web Annotation and PROV-O;
+- CRMinf and relevant CIDOC-CRM inference/belief classes;
+- Story Workbench, DramaBank, SIG, and Drammar;
+- RST and enhanced RST signalling;
+- nanopublications.
 
 ## Priority 3: conceptual analogues
 
 - rhetorical stasis;
 - undercutting defeaters;
 - literary blanks and indeterminacy;
-- sources-of-disagreement taxonomies;
 - interpretive communities;
 - annotation perspectivism;
 - rationale faithfulness and retrospective rationalization.
 
 For each item, verify exact bibliographic metadata and passage-level support before using it in article prose.
 
-# 11. Stop rule
+# 12. Stop rule
 
-Do not modify the TRIM schema in response to this document before independent pilot data are available.
+Do not revise the TRIM schema, codebook, controlled vocabularies, or pilot packet in response to this document.
 
-The next revision decision must be based on observed evidence about:
+The current schema is the validation object. Changing it before the blinded pilot would move the object being tested.
 
-- field usability;
-- field-level agreement;
+The next schema decision must follow observed evidence about:
+
+- independent usability;
+- field-level reliability;
 - redundancy;
-- cross-case patterns;
-- adjudication difficulty;
-- and cross-language relocation.
-
-Until then, this file is a research and writing instrument, not a specification change request.
+- signature topology;
+- cross-language relocation;
+- disagreement localization;
+- and adjudication difficulty.
