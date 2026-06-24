@@ -17,6 +17,9 @@
   overlap, and Jaccard overlap.
 - Optional `reliability` dependency group for scikit-learn-backed Cohen's
   kappa.
+- Cross-language construct-validity protocol with separate layer-level
+  annotation and pair-level comparison templates for recording original/gloss
+  provenance outside the canonical signature.
 
 ### Changed
 
@@ -54,7 +57,7 @@
 ## v0.1.1
 
 TRIM v0.1.1 prepares the package for public research software release as a
-digital humanities annotation support tool.
+Digital Humanities annotation support tool.
 
 ### Added
 

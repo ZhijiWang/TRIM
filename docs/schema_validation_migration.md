@@ -1,42 +1,21 @@
-# Schema and Validator Hardening for Unreleased 0.2.0
+# Schema and Validator Changes for Unreleased 0.2.0
 
-This note describes validation-boundary changes made before any formal 0.2.0
-release. No released TRIM version is being retroactively changed.
+This note records the validation changes introduced before the first formal 0.2.0 release.
 
-## Evidence and Anchor Migration
+## Evidence and Anchor Structure
 
-Standard annotations now require:
+Standard annotations now include one or more evidence nodes, a source-facing `evidence_anchor`, and a normalized `anchor_node`.
 
-- at least one non-empty `evidence_nodes` item;
-- a source-facing `evidence_anchor`;
-- a normalized analytic `anchor_node`.
+The demonstration records already use this structure. Blank second-coder templates become valid after their evidence, anchor, signature, and rationale fields are completed.
 
-Existing complete demonstration records already satisfy these rules. Incomplete
-second-coder templates remain scaffolds and will fail validation until their
-coding fields are filled.
+Graph conversion now preserves the full evidence-to-anchor pathway. Projects adopting this source version should retain both the source reference and the analytic anchor label.
 
-Graph conversion no longer substitutes one anchor field for another and no
-longer emits an evidence-free standard graph. Projects with records missing
-these fields should add evidence-node decomposition and preserve both the source
-reference and analytic anchor label before adopting this source version. No
-field is deleted and no automatic rewriting is performed.
+## Contested Rationale Structure
 
-## Contested Rationale Migration
+An `alternative_signature` activates two checks: the alternative pathway parses as a complete signature, and `rationale_note` contains at least 60 characters.
 
-`alternative_signature` no longer triggers an English-keyword check. Instead:
+The length threshold provides a language-neutral minimum for review documentation. Interpretive quality remains part of scholarly assessment.
 
-- the alternative signature must parse and validate;
-- `rationale_note` must contain at least 60 characters.
+## Command-Line Status
 
-The character threshold is a minimal, language-neutral documentation safeguard,
-not an assessment of interpretive quality.
-
-## CLI Migration
-
-`trim validate` now writes the requested CSV report and returns:
-
-- `0` for no errors, including warnings-only reports;
-- `1` when one or more errors are present.
-
-Use `--always-zero` only for report-generation workflows that intentionally
-handle validation status outside the process exit code.
+`trim validate` writes the CSV report and returns `0` for valid or warnings-only input and `1` when errors are present. `--always-zero` supports report-only workflows.

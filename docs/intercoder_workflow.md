@@ -2,28 +2,24 @@
 
 ## Purpose
 
-The intercoder workflow prepares independently completed annotations for
-comparison. It supports field-level agreement checks, disagreement tables, and
-human review of contested thresholds.
-
-It is pilot infrastructure. The included files do not constitute a completed
-reliability study.
+The intercoder workflow compares independently completed TRIM annotations. It produces field-level agreement measures, compound-mechanism reports, disagreement tables, and a preserved record for adjudication.
 
 ## Preparing Files
 
-1. Prepare a primary-coder CSV using the TRIM schema.
-2. Prepare a second-coder CSV using the same schema and the same `case_id`
-   values.
-3. Use distinct `coder_id` values, such as `primary_coder` and `second_coder`.
-4. Keep source segments and coding manuals available during independent coding.
+1. Prepare primary- and second-coder CSV files with the same TRIM schema and `case_id` values.
+2. Assign distinct `coder_id` values.
+3. Preserve the independently completed files before comparison.
+4. Keep the source packet and coding manuals available for later review.
 
-The template `data/second_coder_template.csv` provides a three-case software and
-onboarding demonstration for the In a Grove examples.
-`data/demo_annotations_second_coder_template.csv` provides the ten
-demonstration case IDs as a schema scaffold. It does not itself provide the
-blinded source packet needed for a broader preliminary usability pilot.
+The ten-case pilot uses:
 
-## Comparing Fields
+- `data/blinded_pilot_source_packet.md`
+- `data/blinded_pilot_case_manifest.csv`
+- `data/blinded_pilot_coding_template.csv`
+
+The three-case templates remain useful for software demonstration and onboarding.
+
+## Comparison Utilities
 
 The module `trim.intercoder` provides:
 
@@ -36,13 +32,11 @@ The module `trim.intercoder` provides:
 - `disagreement_table(df, fields)`
 - `contested_disagreement_report(df)`
 
-Install the optional dependency required to compute Cohen's kappa with:
+Install Cohen's kappa support with:
 
 ```bash
 python -m pip install -e ".[reliability]"
 ```
-
-Core TRIM installation does not require `scikit-learn`.
 
 Example:
 
@@ -63,39 +57,26 @@ print(pairwise_compound_agreement(combined, "rationale_mechanism"))
 print(disagreement_table(combined, ["friction_locus", "rationale_mechanism"]))
 ```
 
-`pairwise_agreement` compares raw strings and remains useful for simple
-controlled fields. For compound fields such as `rationale_mechanism`, the
-compound-aware report adds:
+## Reading Agreement
 
-- exact-set agreement, which treats the compound as an unordered set and
-  ignores value order;
-- primary-mechanism agreement, which compares the first ordered mechanism;
+Simple controlled fields use exact string agreement. Compound mechanisms require several views:
+
+- exact-set agreement;
+- primary-mechanism agreement;
 - any-overlap agreement;
-- mean Jaccard overlap.
+- mean Jaccard overlap;
+- order differences where the same values appear in a different sequence.
 
-This preserves the distinction between `authorizes+reframes` and
-`reframes+authorizes`: they have exact-set agreement because order is ignored
-for that metric, but not primary-mechanism agreement because their first
-ordered mechanisms differ.
+This keeps `authorizes+reframes` and `reframes+authorizes` analytically distinct. They share the same set of mechanisms while assigning a different primary operation.
 
-## Reviewing Disagreements
+## Reviewing Disagreement
 
-Disagreements should be inspected as reviewable thresholds. Reviewers can ask:
+Each disagreement is traced to the point where the annotations diverge: evidence selection, anchor construction, function assignment, locus, mechanism, support, discourse level, temporality, uncertainty, or compound order.
 
-- Is the source location clear?
-- Is each coder's rationale coherent?
-- Does the disagreement resist simple refinement?
+`contested_disagreement_report` prepares review columns for source clarity, rationale coherence, and adjudication. The original metrics and disagreement tables remain archived before discussion begins.
 
-The function `contested_disagreement_report` creates these human-review columns
-for later adjudication.
-
-Independent coding must be completed before adjudication. Initial metrics and
-disagreement tables should be preserved, then reviewers can discuss whether
-manual clarification or a contested annotation is warranted.
+Plural-reading disagreements receive their own count and remain visible alongside the agreement results. They contribute to the case analysis without altering the pre-adjudication agreement rate.
 
 ## Demonstration Script
 
-`examples/run_intercoder_demo.py` checks the template format and writes a short
-intercoder preparation report. The three-case run verifies software preparation
-only. A ten-case run can identify usability and boundary problems, but cannot
-establish domain-general or population-level reliability.
+`examples/run_intercoder_demo.py` checks the template format and writes a short preparation report. The three-case run verifies the software workflow. The ten-case pilot evaluates manual usability, field boundaries, and three pre-specified comparative patterns. A larger out-of-sample study will evaluate stability across a broader corpus.
