@@ -12,15 +12,15 @@ Coders assign evidence, function labels, and rationale notes. The package preser
 
 ## Cross-Language Construct Validity
 
-For multilingual cases, the article should identify the textual layer on which each annotation was made. Source-language coding provides the basis for claims about the original passage. Glosses and translations provide access and can be assessed separately for whether they preserve, soften, introduce, or relocate the dominant friction locus.
+For multilingual cases, the article should identify the textual layer on which each annotation was made. Canonical source-language records supply the original-layer values used for claims about the original passage. Glosses and translations provide access and can be coded as separate gloss-layer records in `data/cross_language_layer_annotations_template.csv`.
 
-Cross-layer differences are reported as provenance and construct-validity evidence rather than folded into the six-field TRIM signature. The companion protocol in `docs/cross_language_validity.md` records the source language, coding layer, mediation source, paired record, original and gloss loci, and the observed cross-layer relation.
+Pair-level divergence is derived after the original-layer and gloss-layer records are locked. `data/cross_language_pair_comparisons_template.csv` records the copied original and gloss loci, copied mechanisms, cross-layer relation, and comparison note. Pair-level results remain outside the six-field TRIM signature because they describe a relation between textual layers rather than evidence-to-function conversion within one layer.
 
 Until double-layer coding has been completed, the Classical Chinese close paraphrases should be described as researcher-authored access materials. Substantive claims about the Chinese cases remain anchored in source-language reading.
 
 ## Reproducibility Statement
 
-The repository contains the demonstration annotations, source-segment examples, codebook, coding manuals, scripts, tests, generated-output paths, blinded-pilot materials, and a cross-language validity companion template.
+The repository contains the demonstration annotations, source-segment examples, codebook, coding manuals, scripts, tests, generated-output paths, blinded-pilot materials, and cross-language validity companion templates.
 
 Run the main workflow with:
 

@@ -4,7 +4,7 @@
 
 TRIM compares evidence-to-function conversions across languages and traditions. A translation or project-authored gloss can preserve, soften, introduce, or relocate the point at which that conversion becomes difficult. The resulting question concerns construct validity: whether `friction_locus` records the interpretive structure of the source passage or an effect of linguistic mediation.
 
-The core signature remains tied to the textual layer on which coding occurred. Translation-mediated differences are recorded as provenance and cross-layer validity evidence.
+The core signature remains tied to the textual layer on which coding occurred. Translation-mediated differences are recorded as provenance and cross-layer validity evidence outside the canonical six-field signature.
 
 ## Two Analytic Layers
 
@@ -13,42 +13,90 @@ TRIM distinguishes:
 - **authoritative layer**: the source-language text used to adjudicate the primary annotation;
 - **access layer**: a gloss or translation used to make the case available to a coder who does not work directly in the source language.
 
-For multilingual cases, the primary claim about `friction_locus` is anchored in the source-language layer and reviewed by a coder competent in that language. Access-layer coding evaluates whether the mediated version preserves the same interpretive threshold.
+The source-language layer is authoritative because it avoids an additional translation step. It remains a human scholarly interpretation, not absolute ground truth. Access-layer coding evaluates whether a mediated version preserves the same interpretive threshold.
 
-## Companion Provenance Fields
+## Normalized Companion Tables
 
-Cross-layer validity is recorded outside the six-field TRIM signature.
+Cross-language validity uses two companion templates:
 
+- `data/cross_language_layer_annotations_template.csv`;
+- `data/cross_language_pair_comparisons_template.csv`.
+
+The layer-level table records one annotation for one textual layer. The pair-level table records one comparison between a locked original-layer record and a locked gloss-layer record. Keeping these tables separate prevents annotation values and comparison outcomes from silently overwriting one another.
+
+## Layer-Level Annotation Table
+
+Each row in `data/cross_language_layer_annotations_template.csv` represents one textual layer.
+
+Required columns:
+
+- `record_id`: stable identifier for the layer-level annotation;
+- `case_id`: case shared with the canonical dataset;
+- `paired_record_id`: pair identifier shared by the original and gloss rows;
 - `source_language`: language of the authoritative source text;
 - `coding_layer`: `original` or `gloss`;
 - `mediation_source`: `original_text`, `researcher_gloss`, or `published_translation`;
-- `paired_record_id`: identifier linking original- and gloss-layer annotations for the same case;
-- `cross_layer_relation`: `not_assessed`, `aligned`, `softened`, `introduced`, or `relocated`;
-- `original_locus`: locus assigned from the source-language layer;
-- `gloss_locus`: locus assigned from the mediated layer;
-- `cross_layer_note`: concise account of the linguistic feature or reformulation associated with the result.
+- `canonical_record_id`: canonical annotation identifier for original-layer rows where applicable;
+- `friction_locus`: layer-level `friction_locus`, filled only when that layer has been coded;
+- `rationale_mechanism`: layer-level `rationale_mechanism`, filled only when that layer has been coded;
+- `coder_id`: coder responsible for the layer record;
+- `status`: `planned`, `in_progress`, `locked`, or `adjudicated`;
+- `note`: brief provenance or coding note.
 
-These fields describe the provenance and relation of two annotations. They remain separate from `friction_locus` because translational mediation is a relation between textual layers, while `friction_locus` describes the evidence-to-function conversion within one layer.
+Original and gloss rows share `paired_record_id`. Gloss-layer rows may leave `canonical_record_id` blank. Pair-level comparison outcomes do not belong in this table.
+
+## Pair-Level Comparison Table
+
+Each row in `data/cross_language_pair_comparisons_template.csv` represents one original–gloss pair.
+
+Required columns:
+
+- `paired_record_id`: pair identifier linking the two layer rows;
+- `case_id`: case shared with both layer records;
+- `original_record_id`: locked source-layer record;
+- `gloss_record_id`: locked access-layer record;
+- `original_locus`: copied from the locked original-layer record;
+- `gloss_locus`: copied from the locked gloss-layer record;
+- `original_mechanism`: copied from the locked original-layer record;
+- `gloss_mechanism`: copied from the locked gloss-layer record;
+- `cross_layer_relation`: `not_assessed`, `aligned`, `softened`, `introduced`, or `relocated`;
+- `cross_layer_note`: concise account of the linguistic feature or reformulation associated with the result;
+- `comparison_status`: `planned`, `ready`, `compared`, or `adjudicated`;
+- `adjudicator_id`: reviewer responsible for the pair-level comparison.
+
+No independent coding is performed in the pair-level table. Values are copied or joined only from locked layer records. A relocated case records `relocated` as the categorical relation and preserves the actual movement in `original_locus` and `gloss_locus`. Mechanism differences remain visible through `original_mechanism` and `gloss_mechanism`.
+
+## Source of Truth and Data Flow
+
+1. Existing canonical original-layer TRIM annotations remain authoritative in the canonical annotation dataset.
+2. The layer-level companion table references those records through `canonical_record_id`.
+3. The companion table does not silently override canonical original-layer values.
+4. Gloss-layer annotations are new analytical records and use the layer-level companion table as their source of truth.
+5. Pair-level comparisons are derived only after both layer records are locked.
+6. The pair-level comparison table is not an independent annotation source.
+7. Any correction to an original-layer value must first occur in the canonical dataset, then propagate to the companion comparison.
+8. Any correction to a gloss-layer value must first occur in the layer-level companion table.
+9. Pair-level results may be regenerated from the two locked layer records.
 
 ## Controlled Relations
 
-- `not_assessed`: only one textual layer has been coded;
+- `not_assessed`: only one textual layer has been coded, or the pair has not yet been compared;
 - `aligned`: both layers produce the same dominant locus;
 - `softened`: a source-layer friction becomes less visible or disappears in the gloss;
 - `introduced`: the gloss produces a friction absent from the source-layer reading;
 - `relocated`: both layers remain interpretable, but the dominant locus moves from one TRIM value to another.
 
-A relocated case records both values in `original_locus` and `gloss_locus`; the relation field itself remains categorical.
-
 ## Optional Double-Layer Check
 
 For each Classical Chinese pilot case:
 
-1. a source-language-competent coder completes an annotation from the original text;
-2. a coder completes a separate annotation from the English close paraphrase without seeing the source-layer annotation;
-3. both records are preserved before comparison;
-4. the comparison records locus agreement, mechanism agreement, and `cross_layer_relation`;
-5. any relocation is examined at the level of syntax, explicitness, temporal marking, agency, warrant relation, and other features changed by mediation.
+1. a source-language-competent coder completes or confirms the original-layer record;
+2. a coder completes a separate gloss-layer record from the English close paraphrase without seeing the source-layer result;
+3. both layer records are locked;
+4. the pair-level row is created or moved to `ready`;
+5. the comparison copies `friction_locus` and `rationale_mechanism` from the locked layer records;
+6. the adjudicator assigns `cross_layer_relation`;
+7. any relocation is examined at the level of syntax, explicitness, temporal marking, agency, warrant relation, and other features changed by mediation.
 
 This check produces construct-validity evidence. Alignment supports friction preservation across layers. Divergence identifies the direction and type of mediation effect.
 

@@ -17,8 +17,9 @@
   overlap, and Jaccard overlap.
 - Optional `reliability` dependency group for scikit-learn-backed Cohen's
   kappa.
-- Cross-language construct-validity protocol and companion template for
-  recording original/gloss layer provenance outside the canonical signature.
+- Cross-language construct-validity protocol with separate layer-level
+  annotation and pair-level comparison templates for recording original/gloss
+  provenance outside the canonical signature.
 
 ### Changed
 

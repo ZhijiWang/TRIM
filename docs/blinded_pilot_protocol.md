@@ -147,14 +147,20 @@ For Classical Chinese cases, an optional companion check records whether the
 English close paraphrase preserves the same evidence-to-function threshold as
 the source-language reading:
 
-1. a source-language-competent coder annotates the original passage;
-2. a second coder annotates the English close paraphrase without seeing the
-   source-layer result;
-3. both records are preserved before comparison;
-4. compare `friction_locus` and `rationale_mechanism`;
-5. assign `cross_layer_relation` in
-   `data/cross_language_validity_template.csv`;
-6. examine any relocation in relation to syntax, explicitness, agency, temporal
+1. a source-language-competent coder completes or confirms the original-layer
+   record;
+2. a second coder completes the gloss-layer record from the English close
+   paraphrase without seeing the source-layer result;
+3. both layer records are locked in
+   `data/cross_language_layer_annotations_template.csv`;
+4. pair-level comparison is created afterward in
+   `data/cross_language_pair_comparisons_template.csv`;
+5. pair-level outcomes are recorded only in the pair-comparison row, not in
+   either layer row;
+6. compare copied `friction_locus` and `rationale_mechanism` values after both
+   source records are locked;
+7. assign `cross_layer_relation`;
+8. examine any relocation in relation to syntax, explicitness, agency, temporal
    marking, warrant structure, or another visible mediation change.
 
 Plural-reading disagreement is counted separately from cross-layer mediation

@@ -1,9 +1,0 @@
-case_id,source_language,coding_layer,mediation_source,paired_record_id,friction_locus,rationale_mechanism,cross_layer_relation,original_locus,gloss_locus,cross_layer_note,coder_id,status
-ZZ_XIANG_7,Classical Chinese,original,original_text,ZZ_XIANG_7_PAIR,,,,,,,source_language_coder,planned
-ZZ_XIANG_7,Classical Chinese,gloss,researcher_gloss,ZZ_XIANG_7_PAIR,,,,,,,gloss_layer_coder,planned
-ZZ_MIN_1,Classical Chinese,original,original_text,ZZ_MIN_1_PAIR,,,,,,,source_language_coder,planned
-ZZ_MIN_1,Classical Chinese,gloss,researcher_gloss,ZZ_MIN_1_PAIR,,,,,,,gloss_layer_coder,planned
-ZZ_XI_4,Classical Chinese,original,original_text,ZZ_XI_4_PAIR,,,,,,,source_language_coder,planned
-ZZ_XI_4,Classical Chinese,gloss,researcher_gloss,ZZ_XI_4_PAIR,,,,,,,gloss_layer_coder,planned
-ZZ_ZHUANG_22,Classical Chinese,original,original_text,ZZ_ZHUANG_22_PAIR,,,,,,,source_language_coder,planned
-ZZ_ZHUANG_22,Classical Chinese,gloss,researcher_gloss,ZZ_ZHUANG_22_PAIR,,,,,,,gloss_layer_coder,planned

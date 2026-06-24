@@ -1,0 +1,5 @@
+paired_record_id,case_id,original_record_id,gloss_record_id,original_locus,gloss_locus,original_mechanism,gloss_mechanism,cross_layer_relation,cross_layer_note,comparison_status,adjudicator_id
+ZZ_XIANG_7_PAIR,ZZ_XIANG_7,ZZ_XIANG_7_ORIGINAL,ZZ_XIANG_7_GLOSS,,,,,,,planned,
+ZZ_MIN_1_PAIR,ZZ_MIN_1,ZZ_MIN_1_ORIGINAL,ZZ_MIN_1_GLOSS,,,,,,,planned,
+ZZ_XI_4_PAIR,ZZ_XI_4,ZZ_XI_4_ORIGINAL,ZZ_XI_4_GLOSS,,,,,,,planned,
+ZZ_ZHUANG_22_PAIR,ZZ_ZHUANG_22,ZZ_ZHUANG_22_ORIGINAL,ZZ_ZHUANG_22_GLOSS,,,,,,,planned,
