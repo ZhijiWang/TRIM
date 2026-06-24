@@ -103,7 +103,8 @@ The repository also contains:
 - a neutral case manifest;
 - a blank second-coder template;
 - a source packet for independent coding;
-- field-level and compound-aware agreement utilities.
+- field-level and compound-aware agreement utilities;
+- a cross-language construct-validity protocol and companion template.
 
 These materials establish a proof of concept and a fully specified validation
 infrastructure. Independent second-coder execution forms the next empirical
@@ -131,6 +132,7 @@ See [`docs/related_methods.md`](docs/related_methods.md) and
 - [`docs/second_coder_onboarding.md`](docs/second_coder_onboarding.md)
 - [`docs/intercoder_workflow.md`](docs/intercoder_workflow.md)
 - [`docs/blinded_pilot_protocol.md`](docs/blinded_pilot_protocol.md)
+- [`docs/cross_language_validity.md`](docs/cross_language_validity.md)
 - [`docs/software_scope.md`](docs/software_scope.md)
 - [`docs/schema_validation_migration.md`](docs/schema_validation_migration.md)
 - [`docs/article_use.md`](docs/article_use.md)
