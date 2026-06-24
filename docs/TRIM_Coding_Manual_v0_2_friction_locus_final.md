@@ -29,6 +29,16 @@ When several loci appear plausible, ask three questions:
 
 The selected value names the dominant threshold. A case that remains unresolved receives `uncertainty_flag=high`, an `alternative_signature` where possible, and a rationale note explaining both pathways.
 
+### Dominant-threshold rule
+
+`friction_locus` records the single point that most directly explains the evidence-to-function conversion. Use the counterfactual, proximity, and explanatory-sufficiency tests together:
+
+- **Counterfactual test:** removing which candidate locus would make the function label hardest to sustain?
+- **Proximity test:** which candidate most directly mediates the anchor-to-function conversion?
+- **Explanatory-sufficiency test:** which candidate explains the conversion with the fewest additional assumptions?
+
+If these tests still leave two viable loci, set `uncertainty_flag=high`, record the competing pathway in `alternative_signature` when possible, and explain the unresolved threshold in `rationale_note`.
+
 ## `cue_function`
 
 ### Definition
@@ -196,6 +206,10 @@ The value awaits a positive out-of-sample demonstration. Its use should identify
 
 ## Key Distinctions
 
+### `friction_locus` and `rationale_mechanism`
+
+`friction_locus` identifies where the conversion becomes difficult. `rationale_mechanism` identifies what that threshold does as evidence becomes functional. A case may have the same locus with different mechanisms, or the same mechanism produced through different loci. For example, `ZZ_XI_4` and `GROVE_TAKEHIRO` both use `warrant_relation`, but their mechanisms differ because one extends deliberation while the other contradicts and suspends adjudication.
+
 ### `friction_locus` and `epistemic_support`
 
 `friction_locus` identifies where the conversion requires added inferential work. `epistemic_support` identifies what carries the judgement across that threshold. Narrative or historical context can support an annotation whose locus remains `warrant_relation`, `temporal_layering`, or another more specific value.
@@ -210,21 +224,39 @@ Choose `operation_function` when evidence already has standing and the decisive 
 
 Xiang 7 uses `operation_function` because the failed divination already counts as the relevant result and Meng Xianzi transforms its meaning. Min 1 uses `warrant_attribution` because Xin Liao's interpretation makes the result usable as warrant.
 
+Counterfactual test: if the evidence already counts as relevant before the operation, and the function depends on how the operation handles it, prefer `operation_function`. If the evidence becomes usable as warrant through the operation that grants it standing, prefer `warrant_attribution`.
+
 ### `operation_function` and `warrant_relation`
 
 Choose `operation_function` when the visible act performs the conversion. Choose `warrant_relation` when the act matters because it creates, ranks, or intensifies a relation among warrants. In Xi 4, the ranking speech matters through the hierarchy it creates between turtle-shell and milfoil results.
+
+Counterfactual test: if the operation itself performs the conversion, prefer `operation_function`. If the operation mainly matters because it relates multiple warrants to one another, prefer `warrant_relation`.
+
+### `cue_function` and `operation_function`
+
+Choose `cue_function` when the evidentiary cue type itself leaves the function underdetermined. Choose `operation_function` when a visible action such as interpretation, confession, consultation, recognition, or self-reading converts evidence into function. Macbeth Act 4.1 uses `operation_function` because Macbeth's self-reading of the apparitions drives the conversion.
 
 ### `warrant_relation` and `temporal_layering`
 
 Choose `warrant_relation` when local conflict among warrants produces the function. Choose `temporal_layering` when later fulfilment, historical readability, or retrospective framing reclassifies earlier evidence. Xi 4 centres cross-warrant conflict; Zhuang 22 centres time-layered uptake.
 
+Counterfactual test: if removing the cross-warrant conflict removes the function, prefer `warrant_relation`. If removing the later temporal frame or later readability removes the function, prefer `temporal_layering`.
+
 ### `operation_function` and `temporal_layering`
 
 Choose `operation_function` when a local act converts the evidence. Choose `temporal_layering` when a later moment changes the status of earlier evidence. Macbeth Act 5.8 centres the later fulfilment that reclassifies the earlier prophecy.
 
+Counterfactual test: if the function is produced by the local operation itself, prefer `operation_function`. If the operation registers a later temporal reclassification of earlier evidence, prefer `temporal_layering`.
+
 ### `perspective_assignment` and `warrant_relation`
 
 Choose `perspective_assignment` when one testimonial standpoint determines the function. Choose `warrant_relation` when incompatibility among several accounts determines the function. Masago illustrates perspective; Takehiro illustrates warrant relation.
+
+### Compound and contested cases
+
+`friction_locus` itself is not compound. When a record contains a compound `rationale_mechanism`, choose the locus that explains the primary mechanism and use `rationale_note` to describe how the secondary mechanism modifies the conversion. When two loci remain genuinely viable, preserve the second pathway through `alternative_signature` rather than combining loci in one field.
+
+When `alternative_signature` is recorded, the rationale note should document the competing pathway clearly enough for review. The validator applies the language-neutral alternative-signature rationale threshold described in the codebook; the threshold is a minimum reviewability safeguard, not a quality score.
 
 ## Decision Tree
 

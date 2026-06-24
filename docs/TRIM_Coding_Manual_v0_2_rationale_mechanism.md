@@ -29,6 +29,20 @@ The first value names the dominant conversion. The second records an additional 
 
 Intercoder reporting compares raw strings, exact sets, primary mechanisms, any overlap, and Jaccard overlap.
 
+### Dominant-mechanism test
+
+When several mechanisms appear plausible, ask:
+
+1. What is the main change between the evidence and the function?
+2. Which value names that change most directly?
+3. Does a second mechanism record a consequential effect that remains necessary to the explanation?
+
+Use a compound value only when the secondary mechanism changes the interpretation of the primary conversion. Avoid using a compound merely to list every plausible effect.
+
+### Mechanism, locus, and function label
+
+`friction_locus` identifies where the conversion is under pressure. `rationale_mechanism` identifies what the threshold does. `function_label` names the analytic role assigned by the project. Keep the three decisions separate: `warrant_attribution / authorizes+reframes / ambition_trigger_authorization` locates the threshold in warrant attribution, records what confirmation does, and assigns the resulting project-specific function.
+
 ## `supports`
 
 ### Definition
@@ -205,6 +219,12 @@ Choose this value when ambiguity is converted into a restricted operational read
 
 ## Key Distinctions
 
+### `stabilizes` and `authorizes`
+
+`stabilizes` settles evidence into usable judgement. `authorizes` gives evidence standing for action, legitimacy, or uptake. Min 1 uses `stabilizes+projects` because Xin Liao's reading settles the result and sends it forward; Macbeth Act 1.3 uses `authorizes+reframes` because confirmation makes the prophecy actionable.
+
+Counterfactual test: if the function depends on uncertainty becoming settled enough to hold, prefer `stabilizes`. If the function depends on evidence gaining action-guiding standing, prefer `authorizes`.
+
 ### `reframes` and `narrows`
 
 `reframes` changes the interpretive frame through which evidence functions. `narrows` reduces the available meanings or uses within a frame. Macbeth Act 4.1 combines both because Macbeth treats conditional prophecy as guarantee and restricts equivocation to a practical sense of security.
@@ -217,17 +237,35 @@ Choose this value when ambiguity is converted into a restricted operational read
 
 `stabilizes` settles evidence into a usable judgement. `extends` keeps it active, open, or unresolved. Xiang 7 and Min 1 illustrate stabilization; Xi 4 and Zhuang 22 illustrate extension.
 
+### `extends` and `contradicts`
+
+`extends` keeps evidence active or unresolved across a sequence. `contradicts` introduces incompatibility. Xi 4 uses `extends` because competing warrants prolong deliberation; Takehiro uses `contradicts+suspends` because posthumous testimony conflicts with the testimonial field and blocks closure.
+
 ### `projects` and `reactivates`
 
 `projects` gives evidence forward reach from the current moment. `reactivates` returns previously settled or inactive evidence to use. Min 1 and Zhuang 22 illustrate projection. The present corpus contains no primary `reactivates` case.
+
+### `projects` and `reframes`
+
+`projects` gives evidence prospective reach. `reframes` changes the interpretive frame through which the evidence functions. Min 1 projects lineage significance; Macbeth Act 5.8 reframes earlier assurance as an equivocal trap.
 
 ### `contradicts` and `suspends`
 
 `contradicts` introduces incompatibility. `suspends` prevents closure. Takehiro's posthumous testimony combines both mechanisms.
 
+### `suspends` and unresolved conversion
+
+Use `suspends` when blocked closure is itself part of the conversion. Use it as a secondary mechanism when another effect, such as contradiction, creates the blockage. A high `uncertainty_flag` records coder confidence; `suspends` records what the evidence does within the interpretation.
+
 ### `qualifies` and `reframes`
 
 `qualifies` modifies or limits a function while preserving its frame. `reframes` changes the frame itself. Masago illustrates qualification; Tajōmaru illustrates reframing.
+
+## Demonstration and Boundary Status
+
+The ten-case corpus demonstrates primary uses of `contradicts`, `qualifies`, `reframes`, `stabilizes`, `extends`, `suspends`, `projects`, `authorizes`, and `narrows`, including several compound mechanisms. `supports`, `overrides`, and `reactivates` currently function as operational values with contrastive examples rather than positive primary demonstrations.
+
+Boundary cases should be recorded in `rationale_note`. If two mechanisms remain viable after the dominant-mechanism test, place the dominant value first and preserve the competing pathway through `alternative_signature` and `uncertainty_flag` where appropriate.
 
 ## Decision Tree
 
