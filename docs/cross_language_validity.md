@@ -62,9 +62,13 @@ Cross-layer divergence would qualify the multilingual comparison and become a re
 
 Cross-lingual annotation projection often assumes meaning-preserving translation and then evaluates or corrects projected annotations against target-language evidence. Research on fine-grained cross-lingual semantic divergence likewise treats differences between aligned language versions as observable annotation targets. TRIM adapts this general principle to interpretive annotation by comparing the location of evidence-to-function friction across original and mediated layers.
 
+Qualitative translation research adds a second methodological anchor. Helmich et al. show that grammar, syntax, metaphor, and sociolinguistic nuance can alter qualitative interpretation; they recommend transparent translation strategies and discuss source-oriented “ugly” translations that preserve visible difference. Zhao et al. argue that uncertainty and difference between original and translated texts can contribute to validity when they are made explicit and reflexively analysed, rather than treated only as defects to be eliminated.
+
 Relevant verified starting points include:
 
 - Abzianidze, Lasha, et al. 2017. “The Parallel Meaning Bank: Towards a Multilingual Corpus of Translations Annotated with Compositional Meaning Representations.” arXiv:1702.03964.
 - Briakou, Eleftheria, and Marine Carpuat. 2020. “Detecting Fine-Grained Cross-Lingual Semantic Divergences without Supervision by Learning to Rank.” arXiv:2010.03662.
+- Helmich, Esther, Sayra Cristancho, Laura Diachun, and Lorelei Lingard. 2017. “‘How Would You Call This in English?’: Being Reflective about Translations in International, Cross-Cultural Qualitative Research.” *Perspectives on Medical Education* 6 (2): 127–132. https://doi.org/10.1007/s40037-017-0329-1
+- Zhao, Pengfei, Wen Qi, Pei-Jung Li, and Peiwei Li. 2024. “Reconceptualizing the Link Between Validity and Translation in Qualitative Research: Extending the Conversation Beyond Equivalence.” *International Journal of Qualitative Methods* 23. https://doi.org/10.1177/16094069241260134
 
-The qualitative-research and translation-validity literature should be expanded only from directly verified bibliographic records. The proposed Zhao, Qi, Li, and Li 2024 reference remains unverified in the present repository and is therefore excluded from the verified reference list.
+Catford's concept of translation shift and van Leuven-Zwart's comparative model remain plausible additional anchors. Their direct application to friction-locus relocation is an inference developed by TRIM and should be introduced only after the exact bibliographic records and relevant passages have been checked.
