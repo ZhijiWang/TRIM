@@ -2,7 +2,7 @@
 
 ## Status and purpose
 
-This is the single authoritative paper-development note for the TRIM article. It does not modify the TRIM schema, codebook, controlled vocabularies, pilot materials, or software. It records the current novelty audit, evidence status, ablation design, pilot decision rules, and demonstration-corpus strategy.
+This is the single authoritative paper-development note for the TRIM article. It consolidates the initial adversarial audit and subsequent Claude/Gemini revisions into one maintained document. It does not modify the TRIM schema, codebook, controlled vocabularies, pilot materials, or software. It records the current novelty audit, evidence status, ablation design, pilot decision rules, and demonstration-corpus strategy.
 
 Do not revise the validation object before the independent pilot. The next schema decision must follow observed evidence.
 
