@@ -104,7 +104,8 @@ The repository also contains:
 - a blank second-coder template;
 - a source packet for independent coding;
 - field-level and compound-aware agreement utilities;
-- a cross-language construct-validity protocol and companion template.
+- a cross-language construct-validity protocol and
+  [companion template](data/cross_language_validity_template.csv).
 
 These materials establish a proof of concept and a fully specified validation
 infrastructure. Independent second-coder execution forms the next empirical
@@ -133,6 +134,7 @@ See [`docs/related_methods.md`](docs/related_methods.md) and
 - [`docs/intercoder_workflow.md`](docs/intercoder_workflow.md)
 - [`docs/blinded_pilot_protocol.md`](docs/blinded_pilot_protocol.md)
 - [`docs/cross_language_validity.md`](docs/cross_language_validity.md)
+- [`data/cross_language_validity_template.csv`](data/cross_language_validity_template.csv)
 - [`docs/software_scope.md`](docs/software_scope.md)
 - [`docs/schema_validation_migration.md`](docs/schema_validation_migration.md)
 - [`docs/article_use.md`](docs/article_use.md)

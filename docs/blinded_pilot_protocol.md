@@ -141,6 +141,31 @@ Review `evidence_anchor`, `evidence_nodes`, `anchor_node`, `function_label`, and
 - substantive equivalence of function labels;
 - coherence between rationale and selected signature.
 
+## Optional Double-Layer Construct-Validity Check
+
+For Classical Chinese cases, an optional companion check records whether the
+English close paraphrase preserves the same evidence-to-function threshold as
+the source-language reading:
+
+1. a source-language-competent coder annotates the original passage;
+2. a second coder annotates the English close paraphrase without seeing the
+   source-layer result;
+3. both records are preserved before comparison;
+4. compare `friction_locus` and `rationale_mechanism`;
+5. assign `cross_layer_relation` in
+   `data/cross_language_validity_template.csv`;
+6. examine any relocation in relation to syntax, explicitness, agency, temporal
+   marking, warrant structure, or another visible mediation change.
+
+Plural-reading disagreement is counted separately from cross-layer mediation
+effects. Plural-reading cases leave the pre-adjudication agreement rate intact
+and enter the qualitative disagreement report.
+
+Pilot reporting records coder disciplinary background and language competence.
+The Classical Chinese paraphrases are researcher-authored access materials.
+Source-language claims remain anchored in original-language reading until this
+double-layer coding has been completed.
+
 ## Pre-Specified Comparative Tests
 
 ### Test A: *Macbeth* locus migration
