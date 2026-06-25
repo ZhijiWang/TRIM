@@ -19,6 +19,7 @@ Use:
 
 - `data/retest_v0_2_1_source_packet.md`
 - `data/retest_v0_2_1_case_manifest.csv`
+- `data/retest_v0_2_1_shared_context_registry.csv`
 - `data/retest_v0_2_1_coding_template.csv`
 - `data/retest_v0_2_1_question_log_template.csv`
 - `data/retest_v0_2_1_language_access_form.csv`
@@ -82,6 +83,9 @@ If `cross_case_context_permitted=no`, do not use other cases to decide the
 signature. If shared context is permitted, record any required context segments
 in the appropriate field.
 
+The shared-context registry lists the only case groups and segment IDs that may
+be used when shared context is permitted.
+
 ## Uncertainty
 
 - Low: one complete pathway is clearly preferable and no complete alternative
@@ -97,4 +101,3 @@ A complete alternative signature normally requires at least medium uncertainty.
 Submit the completed coding sheet and question log before seeing comparison,
 adjudication, pilot results, or article working notes. Do not revise the locked
 file after debriefing.
-

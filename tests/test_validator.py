@@ -5,6 +5,8 @@ from trim.validator import (
     format_signature,
     validate_dataframe,
     validate_record,
+    validate_retest_manifest,
+    validate_shared_context_registry,
     validate_signature,
     validation_report,
 )
@@ -35,6 +37,49 @@ def _valid_record(**overrides):
 
 def _errors(issues):
     return [issue for issue in issues if issue.severity == "error"]
+
+
+def _shared_manifest():
+    return [
+        {
+            "case_id": "case-a",
+            "case_scope": "supplied_related_cases",
+            "language_access_mode": "direct_original_language_access",
+            "shared_context_ids": "ctx-1",
+            "cross_case_context_permitted": "yes",
+            "required_context_segments": "case-b_S1",
+            "segment_ids": "case-a_S1|case-a_S2",
+        },
+        {
+            "case_id": "case-b",
+            "case_scope": "local_passage",
+            "language_access_mode": "direct_original_language_access",
+            "shared_context_ids": "",
+            "cross_case_context_permitted": "no",
+            "required_context_segments": "",
+            "segment_ids": "case-b_S1|case-b_S2",
+        },
+        {
+            "case_id": "case-c",
+            "case_scope": "local_passage",
+            "language_access_mode": "direct_original_language_access",
+            "shared_context_ids": "",
+            "cross_case_context_permitted": "no",
+            "required_context_segments": "",
+            "segment_ids": "case-c_S1",
+        },
+    ]
+
+
+def _shared_registry():
+    return [
+        {
+            "shared_context_id": "ctx-1",
+            "description": "Neutral context group",
+            "member_case_ids": "case-a|case-b",
+            "permitted_segment_ids": "case-a_S1|case-a_S2|case-b_S1|case-b_S2",
+        }
+    ]
 
 
 def test_valid_single_mechanism():
@@ -285,6 +330,116 @@ def test_shared_context_required_segments_require_permission():
         and "requires cross_case_context_permitted=yes" in issue.message
         for issue in _errors(issues)
     )
+
+
+def test_unknown_shared_context_id_fails_manifest_validation():
+    manifest = _shared_manifest()
+    manifest[0]["shared_context_ids"] = "missing-ctx"
+
+    issues = validate_retest_manifest(manifest, _shared_registry())
+
+    assert any("Unknown shared-context ID" in issue.message for issue in _errors(issues))
+
+
+def test_unknown_shared_context_member_case_fails():
+    registry = _shared_registry()
+    registry[0]["member_case_ids"] = "case-a|missing-case"
+
+    issues = validate_shared_context_registry(_shared_manifest(), registry)
+
+    assert any("Unknown member case ID" in issue.message for issue in _errors(issues))
+
+
+def test_unknown_shared_context_permitted_segment_fails():
+    registry = _shared_registry()
+    registry[0]["permitted_segment_ids"] = "case-a_S1|missing-segment"
+
+    issues = validate_shared_context_registry(_shared_manifest(), registry)
+
+    assert any("Unknown permitted segment ID" in issue.message for issue in _errors(issues))
+
+
+def test_required_context_segment_outside_declared_group_fails():
+    manifest = _shared_manifest()
+    manifest[0]["required_context_segments"] = "case-c_S1"
+
+    issues = validate_retest_manifest(manifest, _shared_registry())
+
+    assert any("outside the declared shared-context group" in issue.message for issue in _errors(issues))
+
+
+def test_cross_case_context_with_permission_no_fails():
+    manifest = _shared_manifest()
+    manifest[0]["cross_case_context_permitted"] = "no"
+
+    issues = validate_retest_manifest(manifest, _shared_registry())
+
+    assert any("cross_case_context_permitted=no" in issue.message for issue in _errors(issues))
+
+
+def test_shared_narrative_field_without_registry_entry_fails():
+    manifest = _shared_manifest()
+    manifest[0]["case_scope"] = "shared_narrative_field"
+    manifest[0]["shared_context_ids"] = ""
+
+    issues = validate_retest_manifest(manifest, _shared_registry())
+
+    assert any("requires shared_context_ids" in issue.message for issue in _errors(issues))
+
+
+def test_valid_shared_context_case_passes_registry_validation():
+    issues = [
+        *validate_shared_context_registry(_shared_manifest(), _shared_registry()),
+        *validate_retest_manifest(_shared_manifest(), _shared_registry()),
+    ]
+
+    assert _errors(issues) == []
+
+
+def test_local_primary_and_permitted_shared_context_segments_validate():
+    record = _valid_record(
+        case_id="case-a",
+        status="retest_v0_2_1",
+        language_access_mode="direct_original_language_access",
+        case_scope="supplied_related_cases",
+        shared_context_ids="ctx-1",
+        cross_case_context_permitted="yes",
+        required_context_segments="case-b_S1",
+        evidence_nodes="",
+        primary_evidence_segment_ids="case-a_S1",
+        context_segment_ids="case-b_S1",
+    )
+
+    issues = validate_record(
+        record,
+        manifest_metadata=_shared_manifest(),
+        shared_context_registry=_shared_registry(),
+    )
+
+    assert _errors(issues) == []
+
+
+def test_annotation_context_segment_from_unrelated_case_fails():
+    record = _valid_record(
+        case_id="case-a",
+        status="retest_v0_2_1",
+        language_access_mode="direct_original_language_access",
+        case_scope="supplied_related_cases",
+        shared_context_ids="ctx-1",
+        cross_case_context_permitted="yes",
+        required_context_segments="case-b_S1",
+        evidence_nodes="",
+        primary_evidence_segment_ids="case-a_S1",
+        context_segment_ids="case-c_S1",
+    )
+
+    issues = validate_record(
+        record,
+        manifest_metadata=_shared_manifest(),
+        shared_context_registry=_shared_registry(),
+    )
+
+    assert any("unpermitted context segment" in issue.message for issue in _errors(issues))
 
 
 def test_low_uncertainty_with_alternative_signature_warns():

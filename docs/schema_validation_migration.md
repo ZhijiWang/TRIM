@@ -60,3 +60,29 @@ questions:
 Low uncertainty with a complete `alternative_signature` produces a warning
 because the v0.2.0 pilot showed that complete alternatives should normally
 trigger at least medium uncertainty.
+
+## Shared-Context Registry
+
+v0.2.1 retest scope is represented by a separate registry file,
+`data/retest_v0_2_1_shared_context_registry.csv`, rather than by free-text
+manifest notes alone. The registry schema is:
+
+- `shared_context_id`
+- `description`
+- `member_case_ids`
+- `permitted_segment_ids`
+
+The validator checks this registry against the retest manifest. Every
+`shared_context_id` used by a case must exist in the registry. Every member case
+must exist in the manifest. Every permitted segment must exist in a manifest
+`segment_ids` field and belong to a member case. `required_context_segments`
+must exist and belong to the declared shared-context group. Annotation
+`primary_evidence_segment_ids` are limited to local case segments, while
+`context_segment_ids` may include local segments and permitted shared-context
+segments.
+
+For v0.2.0 compatibility, legacy annotations are not required to provide a
+registry. v0.2.1 records that use shared-context fields should pass
+`manifest_metadata` and `shared_context_registry` to `validate_record` or
+`validate_dataframe`; the package builder does this for the public retest
+materials.

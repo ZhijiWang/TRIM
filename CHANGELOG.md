@@ -17,7 +17,11 @@
 - Public pilot archive manifests and SHA-256 records for privately retained
   locked submissions, interview, and adjudication files.
 - Reproducible coder-facing ZIP package builder with leakage checks and
-  checksum output.
+  checksum output, shared-context referential-integrity checks, and
+  semantic-steering audit reports.
+- Shared-context registry for v0.2.1 retest cases.
+- Researcher-facing retest manifest separated from the neutral coder-facing
+  manifest.
 - Intercoder evidence-overlap metrics, primary/context overlap reporting,
   compatible single-versus-compound agreement, language/scope strata, and
   adjudication-category columns that preserve raw disagreement.
@@ -30,8 +34,10 @@
   including `no_fit`.
 - Revised validation to support v0.2.1 primary/context evidence fields, shared
   context permissions, language-access metadata, uncertainty calibration
-  warnings, and question-log fields while preserving v0.2.0 `evidence_nodes`
-  compatibility.
+  warnings, question-log fields, and shared-context registry validation while
+  preserving v0.2.0 `evidence_nodes` compatibility.
+- Neutralized coder-facing retest metadata and source-packet summaries that
+  could otherwise cue analytic choices.
 - Reframed the completed v0.2.0 pilot as multilingual, translation- and
   summary-mediated usability evidence, not established reliability.
 

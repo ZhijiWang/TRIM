@@ -171,7 +171,9 @@ class TrimAnnotation:
 
     The flat fields are useful for CSV/JSON exchange. Use ``to_core_components``
     to view the same annotation as evidence nodes, anchor node, edge, and
-    function node.
+    function node. v0.2.1 metadata fields record language access, primary versus
+    context segment selection, and shared-context permissions without changing
+    the v0.2.0 evidence-node compatibility path.
     """
 
     case_id: str = ""

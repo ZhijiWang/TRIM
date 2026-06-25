@@ -11,6 +11,9 @@ central analytic role.
 
 ## Required Steps
 
+All formal coding must be based on the supplied packet. External links are
+provenance references and are not required for completion.
+
 1. Read the case metadata and source segments.
 2. Check the permitted case scope.
 3. Select one to three `primary_evidence_segment_ids`.
@@ -65,4 +68,3 @@ Do not seek case-specific coaching before lock.
 Use only the context permitted in the manifest. If the case says
 `cross_case_context_permitted=no`, do not use related cases to select the
 signature.
-

@@ -1,13 +1,13 @@
 case_id,text,case_label,source,language,case_type,language_access_mode,case_scope,shared_context_ids,cross_case_context_permitted,required_context_segments,function_label,cue_family,broad_function_family,evidence_anchor,evidence_nodes,primary_evidence_segment_ids,context_segment_ids,evidence_highlight,anchor_node,friction_locus,rationale_mechanism,epistemic_support,discourse_level,temporal_orientation,uncertainty_flag,rationale_note,alternative_signature,coder_id,status
-JC_CALPURNIA_DECIUS,,"Act 2.2, Calpurnia dream and Decius interpretation",Julius Caesar,English,omen_and_persuasion,direct_original_language_access,local_passage,,no,,,,,,,,,,,,,,,,,,coder_id,retest_v0_2_1
-JC_IDES_SOOTHSAYER,,"Act 1.2, soothsayer warning",Julius Caesar,English,prophetic_warning,direct_original_language_access,local_passage,,no,,,,,,,,,,,,,,,,,,coder_id,retest_v0_2_1
-HAM_GHOST_COMMAND,,"Act 1.5, ghost command and Hamlet response",Hamlet,English,testimony_and_command,direct_original_language_access,local_passage,,no,,,,,,,,,,,,,,,,,,coder_id,retest_v0_2_1
-HAM_PLAY_REACTION,,"Act 3.2, play test and Claudius reaction",Hamlet,English,staged_testimony,direct_original_language_access,supplied_related_cases,HAMLET_GHOST_TEST,yes,HAM_GHOST_COMMAND_S2,,,,,,,,,,,,,,,,,,coder_id,retest_v0_2_1
-OTH_HANDKERCHIEF_CHAIN,,"Act 3.3-3.4, handkerchief chain",Othello,English,material_warrant,direct_original_language_access,supplied_related_cases,OTHELLO_HANDKERCHIEF_CHAIN,yes,OTH_HANDKERCHIEF_CHAIN_S1|OTH_HANDKERCHIEF_CHAIN_S2,,,,,,,,,,,,,,,,,,coder_id,retest_v0_2_1
-ANT_GUARD_REPORT,,Guard report of the burial,Antigone,Ancient Greek,reported_speech,published_translation,local_passage,,no,,,,,,,,,,,,,,,,,,coder_id,retest_v0_2_1
-ANT_TEIRESIAS_OMENS,,Teiresias reports failed sacrifices,Antigone,Ancient Greek,prophetic_interpretation,published_translation,local_passage,,no,,,,,,,,,,,,,,,,,,coder_id,retest_v0_2_1
-OED_TIREISIAS_ACCUSATION,,Teiresias accusation,Oedipus the King,Ancient Greek,testimony_and_accusation,published_translation,local_passage,,no,,,,,,,,,,,,,,,,,,coder_id,retest_v0_2_1
-OED_MESSENGER_SHEPHERD,,Messenger and shepherd recognition chain,Oedipus the King,Ancient Greek,recognition_testimony,published_translation,shared_narrative_field,THEBES_IDENTITY_CHAIN,yes,OED_TIREISIAS_ACCUSATION_S4,,,,,,,,,,,,,,,,,,coder_id,retest_v0_2_1
-APOL_ORACLE_INQUIRY,,Oracle and Socrates' inquiry,Apology,Ancient Greek,oracle_and_inquiry,published_translation,complete_work,,no,,,,,,,,,,,,,,,,,,coder_id,retest_v0_2_1
-SILVER_BLAZE_DOG,,"Silver Blaze, the dog in the night-time",The Memoirs of Sherlock Holmes,English,inference_case,direct_original_language_access,local_passage,,no,,,,,,,,,,,,,,,,,,coder_id,retest_v0_2_1
-AESOP_FOX_GRAPES,,The Fox and the Grapes,Three Hundred Aesop's Fables,Ancient Greek,fable,published_translation,local_passage,,no,,,,,,,,,,,,,,,,,,coder_id,retest_v0_2_1
+JC_CALPURNIA_DECIUS,,Act 2.2 selected passage,Julius Caesar,English,dramatic_scene,direct_original_language_access,local_passage,,no,,,,,,,,,,,,,,,,,,coder_id,retest_v0_2_1
+JC_IDES_SOOTHSAYER,,Act 1.2 warning scene,Julius Caesar,English,dramatic_scene,direct_original_language_access,local_passage,,no,,,,,,,,,,,,,,,,,,coder_id,retest_v0_2_1
+HAM_GHOST_COMMAND,,Act 1.5 selected passage,Hamlet,English,dramatic_scene,direct_original_language_access,local_passage,,no,,,,,,,,,,,,,,,,,,coder_id,retest_v0_2_1
+HAM_PLAY_REACTION,,Act 3.2 play scene,Hamlet,English,dramatic_scene,direct_original_language_access,supplied_related_cases,HAMLET_CONTEXT_A,yes,HAM_GHOST_COMMAND_S2,,,,,,,,,,,,,,,,,,coder_id,retest_v0_2_1
+OTH_HANDKERCHIEF_CHAIN,,Act 3.3-3.4 selected passages,Othello,English,dramatic_scene,direct_original_language_access,supplied_related_cases,OTHELLO_CONTEXT_A,yes,OTH_HANDKERCHIEF_CHAIN_S1|OTH_HANDKERCHIEF_CHAIN_S2,,,,,,,,,,,,,,,,,,coder_id,retest_v0_2_1
+ANT_GUARD_REPORT,,Selected guard report passage,Antigone,Ancient Greek,dramatic_scene,published_translation,local_passage,,no,,,,,,,,,,,,,,,,,,coder_id,retest_v0_2_1
+ANT_TEIRESIAS_OMENS,,Selected Teiresias passage,Antigone,Ancient Greek,dramatic_scene,published_translation,local_passage,,no,,,,,,,,,,,,,,,,,,coder_id,retest_v0_2_1
+OED_TIREISIAS_ACCUSATION,,Selected Teiresias passage,Oedipus the King,Ancient Greek,dramatic_scene,published_translation,local_passage,,no,,,,,,,,,,,,,,,,,,coder_id,retest_v0_2_1
+OED_MESSENGER_SHEPHERD,,Messenger and shepherd scene,Oedipus the King,Ancient Greek,dramatic_scene,published_translation,shared_narrative_field,THEBES_CONTEXT_A,yes,OED_TIREISIAS_ACCUSATION_S4,,,,,,,,,,,,,,,,,,coder_id,retest_v0_2_1
+APOL_ORACLE_INQUIRY,,Selected oracle passage,Apology,Ancient Greek,dialogue_passage,published_translation,complete_work,,no,,,,,,,,,,,,,,,,,,coder_id,retest_v0_2_1
+SILVER_BLAZE_DOG,,Selected night-time exchange,The Memoirs of Sherlock Holmes,English,detective_passage,direct_original_language_access,local_passage,,no,,,,,,,,,,,,,,,,,,coder_id,retest_v0_2_1
+AESOP_FOX_GRAPES,,Selected fable passage,Three Hundred Aesop's Fables,Ancient Greek,short_fable,published_translation,local_passage,,no,,,,,,,,,,,,,,,,,,coder_id,retest_v0_2_1

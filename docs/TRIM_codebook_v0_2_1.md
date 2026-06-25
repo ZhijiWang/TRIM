@@ -310,6 +310,17 @@ work, supplied related cases, or an explicitly defined shared narrative field.
 If a function depends on accumulated incompatibility or a shared narrative
 field, the permission must be explicit.
 
+Shared-context groups are represented in
+`data/retest_v0_2_1_shared_context_registry.csv`, with one row per
+`shared_context_id`. The registry records a neutral description, member case
+IDs, and the segment IDs available to that group. A case with
+`cross_case_context_permitted=no` must have empty `shared_context_ids` and
+empty `required_context_segments`. A case with `case_scope=supplied_related_cases`
+or `case_scope=shared_narrative_field` must name a valid registry entry and use
+`cross_case_context_permitted=yes`. Local primary evidence must come from the
+case's own `segment_ids`; context evidence may use local segments plus the
+segments permitted by the declared shared-context group.
+
 ## Backward Compatibility
 
 Existing v0.2.0 annotations remain loadable. Records with `evidence_nodes`
@@ -317,4 +328,3 @@ continue to validate under the legacy evidence model unless they opt into
 v0.2.1 fields or status. v0.2.1 retest records require
 `primary_evidence_segment_ids`, `language_access_mode`, `case_scope`, and
 `cross_case_context_permitted`.
-

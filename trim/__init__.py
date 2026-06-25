@@ -67,6 +67,9 @@ from trim.validator import (
     ValidationReport,
     validate_annotation,
     validate_annotations,
+    validate_retest_manifest,
+    validate_shared_context_registry,
+    validate_source_packet_segment_coverage,
 )
 
 __all__ = [
@@ -121,5 +124,8 @@ __all__ = [
     "stratified_pairwise_agreement",
     "validate_annotation",
     "validate_annotations",
+    "validate_retest_manifest",
+    "validate_shared_context_registry",
+    "validate_source_packet_segment_coverage",
     "write_markdown_table",
 ]

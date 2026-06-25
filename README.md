@@ -120,8 +120,9 @@ validated intercoder reliability or cross-language construct validity.
 v0.2.1 is a prospective retest design. It does not recode the original ten
 formal cases. It adds an out-of-sample 12-case retest corpus, discriminative
 primary/context evidence selection, explicit shared-context permissions,
-language-access metadata, revised uncertainty thresholds, and a question-log
-rule for self-resolved questions.
+language-access metadata, revised uncertainty thresholds, a question-log rule
+for self-resolved questions, and semantic-steering checks for the coder-facing
+package.
 
 ## Methodological Contribution
 
@@ -143,6 +144,8 @@ See [`docs/related_methods.md`](docs/related_methods.md) and
 - [`docs/pilot_v0_2_0_results_and_adjudication.md`](docs/pilot_v0_2_0_results_and_adjudication.md)
 - [`docs/retest_protocol_v0_2_1.md`](docs/retest_protocol_v0_2_1.md)
 - [`docs/retest_v0_2_1_coder_guide.md`](docs/retest_v0_2_1_coder_guide.md)
+- [`docs/retest_v0_2_1_semantic_steering_audit.md`](docs/retest_v0_2_1_semantic_steering_audit.md)
+- [`docs/retest_v0_2_1_case_design_audit.md`](docs/retest_v0_2_1_case_design_audit.md)
 - [`docs/v0_2_1_revision_traceability.md`](docs/v0_2_1_revision_traceability.md)
 - [`docs/second_coder_onboarding_v0_2_1.md`](docs/second_coder_onboarding_v0_2_1.md)
 - [`docs/intercoder_workflow_v0_2_1.md`](docs/intercoder_workflow_v0_2_1.md)
@@ -171,8 +174,8 @@ python scripts/build_retest_v0_2_1_package.py
 
 The builder writes a deterministic ZIP and SHA-256 manifest under
 `outputs/coder_packages/`. Leakage tests fail if original pilot case IDs,
-answer-bearing labels, adjudication outcomes, article notes, or comparison
-reports enter the coder package.
+answer-bearing labels, adjudication outcomes, article notes, comparison reports,
+or unreviewed case-specific semantic-steering phrases enter the coder package.
 
 ## Citing and License
 

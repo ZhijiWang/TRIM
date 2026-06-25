@@ -19,8 +19,7 @@ Task:
 
 1. Select one to three primary evidence segment IDs.
 2. Add context segment IDs if needed.
-3. Decide whether the visible explanation or the background storm context is
-   doing the main conversion work.
+3. Decide which segment is most important for your annotation and why.
 4. Record any question you ask yourself.
 
 ## Practice Case 2: Shared Context Permission
@@ -37,6 +36,6 @@ Task:
 
 1. Code one local witness statement first.
 2. Then code the same statement with shared context permitted.
-3. Note whether the discourse level or warrant relation changes.
+3. Note whether your field choices change when the related statements are
+   available.
 4. Log any uncertainty threshold question.
-

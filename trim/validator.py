@@ -186,16 +186,28 @@ def validate_record(
     record: TrimAnnotation | Mapping[str, Any],
     *,
     known_segment_ids: Iterable[str] | Mapping[str, Iterable[str]] | None = None,
+    manifest_metadata: Any = None,
+    shared_context_registry: Any = None,
 ) -> list[ValidationIssue]:
     """Validate one human-created TRIM annotation record."""
 
     case_id = _field_value(record, "case_id") or "<missing case_id>"
+    manifest = _records_by_key(manifest_metadata, "case_id")
+    registry = _records_by_key(shared_context_registry, "shared_context_id")
     issues: list[ValidationIssue] = []
 
     issues.extend(_validate_required_fields(record, case_id))
     issues.extend(_validate_function_label(record, case_id))
-    issues.extend(_validate_v0_2_1_metadata(record, case_id))
-    issues.extend(_validate_evidence_fields(record, case_id, known_segment_ids))
+    issues.extend(_validate_v0_2_1_metadata(record, case_id, manifest, registry))
+    issues.extend(
+        _validate_evidence_fields(
+            record,
+            case_id,
+            known_segment_ids,
+            manifest,
+            registry,
+        )
+    )
     signature_values = {
         field_name: _field_value(record, field_name)
         for field_name in SIGNATURE_FIELDS
@@ -213,12 +225,162 @@ def validate_record(
     return issues
 
 
-def validate_dataframe(df: pd.DataFrame) -> list[ValidationIssue]:
+def validate_dataframe(
+    df: pd.DataFrame,
+    *,
+    known_segment_ids: Iterable[str] | Mapping[str, Iterable[str]] | None = None,
+    manifest_metadata: Any = None,
+    shared_context_registry: Any = None,
+) -> list[ValidationIssue]:
     """Validate all records in a pandas DataFrame."""
 
     issues: list[ValidationIssue] = []
     for record in df.to_dict(orient="records"):
-        issues.extend(validate_record(record))
+        issues.extend(
+            validate_record(
+                record,
+                known_segment_ids=known_segment_ids,
+                manifest_metadata=manifest_metadata,
+                shared_context_registry=shared_context_registry,
+            )
+        )
+    return issues
+
+
+def validate_retest_manifest(
+    manifest_metadata: Any,
+    shared_context_registry: Any | None = None,
+) -> list[ValidationIssue]:
+    """Validate v0.2.1 retest manifest scope and shared-context references."""
+
+    manifest = _records_by_key(manifest_metadata, "case_id")
+    registry = _records_by_key(shared_context_registry, "shared_context_id")
+    issues: list[ValidationIssue] = []
+    all_segments = _all_manifest_segments(manifest)
+
+    for case_id, record in manifest.items():
+        issues.extend(_validate_manifest_scope_record(record, case_id, registry))
+        required_segments = coerce_string_list(record.get("required_context_segments"))
+        shared_ids = coerce_string_list(record.get("shared_context_ids"))
+        permitted = _permitted_shared_segments(shared_ids, registry)
+
+        for segment_id in required_segments:
+            if segment_id not in all_segments:
+                issues.append(
+                    ValidationIssue(
+                        case_id=case_id,
+                        field="required_context_segments",
+                        severity="error",
+                        message=f"Unknown required context segment {segment_id!r}.",
+                    )
+                )
+            elif shared_ids and segment_id not in permitted:
+                issues.append(
+                    ValidationIssue(
+                        case_id=case_id,
+                        field="required_context_segments",
+                        severity="error",
+                        message=(
+                            f"Required context segment {segment_id!r} is outside "
+                            "the declared shared-context group."
+                        ),
+                    )
+                )
+    return issues
+
+
+def validate_shared_context_registry(
+    manifest_metadata: Any,
+    shared_context_registry: Any,
+) -> list[ValidationIssue]:
+    """Validate shared-context registry membership and segment references."""
+
+    manifest = _records_by_key(manifest_metadata, "case_id")
+    registry = _records_by_key(shared_context_registry, "shared_context_id")
+    segment_to_case = _segment_to_case_map(manifest)
+    issues: list[ValidationIssue] = []
+
+    for shared_context_id, record in registry.items():
+        members = coerce_string_list(record.get("member_case_ids"))
+        permitted_segments = coerce_string_list(record.get("permitted_segment_ids"))
+        if not members:
+            issues.append(
+                ValidationIssue(
+                    case_id=shared_context_id,
+                    field="member_case_ids",
+                    severity="error",
+                    message="member_case_ids is required.",
+                )
+            )
+        if not permitted_segments:
+            issues.append(
+                ValidationIssue(
+                    case_id=shared_context_id,
+                    field="permitted_segment_ids",
+                    severity="error",
+                    message="permitted_segment_ids is required.",
+                )
+            )
+        for member in members:
+            if member not in manifest:
+                issues.append(
+                    ValidationIssue(
+                        case_id=shared_context_id,
+                        field="member_case_ids",
+                        severity="error",
+                        message=f"Unknown member case ID {member!r}.",
+                    )
+                )
+        for segment_id in permitted_segments:
+            owner_case = segment_to_case.get(segment_id)
+            if owner_case is None:
+                issues.append(
+                    ValidationIssue(
+                        case_id=shared_context_id,
+                        field="permitted_segment_ids",
+                        severity="error",
+                        message=f"Unknown permitted segment ID {segment_id!r}.",
+                    )
+                )
+            elif members and owner_case not in members:
+                issues.append(
+                    ValidationIssue(
+                        case_id=shared_context_id,
+                        field="permitted_segment_ids",
+                        severity="error",
+                        message=(
+                            f"Permitted segment {segment_id!r} belongs to "
+                            f"{owner_case!r}, which is not a member case."
+                        ),
+                    )
+                )
+    return issues
+
+
+def validate_source_packet_segment_coverage(
+    manifest_metadata: Any,
+    source_packet_text: str,
+) -> list[ValidationIssue]:
+    """Validate that manifest segment IDs appear in the coder-facing packet."""
+
+    manifest = _records_by_key(manifest_metadata, "case_id")
+    packet = _clean_value(source_packet_text)
+    issues: list[ValidationIssue] = []
+    for case_id, record in manifest.items():
+        for field_name in ("segment_ids", "required_context_segments"):
+            for segment_id in coerce_string_list(record.get(field_name)):
+                if segment_id and segment_id not in packet:
+                    issues.append(
+                        ValidationIssue(
+                            case_id=case_id,
+                            field=field_name,
+                            severity="error",
+                            message=(
+                                f"Segment ID {segment_id!r} is not present in "
+                                "the coder-facing source packet."
+                            ),
+                        )
+                    )
     return issues
 
 
@@ -342,6 +504,8 @@ def _validate_function_label(
 def _validate_v0_2_1_metadata(
     record: TrimAnnotation | Mapping[str, Any],
     case_id: str,
+    manifest: Mapping[str, Mapping[str, Any]],
+    registry: Mapping[str, Mapping[str, Any]],
 ) -> list[ValidationIssue]:
     issues: list[ValidationIssue] = []
     controlled_checks = {
@@ -382,9 +546,123 @@ def _validate_v0_2_1_metadata(
     required_context_segments = coerce_string_list(
         _raw_field_value(record, "required_context_segments")
     )
+    shared_context_ids = coerce_string_list(
+        _raw_field_value(record, "shared_context_ids")
+    )
+    case_scope = _field_value(record, "case_scope")
+    cross_case_context_permitted = _field_value(record, "cross_case_context_permitted")
+
+    if cross_case_context_permitted == "no":
+        if shared_context_ids:
+            issues.append(
+                ValidationIssue(
+                    case_id=case_id,
+                    field="shared_context_ids",
+                    severity="error",
+                    message=(
+                        "shared_context_ids must be empty when "
+                        "cross_case_context_permitted=no."
+                    ),
+                )
+            )
+        if required_context_segments:
+            issues.append(
+                ValidationIssue(
+                    case_id=case_id,
+                    field="required_context_segments",
+                    severity="error",
+                    message=(
+                        "required_context_segments must be empty when "
+                        "cross_case_context_permitted=no."
+                    ),
+                )
+            )
+
+    if case_scope in {"supplied_related_cases", "shared_narrative_field"}:
+        if not shared_context_ids:
+            issues.append(
+                ValidationIssue(
+                    case_id=case_id,
+                    field="shared_context_ids",
+                    severity="error",
+                    message=(
+                        f"case_scope={case_scope} requires shared_context_ids."
+                    ),
+                )
+            )
+        if cross_case_context_permitted != "yes":
+            issues.append(
+                ValidationIssue(
+                    case_id=case_id,
+                    field="cross_case_context_permitted",
+                    severity="error",
+                    message=(
+                        f"case_scope={case_scope} requires "
+                        "cross_case_context_permitted=yes."
+                    ),
+                )
+            )
+
+    if case_scope == "local_passage" and required_context_segments:
+        issues.append(
+            ValidationIssue(
+                case_id=case_id,
+                field="required_context_segments",
+                severity="error",
+                message="case_scope=local_passage cannot use cross-case context.",
+            )
+        )
+
+    if registry:
+        for shared_context_id in shared_context_ids:
+            if shared_context_id not in registry:
+                issues.append(
+                    ValidationIssue(
+                        case_id=case_id,
+                        field="shared_context_ids",
+                        severity="error",
+                        message=f"Unknown shared-context ID {shared_context_id!r}.",
+                    )
+                )
+            else:
+                members = set(
+                    coerce_string_list(registry[shared_context_id].get("member_case_ids"))
+                )
+                if members and case_id not in members:
+                    issues.append(
+                        ValidationIssue(
+                            case_id=case_id,
+                            field="shared_context_ids",
+                            severity="error",
+                            message=(
+                                f"Case {case_id!r} is not a member of "
+                                f"shared-context ID {shared_context_id!r}."
+                            ),
+                        )
+                    )
+    elif shared_context_ids:
+        issues.append(
+            ValidationIssue(
+                case_id=case_id,
+                field="shared_context_ids",
+                severity="error",
+                message="shared_context_ids requires a shared-context registry.",
+            )
+        )
+
+    if manifest and case_id not in manifest:
+        issues.append(
+            ValidationIssue(
+                case_id=case_id,
+                field="case_id",
+                severity="error",
+                message=f"case_id {case_id!r} is not present in manifest metadata.",
+            )
+        )
+
     if (
         required_context_segments
-        and _field_value(record, "cross_case_context_permitted") != "yes"
+        and cross_case_context_permitted != "yes"
     ):
         issues.append(
             ValidationIssue(
@@ -397,6 +675,22 @@ def _validate_v0_2_1_metadata(
                 ),
             )
         )
+
+    if required_context_segments and registry:
+        permitted = _permitted_shared_segments(shared_context_ids, registry)
+        for segment_id in required_context_segments:
+            if segment_id not in permitted:
+                issues.append(
+                    ValidationIssue(
+                        case_id=case_id,
+                        field="required_context_segments",
+                        severity="error",
+                        message=(
+                            f"Required context segment {segment_id!r} is outside "
+                            "the declared shared-context group."
+                        ),
+                    )
+                )
     return issues
 
 
@@ -404,6 +698,8 @@ def _validate_evidence_fields(
     record: TrimAnnotation | Mapping[str, Any],
     case_id: str,
     known_segment_ids: Iterable[str] | Mapping[str, Iterable[str]] | None,
+    manifest: Mapping[str, Mapping[str, Any]],
+    registry: Mapping[str, Mapping[str, Any]],
 ) -> list[ValidationIssue]:
     issues: list[ValidationIssue] = []
     evidence_nodes = coerce_string_list(_raw_field_value(record, "evidence_nodes"))
@@ -473,32 +769,55 @@ def _validate_evidence_fields(
             )
         )
 
-    allowed_segments = _known_segments_for_case(known_segment_ids, case_id)
-    if allowed_segments is not None:
-        for field_name, values in (
-            ("primary_evidence_segment_ids", primary_segments),
-            ("context_segment_ids", context_segments),
-        ):
-            unknown = sorted(set(values) - allowed_segments)
-            if unknown:
-                issues.append(
-                    ValidationIssue(
-                        case_id=case_id,
-                        field=field_name,
-                        severity="error",
-                        message=(
-                            "Unknown segment IDs for this case: "
-                            f"{', '.join(unknown)}."
-                        ),
-                    )
+    local_segments = _local_segments_for_case(manifest, known_segment_ids, case_id)
+    shared_segments = _permitted_shared_segments(
+        coerce_string_list(_raw_field_value(record, "shared_context_ids")),
+        registry,
+    )
+    primary_allowed = local_segments
+    context_allowed = (
+        (local_segments | shared_segments)
+        if local_segments is not None
+        else _known_segments_for_case(known_segment_ids, case_id)
+    )
+
+    if primary_allowed is not None:
+        unknown_primary = sorted(set(primary_segments) - primary_allowed)
+        if unknown_primary:
+            issues.append(
+                ValidationIssue(
+                    case_id=case_id,
+                    field="primary_evidence_segment_ids",
+                    severity="error",
+                    message=(
+                        "Unknown segment IDs for local primary evidence in "
+                        "this case: "
+                        f"{', '.join(unknown_primary)}."
+                    ),
                 )
+            )
+
+    if context_allowed is not None:
+        unknown_context = sorted(set(context_segments) - context_allowed)
+        if unknown_context:
+            issues.append(
+                ValidationIssue(
+                    case_id=case_id,
+                    field="context_segment_ids",
+                    severity="error",
+                    message=(
+                        "Unknown or unpermitted context segment IDs for this case: "
+                        f"{', '.join(unknown_context)}."
+                    ),
+                )
+            )
 
     if (
         primary_segments
-        and allowed_segments is not None
-        and set(primary_segments) == allowed_segments
+        and primary_allowed is not None
+        and set(primary_segments) == primary_allowed
         and not context_segments
-        and len(allowed_segments) > 1
+        and len(primary_allowed) > 1
     ):
         issues.append(
             ValidationIssue(
@@ -686,6 +1005,86 @@ def _known_segments_for_case(
             return None
         return set(coerce_string_list(values))
     return set(coerce_string_list(known_segment_ids))
+
+
+def _validate_manifest_scope_record(
+    record: Mapping[str, Any],
+    case_id: str,
+    registry: Mapping[str, Mapping[str, Any]],
+) -> list[ValidationIssue]:
+    return _validate_v0_2_1_metadata(record, case_id, {}, registry)
+
+
+def _records_by_key(table: Any, key: str) -> dict[str, Mapping[str, Any]]:
+    if table is None:
+        return {}
+    if isinstance(table, pd.DataFrame):
+        records = table.to_dict(orient="records")
+    elif isinstance(table, Mapping):
+        if all(isinstance(value, Mapping) for value in table.values()):
+            return {
+                _clean_value(record_key): value
+                for record_key, value in table.items()
+                if _clean_value(record_key)
+            }
+        records = [table]
+    elif isinstance(table, Iterable) and not isinstance(table, (str, bytes)):
+        records = list(table)
+    else:
+        raise TypeError(f"Unsupported table type for {key}: {type(table)!r}")
+
+    keyed: dict[str, Mapping[str, Any]] = {}
+    for record in records:
+        if not isinstance(record, Mapping):
+            continue
+        record_key = _clean_value(record.get(key, ""))
+        if record_key:
+            keyed[record_key] = record
+    return keyed
+
+
+def _all_manifest_segments(
+    manifest: Mapping[str, Mapping[str, Any]],
+) -> set[str]:
+    return {
+        segment_id
+        for record in manifest.values()
+        for segment_id in coerce_string_list(record.get("segment_ids"))
+    }
+
+
+def _segment_to_case_map(
+    manifest: Mapping[str, Mapping[str, Any]],
+) -> dict[str, str]:
+    return {
+        segment_id: case_id
+        for case_id, record in manifest.items()
+        for segment_id in coerce_string_list(record.get("segment_ids"))
+    }
+
+
+def _local_segments_for_case(
+    manifest: Mapping[str, Mapping[str, Any]],
+    known_segment_ids: Iterable[str] | Mapping[str, Iterable[str]] | None,
+    case_id: str,
+) -> set[str] | None:
+    if case_id in manifest:
+        return set(coerce_string_list(manifest[case_id].get("segment_ids")))
+    return _known_segments_for_case(known_segment_ids, case_id)
+
+
+def _permitted_shared_segments(
+    shared_context_ids: tuple[str, ...],
+    registry: Mapping[str, Mapping[str, Any]],
+) -> set[str]:
+    return {
+        segment_id
+        for shared_context_id in shared_context_ids
+        if shared_context_id in registry
+        for segment_id in coerce_string_list(
+            registry[shared_context_id].get("permitted_segment_ids")
+        )
+    }
 
 
 def _clean_value(value: Any) -> str:

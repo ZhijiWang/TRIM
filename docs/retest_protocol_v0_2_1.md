@@ -43,6 +43,7 @@ Coder-facing:
 - `docs/discourse_level_guide_v0_2_1.md`
 - `docs/retest_v0_2_1_coder_guide.md`
 - `data/retest_v0_2_1_case_manifest.csv`
+- `data/retest_v0_2_1_shared_context_registry.csv`
 - `data/retest_v0_2_1_source_packet.md`
 - `data/retest_v0_2_1_coding_template.csv`
 - `data/retest_v0_2_1_question_log_template.csv`
@@ -51,7 +52,8 @@ Coder-facing:
 
 Research-only materials, pilot results, adjudication, tests, comparison
 reports, article notes, and expected labels are excluded from the coder-facing
-ZIP.
+ZIP. The researcher-facing design manifest is
+`data/retest_v0_2_1_research_manifest.csv`; it is not part of the coder package.
 
 ## Procedure
 
@@ -81,6 +83,31 @@ The manifest states each case's permitted scope. Coders may use only the local
 passage, complete work, supplied related cases, or shared narrative field named
 in the manifest. Cross-case context is not assumed.
 
+The shared-context registry is the authoritative map from `shared_context_ids`
+to member cases and permitted cross-case segments. Validation fails if a
+manifest names an unknown shared-context ID, if a registry member case or
+permitted segment does not exist, if a required context segment is outside the
+declared group, or if a local-passage case supplies cross-case required context.
+
+All formal coding must be possible from the supplied source packet. External
+URLs in the manifest are provenance references and are not required for coding.
+
+## Metadata Separation
+
+Coder-facing metadata uses neutral bibliographic and structural descriptors.
+Research-only analytic categories are retained only in the researcher-facing
+manifest for later design analysis. Coder-facing `case_type` values must not
+duplicate or approximate controlled TRIM function, locus, discourse-level,
+rationale-mechanism, or epistemic-support values.
+
+## Package Audit
+
+The package builder performs explicit leakage checks and a separate
+semantic-steering scan. Instructional files may contain controlled vocabulary.
+Case-specific files are scanned for controlled values, prohibited analytic
+descriptors, original pilot case IDs, and answer-bearing phrases. Unreviewed
+high-risk matches fail package generation.
+
 ## Analysis
 
 Report:
@@ -103,4 +130,3 @@ Proceed to a larger reliability design only if the v0.2.1 retest shows complete
 records, discriminative evidence selection, meaningful question logging,
 stable handling of revised boundary pairs, and no new systematic leakage or
 scope ambiguity.
-

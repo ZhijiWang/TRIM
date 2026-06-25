@@ -7,7 +7,9 @@ metadata. For each formal case, select one to three primary evidence segment
 IDs. Add context segment IDs only when they support sequence, speaker role, or
 permitted shared context.
 
-This packet contains no expected labels.
+All formal coding must be based on the supplied packet. External links are
+provenance references and are not required for completion. This packet contains
+no expected labels.
 
 ---
 
@@ -26,8 +28,9 @@ This packet contains no expected labels.
   heart in the beast and advise Caesar not to go forth.
 - `JC_CALPURNIA_DECIUS_S4`: Calpurnia describes the dream of Caesar's statue
   spouting blood while Romans smile and bathe their hands.
-- `JC_CALPURNIA_DECIUS_S5`: Decius reinterprets the dream as reviving blood for
-  Rome and tells Caesar the Senate intends to give him a crown.
+- `JC_CALPURNIA_DECIUS_S5`: Decius gives a different account of the dream,
+  saying Caesar's blood will provide life for Rome, and tells Caesar the Senate
+  intends to give him a crown.
 
 ---
 
@@ -67,11 +70,11 @@ This packet contains no expected labels.
 
 **Source:** William Shakespeare, *Hamlet*, Act 3, Scene 2  
 **Scope:** supplied related cases permitted  
-**Shared context:** `HAMLET_GHOST_TEST`  
+**Shared context:** `HAMLET_CONTEXT_A`
 **Required context:** `HAM_GHOST_COMMAND_S2` may be used as context
 
-- `HAM_PLAY_REACTION_S1`: Hamlet asks Horatio to observe Claudius during the
-  play and says he will compare Horatio's judgement with his own.
+- `HAM_PLAY_REACTION_S1`: Hamlet asks Horatio to watch Claudius during the play
+  and says they will compare what they see.
 - `HAM_PLAY_REACTION_S2`: The dumb show and play stage a king murdered in a
   garden by poison poured into his ear.
 - `HAM_PLAY_REACTION_S3`: Claudius rises and stops the play.
@@ -84,7 +87,7 @@ This packet contains no expected labels.
 
 **Source:** William Shakespeare, *Othello*, Act 3, Scenes 3-4  
 **Scope:** supplied related cases permitted  
-**Shared context:** `OTHELLO_HANDKERCHIEF_CHAIN`
+**Shared context:** `OTHELLO_CONTEXT_A`
 
 - `OTH_HANDKERCHIEF_CHAIN_S1`: Desdemona offers Othello her handkerchief; it
   drops unnoticed.
@@ -109,10 +112,9 @@ This packet contains no expected labels.
   with dust and performed burial rites.
 - `ANT_GUARD_REPORT_S2`: He says there was no mark of pickaxe or mattock and no
   wheel track.
-- `ANT_GUARD_REPORT_S3`: The sentries dispute the meaning of the event and
-  accuse one another.
-- `ANT_GUARD_REPORT_S4`: Creon hears the report and turns suspicion toward
-  disobedience and bribery.
+- `ANT_GUARD_REPORT_S3`: The sentries argue with one another after the report.
+- `ANT_GUARD_REPORT_S4`: Creon hears the report and speaks about disobedience
+  and bribery.
 
 ---
 
@@ -154,7 +156,7 @@ This packet contains no expected labels.
 
 **Source:** Sophocles, *Oedipus the King*, translated by F. Storr  
 **Scope:** shared narrative field  
-**Shared context:** `THEBES_IDENTITY_CHAIN`  
+**Shared context:** `THEBES_CONTEXT_A`
 **Required context:** `OED_TIREISIAS_ACCUSATION_S4` may be used as context
 
 - `OED_MESSENGER_SHEPHERD_S1`: A Corinthian messenger says Polybus was not
@@ -165,8 +167,8 @@ This packet contains no expected labels.
   answering.
 - `OED_MESSENGER_SHEPHERD_S4`: Under threat, the shepherd admits the child came
   from Laius's house.
-- `OED_MESSENGER_SHEPHERD_S5`: Oedipus recognizes the accumulated testimony and
-  cries out that all has come to light.
+- `OED_MESSENGER_SHEPHERD_S5`: After hearing the messenger and shepherd,
+  Oedipus says that all has come to light.
 
 ---
 
@@ -179,8 +181,9 @@ This packet contains no expected labels.
 - `APOL_ORACLE_INQUIRY_S1`: Socrates reports that Chaerephon asked the Delphic
   oracle whether anyone was wiser than Socrates.
 - `APOL_ORACLE_INQUIRY_S2`: The oracle answered that no one was wiser.
-- `APOL_ORACLE_INQUIRY_S3`: Socrates says he tried to test the oracle by going
-  to reputedly wise people.
+- `APOL_ORACLE_INQUIRY_S3`: Socrates says he visited people reputed to be wise
+  after hearing the oracle's answer and compared what they knew with what he
+  knew.
 - `APOL_ORACLE_INQUIRY_S4`: He concludes that his advantage is recognizing that
   he does not know what he does not know.
 
@@ -223,4 +226,3 @@ translated by George Fyler Townsend
 - "Silver Blaze" uses Project Gutenberg #834.
 - "The Fox and the Grapes" uses Project Gutenberg #21, George Fyler Townsend
   translation.
-
