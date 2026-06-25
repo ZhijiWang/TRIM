@@ -19,3 +19,44 @@ The length threshold provides a language-neutral minimum for review documentatio
 ## Command-Line Status
 
 `trim validate` writes the CSV report and returns `0` for valid or warnings-only input and `1` when errors are present. `--always-zero` supports report-only workflows.
+
+## v0.2.1 Pilot-Informed Additions
+
+v0.2.1 adds pilot-facing fields while preserving v0.2.0 compatibility:
+
+- `primary_evidence_segment_ids`
+- `context_segment_ids`
+- `evidence_highlight`
+- `language_access_mode`
+- `case_scope`
+- `shared_context_ids`
+- `cross_case_context_permitted`
+- `required_context_segments`
+
+For v0.2.1 retest records, `primary_evidence_segment_ids` is required and must
+contain one to three segment IDs. `context_segment_ids` is optional. A segment
+cannot be both primary and context in the same record. When known segment IDs
+are supplied to the validator, unknown IDs are errors.
+
+Legacy v0.2.0 records with `evidence_nodes` remain loadable and valid. Graph
+conversion uses `evidence_nodes` when present. If `evidence_nodes` is absent and
+`primary_evidence_segment_ids` is present, graph conversion creates evidence
+nodes from the primary segment IDs and stores context IDs in anchor metadata.
+
+The repository's v0.2.1 retest closes the project-specific `function_label`
+vocabulary to eight substantive labels plus `no_fit`. This is a project-level
+pilot rule, not a claim that all future TRIM projects must use the same
+function list.
+
+Question logs now have a structured validation path for self-resolved
+questions:
+
+- `question_type`
+- `provisional_resolution`
+- `did_question_change_code`
+- `blocking_or_nonblocking`
+- `requires_manual_revision`
+
+Low uncertainty with a complete `alternative_signature` produces a warning
+because the v0.2.0 pilot showed that complete alternatives should normally
+trigger at least medium uncertainty.

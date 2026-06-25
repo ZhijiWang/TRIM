@@ -5,6 +5,20 @@ from __future__ import annotations
 from typing import Iterable
 
 
+FUNCTION_LABELS: frozenset[str] = frozenset(
+    {
+        "immediate_stabilization",
+        "extended_deliberation",
+        "ambition_trigger_authorization",
+        "false_security",
+        "retrospective_trap",
+        "self_justification",
+        "self_defence_self_accusation",
+        "epistemic_suspension",
+        "no_fit",
+    }
+)
+
 FRICTION_LOCI: frozenset[str] = frozenset(
     {
         "cue_function",
@@ -73,13 +87,70 @@ TEMPORAL_ORIENTATIONS: frozenset[str] = frozenset(
 
 UNCERTAINTY_FLAGS: frozenset[str] = frozenset({"low", "medium", "high"})
 
+LANGUAGE_ACCESS_MODES: frozenset[str] = frozenset(
+    {
+        "direct_original_language_access",
+        "published_translation",
+        "project_authored_close_support",
+        "summary_mediated",
+        "mixed",
+    }
+)
+
+CASE_SCOPES: frozenset[str] = frozenset(
+    {
+        "local_passage",
+        "complete_work",
+        "supplied_related_cases",
+        "shared_narrative_field",
+    }
+)
+
+YES_NO_VALUES: frozenset[str] = frozenset({"yes", "no"})
+
+QUESTION_TYPES: frozenset[str] = frozenset(
+    {
+        "definitional",
+        "interpretive",
+        "procedural",
+        "packet_level",
+        "other",
+    }
+)
+
+QUESTION_STATUS_VALUES: frozenset[str] = frozenset({"blocking", "nonblocking"})
+
+QUESTION_REVISION_VALUES: frozenset[str] = frozenset({"yes", "no", "uncertain"})
+
+DISAGREEMENT_CATEGORIES: frozenset[str] = frozenset(
+    {
+        "raw_disagreement",
+        "compatible_difference",
+        "codebook_ambiguity",
+        "substantive_pathway_variation",
+        "insufficient_evidence",
+        "coder_error",
+        "unresolved_legitimate_alternatives",
+        "near_complete_alignment",
+    }
+)
+
 CONTROLLED_VOCABULARIES: dict[str, frozenset[str]] = {
+    "function_label": FUNCTION_LABELS,
     "friction_locus": FRICTION_LOCI,
     "rationale_mechanism": RATIONALE_MECHANISMS,
     "epistemic_support": EPISTEMIC_SUPPORT_VALUES,
     "discourse_level": DISCOURSE_LEVELS,
     "temporal_orientation": TEMPORAL_ORIENTATIONS,
     "uncertainty_flag": UNCERTAINTY_FLAGS,
+    "language_access_mode": LANGUAGE_ACCESS_MODES,
+    "case_scope": CASE_SCOPES,
+    "cross_case_context_permitted": YES_NO_VALUES,
+    "did_question_change_code": YES_NO_VALUES,
+    "blocking_or_nonblocking": QUESTION_STATUS_VALUES,
+    "requires_manual_revision": QUESTION_REVISION_VALUES,
+    "question_type": QUESTION_TYPES,
+    "disagreement_category": DISAGREEMENT_CATEGORIES,
 }
 
 COMPOUND_FIELDS: frozenset[str] = frozenset(

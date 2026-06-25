@@ -15,7 +15,7 @@ def _valid_record(**overrides):
         "case_id": "case-1",
         "case_label": "demo case",
         "source": "demo",
-        "function_label": "demo function",
+        "function_label": "immediate_stabilization",
         "evidence_anchor": "demo anchor",
         "evidence_nodes": "first evidence|second evidence",
         "anchor_node": "demo anchor node",
@@ -53,6 +53,14 @@ def test_invalid_mechanism():
     issues = validate_record(_valid_record(rationale_mechanism="automatic_guess"))
 
     assert any(issue.field == "rationale_mechanism" for issue in _errors(issues))
+
+
+def test_function_label_closed_list_includes_no_fit():
+    assert _errors(validate_record(_valid_record(function_label="no_fit"))) == []
+
+    issues = validate_record(_valid_record(function_label="local_guess"))
+
+    assert any(issue.field == "function_label" for issue in _errors(issues))
 
 
 def test_too_many_compound_mechanisms():
@@ -199,9 +207,106 @@ def test_evidence_nodes_require_at_least_one_nonempty_node():
 
     assert any(
         issue.field == "evidence_nodes"
-        and issue.message
-        == "evidence_nodes requires at least one non-empty evidence node."
+        and issue.message.startswith(
+            "evidence_nodes or primary_evidence_segment_ids requires"
+        )
         for issue in _errors(issues)
+    )
+
+
+def test_primary_evidence_segments_are_limited_and_checked():
+    issues = validate_record(
+        _valid_record(
+            status="retest_v0_2_1",
+            language_access_mode="direct_original_language_access",
+            case_scope="local_passage",
+            cross_case_context_permitted="no",
+            evidence_nodes="",
+            primary_evidence_segment_ids="S1|S2|S3|S4",
+        )
+    )
+
+    assert any(
+        issue.field == "primary_evidence_segment_ids"
+        and "one to three" in issue.message
+        for issue in _errors(issues)
+    )
+
+
+def test_primary_and_context_segments_cannot_duplicate_or_overlap():
+    issues = validate_record(
+        _valid_record(
+            status="retest_v0_2_1",
+            language_access_mode="direct_original_language_access",
+            case_scope="local_passage",
+            cross_case_context_permitted="no",
+            evidence_nodes="",
+            primary_evidence_segment_ids="S1|S1",
+            context_segment_ids="S1|S2|S2",
+        )
+    )
+
+    assert any("duplicate segment IDs" in issue.message for issue in _errors(issues))
+    assert any("both primary evidence and context" in issue.message for issue in _errors(issues))
+
+
+def test_unknown_segment_ids_fail_when_known_segments_are_supplied():
+    issues = validate_record(
+        _valid_record(
+            status="retest_v0_2_1",
+            language_access_mode="direct_original_language_access",
+            case_scope="local_passage",
+            cross_case_context_permitted="no",
+            evidence_nodes="",
+            primary_evidence_segment_ids="S1|S9",
+        ),
+        known_segment_ids={"case-1": ["S1", "S2"]},
+    )
+
+    assert any("Unknown segment IDs" in issue.message for issue in _errors(issues))
+
+
+def test_shared_context_required_segments_require_permission():
+    issues = validate_record(
+        _valid_record(
+            status="retest_v0_2_1",
+            language_access_mode="published_translation",
+            case_scope="shared_narrative_field",
+            shared_context_ids="cluster-1",
+            cross_case_context_permitted="no",
+            required_context_segments="other-case_S1",
+            evidence_nodes="",
+            primary_evidence_segment_ids="S1",
+        )
+    )
+
+    assert any(
+        issue.field == "cross_case_context_permitted"
+        and "requires cross_case_context_permitted=yes" in issue.message
+        for issue in _errors(issues)
+    )
+
+
+def test_low_uncertainty_with_alternative_signature_warns():
+    issues = validate_record(
+        _valid_record(
+            uncertainty_flag="low",
+            rationale_note=(
+                "This rationale documents a complete alternate pathway with "
+                "enough detail for review while preserving the preferred one."
+            ),
+            alternative_signature=(
+                "temporal_layering / extends / textual_anchor / "
+                "commentarial_discourse / retrospective / medium"
+            ),
+        )
+    )
+
+    assert any(
+        issue.field == "uncertainty_flag"
+        and issue.severity == "warning"
+        and "alternative_signature" in issue.message
+        for issue in issues
     )
 
 
@@ -294,3 +399,51 @@ def test_dataframe_validation_helpers():
 
     assert any(issue.case_id == "case-2" for issue in _errors(issues))
     assert list(report.columns) == ["case_id", "field", "severity", "message"]
+
+
+def test_question_log_validation_requires_provisional_resolution_fields():
+    from trim.validator import validate_question_log_record
+
+    issues = validate_question_log_record(
+        {
+            "question_id": "Q1",
+            "case_id": "case-1",
+            "question_type": "interpretive",
+            "question_text": "Does a complete alternate pathway remain viable?",
+            "provisional_resolution": "Use preferred pathway and record alternative.",
+            "did_question_change_code": "yes",
+            "blocking_or_nonblocking": "nonblocking",
+            "requires_manual_revision": "uncertain",
+            "coder_id": "coder_b",
+        }
+    )
+
+    assert _errors(issues) == []
+
+
+def test_question_log_rejects_unknown_controlled_values():
+    from trim.validator import validate_question_log_record
+
+    issues = validate_question_log_record(
+        {
+            "question_id": "Q1",
+            "case_id": "case-1",
+            "question_type": "private_hunch",
+            "question_text": "Question",
+            "provisional_resolution": "Resolution",
+            "did_question_change_code": "maybe",
+            "blocking_or_nonblocking": "soft",
+            "requires_manual_revision": "sometimes",
+            "coder_id": "coder_b",
+        }
+    )
+
+    assert {
+        issue.field
+        for issue in _errors(issues)
+    } >= {
+        "question_type",
+        "did_question_change_code",
+        "blocking_or_nonblocking",
+        "requires_manual_revision",
+    }

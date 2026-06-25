@@ -1,0 +1,28 @@
+# v0.2.1 Revision Traceability
+
+This table maps each pilot-informed revision to locked evidence, adjudication
+category, revised files, tests, and affected layer. Case IDs refer to the locked
+v0.2.0 pilot record only.
+
+| Change | Pilot evidence | Interview evidence | Adjudication category | Revised files | Tests | Layer |
+| --- | --- | --- | --- | --- | --- | --- |
+| Analytic function versus actor uptake rule | `ZZ_MIN_1`, `ZZ_XI_4` | C1-C2: actor uptake boundary unclear | codebook ambiguity / function-boundary problem | `docs/TRIM_codebook_v0_2_1.md`; `docs/TRIM_Coding_Manual_v0_2_1_friction_locus.md`; `data/retest_v0_2_1_*` | `test_function_label_closed_list_includes_no_fit`; retest package leakage tests | manual, packet |
+| Preserve nine function labels plus `no_fit` | All ten cases; no adjudicated split/merge required | C4: no_fit reserved for outside-vocabulary material | function-list revision needed but no split/merge | `trim/vocabulary.py`; `trim/validator.py`; `docs/TRIM_codebook_v0_2_1.md`; templates | `test_function_label_closed_list_includes_no_fit` | schema, manual, tests |
+| Primary/context evidence model | all ten cases selected all segments by Coder B | D1-D3: fixed boundaries encouraged all-segment selection | packet revision | `trim/schema.py`; `trim/validator.py`; `data/retest_v0_2_1_coding_template.csv`; manuals | `test_primary_evidence_segments_are_limited_and_checked`; `test_primary_and_context_segments_cannot_duplicate_or_overlap`; `test_unknown_segment_ids_fail_when_known_segments_are_supplied` | schema, packet, analysis |
+| `context_inference` exclusion for explicit textual operation | `ZZ_XIANG_7` | E2: actor visibly performed conversion | codebook ambiguity | `docs/TRIM_codebook_v0_2_1.md`; `docs/TRIM_Coding_Manual_v0_2_1_friction_locus.md`; `data/retest_v0_2_1_source_packet.md` | documentation and retest coverage; validator protects evidence fields | manual, packet |
+| `warrant_attribution` versus `warrant_relation` | `MAC_1_3` | E1: confirmation changed force of future claim | substantive pathway variation | v0.2.1 codebook/manuals; intercoder workflow | `test_compatible_single_compound_value_reports_containment`; `test_apply_disagreement_categories_preserves_raw_rows` | manual, analysis |
+| `operation_function` versus `perspective_assignment` | `GROVE_TAJOMARU` | E3: confession act versus standpoint | substantive pathway variation | v0.2.1 codebook/manuals; retest corpus | traceability plus retest design review | manual, packet |
+| `frame_narrative` versus `reported_speech` | all three Grove cases | F1-F3: local speech act coded rather than frame | codebook ambiguity / compatible difference / insufficient evidence | `docs/discourse_level_guide_v0_2_1.md`; source packet metadata | discourse guide; retest leakage and manifest tests | manual, packet |
+| Uncertainty calibration | most cases; 40% exact agreement | G1-G2: complete alternative should trigger medium | codebook ambiguity | `trim/validator.py`; manuals; onboarding | `test_low_uncertainty_with_alternative_signature_warns` | schema, manual, tests |
+| Question-log rule | question log had zero entries | B3: questions arose but were self-resolved | packet/manual ambiguity | `trim/validator.py`; `data/retest_v0_2_1_question_log_template.csv`; onboarding | `test_question_log_validation_requires_provisional_resolution_fields`; `test_question_log_rejects_unknown_controlled_values` | schema, packet, tests |
+| Language and translation reporting | pilot used multilingual source packet | A1-A3, G3: summaries affected certainty | reporting limitation | `docs/pilot_v0_2_0_results_and_adjudication.md`; `data/retest_v0_2_1_language_access_form.csv`; manifest | metadata and package tests | packet, analysis |
+| Shared narrative context permissions | `GROVE_TAKEHIRO` lacked explicit cross-testimony permission | A4: later testimony affected by shared field | insufficient evidence | `trim/schema.py`; `trim/validator.py`; retest manifest and source packet | `test_shared_context_required_segments_require_permission`; `test_stratified_pairwise_agreement_reports_language_and_scope` | schema, packet, analysis |
+| Richer reliability outputs | compound/single-select compatibility in adjudication | B2, E5: fields forced dominance choices | compatible difference / substantive variation | `trim/intercoder.py`; `docs/intercoder_workflow_v0_2_1.md` | `test_segment_set_metrics_and_pairwise_segment_agreement`; `test_primary_context_segment_overlap_reports_cross_role_overlap`; `test_apply_disagreement_categories_preserves_raw_rows` | analysis, tests |
+| Coder-package leakage prevention | original pilot materials answer-bearing | H2: revised packet should be usable standalone | packet revision | `scripts/build_retest_v0_2_1_package.py`; package tests | `test_coder_package_leakage`; `test_reproducible_coder_package_checksums` | packet, tests |
+
+## Backward Compatibility
+
+v0.2.0 records that use `evidence_nodes` remain loadable and valid. v0.2.1
+records opt into the new evidence and metadata requirements through the added
+fields and retest status.
+
