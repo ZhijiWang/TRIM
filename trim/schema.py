@@ -18,11 +18,19 @@ ANNOTATION_FIELDS: tuple[str, ...] = (
     "source",
     "language",
     "case_type",
+    "language_access_mode",
+    "case_scope",
+    "shared_context_ids",
+    "cross_case_context_permitted",
+    "required_context_segments",
     "function_label",
     "cue_family",
     "broad_function_family",
     "evidence_anchor",
     "evidence_nodes",
+    "primary_evidence_segment_ids",
+    "context_segment_ids",
+    "evidence_highlight",
     "anchor_node",
     "friction_locus",
     "rationale_mechanism",
@@ -34,6 +42,16 @@ ANNOTATION_FIELDS: tuple[str, ...] = (
     "alternative_signature",
     "coder_id",
     "status",
+)
+
+LIST_FIELDS: frozenset[str] = frozenset(
+    {
+        "evidence_nodes",
+        "primary_evidence_segment_ids",
+        "context_segment_ids",
+        "shared_context_ids",
+        "required_context_segments",
+    }
 )
 
 
@@ -153,7 +171,9 @@ class TrimAnnotation:
 
     The flat fields are useful for CSV/JSON exchange. Use ``to_core_components``
     to view the same annotation as evidence nodes, anchor node, edge, and
-    function node.
+    function node. v0.2.1 metadata fields record language access, primary versus
+    context segment selection, and shared-context permissions without changing
+    the v0.2.0 evidence-node compatibility path.
     """
 
     case_id: str = ""
@@ -162,11 +182,19 @@ class TrimAnnotation:
     source: str = ""
     language: str = ""
     case_type: str = ""
+    language_access_mode: str = ""
+    case_scope: str = ""
+    shared_context_ids: tuple[str, ...] = ()
+    cross_case_context_permitted: str = ""
+    required_context_segments: tuple[str, ...] = ()
     function_label: str = ""
     cue_family: str = ""
     broad_function_family: str = ""
     evidence_anchor: str = ""
     evidence_nodes: tuple[str, ...] = ()
+    primary_evidence_segment_ids: tuple[str, ...] = ()
+    context_segment_ids: tuple[str, ...] = ()
+    evidence_highlight: str = ""
     anchor_node: str = ""
     friction_locus: str = ""
     rationale_mechanism: str = ""
@@ -181,8 +209,13 @@ class TrimAnnotation:
 
     def __post_init__(self) -> None:
         for field_name in ANNOTATION_FIELDS:
-            if field_name == "evidence_nodes":
-                self.evidence_nodes = coerce_string_list(self.evidence_nodes)
+            if field_name in LIST_FIELDS:
+                setattr(
+                    self,
+                    field_name,
+                    coerce_string_list(getattr(self, field_name)),
+                )
+                continue
             elif field_name == "alternative_signature":
                 self.alternative_signature = _coerce_optional_text(
                     self.alternative_signature
@@ -201,7 +234,8 @@ class TrimAnnotation:
         """Return a JSON-friendly flat record."""
 
         record = {field_name: getattr(self, field_name) for field_name in ANNOTATION_FIELDS}
-        record["evidence_nodes"] = list(self.evidence_nodes)
+        for field_name in LIST_FIELDS:
+            record[field_name] = list(getattr(self, field_name))
         return record
 
     def to_csv_record(self) -> dict[str, str]:
@@ -210,8 +244,8 @@ class TrimAnnotation:
         record: dict[str, str] = {}
         for field_name in ANNOTATION_FIELDS:
             value = getattr(self, field_name)
-            if field_name == "evidence_nodes":
-                record[field_name] = "|".join(self.evidence_nodes)
+            if field_name in LIST_FIELDS:
+                record[field_name] = "|".join(getattr(self, field_name))
             elif value is None:
                 record[field_name] = ""
             else:
@@ -221,9 +255,11 @@ class TrimAnnotation:
     def to_core_components(self) -> dict[str, Any]:
         """Represent the flat annotation as the TRIM core graph components."""
 
-        if not self.evidence_nodes:
+        evidence_values = self.evidence_nodes or self.primary_evidence_segment_ids
+        if not evidence_values:
             raise ValueError(
-                "evidence_nodes requires at least one non-empty evidence node."
+                "evidence_nodes or primary_evidence_segment_ids requires at least "
+                "one non-empty evidence node."
             )
         if not self.evidence_anchor:
             raise ValueError("evidence_anchor is required for graph conversion.")
@@ -235,15 +271,29 @@ class TrimAnnotation:
             EvidenceNode(
                 node_id=f"{case_prefix}:evidence:{index}",
                 text=node_text,
-                role="evidence",
+                role=(
+                    "evidence"
+                    if self.evidence_nodes
+                    else "primary_evidence_segment_id"
+                ),
             )
-            for index, node_text in enumerate(self.evidence_nodes, start=1)
+            for index, node_text in enumerate(evidence_values, start=1)
         )
         anchor = AnchorNode(
             node_id=f"{case_prefix}:anchor",
             text=self.anchor_node,
             evidence_node_ids=tuple(node.node_id for node in evidence),
-            metadata={"evidence_anchor": self.evidence_anchor},
+            metadata={
+                "evidence_anchor": self.evidence_anchor,
+                "primary_evidence_segment_ids": self.primary_evidence_segment_ids,
+                "context_segment_ids": self.context_segment_ids,
+                "evidence_highlight": self.evidence_highlight,
+                "case_scope": self.case_scope,
+                "shared_context_ids": self.shared_context_ids,
+                "cross_case_context_permitted": self.cross_case_context_permitted,
+                "required_context_segments": self.required_context_segments,
+                "language_access_mode": self.language_access_mode,
+            },
         )
         function = FunctionNode(
             node_id=f"{case_prefix}:function",

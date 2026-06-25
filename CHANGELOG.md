@@ -1,5 +1,46 @@
 # Changelog
 
+## 0.2.1 - Unreleased
+
+### Added
+
+- Pilot-informed v0.2.1 codebook, friction-locus manual, mechanism manual,
+  discourse-level guide, onboarding, workflow, retest protocol, coder guide,
+  traceability report, and locked v0.2.0 pilot results report.
+- Out-of-sample 12-case v0.2.1 retest corpus with explicit language-access,
+  scope, shared-context, segment, and copyright metadata.
+- v0.2.1 retest coding template with `primary_evidence_segment_ids`,
+  `context_segment_ids`, `evidence_highlight`, `language_access_mode`,
+  `case_scope`, `shared_context_ids`, `cross_case_context_permitted`, and
+  `required_context_segments`.
+- Revised question-log and language-access templates.
+- Public pilot archive manifests and SHA-256 records for privately retained
+  locked submissions, interview, and adjudication files.
+- Reproducible coder-facing ZIP package builder with leakage checks and
+  checksum output, shared-context referential-integrity checks, and
+  semantic-steering audit reports.
+- Shared-context registry for v0.2.1 retest cases.
+- Researcher-facing retest manifest separated from the neutral coder-facing
+  manifest.
+- Intercoder evidence-overlap metrics, primary/context overlap reporting,
+  compatible single-versus-compound agreement, language/scope strata, and
+  adjudication-category columns that preserve raw disagreement.
+
+### Changed
+
+- Bumped source version and citation metadata to 0.2.1 without creating a
+  formal release.
+- Closed the repository's project-specific retest function-label vocabulary,
+  including `no_fit`.
+- Revised validation to support v0.2.1 primary/context evidence fields, shared
+  context permissions, language-access metadata, uncertainty calibration
+  warnings, question-log fields, and shared-context registry validation while
+  preserving v0.2.0 `evidence_nodes` compatibility.
+- Neutralized coder-facing retest metadata and source-packet summaries that
+  could otherwise cue analytic choices.
+- Reframed the completed v0.2.0 pilot as multilingual, translation- and
+  summary-mediated usability evidence, not established reliability.
+
 ## 0.2.0 - Unreleased
 
 ### Added

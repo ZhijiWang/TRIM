@@ -31,6 +31,7 @@ def run_intercoder_demo(repo_root: Path | None = None) -> Path:
 
     primary = pd.read_csv(data_dir / "demo_annotations.csv", dtype=str, keep_default_na=False)
     template = pd.read_csv(data_dir / "second_coder_template.csv", dtype=str, keep_default_na=False)
+    template = template.reindex(columns=ANNOTATION_FIELDS, fill_value="")
     combined = pd.concat(
         [primary.loc[primary["case_id"].isin(template["case_id"])], template],
         ignore_index=True,
