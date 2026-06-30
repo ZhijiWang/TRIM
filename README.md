@@ -7,7 +7,7 @@
 TRIM structures the warranted conversion from textual evidence to interpretive
 function as a locatable, reviewable, and comparable annotation pathway.
 
-Current source version: 0.2.1 (unreleased).
+Current source version: 0.2.2 (unreleased).
 
 ## Core Model
 
@@ -31,7 +31,7 @@ reasoning that keeps them in view.
 Standard annotations also include:
 
 - one or more `evidence_nodes`;
-- for v0.2.1 retest coding, one to three
+- for v0.2.1/v0.2.2 retest coding, one to three
   `primary_evidence_segment_ids`, optional `context_segment_ids`, and optional
   `evidence_highlight`;
 - `evidence_anchor`, which returns the record to a source-facing span, quotation,
@@ -52,7 +52,7 @@ The package:
 - exports evidence-to-function graphs as GraphML and JSON;
 - supports source segmentation;
 - prepares pilot-scale intercoder comparison and disagreement reports.
-- reports v0.2.1 evidence-segment exactness, overlap/Jaccard, primary/context
+- reports v0.2.1/v0.2.2 evidence-segment exactness, overlap/Jaccard, primary/context
   overlap, compatible single-versus-compound differences, and language/scope
   strata.
 
@@ -117,13 +117,22 @@ The completed v0.2.0 pilot is a locked historical record. It is reported as a
 multilingual, translation- and summary-mediated usability pilot, not as
 validated intercoder reliability or cross-language construct validity.
 
-v0.2.1 is a prospective retest design. It does not recode the original ten
+v0.2.1 is a prospective source-text retest package. It does not recode the original ten
 formal cases. It adds an out-of-sample 12-case retest corpus, discriminative
 primary/context evidence selection, explicit shared-context permissions,
 language-access metadata, revised uncertainty thresholds, a question-log rule
 for self-resolved questions, source-text provenance for formal retest segments,
 a `multi_passage_single_case` scope for distributed passages within one formal
 case, and semantic-steering checks for the coder-facing package.
+
+v0.2.2 is a minimal pre-human-deployment patch after an AI protocol dry run of
+the frozen v0.2.1 package. It removes `cue_family` and
+`broad_function_family` from the coder-facing template, adds a question-log /
+uncertainty consistency warning, and clarifies real-time question logging. It
+does not change cases, source-text segments, source provenance, controlled
+vocabularies, shared-context structure, evidence-selection rules, or
+uncertainty definitions. The AI dry run is a protocol stress test only, not
+human reliability evidence.
 
 ## Methodological Contribution
 
@@ -138,6 +147,15 @@ See [`docs/related_methods.md`](docs/related_methods.md) and
 
 ## Documentation
 
+- [`docs/TRIM_codebook_v0_2_2.md`](docs/TRIM_codebook_v0_2_2.md)
+- [`docs/TRIM_Coding_Manual_v0_2_2_friction_locus.md`](docs/TRIM_Coding_Manual_v0_2_2_friction_locus.md)
+- [`docs/TRIM_Coding_Manual_v0_2_2_rationale_mechanism.md`](docs/TRIM_Coding_Manual_v0_2_2_rationale_mechanism.md)
+- [`docs/discourse_level_guide_v0_2_2.md`](docs/discourse_level_guide_v0_2_2.md)
+- [`docs/retest_protocol_v0_2_2.md`](docs/retest_protocol_v0_2_2.md)
+- [`docs/retest_v0_2_2_coder_guide.md`](docs/retest_v0_2_2_coder_guide.md)
+- [`docs/retest_v0_2_2_execution_protocol.md`](docs/retest_v0_2_2_execution_protocol.md)
+- [`docs/retest_v0_2_2_freeze_record.md`](docs/retest_v0_2_2_freeze_record.md)
+- [`docs/v0_2_1_to_v0_2_2_migration.md`](docs/v0_2_1_to_v0_2_2_migration.md)
 - [`docs/TRIM_codebook_v0_2_1.md`](docs/TRIM_codebook_v0_2_1.md)
 - [`docs/TRIM_Coding_Manual_v0_2_1_friction_locus.md`](docs/TRIM_Coding_Manual_v0_2_1_friction_locus.md)
 - [`docs/TRIM_Coding_Manual_v0_2_1_rationale_mechanism.md`](docs/TRIM_Coding_Manual_v0_2_1_rationale_mechanism.md)
@@ -171,7 +189,7 @@ See [`docs/related_methods.md`](docs/related_methods.md) and
 Build the clean coder-facing package with:
 
 ```bash
-python scripts/build_retest_v0_2_1_package.py
+python scripts/build_retest_v0_2_2_package.py
 ```
 
 The builder writes a deterministic ZIP and SHA-256 manifest under

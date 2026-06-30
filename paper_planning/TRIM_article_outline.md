@@ -1,6 +1,6 @@
 # TRIM Article Outline
 
-Recommended target: **Journal of Computational Literary Studies** if the v0.2.1 retest is completed; **Digital Humanities Quarterly** as the most realistic broad DH target.
+Recommended target: **Journal of Computational Literary Studies** if the human v0.2.2 retest is completed; **Digital Humanities Quarterly** as the most realistic broad DH target.
 
 Recommended length: **8,000-9,000 words** for JCLS/DSH-style article; **7,000-8,500 words** for DHQ.
 
@@ -27,9 +27,11 @@ Recommended sections:
 9. Limitations
 10. Conclusion
 
-The v0.2.1 retest section should explicitly note the final source-text patch:
-formal segments now use source text or documented public-domain translation text,
-with provenance, rather than project-authored summaries.
+The retest section should explicitly note the version sequence: v0.2.1 supplied
+source text or documented public-domain translation text with provenance, a
+machine-executed v0.2.1 dry run was used only as a protocol stress test, and
+v0.2.2 made a minimal prospective patch before human deployment. The AI dry run
+is not reported as empirical validation.
 
 ## Section Blueprint
 
@@ -42,7 +44,7 @@ with provenance, rather than project-authored summaries.
 | 5. Pilot design: v0.2.0 | Explain first pilot as usability/method-development, not validation. | Ten cases; independent second coder; post-pilot interview; locked archive. | Table 4: pilot corpus and conditions. | 800 | Reviewers may see pilot as too small. |
 | 6. What the first pilot revealed | Present diagnostic findings. | Completion; field agreement; all-segment selection; question-log gap; boundary findings. | Figure 4: field-level agreement chart; Table 5: adjudication categories. | 1,100 | Treating descriptive agreement as reliability proof. |
 | 7. Pilot-informed v0.2.1 revisions | Show traceability from pilot findings to revisions. | Revision traceability; manuals; schema validation; package leakage tests. | Figure 5: revision trace; Table 6: pilot issue -> revision -> retest measure. | 900 | Looking like patch notes. |
-| 8. Prospective retest design | Describe the 12-case out-of-sample retest and planned analysis. | Retest protocol, case audit, semantic-steering audit, manifest, source packet. | Table 7: retest design matrix; Figure 6: adjudication workflow. | 800 | Too much future tense if results absent. |
+| 8. Prospective retest design | Describe the 12-case out-of-sample human v0.2.2 retest and planned analysis. | Retest protocol, case audit, semantic-steering audit, manifest, source packet, v0.2.1-to-v0.2.2 migration note. | Table 7: retest design matrix; Figure 6: adjudication workflow. | 800 | Too much future tense if results absent. |
 | 9. Discussion: disagreement as structure rather than noise | Explain contribution: disagreement categories, auditability, interpretive plurality. | Worked examples; field-specific disagreement logic. | Figure 7: two pathways to same function or divergent pathways. | 900 | Sounding like transparency equals validity. |
 | 10. Limitations | State limitations plainly. | Pilot size, language mediation, project-specific labels, burden, adjudication dependence, no memo baseline. | None or Table 8: limitations and next evidence. | 600 | Too defensive or too brief. |
 | 11. Conclusion | Re-state contribution and next empirical step. | Summary of claim scale. | None. | 300 | Inflated closing. |
@@ -228,4 +230,4 @@ Paragraph 1 topic sentence: Interpretive annotation needs records that show not 
 
 Paragraph 2 topic sentence: TRIM offers one pathway architecture for that purpose and a retest design for evaluating it prospectively.
 
-Final sentence: Future claims about reliability, language validity, and domain generality depend on completing the v0.2.1 retest and extending the design beyond the current project.
+Final sentence: Future claims about reliability, language validity, and domain generality depend on completing the human v0.2.2 retest and extending the design beyond the current project.

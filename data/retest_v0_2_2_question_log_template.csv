@@ -1,0 +1,2 @@
+question_id,case_id,question_type,question_text,provisional_resolution,did_question_change_code,blocking_or_nonblocking,requires_manual_revision,coder_id,timestamp_utc
+Q1,,definitional,,,,nonblocking,uncertain,coder_id,

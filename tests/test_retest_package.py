@@ -9,9 +9,14 @@ import zipfile
 import pandas as pd
 
 from scripts.build_retest_v0_2_1_package import PACKAGE_FILES, semantic_steering_audit
+from scripts.build_retest_v0_2_2_package import (
+    PACKAGE_FILES as PACKAGE_FILES_V0_2_2,
+    semantic_steering_audit as semantic_steering_audit_v0_2_2,
+)
 from trim.schema import ANNOTATION_FIELDS
 from trim.validator import (
     extract_source_text_blocks,
+    validate_record,
     validate_retest_manifest,
     validate_shared_context_registry,
     validate_source_packet_segment_coverage,
@@ -28,6 +33,9 @@ from trim.vocabulary import (
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 FROZEN_PACKAGE_SHA256 = (
     "012a71280f46cdb2327a6a90d3f4eb788ec44258eea56dfad70a06c6f3467ade"
+)
+FROZEN_PACKAGE_SHA256_V0_2_2 = (
+    "3b3ac302d8491e429d20b1d4fb1c66351ad0e6340698b2f5cd683adb5e0d4cb4"
 )
 ORIGINAL_CASE_IDS = {
     "ZZ_XIANG_7",
@@ -385,11 +393,156 @@ def test_reproducible_coder_package_checksums(tmp_path):
     second_hash = _sha256(second_zip)
 
     assert first_hash == second_hash
+    assert first_hash == FROZEN_PACKAGE_SHA256
     sums = (
         first / "TRIM_retest_v0_2_1_coder_package.SHA256SUMS.txt"
     ).read_text(encoding="utf-8")
     assert f"{first_hash}  TRIM_retest_v0_2_1_coder_package.zip" in sums
     _assert_frozen_coder_facing_files_match_manifest()
+
+
+def test_v0_2_2_template_excludes_researcher_metadata_fields():
+    template = pd.read_csv(
+        PROJECT_ROOT / "data" / "retest_v0_2_2_coding_template.csv",
+        dtype=str,
+        keep_default_na=False,
+    )
+
+    assert "cue_family" not in template.columns
+    assert "broad_function_family" not in template.columns
+    assert len(template) == 12
+    assert set(template["status"]) == {"retest_v0_2_2"}
+    assert set(template["coder_id"]) == {"coder_id"}
+
+
+def test_v0_2_2_validator_does_not_require_removed_template_fields():
+    template = pd.read_csv(
+        PROJECT_ROOT / "data" / "retest_v0_2_2_coding_template.csv",
+        dtype=str,
+        keep_default_na=False,
+    )
+    record = template.iloc[0].to_dict()
+    record.update(
+        {
+            "function_label": "immediate_stabilization",
+            "evidence_anchor": "source-facing anchor",
+            "anchor_node": "analytic anchor",
+            "primary_evidence_segment_ids": "JC_CALPURNIA_DECIUS_S1",
+            "friction_locus": "cue_function",
+            "rationale_mechanism": "supports",
+            "epistemic_support": "textual_anchor",
+            "discourse_level": "intradiegetic",
+            "temporal_orientation": "immediate",
+            "uncertainty_flag": "low",
+            "rationale_note": "The coder records a complete enough rationale.",
+        }
+    )
+
+    issues = validate_record(
+        record,
+        manifest_metadata=pd.read_csv(
+            PROJECT_ROOT / "data" / "retest_v0_2_2_case_manifest.csv",
+            dtype=str,
+            keep_default_na=False,
+        ),
+        shared_context_registry=pd.read_csv(
+            PROJECT_ROOT / "data" / "retest_v0_2_2_shared_context_registry.csv",
+            dtype=str,
+            keep_default_na=False,
+        ),
+    )
+
+    assert not any(
+        issue.field in {"cue_family", "broad_function_family"}
+        for issue in issues
+    )
+    assert not any(issue.severity == "error" for issue in issues)
+
+
+def test_v0_2_2_source_segments_and_provenance_match_v0_2_1():
+    v0_2_1_packet = (
+        PROJECT_ROOT / "data" / "retest_v0_2_1_source_packet.md"
+    ).read_text(encoding="utf-8")
+    v0_2_2_packet = (
+        PROJECT_ROOT / "data" / "retest_v0_2_2_source_packet.md"
+    ).read_text(encoding="utf-8")
+
+    assert extract_source_text_blocks(v0_2_2_packet) == extract_source_text_blocks(
+        v0_2_1_packet
+    )
+    assert (
+        PROJECT_ROOT / "data" / "retest_v0_2_2_source_text_provenance.csv"
+    ).read_text(encoding="utf-8") == (
+        PROJECT_ROOT / "data" / "retest_v0_2_1_source_text_provenance.csv"
+    ).read_text(encoding="utf-8")
+
+
+def test_v0_2_2_shared_context_and_source_provenance_validate():
+    manifest = pd.read_csv(
+        PROJECT_ROOT / "data" / "retest_v0_2_2_case_manifest.csv",
+        dtype=str,
+        keep_default_na=False,
+    )
+    registry = pd.read_csv(
+        PROJECT_ROOT / "data" / "retest_v0_2_2_shared_context_registry.csv",
+        dtype=str,
+        keep_default_na=False,
+    )
+    provenance = pd.read_csv(
+        PROJECT_ROOT / "data" / "retest_v0_2_2_source_text_provenance.csv",
+        dtype=str,
+        keep_default_na=False,
+    )
+    packet = (
+        PROJECT_ROOT / "data" / "retest_v0_2_2_source_packet.md"
+    ).read_text(encoding="utf-8")
+
+    issues = [
+        *validate_shared_context_registry(manifest, registry),
+        *validate_retest_manifest(manifest, registry),
+        *validate_source_packet_segment_coverage(manifest, packet),
+        *validate_source_text_provenance(manifest, provenance, packet),
+    ]
+
+    assert issues == []
+
+
+def test_v0_2_2_semantic_steering_audit_passes():
+    audit = semantic_steering_audit_v0_2_2(PROJECT_ROOT)
+
+    assert audit["match_count"] == 2
+    assert audit["verified_source_text_match_count"] == 2
+    assert audit["unreviewed_high_risk_count"] == 0
+
+
+def test_v0_2_2_coder_package_is_reproducible_and_offline_complete(tmp_path):
+    script = PROJECT_ROOT / "scripts" / "build_retest_v0_2_2_package.py"
+    first = tmp_path / "first"
+    second = tmp_path / "second"
+
+    subprocess.run(
+        [sys.executable, str(script), "--outdir", str(first)],
+        cwd=PROJECT_ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    subprocess.run(
+        [sys.executable, str(script), "--outdir", str(second)],
+        cwd=PROJECT_ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+
+    first_zip = first / "TRIM_retest_v0_2_2_coder_package.zip"
+    second_zip = second / "TRIM_retest_v0_2_2_coder_package.zip"
+    assert _sha256(first_zip) == _sha256(second_zip)
+    assert _sha256(first_zip) == FROZEN_PACKAGE_SHA256_V0_2_2
+    with zipfile.ZipFile(first_zip) as archive:
+        names = archive.namelist()
+    assert names == list(PACKAGE_FILES_V0_2_2)
+    _assert_frozen_v0_2_2_coder_facing_files_match_manifest()
 
 
 def test_coder_package_leakage(tmp_path):
@@ -440,6 +593,26 @@ def _assert_frozen_coder_facing_files_match_manifest():
     assert "retest_v0_2_1" in freeze_record
     assert FROZEN_PACKAGE_SHA256 in freeze_record
     assert FROZEN_PACKAGE_SHA256 in changelog
+    assert "new version identifier" in freeze_record
+
+
+def _assert_frozen_v0_2_2_coder_facing_files_match_manifest():
+    manifest_path = PROJECT_ROOT / "data" / "retest_v0_2_2_frozen_file_hashes.csv"
+    with manifest_path.open("r", encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+
+    assert [row["path"] for row in rows] == list(PACKAGE_FILES_V0_2_2)
+    for row in rows:
+        assert _sha256(PROJECT_ROOT / row["path"]) == row["sha256"]
+
+    freeze_record = (
+        PROJECT_ROOT / "docs" / "retest_v0_2_2_freeze_record.md"
+    ).read_text(encoding="utf-8")
+    changelog = (PROJECT_ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+
+    assert "retest_v0_2_2" in freeze_record
+    assert FROZEN_PACKAGE_SHA256_V0_2_2 in freeze_record
+    assert FROZEN_PACKAGE_SHA256_V0_2_2 in changelog
     assert "new version identifier" in freeze_record
 
 

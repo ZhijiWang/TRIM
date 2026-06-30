@@ -1,21 +1,29 @@
 # TRIM Article Strategy
 
-Working branch reviewed: `pilot-informed-v0.2.1`  
-Head inspected: `626611873b8f820ffd4f52f0de537ce1a30e8e31`  
+Working branch reviewed: `pilot-informed-v0.2.2`  
+Head inspected before v0.2.2 patch: `252f4b1c867751bd996885ec674f5f546ddbc110`  
 Draft PR inspected: #12, open draft, no review comments or discussion threads as of review.
 
 ## Direct Verdict
 
-TRIM is **ready to draft as a disciplined digital humanities methods article**, but **not ready to submit until the v0.2.1 retest is completed and analyzed**.
+TRIM is **ready to draft as a disciplined digital humanities methods article**, but **not ready to submit until the human v0.2.2 retest is completed and analyzed**.
 
 The first article should not claim that TRIM has solved intercoder reliability. The current evidence supports a narrower but publishable argument: final-label agreement and disagreement are methodologically underspecified in interpretive annotation, and TRIM provides a structured pathway record that makes the location and character of interpretive disagreement inspectable.
 
 Revised default architecture after the source-text and scope patch:
 
-- one integrated methods article containing the final-label compression problem, TRIM architecture, v0.2.0 diagnostic usability pilot, pilot failure modes, v0.2.1 prospective revision, out-of-sample retest, pathway-level and field-level comparison, limitations, and future validation;
+- one integrated methods article containing the final-label compression problem, TRIM architecture, v0.2.0 diagnostic usability pilot, pilot failure modes, v0.2.1 prospective source-text retest package, v0.2.1 AI protocol dry run, v0.2.2 minimal pre-human-deployment patch, future human v0.2.2 retest, pathway-level and field-level comparison, limitations, and future validation;
 - a later second article only if it has genuinely new empirical scope: larger multi-coder validation, another domain, another function vocabulary, memo-only comparison, direct-source cross-language replication, or broader generalization.
 
-A pre-retest paper would likely appear incomplete because the repository now contains a carefully corrected and leakage-tested prospective retest package. The most credible article should use that design rather than stop at a pilot-informed promise. Drafting can begin now; submission should wait. No v0.2.1 empirical result should be invented or implied before the retest is complete.
+A pre-retest paper would likely appear incomplete because the repository now contains a carefully corrected and leakage-tested prospective human retest package. The most credible article should use that design rather than stop at a pilot-informed promise. Drafting can begin now; submission should wait. No v0.2.1 AI dry-run or v0.2.2 human-retest empirical result should be invented or implied before human retest completion.
+
+Before human deployment, a machine-executed dry run was used as a protocol
+stress test. It identified ambiguity in two coder-facing metadata fields and a
+need for a consistency warning between logged coding questions and final
+uncertainty reporting. These issues were corrected prospectively in v0.2.2
+without changing cases, source texts, source segments, or substantive coding
+categories. The AI dry run is not empirical validation and its substantive
+labels are not article findings.
 
 ## Article Model Evaluation
 
@@ -53,7 +61,7 @@ Supported refinement:
 - **Methodological claim:** TRIM decomposes evidence-to-function reasoning into fields that can be compared and adjudicated. Strongly supported by codebook, manuals, pilot adjudication, and utilities.
 - **Software/infrastructure claim:** TRIM provides a schema, validator, comparison tools, graph exports, source-segment workflows, and leakage-tested retest packaging. Supported by implementation and tests.
 - **Empirical pilot finding:** v0.2.0 showed independent completion and revealed specific instability points: evidence selection, function/actor uptake, discourse level, context inference, uncertainty, question logging, language mediation, and shared context.
-- **Prospective validation claim:** v0.2.1 is designed to test whether revisions improve usability and comparison. Not yet supported by outcomes.
+- **Prospective validation claim:** v0.2.2 is designed for human external-coder testing of whether revisions improve usability and comparison. Not yet supported by outcomes.
 
 ## One Paper Or Two?
 
@@ -65,16 +73,18 @@ The default publication plan should be one integrated methods article:
 2. TRIM architecture;
 3. v0.2.0 diagnostic usability pilot;
 4. pilot failure modes;
-5. prospective v0.2.1 revision;
-6. out-of-sample v0.2.1 retest;
-7. pathway-level and field-level comparison;
-8. limitations and future validation.
+5. prospective v0.2.1 source-text revision;
+6. v0.2.1 AI protocol dry run;
+7. v0.2.2 minimal pre-human-deployment patch;
+8. out-of-sample human v0.2.2 retest;
+9. pathway-level and field-level comparison;
+10. limitations and future validation.
 
-A pre-retest "Paper 1" would probably look like an incomplete methods note because the strongest empirical promise is already embodied in the corrected v0.2.1 retest package. The first pilot alone is insufficient for the preferred full methods article.
+A pre-retest "Paper 1" would probably look like an incomplete methods note because the strongest empirical promise is already embodied in the corrected v0.2.2 retest package. The first pilot and AI dry run alone are insufficient for the preferred full methods article.
 
 A later second paper may be justified if it adds new empirical scope: larger multi-coder validation, another interpretive domain, another function vocabulary, a memo-only comparison, direct-source cross-language replication, or larger-scale generalization.
 
-Submission readiness: draft now; submit after the v0.2.1 retest. The corrected source-text package improves methodological defensibility, but it does not itself supply retest findings.
+Submission readiness: draft now; submit after the human v0.2.2 retest. The corrected source-text package and AI dry run improve methodological defensibility, but they do not themselves supply human retest findings.
 
 ## Final Recommendation
 
@@ -83,8 +93,8 @@ Submission readiness: draft now; submit after the v0.2.1 retest. The corrected s
 3. **Target first:** depends on retest outcome. If results are theoretically interesting, start with Journal of Computational Literary Studies. If results mainly show method refinement and infrastructure, start with Digital Humanities Quarterly.
 4. **Most realistic target:** Digital Humanities Quarterly or Digital Studies / Le champ numérique.
 5. **Is the first pilot enough for submission?** No for the preferred integrated methods article. It is enough to begin drafting, not enough to submit.
-6. **Must v0.2.1 retest be completed?** Yes for best submission odds; especially for JCLS, DSH, JCA, or any methods journal.
+6. **Must human v0.2.2 retest be completed?** Yes for best submission odds; especially for JCLS, DSH, JCA, or any methods journal.
 7. **Should a memo-only comparison be added?** Not required for Paper 1, but valuable for Paper 2 if feasible.
 8. **Should the software be released before submission?** Yes. Make a tagged release, archive on Zenodo if possible, and cite exact commit/DOI.
 9. **Three biggest publication risks:** pilot too small; method looks over-engineered; novelty challenged by qualitative coding, argumentation annotation, and provenance/annotation tooling.
-10. **Exact next work:** use the corrected source-text package with external coders; complete v0.2.1 retest; run field-specific and evidence-overlap analyses; finalize claim matrix; prepare two contrasting opening examples; release code/data; then submit one integrated methods article.
+10. **Exact next work:** use the corrected v0.2.2 package with external coders; complete the human retest; run field-specific and evidence-overlap analyses; finalize claim matrix; prepare two contrasting opening examples; release code/data; then submit one integrated methods article.
