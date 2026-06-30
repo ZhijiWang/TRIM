@@ -1,0 +1,2 @@
+# Codex ZIP not locally available to hash; request supplied expected hash:
+# 71369051bf337ed1ff174320bae1b9f8e12ca8e50f4ee294e8d7fb03223be3b1  TRIM_retest_v0_2_1_completed_submission.zip

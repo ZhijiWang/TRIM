@@ -1,0 +1,2 @@
+model,case_count,medium_uncertainty_count,low_uncertainty_count,alternative_signature_count,all_segment_primary_count,mean_primary_segment_count,mean_context_segment_count,median_rationale_length,no_fit_count,discourse_level_distribution
+Claude Opus 4.8,12,11,1,11,0,1.5833333333333333,1.9166666666666667,467.0,0,"{'dramatic_present': 5, 'reported_speech': 2, 'frame_narrative': 2, 'commentarial_discourse': 1, 'intradiegetic': 1, 'extradiegetic': 1}"
