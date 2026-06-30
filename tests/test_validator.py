@@ -2,7 +2,9 @@ import pandas as pd
 
 from trim.signature import parse_signature
 from trim.validator import (
+    QUESTION_CHANGED_CODE_BUT_LOW_UNCERTAINTY,
     format_signature,
+    validate_question_annotation_consistency,
     validate_dataframe,
     validate_record,
     validate_retest_manifest,
@@ -625,3 +627,115 @@ def test_question_log_rejects_unknown_controlled_values():
         "blocking_or_nonblocking",
         "requires_manual_revision",
     }
+
+
+def test_question_changed_code_low_uncertainty_warning_triggers():
+    annotations = [
+        _valid_record(
+            case_id="case-1",
+            uncertainty_flag="low",
+            alternative_signature="",
+        )
+    ]
+    questions = [
+        {
+            "case_id": "case-1",
+            "question_type": "interpretive",
+            "did_question_change_code": "yes",
+        }
+    ]
+
+    issues = validate_question_annotation_consistency(annotations, questions)
+
+    assert len(issues) == 1
+    assert issues[0].severity == "warning"
+    assert issues[0].field == "uncertainty_flag"
+    assert QUESTION_CHANGED_CODE_BUT_LOW_UNCERTAINTY in issues[0].message
+
+
+def test_question_changed_code_warning_does_not_trigger_with_medium_uncertainty():
+    issues = validate_question_annotation_consistency(
+        [_valid_record(case_id="case-1", uncertainty_flag="medium")],
+        [
+            {
+                "case_id": "case-1",
+                "question_type": "definitional",
+                "did_question_change_code": "yes",
+            }
+        ],
+    )
+
+    assert issues == []
+
+
+def test_question_changed_code_warning_does_not_trigger_with_complete_alternative():
+    issues = validate_question_annotation_consistency(
+        [
+            _valid_record(
+                case_id="case-1",
+                uncertainty_flag="low",
+                alternative_signature=(
+                    "temporal_layering / extends / textual_anchor / "
+                    "commentarial_discourse / retrospective / medium"
+                ),
+            )
+        ],
+        [
+            {
+                "case_id": "case-1",
+                "question_type": "interpretive",
+                "did_question_change_code": "yes",
+            }
+        ],
+    )
+
+    assert issues == []
+
+
+def test_question_changed_code_warning_does_not_trigger_for_procedural_question():
+    issues = validate_question_annotation_consistency(
+        [_valid_record(case_id="case-1", uncertainty_flag="low")],
+        [
+            {
+                "case_id": "case-1",
+                "question_type": "procedural",
+                "did_question_change_code": "yes",
+            }
+        ],
+    )
+
+    assert issues == []
+
+
+def test_question_changed_code_warning_does_not_trigger_when_code_unchanged():
+    issues = validate_question_annotation_consistency(
+        [_valid_record(case_id="case-1", uncertainty_flag="low")],
+        [
+            {
+                "case_id": "case-1",
+                "question_type": "interpretive",
+                "did_question_change_code": "no",
+            }
+        ],
+    )
+
+    assert issues == []
+
+
+def test_v0_2_2_status_requires_retest_metadata_without_removed_fields():
+    issues = validate_record(
+        _valid_record(
+            status="retest_v0_2_2",
+            language_access_mode="",
+            case_scope="",
+            cross_case_context_permitted="",
+            evidence_nodes="",
+            primary_evidence_segment_ids="",
+        )
+    )
+
+    assert any(issue.field == "language_access_mode" for issue in _errors(issues))
+    assert not any(
+        issue.field in {"cue_family", "broad_function_family"}
+        for issue in issues
+    )

@@ -72,6 +72,16 @@ LOW_UNCERTAINTY_WITH_ALTERNATIVE_MESSAGE = (
     "A complete alternative_signature should normally use at least medium "
     "uncertainty."
 )
+QUESTION_CHANGED_CODE_BUT_LOW_UNCERTAINTY = (
+    "QUESTION_CHANGED_CODE_BUT_LOW_UNCERTAINTY"
+)
+QUESTION_CHANGED_CODE_BUT_LOW_UNCERTAINTY_MESSAGE = (
+    "QUESTION_CHANGED_CODE_BUT_LOW_UNCERTAINTY: The question log records an "
+    "interpretive or definitional question that changed the code, but the final "
+    "annotation uses low uncertainty and no alternative signature. Confirm that "
+    "the question was fully resolved rather than omitted from uncertainty "
+    "reporting."
+)
 
 QUESTION_LOG_FIELDS: tuple[str, ...] = (
     "question_id",
@@ -588,6 +598,65 @@ def validate_question_log_dataframe(df: pd.DataFrame) -> list[ValidationIssue]:
         for record in df.to_dict(orient="records")
         for issue in validate_question_log_record(record)
     ]
+
+
+def validate_question_annotation_consistency(
+    annotation_records: Any,
+    question_log_records: Any,
+) -> list[ValidationIssue]:
+    """Warn when question-log resolution and final uncertainty may diverge.
+
+    This cross-file check is intentionally advisory. A changed interpretive or
+    definitional question can legitimately resolve to low uncertainty, but the
+    combination deserves review when no complete alternative pathway remains in
+    the final annotation.
+    """
+
+    annotations = _records_by_key(annotation_records, "case_id")
+    if isinstance(question_log_records, pd.DataFrame):
+        questions = question_log_records.to_dict(orient="records")
+    elif isinstance(question_log_records, Mapping):
+        questions = [question_log_records]
+    elif isinstance(question_log_records, Iterable) and not isinstance(
+        question_log_records, (str, bytes)
+    ):
+        questions = list(question_log_records)
+    else:
+        raise TypeError(
+            "Unsupported question-log records type: "
+            f"{type(question_log_records)!r}"
+        )
+
+    issues: list[ValidationIssue] = []
+    for question in questions:
+        if not isinstance(question, Mapping):
+            continue
+        case_id = _clean_value(question.get("case_id", ""))
+        annotation = annotations.get(case_id)
+        if not case_id or annotation is None:
+            continue
+        if _clean_value(question.get("question_type")) not in {
+            "interpretive",
+            "definitional",
+        }:
+            continue
+        if _clean_value(question.get("did_question_change_code")) != "yes":
+            continue
+        if _field_value(annotation, "uncertainty_flag") != "low":
+            continue
+        if _has_complete_alternative_signature(
+            _field_value(annotation, "alternative_signature")
+        ):
+            continue
+        issues.append(
+            ValidationIssue(
+                case_id=case_id,
+                field="uncertainty_flag",
+                severity="warning",
+                message=QUESTION_CHANGED_CODE_BUT_LOW_UNCERTAINTY_MESSAGE,
+            )
+        )
+    return issues
 
 
 def validation_report(df: pd.DataFrame) -> pd.DataFrame:
@@ -1163,11 +1232,22 @@ def _is_v0_2_1_record(record: TrimAnnotation | Mapping[str, Any]) -> bool:
     status = _field_value(record, "status")
     return (
         "v0_2_1" in status
+        or "v0_2_2" in status
         or bool(_field_value(record, "language_access_mode"))
         or bool(_field_value(record, "case_scope"))
         or bool(_field_value(record, "primary_evidence_segment_ids"))
         or bool(_field_value(record, "context_segment_ids"))
     )
+
+
+def _has_complete_alternative_signature(signature: str) -> bool:
+    if not signature:
+        return False
+    try:
+        parsed = parse_signature(signature)
+    except ValueError:
+        return False
+    return not validate_signature_values(_signature_to_values(parsed))
 
 
 def _duplicate_segment_issues(

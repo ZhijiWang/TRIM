@@ -1,0 +1,3 @@
+# No raw AI dry-run submission files are committed here.
+# /mnt/data/TRIM_retest_v0_2_1_completed_submission.zip was not available in this workspace on 2026-06-30.
+# Safe hashes can be added later only after direct local inspection, without exposing substantive labels or raw private contents.

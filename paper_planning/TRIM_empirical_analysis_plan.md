@@ -1,6 +1,9 @@
 # TRIM Empirical Analysis Plan
 
-This plan assumes the v0.2.1 retest is completed with at least two independent coders, locked submissions, locked question logs, and language-access forms.
+This plan assumes the human v0.2.2 retest is completed with at least two
+independent human coders, locked submissions, locked question logs, and
+language-access forms. The v0.2.1 AI dry run is a protocol stress test only and
+must not be pooled with human v0.2.2 retest data.
 
 ## Data Preservation
 
@@ -13,6 +16,7 @@ Before analysis, archive:
 - validation reports;
 - manifest and shared-context registry;
 - source-packet version;
+- package version and SHA-256 used by each coder;
 - adjudication notes;
 - analysis scripts and outputs.
 

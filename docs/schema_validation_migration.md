@@ -93,3 +93,20 @@ registry. v0.2.1 records that use shared-context fields should pass
 `manifest_metadata` and `shared_context_registry` to `validate_record` or
 `validate_dataframe`; the package builder does this for the public retest
 materials.
+
+## v0.2.2 Deployment Patch
+
+v0.2.2 preserves schema support for `cue_family` and
+`broad_function_family` for older datasets and researcher-facing descriptive
+metadata, but removes both fields from the v0.2.2 coder-facing retest template.
+They are optional, not coder-generated v0.2.2 fields, and should not be included
+in v0.2.2 field-level agreement calculations.
+
+v0.2.2 also adds the cross-file warning
+`QUESTION_CHANGED_CODE_BUT_LOW_UNCERTAINTY`. Use
+`validate_question_annotation_consistency` after returned annotations and
+question logs are both available. The warning is emitted when an interpretive or
+definitional question changed the code, but the final annotation uses
+`uncertainty_flag=low` and no complete `alternative_signature`. This warning
+does not automatically change the annotation and does not require an alternative
+signature merely because a question occurred.

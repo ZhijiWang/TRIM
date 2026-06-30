@@ -1,5 +1,10 @@
 # TRIM v0.2.1 Retest Results Shell
 
+Status after v0.2.2 patch: superseded for human retest reporting by
+`TRIM_v0_2_2_retest_results_shell.md`. Do not fill this v0.2.1 shell with AI
+dry-run substantive labels. The v0.2.1 AI dry run is a protocol stress test
+only.
+
 This is a planning shell only. Do not fill it with inferred or expected values. Replace bracketed placeholders only after the v0.2.1 retest has been completed, submissions have been locked, and comparison/adjudication have been documented.
 
 ## Completion and Usability

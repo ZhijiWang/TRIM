@@ -1,5 +1,36 @@
 # Changelog
 
+## 0.2.2 - Unreleased
+
+### Added
+
+- Versioned v0.2.2 coder package, freeze record, deployment checklist, migration
+  note, execution protocol, return-manifest template, frozen file hash manifest,
+  and AI dry-run archive record. The v0.2.2 coder package SHA-256 is
+  `3b3ac302d8491e429d20b1d4fb1c66351ad0e6340698b2f5cd683adb5e0d4cb4`.
+- Cross-file warning
+  `QUESTION_CHANGED_CODE_BUT_LOW_UNCERTAINTY` for cases where an interpretive or
+  definitional question changed the code but the final annotation uses low
+  uncertainty and no complete alternative signature.
+
+### Changed
+
+- Removed `cue_family` and `broad_function_family` from the v0.2.2 coder-facing
+  coding template. Schema support remains for backward compatibility and
+  researcher-facing descriptive metadata.
+- Clarified that question-log entries should be recorded when questions arise,
+  with self-resolved questions included and batch-created timestamps disclosed.
+- Bumped source and citation metadata to 0.2.2 without creating a formal
+  release.
+
+### Preserved
+
+- v0.2.1 frozen package and SHA-256
+  `012a71280f46cdb2327a6a90d3f4eb788ec44258eea56dfad70a06c6f3467ade`.
+- Formal cases, source-text segments, source provenance, controlled
+  vocabularies, shared-context structure, evidence-selection rules, no-fit
+  rules, and uncertainty definitions.
+
 ## 0.2.1 - Unreleased
 
 ### Added

@@ -1,0 +1,2 @@
+coder_id,trim_version,package_sha256,coding_file,question_log_file,language_access_file,completion_time_minutes,protocol_deviation_file,submission_timestamp,locked,notes
+CODER_ID,retest_v0_2_2,TBD_AFTER_BUILD,CODER_ID_retest_v0_2_2_coding.csv,CODER_ID_retest_v0_2_2_question_log.csv,CODER_ID_retest_v0_2_2_language_access.csv,INTEGER_MINUTES,none|FILENAME,YYYY-MM-DDTHH:MM:SSZ,yes,
