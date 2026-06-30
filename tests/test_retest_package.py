@@ -1,4 +1,5 @@
 from pathlib import Path
+import csv
 import hashlib
 import shutil
 import subprocess
@@ -25,6 +26,9 @@ from trim.vocabulary import (
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
+FROZEN_PACKAGE_SHA256 = (
+    "012a71280f46cdb2327a6a90d3f4eb788ec44258eea56dfad70a06c6f3467ade"
+)
 ORIGINAL_CASE_IDS = {
     "ZZ_XIANG_7",
     "ZZ_MIN_1",
@@ -385,6 +389,7 @@ def test_reproducible_coder_package_checksums(tmp_path):
         first / "TRIM_retest_v0_2_1_coder_package.SHA256SUMS.txt"
     ).read_text(encoding="utf-8")
     assert f"{first_hash}  TRIM_retest_v0_2_1_coder_package.zip" in sums
+    _assert_frozen_coder_facing_files_match_manifest()
 
 
 def test_coder_package_leakage(tmp_path):
@@ -416,6 +421,26 @@ def test_coder_package_leakage(tmp_path):
     }
     assert not any("pilot_archive" in name for name in names)
     assert not any(pattern in combined_text for pattern in forbidden)
+
+
+def _assert_frozen_coder_facing_files_match_manifest():
+    manifest_path = PROJECT_ROOT / "data" / "retest_v0_2_1_frozen_file_hashes.csv"
+    with manifest_path.open("r", encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+
+    assert [row["path"] for row in rows] == list(PACKAGE_FILES)
+    for row in rows:
+        assert _sha256(PROJECT_ROOT / row["path"]) == row["sha256"]
+
+    freeze_record = (
+        PROJECT_ROOT / "docs" / "retest_v0_2_1_freeze_record.md"
+    ).read_text(encoding="utf-8")
+    changelog = (PROJECT_ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+
+    assert "retest_v0_2_1" in freeze_record
+    assert FROZEN_PACKAGE_SHA256 in freeze_record
+    assert FROZEN_PACKAGE_SHA256 in changelog
+    assert "new version identifier" in freeze_record
 
 
 def _sha256(path: Path) -> str:

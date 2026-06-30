@@ -22,6 +22,10 @@
 - Shared-context registry for v0.2.1 retest cases.
 - Source-text provenance table and source-text audit for all formal v0.2.1
   retest segments.
+- Retest freeze record, external coder deployment checklist, execution
+  protocol, return-manifest template, archive placeholders, and frozen
+  coder-facing file hash manifest for package SHA-256
+  `012a71280f46cdb2327a6a90d3f4eb788ec44258eea56dfad70a06c6f3467ade`.
 - Researcher-facing retest manifest separated from the neutral coder-facing
   manifest.
 - Intercoder evidence-overlap metrics, primary/context overlap reporting,
