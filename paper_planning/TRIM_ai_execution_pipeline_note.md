@@ -8,17 +8,20 @@ retest dataset.
 
 Current verified status:
 
-- v0.2.1 Codex raw execution: not found locally in this workspace.
-- v0.2.2 Claude Opus 4.8 execution: coding CSV found and structurally validated;
-  companion question log, language-access form, return manifest, and
-  protocol-deviation file not found locally.
+- v0.2.1 Codex raw execution: expected ZIP filename and user-supplied SHA-256
+  were documented, but the actual ZIP was not locally readable in this
+  workspace.
+- v0.2.2 Claude Opus 4.8 execution: complete five-file bundle found through the
+  attached local archive and structurally validated.
 
 The available AI execution materials helped verify:
 
-- coding-sheet ingestion;
-- v0.2.2 field operability for one machine-filled sheet;
+- complete v0.2.2 submission-bundle ingestion;
+- v0.2.2 field operability for one machine-filled return;
 - source-segment and shared-context validation;
-- missing-submission transparency;
+- return-manifest package-hash checking;
+- question-log validation and question/annotation consistency checking;
+- missing Codex-submission transparency;
 - uncertainty and alternative-signature descriptive reporting;
 - pathway-classification helper tests.
 
@@ -28,8 +31,15 @@ They do not verify:
 - human intercoder reliability;
 - cross-language validity;
 - final package burden;
-- question-log timing in practice;
+- human question-log timing in practice;
 - substantive interpretation quality.
+
+Because the Codex ZIP was not locally verifiable, Codex-Claude common-field
+agreement, evidence-overlap, pathway-classification, and question-log
+comparison metrics were not computed. Those metrics may be generated only after
+both raw AI execution datasets are mounted or otherwise supplied in verifiable
+form. Any such output remains exploratory technical evidence, not reliability
+evidence.
 
 Suggested article wording:
 

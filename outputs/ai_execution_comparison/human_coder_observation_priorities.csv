@@ -1,0 +1,3 @@
+case_id,field_or_boundary,codex_issue,claude_issue,overlap_type,priority,reason
+ALL,Codex availability,Raw ZIP not locally available,complete five-file bundle available,protocol_input_gap,high,AI-AI comparison and repeated friction analysis cannot be completed until Codex ZIP is mounted/readable.
+ALL,uncertainty / alternative calibration,not comparable,medium uncertainty and alternatives in 11/12 cases,single_model_pattern,medium,Observe human calibration; do not revise package from one AI model style.

@@ -1,18 +1,19 @@
 # Codex vs Claude Comparison Report
 
-Label: Exploratory AI execution comparison. Not human intercoder reliability.
+Disclaimer: Exploratory AI execution comparison; not human intercoder reliability.
 
 Status: not computed.
 
-Reason: both raw executions were not available locally. The Claude v0.2.2 coding CSV was found and validated structurally, but the prior Codex raw submission was not found. The expected `/mnt/data/TRIM_retest_v0_2_1_completed_submission.zip` path was not mounted in this workspace.
+Claude Opus 4.8 v0.2.2 was validated as a complete five-file AI execution bundle. The prior Codex v0.2.1 raw ZIP was still not locally accessible in this workspace at `/mnt/data/TRIM_retest_v0_2_1_completed_submission.zip`; the attached `files.zip` contained only Claude files.
 
-The following requested comparison files were therefore not generated because doing so would require fabricating Codex records:
+Because Codex raw coding was unavailable, exact function agreement, field-level agreement, evidence overlap, pathway classification, uncertainty comparison, and question-log comparison were not computed. This avoids fabricating Codex records or treating any model as ground truth.
 
-- `codex_vs_claude_case_comparison.csv`
-- `codex_vs_claude_field_agreement.csv`
-- `codex_vs_claude_evidence_overlap.csv`
-- `codex_vs_claude_pathway_classification.csv`
-- `codex_vs_claude_uncertainty_comparison.csv`
-- `codex_vs_claude_question_log_comparison.csv`
+Claude validation summary:
 
-Available Claude-only files in this directory test ingestion and descriptive audit paths without treating AI output as empirical validation.
+- 12/12 coding cases;
+- 9 question-log rows;
+- 12 language-access rows;
+- return-manifest package-hash match: True;
+- locked: True;
+- completion time: ~55 minutes;
+- approximate timestamps disclosed with `~`: True.

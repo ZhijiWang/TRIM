@@ -1,3 +1,2 @@
 Case,Field/boundary,Codex issue,Claude issue,Priority for human observation,Why
-ALL,question-log timing,not available,question log unavailable,high,Companion files missing in local AI execution prevents testing the lock/question-log workflow.
-ALL,uncertainty/alternative calibration,not available,medium uncertainty and alternatives in 11/12 Claude cases,medium,May be model style or package ambiguity; observe human calibration without revising rules.
+ALL,Codex availability,Raw ZIP not locally available,complete five-file bundle available,high,AI-AI comparison cannot be completed without Codex raw files.

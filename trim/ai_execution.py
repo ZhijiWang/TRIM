@@ -8,8 +8,11 @@ from __future__ import annotations
 
 from collections import Counter
 from dataclasses import dataclass
+import hashlib
 from statistics import mean, median
+from pathlib import Path
 from typing import Any, Mapping
+from zipfile import ZipFile
 
 import pandas as pd
 
@@ -29,6 +32,14 @@ COMMON_COMPARISON_FIELDS: tuple[str, ...] = (
     "discourse_level",
     "temporal_orientation",
     "uncertainty_flag",
+)
+
+PATHWAY_SIGNATURE_FIELDS: tuple[str, ...] = (
+    "friction_locus",
+    "rationale_mechanism",
+    "epistemic_support",
+    "discourse_level",
+    "temporal_orientation",
 )
 
 PATHWAY_CATEGORIES: frozenset[str] = frozenset(
@@ -291,27 +302,150 @@ def model_pattern_summary(df: pd.DataFrame, label: str) -> dict[str, Any]:
     }
 
 
+def zip_member_hashes(zip_path: str | Path) -> dict[str, str]:
+    """Return SHA-256 hashes for every file member in a ZIP archive."""
+
+    hashes: dict[str, str] = {}
+    with ZipFile(zip_path) as archive:
+        for name in sorted(archive.namelist()):
+            if name.endswith("/"):
+                continue
+            hashes[name] = hashlib.sha256(archive.read(name)).hexdigest()
+    return hashes
+
+
+def question_log_summary(df: pd.DataFrame, label: str) -> pd.DataFrame:
+    """Summarize one execution question log."""
+
+    rows: list[dict[str, Any]] = []
+    if df.empty:
+        return pd.DataFrame(
+            columns=[
+                "model",
+                "question_count",
+                "question_type_distribution",
+                "case_count",
+                "cases_questioned",
+                "changed_code_count",
+                "blocking_count",
+                "manual_revision_requested_count",
+                "approximate_timestamp_count",
+            ]
+        )
+    rows.append(
+        {
+            "model": label,
+            "question_count": len(df),
+            "question_type_distribution": dict(Counter(df["question_type"])),
+            "case_count": df["case_id"].nunique(),
+            "cases_questioned": "|".join(sorted(set(df["case_id"]))),
+            "changed_code_count": int((df["did_question_change_code"] == "yes").sum()),
+            "blocking_count": int((df["blocking_or_nonblocking"] == "blocking").sum()),
+            "manual_revision_requested_count": int(
+                (df["requires_manual_revision"] == "yes").sum()
+            ),
+            "approximate_timestamp_count": int(
+                df["timestamp_utc"].astype(str).str.endswith("~").sum()
+            ),
+        }
+    )
+    return pd.DataFrame(rows)
+
+
+def question_log_comparison(
+    left_questions: pd.DataFrame,
+    right_questions: pd.DataFrame,
+    *,
+    left_label: str = "Codex",
+    right_label: str = "Claude",
+) -> pd.DataFrame:
+    """Compare question-log case overlap and high-level distributions."""
+
+    left_cases = set(left_questions.get("case_id", pd.Series(dtype=str)))
+    right_cases = set(right_questions.get("case_id", pd.Series(dtype=str)))
+    return pd.DataFrame(
+        [
+            {
+                "left_model": left_label,
+                "right_model": right_label,
+                "left_question_count": len(left_questions),
+                "right_question_count": len(right_questions),
+                "overlapping_cases": "|".join(sorted(left_cases & right_cases)),
+                "left_only_cases": "|".join(sorted(left_cases - right_cases)),
+                "right_only_cases": "|".join(sorted(right_cases - left_cases)),
+            }
+        ]
+    )
+
+
+def review_triggers(
+    case_comparison_df: pd.DataFrame,
+    *,
+    primary_jaccard_threshold: float = 0.5,
+    repeated_question_cases: set[str] | None = None,
+) -> pd.DataFrame:
+    """Generate non-adjudicated human-review triggers."""
+
+    repeated_question_cases = repeated_question_cases or set()
+    rows: list[dict[str, Any]] = []
+    for _, row in case_comparison_df.iterrows():
+        reasons: list[str] = []
+        if not bool(row.get("function_label_match", False)):
+            reasons.append("different_function")
+        if row.get("pathway_classification") == "same_function_different_pathway":
+            reasons.append("same_function_different_pathway")
+        if float(row.get("primary_evidence_jaccard", 1.0)) < primary_jaccard_threshold:
+            reasons.append("primary_jaccard_below_threshold")
+        if _clean(row.get("primary_context_role_reversal")):
+            reasons.append("primary_context_role_reversal")
+        if not bool(row.get("uncertainty_flag_match", False)):
+            reasons.append("uncertainty_disagreement")
+        if _clean(row.get("case_id")) in repeated_question_cases:
+            reasons.append("repeated_question_log_friction")
+        if reasons:
+            rows.append(
+                {
+                    "disclaimer": (
+                        "Exploratory AI execution comparison; not human "
+                        "intercoder reliability."
+                    ),
+                    "case_id": row.get("case_id"),
+                    "trigger_reasons": "|".join(reasons),
+                    "human_review_override": "",
+                }
+            )
+    return pd.DataFrame(rows)
+
+
 def _same_pathway(left: Mapping[str, Any], right: Mapping[str, Any]) -> bool:
-    return all(_clean(left.get(field)) == _clean(right.get(field)) for field in COMMON_COMPARISON_FIELDS)
+    return all(_pathway_field_compatible(left, right, field) for field in PATHWAY_SIGNATURE_FIELDS)
 
 
 def _shared_pathway_fields(left: Mapping[str, Any], right: Mapping[str, Any]) -> int:
     shared = 0
-    for field in COMMON_COMPARISON_FIELDS[1:]:
-        left_value = _clean(left.get(field))
-        right_value = _clean(right.get(field))
-        if not left_value or not right_value:
-            continue
-        if left_value == right_value:
+    for field in PATHWAY_SIGNATURE_FIELDS:
+        if _pathway_field_compatible(left, right, field):
             shared += 1
-        elif field in {"rationale_mechanism", "epistemic_support"}:
-            try:
-                metrics = compound_value_metrics(left_value, right_value)
-            except ValueError:
-                continue
-            if metrics["any_overlap_agreement"]:
-                shared += 1
     return shared
+
+
+def _pathway_field_compatible(
+    left: Mapping[str, Any],
+    right: Mapping[str, Any],
+    field: str,
+) -> bool:
+    left_value = _clean(left.get(field))
+    right_value = _clean(right.get(field))
+    if not left_value or not right_value:
+        return False
+    if left_value == right_value:
+        return True
+    if field not in {"rationale_mechanism", "epistemic_support"}:
+        return False
+    try:
+        return compatible_single_compound_value(left_value, right_value)
+    except ValueError:
+        return False
 
 
 def _records_by_case(df: pd.DataFrame) -> dict[str, Mapping[str, Any]]:

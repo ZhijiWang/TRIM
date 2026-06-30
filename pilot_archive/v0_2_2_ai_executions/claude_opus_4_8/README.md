@@ -8,34 +8,29 @@ Purpose: machine-based protocol stress test of the frozen v0.2.2 coder package.
 
 This is not a human coder submission, intercoder reliability evidence, empirical validation, human usability evidence, cross-language validation, or independent human replication.
 
-Available raw file inspected locally:
+Returned files:
 
 - `claude_opus_4_8_retest_v0_2_2_coding.csv`
-
-Expected files not available locally:
-
 - `claude_opus_4_8_retest_v0_2_2_question_log.csv`
 - `claude_opus_4_8_retest_v0_2_2_language_access.csv`
 - `claude_opus_4_8_retest_v0_2_2_return_manifest.csv`
 - `claude_opus_4_8_retest_v0_2_2_protocol_deviations.md`
 
-Coding file SHA-256: `04caf13679e53016e068e04d8a171080c2d1e4a5f69e4da47c505c1a4d70c3aa`
+SHA-256 values are recorded in `checksums/SHA256SUMS.txt`; all matched the verified values supplied for this correction.
 
-Frozen v0.2.2 package SHA-256 expected by protocol:
-`3b3ac302d8491e429d20b1d4fb1c66351ad0e6340698b2f5cd683adb5e0d4cb4`
+Validation summary:
 
-Package-hash verification: not available, because the return manifest was not present locally.
-
-Structural validation result: The available coding CSV contains 12/12 formal cases and produced zero structural validation issues against the v0.2.2 manifest and shared-context registry. Full submission locking remains incomplete because expected companion files were unavailable.
-
-Known metadata omissions:
-
-- package hash could not be verified from a return manifest;
-- language-access form could not be validated;
-- question log could not be validated;
-- question/annotation consistency validation could not be run;
-- final lock confirmation could not be verified;
-- completion time could not be verified;
-- protocol-deviation statement could not be inspected.
+- coding cases: 12/12;
+- coding validation issues: 0;
+- question-log rows: 9;
+- question-log validation issues: 0;
+- question/annotation consistency warnings: 0;
+- language-access rows: 12;
+- language-access complete: True;
+- return-manifest package-hash match: True;
+- locked: True;
+- completion time: ~55 minutes;
+- approximate timestamps disclosed with `~`: True;
+- protocol-deviation statement present: True.
 
 No raw substantive coding is committed in this archive record. Only safe metadata and hashes are recorded.

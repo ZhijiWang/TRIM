@@ -43,9 +43,9 @@ Collect:
 
 | Case | Field/boundary | Codex issue | Claude issue | Priority for human observation | Why |
 | --- | --- | --- | --- | --- | --- |
-| All | question-log timing | Raw Codex execution unavailable | Claude question log unavailable | high | Companion files are necessary to test lock, timing, and consistency workflow. |
+| All | complete return bundle | Raw Codex ZIP unavailable in this workspace | Claude returned all five expected files | high | Human submissions must include coding, question log, language access, return manifest, and protocol-deviation note so lock and timing workflow can be verified. |
 | All | uncertainty / alternative signature calibration | Raw Codex execution unavailable | Claude coding uses medium uncertainty and alternatives in most cases | medium | May be model style, source difficulty, or package ambiguity; human behavior is needed before revising anything. |
-| Shared-context cases | context use | Raw Codex execution unavailable | Claude coding file validates structurally | low | No repeated friction can be established without a second raw execution and logs. |
+| Shared-context cases | context use | Raw Codex execution unavailable | Claude coding file validates structurally | low | No repeated friction can be established without two locally verifiable raw executions. |
 
 High priority requires repeated friction across model executions or a strong
 protocol inconsistency. No manual or package revision should be made from this

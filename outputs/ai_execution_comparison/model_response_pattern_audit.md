@@ -1,8 +1,10 @@
 # Model Response Pattern Audit
 
-Label: Exploratory AI execution comparison. Not human intercoder reliability.
+Disclaimer: Exploratory AI execution comparison; not human intercoder reliability.
 
-Only the Claude Opus 4.8 v0.2.2 coding CSV was available locally. The prior Codex raw submission and Claude companion files were not available, so this audit is Claude-only and cannot support AI-AI comparison claims.
+## Available Executions
+
+Claude Opus 4.8 v0.2.2 is available as a complete five-file AI execution bundle. Codex v0.2.1 is not locally readable in this workspace, so AI-AI comparison cannot be computed honestly.
 
 ## Claude Pattern Summary
 
@@ -15,13 +17,16 @@ Only the Claude Opus 4.8 v0.2.2 coding CSV was available locally. The prior Code
 - Mean context segment count: 1.92.
 - Median rationale-note length: 467.0 characters.
 - No-fit count: 0/12.
+- Question-log rows: 9.
+- Question-type distribution: {'definitional': 6, 'procedural': 3}.
+- Approximate timestamp disclosure: True.
 
 ## Interpretation
 
-Claude appears to use medium uncertainty in most cases and complete alternative signatures in most cases. This should be treated as a model-style tendency or possible package stress point, not as a TRIM defect. Human data are needed to distinguish method friction, model-style tendency, source-case difficulty, and package ambiguity.
+Claude appears to use medium uncertainty and complete alternative signatures in most cases. This should be treated as a model-style tendency or possible package stress point, not as evidence that Claude is more correct and not as a TRIM defect. Human data are needed to distinguish model-style tendency, package ambiguity, case difficulty, and protocol limitation.
 
-The available coding CSV does not show all-segment primary overuse. Context segments are commonly used, which may reflect either careful sequence support or a model preference for balanced-looking evidence structures.
+The available Claude coding CSV does not show all-segment primary overuse. Context segments are commonly used, which may reflect careful sequence support or a model preference for balanced evidence structures.
 
-## Unavailable Comparisons
+## Codex Comparison Limitation
 
-Because Codex raw coding and Claude question log files were not available, this audit cannot compare question-log behavior, repeated friction points across model executions, real-time versus reconstructed timestamps, or AI-AI field agreement.
+The Codex v0.2.1 ZIP was not locally available, so Codex uncertainty distribution, rationale-note length, question timing, compound-value tendencies, and evidence selection could not be compared.

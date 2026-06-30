@@ -30,6 +30,15 @@ v0.2.1 and v0.2.2 records may be compared only on common fields. Fields removed
 from the v0.2.2 coder-facing template, such as `cue_family` and
 `broad_function_family`, should not be treated as missing coder work.
 
+## Current File Availability Note
+
+The Claude Opus 4.8 v0.2.2 execution was available as a complete five-file
+bundle and was validated as a machine-executed protocol return. The prior Codex
+v0.2.1 ZIP was identified by expected filename and user-supplied SHA-256, but
+the actual ZIP was not mounted or readable in this workspace. Version-aware
+AI-AI comparison outputs must therefore remain uncomputed until both raw
+execution datasets are locally verifiable.
+
 ## Pathway Categories
 
 - `same_function_same_pathway`

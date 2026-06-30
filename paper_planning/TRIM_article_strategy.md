@@ -26,10 +26,13 @@ categories. The AI dry run is not empirical validation and its substantive
 labels are not article findings.
 
 Subsequent AI execution handling should be described only as package and
-analysis-pipeline stress testing. A verified Claude v0.2.2 coding sheet tested
-submission ingestion and structural validation, while missing companion files
-and unavailable Codex raw records prevented a genuine AI-AI comparison. These
-materials are not pooled with future human data.
+analysis-pipeline stress testing. A complete Claude v0.2.2 five-file return
+tested submission ingestion, return-manifest package-hash checking, question-log
+validation, language-access completeness, lock metadata, and structural
+validation. The prior Codex v0.2.1 ZIP was documented by expected filename and
+user-supplied SHA-256, but it was not locally readable in this workspace; no
+Codex-Claude metrics should be reported unless both raw executions are
+verifiable. These materials are not pooled with future human data.
 
 ## Article Model Evaluation
 
