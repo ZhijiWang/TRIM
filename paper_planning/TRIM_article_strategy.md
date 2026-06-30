@@ -25,6 +25,12 @@ without changing cases, source texts, source segments, or substantive coding
 categories. The AI dry run is not empirical validation and its substantive
 labels are not article findings.
 
+Subsequent AI execution handling should be described only as package and
+analysis-pipeline stress testing. A verified Claude v0.2.2 coding sheet tested
+submission ingestion and structural validation, while missing companion files
+and unavailable Codex raw records prevented a genuine AI-AI comparison. These
+materials are not pooled with future human data.
+
 ## Article Model Evaluation
 
 | Model | Central research question | Main contribution | Required empirical evidence | Reviewer expectations | Strongest feature | Greatest weakness | Current repo sufficient? | Retest needed first? | Likely journal family | Main risk |

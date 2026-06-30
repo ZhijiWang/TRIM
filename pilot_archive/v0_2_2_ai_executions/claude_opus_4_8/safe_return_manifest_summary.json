@@ -1,0 +1,22 @@
+{
+  "executor_type": "AI / Claude Opus 4.8",
+  "purpose": "machine-based protocol stress test",
+  "not_human_reliability_evidence": true,
+  "coding_file_available": true,
+  "question_log_available": false,
+  "language_access_available": false,
+  "return_manifest_available": false,
+  "protocol_deviation_file_available": false,
+  "coding_file_sha256": "04caf13679e53016e068e04d8a171080c2d1e4a5f69e4da47c505c1a4d70c3aa",
+  "case_count": 12,
+  "expected_case_count": 12,
+  "missing_cases": [],
+  "extra_cases": [],
+  "validation_issue_count": 0,
+  "missing_required_field_count": 0,
+  "package_hash_verified": false,
+  "final_lock_verified": false,
+  "completion_time_verified": false,
+  "question_annotation_consistency_run": false,
+  "question_annotation_consistency_reason": "question log file unavailable"
+}
