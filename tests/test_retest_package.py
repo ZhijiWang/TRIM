@@ -10,9 +10,11 @@ import pandas as pd
 from scripts.build_retest_v0_2_1_package import PACKAGE_FILES, semantic_steering_audit
 from trim.schema import ANNOTATION_FIELDS
 from trim.validator import (
+    extract_source_text_blocks,
     validate_retest_manifest,
     validate_shared_context_registry,
     validate_source_packet_segment_coverage,
+    validate_source_text_provenance,
 )
 from trim.vocabulary import (
     DISCOURSE_LEVELS,
@@ -62,12 +64,41 @@ def test_retest_manifest_records_scope_language_and_segments():
     assert set(manifest["case_id"]).isdisjoint(ORIGINAL_CASE_IDS)
     assert "published_translation" in set(manifest["language_access_mode"])
     assert "direct_original_language_access" in set(manifest["language_access_mode"])
+    assert "multi_passage_single_case" in set(manifest["case_scope"])
     assert "shared_narrative_field" in set(manifest["case_scope"])
     assert all(manifest["segment_ids"].str.contains("_S"))
     assert not (
         set(manifest["case_type"])
         & (DISCOURSE_LEVELS | FRICTION_LOCI | FUNCTION_LABELS | RATIONALE_MECHANISMS)
     )
+
+
+def test_othello_uses_multi_passage_single_case_without_registry():
+    manifest = pd.read_csv(
+        PROJECT_ROOT / "data" / "retest_v0_2_1_case_manifest.csv",
+        dtype=str,
+        keep_default_na=False,
+    )
+    template = pd.read_csv(
+        PROJECT_ROOT / "data" / "retest_v0_2_1_coding_template.csv",
+        dtype=str,
+        keep_default_na=False,
+    )
+    registry = pd.read_csv(
+        PROJECT_ROOT / "data" / "retest_v0_2_1_shared_context_registry.csv",
+        dtype=str,
+        keep_default_na=False,
+    )
+
+    manifest_row = manifest.set_index("case_id").loc["OTH_HANDKERCHIEF_CHAIN"]
+    template_row = template.set_index("case_id").loc["OTH_HANDKERCHIEF_CHAIN"]
+
+    assert manifest_row["case_scope"] == "multi_passage_single_case"
+    assert manifest_row["shared_context_ids"] == ""
+    assert manifest_row["cross_case_context_permitted"] == "no"
+    assert manifest_row["required_context_segments"] == ""
+    assert template_row["case_scope"] == "multi_passage_single_case"
+    assert "OTHELLO_CONTEXT_A" not in set(registry["shared_context_id"])
 
 
 def test_coder_facing_metadata_avoids_analytic_descriptors():
@@ -128,6 +159,28 @@ def test_current_shared_context_registry_and_manifest_pass():
     assert issues == []
 
 
+def test_singleton_shared_context_registry_entry_fails():
+    manifest = pd.read_csv(
+        PROJECT_ROOT / "data" / "retest_v0_2_1_case_manifest.csv",
+        dtype=str,
+        keep_default_na=False,
+    )
+    registry = pd.DataFrame(
+        [
+            {
+                "shared_context_id": "SINGLETON_CONTEXT",
+                "description": "Invalid singleton group",
+                "member_case_ids": "JC_IDES_SOOTHSAYER",
+                "permitted_segment_ids": "JC_IDES_SOOTHSAYER_S1",
+            }
+        ]
+    )
+
+    issues = validate_shared_context_registry(manifest, registry)
+
+    assert any("at least two member cases" in issue.message for issue in issues)
+
+
 def test_source_packet_contains_every_formal_and_required_segment():
     manifest = pd.read_csv(
         PROJECT_ROOT / "data" / "retest_v0_2_1_case_manifest.csv",
@@ -141,11 +194,54 @@ def test_source_packet_contains_every_formal_and_required_segment():
     assert validate_source_packet_segment_coverage(manifest, packet) == []
 
 
+def test_every_formal_segment_has_source_text_and_provenance():
+    manifest = pd.read_csv(
+        PROJECT_ROOT / "data" / "retest_v0_2_1_case_manifest.csv",
+        dtype=str,
+        keep_default_na=False,
+    )
+    provenance = pd.read_csv(
+        PROJECT_ROOT / "data" / "retest_v0_2_1_source_text_provenance.csv",
+        dtype=str,
+        keep_default_na=False,
+    )
+    packet = (
+        PROJECT_ROOT / "data" / "retest_v0_2_1_source_packet.md"
+    ).read_text(encoding="utf-8")
+    source_blocks = extract_source_text_blocks(packet)
+    formal_segments = {
+        segment_id
+        for value in manifest["segment_ids"]
+        for segment_id in value.split("|")
+        if segment_id
+    }
+
+    assert set(provenance["segment_id"]) == formal_segments
+    assert set(source_blocks) == formal_segments
+    assert all(source_blocks[segment_id].strip() for segment_id in formal_segments)
+    assert not any(
+        "summary" in source_blocks[segment_id].lower()
+        or "paraphrase" in source_blocks[segment_id].lower()
+        for segment_id in formal_segments
+    )
+    assert validate_source_text_provenance(manifest, provenance, packet) == []
+    for column in (
+        "source",
+        "edition_or_translation",
+        "source_url",
+        "location",
+        "quotation_status",
+        "copyright_status",
+    ):
+        assert all(provenance[column].str.len() > 0)
+
+
 def test_current_semantic_steering_audit_passes():
     audit = semantic_steering_audit(PROJECT_ROOT)
 
     assert audit["unreviewed_high_risk_count"] == 0
-    assert audit["match_count"] == 0
+    assert audit["unreviewed_project_authored_analytic_match_count"] == 0
+    assert audit["answer_bearing_phrase_count"] == 0
 
 
 def test_source_packet_case_descriptions_do_not_contain_function_labels():
@@ -154,6 +250,43 @@ def test_source_packet_case_descriptions_do_not_contain_function_labels():
     ).read_text(encoding="utf-8")
 
     assert not any(function_label in packet for function_label in FUNCTION_LABELS)
+
+
+def test_source_quote_matches_are_allowlisted_with_provenance(tmp_path):
+    root = _copy_package_root(tmp_path)
+    source_packet = root / "data" / "retest_v0_2_1_source_packet.md"
+    text = source_packet.read_text(encoding="utf-8")
+    source_packet.write_text(
+        text.replace(
+            "> Caesar!",
+            "> Caesar! confirm",
+            1,
+        ),
+        encoding="utf-8",
+    )
+
+    audit = semantic_steering_audit(root)
+
+    assert audit["verified_source_text_match_count"] >= 1
+    assert audit["unreviewed_high_risk_count"] == 0
+
+
+def test_source_quote_allowlist_does_not_cover_navigation_notes(tmp_path):
+    root = _copy_package_root(tmp_path)
+    source_packet = root / "data" / "retest_v0_2_1_source_packet.md"
+    text = source_packet.read_text(encoding="utf-8")
+    source_packet.write_text(
+        text.replace(
+            "Navigation note: Caesar speaks at the opening",
+            "Navigation note: Caesar speaks and confirms at the opening",
+            1,
+        ),
+        encoding="utf-8",
+    )
+
+    audit = semantic_steering_audit(root)
+
+    assert audit["unreviewed_high_risk_count"] >= 1
 
 
 def test_instructional_vocabulary_is_allowed_by_steering_audit():

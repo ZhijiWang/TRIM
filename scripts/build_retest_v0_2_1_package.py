@@ -23,6 +23,7 @@ from trim.validator import (
     validate_retest_manifest,
     validate_shared_context_registry,
     validate_source_packet_segment_coverage,
+    validate_source_text_provenance,
 )
 from trim.vocabulary import (
     DISCOURSE_LEVELS,
@@ -45,6 +46,7 @@ PACKAGE_FILES: tuple[str, ...] = (
     "data/retest_v0_2_1_case_manifest.csv",
     "data/retest_v0_2_1_shared_context_registry.csv",
     "data/retest_v0_2_1_source_packet.md",
+    "data/retest_v0_2_1_source_text_provenance.csv",
     "data/retest_v0_2_1_coding_template.csv",
     "data/retest_v0_2_1_question_log_template.csv",
     "data/retest_v0_2_1_practice_cases.md",
@@ -206,6 +208,7 @@ def _assert_no_leakage(root: Path) -> None:
 def _assert_manifest_integrity(root: Path) -> None:
     manifest = _read_csv(root / "data" / "retest_v0_2_1_case_manifest.csv")
     registry = _read_csv(root / "data" / "retest_v0_2_1_shared_context_registry.csv")
+    provenance = _read_csv(root / "data" / "retest_v0_2_1_source_text_provenance.csv")
     source_packet = (root / "data" / "retest_v0_2_1_source_packet.md").read_text(
         encoding="utf-8"
     )
@@ -213,6 +216,7 @@ def _assert_manifest_integrity(root: Path) -> None:
         *validate_shared_context_registry(manifest, registry),
         *validate_retest_manifest(manifest, registry),
         *validate_source_packet_segment_coverage(manifest, source_packet),
+        *validate_source_text_provenance(manifest, provenance, source_packet),
     ]
     if issues:
         details = "\n".join(
@@ -226,6 +230,15 @@ def semantic_steering_audit(root: Path) -> dict[str, object]:
     """Return a machine-readable semantic-steering audit for coder files."""
 
     matches: list[dict[str, object]] = []
+    provenance = _read_csv(root / "data" / "retest_v0_2_1_source_text_provenance.csv")
+    provenance_by_segment = {
+        row["segment_id"]: row for row in provenance if row.get("segment_id")
+    }
+    source_quote_lines = _source_quote_lines(
+        (root / "data" / "retest_v0_2_1_source_packet.md").read_text(
+            encoding="utf-8"
+        )
+    )
     controlled_terms = sorted(
         set(FUNCTION_LABELS)
         | set(FRICTION_LOCI)
@@ -247,6 +260,8 @@ def semantic_steering_audit(root: Path) -> dict[str, object]:
                             term,
                             "controlled_term",
                             line,
+                            source_quote_lines,
+                            provenance_by_segment,
                         )
                     )
             for pattern in PROHIBITED_ANALYTIC_PATTERNS:
@@ -258,6 +273,8 @@ def semantic_steering_audit(root: Path) -> dict[str, object]:
                             pattern,
                             "analytic_descriptor",
                             line,
+                            source_quote_lines,
+                            provenance_by_segment,
                         )
                     )
             for pattern in ANSWER_BEARING_PATTERNS:
@@ -269,15 +286,29 @@ def semantic_steering_audit(root: Path) -> dict[str, object]:
                             pattern,
                             "answer_bearing_phrase",
                             line,
+                            source_quote_lines,
+                            provenance_by_segment,
                         )
                     )
 
     allowlisted = 0
     unreviewed = 0
+    verified_source = 0
+    neutral_metadata = 0
+    answer_bearing = 0
     for match in matches:
-        if _is_allowlisted(match):
+        if match.get("reason") == "verified_source_quotation":
+            match["status"] = "allowlisted"
+            match["category"] = "verified_source_text_match"
+            allowlisted += 1
+            verified_source += 1
+        elif _is_allowlisted(match):
             match["status"] = "allowlisted"
             allowlisted += 1
+        elif match["category"] == "answer_bearing_phrase":
+            match["status"] = "unreviewed_high_risk"
+            answer_bearing += 1
+            unreviewed += 1
         else:
             match["status"] = "unreviewed_high_risk"
             unreviewed += 1
@@ -288,6 +319,10 @@ def semantic_steering_audit(root: Path) -> dict[str, object]:
         "allowlist_entries": list(STEERING_ALLOWLIST),
         "match_count": len(matches),
         "allowlisted_match_count": allowlisted,
+        "verified_source_text_match_count": verified_source,
+        "neutral_metadata_match_count": neutral_metadata,
+        "unreviewed_project_authored_analytic_match_count": unreviewed - answer_bearing,
+        "answer_bearing_phrase_count": answer_bearing,
         "unreviewed_high_risk_count": unreviewed,
         "matches": matches,
     }
@@ -306,6 +341,13 @@ def _write_steering_reports(
         "TRIM v0.2.1 semantic-steering audit",
         f"match_count: {audit['match_count']}",
         f"allowlisted_match_count: {audit['allowlisted_match_count']}",
+        f"verified_source_text_match_count: {audit['verified_source_text_match_count']}",
+        f"neutral_metadata_match_count: {audit['neutral_metadata_match_count']}",
+        (
+            "unreviewed_project_authored_analytic_match_count: "
+            f"{audit['unreviewed_project_authored_analytic_match_count']}"
+        ),
+        f"answer_bearing_phrase_count: {audit['answer_bearing_phrase_count']}",
         f"unreviewed_high_risk_count: {audit['unreviewed_high_risk_count']}",
         "",
     ]
@@ -339,8 +381,10 @@ def _audit_match(
     pattern: str,
     category: str,
     line: str,
+    source_quote_lines: dict[tuple[str, int], str],
+    provenance_by_segment: dict[str, dict[str, str]],
 ) -> dict[str, object]:
-    return {
+    match = {
         "file": file_path,
         "line": line_number,
         "pattern": pattern,
@@ -348,6 +392,18 @@ def _audit_match(
         "excerpt": line.strip(),
         "status": "unreviewed_high_risk",
     }
+    segment_id = source_quote_lines.get((file_path, line_number))
+    provenance = provenance_by_segment.get(segment_id or "")
+    if segment_id and provenance:
+        match.update(
+            {
+                "segment_id": segment_id,
+                "edition_or_translation": provenance["edition_or_translation"],
+                "source": provenance["source"],
+                "reason": "verified_source_quotation",
+            }
+        )
+    return match
 
 
 def _is_allowlisted(match: dict[str, object]) -> bool:
@@ -364,6 +420,32 @@ def _is_allowlisted(match: dict[str, object]) -> bool:
 def _read_csv(path: Path) -> list[dict[str, str]]:
     with path.open("r", encoding="utf-8", newline="") as handle:
         return list(csv.DictReader(handle))
+
+
+def _source_quote_lines(source_packet_text: str) -> dict[tuple[str, int], str]:
+    """Map source-packet line numbers inside Source text blocks to segment IDs."""
+
+    segment_by_line: dict[tuple[str, int], str] = {}
+    current_segment: str | None = None
+    in_source_text = False
+    file_path = "data/retest_v0_2_1_source_packet.md"
+    for line_number, line in enumerate(source_packet_text.splitlines(), start=1):
+        heading = re.match(r"^#### `([^`]+)`\s*$", line)
+        if heading:
+            current_segment = heading.group(1)
+            in_source_text = False
+            continue
+        if current_segment is None:
+            continue
+        if line.strip() == "Source text:":
+            in_source_text = True
+            continue
+        if line.startswith("Navigation note:"):
+            in_source_text = False
+            continue
+        if in_source_text and line.strip():
+            segment_by_line[(file_path, line_number)] = current_segment
+    return segment_by_line
 
 
 def _sha256(path: Path) -> str:

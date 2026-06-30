@@ -11,8 +11,9 @@ central analytic role.
 
 ## Required Steps
 
-All formal coding must be based on the supplied packet. External links are
-provenance references and are not required for completion.
+All formal coding must be based on the supplied packet. The formal segments
+provide source text or documented public-domain translation text. External links
+are provenance references and are not required for completion.
 
 1. Read the case metadata and source segments.
 2. Check the permitted case scope.
@@ -67,4 +68,5 @@ Do not seek case-specific coaching before lock.
 
 Use only the context permitted in the manifest. If the case says
 `cross_case_context_permitted=no`, do not use related cases to select the
-signature.
+signature. A `multi_passage_single_case` may contain separated passages from the
+same formal case, but it does not permit cross-case context.

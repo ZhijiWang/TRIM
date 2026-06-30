@@ -121,8 +121,9 @@ v0.2.1 is a prospective retest design. It does not recode the original ten
 formal cases. It adds an out-of-sample 12-case retest corpus, discriminative
 primary/context evidence selection, explicit shared-context permissions,
 language-access metadata, revised uncertainty thresholds, a question-log rule
-for self-resolved questions, and semantic-steering checks for the coder-facing
-package.
+for self-resolved questions, source-text provenance for formal retest segments,
+a `multi_passage_single_case` scope for distributed passages within one formal
+case, and semantic-steering checks for the coder-facing package.
 
 ## Methodological Contribution
 
@@ -145,6 +146,7 @@ See [`docs/related_methods.md`](docs/related_methods.md) and
 - [`docs/retest_protocol_v0_2_1.md`](docs/retest_protocol_v0_2_1.md)
 - [`docs/retest_v0_2_1_coder_guide.md`](docs/retest_v0_2_1_coder_guide.md)
 - [`docs/retest_v0_2_1_semantic_steering_audit.md`](docs/retest_v0_2_1_semantic_steering_audit.md)
+- [`docs/retest_v0_2_1_source_text_audit.md`](docs/retest_v0_2_1_source_text_audit.md)
 - [`docs/retest_v0_2_1_case_design_audit.md`](docs/retest_v0_2_1_case_design_audit.md)
 - [`docs/v0_2_1_revision_traceability.md`](docs/v0_2_1_revision_traceability.md)
 - [`docs/second_coder_onboarding_v0_2_1.md`](docs/second_coder_onboarding_v0_2_1.md)
@@ -176,6 +178,8 @@ The builder writes a deterministic ZIP and SHA-256 manifest under
 `outputs/coder_packages/`. Leakage tests fail if original pilot case IDs,
 answer-bearing labels, adjudication outcomes, article notes, comparison reports,
 or unreviewed case-specific semantic-steering phrases enter the coder package.
+Verified source-text quotation matches are reported separately and require a
+segment provenance record.
 
 ## Citing and License
 

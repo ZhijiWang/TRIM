@@ -1,0 +1,40 @@
+# TRIM Claim-Evidence Matrix
+
+## Core Boundary
+
+TRIM is currently an **interesting and usable method-development framework** with a carefully designed prospective retest. It is not yet a **validated method**. The article must preserve that distinction.
+
+| Claim | Current support | Additional evidence needed | Safe wording | Overclaim to avoid |
+| --- | --- | --- | --- | --- |
+| Independent usability | v0.2.0 ten-case pilot was completed by two coders with no missing required fields; post-pilot interview showed questions arose but were not logged. | v0.2.1 completion rates, time-on-task, missing fields, question-log use, protocol deviations. | "The first pilot showed that independent coders could complete the schema, while also exposing usability and instruction problems." | "TRIM is easy to use" or "TRIM is independently reproducible." |
+| Intercoder reliability | v0.2.0 descriptive agreement: function 80%; friction 50%; rationale 30% exact / 70% compatible; epistemic support 0% exact / 80% compatible; discourse 60%; temporal 60%; uncertainty 40%. | v0.2.1 field-level agreement; coder count; larger sample; appropriate chance-corrected statistics only where design permits. | "The pilot provides diagnostic field-level agreement evidence, not final reliability." | "TRIM establishes high intercoder reliability." |
+| Interpretive plurality | Two pilot cases retained as substantive pathway variation; alternative signatures preserve complete competing pathways. | More examples from v0.2.1; adjudication evidence that alternatives are textually defensible rather than lax coding. | "TRIM can preserve defensible competing pathways when they remain complete and textually grounded." | "TRIM proves all interpretations are equally valid." |
+| Structured disagreement | Pilot adjudication separated codebook ambiguity, compatible difference, insufficient evidence, substantive pathway variation, near-complete alignment, function-boundary ambiguity. | v0.2.1 adjudication with reproducible category definitions and examples. | "TRIM makes several kinds of disagreement distinguishable in review." | "TRIM objectively classifies disagreement." |
+| Auditability | Evidence anchors, primary/context segments, rationale notes, alternative signatures, validators, locked submissions, package checksums, leakage tests. | Reviewer replication of audit workflow; archived package and outputs. | "TRIM increases auditability by tying claims to explicit source-facing and analytic fields." | "TRIM guarantees valid interpretation." |
+| Reproducibility | Deterministic package builder; tests for schema, validator, package leakage, source coverage, and semantic steering; PR reports 114 tests passed. | Public release, archived DOI, retest locked files, environment instructions, full analysis scripts. | "The repository supports computational reproducibility of the validation and comparison workflow." | "Interpretive results are fully reproducible." |
+| Cross-language validity | v0.2.0 explicitly reported as multilingual, translation- and summary-mediated; language-access metadata added; cross-language companion templates exist. | Direct-language coders or controlled translation-mediated condition; layer/pair comparison; language-stratified analysis. | "TRIM records language-access conditions and can support later cross-language validity analysis." | "TRIM is validated across languages." |
+| Source-text grounding | v0.2.1 formal source packet now supplies source text or documented public-domain translation text for every formal segment; each segment has provenance; summaries no longer substitute for formal evidence text. | External coder completion using the corrected packet; independent spot-check of source excerpts before release. | "The v0.2.1 retest package is source-text grounded and offline-complete." | "Source-text grounding validates the interpretation." |
+| Superiority over free-text memos | TRIM has structured fields plus rationale notes; no memo-only baseline. | Optional comparison with memo-only coding and reviewer reconstruction tasks. | "TRIM offers a more structured alternative to memo-only documentation." | "TRIM is superior to free-text memos." |
+| Domain generality | Current cases span Classical Chinese, Shakespeare, Akutagawa, Greek drama in translation, Plato, detective fiction, Aesop; function labels are project-specific. | New projects with different function vocabularies; non-literary interpretive corpora. | "The pathway architecture is portable in principle; the current function list is project-specific." | "TRIM is domain-general." |
+| Computational tractability | Implemented schema, parser, validator, graph conversion, comparison utilities, Jaccard evidence overlap, package checks. | Larger data volume; user testing; performance and usability packaging if software paper. | "TRIM makes pathway annotations computationally checkable and comparable." | "TRIM automates interpretation." |
+| Explanatory value of friction signatures | Demo tables identify same-function/different-signature and contested cases; pilot adjudication shows signatures diagnose disagreement locations. | v0.2.1 case-level pathway comparison and worked examples showing interpretive payoff. | "Friction signatures help locate where interpretive pathways diverge." | "Friction signatures explain interpretation by themselves." |
+| v0.2.1 improves v0.2.0 | Revision traceability maps pilot findings to codebook, packet, schema, and tests. | Retest outcomes. | "v0.2.1 is a prospectively revised design intended to test pilot-informed changes." | "v0.2.1 fixes the pilot problems." |
+| Function-label closure | The retest uses eight substantive labels plus `no_fit`; validator enforces closure. | Evidence that coders can use `no_fit` appropriately and labels do not force cases. | "The project uses a closed function vocabulary for this retest." | "These labels are a general taxonomy of interpretive function." |
+| Evidence discrimination | v0.2.0 showed all-segment selection by Coder B; v0.2.1 requires one to three primary segments plus context. | Segment-count distribution and all-segment-selection rate in retest. | "v0.2.1 directly tests whether discriminative evidence selection is usable." | "TRIM already solves evidence selection." |
+| Question logging | v0.2.0 empty log was contradicted by interview; v0.2.1 requires all self-resolved questions. | Actual question-log frequency, types, and relation to code changes. | "The revised protocol treats self-resolved questions as data." | "Question logs measure confusion precisely." |
+| Leakage control | Coder package excludes pilot archive, answer-bearing labels, article notes, comparison outputs; semantic-steering scan reports zero matches. | Retest coder feedback and independent audit. | "The package is designed and tested to reduce analytic steering." | "Leakage is impossible." |
+
+## Most Defensible Claim Stack
+
+1. Interpretive annotation needs a reviewable middle layer between labels and memos.
+2. TRIM defines that layer as evidence-to-function pathway structure.
+3. The v0.2.0 pilot shows why this structure matters: final-label outcomes and pathway fields behave differently.
+4. The v0.2.1 package is a prospectively designed retest of pilot-informed revisions.
+5. Reliability, cross-language validity, and domain generality remain future claims.
+
+## Submission Readiness
+
+Drafting can begin now. Submission should wait until the v0.2.1 retest is
+complete and analyzed. The first pilot alone is insufficient for the preferred
+integrated methods article, and no v0.2.1 empirical result should be fabricated
+or implied before the retest.

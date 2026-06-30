@@ -295,17 +295,32 @@ summary-mediated usability pilot. For v0.2.1, either recruit coders who can read
 the source languages directly or explicitly standardize translation-mediated
 conditions.
 
+For v0.2.1 formal retest coding, coder-facing segments supply actual source
+text for English cases and the documented public-domain translation text for
+translated cases. External URLs are provenance references, not required reading.
+Do not describe a formal case as direct-source or published-translation access
+if the coder-facing evidence is only a project-authored summary.
+
 ## Shared Context Metadata
 
-v0.2.1 cases must state whether coders may use only a local passage, the entire
-work, supplied related cases, or an explicitly defined shared narrative field.
+v0.2.1 cases must state whether coders may use only a local passage, a
+multi-passage single case, the entire work, supplied related cases, or an
+explicitly defined shared narrative field.
 
 | Field | Values |
 | --- | --- |
-| `case_scope` | `local_passage`, `complete_work`, `supplied_related_cases`, `shared_narrative_field` |
+| `case_scope` | `local_passage`, `multi_passage_single_case`, `complete_work`, `supplied_related_cases`, `shared_narrative_field` |
 | `shared_context_ids` | optional delimited IDs |
 | `cross_case_context_permitted` | `yes` or `no` |
 | `required_context_segments` | optional segment IDs |
+
+Use `local_passage` when all selected evidence belongs to one contiguous local
+passage. Use `multi_passage_single_case` when one formal case contains separated
+passages from the same work and no other formal case is being used as context.
+Use `supplied_related_cases` when explicitly supplied formal cases may be used
+together. Use `shared_narrative_field` when the case depends on a declared
+cross-case narrative field. Use `complete_work` when the entire named work is
+permitted as background.
 
 If a function depends on accumulated incompatibility or a shared narrative
 field, the permission must be explicit.
@@ -317,9 +332,12 @@ IDs, and the segment IDs available to that group. A case with
 `cross_case_context_permitted=no` must have empty `shared_context_ids` and
 empty `required_context_segments`. A case with `case_scope=supplied_related_cases`
 or `case_scope=shared_narrative_field` must name a valid registry entry and use
-`cross_case_context_permitted=yes`. Local primary evidence must come from the
-case's own `segment_ids`; context evidence may use local segments plus the
-segments permitted by the declared shared-context group.
+`cross_case_context_permitted=yes`. A `multi_passage_single_case` must not name a
+shared-context group; all permitted primary and context segments are local to
+that formal case. Shared-context registry entries must contain at least two
+member cases. Local primary evidence must come from the case's own
+`segment_ids`; context evidence may use local segments plus the segments
+permitted by the declared shared-context group.
 
 ## Backward Compatibility
 

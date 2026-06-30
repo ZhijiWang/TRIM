@@ -48,6 +48,11 @@ vocabulary to eight substantive labels plus `no_fit`. This is a project-level
 pilot rule, not a claim that all future TRIM projects must use the same
 function list.
 
+`case_scope=multi_passage_single_case` records a formal case that contains
+separated passages from the same work without using cross-case context. It
+requires empty `shared_context_ids`, empty `required_context_segments`, and
+`cross_case_context_permitted=no`.
+
 Question logs now have a structured validation path for self-resolved
 questions:
 
@@ -74,9 +79,11 @@ manifest notes alone. The registry schema is:
 
 The validator checks this registry against the retest manifest. Every
 `shared_context_id` used by a case must exist in the registry. Every member case
-must exist in the manifest. Every permitted segment must exist in a manifest
-`segment_ids` field and belong to a member case. `required_context_segments`
-must exist and belong to the declared shared-context group. Annotation
+must exist in the manifest. Every registry entry must contain at least two
+member cases; singleton distributed passages should use
+`case_scope=multi_passage_single_case` instead. Every permitted segment must
+exist in a manifest `segment_ids` field and belong to a member case.
+`required_context_segments` must exist and belong to the declared shared-context group. Annotation
 `primary_evidence_segment_ids` are limited to local case segments, while
 `context_segment_ids` may include local segments and permitted shared-context
 segments.

@@ -45,6 +45,7 @@ Coder-facing:
 - `data/retest_v0_2_1_case_manifest.csv`
 - `data/retest_v0_2_1_shared_context_registry.csv`
 - `data/retest_v0_2_1_source_packet.md`
+- `data/retest_v0_2_1_source_text_provenance.csv`
 - `data/retest_v0_2_1_coding_template.csv`
 - `data/retest_v0_2_1_question_log_template.csv`
 - `data/retest_v0_2_1_practice_cases.md`
@@ -80,8 +81,13 @@ translation-mediated for those cases and interpret agreement accordingly.
 ## Shared Context
 
 The manifest states each case's permitted scope. Coders may use only the local
-passage, complete work, supplied related cases, or shared narrative field named
-in the manifest. Cross-case context is not assumed.
+passage, multi-passage single case, complete work, supplied related cases, or
+shared narrative field named in the manifest. Cross-case context is not assumed.
+
+`multi_passage_single_case` is used when one formal case contains separated
+passages from the same work and no other formal case is used as cross-case
+context. It must not use `shared_context_ids`, and
+`cross_case_context_permitted` must be `no`.
 
 The shared-context registry is the authoritative map from `shared_context_ids`
 to member cases and permitted cross-case segments. Validation fails if a
@@ -89,8 +95,10 @@ manifest names an unknown shared-context ID, if a registry member case or
 permitted segment does not exist, if a required context segment is outside the
 declared group, or if a local-passage case supplies cross-case required context.
 
-All formal coding must be possible from the supplied source packet. External
-URLs in the manifest are provenance references and are not required for coding.
+All formal coding must be possible from the supplied source packet. Formal
+segments supply actual source text or the documented public-domain translation
+text. External URLs in the manifest are provenance references and are not
+required for coding.
 
 ## Metadata Separation
 
@@ -105,8 +113,10 @@ rationale-mechanism, or epistemic-support values.
 The package builder performs explicit leakage checks and a separate
 semantic-steering scan. Instructional files may contain controlled vocabulary.
 Case-specific files are scanned for controlled values, prohibited analytic
-descriptors, original pilot case IDs, and answer-bearing phrases. Unreviewed
-high-risk matches fail package generation.
+descriptors, original pilot case IDs, and answer-bearing phrases. Verified
+source-text quotation matches are reported separately from project-authored
+metadata or navigation prose. Unreviewed high-risk project-authored matches fail
+package generation.
 
 ## Analysis
 

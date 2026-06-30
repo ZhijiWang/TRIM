@@ -20,6 +20,8 @@
   checksum output, shared-context referential-integrity checks, and
   semantic-steering audit reports.
 - Shared-context registry for v0.2.1 retest cases.
+- Source-text provenance table and source-text audit for all formal v0.2.1
+  retest segments.
 - Researcher-facing retest manifest separated from the neutral coder-facing
   manifest.
 - Intercoder evidence-overlap metrics, primary/context overlap reporting,
@@ -38,6 +40,12 @@
   preserving v0.2.0 `evidence_nodes` compatibility.
 - Neutralized coder-facing retest metadata and source-packet summaries that
   could otherwise cue analytic choices.
+- Replaced project-authored formal segment summaries in the v0.2.1 source
+  packet with source text or documented public-domain translation text.
+- Added `multi_passage_single_case` scope and moved the Othello distributed
+  passage case out of the shared-context registry.
+- Updated semantic-steering audit logic to allow verified source quotation
+  matches only when backed by segment provenance.
 - Reframed the completed v0.2.0 pilot as multilingual, translation- and
   summary-mediated usability evidence, not established reliability.
 

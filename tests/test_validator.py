@@ -332,6 +332,29 @@ def test_shared_context_required_segments_require_permission():
     )
 
 
+def test_multi_passage_single_case_rejects_cross_case_metadata():
+    issues = validate_record(
+        _valid_record(
+            status="retest_v0_2_1",
+            language_access_mode="direct_original_language_access",
+            case_scope="multi_passage_single_case",
+            shared_context_ids="ctx-1",
+            cross_case_context_permitted="yes",
+            required_context_segments="case-b_S1",
+            evidence_nodes="",
+            primary_evidence_segment_ids="S1",
+        )
+    )
+
+    assert any(issue.field == "shared_context_ids" for issue in _errors(issues))
+    assert any(
+        issue.field == "cross_case_context_permitted"
+        and "cross_case_context_permitted=no" in issue.message
+        for issue in _errors(issues)
+    )
+    assert any(issue.field == "required_context_segments" for issue in _errors(issues))
+
+
 def test_unknown_shared_context_id_fails_manifest_validation():
     manifest = _shared_manifest()
     manifest[0]["shared_context_ids"] = "missing-ctx"

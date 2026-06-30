@@ -6,6 +6,7 @@ vocabulary use. Human coders provide the interpretive labels.
 
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass, field
 from typing import Any, Iterable, Mapping
 
@@ -82,6 +83,27 @@ QUESTION_LOG_FIELDS: tuple[str, ...] = (
     "blocking_or_nonblocking",
     "requires_manual_revision",
     "coder_id",
+)
+
+SOURCE_TEXT_PROVENANCE_FIELDS: tuple[str, ...] = (
+    "case_id",
+    "segment_id",
+    "source",
+    "edition_or_translation",
+    "source_url",
+    "location",
+    "quotation_status",
+    "normalization_notes",
+    "copyright_status",
+)
+
+QUOTATION_STATUSES: frozenset[str] = frozenset(
+    {
+        "exact_contiguous_excerpt",
+        "exact_excerpt_with_omissions",
+        "multiple_marked_excerpts",
+        "normalized_public_domain_text",
+    }
 )
 
 
@@ -312,6 +334,19 @@ def validate_shared_context_registry(
                     message="member_case_ids is required.",
                 )
             )
+        elif len(members) < 2:
+            issues.append(
+                ValidationIssue(
+                    case_id=shared_context_id,
+                    field="member_case_ids",
+                    severity="error",
+                    message=(
+                        "shared-context groups must contain at least two member "
+                        "cases; use case_scope=multi_passage_single_case for "
+                        "distributed passages within one formal case."
+                    ),
+                )
+            )
         if not permitted_segments:
             issues.append(
                 ValidationIssue(
@@ -382,6 +417,127 @@ def validate_source_packet_segment_coverage(
                         )
                     )
     return issues
+
+
+def validate_source_text_provenance(
+    manifest_metadata: Any,
+    provenance_metadata: Any,
+    source_packet_text: str,
+) -> list[ValidationIssue]:
+    """Validate formal segment source text blocks and provenance rows."""
+
+    manifest = _records_by_key(manifest_metadata, "case_id")
+    provenance = _records_by_key(provenance_metadata, "segment_id")
+    source_blocks = extract_source_text_blocks(source_packet_text)
+    issues: list[ValidationIssue] = []
+
+    for case_id, record in manifest.items():
+        for segment_id in coerce_string_list(record.get("segment_ids")):
+            row = provenance.get(segment_id)
+            if row is None:
+                issues.append(
+                    ValidationIssue(
+                        case_id=case_id,
+                        field="source_text_provenance",
+                        severity="error",
+                        message=f"Missing provenance row for segment {segment_id!r}.",
+                    )
+                )
+                continue
+            if _clean_value(row.get("case_id")) != case_id:
+                issues.append(
+                    ValidationIssue(
+                        case_id=case_id,
+                        field="source_text_provenance.case_id",
+                        severity="error",
+                        message=(
+                            f"Provenance row for segment {segment_id!r} has "
+                            f"case_id {_clean_value(row.get('case_id'))!r}."
+                        ),
+                    )
+                )
+            for field_name in SOURCE_TEXT_PROVENANCE_FIELDS:
+                if not _clean_value(row.get(field_name)):
+                    issues.append(
+                        ValidationIssue(
+                            case_id=case_id,
+                            field=f"source_text_provenance.{field_name}",
+                            severity="error",
+                            message=(
+                                f"{field_name} is required for segment "
+                                f"{segment_id!r}."
+                            ),
+                        )
+                    )
+            quotation_status = _clean_value(row.get("quotation_status"))
+            if quotation_status and quotation_status not in QUOTATION_STATUSES:
+                issues.append(
+                    ValidationIssue(
+                        case_id=case_id,
+                        field="source_text_provenance.quotation_status",
+                        severity="error",
+                        message=(
+                            f"quotation_status {quotation_status!r} is not "
+                            "controlled vocabulary."
+                        ),
+                    )
+                )
+            source_text = source_blocks.get(segment_id, "")
+            if not source_text:
+                issues.append(
+                    ValidationIssue(
+                        case_id=case_id,
+                        field="source_text",
+                        severity="error",
+                        message=f"Missing non-empty Source text block for {segment_id!r}.",
+                    )
+                )
+            elif re.search(r"\bsummary\b|\bparaphrase\b", source_text, flags=re.I):
+                issues.append(
+                    ValidationIssue(
+                        case_id=case_id,
+                        field="source_text",
+                        severity="error",
+                        message=(
+                            f"Formal segment {segment_id!r} appears to use "
+                            "summary/paraphrase language in the source-text block."
+                        ),
+                    )
+                )
+    return issues
+
+
+def extract_source_text_blocks(source_packet_text: str) -> dict[str, str]:
+    """Return segment_id to Source text block from the retest source packet."""
+
+    blocks: dict[str, str] = {}
+    current_segment: str | None = None
+    in_source_text = False
+    lines: list[str] = []
+    for raw_line in source_packet_text.splitlines():
+        heading = re.match(r"^#### `([^`]+)`\s*$", raw_line)
+        if heading:
+            if current_segment is not None:
+                blocks[current_segment] = "\n".join(lines).strip()
+            current_segment = heading.group(1)
+            in_source_text = False
+            lines = []
+            continue
+        if current_segment is None:
+            continue
+        if raw_line.strip() == "Source text:":
+            in_source_text = True
+            lines = []
+            continue
+        if raw_line.startswith("Navigation note:"):
+            in_source_text = False
+            blocks[current_segment] = "\n".join(lines).strip()
+            continue
+        if in_source_text:
+            lines.append(raw_line)
+    if current_segment is not None and current_segment not in blocks:
+        blocks[current_segment] = "\n".join(lines).strip()
+    return blocks
 
 
 def validate_question_log_record(
@@ -612,6 +768,45 @@ def _validate_v0_2_1_metadata(
                 message="case_scope=local_passage cannot use cross-case context.",
             )
         )
+
+    if case_scope == "multi_passage_single_case":
+        if shared_context_ids:
+            issues.append(
+                ValidationIssue(
+                    case_id=case_id,
+                    field="shared_context_ids",
+                    severity="error",
+                    message=(
+                        "case_scope=multi_passage_single_case must not use "
+                        "shared_context_ids."
+                    ),
+                )
+            )
+        if cross_case_context_permitted == "yes":
+            issues.append(
+                ValidationIssue(
+                    case_id=case_id,
+                    field="cross_case_context_permitted",
+                    severity="error",
+                    message=(
+                        "case_scope=multi_passage_single_case requires "
+                        "cross_case_context_permitted=no."
+                    ),
+                )
+            )
+        if required_context_segments:
+            issues.append(
+                ValidationIssue(
+                    case_id=case_id,
+                    field="required_context_segments",
+                    severity="error",
+                    message=(
+                        "case_scope=multi_passage_single_case keeps distributed "
+                        "segments within the formal case; required_context_segments "
+                        "must be empty."
+                    ),
+                )
+            )
 
     if registry:
         for shared_context_id in shared_context_ids:

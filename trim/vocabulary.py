@@ -100,6 +100,7 @@ LANGUAGE_ACCESS_MODES: frozenset[str] = frozenset(
 CASE_SCOPES: frozenset[str] = frozenset(
     {
         "local_passage",
+        "multi_passage_single_case",
         "complete_work",
         "supplied_related_cases",
         "shared_narrative_field",

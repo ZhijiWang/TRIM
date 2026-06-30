@@ -5,31 +5,44 @@ coder-facing retest packet. It does not record expected function labels,
 expected friction-locus values, adjudication outcomes, or hidden answer keys.
 
 The review target was wording that could tell a coder what analytic work a
-segment performs instead of describing observable textual content. The package
-builder also runs a machine scan over case-specific files and fails on
-unreviewed high-risk matches.
+segment performs instead of supplying source text, source-text provenance, or
+neutral navigation. The package builder also runs a machine scan over
+case-specific files. Controlled or prohibited terms that occur inside verified
+source quotations are reported separately as `verified_source_text_match`; the
+same terms in project-authored navigation, metadata, summaries, or instructions
+remain high-risk unless independently reviewed and justified.
 
 | Case ID | Potentially loaded wording reviewed | Final neutral wording decision | Remaining wording type | Reviewer conclusion |
 | --- | --- | --- | --- | --- |
-| `JC_CALPURNIA_DECIUS` | Earlier wording described Decius as reinterpreting the dream. | Segment `S5` now says Decius gives a different account of the dream and states what he says about Caesar's blood and the crown. | Direct textual description with brief quotation support. | Retain. Wording names the speech content without naming a TRIM operation. |
-| `JC_IDES_SOOTHSAYER` | Warning-scene phrasing was checked for analytic cueing. | Segments state the warning, Caesar's request to see the speaker, repetition, and dismissal. | Direct textual description and quotation. | Retain. The case remains concise but does not supply an expected analytic label. |
-| `HAM_GHOST_COMMAND` | Command and memory language was checked for actor-action steering. | Segments state what the Ghost says and what Hamlet swears to remember. | Direct textual description and quotation. | Retain. Actor action is visible, but the packet does not tell the coder how to classify it. |
-| `HAM_PLAY_REACTION` | Earlier wording could imply a testing or evidentiary mechanism. | Segment `S1` now says Hamlet asks Horatio to watch Claudius and compare what they see; later segments state the staged murder, Claudius's exit, and the comparison. | Direct textual description. | Retain. Shared context is explicit through the registry, not by analytic wording. |
-| `OTH_HANDKERCHIEF_CHAIN` | The case label and registry ID previously used warrant-like wording. | Coder-facing metadata now uses a neutral scene label and registry ID; segments list possession and reported sightings of the handkerchief. | Direct textual sequence. | Retain. The sequence remains available without naming a TRIM rationale or locus. |
-| `ANT_GUARD_REPORT` | Earlier segment wording suggested report uptake and exposition. | Segments now describe the covered corpse, missing tracks, sentry argument, and Creon's stated concerns. | Direct textual description. | Retain. Presentation form is visible without naming discourse-level categories. |
-| `ANT_TEIRESIAS_OMENS` | Omen wording was checked for automatic authorization cues. | Segments state the seat of augury, bird cries, failed sacrifice, and Teiresias's statement to Creon. | Direct textual description. | Retain. The packet does not say what function the signs should have. |
-| `OED_TIREISIAS_ACCUSATION` | Accusation wording was checked for perspective and testimony cues. | Segments state the request, resistance, accusation, and Oedipus's rejection. | Direct textual description. | Retain. The packet records who says what without assigning the analytic boundary. |
-| `OED_MESSENGER_SHEPHERD` | Earlier wording used recognition-chain language. | Segment `S5` now says that after hearing the messenger and shepherd, Oedipus says all has come to light. | Direct textual description. | Retain. The shared narrative field is explicit, but the wording does not name a mechanism. |
-| `APOL_ORACLE_INQUIRY` | Earlier wording could imply Socrates tests the oracle as an analytic label. | Segment `S3` now states that Socrates visited people reputed to be wise and compared what they knew with what he knew. | Direct textual description. | Retain. The packet records the reported sequence of inquiry. |
-| `SILVER_BLAZE_DOG` | The famous phrase was checked for over-directing an inference case. | Segments keep the quoted exchange about the dog and the night-time. | Direct quotation and minimal description. | Retain. The case is an anchor case, but the packet does not name the analytic result. |
-| `AESOP_FOX_GRAPES` | Fable moral and self-justification wording was checked. | Segments state the fox sees grapes, fails to reach them, and says they are probably sour. | Direct textual description. | Retain. No moral or TRIM label is supplied. |
+| `JC_CALPURNIA_DECIUS` | Earlier wording described Decius as reinterpreting the dream. | Segments now supply Shakespeare source text; navigation notes identify scene and speaker only. | Verified source text plus neutral navigation. | Retain. |
+| `JC_IDES_SOOTHSAYER` | Warning-scene phrasing was checked for analytic cueing. | Segments now supply Shakespeare source text; navigation notes identify sequence only. | Verified source text plus neutral navigation. | Retain. |
+| `HAM_GHOST_COMMAND` | Command and memory language was checked for actor-action steering. | Segments now supply Shakespeare source text; navigation notes identify scene and speaker only. | Verified source text plus neutral navigation. | Retain. |
+| `HAM_PLAY_REACTION` | Earlier wording could imply a testing or evidentiary mechanism. | Segments now supply Shakespeare source text; shared context remains explicit through the registry. | Verified source text plus neutral navigation. | Retain. |
+| `OTH_HANDKERCHIEF_CHAIN` | The case label and singleton registry ID previously used warrant-like wording. | Coder-facing metadata now uses `multi_passage_single_case`; the singleton registry entry is removed; segments supply Shakespeare source text. | Verified source text plus neutral navigation. | Retain. The distributed passage chain remains available without using cross-case scope. |
+| `ANT_GUARD_REPORT` | Earlier segment wording suggested report uptake and exposition. | Segments now supply the documented F. Storr translation; navigation notes identify speaker and sequence only. | Verified translation text plus neutral navigation. | Retain. |
+| `ANT_TEIRESIAS_OMENS` | Omen wording was checked for automatic authorization cues. | Segments now supply the documented F. Storr translation; navigation notes identify speaker and sequence only. | Verified translation text plus neutral navigation. | Retain. |
+| `OED_TIREISIAS_ACCUSATION` | Accusation wording was checked for perspective and testimony cues. | Segments now supply the documented F. Storr translation; navigation notes identify speaker and sequence only. | Verified translation text plus neutral navigation. | Retain. |
+| `OED_MESSENGER_SHEPHERD` | Earlier wording used recognition-chain language. | Segments now supply the documented F. Storr translation; shared narrative field remains explicit through the registry. | Verified translation text plus neutral navigation. | Retain. |
+| `APOL_ORACLE_INQUIRY` | Earlier wording could imply Socrates tests the oracle as an analytic label. | Segments now supply the documented Jowett translation; navigation notes identify sequence only. | Verified translation text plus neutral navigation. | Retain. |
+| `SILVER_BLAZE_DOG` | The famous phrase was checked for over-directing an inference case. | Segments now supply Conan Doyle source text; navigation notes identify exchange only. | Verified source text plus neutral navigation. | Retain. |
+| `AESOP_FOX_GRAPES` | Fable moral and self-justification wording was checked. | Segments now supply the documented Townsend translation; navigation notes identify sentence order only. | Verified translation text plus neutral navigation. | Retain. |
 
 ## Machine Audit Result
 
-The current package-builder semantic scan reports:
+The current package-builder semantic scan reports verified source-text matches,
+neutral metadata matches, unreviewed project-authored analytic matches, and
+answer-bearing phrase matches separately. Source-text allowlisting requires a
+provenance row and the reason `verified_source_quotation`; project-authored
+prose cannot be allowlisted through this route.
 
-- `match_count: 0`
-- `allowlisted_match_count: 0`
+Current counts are regenerated by `scripts/build_retest_v0_2_1_package.py` and
+written to `outputs/coder_packages/TRIM_retest_v0_2_1_semantic_steering_audit.*`.
+The current generated audit reports:
+
+- `match_count: 2`
+- `allowlisted_match_count: 2`
+- `verified_source_text_match_count: 2`
+- `neutral_metadata_match_count: 0`
+- `unreviewed_project_authored_analytic_match_count: 0`
+- `answer_bearing_phrase_count: 0`
 - `unreviewed_high_risk_count: 0`
-
-No allowlist entry is currently needed for the formal coder-facing case files.

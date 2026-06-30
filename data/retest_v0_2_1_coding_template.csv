@@ -3,7 +3,7 @@ JC_CALPURNIA_DECIUS,,Act 2.2 selected passage,Julius Caesar,English,dramatic_sce
 JC_IDES_SOOTHSAYER,,Act 1.2 warning scene,Julius Caesar,English,dramatic_scene,direct_original_language_access,local_passage,,no,,,,,,,,,,,,,,,,,,coder_id,retest_v0_2_1
 HAM_GHOST_COMMAND,,Act 1.5 selected passage,Hamlet,English,dramatic_scene,direct_original_language_access,local_passage,,no,,,,,,,,,,,,,,,,,,coder_id,retest_v0_2_1
 HAM_PLAY_REACTION,,Act 3.2 play scene,Hamlet,English,dramatic_scene,direct_original_language_access,supplied_related_cases,HAMLET_CONTEXT_A,yes,HAM_GHOST_COMMAND_S2,,,,,,,,,,,,,,,,,,coder_id,retest_v0_2_1
-OTH_HANDKERCHIEF_CHAIN,,Act 3.3-3.4 selected passages,Othello,English,dramatic_scene,direct_original_language_access,supplied_related_cases,OTHELLO_CONTEXT_A,yes,OTH_HANDKERCHIEF_CHAIN_S1|OTH_HANDKERCHIEF_CHAIN_S2,,,,,,,,,,,,,,,,,,coder_id,retest_v0_2_1
+OTH_HANDKERCHIEF_CHAIN,,Act 3.3-3.4 selected passages,Othello,English,dramatic_scene,direct_original_language_access,multi_passage_single_case,,no,,,,,,,,,,,,,,,,,,coder_id,retest_v0_2_1
 ANT_GUARD_REPORT,,Selected guard report passage,Antigone,Ancient Greek,dramatic_scene,published_translation,local_passage,,no,,,,,,,,,,,,,,,,,,coder_id,retest_v0_2_1
 ANT_TEIRESIAS_OMENS,,Selected Teiresias passage,Antigone,Ancient Greek,dramatic_scene,published_translation,local_passage,,no,,,,,,,,,,,,,,,,,,coder_id,retest_v0_2_1
 OED_TIREISIAS_ACCUSATION,,Selected Teiresias passage,Oedipus the King,Ancient Greek,dramatic_scene,published_translation,local_passage,,no,,,,,,,,,,,,,,,,,,coder_id,retest_v0_2_1
