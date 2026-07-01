@@ -16,12 +16,13 @@ The software package is standalone for record validation, lock verification, pro
 
 - Synthetic dry run with valid and invalid fixtures.
 - Author-only In a Grove walkthrough.
+- Japanese-canonical public walkthrough v0.2 with locked author/model records and a frozen descriptive comparison.
 - Position-note technical draft.
 - Frozen artifact preservation by SHA-256.
 
 ## Under Review
 
-- A Japanese-canonical, English-gloss public walkthrough text layer is under author review. It contains no new annotation records and is not yet frozen.
+- The Japanese-canonical public walkthrough v0.2 is prepared as a provenance-aware technical walkthrough demonstrating structured comparison between locked human and model annotations. It remains a representability demonstration and descriptive locked-record comparison, not empirical validation, a truth verdict, a replication study, or a general claim about model behaviour.
 
 ## Deferred
 
