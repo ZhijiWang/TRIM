@@ -27,7 +27,18 @@ FORBIDDEN_AI = {
     "ai_raw_output.txt",
     "model_run_manifest.csv",
     "prompt_manifest.csv",
+    "prompts",
     "outputs",
+    "comparison",
+    "exposure_events.csv",
+    "assistance_provenance.csv",
+    "frozen_packet.zip",
+}
+FORBIDDEN_STAGES = {
+    "ai_independent",
+    "human_post_ai",
+    "human_second_pass_control",
+    "adjudicated",
 }
 CORE_FIELDS = [
     "annotation_id","case_id","parent_annotation_id","actor_id","actor_type",
@@ -58,6 +69,15 @@ def test_public_v02_structure_and_ai_boundary():
         "author_lock_manifest.csv",
     }
     assert not any((PUBLIC / name).exists() for name in FORBIDDEN_AI)
+    assert not [
+        path
+        for name in FORBIDDEN_AI
+        for path in PUBLIC.glob(f"**/{name}")
+    ]
+
+    for csv_path in PUBLIC.glob("**/*.csv"):
+        for row in _rows(csv_path):
+            assert row.get("annotation_stage", "") not in FORBIDDEN_STAGES
 
 
 def test_segments_and_glosses_match_one_to_one():
@@ -75,17 +95,31 @@ def test_segments_and_glosses_match_one_to_one():
 def test_locked_author_record_verifies():
     record = _rows(AUTHOR / "author_analytic_record.csv")[0]
     lock = _rows(AUTHOR / "author_lock_manifest.csv")[0]
+    segment_ids = {
+        row["segment_id"] for row in _rows(PUBLIC / "source_segments_japanese.csv")
+    }
+    evidence_ids = record["primary_evidence_segment_ids"].split("|")
+
     assert record["annotation_id"] == "IAG_JP_V02_AUTHOR_PRE"
     assert record["case_id"] == "IAG_JP_PUBLIC_002"
+    assert record["actor_id"] == "AUTHOR_ANALYTIC"
     assert record["actor_type"] == "human"
     assert record["annotation_stage"] == "human_pre"
     assert record["parent_annotation_id"] == ""
     assert record["status"] == "locked"
     assert record["uncertainty_flag"] == "high"
     assert record["alternative_pathway_present"] == "yes"
-    assert set(record["primary_evidence_segment_ids"].split("|")) == {
+    assert evidence_ids == [
+        "IAG-JP-FRAME-001",
+        "IAG-JP-017",
+        "IAG-JP-018",
+        "IAG-JP-019",
+        "IAG-JP-020",
+    ]
+    assert set(evidence_ids) == {
         "IAG-JP-FRAME-001","IAG-JP-017","IAG-JP-018","IAG-JP-019","IAG-JP-020"
     }
+    assert set(evidence_ids).issubset(segment_ids)
     payload = json.dumps(
         {field: record[field].strip().replace("\r\n", "\n").replace("\r", "\n") for field in CORE_FIELDS},
         ensure_ascii=False,
@@ -95,6 +129,10 @@ def test_locked_author_record_verifies():
     digest = hashlib.sha256(payload.encode("utf-8")).hexdigest()
     assert digest == lock["canonical_record_sha256"]
     assert digest == "6d78fd9d161d7a11c23ce962b257864eda16801793c6d87f17466e99ef269c50"
+    assert lock["annotation_id"] == record["annotation_id"]
+    assert lock["case_id"] == record["case_id"]
+    assert lock["annotation_stage"] == record["annotation_stage"]
+    assert lock["actor_id"] == record["actor_id"]
     assert lock["lock_status"] == "locked"
 
 
@@ -116,3 +154,14 @@ def test_text_layer_manifests_remain_valid():
         digest, filename = line.split("  ", 1)
         sums[filename] = digest
     assert sums == expected
+
+
+def test_review_status_tracks_locked_author_record_and_ai_boundary():
+    status = _read(PUBLIC / "text_layer_review_status.md")
+
+    assert "freeze_status: frozen_text_layer_v0_2" in status
+    assert "author_record_status: completed_and_locked" in status
+    assert "ready_for_new_ai_record: yes" in status
+    assert "ready_for_public_release: no" in status
+    assert "does not claim that an AI record exists" in status
+    assert "does not claim that a comparison has been completed" in status

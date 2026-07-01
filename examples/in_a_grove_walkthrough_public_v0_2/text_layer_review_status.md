@@ -2,7 +2,8 @@
 
 review_status: author_review_completed
 freeze_status: frozen_text_layer_v0_2
-annotation_status: ready_for_new_author_record_only
+annotation_status: author_record_completed_and_locked
+author_record_status: completed_and_locked
 review_date: 2026-07-01
 freeze_date: 2026-07-01
 
@@ -18,7 +19,7 @@ This status covers the Japanese-canonical public walkthrough text layer:
 - `aozora_usage_guidance_record.md`
 - `canonical_text_exactness_audit.md`
 
-It does not cover a new author analytic record, AI record, prompt run, comparison result, position-note finding, or public release package.
+It now records that one versioned author analytic record has been completed and locked under `author_record_v0_1/`. It does not cover an AI record, prompt run, comparison result, position-note finding, or public release package.
 
 ## Review basis
 
@@ -40,12 +41,13 @@ This review must not be described as an independent human bilingual expert revie
 - rights-guidance record created: yes
 - ready_to_freeze: yes
 - frozen: yes
-- ready_for_new_author_record: yes
-- ready_for_new_ai_record: no
+- author_record_completed_and_locked: yes
+- ready_for_new_author_record: no
+- ready_for_new_ai_record: yes
 - ready_for_public_release: no
 
 ## Boundary
 
 The text layer is frozen. Any change to canonical Japanese text, segmentation, gloss wording, provenance, or protocol requires a new version and regenerated manifests.
 
-The next permitted step is a new author analytic record based only on the frozen Japanese segment IDs. A new AI record remains prohibited until that author record has been completed and locked.
+The author record is locked and uses only frozen Japanese segment IDs. The next permitted step is preparation of an independent AI run under a separately frozen prompt/run workflow. This status does not claim that an AI record exists and does not claim that a comparison has been completed.

@@ -185,12 +185,19 @@ def test_research_boundaries_remain_visible():
     position_note = (ROOT / "research" / "position_note" / "TRIM_HAA_position_note_v0_1.md").read_text(encoding="utf-8").lower()
     walkthrough_readme = (ROOT / "examples" / "in_a_grove_walkthrough" / "README.md").read_text(encoding="utf-8").lower()
     future = (ROOT / "research" / "future_human_study" / "README.md").read_text(encoding="utf-8").lower()
+    public_v02 = ROOT / "examples" / "in_a_grove_walkthrough_public_v0_2"
+    public_author_records = list(public_v02.glob("author_record_v*/author_analytic_record.csv"))
 
     assert "representation is not detection" in position_note
     assert "author-only" in walkthrough_readme
     assert "not human-subject data" in walkthrough_readme
     assert "no ethics approval has been obtained" in future
-    assert not list((ROOT / "examples").glob("in_a_grove_*/*/author_analytic_record.csv"))
+    assert public_author_records == [
+        public_v02 / "author_record_v0_1" / "author_analytic_record.csv"
+    ]
+    assert not list((public_v02).glob("**/ai_independent_record.csv"))
+    assert not list((public_v02).glob("**/model_run_manifest.csv"))
+    assert not (public_v02 / "outputs").exists()
 
 
 def test_version_and_pandas_dependency_classification_are_consistent():
