@@ -3,9 +3,10 @@
 from __future__ import annotations
 
 from statistics import mean, median
-from typing import Any, Iterable, Mapping
+from typing import TYPE_CHECKING, Any, Iterable, Mapping
 
-import pandas as pd
+if TYPE_CHECKING:
+    import pandas as pd
 
 from trim_haa.comparison import compare_pre_ai_post
 from trim_haa.locking import LockRecord, verify_locked_annotation
@@ -19,6 +20,7 @@ def case_level_report(
     provenance_records: Iterable[AssistanceProvenance | Mapping[str, Any]] = (),
     lock_records: Iterable[LockRecord | Mapping[str, Any]] = (),
 ) -> pd.DataFrame:
+    pd = _pandas()
     rows: list[dict[str, Any]] = []
     prepared = [_coerce(record) for record in annotations]
     by_case = _by_case(prepared)
@@ -85,6 +87,7 @@ def participant_level_report(
     annotations: Iterable[TrimHAAAnnotation | Mapping[str, Any]],
     case_report: pd.DataFrame | None = None,
 ) -> pd.DataFrame:
+    pd = _pandas()
     prepared = [_coerce(record) for record in annotations]
     case_report = case_report if case_report is not None else case_level_report(prepared)
     rows: list[dict[str, Any]] = []
@@ -128,6 +131,7 @@ def study_level_report(
     exposure_events: Iterable[Mapping[str, Any]] = (),
     lock_records: Iterable[Mapping[str, Any]] = (),
 ) -> dict[str, Any]:
+    pd = _pandas()
     prepared = [_coerce(record) for record in annotations]
     cases = case_level_report(prepared, provenance_records, lock_records)
     report = validate_dataset(prepared, provenance_records, exposure_events, lock_records)
@@ -290,3 +294,14 @@ def _missingness(records: list[TrimHAAAnnotation]) -> dict[str, int]:
         if not record.uncertainty_flag:
             counts["uncertainty_flag"] += 1
     return counts
+
+
+def _pandas():
+    try:
+        import pandas as pd
+    except ImportError:
+        raise RuntimeError(
+            "trim_haa.reporting requires the optional pandas dependency. "
+            "Install trim-haa[reporting] to use reporting helpers."
+        ) from None
+    return pd

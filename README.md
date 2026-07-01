@@ -61,15 +61,25 @@ lock = lock_annotation(
 )
 ```
 
-## CLI Quickstart
+## Installed-Package CLI
+
+The installed package provides validation, locking, provenance, and comparison utilities.
 
 ```bash
 trim-haa --help
 trim-haa version
-trim-haa validate tests/fixtures/trim_haa/core_valid.csv
-trim-haa verify-lock tests/fixtures/trim_haa/core_valid.csv tests/fixtures/trim_haa/lock_valid.csv
-trim-haa compare examples/in_a_grove_walkthrough/author_analytic_record.csv examples/in_a_grove_walkthrough/ai_independent_record.csv
+trim-haa validate <core-records.csv>
+trim-haa verify-lock <annotation.csv> <lock-manifest.csv>
+trim-haa compare <left-annotation.csv> <right-annotation.csv>
+```
+
+## Source-Checkout Demonstrations
+
+Repository demonstrations and research workflows require a source checkout. The walkthrough source packet is not distributed inside the wheel.
+
+```bash
 trim-haa run-walkthrough
+trim-haa run-synthetic
 ```
 
 ## Repository Structure

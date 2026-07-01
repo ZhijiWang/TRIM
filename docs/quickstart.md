@@ -41,10 +41,23 @@ assert not validate_core_record(left)
 comparison = compare_annotations(left, right)
 ```
 
-Use the CLI:
+Use the installed-package CLI:
 
 ```bash
 trim-haa --help
-trim-haa validate tests/fixtures/trim_haa/core_valid.csv
-trim-haa compare examples/in_a_grove_walkthrough/author_analytic_record.csv examples/in_a_grove_walkthrough/ai_independent_record.csv
+trim-haa version
+trim-haa validate <core-records.csv>
+trim-haa verify-lock <annotation.csv> <lock-manifest.csv>
+trim-haa compare <left-annotation.csv> <right-annotation.csv>
 ```
+
+The installed package provides validation, locking, provenance, and comparison utilities. Repository demonstrations and research workflows require a source checkout.
+
+Source-checkout-only demonstrations:
+
+```bash
+trim-haa run-walkthrough
+trim-haa run-synthetic
+```
+
+The walkthrough source packet is not distributed inside the wheel.

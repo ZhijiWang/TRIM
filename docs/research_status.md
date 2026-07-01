@@ -10,6 +10,8 @@
 - Field-level comparison helpers.
 - CLI smoke commands.
 
+The software package is standalone for record validation, lock verification, provenance handling, and comparison. Demonstrations remain repository-bound and require a source checkout.
+
 ## Demonstrated
 
 - Synthetic dry run with valid and invalid fixtures.

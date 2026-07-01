@@ -16,6 +16,11 @@ from trim_haa.locking import LockRecord, verify_locked_annotation
 from trim_haa.schema import TrimHAAAnnotation
 from trim_haa.validator import validate_core_records
 
+SOURCE_CHECKOUT_REQUIRED = (
+    "This command requires a TRIM-HAA source checkout.\n"
+    "Install-package commands available here are: validate, verify-lock, compare, and version."
+)
+
 
 def main(argv: Sequence[str] | None = None) -> int:
     parser = build_parser()
@@ -47,10 +52,16 @@ def build_parser() -> argparse.ArgumentParser:
     compare.add_argument("right_csv", type=Path)
     compare.set_defaults(func=cmd_compare)
 
-    walkthrough = subparsers.add_parser("run-walkthrough", help="Run the author-only In a Grove walkthrough.")
+    walkthrough = subparsers.add_parser(
+        "run-walkthrough",
+        help="Run the author-only walkthrough from a source checkout.",
+    )
     walkthrough.set_defaults(func=cmd_run_walkthrough)
 
-    synthetic = subparsers.add_parser("run-synthetic", help="Run the synthetic dry-run workflow.")
+    synthetic = subparsers.add_parser(
+        "run-synthetic",
+        help="Run the synthetic dry-run workflow from a source checkout.",
+    )
     synthetic.add_argument(
         "--invalid",
         action="store_true",
@@ -121,7 +132,10 @@ def cmd_run_walkthrough(args: argparse.Namespace) -> int:
 
 
 def cmd_run_synthetic(args: argparse.Namespace) -> int:
-    root = _repo_root()
+    root = find_source_checkout()
+    if root is None:
+        print(SOURCE_CHECKOUT_REQUIRED, file=sys.stderr)
+        return 2
     fixture = (
         root / "examples" / "synthetic_dry_run" / ("invalid" if args.invalid else "valid")
     )
@@ -142,13 +156,13 @@ def _read_csv(path: Path) -> list[dict[str, str]]:
 
 
 def _run_repo_script(relative_path: str, *args: str) -> int:
-    root = _repo_root()
+    root = find_source_checkout()
+    if root is None:
+        print(SOURCE_CHECKOUT_REQUIRED, file=sys.stderr)
+        return 2
     script = root / relative_path
     if not script.exists():
-        print(
-            f"{relative_path} is available only from a source checkout.",
-            file=sys.stderr,
-        )
+        print(SOURCE_CHECKOUT_REQUIRED, file=sys.stderr)
         return 2
     completed = subprocess.run(
         [sys.executable, str(script), *args],
@@ -158,11 +172,12 @@ def _run_repo_script(relative_path: str, *args: str) -> int:
     return completed.returncode
 
 
-def _repo_root() -> Path:
-    for candidate in (Path.cwd(), *Path.cwd().parents):
+def find_source_checkout() -> Path | None:
+    candidates = (Path.cwd(), Path.cwd().parent, Path.cwd().parent.parent)
+    for candidate in candidates:
         if (candidate / "src" / "trim_haa").is_dir():
             return candidate
-    return Path.cwd()
+    return None
 
 
 if __name__ == "__main__":
