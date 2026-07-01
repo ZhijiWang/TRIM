@@ -5,14 +5,20 @@ import sys
 import pandas as pd
 
 from trim.intercoder import (
+    apply_disagreement_categories,
     cohen_kappa_if_two_coders,
+    compatible_single_compound_value,
     compound_value_metrics,
     contested_disagreement_report,
     disagreement_table,
     pairwise_agreement,
     pairwise_compound_agreement,
+    pairwise_segment_agreement,
     percent_agreement,
+    primary_context_segment_overlap,
     pivot_coder_annotations,
+    segment_set_metrics,
+    stratified_pairwise_agreement,
 )
 
 
@@ -147,8 +153,74 @@ def test_pairwise_compound_agreement_reports_multiple_views():
     assert row["comparable_cases"] == 2
     assert row["exact_set_agreement"] == 0.5
     assert row["primary_agreement"] == 0.5
+    assert row["compatible_single_compound_agreement"] == 1.0
     assert row["any_overlap_agreement"] == 1.0
     assert row["mean_jaccard_overlap"] == 0.75
+
+
+def test_compatible_single_compound_value_reports_containment():
+    assert compatible_single_compound_value("authorizes", "authorizes+reframes")
+    assert compatible_single_compound_value("reframes+authorizes", "authorizes")
+    assert not compatible_single_compound_value("extends", "authorizes+reframes")
+
+
+def test_segment_set_metrics_and_pairwise_segment_agreement():
+    frame = pd.DataFrame(
+        [
+            {
+                "case_id": "case-1",
+                "coder_id": "coder_a",
+                "primary_evidence_segment_ids": "S1|S2",
+            },
+            {
+                "case_id": "case-1",
+                "coder_id": "coder_b",
+                "primary_evidence_segment_ids": "S2|S3",
+            },
+            {
+                "case_id": "case-2",
+                "coder_id": "coder_a",
+                "primary_evidence_segment_ids": "S4",
+            },
+            {
+                "case_id": "case-2",
+                "coder_id": "coder_b",
+                "primary_evidence_segment_ids": "S4",
+            },
+        ]
+    )
+
+    assert segment_set_metrics("S1|S2", "S2|S3")["jaccard_overlap"] == 1 / 3
+    row = pairwise_segment_agreement(frame).iloc[0]
+
+    assert row["comparable_cases"] == 2
+    assert row["exact_set_agreement"] == 0.5
+    assert row["any_overlap_agreement"] == 1.0
+
+
+def test_primary_context_segment_overlap_reports_cross_role_overlap():
+    frame = pd.DataFrame(
+        [
+            {
+                "case_id": "case-1",
+                "coder_id": "coder_a",
+                "primary_evidence_segment_ids": "S1|S2",
+                "context_segment_ids": "S3",
+            },
+            {
+                "case_id": "case-1",
+                "coder_id": "coder_b",
+                "primary_evidence_segment_ids": "S2|S3",
+                "context_segment_ids": "S1",
+            },
+        ]
+    )
+
+    row = primary_context_segment_overlap(frame).iloc[0]
+
+    assert row["primary_jaccard_overlap"] == 1 / 3
+    assert row["context_jaccard_overlap"] == 0.0
+    assert row["cross_role_overlap"] == "S1|S3"
 
 
 def test_compound_value_metrics_require_nonempty_values():
@@ -205,6 +277,35 @@ def test_disagreement_table():
         "coder_a=" in value and "coder_b=" in value
         for value in table["coder_values"]
     )
+    assert set(table["raw_disagreement"]) == {"yes"}
+
+
+def test_apply_disagreement_categories_preserves_raw_rows():
+    table = disagreement_table(_coded_rows(), ["function_label"])
+    categorized = apply_disagreement_categories(
+        table,
+        {"ZZ_MIN_1": "substantive_pathway_variation"},
+    )
+    row = categorized.iloc[0]
+
+    assert row["raw_disagreement"] == "yes"
+    assert row["adjudicated_substantive_pathway_variation"] == "yes"
+    assert row["disagreement_category"] == "substantive_pathway_variation"
+
+
+def test_stratified_pairwise_agreement_reports_language_and_scope():
+    frame = _coded_rows()
+    frame["language_access_mode"] = "direct_original_language_access"
+    frame["case_scope"] = [
+        "local_passage",
+        "local_passage",
+        "shared_narrative_field",
+        "shared_narrative_field",
+    ]
+
+    table = stratified_pairwise_agreement(frame, "function_label")
+
+    assert {"language_access_mode", "case_scope"} <= set(table["stratum_field"])
 
 
 def test_contested_disagreement_report_leaves_human_review_columns_blank():

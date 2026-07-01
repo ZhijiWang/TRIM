@@ -1,0 +1,7 @@
+case_id,case_title,segment_ids,notes
+C01,Synthetic interpretive case 1,C01_S1|C01_S2|C01_S3|C01_S4|C01_S5|C01_S6,Synthetic case; no historical coder answer reused.
+C02,Synthetic interpretive case 2,C02_S1|C02_S2|C02_S3|C02_S4|C02_S5|C02_S6,Synthetic case; no historical coder answer reused.
+C03,Synthetic interpretive case 3,C03_S1|C03_S2|C03_S3|C03_S4|C03_S5|C03_S6,Synthetic case; no historical coder answer reused.
+C04,Synthetic interpretive case 4,C04_S1|C04_S2|C04_S3|C04_S4|C04_S5|C04_S6,Synthetic case; no historical coder answer reused.
+C05,Synthetic interpretive case 5,C05_S1|C05_S2|C05_S3|C05_S4|C05_S5|C05_S6,Synthetic case; no historical coder answer reused.
+C06,Synthetic interpretive case 6,C06_S1|C06_S2|C06_S3|C06_S4|C06_S5|C06_S6,Synthetic case; no historical coder answer reused.

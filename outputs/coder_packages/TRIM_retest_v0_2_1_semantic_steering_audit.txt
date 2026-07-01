@@ -1,0 +1,11 @@
+TRIM v0.2.1 semantic-steering audit
+match_count: 2
+allowlisted_match_count: 2
+verified_source_text_match_count: 2
+neutral_metadata_match_count: 0
+unreviewed_project_authored_analytic_match_count: 0
+answer_bearing_phrase_count: 0
+unreviewed_high_risk_count: 0
+
+data/retest_v0_2_1_source_packet.md:584 [verified_source_text_match/allowlisted] \bwarrant\b: > 'Tis they, I warrant, who suborned my guards
+data/retest_v0_2_1_source_packet.md:864 [verified_source_text_match/allowlisted] \bconfirm(?:s|ed|ing|ation)?\b: > is in court, will confirm the truth of what I am saying.

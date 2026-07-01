@@ -51,9 +51,37 @@ def test_core_components_reject_anchor_only_annotation():
 
     with pytest.raises(
         ValueError,
-        match="evidence_nodes requires at least one non-empty evidence node",
+        match="evidence_nodes or primary_evidence_segment_ids requires",
     ):
         annotation.to_core_components()
+
+
+def test_core_components_accept_primary_segment_ids_for_v0_2_1():
+    annotation = TrimAnnotation(
+        case_id="case-1",
+        evidence_anchor="Segment S2",
+        primary_evidence_segment_ids="case-1_S2|case-1_S3",
+        context_segment_ids="case-1_S1",
+        anchor_node="visible confirmation",
+        function_label="immediate_stabilization",
+        friction_locus="operation_function",
+        rationale_mechanism="stabilizes",
+        epistemic_support="textual_anchor",
+        discourse_level="intradiegetic",
+        temporal_orientation="immediate",
+        uncertainty_flag="low",
+    )
+
+    components = annotation.to_core_components()
+
+    assert [node.text for node in components["evidence_nodes"]] == [
+        "case-1_S2",
+        "case-1_S3",
+    ]
+    assert components["evidence_nodes"][0].role == "primary_evidence_segment_id"
+    assert components["anchor_node"].metadata["context_segment_ids"] == (
+        "case-1_S1",
+    )
 
 
 @pytest.mark.parametrize(

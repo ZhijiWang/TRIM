@@ -7,7 +7,7 @@
 TRIM structures the warranted conversion from textual evidence to interpretive
 function as a locatable, reviewable, and comparable annotation pathway.
 
-Current source version: 0.2.0 (unreleased).
+Current source version: 0.2.1 (unreleased).
 
 ## Core Model
 
@@ -31,6 +31,9 @@ reasoning that keeps them in view.
 Standard annotations also include:
 
 - one or more `evidence_nodes`;
+- for v0.2.1 retest coding, one to three
+  `primary_evidence_segment_ids`, optional `context_segment_ids`, and optional
+  `evidence_highlight`;
 - `evidence_anchor`, which returns the record to a source-facing span, quotation,
   or segment reference;
 - `anchor_node`, which gives that evidence a normalized analytic centre.
@@ -49,6 +52,9 @@ The package:
 - exports evidence-to-function graphs as GraphML and JSON;
 - supports source segmentation;
 - prepares pilot-scale intercoder comparison and disagreement reports.
+- reports v0.2.1 evidence-segment exactness, overlap/Jaccard, primary/context
+  overlap, compatible single-versus-compound differences, and language/scope
+  strata.
 
 Human coders define the evidence, function, and rationale. The software preserves
 those choices in a form that can be checked, compared, and revisited.
@@ -83,9 +89,9 @@ trim compare data/demo_annotations.csv --outdir outputs/tables
 status 1; valid and warnings-only input produce status 0. `--always-zero` supports
 reporting pipelines that handle status outside the command.
 
-## Demonstration Corpus
+## Demonstration Corpus And Pilot Status
 
-The ten-case corpus brings together:
+The original ten-case demonstration and v0.2.0 usability pilot bring together:
 
 - four *Zuo zhuan* divination cases;
 - three *Macbeth* prophecy cases;
@@ -107,9 +113,17 @@ The repository also contains:
 - a cross-language construct-validity protocol and
   normalized layer/pair companion templates.
 
-These materials establish a proof of concept and a fully specified validation
-infrastructure. Independent second-coder execution forms the next empirical
-stage.
+The completed v0.2.0 pilot is a locked historical record. It is reported as a
+multilingual, translation- and summary-mediated usability pilot, not as
+validated intercoder reliability or cross-language construct validity.
+
+v0.2.1 is a prospective retest design. It does not recode the original ten
+formal cases. It adds an out-of-sample 12-case retest corpus, discriminative
+primary/context evidence selection, explicit shared-context permissions,
+language-access metadata, revised uncertainty thresholds, a question-log rule
+for self-resolved questions, source-text provenance for formal retest segments,
+a `multi_passage_single_case` scope for distributed passages within one formal
+case, and semantic-steering checks for the coder-facing package.
 
 ## Methodological Contribution
 
@@ -124,9 +138,20 @@ See [`docs/related_methods.md`](docs/related_methods.md) and
 
 ## Documentation
 
+- [`docs/TRIM_codebook_v0_2_1.md`](docs/TRIM_codebook_v0_2_1.md)
+- [`docs/TRIM_Coding_Manual_v0_2_1_friction_locus.md`](docs/TRIM_Coding_Manual_v0_2_1_friction_locus.md)
+- [`docs/TRIM_Coding_Manual_v0_2_1_rationale_mechanism.md`](docs/TRIM_Coding_Manual_v0_2_1_rationale_mechanism.md)
+- [`docs/discourse_level_guide_v0_2_1.md`](docs/discourse_level_guide_v0_2_1.md)
+- [`docs/pilot_v0_2_0_results_and_adjudication.md`](docs/pilot_v0_2_0_results_and_adjudication.md)
+- [`docs/retest_protocol_v0_2_1.md`](docs/retest_protocol_v0_2_1.md)
+- [`docs/retest_v0_2_1_coder_guide.md`](docs/retest_v0_2_1_coder_guide.md)
+- [`docs/retest_v0_2_1_semantic_steering_audit.md`](docs/retest_v0_2_1_semantic_steering_audit.md)
+- [`docs/retest_v0_2_1_source_text_audit.md`](docs/retest_v0_2_1_source_text_audit.md)
+- [`docs/retest_v0_2_1_case_design_audit.md`](docs/retest_v0_2_1_case_design_audit.md)
+- [`docs/v0_2_1_revision_traceability.md`](docs/v0_2_1_revision_traceability.md)
+- [`docs/second_coder_onboarding_v0_2_1.md`](docs/second_coder_onboarding_v0_2_1.md)
+- [`docs/intercoder_workflow_v0_2_1.md`](docs/intercoder_workflow_v0_2_1.md)
 - [`docs/TRIM_codebook_v0_2_0.md`](docs/TRIM_codebook_v0_2_0.md)
-- [`docs/TRIM_Coding_Manual_v0_2_friction_locus_final.md`](docs/TRIM_Coding_Manual_v0_2_friction_locus_final.md)
-- [`docs/TRIM_Coding_Manual_v0_2_rationale_mechanism.md`](docs/TRIM_Coding_Manual_v0_2_rationale_mechanism.md)
 - [`docs/demo_dataset_notes.md`](docs/demo_dataset_notes.md)
 - [`docs/substantive_demo_interpretations.md`](docs/substantive_demo_interpretations.md)
 - [`docs/segmentation_workflow.md`](docs/segmentation_workflow.md)
@@ -140,6 +165,21 @@ See [`docs/related_methods.md`](docs/related_methods.md) and
 - [`docs/schema_validation_migration.md`](docs/schema_validation_migration.md)
 - [`docs/article_use.md`](docs/article_use.md)
 - [`CHANGELOG.md`](CHANGELOG.md)
+
+## Retest Package
+
+Build the clean coder-facing package with:
+
+```bash
+python scripts/build_retest_v0_2_1_package.py
+```
+
+The builder writes a deterministic ZIP and SHA-256 manifest under
+`outputs/coder_packages/`. Leakage tests fail if original pilot case IDs,
+answer-bearing labels, adjudication outcomes, article notes, comparison reports,
+or unreviewed case-specific semantic-steering phrases enter the coder package.
+Verified source-text quotation matches are reported separately and require a
+segment provenance record.
 
 ## Citing and License
 

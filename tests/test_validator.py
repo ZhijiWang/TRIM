@@ -5,6 +5,8 @@ from trim.validator import (
     format_signature,
     validate_dataframe,
     validate_record,
+    validate_retest_manifest,
+    validate_shared_context_registry,
     validate_signature,
     validation_report,
 )
@@ -15,7 +17,7 @@ def _valid_record(**overrides):
         "case_id": "case-1",
         "case_label": "demo case",
         "source": "demo",
-        "function_label": "demo function",
+        "function_label": "immediate_stabilization",
         "evidence_anchor": "demo anchor",
         "evidence_nodes": "first evidence|second evidence",
         "anchor_node": "demo anchor node",
@@ -37,6 +39,49 @@ def _errors(issues):
     return [issue for issue in issues if issue.severity == "error"]
 
 
+def _shared_manifest():
+    return [
+        {
+            "case_id": "case-a",
+            "case_scope": "supplied_related_cases",
+            "language_access_mode": "direct_original_language_access",
+            "shared_context_ids": "ctx-1",
+            "cross_case_context_permitted": "yes",
+            "required_context_segments": "case-b_S1",
+            "segment_ids": "case-a_S1|case-a_S2",
+        },
+        {
+            "case_id": "case-b",
+            "case_scope": "local_passage",
+            "language_access_mode": "direct_original_language_access",
+            "shared_context_ids": "",
+            "cross_case_context_permitted": "no",
+            "required_context_segments": "",
+            "segment_ids": "case-b_S1|case-b_S2",
+        },
+        {
+            "case_id": "case-c",
+            "case_scope": "local_passage",
+            "language_access_mode": "direct_original_language_access",
+            "shared_context_ids": "",
+            "cross_case_context_permitted": "no",
+            "required_context_segments": "",
+            "segment_ids": "case-c_S1",
+        },
+    ]
+
+
+def _shared_registry():
+    return [
+        {
+            "shared_context_id": "ctx-1",
+            "description": "Neutral context group",
+            "member_case_ids": "case-a|case-b",
+            "permitted_segment_ids": "case-a_S1|case-a_S2|case-b_S1|case-b_S2",
+        }
+    ]
+
+
 def test_valid_single_mechanism():
     issues = validate_record(_valid_record(rationale_mechanism="supports"))
 
@@ -53,6 +98,14 @@ def test_invalid_mechanism():
     issues = validate_record(_valid_record(rationale_mechanism="automatic_guess"))
 
     assert any(issue.field == "rationale_mechanism" for issue in _errors(issues))
+
+
+def test_function_label_closed_list_includes_no_fit():
+    assert _errors(validate_record(_valid_record(function_label="no_fit"))) == []
+
+    issues = validate_record(_valid_record(function_label="local_guess"))
+
+    assert any(issue.field == "function_label" for issue in _errors(issues))
 
 
 def test_too_many_compound_mechanisms():
@@ -199,9 +252,239 @@ def test_evidence_nodes_require_at_least_one_nonempty_node():
 
     assert any(
         issue.field == "evidence_nodes"
-        and issue.message
-        == "evidence_nodes requires at least one non-empty evidence node."
+        and issue.message.startswith(
+            "evidence_nodes or primary_evidence_segment_ids requires"
+        )
         for issue in _errors(issues)
+    )
+
+
+def test_primary_evidence_segments_are_limited_and_checked():
+    issues = validate_record(
+        _valid_record(
+            status="retest_v0_2_1",
+            language_access_mode="direct_original_language_access",
+            case_scope="local_passage",
+            cross_case_context_permitted="no",
+            evidence_nodes="",
+            primary_evidence_segment_ids="S1|S2|S3|S4",
+        )
+    )
+
+    assert any(
+        issue.field == "primary_evidence_segment_ids"
+        and "one to three" in issue.message
+        for issue in _errors(issues)
+    )
+
+
+def test_primary_and_context_segments_cannot_duplicate_or_overlap():
+    issues = validate_record(
+        _valid_record(
+            status="retest_v0_2_1",
+            language_access_mode="direct_original_language_access",
+            case_scope="local_passage",
+            cross_case_context_permitted="no",
+            evidence_nodes="",
+            primary_evidence_segment_ids="S1|S1",
+            context_segment_ids="S1|S2|S2",
+        )
+    )
+
+    assert any("duplicate segment IDs" in issue.message for issue in _errors(issues))
+    assert any("both primary evidence and context" in issue.message for issue in _errors(issues))
+
+
+def test_unknown_segment_ids_fail_when_known_segments_are_supplied():
+    issues = validate_record(
+        _valid_record(
+            status="retest_v0_2_1",
+            language_access_mode="direct_original_language_access",
+            case_scope="local_passage",
+            cross_case_context_permitted="no",
+            evidence_nodes="",
+            primary_evidence_segment_ids="S1|S9",
+        ),
+        known_segment_ids={"case-1": ["S1", "S2"]},
+    )
+
+    assert any("Unknown segment IDs" in issue.message for issue in _errors(issues))
+
+
+def test_shared_context_required_segments_require_permission():
+    issues = validate_record(
+        _valid_record(
+            status="retest_v0_2_1",
+            language_access_mode="published_translation",
+            case_scope="shared_narrative_field",
+            shared_context_ids="cluster-1",
+            cross_case_context_permitted="no",
+            required_context_segments="other-case_S1",
+            evidence_nodes="",
+            primary_evidence_segment_ids="S1",
+        )
+    )
+
+    assert any(
+        issue.field == "cross_case_context_permitted"
+        and "requires cross_case_context_permitted=yes" in issue.message
+        for issue in _errors(issues)
+    )
+
+
+def test_multi_passage_single_case_rejects_cross_case_metadata():
+    issues = validate_record(
+        _valid_record(
+            status="retest_v0_2_1",
+            language_access_mode="direct_original_language_access",
+            case_scope="multi_passage_single_case",
+            shared_context_ids="ctx-1",
+            cross_case_context_permitted="yes",
+            required_context_segments="case-b_S1",
+            evidence_nodes="",
+            primary_evidence_segment_ids="S1",
+        )
+    )
+
+    assert any(issue.field == "shared_context_ids" for issue in _errors(issues))
+    assert any(
+        issue.field == "cross_case_context_permitted"
+        and "cross_case_context_permitted=no" in issue.message
+        for issue in _errors(issues)
+    )
+    assert any(issue.field == "required_context_segments" for issue in _errors(issues))
+
+
+def test_unknown_shared_context_id_fails_manifest_validation():
+    manifest = _shared_manifest()
+    manifest[0]["shared_context_ids"] = "missing-ctx"
+
+    issues = validate_retest_manifest(manifest, _shared_registry())
+
+    assert any("Unknown shared-context ID" in issue.message for issue in _errors(issues))
+
+
+def test_unknown_shared_context_member_case_fails():
+    registry = _shared_registry()
+    registry[0]["member_case_ids"] = "case-a|missing-case"
+
+    issues = validate_shared_context_registry(_shared_manifest(), registry)
+
+    assert any("Unknown member case ID" in issue.message for issue in _errors(issues))
+
+
+def test_unknown_shared_context_permitted_segment_fails():
+    registry = _shared_registry()
+    registry[0]["permitted_segment_ids"] = "case-a_S1|missing-segment"
+
+    issues = validate_shared_context_registry(_shared_manifest(), registry)
+
+    assert any("Unknown permitted segment ID" in issue.message for issue in _errors(issues))
+
+
+def test_required_context_segment_outside_declared_group_fails():
+    manifest = _shared_manifest()
+    manifest[0]["required_context_segments"] = "case-c_S1"
+
+    issues = validate_retest_manifest(manifest, _shared_registry())
+
+    assert any("outside the declared shared-context group" in issue.message for issue in _errors(issues))
+
+
+def test_cross_case_context_with_permission_no_fails():
+    manifest = _shared_manifest()
+    manifest[0]["cross_case_context_permitted"] = "no"
+
+    issues = validate_retest_manifest(manifest, _shared_registry())
+
+    assert any("cross_case_context_permitted=no" in issue.message for issue in _errors(issues))
+
+
+def test_shared_narrative_field_without_registry_entry_fails():
+    manifest = _shared_manifest()
+    manifest[0]["case_scope"] = "shared_narrative_field"
+    manifest[0]["shared_context_ids"] = ""
+
+    issues = validate_retest_manifest(manifest, _shared_registry())
+
+    assert any("requires shared_context_ids" in issue.message for issue in _errors(issues))
+
+
+def test_valid_shared_context_case_passes_registry_validation():
+    issues = [
+        *validate_shared_context_registry(_shared_manifest(), _shared_registry()),
+        *validate_retest_manifest(_shared_manifest(), _shared_registry()),
+    ]
+
+    assert _errors(issues) == []
+
+
+def test_local_primary_and_permitted_shared_context_segments_validate():
+    record = _valid_record(
+        case_id="case-a",
+        status="retest_v0_2_1",
+        language_access_mode="direct_original_language_access",
+        case_scope="supplied_related_cases",
+        shared_context_ids="ctx-1",
+        cross_case_context_permitted="yes",
+        required_context_segments="case-b_S1",
+        evidence_nodes="",
+        primary_evidence_segment_ids="case-a_S1",
+        context_segment_ids="case-b_S1",
+    )
+
+    issues = validate_record(
+        record,
+        manifest_metadata=_shared_manifest(),
+        shared_context_registry=_shared_registry(),
+    )
+
+    assert _errors(issues) == []
+
+
+def test_annotation_context_segment_from_unrelated_case_fails():
+    record = _valid_record(
+        case_id="case-a",
+        status="retest_v0_2_1",
+        language_access_mode="direct_original_language_access",
+        case_scope="supplied_related_cases",
+        shared_context_ids="ctx-1",
+        cross_case_context_permitted="yes",
+        required_context_segments="case-b_S1",
+        evidence_nodes="",
+        primary_evidence_segment_ids="case-a_S1",
+        context_segment_ids="case-c_S1",
+    )
+
+    issues = validate_record(
+        record,
+        manifest_metadata=_shared_manifest(),
+        shared_context_registry=_shared_registry(),
+    )
+
+    assert any("unpermitted context segment" in issue.message for issue in _errors(issues))
+
+
+def test_low_uncertainty_with_alternative_signature_warns():
+    issues = validate_record(
+        _valid_record(
+            uncertainty_flag="low",
+            rationale_note=(
+                "This rationale documents a complete alternate pathway with "
+                "enough detail for review while preserving the preferred one."
+            ),
+            alternative_signature=(
+                "temporal_layering / extends / textual_anchor / "
+                "commentarial_discourse / retrospective / medium"
+            ),
+        )
+    )
+
+    assert any(
+        issue.field == "uncertainty_flag"
+        and issue.severity == "warning"
+        and "alternative_signature" in issue.message
+        for issue in issues
     )
 
 
@@ -294,3 +577,51 @@ def test_dataframe_validation_helpers():
 
     assert any(issue.case_id == "case-2" for issue in _errors(issues))
     assert list(report.columns) == ["case_id", "field", "severity", "message"]
+
+
+def test_question_log_validation_requires_provisional_resolution_fields():
+    from trim.validator import validate_question_log_record
+
+    issues = validate_question_log_record(
+        {
+            "question_id": "Q1",
+            "case_id": "case-1",
+            "question_type": "interpretive",
+            "question_text": "Does a complete alternate pathway remain viable?",
+            "provisional_resolution": "Use preferred pathway and record alternative.",
+            "did_question_change_code": "yes",
+            "blocking_or_nonblocking": "nonblocking",
+            "requires_manual_revision": "uncertain",
+            "coder_id": "coder_b",
+        }
+    )
+
+    assert _errors(issues) == []
+
+
+def test_question_log_rejects_unknown_controlled_values():
+    from trim.validator import validate_question_log_record
+
+    issues = validate_question_log_record(
+        {
+            "question_id": "Q1",
+            "case_id": "case-1",
+            "question_type": "private_hunch",
+            "question_text": "Question",
+            "provisional_resolution": "Resolution",
+            "did_question_change_code": "maybe",
+            "blocking_or_nonblocking": "soft",
+            "requires_manual_revision": "sometimes",
+            "coder_id": "coder_b",
+        }
+    )
+
+    assert {
+        issue.field
+        for issue in _errors(issues)
+    } >= {
+        "question_type",
+        "did_question_change_code",
+        "blocking_or_nonblocking",
+        "requires_manual_revision",
+    }

@@ -1,0 +1,4 @@
+annotation_id,field,severity,message
+P04_C06_POST,exposure_event_id,warning,Multiple exposure events for one human-post record.
+P04_C06_POST,rationale_note,warning,Rationale contains unusually high copied phrase overlap with AI rationale.
+P04_C06_POST,annotation,warning,Post-AI record is identical to AI record across all submitted core fields.

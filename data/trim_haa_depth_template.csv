@@ -1,0 +1,3 @@
+annotation_id,context_segment_ids,evidence_anchor,anchor_node,friction_locus,epistemic_support,discourse_level,temporal_orientation,full_alternative_signature,question_log_reference
+H01_CASE01_PRE,CASE01_S2,Short source-facing anchor,normalized interpretive anchor,boundary_setting,textual_anchor,intradiegetic,retrospective,,Q1
+

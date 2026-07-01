@@ -3,7 +3,7 @@ import tomllib
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-EXPECTED_VERSION = "0.2.0"
+EXPECTED_VERSION = "0.2.1"
 
 
 def test_unreleased_version_metadata_is_consistent():
@@ -22,13 +22,13 @@ def test_unreleased_version_metadata_is_consistent():
 
 
 def test_codebook_filename_and_heading_match_package_version():
-    codebook = PROJECT_ROOT / "docs" / "TRIM_codebook_v0_2_0.md"
+    codebook = PROJECT_ROOT / "docs" / "TRIM_codebook_v0_2_1.md"
     old_codebook = PROJECT_ROOT / "docs" / "TRIM_codebook_v0_1_2.md"
 
     assert codebook.exists()
     assert not old_codebook.exists()
     assert codebook.read_text(encoding="utf-8").startswith(
-        "# TRIM Codebook v0.2.0"
+        "# TRIM Codebook v0.2.1"
     )
 
 
