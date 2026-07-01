@@ -27,6 +27,7 @@ The Core schema is intentionally smaller than legacy TRIM. It is designed for ev
 - `annotation_id` must be globally unique.
 - Independent records have empty `parent_annotation_id`.
 - `human_post_ai` records must reference a locked `human_pre`.
+- `human_post_ai` records identify the AI output shown through provenance, not through `parent_annotation_id`.
 - `human_second_pass_control` records must reference a locked `human_pre`.
 - `ai_independent` records require `actor_type=model`.
 - Model records are model-generated justificatory artifacts, not hidden model reasoning.
@@ -43,4 +44,3 @@ The human-facing Core asks for six substantive judgments per case:
 4. uncertainty;
 5. rationale note;
 6. alternative present/absent, with details only if present.
-

@@ -12,6 +12,14 @@ The participant:
 
 The control condition estimates ordinary second-pass change. It helps separate post-AI change from rereading, task familiarity, and revision opportunity.
 
+Control provenance must use:
+
+- `ai_output_exposed=none`;
+- `exposure_order=control_second_pass`;
+- `interface_condition=control_review`;
+- empty `exposed_ai_annotation_id`;
+- empty `exposed_model_run_id`.
+
 Prototype reports may describe:
 
 ```text
@@ -19,4 +27,3 @@ AI-associated change = post-AI change - second-pass control change
 ```
 
 This is descriptive in the prototype. It is not a causal estimate from a single participant or synthetic dataset.
-

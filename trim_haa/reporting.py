@@ -8,26 +8,44 @@ from typing import Any, Iterable, Mapping
 import pandas as pd
 
 from trim_haa.comparison import compare_pre_ai_post
+from trim_haa.locking import LockRecord, verify_locked_annotation
+from trim_haa.provenance import AssistanceProvenance
 from trim_haa.schema import TrimHAAAnnotation
 from trim_haa.validator import validate_dataset
 
 
 def case_level_report(
     annotations: Iterable[TrimHAAAnnotation | Mapping[str, Any]],
+    provenance_records: Iterable[AssistanceProvenance | Mapping[str, Any]] = (),
+    lock_records: Iterable[LockRecord | Mapping[str, Any]] = (),
 ) -> pd.DataFrame:
     rows: list[dict[str, Any]] = []
-    by_case = _by_case(annotations)
+    prepared = [_coerce(record) for record in annotations]
+    by_case = _by_case(prepared)
+    prov_by_id = _provenance_by_id(provenance_records)
+    lock_by_id = _lock_by_annotation(lock_records)
     for case_id, records in by_case.items():
         human_pre = _first_stage(records, "human_pre")
         ai = _first_stage(records, "ai_independent")
         post = _first_stage(records, "human_post_ai")
         control = _first_stage(records, "human_second_pass_control")
+        post_prov = prov_by_id.get(post.annotation_id) if post else None
         row = {
             "case_id": case_id,
             "human_pre_annotation_id": _id(human_pre),
             "ai_annotation_id": _id(ai),
             "human_post_annotation_id": _id(post),
             "control_annotation_id": _id(control),
+            "exposed_ai_annotation_id": post_prov.exposed_ai_annotation_id if post_prov else "",
+            "exposed_model_run_id": post_prov.exposed_model_run_id if post_prov else "",
+            "pre_lock_verified": (
+                verify_locked_annotation(human_pre, lock_by_id[human_pre.annotation_id])
+                if human_pre and human_pre.annotation_id in lock_by_id
+                else False
+            ),
+            "self_reported_revision_reason": (
+                post_prov.self_reported_revision_reason if post_prov else ""
+            ),
         }
         if human_pre and ai and post:
             comparison = compare_pre_ai_post(human_pre, ai, post)
@@ -40,13 +58,23 @@ def case_level_report(
                     "pre_ai_primary_jaccard": comparison["pre_ai_primary_jaccard"],
                     "pre_post_primary_jaccard": comparison["pre_post_primary_jaccard"],
                     "post_ai_primary_jaccard": comparison["post_ai_primary_jaccard"],
-                    "evidence_adoption": comparison["evidence_adoption"],
+                    "ai_evidence_incorporated": comparison["ai_evidence_incorporated"],
+                    "evidence_convergence_increased": comparison[
+                        "evidence_convergence_increased"
+                    ],
                     "evidential_displacement": comparison["evidential_displacement"],
                     "mechanism_adoption": comparison["mechanism_adopted_from_ai"],
                     "uncertainty_shift": comparison["uncertainty_shift"],
                     "alternative_suppression": comparison["alternative_suppressed"],
                     "alternative_generation": comparison["alternative_generated"],
+                    "alternative_changed_without_suppression": comparison[
+                        "alternative_changed_without_suppression"
+                    ],
+                    "alternative_mechanism_adopted_from_ai": comparison[
+                        "alternative_mechanism_adopted_from_ai"
+                    ],
                     "rationale_overlap": comparison["rationale_overlap"],
+                    "copied_phrase_overlap": comparison["copied_phrase_overlap"],
                 }
             )
         rows.append(row)
@@ -81,7 +109,7 @@ def participant_level_report(
                 "number_of_cases": len(case_ids),
                 "label_changes": _sum_bool(subset, "label_adoption"),
                 "label_adoptions": _sum_bool(subset, "label_adoption"),
-                "evidence_adoptions": _sum_bool(subset, "evidence_adoption"),
+                "evidence_adoptions": _sum_bool(subset, "ai_evidence_incorporated"),
                 "mechanism_adoptions": _sum_bool(subset, "mechanism_adoption"),
                 "uncertainty_shifts": int((subset["uncertainty_shift"] != "unchanged").sum())
                 if "uncertainty_shift" in subset
@@ -97,10 +125,12 @@ def participant_level_report(
 def study_level_report(
     annotations: Iterable[TrimHAAAnnotation | Mapping[str, Any]],
     provenance_records: Iterable[Mapping[str, Any]] = (),
+    exposure_events: Iterable[Mapping[str, Any]] = (),
+    lock_records: Iterable[Mapping[str, Any]] = (),
 ) -> dict[str, Any]:
     prepared = [_coerce(record) for record in annotations]
-    cases = case_level_report(prepared)
-    report = validate_dataset(prepared, provenance_records)
+    cases = case_level_report(prepared, provenance_records, lock_records)
+    report = validate_dataset(prepared, provenance_records, exposure_events, lock_records)
     row_count = len(cases)
     jaccards = [
         float(value)
@@ -111,12 +141,36 @@ def study_level_report(
         "annotation_count": len(prepared),
         "label_adoption_count": _sum_bool(cases, "label_adoption"),
         "label_adoption_percent": _percent(cases, "label_adoption"),
-        "evidence_adoption_count": _sum_bool(cases, "evidence_adoption"),
-        "evidence_adoption_percent": _percent(cases, "evidence_adoption"),
+        "ai_evidence_incorporation_count": _sum_bool(cases, "ai_evidence_incorporated"),
+        "ai_evidence_incorporation_percent": _percent(cases, "ai_evidence_incorporated"),
+        "evidence_convergence_increased_count": _sum_bool(
+            cases, "evidence_convergence_increased"
+        ),
         "evidential_displacement_count": _sum_bool(cases, "evidential_displacement"),
         "mechanism_adoption_count": _sum_bool(cases, "mechanism_adoption"),
+        "uncertainty_decrease_count": int(
+            (cases.get("uncertainty_shift", pd.Series(dtype=str)) == "decreased").sum()
+        ),
+        "uncertainty_increase_count": int(
+            (cases.get("uncertainty_shift", pd.Series(dtype=str)) == "increased").sum()
+        ),
         "alternative_suppression_count": _sum_bool(cases, "alternative_suppression"),
         "alternative_generation_count": _sum_bool(cases, "alternative_generation"),
+        "alternative_modification_count": _sum_bool(
+            cases, "alternative_changed_without_suppression"
+        ),
+        "rejected_ai_output_count": int(
+            (
+                cases.get("self_reported_revision_reason", pd.Series(dtype=str))
+                == "rejected_ai_output"
+            ).sum()
+        ),
+        "changed_after_rereading_not_ai_count": int(
+            (
+                cases.get("self_reported_revision_reason", pd.Series(dtype=str))
+                == "changed_after_rereading_not_ai"
+            ).sum()
+        ),
         "post_ai_primary_jaccard_mean": mean(jaccards) if jaccards else None,
         "post_ai_primary_jaccard_median": median(jaccards) if jaccards else None,
         "validation_issue_count": len(report.issues),
@@ -132,6 +186,9 @@ CASE_LEVEL_COLUMNS: tuple[str, ...] = (
     "ai_annotation_id",
     "human_post_annotation_id",
     "control_annotation_id",
+    "exposed_ai_annotation_id",
+    "exposed_model_run_id",
+    "pre_lock_verified",
     "pre_label",
     "ai_label",
     "post_label",
@@ -139,13 +196,18 @@ CASE_LEVEL_COLUMNS: tuple[str, ...] = (
     "pre_ai_primary_jaccard",
     "pre_post_primary_jaccard",
     "post_ai_primary_jaccard",
-    "evidence_adoption",
+    "ai_evidence_incorporated",
+    "evidence_convergence_increased",
     "evidential_displacement",
     "mechanism_adoption",
     "uncertainty_shift",
     "alternative_suppression",
     "alternative_generation",
+    "alternative_changed_without_suppression",
+    "alternative_mechanism_adopted_from_ai",
     "rationale_overlap",
+    "copied_phrase_overlap",
+    "self_reported_revision_reason",
 )
 
 
@@ -172,6 +234,28 @@ def _coerce(record: TrimHAAAnnotation | Mapping[str, Any]) -> TrimHAAAnnotation:
 
 def _id(record: TrimHAAAnnotation | None) -> str:
     return record.annotation_id if record else ""
+
+
+def _provenance_by_id(
+    records: Iterable[AssistanceProvenance | Mapping[str, Any]],
+) -> dict[str, AssistanceProvenance]:
+    by_id: dict[str, AssistanceProvenance] = {}
+    for record in records:
+        if not isinstance(record, AssistanceProvenance):
+            record = AssistanceProvenance.from_record(record)
+        by_id[record.annotation_id] = record
+    return by_id
+
+
+def _lock_by_annotation(
+    records: Iterable[LockRecord | Mapping[str, Any]],
+) -> dict[str, LockRecord]:
+    by_id: dict[str, LockRecord] = {}
+    for record in records:
+        if not isinstance(record, LockRecord):
+            record = LockRecord.from_record(record)
+        by_id[record.annotation_id] = record
+    return by_id
 
 
 def _sum_bool(df: pd.DataFrame, column: str) -> int:

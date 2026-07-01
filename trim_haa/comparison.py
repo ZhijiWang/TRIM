@@ -63,7 +63,11 @@ def evidence_comparison(pre: Any, ai: Any, post: Any) -> dict[str, Any]:
     post_ai = segment_set_metrics(post_set, ai_set)
     evidence_added = sorted(post_set - pre_set)
     evidence_removed = sorted(pre_set - post_set)
-    evidence_adopted = sorted((post_set - pre_set) & ai_set)
+    incorporated_ai_segments = sorted((post_set - pre_set) & ai_set)
+    removed_pre_segments = sorted(pre_set - post_set)
+    retained_pre_segments = sorted(pre_set & post_set)
+    new_non_ai_segments = sorted((post_set - pre_set) - ai_set)
+    evidence_convergence_increased = post_ai["jaccard"] > pre_ai["jaccard"]
     return {
         "pre_ai_primary_exact_match": pre_ai["exact_match"],
         "pre_ai_primary_jaccard": pre_ai["jaccard"],
@@ -73,10 +77,17 @@ def evidence_comparison(pre: Any, ai: Any, post: Any) -> dict[str, Any]:
         "post_ai_primary_jaccard": post_ai["jaccard"],
         "evidence_added": "|".join(evidence_added),
         "evidence_removed": "|".join(evidence_removed),
-        "evidence_adopted_from_ai": "|".join(evidence_adopted),
-        "evidence_adoption": bool(evidence_adopted)
-        and post_ai["jaccard"] > pre_ai["jaccard"],
-        "evidential_displacement": bool(evidence_removed) and bool(evidence_adopted),
+        "evidence_adopted_from_ai": "|".join(incorporated_ai_segments),
+        "incorporated_ai_segments": "|".join(incorporated_ai_segments),
+        "removed_pre_segments": "|".join(removed_pre_segments),
+        "retained_pre_segments": "|".join(retained_pre_segments),
+        "new_non_ai_segments": "|".join(new_non_ai_segments),
+        "ai_evidence_incorporated": bool(incorporated_ai_segments),
+        "evidence_convergence_increased": evidence_convergence_increased,
+        "evidence_adoption": bool(incorporated_ai_segments)
+        and evidence_convergence_increased,
+        "evidential_displacement": bool(removed_pre_segments)
+        and bool(incorporated_ai_segments),
     }
 
 
@@ -115,16 +126,36 @@ def uncertainty_comparison(pre: Any, post: Any) -> dict[str, str]:
     }
 
 
-def alternative_comparison(pre: Any, post: Any) -> dict[str, Any]:
+def alternative_comparison(pre: Any, ai: Any, post: Any) -> dict[str, Any]:
     pre = coerce_annotation(pre)
+    ai = coerce_annotation(ai)
     post = coerce_annotation(post)
+    note_overlap = normalised_token_overlap(post.alternative_note, ai.alternative_note)
     return {
         "alternative_present_pre": pre.alternative_pathway_present,
+        "alternative_present_ai": ai.alternative_pathway_present,
         "alternative_present_post": post.alternative_pathway_present,
         "alternative_suppressed": pre.has_alternative and not post.has_alternative,
         "alternative_generated": not pre.has_alternative and post.has_alternative,
         "alternative_mechanism_changed": (
             pre.alternative_mechanism != post.alternative_mechanism
+        ),
+        "alternative_mechanism_adopted_from_ai": (
+            pre.alternative_mechanism != ai.alternative_mechanism
+            and post.alternative_mechanism == ai.alternative_mechanism
+            and bool(post.alternative_mechanism)
+        ),
+        "alternative_note_exact_match_ai": (
+            bool(post.alternative_note) and post.alternative_note == ai.alternative_note
+        ),
+        "alternative_note_token_overlap_ai": note_overlap,
+        "alternative_changed_without_suppression": (
+            pre.has_alternative
+            and post.has_alternative
+            and (
+                pre.alternative_mechanism != post.alternative_mechanism
+                or pre.alternative_note != post.alternative_note
+            )
         ),
     }
 
@@ -219,11 +250,13 @@ def pathway_change(pre: Any, ai: Any, post: Any) -> dict[str, Any]:
     evidence = evidence_comparison(pre, ai, post)
     mechanism = mechanism_comparison(pre, ai, post)
     uncertainty = uncertainty_comparison(pre, post)
-    alternative = alternative_comparison(pre, post)
+    alternative = alternative_comparison(pre, ai, post)
     return {
         "label_changed": label["label_changed"],
         "label_adopted_from_ai": label["label_adopted_from_ai"],
         "primary_evidence_changed": not evidence["pre_post_primary_exact_match"],
+        "ai_evidence_incorporated": evidence["ai_evidence_incorporated"],
+        "evidence_convergence_increased": evidence["evidence_convergence_increased"],
         "evidence_adoption": evidence["evidence_adoption"],
         "evidential_displacement": evidence["evidential_displacement"],
         "mechanism_changed": mechanism["mechanism_changed"],
@@ -241,7 +274,7 @@ def compare_pre_ai_post(pre: Any, ai: Any, post: Any) -> dict[str, Any]:
         **evidence_comparison(pre, ai, post),
         **mechanism_comparison(pre, ai, post),
         **uncertainty_comparison(pre, post),
-        **alternative_comparison(pre, post),
+        **alternative_comparison(pre, ai, post),
         "rationale_overlap": rationale["normalised_token_overlap"],
         "copied_phrase_overlap": rationale["copied_phrase_overlap"],
         **pathway_change(pre, ai, post),
@@ -295,4 +328,3 @@ def ai_associated_change_summary(pre: Any, ai: Any, post: Any, control: Any | No
             - int(bool(control_change["pre_to_control_label_changed"]))
         )
     return summary
-

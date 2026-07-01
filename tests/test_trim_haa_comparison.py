@@ -42,8 +42,9 @@ def test_evidence_adoption():
     records = _records_by_id()
     result = compare_pre_ai_post(records["H01_C04_PRE"], records["AI_C04"], records["H01_C04_POST"])
 
-    assert result["evidence_adoption"] is True
-    assert result["evidence_adopted_from_ai"] == "C04_S2"
+    assert result["ai_evidence_incorporated"] is True
+    assert result["evidence_convergence_increased"] is True
+    assert result["incorporated_ai_segments"] == "C04_S2"
 
 
 def test_evidential_displacement():
@@ -51,6 +52,18 @@ def test_evidential_displacement():
     result = compare_pre_ai_post(records["H01_C05_PRE"], records["AI_C05"], records["H01_C05_POST"])
 
     assert result["evidential_displacement"] is True
+    assert result["removed_pre_segments"] == "C05_S1"
+    assert result["retained_pre_segments"] == ""
+    assert result["new_non_ai_segments"] == ""
+
+
+def test_ai_evidence_incorporation_without_net_convergence():
+    records = _records_by_id()
+    result = compare_pre_ai_post(records["H01_C11_PRE"], records["AI_C11"], records["H01_C11_POST"])
+
+    assert result["ai_evidence_incorporated"] is True
+    assert result["incorporated_ai_segments"] == "C11_S3"
+    assert result["evidence_convergence_increased"] is False
 
 
 def test_mechanism_adoption():
@@ -79,6 +92,42 @@ def test_alternative_generation():
     result = compare_pre_ai_post(records["H01_C09_PRE"], records["AI_C09"], records["H01_C09_POST"])
 
     assert result["alternative_generated"] is True
+
+
+def test_alternative_mechanism_adoption_and_modification():
+    records = _records_by_id()
+    result = compare_pre_ai_post(records["H01_C09_PRE"], records["AI_C09"], records["H01_C09_POST"])
+
+    assert result["alternative_mechanism_adopted_from_ai"] is True
+    assert result["alternative_changed_without_suppression"] is False
+
+    pre = TrimHAAAnnotation(
+        alternative_pathway_present="yes",
+        alternative_mechanism="supports",
+        alternative_note="Original alternative note",
+    )
+    ai = TrimHAAAnnotation(
+        alternative_pathway_present="yes",
+        alternative_mechanism="qualifies",
+        alternative_note="AI alternative note",
+    )
+    post = TrimHAAAnnotation(
+        alternative_pathway_present="yes",
+        alternative_mechanism="qualifies",
+        alternative_note="AI alternative note",
+    )
+    changed = compare_pre_ai_post(pre, ai, post)
+
+    assert changed["alternative_changed_without_suppression"] is True
+    assert changed["alternative_note_exact_match_ai"] is True
+    assert changed["alternative_note_token_overlap_ai"] > 0
+
+    fixture_changed = compare_pre_ai_post(
+        records["H01_C12_PRE"],
+        records["AI_C12"],
+        records["H01_C12_POST"],
+    )
+    assert fixture_changed["alternative_changed_without_suppression"] is True
 
 
 def test_rationale_overlap_measures_are_lexical_only():
@@ -114,4 +163,3 @@ def test_construct_functions():
         records["H01_C04_POST"],
         "primary_evidence_segment_ids",
     )
-

@@ -7,7 +7,9 @@ from datetime import datetime
 from typing import Any, Iterable, Mapping
 
 from trim_haa.comparison import copied_phrase_overlap
+from trim_haa.exposure import ExposureEvent
 from trim_haa.hashing import looks_like_sha256
+from trim_haa.locking import LockRecord, verify_locked_annotation
 from trim_haa.provenance import (
     AssistanceProvenance,
     PROVENANCE_CONTROLLED_FIELDS,
@@ -180,7 +182,7 @@ def validate_provenance_record(record: AssistanceProvenance | Mapping[str, Any])
         "interface_condition",
         "retry_count",
         "regenerated_output",
-        "adoption_type",
+        "self_reported_revision_reason",
         "lock_status",
     ):
         if not clean_text(raw.get(field_name, "")):
@@ -256,7 +258,14 @@ def validate_provenance_record(record: AssistanceProvenance | Mapping[str, Any])
                 annotation_id,
                 "ai_output_exposed",
                 "human_post_ai submitted without exposure metadata.",
-                severity="warning",
+            )
+        )
+    if provenance.self_reported_revision_reason == "other" and not provenance.self_reported_revision_note:
+        issues.append(
+            _issue(
+                annotation_id,
+                "self_reported_revision_note",
+                "self_reported_revision_note is required when self_reported_revision_reason=other.",
             )
         )
 
@@ -298,13 +307,21 @@ def validate_relationships(
 def validate_dataset(
     core_records: Iterable[TrimHAAAnnotation | Mapping[str, Any]],
     provenance_records: Iterable[AssistanceProvenance | Mapping[str, Any]] = (),
+    exposure_events: Iterable[ExposureEvent | Mapping[str, Any]] = (),
+    lock_records: Iterable[LockRecord | Mapping[str, Any]] = (),
 ) -> ValidationReport:
     annotations = [_coerce_annotation(record) for record in core_records]
     provenance = [_coerce_provenance(record) for record in provenance_records]
+    exposures = [_coerce_exposure_event(record) for record in exposure_events]
+    locks = [_coerce_lock_record(record) for record in lock_records]
     report = validate_core_records(annotations)
     for record in provenance:
         report.extend(validate_provenance_record(record))
     report.extend(_validate_provenance_completeness(annotations, provenance))
+    report.extend(_validate_stage_condition_matrix(annotations, provenance))
+    report.extend(_validate_exposed_ai_links(annotations, provenance))
+    report.extend(_validate_exposure_events(annotations, provenance, exposures))
+    report.extend(_validate_locks(annotations, provenance, locks))
     report.extend(_validate_changed_flag_consistency(annotations, provenance))
     report.extend(_copying_warnings(annotations))
     return report
@@ -337,6 +354,235 @@ def _validate_provenance_completeness(
                         f"Core and provenance disagree on {field_name}.",
                     )
                 )
+        if annotation.status != prov.lock_status:
+            issues.append(
+                _issue(
+                    annotation.annotation_id,
+                    "lock_status",
+                    "Core status and provenance lock_status must match.",
+                )
+            )
+    return issues
+
+
+def _validate_stage_condition_matrix(
+    annotations: list[TrimHAAAnnotation],
+    provenance: list[AssistanceProvenance],
+) -> list[ValidationIssue]:
+    issues: list[ValidationIssue] = []
+    prov_by_id = {record.annotation_id: record for record in provenance}
+    for annotation in annotations:
+        prov = prov_by_id.get(annotation.annotation_id)
+        if prov is None:
+            continue
+        stage = annotation.annotation_stage
+        if stage == "human_pre":
+            issues.extend(
+                _require_stage_values(
+                    annotation,
+                    prov,
+                    actor_type="human",
+                    parent_empty=True,
+                    ai_output_exposed="none",
+                    exposure_order="none",
+                    interface_condition="independent",
+                    pre_ai_annotation_locked="not_applicable",
+                    exposed_empty=True,
+                )
+            )
+        elif stage == "ai_independent":
+            issues.extend(
+                _require_stage_values(
+                    annotation,
+                    prov,
+                    actor_type="model",
+                    parent_empty=True,
+                    ai_output_exposed="none",
+                    exposure_order="none",
+                    interface_condition="independent",
+                    pre_ai_annotation_locked="not_applicable",
+                    exposed_empty=True,
+                )
+            )
+        elif stage == "human_post_ai":
+            if annotation.actor_type != "human":
+                issues.append(_issue(annotation.annotation_id, "actor_type", "human_post_ai requires actor_type=human."))
+            if prov.ai_output_exposed == "none":
+                issues.append(_issue(annotation.annotation_id, "ai_output_exposed", "human_post_ai requires ai_output_exposed other than none."))
+            if prov.exposure_order not in {"human_first", "ai_first"}:
+                issues.append(_issue(annotation.annotation_id, "exposure_order", "human_post_ai exposure_order must be human_first or ai_first."))
+            if prov.interface_condition != "ai_review":
+                issues.append(_issue(annotation.annotation_id, "interface_condition", "human_post_ai requires interface_condition=ai_review."))
+            if prov.pre_ai_annotation_locked != "yes":
+                issues.append(_issue(annotation.annotation_id, "pre_ai_annotation_locked", "human_post_ai requires pre_ai_annotation_locked=yes."))
+        elif stage == "human_second_pass_control":
+            issues.extend(
+                _require_stage_values(
+                    annotation,
+                    prov,
+                    actor_type="human",
+                    parent_empty=False,
+                    ai_output_exposed="none",
+                    exposure_order="control_second_pass",
+                    interface_condition="control_review",
+                    pre_ai_annotation_locked="yes",
+                    exposed_empty=True,
+                )
+            )
+        elif stage == "adjudicated":
+            if annotation.actor_type != "human":
+                issues.append(_issue(annotation.annotation_id, "actor_type", "adjudicated records require actor_type=human."))
+            if not annotation.parent_annotation_id:
+                issues.append(_issue(annotation.annotation_id, "parent_annotation_id", "adjudicated records must reference a prior record."))
+            if prov.interface_condition not in {"independent", "ai_review", "control_review"}:
+                issues.append(_issue(annotation.annotation_id, "interface_condition", "adjudicated records require a known interface_condition."))
+    return issues
+
+
+def _require_stage_values(
+    annotation: TrimHAAAnnotation,
+    prov: AssistanceProvenance,
+    *,
+    actor_type: str,
+    parent_empty: bool,
+    ai_output_exposed: str,
+    exposure_order: str,
+    interface_condition: str,
+    pre_ai_annotation_locked: str,
+    exposed_empty: bool,
+) -> list[ValidationIssue]:
+    issues: list[ValidationIssue] = []
+    if annotation.actor_type != actor_type:
+        issues.append(_issue(annotation.annotation_id, "actor_type", f"{annotation.annotation_stage} requires actor_type={actor_type}."))
+    if parent_empty and annotation.parent_annotation_id:
+        issues.append(_issue(annotation.annotation_id, "parent_annotation_id", f"{annotation.annotation_stage} requires empty parent_annotation_id."))
+    if not parent_empty and not annotation.parent_annotation_id:
+        issues.append(_issue(annotation.annotation_id, "parent_annotation_id", f"{annotation.annotation_stage} requires parent_annotation_id."))
+    expected = {
+        "ai_output_exposed": ai_output_exposed,
+        "exposure_order": exposure_order,
+        "interface_condition": interface_condition,
+        "pre_ai_annotation_locked": pre_ai_annotation_locked,
+    }
+    for field_name, value in expected.items():
+        if getattr(prov, field_name) != value:
+            issues.append(_issue(annotation.annotation_id, field_name, f"{annotation.annotation_stage} requires {field_name}={value}."))
+    if exposed_empty and (prov.exposed_ai_annotation_id or prov.exposed_model_run_id):
+        issues.append(_issue(annotation.annotation_id, "exposed_ai_annotation_id", f"{annotation.annotation_stage} must not contain exposed AI linkage."))
+    return issues
+
+
+def _validate_exposed_ai_links(
+    annotations: list[TrimHAAAnnotation],
+    provenance: list[AssistanceProvenance],
+) -> list[ValidationIssue]:
+    issues: list[ValidationIssue] = []
+    annotation_by_id = {record.annotation_id: record for record in annotations}
+    prov_by_id = {record.annotation_id: record for record in provenance}
+    for annotation in annotations:
+        prov = prov_by_id.get(annotation.annotation_id)
+        if prov is None:
+            continue
+        if annotation.annotation_stage == "human_post_ai":
+            if not prov.exposed_ai_annotation_id:
+                issues.append(_issue(annotation.annotation_id, "exposed_ai_annotation_id", "human_post_ai requires exposed_ai_annotation_id."))
+                continue
+            if not prov.exposed_model_run_id:
+                issues.append(_issue(annotation.annotation_id, "exposed_model_run_id", "human_post_ai requires exposed_model_run_id."))
+            ai = annotation_by_id.get(prov.exposed_ai_annotation_id)
+            ai_prov = prov_by_id.get(prov.exposed_ai_annotation_id)
+            if ai is None:
+                issues.append(_issue(annotation.annotation_id, "exposed_ai_annotation_id", "exposed_ai_annotation_id does not reference an existing Core record."))
+                continue
+            if ai.annotation_stage != "ai_independent":
+                issues.append(_issue(annotation.annotation_id, "exposed_ai_annotation_id", "exposed_ai_annotation_id must reference an ai_independent record."))
+            if ai.case_id != annotation.case_id:
+                issues.append(_issue(annotation.annotation_id, "exposed_ai_annotation_id", "Exposed AI record must have the same case_id."))
+            if ai_prov is None:
+                issues.append(_issue(annotation.annotation_id, "exposed_ai_annotation_id", "Exposed AI record must have a provenance row."))
+            elif prov.exposed_model_run_id != ai_prov.model_run_id:
+                issues.append(_issue(annotation.annotation_id, "exposed_model_run_id", "exposed_model_run_id must match exposed AI provenance model_run_id."))
+        elif prov.exposed_ai_annotation_id or prov.exposed_model_run_id:
+            issues.append(_issue(annotation.annotation_id, "exposed_ai_annotation_id", f"{annotation.annotation_stage} must not contain exposed AI linkage."))
+    return issues
+
+
+def _validate_exposure_events(
+    annotations: list[TrimHAAAnnotation],
+    provenance: list[AssistanceProvenance],
+    events: list[ExposureEvent],
+) -> list[ValidationIssue]:
+    issues: list[ValidationIssue] = []
+    annotation_by_id = {record.annotation_id: record for record in annotations}
+    prov_by_id = {record.annotation_id: record for record in provenance}
+    seen: set[str] = set()
+    events_by_post: dict[str, list[ExposureEvent]] = {}
+    for event in events:
+        if event.exposure_event_id in seen:
+            issues.append(_issue(event.exposure_event_id, "exposure_event_id", "Duplicate exposure_event_id."))
+        seen.add(event.exposure_event_id)
+        events_by_post.setdefault(event.human_post_annotation_id, []).append(event)
+        post = annotation_by_id.get(event.human_post_annotation_id)
+        pre = annotation_by_id.get(event.human_pre_annotation_id)
+        ai = annotation_by_id.get(event.ai_annotation_id)
+        ai_prov = prov_by_id.get(event.ai_annotation_id)
+        if post is None:
+            issues.append(_issue(event.exposure_event_id, "human_post_annotation_id", "Exposure event points to unknown human-post record."))
+            continue
+        if pre is None or post.parent_annotation_id != event.human_pre_annotation_id:
+            issues.append(_issue(event.exposure_event_id, "human_pre_annotation_id", "Exposure event points to wrong human-pre record."))
+        if post.case_id != event.case_id:
+            issues.append(_issue(event.exposure_event_id, "case_id", "Exposure event points to wrong case."))
+        if ai is None:
+            issues.append(_issue(event.exposure_event_id, "ai_annotation_id", "Exposure event points to unknown AI record."))
+        elif ai.annotation_stage != "ai_independent":
+            issues.append(_issue(event.exposure_event_id, "ai_annotation_id", "Exposure event AI record must be ai_independent."))
+        elif ai.case_id != event.case_id:
+            issues.append(_issue(event.exposure_event_id, "case_id", "Exposure event AI record has wrong case_id."))
+        if ai_prov is not None and event.model_run_id != ai_prov.model_run_id:
+            issues.append(_issue(event.exposure_event_id, "model_run_id", "Exposure event model_run_id must match AI provenance."))
+        post_prov = prov_by_id.get(event.human_post_annotation_id)
+        if post_prov and (
+            event.ai_annotation_id != post_prov.exposed_ai_annotation_id
+            or event.model_run_id != post_prov.exposed_model_run_id
+        ):
+            issues.append(_issue(event.exposure_event_id, "ai_annotation_id", "Exposure event disagrees with human-post provenance exposure linkage."))
+        issues.extend(_validate_exposure_event_timestamp(event))
+    for post_id, post_events in events_by_post.items():
+        if len(post_events) > 1:
+            issues.append(_issue(post_id, "exposure_event_id", "Multiple exposure events for one human-post record.", severity="warning"))
+    return issues
+
+
+def _validate_locks(
+    annotations: list[TrimHAAAnnotation],
+    provenance: list[AssistanceProvenance],
+    locks: list[LockRecord],
+) -> list[ValidationIssue]:
+    issues: list[ValidationIssue] = []
+    annotation_by_id = {record.annotation_id: record for record in annotations}
+    prov_by_id = {record.annotation_id: record for record in provenance}
+    lock_by_annotation = {record.annotation_id: record for record in locks}
+    required_parent_ids = {
+        record.parent_annotation_id
+        for record in annotations
+        if record.annotation_stage in {"human_post_ai", "human_second_pass_control"}
+        and record.parent_annotation_id
+    }
+    for parent_id in required_parent_ids:
+        parent = annotation_by_id.get(parent_id)
+        prov = prov_by_id.get(parent_id)
+        lock = lock_by_annotation.get(parent_id)
+        if parent is None:
+            continue
+        if parent.status != "locked":
+            issues.append(_issue(parent_id, "status", "Parent record requires Core status=locked."))
+        if prov is None or prov.lock_status != "locked":
+            issues.append(_issue(parent_id, "lock_status", "Parent record requires provenance lock_status=locked."))
+        if lock is None:
+            issues.append(_issue(parent_id, "lock_manifest", "Parent record requires a lock-manifest row."))
+        elif not verify_locked_annotation(parent, lock):
+            issues.append(_issue(parent_id, "canonical_record_sha256", "Stored lock hash does not match current canonical annotation payload."))
     return issues
 
 
@@ -443,6 +689,18 @@ def _validate_timestamp_order(prov: AssistanceProvenance) -> list[ValidationIssu
     return []
 
 
+def _validate_exposure_event_timestamp(event: ExposureEvent) -> list[ValidationIssue]:
+    if _parse_timestamp(event.exposure_timestamp) is None and event.exposure_timestamp:
+        return [
+            _issue(
+                event.exposure_event_id,
+                "exposure_timestamp",
+                "Exposure event timestamp is not valid ISO format.",
+            )
+        ]
+    return []
+
+
 def _parse_timestamp(value: str) -> datetime | None:
     text = clean_text(value)
     if not text:
@@ -479,6 +737,17 @@ def _coerce_provenance(record: AssistanceProvenance | Mapping[str, Any]) -> Assi
     return AssistanceProvenance.from_record(record)
 
 
+def _coerce_exposure_event(record: ExposureEvent | Mapping[str, Any]) -> ExposureEvent:
+    if isinstance(record, ExposureEvent):
+        return record
+    return ExposureEvent.from_record(record)
+
+
+def _coerce_lock_record(record: LockRecord | Mapping[str, Any]) -> LockRecord:
+    if isinstance(record, LockRecord):
+        return record
+    return LockRecord.from_record(record)
+
+
 def _issue(annotation_id: str, field: str, message: str, severity: str = "error") -> ValidationIssue:
     return ValidationIssue(annotation_id, field, severity, message)
-

@@ -40,9 +40,12 @@ TRIM-HAA is a research extension, not v0.2.3.
 - pre-AI human lock;
 - AI independent model run;
 - post-AI human revision linked to the locked pre record;
+- explicit exposed-AI linkage from post-AI provenance to the AI record/model run shown;
+- exposure-event rows for future multiple-exposure support;
 - optional control second pass linked to the locked pre record.
+
+The lock status flag is not sufficient. A pre-AI record is auditably locked only when its canonical Core payload hash is stored in a lock manifest and later verified.
 
 ## Historical records
 
 There is no automatic conversion of historical human-only TRIM records into human-AI records. Old human records may be reused only after contamination and ethics review.
-

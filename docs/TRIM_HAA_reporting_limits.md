@@ -13,6 +13,8 @@ Prototype reports are descriptive. They must not claim:
 Preferred wording:
 
 - "exposure-associated convergence";
+- "AI evidence incorporation";
+- "increased evidence convergence";
 - "submitted rationale";
 - "model-generated justificatory record";
 - "record-level adoption";
@@ -25,3 +27,4 @@ Avoid:
 - "synthetic consensus" unless carefully defined;
 - "bias" unless an independent quality review supports it.
 
+Reports must keep incorporation, increased convergence, and displacement separate. Incorporation is not automatically beneficial or harmful.

@@ -37,8 +37,10 @@ PROVENANCE_FIELDS: tuple[str, ...] = (
     "changed_rationale_mechanism",
     "changed_uncertainty",
     "changed_alternative",
-    "adoption_type",
-    "human_revision_reason",
+    "exposed_ai_annotation_id",
+    "exposed_model_run_id",
+    "self_reported_revision_reason",
+    "self_reported_revision_note",
     "prior_access_to_other_annotations",
     "lock_status",
 )
@@ -62,17 +64,17 @@ INTERFACE_CONDITION_VALUES = frozenset(
     {"independent", "ai_review", "control_review"}
 )
 CHANGE_VALUES = frozenset({"yes", "no", "not_applicable"})
-ADOPTION_TYPES = frozenset(
+SELF_REPORTED_REVISION_REASONS = frozenset(
     {
-        "no_change",
-        "accepted_ai_label",
-        "accepted_ai_evidence",
-        "accepted_ai_mechanism",
-        "partial_ai_adoption",
-        "ai_prompted_new_human_interpretation",
-        "rejected_ai_output",
+        "ai_identified_missed_evidence",
+        "ai_clarified_category_boundary",
+        "ai_confirmed_original_judgment",
+        "ai_persuaded_interpretive_change",
         "changed_after_rereading_not_ai",
-        "unclear",
+        "rejected_ai_output",
+        "mixed_or_unclear",
+        "other",
+        "not_applicable",
     }
 )
 LOCK_STATUS_VALUES = frozenset({"draft", "locked", "superseded"})
@@ -87,7 +89,7 @@ PROVENANCE_CONTROLLED_FIELDS: dict[str, frozenset[str]] = {
     "changed_rationale_mechanism": CHANGE_VALUES,
     "changed_uncertainty": CHANGE_VALUES,
     "changed_alternative": CHANGE_VALUES,
-    "adoption_type": ADOPTION_TYPES,
+    "self_reported_revision_reason": SELF_REPORTED_REVISION_REASONS,
     "lock_status": LOCK_STATUS_VALUES,
 }
 
@@ -124,8 +126,10 @@ class AssistanceProvenance:
     changed_rationale_mechanism: str = "not_applicable"
     changed_uncertainty: str = "not_applicable"
     changed_alternative: str = "not_applicable"
-    adoption_type: str = "no_change"
-    human_revision_reason: str = ""
+    exposed_ai_annotation_id: str = ""
+    exposed_model_run_id: str = ""
+    self_reported_revision_reason: str = "not_applicable"
+    self_reported_revision_note: str = ""
     prior_access_to_other_annotations: str = "none"
     lock_status: str = "draft"
 
@@ -212,4 +216,3 @@ def export_lineage_rows(
             }
         )
     return rows
-

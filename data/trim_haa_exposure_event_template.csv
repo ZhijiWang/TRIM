@@ -1,0 +1,3 @@
+exposure_event_id,human_post_annotation_id,human_pre_annotation_id,ai_annotation_id,model_run_id,case_id,exposure_sequence,output_components_shown,exposure_timestamp,interface_condition,notes
+EXP_CASE01_001,H01_CASE01_POST,H01_CASE01_PRE,AI_MODEL_CASE01,RUN_CASE01_001,CASE01,1,label evidence mechanism uncertainty rationale,2026-07-01T00:00:00Z,ai_review,One AI exposure for the current prototype.
+

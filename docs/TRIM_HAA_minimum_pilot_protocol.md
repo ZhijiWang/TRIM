@@ -19,8 +19,10 @@ This pilot must not claim an exposure effect.
 - one frozen AI model output per case;
 - TRIM-HAA Core only;
 - locked human-pre record;
+- cryptographic lock manifest for the human-pre record;
 - AI exposure;
 - human-post revision;
+- explicit `exposed_ai_annotation_id` and exposure-event row;
 - at least one no-AI second-pass control assignment;
 - counterbalanced case assignment;
 - short post-case revision-reason question;
@@ -44,10 +46,11 @@ This pilot must not claim an exposure effect.
 - time per case;
 - validation issues;
 - label adoption;
-- evidence adoption;
+- AI evidence incorporation;
+- increased evidence convergence;
+- evidential displacement;
 - mechanism adoption;
 - uncertainty shift;
 - alternative suppression/generation;
 - copied-phrase warnings;
 - participant burden notes.
-

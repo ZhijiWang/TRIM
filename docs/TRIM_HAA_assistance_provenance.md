@@ -2,11 +2,14 @@
 
 Assistance provenance is a sidecar. It describes how a record was produced and what AI output was visible. It does not replace the raw annotation record.
 
+`parent_annotation_id` records human revision lineage. `exposed_ai_annotation_id` records the AI annotation shown during review. These are distinct relationships.
+
 ## Required relationships
 
 - `HUMAN_PRE` is locked before AI exposure.
 - `AI_RECORD` is produced independently with a frozen prompt/configuration.
 - `HUMAN_POST_AI` references the locked `HUMAN_PRE`.
+- `HUMAN_POST_AI` also records `exposed_ai_annotation_id` and `exposed_model_run_id`.
 - `HUMAN_SECOND_PASS_CONTROL` references the locked `HUMAN_PRE` and records rereading without AI.
 
 ## Model metadata
@@ -24,6 +27,8 @@ For every `ai_independent` record, record:
 - sampling settings where available.
 
 Do not fabricate provider-side version, random seed, or internals. If only a date label is available, record the date and report the limitation.
+
+For `human_post_ai`, `exposed_model_run_id` must match the model-run ID in the exposed AI record's provenance row.
 
 ## Prompt hashing
 
@@ -43,7 +48,12 @@ Do not fabricate provider-side version, random seed, or internals. If only a dat
 
 `exposure_order` records whether the participant worked human-first, AI-first, or in a control second pass.
 
+## Self-reported revision reason
+
+Concrete adoption outcomes are derived from record comparison. Participants are not asked to diagnose their own behavioural adoption. The human-entered field is `self_reported_revision_reason`, with controlled options such as `ai_identified_missed_evidence`, `ai_confirmed_original_judgment`, `changed_after_rereading_not_ai`, `rejected_ai_output`, `mixed_or_unclear`, and `other`.
+
+If `other` is used, a free-text `self_reported_revision_note` is required.
+
 ## Change flags
 
 Changed-field flags are descriptive consistency fields. They should match raw pre/post differences and should not classify behaviour as bias or error.
-

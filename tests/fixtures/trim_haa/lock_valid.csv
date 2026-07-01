@@ -1,0 +1,3 @@
+lock_manifest_id,annotation_id,case_id,annotation_stage,actor_id,canonical_record_sha256,locked_at,lock_status,locked_by,notes
+LOCK_C01_PRE,H01_C01_PRE,C01,human_pre,H01,8a3295bd6b697720fe73598729b18f9d1d03a095ade8cc8f4377bcbc34284d8e,2026-07-01T00:00:00+00:00,locked,researcher,Valid pre-AI lock.
+

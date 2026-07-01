@@ -29,4 +29,9 @@ H01_C09_POST,C09,H01_C09_PRE,H01,human,human_post_ai,C09_S1,label_a,supports,med
 H01_C10_PRE,C10,,H01,human,human_pre,C10_S1,label_a,supports,medium,Human pre record for no-AI control.,no,,,locked
 AI_C10,C10,,AI_MODEL,model,ai_independent,C10_S1,label_a,supports,medium,AI record exists but is not shown in control.,no,,,locked
 H01_C10_CONTROL,C10,H01_C10_PRE,H01,human,human_second_pass_control,C10_S1|C10_S2,label_a,supports,medium,Human changes evidence after rereading without AI exposure.,no,,,locked
-
+H01_C11_PRE,C11,,H01,human,human_pre,C11_S1|C11_S2,label_a,supports,medium,Human pre evidence overlaps AI on one segment.,no,,,locked
+AI_C11,C11,,AI_MODEL,model,ai_independent,C11_S2|C11_S3,label_a,supports,medium,AI evidence includes one new segment.,no,,,locked
+H01_C11_POST,C11,H01_C11_PRE,H01,human,human_post_ai,C11_S1|C11_S3,label_a,supports,medium,Human incorporates AI segment but does not increase Jaccard convergence.,no,,,locked
+H01_C12_PRE,C12,,H01,human,human_pre,C12_S1,label_a,supports,medium,Human pre alternative will be revised but retained.,yes,supports,Original alternative note.,locked
+AI_C12,C12,,AI_MODEL,model,ai_independent,C12_S1,label_a,qualifies,medium,AI proposes a different alternative mechanism.,yes,qualifies,AI alternative note.,locked
+H01_C12_POST,C12,H01_C12_PRE,H01,human,human_post_ai,C12_S1,label_a,supports,medium,Human post retains alternative but revises mechanism and note.,yes,qualifies,AI alternative note.,locked
