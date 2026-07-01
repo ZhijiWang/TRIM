@@ -5,9 +5,9 @@ Expected session length: approximately 60-90 minutes, including instructions, pr
 In AI-review second-pass cases, you will see:
 
 1. The original segmented text.
-2. Your earlier locked response.
-3. One frozen AI-generated response.
-4. An editable form for your current response.
+2. **Your earlier response**: your earlier locked response.
+3. **AI-generated response**: one frozen AI-generated response.
+4. **Your current response**: an editable form for your current response.
 
 The AI-generated response is one possible annotation, not an answer key. It may be useful, incomplete, misleading, or based on a different reading.
 
@@ -15,7 +15,7 @@ You may leave every field unchanged. You may change only some fields. You may ac
 
 Submit the response that best represents your current judgment. AI fluency is not evidence of correctness.
 
-You may retain or adapt wording from the AI-generated response only when it accurately represents your own final response. Wording overlap is recorded descriptively and is not automatically treated as an error.
+You may retain or adapt wording from the AI-generated response only when it accurately represents Your current response. Wording overlap is recorded descriptively and is not automatically treated as an error.
 
 Disagreement is acceptable. Uncertainty may increase or decrease. Alternatives may be retained, added, changed, or removed.
 

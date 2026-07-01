@@ -1,6 +1,8 @@
 # TRIM-HAA Participant Rationale-Mechanism Guide
 
-Status: template plus synthetic demonstration. The final study mechanism vocabulary is not frozen in this package.
+Status: `synthetic_demonstration_only`.
+
+The final pilot vocabulary is not frozen in this package. The final study mechanism vocabulary is not frozen. Use this guide only to show how a participant-facing mechanism guide should work.
 
 Ethics-submission blocker: final ethics submission requires the actual participant-facing mechanism guide for the selected cases. Do not silently reuse legacy mechanism terms without reviewing their accessibility.
 
@@ -18,10 +20,10 @@ For each final mechanism, provide:
 
 - Mechanism name:
 - Plain-language definition:
-- Synthetic positive example:
-- Near-miss example:
-- Distinction from the most similar mechanism:
-- Diagnostic question:
+- Inclusion rule:
+- Exclusion or near-miss:
+- One short example:
+- Boundary note:
 
 ## Synthetic Demonstration Vocabulary
 
@@ -31,46 +33,46 @@ The mechanisms below are examples for explaining the task structure only.
 
 Plain-language definition: Later evidence strengthens or validates an earlier interpretation.
 
-Synthetic positive example: The text first hints that Mira is cautious, then later shows her checking the same door twice before acting.
+Inclusion rule: Use this mechanism when the selected text makes an earlier judgment more secure.
 
-Near-miss example: The text repeats a door-checking action without making any earlier interpretation more secure.
+Exclusion or near-miss: The text repeats a door-checking action without making any earlier interpretation more secure.
 
-Distinction from repetition: Repetition means something occurs again. Confirmation means the later occurrence strengthens an earlier judgment.
+One short example: The text first hints that Mira is cautious, then later shows her checking the same door twice.
 
-Diagnostic question: Does this evidence make an earlier interpretation more credible or secure?
+Boundary note: Repetition means something occurs again. Confirmation means the later occurrence strengthens an earlier judgment.
 
 ### Mechanism: Contrast
 
 Plain-language definition: The evidence supports the label by showing a difference between two actions, statements, or expectations.
 
-Synthetic positive example: Mira tells others she is calm, but the text shows her hands shaking.
+Inclusion rule: Use this mechanism when the selected text matters because it differs from another action, statement, or expectation.
 
-Near-miss example: Mira is nervous in two similar scenes. That may show repetition rather than contrast.
+Exclusion or near-miss: Mira is nervous in two similar scenes. That may show repetition rather than contrast.
 
-Distinction from escalation: Contrast highlights difference. Escalation highlights an increase in intensity.
+One short example: Mira tells others she is calm, but the text shows her hands shaking.
 
-Diagnostic question: Does this evidence matter because it differs from something nearby?
+Boundary note: Contrast highlights difference. Escalation highlights an increase in intensity.
 
 ### Mechanism: Repetition
 
 Plain-language definition: The evidence supports the label because an action, phrase, or pattern occurs again.
 
-Synthetic positive example: Mira checks the hallway at the start, middle, and end of the scene.
+Inclusion rule: Use this mechanism when recurrence is the main reason the evidence supports the label.
 
-Near-miss example: Mira checks the hallway once and then locks the door. That may show caution, but not repetition.
+Exclusion or near-miss: Mira checks the hallway once and then locks the door. That may show caution, but not repetition.
 
-Distinction from confirmation: Repetition is about recurrence. Confirmation is about strengthening an earlier interpretation.
+One short example: Mira checks the hallway at the start, middle, and end of the scene.
 
-Diagnostic question: Does the support come from something happening more than once?
+Boundary note: Repetition is about recurrence. Confirmation is about strengthening an earlier interpretation.
 
 ### Mechanism: Escalation
 
 Plain-language definition: The evidence supports the label because the situation becomes stronger, more intense, or more consequential.
 
-Synthetic positive example: Mira first whispers, then hides the letter, then refuses to answer the door.
+Inclusion rule: Use this mechanism when the selected text shows an increase in intensity, risk, or consequence.
 
-Near-miss example: Mira performs three different actions with no clear increase in intensity.
+Exclusion or near-miss: Mira performs three different actions with no clear increase in intensity.
 
-Distinction from repetition: Escalation requires an increase. Repetition only requires recurrence.
+One short example: Mira first whispers, then hides the letter, then refuses to answer the door.
 
-Diagnostic question: Does the evidence show the pattern becoming stronger or more serious?
+Boundary note: Escalation requires an increase. Repetition only requires recurrence.

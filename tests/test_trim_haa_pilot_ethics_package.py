@@ -9,12 +9,15 @@ from pathlib import Path
 ROOT = Path(__file__).parents[1]
 ETHICS_DIR = ROOT / "ethics"
 PILOT_DIR = ROOT / "pilot_protocol"
-ZIP_PATH = ROOT / "artifacts" / "TRIM_HAA_pilot_ethics_package_v0_2.zip"
-ZIP_SHA_PATH = ROOT / "artifacts" / "TRIM_HAA_pilot_ethics_package_v0_2.zip.sha256"
+ZIP_PATH = ROOT / "artifacts" / "TRIM_HAA_pilot_ethics_package_v0_3.zip"
+ZIP_SHA_PATH = ROOT / "artifacts" / "TRIM_HAA_pilot_ethics_package_v0_3.zip.sha256"
 V01_ZIP_PATH = ROOT / "artifacts" / "TRIM_HAA_pilot_ethics_package_v0_1.zip"
 V01_ZIP_SHA_PATH = ROOT / "artifacts" / "TRIM_HAA_pilot_ethics_package_v0_1.zip.sha256"
 V01_SHA = "d09edd46b3c463f8c8c163058d6cbe084691bb044113efff7bb3d35e8c72bb69"
-MANIFEST_PATH = PILOT_DIR / "TRIM_HAA_pilot_package_manifest.csv"
+V02_ZIP_PATH = ROOT / "artifacts" / "TRIM_HAA_pilot_ethics_package_v0_2.zip"
+V02_ZIP_SHA_PATH = ROOT / "artifacts" / "TRIM_HAA_pilot_ethics_package_v0_2.zip.sha256"
+V02_SHA = "8a0961033ea87beaa1733fce461b21ea388c74e889ebf29b2212db70671d29b0"
+MANIFEST_PATH = PILOT_DIR / "TRIM_HAA_pilot_package_manifest_v0_3.csv"
 DURATION = "approximately 60-90 minutes"
 
 ETHICS_FILES = {
@@ -48,8 +51,9 @@ PILOT_FILES = {
     "TRIM_HAA_feasibility_analysis_plan.md",
     "TRIM_HAA_feasibility_success_criteria.md",
     "TRIM_HAA_participant_language_review_checklist.md",
+    "TRIM_HAA_participant_language_review_report_v0_1.md",
     "TRIM_HAA_pilot_data_dictionary.csv",
-    "TRIM_HAA_pilot_package_manifest.csv",
+    "TRIM_HAA_pilot_package_manifest_v0_3.csv",
 }
 
 PARTICIPANT_FACING = {
@@ -119,6 +123,8 @@ def test_second_pass_interface_shows_own_locked_prior_response_in_both_condition
     assert "the only intended difference" in spec
     assert "your own locked earlier response" in control
     assert "your earlier locked response" in ai
+    assert "your earlier response" in ai
+    assert "your current response" in ai
     assert "must never complete a second-pass record without access" in spec
 
 
@@ -133,18 +139,33 @@ def test_control_instructions_contain_no_ai_output_and_ai_not_answer_key():
     assert "ai rationale" in control
     assert "not an answer key" in ai
     assert "one possible annotation" in ai
+    assert "your earlier response" in control
+    assert "your current response" in control
+    assert "unchanged responses are acceptable" in control
+    assert "leave every field unchanged" in ai
+    assert "does not reward agreement with ai" in ai
 
 
 def test_label_and_mechanism_guides_are_templates_with_blocker_notes():
     label = _read(PILOT_DIR / "TRIM_HAA_participant_label_guide.md")
     mechanism = _read(PILOT_DIR / "TRIM_HAA_participant_mechanism_guide.md")
 
+    assert "Status: `synthetic_demonstration_only`" in label
+    assert "Status: `synthetic_demonstration_only`" in mechanism
     assert "final study label set is not frozen" in label
     assert "Ethics-submission blocker" in label
     assert "Synthetic Demonstration Label Set" in label
+    assert "Inclusion rule:" in label
+    assert "Exclusion or near-miss:" in label
+    assert "One short example:" in label
+    assert "Boundary note:" in label
     assert "How does the selected evidence support your function label?" in mechanism
     assert "final study mechanism vocabulary is not frozen" in mechanism
     assert "Ethics-submission blocker" in mechanism
+    assert "Inclusion rule:" in mechanism
+    assert "Exclusion or near-miss:" in mechanism
+    assert "One short example:" in mechanism
+    assert "Boundary note:" in mechanism
 
 
 def test_practice_case_protocol_and_outcomes_exist():
@@ -222,6 +243,25 @@ def test_burden_questionnaire_uses_non_accusatory_wording_and_real_comprehension
     assert "leaving my earlier answer unchanged was acceptable" in questionnaire
 
 
+def test_participant_language_contracts_are_explicit():
+    participant_text = "\n".join(_read(path).lower() for path in PARTICIPANT_FACING)
+    ai = _read(PILOT_DIR / "TRIM_HAA_AI_exposure_instructions.md").lower()
+    control = _read(PILOT_DIR / "TRIM_HAA_control_condition_instructions.md").lower()
+
+    assert "one possible annotation" in participant_text
+    assert "not an answer key" in participant_text
+    assert "agreement with ai is not rewarded" in participant_text or "does not reward agreement with ai" in participant_text
+    assert "unchanged answers are acceptable" in participant_text
+    assert "another full interpretation remains possible" in participant_text or "another complete and defensible interpretation" in participant_text
+    assert "do you need to change anything?" not in participant_text
+    assert "please provide hidden chain-of-thought" not in participant_text
+    assert "your earlier response" in ai
+    assert "ai-generated response" in ai
+    assert "your current response" in ai
+    assert "your earlier response" in control
+    assert "no ai-generated material" in control
+
+
 def test_researcher_script_prohibits_case_specific_interpretive_help():
     script = _read(PILOT_DIR / "TRIM_HAA_researcher_session_script.md")
 
@@ -243,6 +283,20 @@ def test_blockers_document_exists_and_marks_final_submission_blockers():
     assert "Final mechanism guide" in blockers
     assert "Source-text copyright/legal review" in blockers
     assert "Participant-language review" in blockers
+    assert "External plain-language review" in blockers
+    assert "Final duration: approximately 60-90 minutes" in blockers
+
+
+def test_participant_language_review_report_exists_without_external_review_claim():
+    report = _read(PILOT_DIR / "TRIM_HAA_participant_language_review_report_v0_1.md")
+    checklist = _read(PILOT_DIR / "TRIM_HAA_participant_language_review_checklist.md")
+
+    assert "author-assisted internal review" in checklist
+    assert "remaining_external_review_needed: yes" in checklist
+    assert "does not claim independent participant review" in report
+    assert "does not claim ethics approval" in report
+    assert "ready_for_external_plain_language_review" in report
+    assert "not_ready_for_recruitment" in report
 
 
 def test_quality_check_for_disallowed_language_and_claims():
@@ -299,16 +353,20 @@ def test_manifest_hashes_match_and_zip_contains_only_manifested_files():
     with zipfile.ZipFile(ZIP_PATH) as archive:
         zip_files = set(archive.namelist())
 
-    assert zip_files == manifest_files | {"pilot_protocol/TRIM_HAA_pilot_package_manifest.csv"}
+    assert zip_files == manifest_files | {"pilot_protocol/TRIM_HAA_pilot_package_manifest_v0_3.csv"}
     assert not any(name.startswith("dry_runs/") for name in zip_files)
     assert not any("historical" in name.lower() for name in zip_files)
 
 
-def test_package_zip_v02_is_deterministic_and_v01_remains_unchanged():
+def test_package_zip_v03_is_deterministic_and_v01_v02_remain_unchanged():
     assert V01_ZIP_PATH.exists()
     assert V01_ZIP_SHA_PATH.exists()
     assert _sha256(V01_ZIP_PATH) == V01_SHA
     assert V01_ZIP_SHA_PATH.read_text(encoding="utf-8").split()[0] == V01_SHA
+    assert V02_ZIP_PATH.exists()
+    assert V02_ZIP_SHA_PATH.exists()
+    assert _sha256(V02_ZIP_PATH) == V02_SHA
+    assert V02_ZIP_SHA_PATH.read_text(encoding="utf-8").split()[0] == V02_SHA
 
     subprocess.run(
         [sys.executable, "scripts/build_trim_haa_pilot_ethics_package.py"],

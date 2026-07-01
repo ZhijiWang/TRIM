@@ -5,8 +5,8 @@ Expected session length: approximately 60-90 minutes, including instructions, pr
 In control second-pass cases, you see:
 
 - The original segmented text
-- Your own locked earlier response
-- An editable current-response form
+- **Your earlier response**: your own locked earlier response
+- **Your current response**: an editable current-response form
 - No AI-generated material
 
 You do not see:

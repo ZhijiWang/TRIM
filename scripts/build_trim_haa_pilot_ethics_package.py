@@ -9,10 +9,10 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PACKAGE_VERSION = "v0_2"
+PACKAGE_VERSION = "v0_3"
 ZIP_PATH = ROOT / "artifacts" / f"TRIM_HAA_pilot_ethics_package_{PACKAGE_VERSION}.zip"
 ZIP_SHA_PATH = ROOT / "artifacts" / f"TRIM_HAA_pilot_ethics_package_{PACKAGE_VERSION}.zip.sha256"
-MANIFEST_PATH = ROOT / "pilot_protocol" / "TRIM_HAA_pilot_package_manifest.csv"
+MANIFEST_PATH = ROOT / "pilot_protocol" / f"TRIM_HAA_pilot_package_manifest_{PACKAGE_VERSION}.csv"
 FIXED_ZIP_TIMESTAMP = (2026, 1, 1, 0, 0, 0)
 
 
@@ -144,6 +144,14 @@ PACKAGE_FILES: tuple[dict[str, str], ...] = (
         "participant_facing": "no",
         "ethics_facing": "yes",
         "notes": "Required before final submission",
+    },
+    {
+        "file_path": "pilot_protocol/TRIM_HAA_participant_language_review_report_v0_1.md",
+        "purpose": "Participant-language internal review report",
+        "contains_personal_data": "no",
+        "participant_facing": "no",
+        "ethics_facing": "yes",
+        "notes": "Internal review only; external plain-language review still required",
     },
     {
         "file_path": "pilot_protocol/TRIM_HAA_AI_exposure_instructions.md",

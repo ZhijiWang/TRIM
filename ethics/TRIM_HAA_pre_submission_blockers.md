@@ -19,5 +19,21 @@ This package is not final-submission-ready until the items below are resolved.
 | Storage location | institutional_placeholder | blocking |
 | PI/supervisor details | institutional_placeholder | blocking |
 | Participant-language review | participant_language_review | blocking |
+| External plain-language review | participant_language_review | blocking |
 
 Do not describe the package as submission-ready until all blocking items are resolved.
+
+## Consistent Placeholders
+
+Use these placeholders until institutional values are supplied:
+
+- Research contact: [name, email, phone placeholder]
+- Ethics contact: [institutional ethics office placeholder]
+- Complaints procedure: [institutional complaints procedure placeholder]
+- Withdrawal deadline: [institutional placeholder]
+- Retention period: [institutional placeholder]
+- Breach process: [institutional placeholder]
+- Storage location: [institutional placeholder]
+- PI/supervisor details: [institutional placeholder]
+- Compensation: [study design placeholder]
+- Final duration: approximately 60-90 minutes, provisional pending ethics review

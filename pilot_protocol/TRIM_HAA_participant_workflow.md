@@ -32,3 +32,11 @@ Expected session length: approximately 60-90 minutes, including instructions, pr
 - Uncertainty is acceptable.
 - Alternative interpretations are acceptable.
 - The task evaluates the workflow, not participant ability.
+
+## Standard Panel Names
+
+Use these names in participant-facing screens and instructions:
+
+- Your earlier response
+- AI-generated response
+- Your current response

@@ -8,7 +8,7 @@ TRIM-HAA: Human-AI Annotation Audit Instrumentation Pilot
 
 This study tests whether a structured text-annotation task is understandable and manageable. It also examines how people review their own responses when they are shown an AI-generated response or given another opportunity to review the text without AI.
 
-The study evaluates the annotation workflow, not your intelligence, literary ability, or ability to outperform AI. The task is not an examination.
+The study evaluates the annotation workflow, not your intelligence, literary ability, or ability to outperform AI. The task is not an examination, and there is no competition with AI.
 
 ## Why You Are Invited
 
@@ -18,7 +18,9 @@ You are invited because you are an adult who may be able to complete short text-
 
 You will read short segmented texts, select parts of the text that support your response, choose categories from a guide, write short notes, and answer feedback questions.
 
-First, you will complete your own response to each assigned text. That earlier response will then be locked so it cannot be overwritten. In the second pass, you will always see the original text and your own locked earlier response. For some cases, you will also see a frozen AI-generated response. For control cases, you will not see AI-generated material.
+First, you will complete your own response to each assigned text. That earlier response will then be locked so it cannot be overwritten.
+
+In the second pass, you will always see the original text and **Your earlier response**. For some cases, you will also see an **AI-generated response**. For control cases, you will not see AI-generated material. You will then complete **Your current response**.
 
 The AI-generated responses are research stimuli and are not treated as correct answers. You are not expected to agree with AI. Unchanged answers are acceptable.
 
