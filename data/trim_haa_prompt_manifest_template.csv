@@ -1,0 +1,3 @@
+prompt_template_id,prompt_version,prompt_purpose,prompt_text_path,prompt_sha256,created_at,frozen,notes
+PROMPT_TRIM_HAA_CORE_V1,v1,Generate an independent TRIM-HAA Core annotation,prompts/trim_haa_core_v1.txt,REPLACE_WITH_SHA256,2026-07-01,no,Freeze before human data collection.
+

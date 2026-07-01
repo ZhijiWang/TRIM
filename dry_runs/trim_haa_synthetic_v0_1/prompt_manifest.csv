@@ -1,0 +1,2 @@
+prompt_template_id,prompt_version,prompt_purpose,prompt_text_path,prompt_sha256,created_at,frozen,notes
+PROMPT_SYNTH_V1,v1,Synthetic TRIM-HAA Core AI record generation.,prompts/synthetic_trim_haa_core_v1.txt,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,2026-07-01T00:00:00+00:00,yes,Synthetic manifest only; no secret prompt.

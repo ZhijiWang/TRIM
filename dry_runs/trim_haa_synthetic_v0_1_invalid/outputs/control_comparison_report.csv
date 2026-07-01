@@ -1,0 +1,25 @@
+participant_id,case_id,condition,pre_to_post_ai_change,pre_to_control_change,descriptive_contrast_note
+P01,C01,ai_exposure,False,,No causal estimate; compare post-AI change and control second-pass change separately.
+P01,C02,ai_exposure,False,,No causal estimate; compare post-AI change and control second-pass change separately.
+P01,C03,ai_exposure,True,,No causal estimate; compare post-AI change and control second-pass change separately.
+P01,C04,ai_exposure,True,,No causal estimate; compare post-AI change and control second-pass change separately.
+P01,C05,control,,True,No causal estimate; compare post-AI change and control second-pass change separately.
+P01,C06,control,,False,No causal estimate; compare post-AI change and control second-pass change separately.
+P02,C01,control,,False,No causal estimate; compare post-AI change and control second-pass change separately.
+P02,C02,ai_exposure,True,,No causal estimate; compare post-AI change and control second-pass change separately.
+P02,C03,ai_exposure,True,,No causal estimate; compare post-AI change and control second-pass change separately.
+P02,C04,ai_exposure,True,,No causal estimate; compare post-AI change and control second-pass change separately.
+P02,C05,ai_exposure,True,,No causal estimate; compare post-AI change and control second-pass change separately.
+P02,C06,control,,True,No causal estimate; compare post-AI change and control second-pass change separately.
+P03,C01,control,,True,No causal estimate; compare post-AI change and control second-pass change separately.
+P03,C02,control,,False,No causal estimate; compare post-AI change and control second-pass change separately.
+P03,C03,ai_exposure,True,,No causal estimate; compare post-AI change and control second-pass change separately.
+P03,C04,ai_exposure,True,,No causal estimate; compare post-AI change and control second-pass change separately.
+P03,C05,ai_exposure,True,,No causal estimate; compare post-AI change and control second-pass change separately.
+P03,C06,ai_exposure,True,,No causal estimate; compare post-AI change and control second-pass change separately.
+P04,C01,ai_exposure,False,,No causal estimate; compare post-AI change and control second-pass change separately.
+P04,C02,ai_exposure,True,,No causal estimate; compare post-AI change and control second-pass change separately.
+P04,C03,control,,True,No causal estimate; compare post-AI change and control second-pass change separately.
+P04,C04,control,,False,No causal estimate; compare post-AI change and control second-pass change separately.
+P04,C05,ai_exposure,True,,No causal estimate; compare post-AI change and control second-pass change separately.
+P04,C06,ai_exposure,True,,No causal estimate; compare post-AI change and control second-pass change separately.

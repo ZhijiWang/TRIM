@@ -1,0 +1,2 @@
+author_segments,ai_segments,shared_segments,author_unique_segments,ai_unique_segments,exact_match,jaccard
+IAG-MED-001|IAG-SAM-010|IAG-SAM-012,IAG-SAM-010|IAG-SAM-011|IAG-SAM-013,IAG-SAM-010,IAG-MED-001|IAG-SAM-012,IAG-SAM-011|IAG-SAM-013,False,0.200000

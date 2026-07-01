@@ -1,0 +1,8 @@
+annotation_id,case_id,parent_annotation_id,actor_id,actor_type,annotation_stage,primary_evidence_segment_ids,function_label,rationale_mechanism,uncertainty_flag,rationale_note,alternative_pathway_present,alternative_mechanism,alternative_note,status
+H01_BAD_MISSING_PARENT,C11,UNKNOWN_PARENT,H01,human,human_post_ai,C11_S1,label_a,supports,medium,Invalid missing parent.,no,,,locked
+H01_BAD_CYCLE_A,C12,H01_BAD_CYCLE_B,H01,human,human_post_ai,C12_S1,label_a,supports,medium,Invalid cycle A.,no,,,locked
+H01_BAD_CYCLE_B,C12,H01_BAD_CYCLE_A,H01,human,human_post_ai,C12_S1,label_a,supports,medium,Invalid cycle B.,no,,,locked
+H01_BAD_UNLOCKED_PRE,C13,,H01,human,human_pre,C13_S1,label_a,supports,medium,Unlocked parent pre record.,no,,,draft
+H01_BAD_UNLOCKED_POST,C13,H01_BAD_UNLOCKED_PRE,H01,human,human_post_ai,C13_S1,label_a,supports,medium,Invalid unlocked pre-AI parent.,no,,,locked
+AI_BAD_METADATA,C14,,AI_MODEL,model,ai_independent,C14_S1,label_a,supports,medium,AI record with missing model metadata in provenance.,no,,,locked
+
