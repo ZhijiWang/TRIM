@@ -1,0 +1,11 @@
+case_id,segment_id,speaker,segment_order,canonical_japanese_text,context_note_ja,included_in_packet,source_note
+IAG_JP_PUBLIC_002,IAG-JP-001,dead_samurai_via_medium,1,妻はおれがためらう内に、何か一声叫ぶが早いか、たちまち藪の奥へ走り出した。,妻の逃走。,yes,Aozora Bunko Japanese text; canonical evidence.
+IAG_JP_PUBLIC_002,IAG-JP-002,dead_samurai_via_medium,2,盗人も咄嗟に飛びかかったが、これは袖さえ捉えなかったらしい。おれはただ幻のように、そう云う景色を眺めていた。,盗人の追跡失敗と死者の知覚。,yes,Aozora Bunko Japanese text; canonical evidence.
+IAG_JP_PUBLIC_002,IAG-JP-003,dead_samurai_via_medium,3,盗人は妻が逃げ去った後、太刀や弓矢を取り上げると、一箇所だけおれの縄を切った。「今度はおれの身の上だ。」――おれは盗人が藪の外へ、姿を隠してしまう時に、こう呟いたのを覚えている。,武器の持去り、部分的解縛、盗人の発話。,yes,Aozora Bunko Japanese text; canonical evidence.
+IAG_JP_PUBLIC_002,IAG-JP-004,dead_samurai_via_medium,4,その跡はどこも静かだった。いや、まだ誰かの泣く声がする。おれは縄を解きながら、じっと耳を澄ませて見た。,静寂の修正と泣き声の知覚。,yes,Aozora Bunko Japanese text; canonical evidence.
+IAG_JP_PUBLIC_002,IAG-JP-005,dead_samurai_via_medium,5,が、その声も気がついて見れば、おれ自身の泣いている声だったではないか？,泣き声の自己同定。,yes,Aozora Bunko Japanese text; canonical evidence.
+IAG_JP_PUBLIC_002,IAG-JP-006,dead_samurai_via_medium,6,おれはやっと杉の根から、疲れ果てた体を起した。おれの前には妻が落した、小刀が一つ光っている。,身体を起こし、小刀を視認。,yes,Aozora Bunko Japanese text; canonical evidence.
+IAG_JP_PUBLIC_002,IAG-JP-007,dead_samurai_via_medium,7,おれはそれを手にとると、一突きにおれの胸へ刺した。何か腥い塊がおれの口へこみ上げて来る。が、苦しみは少しもない。ただ胸が冷たくなると、一層あたりがしんとしてしまった。,自己刺傷、身体感覚、静寂。,yes,Aozora Bunko Japanese text; canonical evidence.
+IAG_JP_PUBLIC_002,IAG-JP-008,dead_samurai_via_medium,8,ああ、何と云う静かさだろう。この山陰の藪の空には、小鳥一羽囀りに来ない。ただ杉や竹の杪に、寂しい日影が漂っている。日影が、――それも次第に薄れて来る。――もう杉や竹も見えない。おれはそこに倒れたまま、深い静かさに包まれている。,知覚の減退と深い静寂。,yes,Aozora Bunko Japanese text; canonical evidence.
+IAG_JP_PUBLIC_002,IAG-JP-009,dead_samurai_via_medium,9,その時誰か忍び足に、おれの側へ来たものがある。おれはそちらを見ようとした。が、おれのまわりには、いつか薄闇が立ちこめている。,不明人物の接近と視認不能。,yes,Aozora Bunko Japanese text; canonical evidence.
+IAG_JP_PUBLIC_002,IAG-JP-010,dead_samurai_via_medium,10,誰か、――その誰かは見えない手に、そっと胸の小刀を抜いた。同時におれの口の中には、もう一度血潮が溢れて来る。おれはそれぎり永久に、中有の闇へ沈んでしまった。,不明人物による小刀の抜去、出血、最終的な闇への沈下。,yes,Aozora Bunko Japanese text; canonical evidence.
