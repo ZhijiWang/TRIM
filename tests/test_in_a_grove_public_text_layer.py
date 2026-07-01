@@ -8,10 +8,15 @@ PUBLIC = ROOT / "examples" / "in_a_grove_walkthrough_public_v0_2"
 AUTHOR = PUBLIC / "author_record_v0_1"
 AI_RUN = PUBLIC / "ai_run_v0_1"
 COMPARISON = PUBLIC / "comparison_v0_1"
+TIMESTAMP_READINESS = PUBLIC / "PUBLIC_TIMESTAMP_READINESS.md"
+RELEASE_CHECKLIST = PUBLIC / "PUBLIC_RELEASE_CHECKLIST.md"
+RELEASE_NOTES_DRAFT = PUBLIC / "RELEASE_NOTES_DRAFT.md"
 EXPECTED_PROMPT_SHA = "7da94b590e7fca93927a59351936a4796b9828b7d7a2e106800fc1bcc240eca5"
 EXPECTED_AUTHOR_SHA = "6d78fd9d161d7a11c23ce962b257864eda16801793c6d87f17466e99ef269c50"
 EXPECTED_AI_SHA = "e9684ca9e776826f20647a59592caa9f6502dd471d87849b1fa76f4915e8338d"
 EXPECTED_RAW_AI_SHA = "40c9eaf10bccf9d78b77bed96f7d424e10903a53f5577d3db676d709ec8f7e73"
+EXPECTED_SOURCE_SEGMENTS_SHA = "29a889ba8ecc1b3d0032328f140651db61e750c121fd79b3bf26bdaa32823037"
+EXPECTED_ENGLISH_GLOSS_SHA = "6c7361d20e450b76a5e6833685395f6513101dafb0481be401e316b69e90ffae"
 EXPECTED_COMPARISON_CSV_HASHES = {
     "comparison_manifest.csv": "a60f4162f96a7a1eea5299030a66751c96d26175272e1d7cdf29133cd34e3fee",
     "field_comparison.csv": "e8d78f50e0b29722ebee059b1ccab4db78d85a442694996cca5bb076ba45acf1",
@@ -35,6 +40,9 @@ EXPECTED_ROOT = {
     "author_record_v0_1",
     "ai_run_v0_1",
     "comparison_v0_1",
+    "PUBLIC_TIMESTAMP_READINESS.md",
+    "PUBLIC_RELEASE_CHECKLIST.md",
+    "RELEASE_NOTES_DRAFT.md",
 }
 EXPECTED_AI_RUN = {
     "prompt.txt",
@@ -249,6 +257,16 @@ def test_review_status_tracks_locked_author_record_and_ai_boundary():
     assert "ready_for_position_note_review: yes" in status
     assert "ready_for_new_ai_record: no" in status
     assert "ready_for_public_release: no" in status
+    assert "provenance-aware technical walkthrough" in status
+    assert "representability demonstration" in status
+    assert "descriptive locked-record comparison" in status
+    assert "not empirical validation" in status
+    assert "not a truth verdict" in status
+    assert "not a replication study" in status
+    assert "not a general claim about model behaviour" in status
+    assert "does not claim that the earlier certainty-alternative mismatch was reproduced" in status
+    assert "preserves an alternative pathway and records medium uncertainty" in status
+    assert "substantially the same two pathways with different prioritisation" in status
     assert "without changing the position note" in status
 
 
@@ -519,6 +537,8 @@ def test_public_v02_comparison_summary_and_boundaries_are_non_adjudicative():
     assert "not a substitute label for that earlier mismatch" in summary
     assert "no causal or sensitivity claim can be assigned to any one factor" in summary
     assert "non-equivalent single runs, not a controlled replication design" in summary
+    assert "In this comparison, a final-label-only view would omit shared interpretive structure." in boundaries
+    assert "A final-label-only comparison would omit shared interpretive structure." not in boundaries
     for phrase in (
         "correct",
         "incorrect",
@@ -587,6 +607,86 @@ def test_public_v02_boundary_patch_does_not_change_metrics_or_records():
     assert _sha256(AI_RUN / "ai_raw_output.txt") == EXPECTED_RAW_AI_SHA
     assert not (AI_RUN / "ai_raw_output_2.txt").exists()
     assert not (AI_RUN / "ai_independent_record_v0_2.csv").exists()
+
+
+def test_public_timestamp_release_preparation_documents_are_scoped():
+    documents = {
+        "readiness": _read(TIMESTAMP_READINESS),
+        "checklist": _read(RELEASE_CHECKLIST),
+        "release_notes": _read(RELEASE_NOTES_DRAFT),
+    }
+
+    assert TIMESTAMP_READINESS.exists()
+    assert RELEASE_CHECKLIST.exists()
+    assert RELEASE_NOTES_DRAFT.exists()
+
+    for text in documents.values():
+        assert "not empirical validation" in text
+        assert "truth verdict" in text
+        assert "provenance-aware technical walkthrough" in text
+        assert "http://" not in text
+        assert "https://" not in text
+        assert "doi:" not in text.lower()
+
+    readiness = documents["readiness"]
+    for digest in (
+        EXPECTED_AUTHOR_SHA,
+        EXPECTED_AI_SHA,
+        EXPECTED_PROMPT_SHA,
+        EXPECTED_RAW_AI_SHA,
+        EXPECTED_SOURCE_SEGMENTS_SHA,
+        EXPECTED_ENGLISH_GLOSS_SHA,
+    ):
+        assert digest in readiness
+    assert "No causal claim is made about language, segmentation, prompt, model configuration, or run instance." in readiness
+    assert "The v0.2 AI record does not reproduce the earlier candidate certainty-alternative mismatch." in readiness
+    assert "The v0.2 AI record preserves an alternative pathway and records medium uncertainty." in readiness
+    assert "The two records retain substantially the same two pathways with different prioritisation." in readiness
+
+    release_notes = documents["release_notes"]
+    assert "the descriptive primary-alternative inversion is not equivalent to the earlier certainty-alternative mismatch" in release_notes
+    assert "the earlier mismatch is not reproduced in this v0.2 run" in release_notes
+    assert "author uncertainty is high" in release_notes
+    assert "AI uncertainty is medium" in release_notes
+    for forbidden in (
+        "breakthrough",
+        "validated",
+        "proves",
+        "demonstrates AI bias",
+        "model failure",
+        "model misunderstanding",
+        "true cause",
+        "replication success",
+        "replication failure",
+        "sensitivity established",
+    ):
+        assert forbidden not in release_notes
+
+
+def test_public_release_checklist_leaves_future_publication_steps_unchecked():
+    checklist = _read(RELEASE_CHECKLIST)
+    for completed in (
+        "- [x] frozen hashes verified",
+        "- [x] author and AI locks verified",
+        "- [x] comparison checksums verified",
+        "- [x] wording tightened",
+        "- [x] no model rerun",
+        "- [x] no record revision",
+        "- [x] no position-note update",
+        "- [x] PR remains draft",
+    ):
+        assert completed in checklist
+    for future in (
+        "- [ ] stacked dependency disclosed",
+        "- [ ] final commit SHA recorded",
+        "- [ ] release notes reviewed",
+        "- [ ] release tag created",
+        "- [ ] archive/DOI created",
+        "- [ ] release URL recorded",
+        "- [ ] DOI/archive URL recorded",
+        "- [ ] exact tagged snapshot verified",
+    ):
+        assert future in checklist
 
 
 def test_public_v02_comparison_checksums_match_frozen_outputs():

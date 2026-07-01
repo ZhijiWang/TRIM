@@ -67,4 +67,6 @@ This review must not be described as an independent human bilingual expert revie
 
 The text layer is frozen. Any change to canonical Japanese text, segmentation, gloss wording, provenance, or protocol requires a new version and regenerated manifests.
 
+The public artifact is a provenance-aware technical walkthrough demonstrating structured comparison between locked human and model annotations. Its scope is representability demonstration, descriptive locked-record comparison, and provenance-preserving technical walkthrough; it is not empirical validation, not a truth verdict, not a replication study, and not a general claim about model behaviour. It does not claim that the earlier certainty-alternative mismatch was reproduced: the v0.2 AI record preserves an alternative pathway and records medium uncertainty, while the two locked records retain substantially the same two pathways with different prioritisation.
+
 The author record is locked and uses only frozen Japanese segment IDs. The independent AI run has been completed once under the frozen prompt/run workflow. The AI record is locked. The descriptive comparison has been completed and frozen without adjudication, without a truth verdict, and without changing the position note.

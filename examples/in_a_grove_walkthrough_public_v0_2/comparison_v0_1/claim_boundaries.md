@@ -9,7 +9,7 @@
 - The v0.2 AI record preserves an alternative pathway and records medium uncertainty.
 - The v0.2 comparison does not reproduce the earlier candidate certainty–alternative mismatch.
 - The descriptive primary-alternative inversion concerns pathway ordering, not alternative omission or low-certainty closure.
-- A final-label-only comparison would omit shared interpretive structure.
+- In this comparison, a final-label-only view would omit shared interpretive structure.
 - The current schema can represent this structured difference.
 
 ## Not supported by this comparison
