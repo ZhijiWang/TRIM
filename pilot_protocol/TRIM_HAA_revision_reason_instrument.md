@@ -1,5 +1,7 @@
 # TRIM-HAA Revision-Reason Instrument
 
+Expected session length: approximately 60-90 minutes, including instructions, practice, breaks, annotation tasks, and feedback questions. This duration range is provisional and must be finalised before ethics submission and recruitment.
+
 After each second-pass record, select the option that best describes your submitted revision or non-revision.
 
 ## Controlled Responses

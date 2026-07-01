@@ -2,13 +2,17 @@
 
 Thank you for participating in this instrumentation pilot.
 
-The study tests whether the TRIM-HAA workflow can collect independent human-pre records, frozen AI records, and second-pass records in a way that is understandable and auditable.
+The planned session length for this pilot is approximately 60-90 minutes, including instructions, practice, breaks, annotation tasks, and feedback questions.
 
-Independent human-pre records were locked so later records can be compared without overwriting the first submitted record. Some cases showed AI output and others did not so the workflow can separately observe post-AI revision and ordinary second-pass revision.
+The study tests whether the TRIM-HAA workflow can collect earlier responses, AI-generated responses, and current responses in a way that is understandable and auditable.
 
-The research compares labels, evidence, mechanisms, uncertainty, and alternatives because final labels alone cannot show how a submitted annotation was justified.
+Your earlier responses were locked so later responses could be compared without overwriting what you first submitted. Some cases showed AI-generated material and others did not so the workflow can separately record review with AI and ordinary second-pass review without AI.
 
-The study does not assume AI influence is harmful. Agreement with AI is not necessarily correct. Disagreement with AI is not necessarily error. This pilot is about workflow feasibility, not participant competence.
+The pilot is testing the instrument. It is not testing your intelligence, literary ability, competence, or ability to outperform AI.
+
+AI agreement is not necessarily correctness. Disagreement with AI is not necessarily error. Revisions may occur for many reasons, including rereading, noticing different evidence, uncertainty, or rejecting the AI-generated response.
+
+The study does not infer private cognition from submitted rationales. Rationale notes are short submitted explanations for the research record.
 
 Contacts:
 

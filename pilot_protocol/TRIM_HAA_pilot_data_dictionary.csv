@@ -91,3 +91,13 @@ protocol_deviation_id,protocol_deviations,Protocol deviation identifier,string,,
 protocol_deviation_type,protocol_deviations,Type of deviation,string,,conditional,no,yes,no,no,during session,no,Describe without real names
 protocol_deviation_note,protocol_deviations,Short deviation note,text,,conditional,no,yes,no,yes,during session,no,Review for identifiers
 notes,templates,Generic template note field,text,,optional,no,no,no,conditional,template-dependent,no,Used in frozen templates; should not contain real participant data
+task_timing,session_log,Overall task timing if approved,duration,,optional,no,yes,no,yes,during session,no,Use only if approved in consent and protocol
+practice_case_outcome,practice_case,Practice-case eligibility outcome,string,ready_for_formal_pilot|ready_with_documented_support|usability_feedback_only|stop_session,yes,no,yes,no,no,after practice case,no,Records instrument readiness rather than participant ability
+researcher_intervention_time,session_log,Time spent on researcher intervention,duration,,optional,no,yes,no,yes,during session,no,Log only procedural support time
+non_standard_explanation_count,session_log,Number of non-standard explanations,integer,,optional,no,yes,no,no,during session,no,Protocol-deviation context
+technical_interruption_count,session_log,Number of technical interruptions,integer,,optional,no,yes,no,no,during session,no,Feasibility output
+comprehension_check_result,burden_comprehension,AI-status comprehension check response,string,correct_answer|one_possible_annotation|researcher_preferred_answer|not_sure,yes,yes,no,no,no,end of session,no,Correct response for analysis is one_possible_annotation
+ai_panel_viewed,interface_log,Whether AI panel was viewed if metadata collection is approved,string,yes|no|not_applicable,optional,no,yes,no,yes,AI-review second pass,no,Optional interface metadata
+ai_panel_view_duration,interface_log,Duration AI panel was visible if approved,duration,,optional,no,yes,no,yes,AI-review second pass,no,Optional interface metadata
+quotation_consent,consent,Optional consent for de-identified rationale quotation,string,yes|no,yes,yes,no,no,yes,consent,no,Separate from mandatory consent
+public_release_consent,consent,Optional consent for public release of de-identified structured annotations,string,yes|no,yes,yes,no,no,yes,consent,no,Separate from quotation consent

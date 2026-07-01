@@ -1,8 +1,10 @@
 # TRIM-HAA Participant Background Questionnaire
 
+Expected session length: approximately 60-90 minutes, including instructions, practice, breaks, annotation tasks, and feedback questions. This duration range is provisional and must be finalised before ethics submission and recruitment.
+
 Use pseudonymous participant IDs only. Do not collect legal name in the research dataset.
 
-## Items
+## Necessary Background Items
 
 1. Confirm you are aged 18 or older.
    - Yes
@@ -47,18 +49,33 @@ Use pseudonymous participant IDs only. Do not collect legal name in the research
    - Daily or near daily
    - Prefer not to answer
 
-9. Prior familiarity with the selected source texts:
-   - None
-   - Vague familiarity
-   - Have read before
-   - Have studied closely
+9. Accessibility needs for the session:
+   - Free text
+   - Prefer not to answer
 
-10. Prior knowledge of the study hypothesis:
-    - None
-    - General awareness
-    - Detailed awareness
+## Familiarity and Contamination Items
 
-11. Accessibility needs for the session:
+10. Have you previously read any TRIM-HAA project document?
+    - No
+    - Yes
+    - Not sure
+
+11. Have you previously seen any cases used in this study?
+    - No
+    - Yes
+    - Not sure
+
+12. Have you previously seen any AI annotations used in this study?
+    - No
+    - Yes
+    - Not sure
+
+13. Were you involved in designing or testing this study?
+    - No
+    - Yes
+    - Not sure
+
+14. Before today, what did you think this study was mainly investigating?
     - Free text
     - Prefer not to answer
 

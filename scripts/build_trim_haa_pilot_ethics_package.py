@@ -9,7 +9,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PACKAGE_VERSION = "v0_1"
+PACKAGE_VERSION = "v0_2"
 ZIP_PATH = ROOT / "artifacts" / f"TRIM_HAA_pilot_ethics_package_{PACKAGE_VERSION}.zip"
 ZIP_SHA_PATH = ROOT / "artifacts" / f"TRIM_HAA_pilot_ethics_package_{PACKAGE_VERSION}.zip.sha256"
 MANIFEST_PATH = ROOT / "pilot_protocol" / "TRIM_HAA_pilot_package_manifest.csv"
@@ -66,6 +66,14 @@ PACKAGE_FILES: tuple[dict[str, str], ...] = (
         "notes": "Does not claim approval",
     },
     {
+        "file_path": "ethics/TRIM_HAA_pre_submission_blockers.md",
+        "purpose": "Pre-submission blocker list",
+        "contains_personal_data": "no",
+        "participant_facing": "no",
+        "ethics_facing": "yes",
+        "notes": "Lists unresolved institutional and design blockers",
+    },
+    {
         "file_path": "pilot_protocol/TRIM_HAA_pilot_research_questions.md",
         "purpose": "Frozen feasibility research questions",
         "contains_personal_data": "no",
@@ -82,6 +90,14 @@ PACKAGE_FILES: tuple[dict[str, str], ...] = (
         "notes": "Feasibility pilot only",
     },
     {
+        "file_path": "pilot_protocol/TRIM_HAA_interface_specification.md",
+        "purpose": "Fixed second-pass interface specification",
+        "contains_personal_data": "no",
+        "participant_facing": "no",
+        "ethics_facing": "yes",
+        "notes": "Own-pre response shown in both second-pass conditions",
+    },
+    {
         "file_path": "pilot_protocol/TRIM_HAA_participant_workflow.md",
         "purpose": "Participant workflow sequence",
         "contains_personal_data": "no",
@@ -90,12 +106,44 @@ PACKAGE_FILES: tuple[dict[str, str], ...] = (
         "notes": "No hidden reasoning collection",
     },
     {
+        "file_path": "pilot_protocol/TRIM_HAA_participant_label_guide.md",
+        "purpose": "Participant-facing label-guide template and synthetic demo",
+        "contains_personal_data": "no",
+        "participant_facing": "yes",
+        "ethics_facing": "yes",
+        "notes": "Final study label guide remains a blocker",
+    },
+    {
+        "file_path": "pilot_protocol/TRIM_HAA_participant_mechanism_guide.md",
+        "purpose": "Participant-facing mechanism-guide template and synthetic demo",
+        "contains_personal_data": "no",
+        "participant_facing": "yes",
+        "ethics_facing": "yes",
+        "notes": "Final mechanism vocabulary remains a blocker",
+    },
+    {
         "file_path": "pilot_protocol/TRIM_HAA_participant_core_guide.md",
         "purpose": "Plain-language Core instructions",
         "contains_personal_data": "no",
         "participant_facing": "yes",
         "ethics_facing": "yes",
         "notes": "Uses synthetic examples only",
+    },
+    {
+        "file_path": "pilot_protocol/TRIM_HAA_practice_case_protocol.md",
+        "purpose": "Practice-case comprehension standard",
+        "contains_personal_data": "no",
+        "participant_facing": "no",
+        "ethics_facing": "yes",
+        "notes": "Defines formal-pilot readiness outcomes",
+    },
+    {
+        "file_path": "pilot_protocol/TRIM_HAA_participant_language_review_checklist.md",
+        "purpose": "Participant-language review checklist",
+        "contains_personal_data": "no",
+        "participant_facing": "no",
+        "ethics_facing": "yes",
+        "notes": "Required before final submission",
     },
     {
         "file_path": "pilot_protocol/TRIM_HAA_AI_exposure_instructions.md",

@@ -5,14 +5,17 @@ Pause or stop the pilot if any of the following occurs:
 - Lock verification fails.
 - Exposed-AI linkage fails.
 - Participant cannot distinguish Core fields after practice.
+- Participant cannot distinguish function label from rationale mechanism after standardised re-explanation.
 - Repeated technical failures occur.
 - Participant distress appears.
 - Participant requests withdrawal.
 - Free-text fields elicit unnecessary personal information.
 - Session burden is clearly excessive.
-- Copied rationale behaviour makes interpretation impossible.
+- Copied or adapted rationale wording makes interpretation impossible.
 - Protocol contamination occurs.
 - More than a predefined fraction of records are incomplete.
+
+If the practice-case standard is not met, do not proceed with formal pilot data collection. Retain only usability feedback if consent permits, and record the issue as instrument failure rather than participant failure.
 
 ## Thresholds Requiring Approval
 

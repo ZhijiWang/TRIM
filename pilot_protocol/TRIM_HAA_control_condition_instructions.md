@@ -1,13 +1,15 @@
-# TRIM-HAA Control Condition Instructions
+# TRIM-HAA Control Second-Pass Instructions
 
-In control second-pass cases, you will not see an AI record.
+Expected session length: approximately 60-90 minutes, including instructions, practice, breaks, annotation tasks, and feedback questions. This duration range is provisional and must be finalised before ethics submission and recruitment.
 
-You may see:
+In control second-pass cases, you see:
 
-- The original case text
-- Your own previous response, if the interface design permits
+- The original segmented text
+- Your own locked earlier response
+- An editable current-response form
+- No AI-generated material
 
-You will not see:
+You do not see:
 
 - AI output
 - AI label
@@ -16,4 +18,6 @@ You will not see:
 - AI uncertainty
 - AI alternative pathway
 
-This condition records ordinary second-pass revision opportunity. It is not presented as an answer check.
+Unchanged responses are acceptable. All fields may be revised. The second pass is not an answer check.
+
+The control procedure should match the AI-review condition except for the absence of the AI-generated response panel.

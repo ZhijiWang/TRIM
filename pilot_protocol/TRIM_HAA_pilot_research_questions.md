@@ -6,7 +6,7 @@ Status: provisionally frozen for ethics and instrumentation-pilot documentation.
 
 This is an instrumentation and feasibility pilot.
 
-The purpose is to test whether participants can independently complete the TRIM-HAA Core, whether locked pre-AI records and post-exposure revisions can be collected reliably, and whether the system can distinguish changes in labels, evidence, justificatory mechanisms, uncertainty, and alternatives without excessive participant burden.
+The purpose is to test whether participants can independently complete the TRIM-HAA Core, whether locked pre-AI records and post-exposure revisions can be collected reliably, and whether the system can distinguish changes in labels, evidence-to-label mechanisms, uncertainty, and alternatives without excessive participant burden.
 
 The pilot is not powered to estimate an AI exposure effect.
 
