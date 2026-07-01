@@ -1,0 +1,28 @@
+metric,value
+total_records_by_stage,ai_independent=6; human_post_ai=16; human_pre=24; human_second_pass_control=8
+total_participants,4
+total_cases,6
+total_ai_exposure_observations,16
+total_control_observations,8
+lock_verification_success_rate,24/24
+provenance_completeness_rate,54/54
+exposure_link_completeness_rate,16/16
+total_exposure_events,17
+label_adoption_count,2
+label_adoption_percent,0.125000
+ai_evidence_incorporation_count,5
+ai_evidence_incorporation_percent,0.312500
+evidence_convergence_increased_count,4
+evidential_displacement_count,2
+mechanism_adoption_count,2
+uncertainty_decrease_count,3
+uncertainty_increase_count,6
+alternative_suppression_count,1
+alternative_generation_count,2
+alternative_modification_count,1
+rejected_ai_output_count,2
+changed_after_rereading_not_ai_count,5
+missingness_by_field,"{'primary_evidence_segment_ids': 0, 'function_label': 0, 'rationale_mechanism': 0, 'uncertainty_flag': 0, 'rationale_note': 0}"
+warning_counts_by_type,annotation=1; exposure_event_id=1; rationale_note=1
+validation_error_count,0
+records_excluded,0

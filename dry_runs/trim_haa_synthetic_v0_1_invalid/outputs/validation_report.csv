@@ -1,0 +1,21 @@
+annotation_id,field,severity,message
+P03_C05_POST,alternative_note,error,alternative_note is required when alternative_pathway_present=yes.
+P02_C03_POST,ai_output_exposed,error,human_post_ai submitted without exposure metadata.
+P01_C02_PRE,lock_status,error,Core status and provenance lock_status must match.
+AI_C06,interface_condition,error,ai_independent requires interface_condition=independent.
+P01_C05_CONTROL,ai_output_exposed,error,human_second_pass_control requires ai_output_exposed=none.
+P02_C03_POST,ai_output_exposed,error,human_post_ai requires ai_output_exposed other than none.
+P01_C03_POST,exposed_ai_annotation_id,error,exposed_ai_annotation_id does not reference an existing Core record.
+P01_C04_POST,exposed_ai_annotation_id,error,Exposed AI record must have the same case_id.
+P01_C04_POST,exposed_model_run_id,error,exposed_model_run_id must match exposed AI provenance model_run_id.
+P02_C02_POST,exposed_model_run_id,error,exposed_model_run_id must match exposed AI provenance model_run_id.
+EXP_P01_C03_POST_001,ai_annotation_id,error,Exposure event disagrees with human-post provenance exposure linkage.
+EXP_P01_C04_POST_001,ai_annotation_id,error,Exposure event disagrees with human-post provenance exposure linkage.
+EXP_P02_C02_POST_001,ai_annotation_id,error,Exposure event disagrees with human-post provenance exposure linkage.
+EXP_P01_C01_POST_001,exposure_event_id,error,Duplicate exposure_event_id.
+P01_C01_POST,exposure_event_id,warning,Multiple exposure events for one human-post record.
+P04_C06_POST,exposure_event_id,warning,Multiple exposure events for one human-post record.
+P01_C01_PRE,canonical_record_sha256,error,Stored lock hash does not match current canonical annotation payload.
+P01_C02_PRE,lock_status,error,Parent record requires provenance lock_status=locked.
+P04_C06_POST,rationale_note,warning,Rationale contains unusually high copied phrase overlap with AI rationale.
+P04_C06_POST,annotation,warning,Post-AI record is identical to AI record across all submitted core fields.
