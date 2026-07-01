@@ -7,7 +7,11 @@ ROOT = Path(__file__).parents[1]
 PUBLIC = ROOT / "examples" / "in_a_grove_walkthrough_public_v0_2"
 AUTHOR = PUBLIC / "author_record_v0_1"
 AI_RUN = PUBLIC / "ai_run_v0_1"
+COMPARISON = PUBLIC / "comparison_v0_1"
 EXPECTED_PROMPT_SHA = "7da94b590e7fca93927a59351936a4796b9828b7d7a2e106800fc1bcc240eca5"
+EXPECTED_AUTHOR_SHA = "6d78fd9d161d7a11c23ce962b257864eda16801793c6d87f17466e99ef269c50"
+EXPECTED_AI_SHA = "e9684ca9e776826f20647a59592caa9f6502dd471d87849b1fa76f4915e8338d"
+EXPECTED_RAW_AI_SHA = "40c9eaf10bccf9d78b77bed96f7d424e10903a53f5577d3db676d709ec8f7e73"
 
 EXPECTED_ROOT = {
     "canonical_japanese_source.md",
@@ -24,6 +28,7 @@ EXPECTED_ROOT = {
     "author_record_validation_report.md",
     "author_record_v0_1",
     "ai_run_v0_1",
+    "comparison_v0_1",
 }
 EXPECTED_AI_RUN = {
     "prompt.txt",
@@ -39,6 +44,15 @@ EXPECTED_AI_RUN = {
     "model_run_manifest.csv",
     "ai_parse_log.md",
     "ai_record_validation_report.md",
+}
+EXPECTED_COMPARISON = {
+    "comparison_manifest.csv",
+    "field_comparison.csv",
+    "evidence_comparison.csv",
+    "alternative_pathway_comparison.csv",
+    "comparison_summary.md",
+    "claim_boundaries.md",
+    "COMPARISON_SHA256SUMS.txt",
 }
 FROZEN_AI_RUN_INPUTS = {
     "prompt.txt",
@@ -62,6 +76,14 @@ FORBIDDEN_ROOT_AI = {
 FORBIDDEN_OUTPUT_DIRS = {
     "comparison",
     "outputs",
+}
+FORBIDDEN_COMPARISON_ARTIFACTS = {
+    "adjudicated_record.csv",
+    "human_post_ai_record.csv",
+    "revised_author_record.csv",
+    "revised_ai_record.csv",
+    "truth_verdict.md",
+    "winner.txt",
 }
 FORBIDDEN_STAGES = {
     "human_post_ai",
@@ -104,6 +126,9 @@ def test_public_v02_structure_and_ai_boundary():
     }
     assert AI_RUN.is_dir()
     assert {path.name for path in AI_RUN.iterdir()} == EXPECTED_AI_RUN
+    assert COMPARISON.is_dir()
+    assert {path.name for path in COMPARISON.iterdir()} == EXPECTED_COMPARISON
+    assert not any((COMPARISON / name).exists() for name in FORBIDDEN_COMPARISON_ARTIFACTS)
     assert not any((PUBLIC / name).exists() for name in FORBIDDEN_ROOT_AI)
     assert not [
         path
@@ -172,7 +197,7 @@ def test_locked_author_record_verifies():
     )
     digest = hashlib.sha256(payload.encode("utf-8")).hexdigest()
     assert digest == lock["canonical_record_sha256"]
-    assert digest == "6d78fd9d161d7a11c23ce962b257864eda16801793c6d87f17466e99ef269c50"
+    assert digest == EXPECTED_AUTHOR_SHA
     assert lock["annotation_id"] == record["annotation_id"]
     assert lock["case_id"] == record["case_id"]
     assert lock["annotation_stage"] == record["annotation_stage"]
@@ -209,12 +234,16 @@ def test_review_status_tracks_locked_author_record_and_ai_boundary():
     assert "ai_run_executed_once: yes" in status
     assert "raw_response_preserved: yes" in status
     assert "ai_record_validated_and_locked: yes" in status
-    assert "comparison_performed: no" in status
+    assert "ai_record_locked: yes" in status
+    assert "descriptive_comparison_completed_and_frozen: yes" in status
+    assert "adjudication_performed: no" in status
+    assert "truth_verdict_assigned: no" in status
     assert "ready_for_ai_run: no" in status
-    assert "ready_for_comparison: yes" in status
+    assert "ready_for_comparison: no" in status
+    assert "ready_for_position_note_review: yes" in status
     assert "ready_for_new_ai_record: no" in status
     assert "ready_for_public_release: no" in status
-    assert "does not claim that a comparison has been completed" in status
+    assert "without changing the position note" in status
 
 
 def test_ai_run_infrastructure_and_templates_are_frozen():
@@ -293,6 +322,7 @@ def test_completed_ai_run_is_preserved_validated_and_locked():
     }
 
     assert raw_path.exists()
+    assert _sha256(raw_path) == EXPECTED_RAW_AI_SHA
     assert _sha256(raw_path) == model_run["output_sha256"]
     assert model_run["human_record_exposed"] == "no"
     assert model_run["retry_count"] == "0"
@@ -317,6 +347,7 @@ def test_completed_ai_run_is_preserved_validated_and_locked():
     assert validate_core_record(annotation) == []
     assert verify_locked_annotation(annotation, lock)
     assert annotation_sha256(annotation) == lock["canonical_record_sha256"]
+    assert annotation_sha256(annotation) == EXPECTED_AI_SHA
     assert lock["lock_status"] == "locked"
 
     assert external_note == ""
@@ -333,6 +364,229 @@ def test_completed_ai_run_is_preserved_validated_and_locked():
     assert "comparison_performed: `no`" in validation_report
     assert not (AI_RUN / "comparison").exists()
     assert not (AI_RUN / "outputs").exists()
+
+
+def test_public_v02_comparison_manifest_references_locked_records():
+    from trim_haa.locking import annotation_sha256, verify_locked_annotation
+    from trim_haa.schema import TrimHAAAnnotation
+
+    author_record = TrimHAAAnnotation.from_record(
+        _rows(AUTHOR / "author_analytic_record.csv")[0]
+    )
+    ai_record = TrimHAAAnnotation.from_record(
+        _rows(AI_RUN / "ai_independent_record.csv")[0]
+    )
+    author_lock = _rows(AUTHOR / "author_lock_manifest.csv")[0]
+    ai_lock = _rows(AI_RUN / "ai_lock_manifest.csv")[0]
+    manifest = _rows(COMPARISON / "comparison_manifest.csv")[0]
+
+    assert verify_locked_annotation(author_record, author_lock)
+    assert verify_locked_annotation(ai_record, ai_lock)
+    assert annotation_sha256(author_record) == EXPECTED_AUTHOR_SHA
+    assert annotation_sha256(ai_record) == EXPECTED_AI_SHA
+    assert _sha256(AI_RUN / "prompt.txt") == EXPECTED_PROMPT_SHA
+    assert _sha256(AI_RUN / "ai_raw_output.txt") == EXPECTED_RAW_AI_SHA
+
+    assert manifest["comparison_id"] == "IAG_JP_V02_COMPARISON_001"
+    assert manifest["case_id"] == "IAG_JP_PUBLIC_002"
+    assert manifest["author_annotation_id"] == "IAG_JP_V02_AUTHOR_PRE"
+    assert manifest["author_record_sha256"] == EXPECTED_AUTHOR_SHA
+    assert manifest["ai_annotation_id"] == "IAG_JP_V02_AI_INDEPENDENT"
+    assert manifest["ai_record_sha256"] == EXPECTED_AI_SHA
+    assert manifest["comparison_status"] == "frozen"
+    assert manifest["comparison_type"] == "descriptive_locked_record_comparison"
+    assert manifest["adjudication_performed"] == "no"
+    assert manifest["truth_verdict_assigned"] == "no"
+    assert "neither record was revised" in manifest["notes"]
+
+
+def test_public_v02_evidence_comparison_metrics_are_descriptive():
+    rows = _rows(COMPARISON / "evidence_comparison.csv")
+    source_ids = {
+        row["segment_id"] for row in _rows(PUBLIC / "source_segments_japanese.csv")
+    }
+    required = {
+        "IAG-JP-FRAME-001",
+        "IAG-JP-010",
+        "IAG-JP-011",
+        "IAG-JP-017",
+        "IAG-JP-018",
+        "IAG-JP-019",
+        "IAG-JP-020",
+        "IAG-JP-021",
+    }
+    assert {row["segment_id"] for row in rows} == required
+    assert {row["segment_id"] for row in rows}.issubset(source_ids)
+
+    author_set = {row["segment_id"] for row in rows if row["author_selected"] == "yes"}
+    ai_set = {row["segment_id"] for row in rows if row["ai_selected"] == "yes"}
+    shared = author_set & ai_set
+    union = author_set | ai_set
+    author_only = author_set - ai_set
+    ai_only = ai_set - author_set
+
+    assert len(author_set) == 5
+    assert len(ai_set) == 7
+    assert len(shared) == 4
+    assert len(union) == 8
+    assert len(author_only) == 1
+    assert len(ai_only) == 3
+    assert round(len(shared) / len(union), 4) == 0.5000
+    assert round(len(shared) / len(author_set), 4) == 0.8000
+    assert round(len(shared) / len(ai_set), 4) == 0.5714
+    assert {row["selection_relation"] for row in rows} <= {
+        "shared",
+        "author_only",
+        "ai_only",
+    }
+
+
+def test_public_v02_field_and_alternative_comparison_contracts():
+    field_rows = _rows(COMPARISON / "field_comparison.csv")
+    alt_rows = _rows(COMPARISON / "alternative_pathway_comparison.csv")
+
+    assert [row["field"] for row in field_rows] == [
+        "function_label",
+        "primary_evidence_segment_ids",
+        "rationale_mechanism",
+        "uncertainty_flag",
+        "rationale_note",
+        "alternative_pathway_present",
+        "alternative_mechanism",
+        "alternative_note",
+        "overall_interpretive_structure",
+    ]
+    assert {row["comparison_type"] for row in field_rows} <= {
+        "exact_match",
+        "different_value",
+        "partial_overlap",
+        "shared_structure_different_emphasis",
+        "primary_alternative_inversion",
+        "uncertainty_difference",
+        "not_comparable_as_exact_text",
+    }
+    by_field = {row["field"]: row for row in field_rows}
+    assert by_field["function_label"]["exact_match"] == "no"
+    assert by_field["uncertainty_flag"]["comparison_type"] == "uncertainty_difference"
+    assert by_field["alternative_pathway_present"]["exact_match"] == "yes"
+    assert by_field["overall_interpretive_structure"]["comparison_type"] == (
+        "primary_alternative_inversion"
+    )
+    assert "substantially the same two pathways with different prioritisation" in (
+        by_field["overall_interpretive_structure"]["descriptive_note"]
+    )
+
+    assert [row["dimension"] for row in alt_rows] == [
+        "self_inflicted_pathway",
+        "third_party_intervention_pathway",
+        "mediation_or_testimony_frame",
+        "causal_completion",
+    ]
+    assert any(
+        row["comparison_type"] == "primary_alternative_inversion" for row in alt_rows
+    )
+
+
+def test_public_v02_comparison_summary_and_boundaries_are_non_adjudicative():
+    summary = _read(COMPARISON / "comparison_summary.md")
+    boundaries = _read(COMPARISON / "claim_boundaries.md")
+
+    for heading in [
+        "# Author–AI Comparison: IAG_JP_PUBLIC_002",
+        "## Record integrity",
+        "## Final-label relation",
+        "## Evidence selection",
+        "## Rationale mechanisms",
+        "## Uncertainty",
+        "## Alternative-pathway handling",
+        "## Shared interpretive structure",
+        "## Unresolved differences",
+        "## What this comparison supports",
+        "## What this comparison does not support",
+    ]:
+        assert heading in summary
+    assert "Jaccard overlap 0.5000" in summary
+    assert "author coverage by AI 0.8000" in summary
+    assert "AI coverage by author 0.5714" in summary
+    assert "primary-alternative inversion is identified" in summary
+    for phrase in (
+        "correct",
+        "incorrect",
+        "better",
+        "worse",
+        "model failure",
+        "hallucination",
+        "overconfident",
+        "underconfident",
+        "actual killer",
+        "proves suicide",
+        "proves homicide",
+        "author was right",
+        "model was right",
+    ):
+        assert phrase not in summary.lower()
+
+    assert "# Claim Boundaries" in boundaries
+    assert "## Supported by this comparison" in boundaries
+    assert "## Not supported by this comparison" in boundaries
+    assert "## Requires additional cases or human evaluation" in boundaries
+    for unsupported in (
+        "One interpretation is correct.",
+        "One annotator is superior.",
+        "The model misunderstood the text.",
+        "The author identified the true killer.",
+        "The medium deliberately deceived anyone.",
+        "Third-party homicide is established.",
+        "Self-inflicted death is established as the complete causal account.",
+        "AI assistance changed human judgment.",
+        "TRIM-HAA is empirically validated.",
+        "Evidence overlap proves semantic agreement.",
+        "Label disagreement proves completely different interpretations.",
+    ):
+        assert unsupported in boundaries
+
+
+def test_public_v02_comparison_checksums_match_frozen_outputs():
+    expected = {}
+    for line in _read(COMPARISON / "COMPARISON_SHA256SUMS.txt").splitlines():
+        digest, filename = line.split("  ", 1)
+        expected[filename] = digest
+
+    assert set(expected) == EXPECTED_COMPARISON - {"COMPARISON_SHA256SUMS.txt"}
+    assert "COMPARISON_SHA256SUMS.txt" not in expected
+    for filename, digest in expected.items():
+        assert _sha256(COMPARISON / filename) == digest
+
+
+def test_public_v02_no_post_ai_or_adjudicated_records_exist():
+    forbidden = {
+        "human_post_ai_record.csv",
+        "adjudicated_record.csv",
+        "revised_author_record.csv",
+        "revised_ai_record.csv",
+        "truth_verdict.md",
+        "winner.txt",
+    }
+    assert not [path for path in PUBLIC.glob("**/*") if path.name in forbidden]
+
+    for csv_path in PUBLIC.glob("**/*.csv"):
+        for row in _rows(csv_path):
+            assert row.get("annotation_stage", "") not in FORBIDDEN_STAGES
+
+
+def test_public_v02_schema_files_remain_unchanged():
+    assert _sha256(ROOT / "src" / "trim_haa" / "schema.py") == (
+        "bf0540c2c34e02e93f19f2559d5794f6fc59579a363e29a7858e478bb88a4264"
+    )
+    assert _sha256(ROOT / "src" / "trim_haa" / "provenance.py") == (
+        "92e075aa74afd0661fb6446c1253863883b651df735aaec0ec073638af0fdd14"
+    )
+    assert _sha256(ROOT / "docs" / "core_schema.md") == (
+        "e2ee7e73bfc4239a69b3d3534af508525775a3840aa228cbcbe24389fcb0d6e4"
+    )
+    assert _sha256(ROOT / "docs" / "provenance.md") == (
+        "66fbd4c679650797e8d4194c52527075c77b90734963389ce9226c9271774e74"
+    )
 
 
 def test_position_note_files_remain_unchanged():
