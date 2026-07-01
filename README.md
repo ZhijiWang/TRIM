@@ -77,6 +77,8 @@ trim-haa compare <left-annotation.csv> <right-annotation.csv>
 
 Repository demonstrations and research workflows require a source checkout. The walkthrough source packet is not distributed inside the wheel.
 
+A draft Japanese-canonical public text layer is under author review in `examples/in_a_grove_walkthrough_public_v0_2`; it has no new annotation records and is not frozen.
+
 ```bash
 trim-haa run-walkthrough
 trim-haa run-synthetic
@@ -88,6 +90,7 @@ trim-haa run-synthetic
 - `docs`: standalone TRIM-HAA documentation.
 - `examples/synthetic_dry_run`: valid and invalid synthetic technical fixtures.
 - `examples/in_a_grove_walkthrough`: author-only walkthrough demonstration.
+- `examples/in_a_grove_walkthrough_public_v0_2`: draft Japanese-canonical text layer under author review, not a completed annotation walkthrough.
 - `research/position_note`: position-note draft and claim-boundary materials.
 - `research/future_human_study`: deferred human-study ethics and protocol drafts.
 - `artifacts`: frozen position-note and future-study packages.

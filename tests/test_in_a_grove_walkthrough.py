@@ -264,7 +264,22 @@ def test_no_new_walkthrough_case_or_exposure_records_added():
         for path in (ROOT / "examples").iterdir()
         if path.is_dir() and path.name.startswith("in_a_grove")
     ]
-    assert [path.name for path in walkthrough_dirs] == ["in_a_grove_walkthrough"]
+    assert {path.name for path in walkthrough_dirs} == {
+        "in_a_grove_walkthrough",
+        "in_a_grove_walkthrough_public_v0_2",
+    }
+
+    public_text_layer = ROOT / "examples" / "in_a_grove_walkthrough_public_v0_2"
+    forbidden_public_artifacts = {
+        "author_analytic_record.csv",
+        "author_lock_manifest.csv",
+        "ai_independent_record.csv",
+        "ai_raw_output.txt",
+        "model_run_manifest.csv",
+        "prompt_manifest.csv",
+        "outputs",
+    }
+    assert not any((public_text_layer / name).exists() for name in forbidden_public_artifacts)
 
     all_csv_rows = []
     for path in WALK.glob("*.csv"):

@@ -13,6 +13,8 @@ Status: `draft_text_layer_only`
 - Revision date shown in the file: 22 May 2011
 - Aozora base edition: 『芥川龍之介全集4』, Chikuma Bunko, 1987
 - Selected section: 「巫女の口を借りたる死霊の物語」
+- access_date: pending_author_confirmation
+- rights_evidence_status: usage_guidance_copy_required_before_public_release
 
 ## Canonical-evidence policy
 
@@ -21,6 +23,8 @@ The Japanese text in `source_segments_japanese.csv` is the formal evidence layer
 ## Rights boundary
 
 The packet no longer redistributes the Takashi Kojima translation. The selected Japanese text is taken from the Aozora Bunko electronic text of Akutagawa's public-domain original. Before public release, the repository should retain a copy of the Aozora Bunko usage guidance relied upon for redistribution and record the access date.
+
+The source path is substantially clearer than the earlier translation path, but final public release still requires preservation of the Aozora Bunko usage guidance and an author-confirmed access date. This provenance note does not claim legal clearance and does not claim that GitHub hosting itself proves copyright permission.
 
 ## Historical boundary
 

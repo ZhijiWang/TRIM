@@ -19,6 +19,10 @@ The software package is standalone for record validation, lock verification, pro
 - Position-note technical draft.
 - Frozen artifact preservation by SHA-256.
 
+## Under Review
+
+- A Japanese-canonical, English-gloss public walkthrough text layer is under author review. It contains no new annotation records and is not yet frozen.
+
 ## Deferred
 
 - Human-subject exposure study.
