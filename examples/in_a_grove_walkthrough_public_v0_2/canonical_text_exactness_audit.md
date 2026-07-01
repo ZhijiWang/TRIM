@@ -1,12 +1,13 @@
 # Canonical Text Exactness Audit
 
 source_url: https://www.aozora.gr.jp/cards/000879/files/179_15255.html
+access_date: 2026-07-01
 segments_checked: 22
-exact_match_status: passed_draft_check
+exact_match_status: passed_author_reviewed_check
 normalisation_applied: Aozora HTML ruby annotations were ignored for comparison; whitespace and HTML line wrapping were ignored. No Japanese source characters, punctuation, quotation marks, or dashes were silently modernised in the repository text. CSV quoting is treated only as CSV escaping, not as source-text alteration.
 differences_found: none
 corrections_made: none
-remaining_manual_check: author_final_review_required_before_freeze
+remaining_manual_check: none_for_text_layer_v0_2
 
 ## Scope
 
@@ -23,6 +24,6 @@ The selected range begins with 「妻はおれがためらう内に」 and ends 
 - altered_dashes: none found
 - kojima_translation_text_imported: none found
 
-## Boundary
+## Freeze boundary
 
-This is a draft exactness audit for author review. It is not a freeze manifest, does not create `source_manifest.csv`, `gloss_manifest.csv`, `SHA256SUMS.txt`, or `frozen_packet.zip`, and does not authorise annotation.
+This audit is part of frozen text layer v0.2 dated 2026-07-01. Later changes to the canonical Japanese text or segmentation require a new version and a new exactness audit.
