@@ -1,6 +1,6 @@
 # Source Provenance: Japanese-Canonical Public Walkthrough v0.2
 
-Status: `draft_text_layer_only`
+Status: `author_reviewed_frozen_text_layer`
 
 ## Bibliographic record
 
@@ -9,12 +9,13 @@ Status: `draft_text_layer_only`
 - First publication: *Shinchō*, January 1922
 - Electronic source: Aozora Bunko
 - Source URL: https://www.aozora.gr.jp/cards/000879/files/179_15255.html
+- Aozora Bunko usage-guidance URL: https://www.aozora.gr.jp/guide/kijyunn.html
 - Aozora Bunko release date shown in the file: 10 November 1997
 - Revision date shown in the file: 22 May 2011
 - Aozora base edition: 『芥川龍之介全集4』, Chikuma Bunko, 1987
 - Selected section: 「巫女の口を借りたる死霊の物語」
-- access_date: pending_author_confirmation
-- rights_evidence_status: usage_guidance_copy_required_before_public_release
+- access_date: 2026-07-01
+- rights_evidence_status: official_usage_guidance_reviewed_and_recorded
 
 ## Canonical-evidence policy
 
@@ -22,9 +23,11 @@ The Japanese text in `source_segments_japanese.csv` is the formal evidence layer
 
 ## Rights boundary
 
-The packet no longer redistributes the Takashi Kojima translation. The selected Japanese text is taken from the Aozora Bunko electronic text of Akutagawa's public-domain original. Before public release, the repository should retain a copy of the Aozora Bunko usage guidance relied upon for redistribution and record the access date.
+The packet does not redistribute the Takashi Kojima translation. The selected Japanese text is taken from the Aozora Bunko electronic text of Akutagawa's public-domain original.
 
-The source path is substantially clearer than the earlier translation path, but final public release still requires preservation of the Aozora Bunko usage guidance and an author-confirmed access date. This provenance note does not claim legal clearance and does not claim that GitHub hosting itself proves copyright permission.
+Aozora Bunko's official handling rules state that files of works whose copyright has expired may be freely copied, redistributed, shared, and adapted, while provenance and work-history information should be retained. The repository records the official guidance URL and an access date in `aozora_usage_guidance_record.md`.
+
+This provenance record documents the source and redistribution rationale used for the repository. It is not legal advice and does not claim that GitHub hosting itself proves copyright permission.
 
 ## Historical boundary
 
