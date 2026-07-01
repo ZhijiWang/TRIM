@@ -12,6 +12,12 @@ EXPECTED_PROMPT_SHA = "7da94b590e7fca93927a59351936a4796b9828b7d7a2e106800fc1bcc
 EXPECTED_AUTHOR_SHA = "6d78fd9d161d7a11c23ce962b257864eda16801793c6d87f17466e99ef269c50"
 EXPECTED_AI_SHA = "e9684ca9e776826f20647a59592caa9f6502dd471d87849b1fa76f4915e8338d"
 EXPECTED_RAW_AI_SHA = "40c9eaf10bccf9d78b77bed96f7d424e10903a53f5577d3db676d709ec8f7e73"
+EXPECTED_COMPARISON_CSV_HASHES = {
+    "comparison_manifest.csv": "a60f4162f96a7a1eea5299030a66751c96d26175272e1d7cdf29133cd34e3fee",
+    "field_comparison.csv": "e8d78f50e0b29722ebee059b1ccab4db78d85a442694996cca5bb076ba45acf1",
+    "evidence_comparison.csv": "f26e58c4e5f7750b43c2e01d9de1f5c2c9823f92a1d957a5d766cd3c15de6c44",
+    "alternative_pathway_comparison.csv": "6d9543555da836ddbad1d4ae3c704737756d52fb3290e3b5652c29d4c554bf12",
+}
 
 EXPECTED_ROOT = {
     "canonical_japanese_source.md",
@@ -509,6 +515,10 @@ def test_public_v02_comparison_summary_and_boundaries_are_non_adjudicative():
     assert "author coverage by AI 0.8000" in summary
     assert "AI coverage by author 0.5714" in summary
     assert "primary-alternative inversion is identified" in summary
+    assert "does not reproduce the earlier candidate certainty–alternative mismatch" in summary
+    assert "not a substitute label for that earlier mismatch" in summary
+    assert "no causal or sensitivity claim can be assigned to any one factor" in summary
+    assert "non-equivalent single runs, not a controlled replication design" in summary
     for phrase in (
         "correct",
         "incorrect",
@@ -542,8 +552,41 @@ def test_public_v02_comparison_summary_and_boundaries_are_non_adjudicative():
         "TRIM-HAA is empirically validated.",
         "Evidence overlap proves semantic agreement.",
         "Label disagreement proves completely different interpretations.",
+        "The primary-alternative inversion is equivalent to a certainty–alternative mismatch.",
+        "The v0.2 AI record prematurely closed the interpretation.",
+        "The v0.2 AI record omitted third-party intervention.",
+        "A change in segmentation caused the changed result.",
+        "A change in language caused the changed result.",
+        "A change in prompt caused the changed result.",
+        "A change in model caused the changed result.",
+        "A change in run instance or uncontrolled run variation caused the changed result.",
+        "The changed result demonstrates sensitivity to any single design variable.",
+        "The older walkthrough and v0.2 constitute a controlled replication.",
+        "Non-reproduction in one non-equivalent run establishes instability as a general property.",
     ):
         assert unsupported in boundaries
+    for supported in (
+        "The v0.2 AI record preserves an alternative pathway and records medium uncertainty.",
+        "The v0.2 comparison does not reproduce the earlier candidate certainty–alternative mismatch.",
+        "The descriptive primary-alternative inversion concerns pathway ordering, not alternative omission or low-certainty closure.",
+    ):
+        assert supported in boundaries
+    for future_requirement in (
+        "A preregistered controlled sensitivity design that varies one factor at a time.",
+        "Repeated runs or otherwise controlled model execution conditions.",
+        "Equivalent packets across segmentation conditions.",
+        "A design capable of separating language, segmentation, prompt, model, and run-instance effects.",
+    ):
+        assert future_requirement in boundaries
+
+
+def test_public_v02_boundary_patch_does_not_change_metrics_or_records():
+    for filename, digest in EXPECTED_COMPARISON_CSV_HASHES.items():
+        assert _sha256(COMPARISON / filename) == digest
+    assert _sha256(AI_RUN / "prompt.txt") == EXPECTED_PROMPT_SHA
+    assert _sha256(AI_RUN / "ai_raw_output.txt") == EXPECTED_RAW_AI_SHA
+    assert not (AI_RUN / "ai_raw_output_2.txt").exists()
+    assert not (AI_RUN / "ai_independent_record_v0_2.csv").exists()
 
 
 def test_public_v02_comparison_checksums_match_frozen_outputs():

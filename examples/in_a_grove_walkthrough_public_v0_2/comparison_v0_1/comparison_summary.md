@@ -17,6 +17,8 @@ The uncertainty flags differ: the author record marks `high`, while the AI recor
 ## Alternative-pathway handling
 Both records include an alternative pathway. The author record foregrounds unresolved third-party agency and retains self-inflicted injury with post-injury intervention as an alternative. The AI record foregrounds self-inflicted death and retains unknown removal as possible causal completion as an alternative.
 
+The v0.2 AI record does not reproduce the earlier candidate certainty–alternative mismatch: it records medium uncertainty, explicitly preserves an alternative pathway, and identifies unknown dagger removal as possible causal completion. The primary-alternative inversion identified here is therefore a descriptive difference in pathway prioritisation, not a substitute label for that earlier mismatch.
+
 ## Shared interpretive structure
 The comparison supports the classification `substantially the same two pathways with different prioritisation`. A descriptive primary-alternative inversion is identified because both records retain self-stabbing and later unidentified intervention, while foregrounding them in different primary and alternative positions.
 
@@ -28,3 +30,7 @@ This comparison supports that the locked records have different final labels, pa
 
 ## What this comparison does not support
 This comparison does not support a truth verdict, adjudication, a claim that either record should be revised, a claim about the complete causal account, or a general claim about TRIM-HAA beyond this single locked-record comparison.
+
+This comparison cannot identify why the v0.2 result differs from the older walkthrough. Language, segmentation, prompt, model configuration, and run instance are not held constant across the two walkthroughs. Their effects are therefore confounded, and no causal or sensitivity claim can be assigned to any one factor.
+
+The older and newer walkthroughs are non-equivalent single runs, not a controlled replication design.
