@@ -1,6 +1,6 @@
 # Canonical Japanese Source Packet: *Yabu no Naka* public walkthrough v0.2
 
-Status: `draft_text_layer_only`
+Status: `author_reviewed_frozen_text_layer`
 
 Case ID: `IAG_JP_PUBLIC_002`
 
@@ -13,6 +13,7 @@ The formal evidence for this walkthrough is the Japanese text in `source_segment
 - First publication: 1922, *Shinchō*
 - Electronic source: Aozora Bunko
 - Source file: https://www.aozora.gr.jp/cards/000879/files/179_15255.html
+- Access date: 2026-07-01
 - Selected testimony: 「巫女の口を借りたる死霊の物語」
 - Selected range: from 「妻はおれがためらう内に」 to 「中有の闇へ沈んでしまった」
 
@@ -24,4 +25,8 @@ This packet begins when the wife runs into the grove and ends when the dead samu
 
 ## Version boundary
 
-This packet does not reuse the segmentation, English wording, author record, AI record, or findings of the earlier Kojima-based development walkthrough. No annotation record should be produced until this Japanese packet and its gloss have been reviewed and frozen.
+This packet does not reuse the segmentation, English wording, author record, AI record, or findings of the earlier Kojima-based development walkthrough.
+
+## Freeze boundary
+
+The Japanese segmentation and English gloss were author-reviewed and frozen on 2026-07-01 after AI-assisted bilingual and methodological review. Any later textual change requires a new version and new manifests. No author or AI annotation record is included in this text-layer freeze.
