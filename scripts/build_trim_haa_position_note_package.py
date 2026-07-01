@@ -9,11 +9,11 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PACKAGE_VERSION = "v0_1"
-CREATED_AT = "2026-07-01T06:10:00+00:00"
+PACKAGE_VERSION = "v0_2"
+CREATED_AT = "2026-07-01T07:20:00+00:00"
 ZIP_PATH = ROOT / "artifacts" / f"TRIM_HAA_position_note_{PACKAGE_VERSION}.zip"
 ZIP_SHA_PATH = ROOT / "artifacts" / f"TRIM_HAA_position_note_{PACKAGE_VERSION}.zip.sha256"
-MANIFEST_PATH = ROOT / "position_note" / "TRIM_HAA_position_note_v0_1_manifest.csv"
+MANIFEST_PATH = ROOT / "position_note" / "TRIM_HAA_position_note_v0_2_manifest.csv"
 FIXED_ZIP_TIMESTAMP = (2026, 1, 1, 0, 0, 0)
 
 
@@ -35,6 +35,12 @@ PACKAGE_FILES: tuple[dict[str, str], ...] = (
         "status": "draft",
         "public_release_candidate": "yes_after_review",
         "notes": "Publication blockers must be resolved before release.",
+    },
+    {
+        "artifact": "position_note/TRIM_HAA_position_note_v0_1_review_response.md",
+        "status": "draft",
+        "public_release_candidate": "yes_after_review",
+        "notes": "Reviewer-response memo for position-note hardening.",
     },
     {
         "artifact": "walkthrough/in_a_grove_v0_1/README.md",
@@ -111,8 +117,8 @@ PACKAGE_FILES: tuple[dict[str, str], ...] = (
     {
         "artifact": "walkthrough/in_a_grove_v0_1/model_run_manifest.csv",
         "status": "frozen",
-        "public_release_candidate": "yes_after_review",
-        "notes": "Model-run provenance.",
+        "public_release_candidate": "development_artifact_only",
+        "notes": "Model-run provenance; locally auditable but not externally reproducible from recorded metadata alone.",
     },
     {
         "artifact": "walkthrough/in_a_grove_v0_1/outputs/validation_report.csv",
@@ -148,7 +154,7 @@ PACKAGE_FILES: tuple[dict[str, str], ...] = (
         "artifact": "walkthrough/in_a_grove_v0_1/outputs/candidate_certainty_alternative_mismatch.md",
         "status": "generated",
         "public_release_candidate": "yes_after_review",
-        "notes": "Candidate display; no truth verdict.",
+        "notes": "Author-defined review-question display; no truth verdict.",
     },
     {
         "artifact": "walkthrough/in_a_grove_v0_1/outputs/execution_summary.md",

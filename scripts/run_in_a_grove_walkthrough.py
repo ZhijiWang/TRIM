@@ -237,8 +237,8 @@ def _write_model_run_manifest(
                 "run_timestamp": AI_RUN_TIMESTAMP,
                 "prompt_template_id": "IAG_TRIM_HAA_V0_1",
                 "prompt_hash": prompt_hash,
-                "system_prompt_hash": "",
-                "temperature_or_sampling": "not_available_in_session",
+                "system_prompt_hash": "unavailable",
+                "temperature_or_sampling": "unavailable",
                 "retry_count": "0",
                 "regenerated_output": "no",
                 "tool_access": "none for model output generation",
@@ -247,7 +247,11 @@ def _write_model_run_manifest(
                 "instruction_set_hash": instruction_set_hash,
                 "output_file": "ai_raw_output.txt",
                 "output_sha256": ai_output_hash,
-                "notes": "Output is a submitted justificatory record, not hidden model reasoning.",
+                "notes": (
+                    "Output is a submitted justificatory record, not hidden model reasoning. "
+                    "The model artifact is locally auditable but not externally reproducible from the recorded metadata alone; "
+                    "exact public model identifier, provider-side system configuration, sampling configuration, and reconstructable session context are unavailable."
+                ),
             }
         ],
     )
@@ -280,6 +284,22 @@ def _field_comparison(author: TrimHAAAnnotation, ai: TrimHAAAnnotation) -> list[
             "field": "rationale_note_token_overlap",
             "author_value": f"{normalised_token_overlap(author.rationale_note, ai.rationale_note):.6f}",
             "ai_value": f"{copied_phrase_overlap(author.rationale_note, ai.rationale_note):.6f}",
+            "same": "not_applicable",
+        }
+    )
+    rows.append(
+        {
+            "field": "walkthrough_result",
+            "author_value": "structured disagreement: unresolved_agency, contrast_or_tension, medium uncertainty, alternative retained",
+            "ai_value": "structured disagreement: self_inflicted_death, direct_action, low uncertainty, no alternative retained",
+            "same": "False",
+        }
+    )
+    rows.append(
+        {
+            "field": "candidate_status_interpretation",
+            "author_value": "not a gold standard or adjudication",
+            "ai_value": "author-defined review-rule trigger; not an independently validated mismatch",
             "same": "not_applicable",
         }
     )
@@ -372,11 +392,15 @@ def _candidate_markdown(
 
     return "\n".join(
         [
-            "# Candidate Certainty-Alternative Mismatch Display",
+            "# Review Question Generated: Candidate Certainty-Closure Tension",
             "",
             f"Display status: `{candidate_status}`",
             "",
-            "This is a walkthrough display status, not an empirical classification or truth verdict.",
+            "`candidate_visible` is a walkthrough display status. It means that the configured author-defined review condition was satisfied. It does not establish that the packet objectively contains a competing causal account or that the inspected record is erroneous.",
+            "",
+            "This display describes a candidate certainty-closure tension: a record reports low uncertainty and no alternative while omitting or not addressing a packet-anchored element that the walkthrough has designated for review as potentially relevant to interpretive closure.",
+            "",
+            "The status is not an adjudicated property of the model record. It does not prove that an alternative interpretation is required. It does not prove that low uncertainty is inappropriate. It does not prove model error. It does not prove overconfidence. It generates a review question.",
             "",
             "## AI Record",
             "",
@@ -415,8 +439,10 @@ def _candidate_markdown(
             "",
             f"- AI record retains an alternative: `{ai.alternative_pathway_present == 'yes'}`",
             f"- AI rationale explicitly distinguishes or excludes the alternative: `{ai_distinguishes}`",
-            "- Packet segment that keeps an alternative question visible:",
+            "- Packet segment designated by the walkthrough for review as potentially relevant to interpretive closure:",
             _segments(["IAG-SAM-012"], source_segments),
+            "- Procedural finding: IAG-SAM-012 was present in the packet and the prompt required explicit alternative assessment, so the absence of an alternative in the AI record cannot be attributed to missing input or a missing response field.",
+            "- Open evaluation question: whether IAG-SAM-012 warranted retaining an alternative remains open to independent evaluation.",
             "",
             "## External Cultural Claim Audit",
             "",
@@ -426,7 +452,7 @@ def _candidate_markdown(
             "",
             "## Neutral Interpretive Note",
             "",
-            "The AI record foregrounds the self-stabbing report with low uncertainty and no alternative pathway. The same packet also includes an unidentified later action involving removal of the small sword. TRIM-HAA makes this candidate tension visible for subsequent independent evaluation without deciding which interpretation is correct.",
+            "The AI record foregrounds the self-stabbing report with low uncertainty and no alternative pathway. The same packet also includes an unidentified later action involving removal of the small sword. That later removal does not automatically establish that someone else caused the death; self-inflicted death and unresolved later intervention may coexist. TRIM-HAA makes this candidate closure question visible for subsequent independent evaluation without deciding which interpretation is correct.",
             "",
             "## Provenance",
             "",
@@ -456,7 +482,10 @@ def _summary(
             "- Control records created: no.",
             f"- Validation issue count: {len(validation_rows)}",
             f"- Author lock verified: {lock_verified}",
-            f"- Candidate mismatch display status: `{candidate_status}`",
+            f"- Review question display status: `{candidate_status}`",
+            "- `candidate_visible` means the configured author-defined review rule was triggered; it is not an independently validated mismatch.",
+            "- Walkthrough result: structured disagreement across final label, selected evidence, mechanism, uncertainty, and alternative handling.",
+            "- Procedural finding: IAG-SAM-012 was present in the packet and the prompt required explicit alternative assessment; whether the segment warranted retaining an alternative remains open.",
             f"- Source packet SHA-256: `{source_packet_hash}`",
             f"- Instruction-set SHA-256: `{instruction_set_hash}`",
             f"- Prompt SHA-256: `{prompt_hash}`",

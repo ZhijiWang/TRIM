@@ -1,8 +1,12 @@
-# Candidate Certainty-Alternative Mismatch Display
+# Review Question Generated: Candidate Certainty-Closure Tension
 
 Display status: `candidate_visible`
 
-This is a walkthrough display status, not an empirical classification or truth verdict.
+`candidate_visible` is a walkthrough display status. It means that the configured author-defined review condition was satisfied. It does not establish that the packet objectively contains a competing causal account or that the inspected record is erroneous.
+
+This display describes a candidate certainty-closure tension: a record reports low uncertainty and no alternative while omitting or not addressing a packet-anchored element that the walkthrough has designated for review as potentially relevant to interpretive closure.
+
+The status is not an adjudicated property of the model record. It does not prove that an alternative interpretation is required. It does not prove that low uncertainty is inappropriate. It does not prove model error. It does not prove overconfidence. It generates a review question.
 
 ## AI Record
 
@@ -47,8 +51,10 @@ Researcher-produced analytic demonstration; not human-subject data and not a gol
 
 - AI record retains an alternative: `False`
 - AI rationale explicitly distinguishes or excludes the alternative: `no`
-- Packet segment that keeps an alternative question visible:
+- Packet segment designated by the walkthrough for review as potentially relevant to interpretive closure:
 - `IAG-SAM-012`: Someone crept up to me and drew the small sword softly out of my breast.
+- Procedural finding: IAG-SAM-012 was present in the packet and the prompt required explicit alternative assessment, so the absence of an alternative in the AI record cannot be attributed to missing input or a missing response field.
+- Open evaluation question: whether IAG-SAM-012 warranted retaining an alternative remains open to independent evaluation.
 
 ## External Cultural Claim Audit
 
@@ -58,7 +64,7 @@ Researcher-produced analytic demonstration; not human-subject data and not a gol
 
 ## Neutral Interpretive Note
 
-The AI record foregrounds the self-stabbing report with low uncertainty and no alternative pathway. The same packet also includes an unidentified later action involving removal of the small sword. TRIM-HAA makes this candidate tension visible for subsequent independent evaluation without deciding which interpretation is correct.
+The AI record foregrounds the self-stabbing report with low uncertainty and no alternative pathway. The same packet also includes an unidentified later action involving removal of the small sword. That later removal does not automatically establish that someone else caused the death; self-inflicted death and unresolved later intervention may coexist. TRIM-HAA makes this candidate closure question visible for subsequent independent evaluation without deciding which interpretation is correct.
 
 ## Provenance
 

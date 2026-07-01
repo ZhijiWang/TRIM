@@ -7,3 +7,5 @@ alternative_pathway_present,yes,no,False
 alternative_mechanism,direct_action,,False
 alternative_note,A narrower reading can foreground the segment where the samurai says he took the small sword and stabbed himself.,,False
 rationale_note_token_overlap,0.180000,0.000000,not_applicable
+walkthrough_result,"structured disagreement: unresolved_agency, contrast_or_tension, medium uncertainty, alternative retained","structured disagreement: self_inflicted_death, direct_action, low uncertainty, no alternative retained",False
+candidate_status_interpretation,not a gold standard or adjudication,author-defined review-rule trigger; not an independently validated mismatch,not_applicable
