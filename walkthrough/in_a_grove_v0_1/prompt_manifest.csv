@@ -1,0 +1,2 @@
+prompt_template_id,prompt_version,prompt_purpose,prompt_text_path,prompt_sha256,created_at,frozen,notes
+IAG_TRIM_HAA_V0_1,v0_1,Independent TRIM-HAA Core annotation for In a Grove walkthrough.,prompts/in_a_grove_trim_haa_v0_1.txt,74af647ec15697e99bd87ee4c4fdbfecfd402ff09cc76dc8acf55e3bf856e8f5,2026-07-01T05:30:00+00:00,yes,Prompt provides frozen source packet and local label/mechanism guide; no hidden system prompt included.

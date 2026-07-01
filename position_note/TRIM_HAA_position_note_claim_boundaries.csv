@@ -1,0 +1,11 @@
+claim,supported_by_walkthrough,requires_human_pilot,requires_multi_case_study,requires_external_adjudication,prohibited_wording,recommended_wording
+System can represent human/model differences,yes,no,for generality,no,"TRIM-HAA proves human/model differences","This walkthrough shows that TRIM-HAA can represent field-level differences in one independent-record comparison."
+System can verify provenance,yes,no,for operational robustness,no,"Provenance is fully solved","The walkthrough records hashes for source packet, instructions, prompt, output, and locked author record."
+Candidate mismatch can be displayed,yes,no,for prevalence,no,"The model failed","The walkthrough displays a candidate certainty-alternative mismatch for subsequent independent evaluation."
+Model is wrong,no,no,yes,yes,"model is wrong","The walkthrough does not adjudicate the model record."
+Model is overconfident,no,possibly,yes,yes,"AI overconfidence is established","The model record uses low uncertainty while omitting an explicit alternative; this is a candidate for later evaluation."
+Humans are more reliable,no,yes,yes,yes,"humans are more reliable","No reliability comparison is supported by this walkthrough."
+AI changes human judgment,no,yes,yes,possibly,"AI changes human judgment","Exposure-associated change requires human-pre and human-post data."
+Exposure causes convergence,no,yes,yes,yes,"AI exposure causes convergence","Causal exposure claims require an approved design beyond this walkthrough."
+Framework generalises,no,yes,yes,possibly,"TRIM-HAA generalises","This walkthrough motivates a testable question for larger studies."
+Framework improves annotation quality,no,yes,yes,yes,"TRIM-HAA improves quality","This walkthrough concerns audit visibility, not quality improvement."

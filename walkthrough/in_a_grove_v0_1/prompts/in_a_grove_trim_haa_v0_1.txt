@@ -1,0 +1,63 @@
+You are producing one independent TRIM-HAA Core annotation record for a technical walkthrough.
+
+Use only the frozen source packet and annotation guide below. Do not use invented quotations. Do not use unsupported external facts. If external cultural knowledge informs your interpretation, mark it separately as external and do not use it as a substitute for packet segment IDs.
+
+The output is a submitted justificatory record, not hidden chain-of-thought. Do not provide commentary outside the requested JSON object.
+
+Required output fields:
+- annotation_id
+- case_id
+- parent_annotation_id
+- actor_id
+- actor_type
+- annotation_stage
+- primary_evidence_segment_ids
+- function_label
+- rationale_mechanism
+- uncertainty_flag
+- rationale_note
+- alternative_pathway_present
+- alternative_mechanism
+- alternative_note
+- status
+- external_knowledge_note
+
+Controlled values:
+- actor_type: model
+- annotation_stage: ai_independent
+- case_id: IAG_MEDIUM_001
+- function_label: self_inflicted_death, unresolved_agency, transferred_blame, testimony_mediation, no_fit
+- rationale_mechanism: direct_action, contrast_or_tension, mediation_frame, moral_attribution, omission_or_gap
+- uncertainty_flag: low, medium, high
+- alternative_pathway_present: yes, no
+- status: locked
+
+Source packet segment IDs:
+- IAG-MED-001: Statement attributed to the dead man as conveyed through a medium.
+- IAG-SAM-001: While I was sitting bound there, my wife was with the robber in the grove.
+- IAG-SAM-002: She said, "Then take me away with you wherever you go."
+- IAG-SAM-003: She pointed at me tied to the cedar and cried, "Kill him! I cannot marry you as long as he lives."
+- IAG-SAM-004: The robber looked at me and asked whether she should be killed or saved.
+- IAG-SAM-005: While I hesitated, she shrieked and ran into the depths of the grove.
+- IAG-SAM-006: After she ran away, he took up my sword, and my bow and arrows.
+- IAG-SAM-007: With a single stroke he cut one of my bonds.
+- IAG-SAM-008: Then he disappeared from the grove.
+- IAG-SAM-009: Untying the rest of my bonds, I listened carefully, and noticed that it was my own crying.
+- IAG-SAM-010: I took up the small sword which my wife had dropped and stabbed it into my breast.
+- IAG-SAM-011: When my breast grew cold, everything was as silent as the dead in their graves.
+- IAG-SAM-012: Someone crept up to me and drew the small sword softly out of my breast.
+- IAG-SAM-013: At the same time once more blood flowed into my mouth, and I sank down into the darkness of space.
+
+Definitions:
+- self_inflicted_death: The record foregrounds the samurai's own account that he caused the fatal wound.
+- unresolved_agency: The record foregrounds uncertainty or tension about who controls the final meaning of the death.
+- transferred_blame: The record foregrounds how the testimony shifts moral blame toward another character.
+- testimony_mediation: The record foregrounds the fact that the testimony is mediated through a medium.
+- no_fit: None of the available labels adequately describes the record.
+- direct_action: The evidence supports the label because a speaker directly reports an action.
+- contrast_or_tension: The evidence supports the label because two packet elements pull interpretation in different directions.
+- mediation_frame: The evidence supports the label because the testimony is framed as conveyed through a medium.
+- moral_attribution: The evidence supports the label by assigning blame, shame, or responsibility.
+- omission_or_gap: The evidence supports the label because something important remains unspecified.
+
+Return valid JSON only.

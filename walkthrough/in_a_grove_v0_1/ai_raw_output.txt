@@ -1,0 +1,18 @@
+{
+  "annotation_id": "IAG_V01_AI",
+  "case_id": "IAG_MEDIUM_001",
+  "parent_annotation_id": "",
+  "actor_id": "OPENAI_CODEX_SESSION",
+  "actor_type": "model",
+  "annotation_stage": "ai_independent",
+  "primary_evidence_segment_ids": ["IAG-SAM-010", "IAG-SAM-011", "IAG-SAM-013"],
+  "function_label": "self_inflicted_death",
+  "rationale_mechanism": "direct_action",
+  "uncertainty_flag": "low",
+  "rationale_note": "The testimony presents the samurai as taking the dropped small sword, stabbing it into his own breast, then experiencing bodily coldness and final darkness, so the record foregrounds self-inflicted death within the testimony.",
+  "alternative_pathway_present": "no",
+  "alternative_mechanism": "",
+  "alternative_note": "",
+  "status": "locked",
+  "external_knowledge_note": "none"
+}
