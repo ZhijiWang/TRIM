@@ -9,9 +9,9 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
-    sys.path.insert(0, str(PROJECT_ROOT))
-DRY_RUN_ROOT = PROJECT_ROOT / "dry_runs" / "trim_haa_synthetic_v0_1"
-INVALID_ROOT = PROJECT_ROOT / "dry_runs" / "trim_haa_synthetic_v0_1_invalid"
+    sys.path.insert(0, str(PROJECT_ROOT / "src"))
+DRY_RUN_ROOT = PROJECT_ROOT / "examples" / "synthetic_dry_run" / "valid"
+INVALID_ROOT = PROJECT_ROOT / "examples" / "synthetic_dry_run" / "invalid"
 
 
 def main() -> int:

@@ -12,14 +12,15 @@ from trim_haa.validator import validate_core_record
 
 
 ROOT = Path(__file__).parents[1]
-WALK = ROOT / "walkthrough" / "in_a_grove_v0_1"
+WALK = ROOT / "examples" / "in_a_grove_walkthrough"
 OUTPUTS = WALK / "outputs"
-POSITION = ROOT / "position_note"
-PACKAGE = ROOT / "artifacts" / "TRIM_HAA_position_note_v0_1.zip"
-PACKAGE_SHA = ROOT / "artifacts" / "TRIM_HAA_position_note_v0_1.zip.sha256"
-PACKAGE_V02 = ROOT / "artifacts" / "TRIM_HAA_position_note_v0_2.zip"
-PACKAGE_V02_SHA = ROOT / "artifacts" / "TRIM_HAA_position_note_v0_2.zip.sha256"
+POSITION = ROOT / "research" / "position_note"
+PACKAGE = ROOT / "artifacts" / "position_note" / "TRIM_HAA_position_note_v0_1.zip"
+PACKAGE_SHA = ROOT / "artifacts" / "position_note" / "TRIM_HAA_position_note_v0_1.zip.sha256"
+PACKAGE_V02 = ROOT / "artifacts" / "position_note" / "TRIM_HAA_position_note_v0_2.zip"
+PACKAGE_V02_SHA = ROOT / "artifacts" / "position_note" / "TRIM_HAA_position_note_v0_2.zip.sha256"
 EXPECTED_V01_PACKAGE_SHA = "eae1c50f329a70fba02640aa07475b2fd985eaafaf2ac17bbe69630427c83433"
+EXPECTED_V02_PACKAGE_SHA = "cc734bff299a3193f6467c494b560a87ae35c5ed3de25a26457de878e1d4d94e"
 EXPECTED_AUTHOR_RECORD_SHA = "8155a280880f9fda1035f1b3790f7dbd2932db0b07de940bf9c023cb3ab86871"
 EXPECTED_AI_RAW_OUTPUT_SHA = "343b9858e3fc9c89840be68542e2ad1aa8b389f8841a86db9c9ceaec48a149a2"
 EXPECTED_PROMPT_SHA = "74af647ec15697e99bd87ee4c4fdbfecfd402ff09cc76dc8acf55e3bf856e8f5"
@@ -40,7 +41,6 @@ def _read(path: Path) -> str:
 
 def _run_walkthrough_and_package():
     subprocess.run([sys.executable, "scripts/run_in_a_grove_walkthrough.py"], cwd=ROOT, check=True)
-    subprocess.run([sys.executable, "scripts/build_trim_haa_position_note_package.py"], cwd=ROOT, check=True)
 
 
 def test_source_packet_provenance_and_legal_review_exist():
@@ -261,10 +261,10 @@ def test_raw_records_prompt_and_v01_package_remain_unchanged():
 def test_no_new_walkthrough_case_or_exposure_records_added():
     walkthrough_dirs = [
         path
-        for path in (ROOT / "walkthrough").iterdir()
+        for path in (ROOT / "examples").iterdir()
         if path.is_dir() and path.name.startswith("in_a_grove")
     ]
-    assert [path.name for path in walkthrough_dirs] == ["in_a_grove_v0_1"]
+    assert [path.name for path in walkthrough_dirs] == ["in_a_grove_walkthrough"]
 
     all_csv_rows = []
     for path in WALK.glob("*.csv"):
@@ -295,20 +295,11 @@ def test_review_response_memo_exists():
     assert "Concern 5: Model provenance is insufficient for external reproduction" in memo
 
 
-def test_position_note_package_v02_builds_deterministically_and_contains_expected_files():
-    _run_walkthrough_and_package()
-    before = _sha256(PACKAGE_V02)
-    subprocess.run([sys.executable, "scripts/build_trim_haa_position_note_package.py"], cwd=ROOT, check=True)
-    after = _sha256(PACKAGE_V02)
-
-    assert after == before
-    assert PACKAGE_V02_SHA.read_text(encoding="utf-8").split()[0] == after
+def test_position_note_package_v02_is_preserved_and_contains_expected_files():
     assert _sha256(PACKAGE) == EXPECTED_V01_PACKAGE_SHA
-
-    manifest = _rows(POSITION / "TRIM_HAA_position_note_v0_2_manifest.csv")
-    for row in manifest:
-        assert _sha256(ROOT / row["artifact"]) == row["sha256"]
-        assert row["version"] == "v0_2"
+    assert PACKAGE_SHA.read_text(encoding="utf-8").split()[0] == EXPECTED_V01_PACKAGE_SHA
+    assert _sha256(PACKAGE_V02) == EXPECTED_V02_PACKAGE_SHA
+    assert PACKAGE_V02_SHA.read_text(encoding="utf-8").split()[0] == EXPECTED_V02_PACKAGE_SHA
 
     with zipfile.ZipFile(PACKAGE_V02) as archive:
         names = set(archive.namelist())

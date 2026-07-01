@@ -1,6 +1,0 @@
-TRIM v0.2.1 semantic-steering audit
-match_count: 0
-allowlisted_match_count: 0
-unreviewed_high_risk_count: 0
-
-No case-specific semantic-steering matches detected.

@@ -1,184 +1,101 @@
-# TRIM: Threshold–Rationale Interpretive Modelling
+# TRIM-HAA
 
-[![Tests](https://github.com/ZhijiWang/TRIM/actions/workflows/tests.yml/badge.svg)](https://github.com/ZhijiWang/TRIM/actions/workflows/tests.yml)
-![License: MIT](https://img.shields.io/badge/license-MIT-green)
-![Python](https://img.shields.io/badge/python-3.11%2B-blue)
+TRIM-HAA is a provenance-aware framework for preserving and auditing evidence selection, interpretive labels, rationale mechanisms, uncertainty, alternatives, and annotation lineage across human and model records.
 
-TRIM structures the warranted conversion from textual evidence to interpretive
-function as a locatable, reviewable, and comparable annotation pathway.
+## What It Does
 
-Current source version: 0.2.1 (unreleased).
+TRIM-HAA stores structured annotation records with selected evidence, function labels, rationale mechanisms, uncertainty, optional alternative pathways, and provenance. It supports record locking, lineage checks, independent human/model record comparison, and exposure-audit workflows in which a locked earlier human record can be compared with a later response after AI review or a no-AI second pass.
 
-## Core Model
+The software preserves the structure of interpretive difference. It helps reviewers inspect where records differ: evidence, label, mechanism, uncertainty, alternative handling, rationale text, and provenance.
 
-```text
-Evidence nodes → anchor node → threshold–rationale relation → function node
-```
+## What It Does Not Do
 
-A TRIM annotation records a human interpretive judgement in six connected
-fields:
+TRIM-HAA does not determine interpretive truth. It does not treat model output as an answer key, optimize human-AI collaboration, or make causal claims about model exposure by default.
 
-- `friction_locus` locates the dominant threshold;
-- `rationale_mechanism` records what the conversion does;
-- `epistemic_support` identifies the support that carries the judgement;
-- `discourse_level` places the conversion within the text's discursive structure;
-- `temporal_orientation` records its temporal direction;
-- `uncertainty_flag` marks the coder's level of confidence.
+The current repository contains a software prototype, synthetic dry run, and author-only walkthrough. It does not contain empirical human validation, ethics approval, participant data, or a validated detector of interpretive problems.
 
-`alternative_signature` and `rationale_note` preserve competing pathways and the
-reasoning that keeps them in view.
+## Installation
 
-Standard annotations also include:
-
-- one or more `evidence_nodes`;
-- for v0.2.1 retest coding, one to three
-  `primary_evidence_segment_ids`, optional `context_segment_ids`, and optional
-  `evidence_highlight`;
-- `evidence_anchor`, which returns the record to a source-facing span, quotation,
-  or segment reference;
-- `anchor_node`, which gives that evidence a normalized analytic centre.
-
-Interpretive friction emerges where textual evidence, analytic function, and
-warranting support meet. TRIM turns that point of pressure into an explicit
-comparative object.
-
-## Software Workflow
-
-The package:
-
-- validates required fields, controlled values, and compound signatures;
-- parses and compares friction signatures;
-- generates same-function, same-cue, broad-family, and contested-case tables;
-- exports evidence-to-function graphs as GraphML and JSON;
-- supports source segmentation;
-- prepares pilot-scale intercoder comparison and disagreement reports.
-- reports v0.2.1 evidence-segment exactness, overlap/Jaccard, primary/context
-  overlap, compatible single-versus-compound differences, and language/scope
-  strata.
-
-Human coders define the evidence, function, and rationale. The software preserves
-those choices in a form that can be checked, compared, and revisited.
-
-## Installation and Quick Start
-
-TRIM requires Python 3.11 or newer.
+From a source checkout:
 
 ```bash
+git clone https://github.com/ZhijiWang/TRIM.git
+cd TRIM
 python -m pip install -e .
-python -m pip install pytest
-python -m pytest
-python examples/demo_trim_workflow.py
 ```
 
-Install Cohen's kappa support with:
+For local development with tests:
 
 ```bash
-python -m pip install -e ".[reliability]"
+python -m pip install -e ".[test]"
 ```
 
-Command-line examples:
+## Python Quickstart
+
+```python
+from trim_haa import TrimHAAAnnotation, validate_core_record, lock_annotation
+
+record = TrimHAAAnnotation(
+    annotation_id="ann-001",
+    case_id="case-001",
+    actor_id="human-001",
+    actor_type="human",
+    annotation_stage="human_pre",
+    primary_evidence_segment_ids=("seg-001",),
+    function_label="unresolved_agency",
+    rationale_mechanism="contrast_or_tension",
+    uncertainty_flag="medium",
+    rationale_note="The selected text supports the label while leaving room for another path.",
+    alternative_pathway_present="yes",
+    alternative_mechanism="unidentified_intervention",
+    alternative_note="A later event may affect narrative closure.",
+    status="locked",
+)
+
+issues = validate_core_record(record)
+lock = lock_annotation(
+    record,
+    lock_manifest_id="lock-001",
+    locked_at="2026-07-01T00:00:00Z",
+    locked_by="example",
+)
+```
+
+## CLI Quickstart
 
 ```bash
-trim validate data/demo_annotations.csv --out outputs/reports/validation.csv
-trim report data/demo_annotations.csv --out outputs/reports/demo_report.md
-trim graph data/demo_annotations.csv --graphml outputs/graphs/demo.graphml --json outputs/graphs/demo.json
-trim compare data/demo_annotations.csv --outdir outputs/tables
+trim-haa --help
+trim-haa version
+trim-haa validate tests/fixtures/trim_haa/core_valid.csv
+trim-haa verify-lock tests/fixtures/trim_haa/core_valid.csv tests/fixtures/trim_haa/lock_valid.csv
+trim-haa compare examples/in_a_grove_walkthrough/author_analytic_record.csv examples/in_a_grove_walkthrough/ai_independent_record.csv
+trim-haa run-walkthrough
 ```
 
-`trim validate` writes its CSV report before returning. Validation errors produce
-status 1; valid and warnings-only input produce status 0. `--always-zero` supports
-reporting pipelines that handle status outside the command.
+## Repository Structure
 
-## Demonstration Corpus And Pilot Status
+- `src/trim_haa`: importable Python package.
+- `docs`: standalone TRIM-HAA documentation.
+- `examples/synthetic_dry_run`: valid and invalid synthetic technical fixtures.
+- `examples/in_a_grove_walkthrough`: author-only walkthrough demonstration.
+- `research/position_note`: position-note draft and claim-boundary materials.
+- `research/future_human_study`: deferred human-study ethics and protocol drafts.
+- `artifacts`: frozen position-note and future-study packages.
 
-The original ten-case demonstration and v0.2.0 usability pilot bring together:
+## Research Status
 
-- four *Zuo zhuan* divination cases;
-- three *Macbeth* prophecy cases;
-- three *In a Grove* testimony cases.
+Implemented: Core schema objects, validation, provenance records, lock verification, comparison helpers, reporting helpers, synthetic dry run, and an author-only walkthrough.
 
-It demonstrates schema expressivity, traceable comparison, graph export, and
-contested-threshold review. Generated tables provide structural
-`comparison_prompt` text. Researcher-authored interpretations appear in
-[`docs/substantive_demo_interpretations.md`](docs/substantive_demo_interpretations.md).
+Demonstrated: representational feasibility, local artifact auditability, deterministic lock checks, and structured comparison of author/model records in one literary walkthrough.
 
-The repository also contains:
+Deferred: empirical human-exposure study, independent participant review, institution-specific ethics approval, and legal publication review for source-text redistribution.
 
-- a three-case software and onboarding demonstration;
-- a complete ten-case blinded pilot protocol;
-- a neutral case manifest;
-- a blank second-coder template;
-- a source packet for independent coding;
-- field-level and compound-aware agreement utilities;
-- a cross-language construct-validity protocol and
-  normalized layer/pair companion templates.
+Not established: interpretive truth, model error, model overconfidence, causal effects of AI exposure, prevalence, generalisability, reliability, or a validated detector.
 
-The completed v0.2.0 pilot is a locked historical record. It is reported as a
-multilingual, translation- and summary-mediated usability pilot, not as
-validated intercoder reliability or cross-language construct validity.
+## Legacy TRIM
 
-v0.2.1 is a prospective retest design. It does not recode the original ten
-formal cases. It adds an out-of-sample 12-case retest corpus, discriminative
-primary/context evidence selection, explicit shared-context permissions,
-language-access metadata, revised uncertainty thresholds, a question-log rule
-for self-resolved questions, and semantic-steering checks for the coder-facing
-package.
+The original TRIM project is archived in Git history and the `legacy-trim-v0.2.1` reference. It is no longer part of the active package.
 
-## Methodological Contribution
+## Citation
 
-TRIM contributes a structured account of how scholarly interpretation moves
-from evidence to function. Its analytic object combines evidence, anchor,
-conversion, support, discourse position, temporality, uncertainty, and viable
-alternatives. This structure makes within-label variation, cross-case
-convergence, and divergent conversion pathways available to direct comparison.
-
-See [`docs/related_methods.md`](docs/related_methods.md) and
-[`docs/methodological_position.md`](docs/methodological_position.md).
-
-## Documentation
-
-- [`docs/TRIM_codebook_v0_2_1.md`](docs/TRIM_codebook_v0_2_1.md)
-- [`docs/TRIM_Coding_Manual_v0_2_1_friction_locus.md`](docs/TRIM_Coding_Manual_v0_2_1_friction_locus.md)
-- [`docs/TRIM_Coding_Manual_v0_2_1_rationale_mechanism.md`](docs/TRIM_Coding_Manual_v0_2_1_rationale_mechanism.md)
-- [`docs/discourse_level_guide_v0_2_1.md`](docs/discourse_level_guide_v0_2_1.md)
-- [`docs/pilot_v0_2_0_results_and_adjudication.md`](docs/pilot_v0_2_0_results_and_adjudication.md)
-- [`docs/retest_protocol_v0_2_1.md`](docs/retest_protocol_v0_2_1.md)
-- [`docs/retest_v0_2_1_coder_guide.md`](docs/retest_v0_2_1_coder_guide.md)
-- [`docs/retest_v0_2_1_semantic_steering_audit.md`](docs/retest_v0_2_1_semantic_steering_audit.md)
-- [`docs/retest_v0_2_1_case_design_audit.md`](docs/retest_v0_2_1_case_design_audit.md)
-- [`docs/v0_2_1_revision_traceability.md`](docs/v0_2_1_revision_traceability.md)
-- [`docs/second_coder_onboarding_v0_2_1.md`](docs/second_coder_onboarding_v0_2_1.md)
-- [`docs/intercoder_workflow_v0_2_1.md`](docs/intercoder_workflow_v0_2_1.md)
-- [`docs/TRIM_codebook_v0_2_0.md`](docs/TRIM_codebook_v0_2_0.md)
-- [`docs/demo_dataset_notes.md`](docs/demo_dataset_notes.md)
-- [`docs/substantive_demo_interpretations.md`](docs/substantive_demo_interpretations.md)
-- [`docs/segmentation_workflow.md`](docs/segmentation_workflow.md)
-- [`docs/second_coder_onboarding.md`](docs/second_coder_onboarding.md)
-- [`docs/intercoder_workflow.md`](docs/intercoder_workflow.md)
-- [`docs/blinded_pilot_protocol.md`](docs/blinded_pilot_protocol.md)
-- [`docs/cross_language_validity.md`](docs/cross_language_validity.md)
-- [`data/cross_language_layer_annotations_template.csv`](data/cross_language_layer_annotations_template.csv)
-- [`data/cross_language_pair_comparisons_template.csv`](data/cross_language_pair_comparisons_template.csv)
-- [`docs/software_scope.md`](docs/software_scope.md)
-- [`docs/schema_validation_migration.md`](docs/schema_validation_migration.md)
-- [`docs/article_use.md`](docs/article_use.md)
-- [`CHANGELOG.md`](CHANGELOG.md)
-
-## Retest Package
-
-Build the clean coder-facing package with:
-
-```bash
-python scripts/build_retest_v0_2_1_package.py
-```
-
-The builder writes a deterministic ZIP and SHA-256 manifest under
-`outputs/coder_packages/`. Leakage tests fail if original pilot case IDs,
-answer-bearing labels, adjudication outcomes, article notes, comparison reports,
-or unreviewed case-specific semantic-steering phrases enter the coder package.
-
-## Citing and License
-
-Citation metadata is provided in [`CITATION.cff`](CITATION.cff). Before a formal
-release, cite the exact commit used together with the repository URL. TRIM is
-licensed under the MIT License; see [`LICENSE`](LICENSE).
+See `CITATION.cff`.

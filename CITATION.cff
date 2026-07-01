@@ -1,7 +1,7 @@
 cff-version: 1.2.0
-message: "Cite the exact TRIM commit used until a formal release is archived."
-title: "TRIM: Threshold–Rationale Interpretive Modelling"
-version: "0.2.1"
+message: "Cite the exact TRIM-HAA commit used until a formal release is archived."
+title: "TRIM-HAA"
+version: "0.3.0a1"
 authors:
   - family-names: "Wang"
     given-names: "Zhiji"

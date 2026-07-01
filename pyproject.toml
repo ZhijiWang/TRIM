@@ -3,38 +3,34 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "trim-method"
-version = "0.2.1"
-description = "Threshold–Rationale Interpretive Modelling for human-created annotations."
+name = "trim-haa"
+version = "0.3.0a1"
+description = "TRIM-HAA provenance-aware human-AI annotation audit tools."
 readme = "README.md"
 requires-python = ">=3.11"
-license = { text = "MIT" }
+license = "MIT"
 authors = [
   { name = "Zhiji Wang" }
 ]
 dependencies = [
-  "pandas",
-  "networkx"
+  "pandas"
 ]
 
 [project.scripts]
-trim = "trim.cli:main"
-trim-validate = "trim.cli:main"
-trim-report = "trim.cli:main"
-trim-graph = "trim.cli:main"
-trim-compare = "trim.cli:main"
+trim-haa = "trim_haa.cli:main"
 
 [project.optional-dependencies]
 test = [
-  "pytest"
+  "pytest",
+  "build"
 ]
-reliability = [
-  "scikit-learn"
-]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
-include = ["trim*"]
+where = ["src"]
+include = ["trim_haa*"]
 
 [tool.pytest.ini_options]
-pythonpath = ["."]
 testpaths = ["tests"]
