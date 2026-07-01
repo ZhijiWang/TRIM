@@ -32,6 +32,20 @@ EXPECTED_AI_RUN = {
     "run_protocol.md",
     "model_run_manifest_template.csv",
     "AI_RUN_SHA256SUMS.txt",
+    "ai_raw_output.txt",
+    "ai_independent_record.csv",
+    "ai_external_knowledge_note.txt",
+    "ai_lock_manifest.csv",
+    "model_run_manifest.csv",
+    "ai_parse_log.md",
+    "ai_record_validation_report.md",
+}
+FROZEN_AI_RUN_INPUTS = {
+    "prompt.txt",
+    "prompt_manifest.csv",
+    "ai_record_template.csv",
+    "run_protocol.md",
+    "model_run_manifest_template.csv",
 }
 FORBIDDEN_ROOT_AI = {
     "ai_independent_record.csv",
@@ -45,9 +59,11 @@ FORBIDDEN_ROOT_AI = {
     "assistance_provenance.csv",
     "frozen_packet.zip",
 }
-FORBIDDEN_ACTUAL_AI = FORBIDDEN_ROOT_AI - {"prompt_manifest.csv"}
+FORBIDDEN_OUTPUT_DIRS = {
+    "comparison",
+    "outputs",
+}
 FORBIDDEN_STAGES = {
-    "ai_independent",
     "human_post_ai",
     "human_second_pass_control",
     "adjudicated",
@@ -91,15 +107,21 @@ def test_public_v02_structure_and_ai_boundary():
     assert not any((PUBLIC / name).exists() for name in FORBIDDEN_ROOT_AI)
     assert not [
         path
-        for name in FORBIDDEN_ACTUAL_AI
+        for name in FORBIDDEN_OUTPUT_DIRS
         for path in PUBLIC.glob(f"**/{name}")
     ]
 
+    ai_stage_files = {
+        AI_RUN / "ai_record_template.csv",
+        AI_RUN / "ai_independent_record.csv",
+        AI_RUN / "ai_lock_manifest.csv",
+    }
     for csv_path in PUBLIC.glob("**/*.csv"):
-        if csv_path == AI_RUN / "ai_record_template.csv":
-            continue
         for row in _rows(csv_path):
-            assert row.get("annotation_stage", "") not in FORBIDDEN_STAGES
+            stage = row.get("annotation_stage", "")
+            assert stage not in FORBIDDEN_STAGES
+            if stage == "ai_independent":
+                assert csv_path in ai_stage_files
 
 
 def test_segments_and_glosses_match_one_to_one():
@@ -184,15 +206,18 @@ def test_review_status_tracks_locked_author_record_and_ai_boundary():
     assert "freeze_status: frozen_text_layer_v0_2" in status
     assert "author_record_status: completed_and_locked" in status
     assert "ai_prompt_run_infrastructure_frozen: yes" in status
-    assert "ai_run_executed: no" in status
-    assert "ready_for_ai_run: yes" in status
-    assert "ready_for_new_ai_record: yes" in status
+    assert "ai_run_executed_once: yes" in status
+    assert "raw_response_preserved: yes" in status
+    assert "ai_record_validated_and_locked: yes" in status
+    assert "comparison_performed: no" in status
+    assert "ready_for_ai_run: no" in status
+    assert "ready_for_comparison: yes" in status
+    assert "ready_for_new_ai_record: no" in status
     assert "ready_for_public_release: no" in status
-    assert "does not claim that an AI record exists" in status
     assert "does not claim that a comparison has been completed" in status
 
 
-def test_ai_run_infrastructure_is_frozen_without_execution():
+def test_ai_run_infrastructure_and_templates_are_frozen():
     prompt = _read(AI_RUN / "prompt.txt")
     prompt_manifest = _rows(AI_RUN / "prompt_manifest.csv")[0]
     model_template = _rows(AI_RUN / "model_run_manifest_template.csv")[0]
@@ -235,9 +260,6 @@ def test_ai_run_infrastructure_is_frozen_without_execution():
     ):
         assert ai_template[field] == ""
 
-    assert not (AI_RUN / "ai_raw_output.txt").exists()
-    assert not (AI_RUN / "ai_independent_record.csv").exists()
-    assert not (AI_RUN / "model_run_manifest.csv").exists()
     assert not (AI_RUN / "comparison").exists()
     assert not (AI_RUN / "outputs").exists()
 
@@ -248,10 +270,69 @@ def test_ai_run_checksum_file_matches_frozen_inputs_only():
         digest, filename = line.split("  ", 1)
         expected[filename] = digest
 
-    assert set(expected) == EXPECTED_AI_RUN - {"AI_RUN_SHA256SUMS.txt"}
+    assert set(expected) == FROZEN_AI_RUN_INPUTS
     assert "AI_RUN_SHA256SUMS.txt" not in expected
     for filename, digest in expected.items():
         assert _sha256(AI_RUN / filename) == digest
+
+
+def test_completed_ai_run_is_preserved_validated_and_locked():
+    from trim_haa.locking import annotation_sha256, verify_locked_annotation
+    from trim_haa.schema import TrimHAAAnnotation
+    from trim_haa.validator import validate_core_record
+
+    raw_path = AI_RUN / "ai_raw_output.txt"
+    ai_rows = _rows(AI_RUN / "ai_independent_record.csv")
+    lock = _rows(AI_RUN / "ai_lock_manifest.csv")[0]
+    model_run = _rows(AI_RUN / "model_run_manifest.csv")[0]
+    parse_log = _read(AI_RUN / "ai_parse_log.md")
+    validation_report = _read(AI_RUN / "ai_record_validation_report.md")
+    external_note = _read(AI_RUN / "ai_external_knowledge_note.txt")
+    source_ids = {
+        row["segment_id"] for row in _rows(PUBLIC / "source_segments_japanese.csv")
+    }
+
+    assert raw_path.exists()
+    assert _sha256(raw_path) == model_run["output_sha256"]
+    assert model_run["human_record_exposed"] == "no"
+    assert model_run["retry_count"] == "0"
+    assert model_run["regenerated_output"] == "no"
+    assert model_run["raw_response_preserved"] == "yes"
+    assert len(ai_rows) == 1
+
+    record = ai_rows[0]
+    assert record["annotation_id"] == "IAG_JP_V02_AI_INDEPENDENT"
+    assert record["case_id"] == "IAG_JP_PUBLIC_002"
+    assert record["parent_annotation_id"] == ""
+    assert record["actor_id"] == "MODEL_INDEPENDENT"
+    assert record["actor_type"] == "model"
+    assert record["annotation_stage"] == "ai_independent"
+    assert record["status"] == "locked"
+
+    evidence_ids = record["primary_evidence_segment_ids"].split("|")
+    assert evidence_ids
+    assert set(evidence_ids).issubset(source_ids)
+
+    annotation = TrimHAAAnnotation.from_record(record)
+    assert validate_core_record(annotation) == []
+    assert verify_locked_annotation(annotation, lock)
+    assert annotation_sha256(annotation) == lock["canonical_record_sha256"]
+    assert lock["lock_status"] == "locked"
+
+    assert external_note == ""
+    assert "raw_output_valid_json: yes" in parse_log
+    assert "code_fences_removed: no" in parse_log
+    assert "surrounding_text_removed: no" in parse_log
+    assert "substantive_rewriting_occurred: no" in parse_log
+    assert "external_knowledge_note_separated: yes" in parse_log
+    assert "final_validation_status: passed" in parse_log
+
+    assert "validation_status: `passed`" in validation_report
+    assert "evidence_id_validity: `passed`" in validation_report
+    assert "lock_verification_result: `passed`" in validation_report
+    assert "comparison_performed: `no`" in validation_report
+    assert not (AI_RUN / "comparison").exists()
+    assert not (AI_RUN / "outputs").exists()
 
 
 def test_position_note_files_remain_unchanged():

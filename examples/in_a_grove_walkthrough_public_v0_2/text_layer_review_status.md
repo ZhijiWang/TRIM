@@ -21,7 +21,7 @@ This status covers the Japanese-canonical public walkthrough text layer:
 
 It now records that one versioned author analytic record has been completed and locked under `author_record_v0_1/`. It does not cover an AI record, prompt run, comparison result, position-note finding, or public release package.
 
-It also records that AI prompt/run infrastructure v0.1 has been frozen under `ai_run_v0_1/`. The AI run has not yet been executed.
+It also records that AI prompt/run infrastructure v0.1 has been frozen under `ai_run_v0_1/`. The AI run has been executed once, the raw response has been preserved, and the parsed AI record has been validated and locked.
 
 ## Review basis
 
@@ -45,14 +45,18 @@ This review must not be described as an independent human bilingual expert revie
 - frozen: yes
 - author_record_completed_and_locked: yes
 - ready_for_new_author_record: no
-- ready_for_new_ai_record: yes
+- ready_for_new_ai_record: no
 - ai_prompt_run_infrastructure_frozen: yes
-- ai_run_executed: no
-- ready_for_ai_run: yes
+- ai_run_executed_once: yes
+- raw_response_preserved: yes
+- ai_record_validated_and_locked: yes
+- comparison_performed: no
+- ready_for_ai_run: no
+- ready_for_comparison: yes
 - ready_for_public_release: no
 
 ## Boundary
 
 The text layer is frozen. Any change to canonical Japanese text, segmentation, gloss wording, provenance, or protocol requires a new version and regenerated manifests.
 
-The author record is locked and uses only frozen Japanese segment IDs. The next permitted step is exactly one independent AI run under the frozen prompt/run workflow. This status does not claim that an AI record exists, does not claim that model output exists, and does not claim that a comparison has been completed.
+The author record is locked and uses only frozen Japanese segment IDs. The independent AI run has been completed once under the frozen prompt/run workflow. The next permitted step is a separate author-versus-AI comparison task. This status does not claim that a comparison has been completed.

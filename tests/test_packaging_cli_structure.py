@@ -187,6 +187,7 @@ def test_research_boundaries_remain_visible():
     future = (ROOT / "research" / "future_human_study" / "README.md").read_text(encoding="utf-8").lower()
     public_v02 = ROOT / "examples" / "in_a_grove_walkthrough_public_v0_2"
     public_author_records = list(public_v02.glob("author_record_v*/author_analytic_record.csv"))
+    public_ai_records = list(public_v02.glob("ai_run_v*/ai_independent_record.csv"))
 
     assert "representation is not detection" in position_note
     assert "author-only" in walkthrough_readme
@@ -195,9 +196,14 @@ def test_research_boundaries_remain_visible():
     assert public_author_records == [
         public_v02 / "author_record_v0_1" / "author_analytic_record.csv"
     ]
-    assert not list((public_v02).glob("**/ai_independent_record.csv"))
-    assert not list((public_v02).glob("**/model_run_manifest.csv"))
+    assert public_ai_records == [
+        public_v02 / "ai_run_v0_1" / "ai_independent_record.csv"
+    ]
+    assert list(public_v02.glob("ai_run_v*/model_run_manifest.csv")) == [
+        public_v02 / "ai_run_v0_1" / "model_run_manifest.csv"
+    ]
     assert not (public_v02 / "outputs").exists()
+    assert not (public_v02 / "comparison").exists()
 
 
 def test_version_and_pandas_dependency_classification_are_consistent():
