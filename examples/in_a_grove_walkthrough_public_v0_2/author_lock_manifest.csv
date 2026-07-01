@@ -1,2 +1,0 @@
-lock_manifest_id,annotation_id,case_id,annotation_stage,actor_id,canonical_record_sha256,locked_at,lock_status,locked_by,notes
-IAG_JP_V02_AUTHOR_LOCK_001,IAG_JP_V02_AUTHOR_PRE,IAG_JP_PUBLIC_002,human_pre,AUTHOR_ANALYTIC,6d78fd9d161d7a11c23ce962b257864eda16801793c6d87f17466e99ef269c50,2026-07-01T21:04:09+10:00,locked,Zhiji Wang,"Author-approved analytic record based only on frozen Japanese canonical segment IDs. Researcher-produced analytic demonstration; not human-subject data and not a gold standard. No AI record was generated before this lock."
