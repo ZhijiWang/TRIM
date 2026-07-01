@@ -1,6 +1,6 @@
 # Japanese-Canonical / English-Gloss Protocol v0.1
 
-Status: `draft_for_author_review`
+Status: `author_reviewed_frozen_text_layer`
 
 ## Governing rule
 
@@ -47,8 +47,10 @@ The English gloss should:
 
 ## Assistance and responsibility
 
-Initial gloss drafting and consistency checking were AI-assisted. Zhiji Wang remains responsible for reviewing, revising, and approving the public research gloss before it is frozen.
+Initial gloss drafting and consistency checking were AI-assisted. Zhiji Wang reviewed and approved the public research gloss and segmentation on 2026-07-01 and remains responsible for the frozen text layer.
 
-## Release boundary
+## Freeze boundary
 
-This draft does not authorise creation of a new author analytic record or AI record. Those records may be produced only after the Japanese segments and English gloss have been reviewed and frozen.
+This text layer was frozen on 2026-07-01. Any textual or segmentation change requires a new version and regenerated manifests.
+
+A new author analytic record may now be created from the frozen Japanese segment IDs. A new AI record may not be created until the author record has been completed and locked.
