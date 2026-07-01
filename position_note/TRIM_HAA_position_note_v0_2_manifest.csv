@@ -1,7 +1,7 @@
 artifact,version,created_at,sha256,status,public_release_candidate,notes
 position_note/TRIM_HAA_position_note_claim_boundaries.csv,v0_2,2026-07-01T07:20:00+00:00,c572304686435fa73596b136aa5cea78f28fa9f7527de64cd0295fcf99188b87,draft,yes_after_review,Claim-boundary table for public-language review.
 position_note/TRIM_HAA_position_note_publication_blockers.md,v0_2,2026-07-01T07:20:00+00:00,2649d4ca0378f37f131bf4b0539ef66c69a88d18234638f4ccc9b00cf597b8e9,draft,yes_after_review,Publication blockers must be resolved before release.
-position_note/TRIM_HAA_position_note_v0_1.md,v0_2,2026-07-01T07:20:00+00:00,c543804518cc92cb056e24122bc90b0e92cd5634f7f1bf60c220ceaffd0b331d,draft,no,Working-paper draft; blockers unresolved.
+position_note/TRIM_HAA_position_note_v0_1.md,v0_2,2026-07-01T07:20:00+00:00,c811ca886907050491c452fa4657102c88b863db3da9cc76b2049cca893d340d,draft,no,Working-paper draft; blockers unresolved.
 position_note/TRIM_HAA_position_note_v0_1_review_response.md,v0_2,2026-07-01T07:20:00+00:00,2aed11ddba63d60ab51d4a5b2c0fcac0136c272ce506d392d07429396ffd65f5,draft,yes_after_review,Reviewer-response memo for position-note hardening.
 walkthrough/in_a_grove_v0_1/README.md,v0_2,2026-07-01T07:20:00+00:00,e0062b6a6a6dd7b0d708b4bbac95e87b13dd68347daf6e36cc26fa8228e56f63,draft,yes_after_review,Walkthrough overview.
 walkthrough/in_a_grove_v0_1/ai_independent_record.csv,v0_2,2026-07-01T07:20:00+00:00,6056908cbbce43e66b85c7fff35e23031faccbf3bf84d03d0d15d4d19e94f46b,frozen,yes_after_review,Independent model record; not a truth verdict.

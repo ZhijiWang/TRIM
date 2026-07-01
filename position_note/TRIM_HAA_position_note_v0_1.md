@@ -18,7 +18,7 @@ TRIM-HAA records submitted annotation pathways: primary evidence, function label
 
 ## 2. Two Audit Layers
 
-TRIM-HAA separates two related but distinct audit layers.
+TRIM-HAA separates two related but distinct audit layers: independent record audit and exposure audit.
 
 ### Independent record audit
 
