@@ -26,11 +26,19 @@ jobs:
       - name: Install package
         run: |
           python -m pip install --upgrade pip
-          python -m pip install -e .
-          python -m pip install pytest
+          python -m pip install -e ".[test]"
 
       - name: Run tests
         run: python -m pytest
 
-      - name: Run demo workflow
-        run: python examples/demo_trim_workflow.py
+      - name: Run CLI smoke tests
+        run: |
+          trim-haa --help
+          python -m trim_haa --help
+          trim-haa version
+
+      - name: Build wheel
+        run: python -m build
+
+      - name: Inspect importability
+        run: python -c "import trim_haa; print(trim_haa.__version__)"

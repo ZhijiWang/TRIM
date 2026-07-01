@@ -11,8 +11,8 @@ from typing import Any
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
-    sys.path.insert(0, str(PROJECT_ROOT))
-DEFAULT_DRY_RUN = PROJECT_ROOT / "dry_runs" / "trim_haa_synthetic_v0_1"
+    sys.path.insert(0, str(PROJECT_ROOT / "src"))
+DEFAULT_DRY_RUN = PROJECT_ROOT / "examples" / "synthetic_dry_run" / "valid"
 
 from trim_haa.comparison import compare_pre_ai_post, compare_pre_control
 from trim_haa.exposure import ExposureEvent

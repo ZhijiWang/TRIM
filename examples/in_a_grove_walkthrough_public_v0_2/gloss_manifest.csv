@@ -1,0 +1,3 @@
+file,role,sha256,freeze_version,freeze_date,status
+english_gloss.csv,non_authoritative_english_gloss,6c7361d20e450b76a5e6833685395f6513101dafb0481be401e316b69e90ffae,text_layer_v0_2,2026-07-01,frozen
+gloss_protocol.md,canonical_gloss_governance,f3097add42857b13ebe5cdbdafd5aefdb96316d290d4664f49b9d2cd31f0e693,text_layer_v0_2,2026-07-01,frozen

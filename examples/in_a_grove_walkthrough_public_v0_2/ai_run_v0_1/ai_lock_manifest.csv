@@ -1,0 +1,2 @@
+lock_manifest_id,annotation_id,case_id,annotation_stage,actor_id,canonical_record_sha256,locked_at,lock_status,locked_by,notes
+IAG_JP_V02_AI_LOCK_001,IAG_JP_V02_AI_INDEPENDENT,IAG_JP_PUBLIC_002,ai_independent,MODEL_INDEPENDENT,e9684ca9e776826f20647a59592caa9f6502dd471d87849b1fa76f4915e8338d,2026-07-01T22:01:28+10:00,locked,model_run_pipeline,"Generated from the frozen v0.1 prompt; author record was not exposed; raw output was preserved before parsing; this is a technical demonstration, not a truth verdict or gold standard."

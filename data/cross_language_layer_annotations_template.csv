@@ -1,9 +1,0 @@
-record_id,case_id,paired_record_id,source_language,coding_layer,mediation_source,canonical_record_id,friction_locus,rationale_mechanism,coder_id,status,note
-ZZ_XIANG_7_ORIGINAL,ZZ_XIANG_7,ZZ_XIANG_7_PAIR,Classical Chinese,original,original_text,ZZ_XIANG_7,,,source_language_coder,planned,
-ZZ_XIANG_7_GLOSS,ZZ_XIANG_7,ZZ_XIANG_7_PAIR,Classical Chinese,gloss,researcher_gloss,,,,gloss_layer_coder,planned,
-ZZ_MIN_1_ORIGINAL,ZZ_MIN_1,ZZ_MIN_1_PAIR,Classical Chinese,original,original_text,ZZ_MIN_1,,,source_language_coder,planned,
-ZZ_MIN_1_GLOSS,ZZ_MIN_1,ZZ_MIN_1_PAIR,Classical Chinese,gloss,researcher_gloss,,,,gloss_layer_coder,planned,
-ZZ_XI_4_ORIGINAL,ZZ_XI_4,ZZ_XI_4_PAIR,Classical Chinese,original,original_text,ZZ_XI_4,,,source_language_coder,planned,
-ZZ_XI_4_GLOSS,ZZ_XI_4,ZZ_XI_4_PAIR,Classical Chinese,gloss,researcher_gloss,,,,gloss_layer_coder,planned,
-ZZ_ZHUANG_22_ORIGINAL,ZZ_ZHUANG_22,ZZ_ZHUANG_22_PAIR,Classical Chinese,original,original_text,ZZ_ZHUANG_22,,,source_language_coder,planned,
-ZZ_ZHUANG_22_GLOSS,ZZ_ZHUANG_22,ZZ_ZHUANG_22_PAIR,Classical Chinese,gloss,researcher_gloss,,,,gloss_layer_coder,planned,

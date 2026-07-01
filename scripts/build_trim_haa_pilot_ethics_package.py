@@ -9,16 +9,16 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PACKAGE_VERSION = "v0_3"
-ZIP_PATH = ROOT / "artifacts" / f"TRIM_HAA_pilot_ethics_package_{PACKAGE_VERSION}.zip"
-ZIP_SHA_PATH = ROOT / "artifacts" / f"TRIM_HAA_pilot_ethics_package_{PACKAGE_VERSION}.zip.sha256"
-MANIFEST_PATH = ROOT / "pilot_protocol" / f"TRIM_HAA_pilot_package_manifest_{PACKAGE_VERSION}.csv"
+PACKAGE_VERSION = "v0_4_draft"
+ZIP_PATH = ROOT / "artifacts" / "future_human_study" / f"TRIM_HAA_pilot_ethics_package_{PACKAGE_VERSION}.zip"
+ZIP_SHA_PATH = ROOT / "artifacts" / "future_human_study" / f"TRIM_HAA_pilot_ethics_package_{PACKAGE_VERSION}.zip.sha256"
+MANIFEST_PATH = ROOT / "research" / "future_human_study" / "pilot_protocol" / f"TRIM_HAA_pilot_package_manifest_{PACKAGE_VERSION}.csv"
 FIXED_ZIP_TIMESTAMP = (2026, 1, 1, 0, 0, 0)
 
 
 PACKAGE_FILES: tuple[dict[str, str], ...] = (
     {
-        "file_path": "ethics/TRIM_HAA_participant_information_sheet.md",
+        "file_path": "research/future_human_study/ethics_drafts/TRIM_HAA_participant_information_sheet.md",
         "purpose": "Participant-facing information sheet",
         "contains_personal_data": "no",
         "participant_facing": "yes",
@@ -26,7 +26,7 @@ PACKAGE_FILES: tuple[dict[str, str], ...] = (
         "notes": "Contains contact and withdrawal placeholders only",
     },
     {
-        "file_path": "ethics/TRIM_HAA_consent_form.md",
+        "file_path": "research/future_human_study/ethics_drafts/TRIM_HAA_consent_form.md",
         "purpose": "Consent form with mandatory and optional items",
         "contains_personal_data": "no",
         "participant_facing": "yes",
@@ -34,7 +34,7 @@ PACKAGE_FILES: tuple[dict[str, str], ...] = (
         "notes": "Template only; no completed consent records",
     },
     {
-        "file_path": "ethics/TRIM_HAA_debrief_sheet.md",
+        "file_path": "research/future_human_study/ethics_drafts/TRIM_HAA_debrief_sheet.md",
         "purpose": "Participant debrief sheet",
         "contains_personal_data": "no",
         "participant_facing": "yes",
@@ -42,7 +42,7 @@ PACKAGE_FILES: tuple[dict[str, str], ...] = (
         "notes": "Explains locked pre records and control condition",
     },
     {
-        "file_path": "ethics/TRIM_HAA_data_management_plan.md",
+        "file_path": "research/future_human_study/ethics_drafts/TRIM_HAA_data_management_plan.md",
         "purpose": "Data management and retention plan",
         "contains_personal_data": "no",
         "participant_facing": "no",
@@ -50,7 +50,7 @@ PACKAGE_FILES: tuple[dict[str, str], ...] = (
         "notes": "Contains institutional placeholders",
     },
     {
-        "file_path": "ethics/TRIM_HAA_risk_assessment.md",
+        "file_path": "research/future_human_study/ethics_drafts/TRIM_HAA_risk_assessment.md",
         "purpose": "Risk assessment with mitigations and stopping criteria",
         "contains_personal_data": "no",
         "participant_facing": "no",
@@ -58,7 +58,7 @@ PACKAGE_FILES: tuple[dict[str, str], ...] = (
         "notes": "Draft for review",
     },
     {
-        "file_path": "ethics/TRIM_HAA_ethics_submission_summary.md",
+        "file_path": "research/future_human_study/ethics_drafts/TRIM_HAA_ethics_submission_summary.md",
         "purpose": "Ethics submission summary",
         "contains_personal_data": "no",
         "participant_facing": "no",
@@ -66,7 +66,7 @@ PACKAGE_FILES: tuple[dict[str, str], ...] = (
         "notes": "Does not claim approval",
     },
     {
-        "file_path": "ethics/TRIM_HAA_pre_submission_blockers.md",
+        "file_path": "research/future_human_study/ethics_drafts/TRIM_HAA_pre_submission_blockers.md",
         "purpose": "Pre-submission blocker list",
         "contains_personal_data": "no",
         "participant_facing": "no",
@@ -74,7 +74,7 @@ PACKAGE_FILES: tuple[dict[str, str], ...] = (
         "notes": "Lists unresolved institutional and design blockers",
     },
     {
-        "file_path": "pilot_protocol/TRIM_HAA_pilot_research_questions.md",
+        "file_path": "research/future_human_study/pilot_protocol/TRIM_HAA_pilot_research_questions.md",
         "purpose": "Frozen feasibility research questions",
         "contains_personal_data": "no",
         "participant_facing": "no",
@@ -82,7 +82,7 @@ PACKAGE_FILES: tuple[dict[str, str], ...] = (
         "notes": "No causal analysis claim",
     },
     {
-        "file_path": "pilot_protocol/TRIM_HAA_instrumentation_pilot_protocol.md",
+        "file_path": "research/future_human_study/pilot_protocol/TRIM_HAA_instrumentation_pilot_protocol.md",
         "purpose": "Instrumentation pilot protocol",
         "contains_personal_data": "no",
         "participant_facing": "no",
@@ -90,7 +90,7 @@ PACKAGE_FILES: tuple[dict[str, str], ...] = (
         "notes": "Feasibility pilot only",
     },
     {
-        "file_path": "pilot_protocol/TRIM_HAA_interface_specification.md",
+        "file_path": "research/future_human_study/pilot_protocol/TRIM_HAA_interface_specification.md",
         "purpose": "Fixed second-pass interface specification",
         "contains_personal_data": "no",
         "participant_facing": "no",
@@ -98,7 +98,7 @@ PACKAGE_FILES: tuple[dict[str, str], ...] = (
         "notes": "Own-pre response shown in both second-pass conditions",
     },
     {
-        "file_path": "pilot_protocol/TRIM_HAA_participant_workflow.md",
+        "file_path": "research/future_human_study/pilot_protocol/TRIM_HAA_participant_workflow.md",
         "purpose": "Participant workflow sequence",
         "contains_personal_data": "no",
         "participant_facing": "yes",
@@ -106,7 +106,7 @@ PACKAGE_FILES: tuple[dict[str, str], ...] = (
         "notes": "No hidden reasoning collection",
     },
     {
-        "file_path": "pilot_protocol/TRIM_HAA_participant_label_guide.md",
+        "file_path": "research/future_human_study/pilot_protocol/TRIM_HAA_participant_label_guide.md",
         "purpose": "Participant-facing label-guide template and synthetic demo",
         "contains_personal_data": "no",
         "participant_facing": "yes",
@@ -114,7 +114,7 @@ PACKAGE_FILES: tuple[dict[str, str], ...] = (
         "notes": "Final study label guide remains a blocker",
     },
     {
-        "file_path": "pilot_protocol/TRIM_HAA_participant_mechanism_guide.md",
+        "file_path": "research/future_human_study/pilot_protocol/TRIM_HAA_participant_mechanism_guide.md",
         "purpose": "Participant-facing mechanism-guide template and synthetic demo",
         "contains_personal_data": "no",
         "participant_facing": "yes",
@@ -122,7 +122,7 @@ PACKAGE_FILES: tuple[dict[str, str], ...] = (
         "notes": "Final mechanism vocabulary remains a blocker",
     },
     {
-        "file_path": "pilot_protocol/TRIM_HAA_participant_core_guide.md",
+        "file_path": "research/future_human_study/pilot_protocol/TRIM_HAA_participant_core_guide.md",
         "purpose": "Plain-language Core instructions",
         "contains_personal_data": "no",
         "participant_facing": "yes",
@@ -130,7 +130,7 @@ PACKAGE_FILES: tuple[dict[str, str], ...] = (
         "notes": "Uses synthetic examples only",
     },
     {
-        "file_path": "pilot_protocol/TRIM_HAA_practice_case_protocol.md",
+        "file_path": "research/future_human_study/pilot_protocol/TRIM_HAA_practice_case_protocol.md",
         "purpose": "Practice-case comprehension standard",
         "contains_personal_data": "no",
         "participant_facing": "no",
@@ -138,7 +138,7 @@ PACKAGE_FILES: tuple[dict[str, str], ...] = (
         "notes": "Defines formal-pilot readiness outcomes",
     },
     {
-        "file_path": "pilot_protocol/TRIM_HAA_participant_language_review_checklist.md",
+        "file_path": "research/future_human_study/pilot_protocol/TRIM_HAA_participant_language_review_checklist.md",
         "purpose": "Participant-language review checklist",
         "contains_personal_data": "no",
         "participant_facing": "no",
@@ -146,7 +146,7 @@ PACKAGE_FILES: tuple[dict[str, str], ...] = (
         "notes": "Required before final submission",
     },
     {
-        "file_path": "pilot_protocol/TRIM_HAA_participant_language_review_report_v0_1.md",
+        "file_path": "research/future_human_study/pilot_protocol/TRIM_HAA_participant_language_review_report_v0_1.md",
         "purpose": "Participant-language internal review report",
         "contains_personal_data": "no",
         "participant_facing": "no",
@@ -154,7 +154,7 @@ PACKAGE_FILES: tuple[dict[str, str], ...] = (
         "notes": "Internal review only; external plain-language review still required",
     },
     {
-        "file_path": "pilot_protocol/TRIM_HAA_AI_exposure_instructions.md",
+        "file_path": "research/future_human_study/pilot_protocol/TRIM_HAA_AI_exposure_instructions.md",
         "purpose": "AI exposure instructions",
         "contains_personal_data": "no",
         "participant_facing": "yes",
@@ -162,7 +162,7 @@ PACKAGE_FILES: tuple[dict[str, str], ...] = (
         "notes": "States AI is not an answer key",
     },
     {
-        "file_path": "pilot_protocol/TRIM_HAA_control_condition_instructions.md",
+        "file_path": "research/future_human_study/pilot_protocol/TRIM_HAA_control_condition_instructions.md",
         "purpose": "No-AI control condition instructions",
         "contains_personal_data": "no",
         "participant_facing": "yes",
@@ -170,7 +170,7 @@ PACKAGE_FILES: tuple[dict[str, str], ...] = (
         "notes": "Contains no AI-output exposure",
     },
     {
-        "file_path": "pilot_protocol/TRIM_HAA_participant_background_questionnaire.md",
+        "file_path": "research/future_human_study/pilot_protocol/TRIM_HAA_participant_background_questionnaire.md",
         "purpose": "Minimal background questionnaire",
         "contains_personal_data": "template_only",
         "participant_facing": "yes",
@@ -178,7 +178,7 @@ PACKAGE_FILES: tuple[dict[str, str], ...] = (
         "notes": "No legal name field",
     },
     {
-        "file_path": "pilot_protocol/TRIM_HAA_revision_reason_instrument.md",
+        "file_path": "research/future_human_study/pilot_protocol/TRIM_HAA_revision_reason_instrument.md",
         "purpose": "Post-case revision-reason instrument",
         "contains_personal_data": "template_only",
         "participant_facing": "yes",
@@ -186,7 +186,7 @@ PACKAGE_FILES: tuple[dict[str, str], ...] = (
         "notes": "Self-report not proof of adoption",
     },
     {
-        "file_path": "pilot_protocol/TRIM_HAA_burden_and_comprehension_questionnaire.md",
+        "file_path": "research/future_human_study/pilot_protocol/TRIM_HAA_burden_and_comprehension_questionnaire.md",
         "purpose": "Burden and comprehension questionnaire",
         "contains_personal_data": "template_only",
         "participant_facing": "yes",
@@ -194,7 +194,7 @@ PACKAGE_FILES: tuple[dict[str, str], ...] = (
         "notes": "Includes attention/comprehension item",
     },
     {
-        "file_path": "pilot_protocol/TRIM_HAA_researcher_session_script.md",
+        "file_path": "research/future_human_study/pilot_protocol/TRIM_HAA_researcher_session_script.md",
         "purpose": "Non-leading researcher script",
         "contains_personal_data": "no",
         "participant_facing": "no",
@@ -202,7 +202,7 @@ PACKAGE_FILES: tuple[dict[str, str], ...] = (
         "notes": "Restricts interpretive coaching",
     },
     {
-        "file_path": "pilot_protocol/TRIM_HAA_contamination_screen.md",
+        "file_path": "research/future_human_study/pilot_protocol/TRIM_HAA_contamination_screen.md",
         "purpose": "Contamination screening procedure",
         "contains_personal_data": "template_only",
         "participant_facing": "no",
@@ -210,7 +210,7 @@ PACKAGE_FILES: tuple[dict[str, str], ...] = (
         "notes": "Does not reuse historical submissions",
     },
     {
-        "file_path": "pilot_protocol/TRIM_HAA_case_selection_criteria.md",
+        "file_path": "research/future_human_study/pilot_protocol/TRIM_HAA_case_selection_criteria.md",
         "purpose": "Case-selection criteria",
         "contains_personal_data": "no",
         "participant_facing": "no",
@@ -218,7 +218,7 @@ PACKAGE_FILES: tuple[dict[str, str], ...] = (
         "notes": "Requires separate legal review",
     },
     {
-        "file_path": "pilot_protocol/TRIM_HAA_pilot_stopping_rules.md",
+        "file_path": "research/future_human_study/pilot_protocol/TRIM_HAA_pilot_stopping_rules.md",
         "purpose": "Stopping and pause rules",
         "contains_personal_data": "no",
         "participant_facing": "no",
@@ -226,7 +226,7 @@ PACKAGE_FILES: tuple[dict[str, str], ...] = (
         "notes": "Includes threshold placeholders",
     },
     {
-        "file_path": "pilot_protocol/TRIM_HAA_feasibility_analysis_plan.md",
+        "file_path": "research/future_human_study/pilot_protocol/TRIM_HAA_feasibility_analysis_plan.md",
         "purpose": "Feasibility analysis plan",
         "contains_personal_data": "no",
         "participant_facing": "no",
@@ -234,7 +234,7 @@ PACKAGE_FILES: tuple[dict[str, str], ...] = (
         "notes": "Descriptive only",
     },
     {
-        "file_path": "pilot_protocol/TRIM_HAA_feasibility_success_criteria.md",
+        "file_path": "research/future_human_study/pilot_protocol/TRIM_HAA_feasibility_success_criteria.md",
         "purpose": "Provisional success criteria",
         "contains_personal_data": "no",
         "participant_facing": "no",
@@ -242,7 +242,7 @@ PACKAGE_FILES: tuple[dict[str, str], ...] = (
         "notes": "Numerical thresholds need approval",
     },
     {
-        "file_path": "pilot_protocol/TRIM_HAA_pilot_data_dictionary.csv",
+        "file_path": "research/future_human_study/pilot_protocol/TRIM_HAA_pilot_data_dictionary.csv",
         "purpose": "Frozen pilot data dictionary",
         "contains_personal_data": "no",
         "participant_facing": "no",
