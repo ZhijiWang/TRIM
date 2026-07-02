@@ -1,0 +1,815 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ZhijiWang/TRIM/schemas/human_llm_coder_output.schema.json",
+  "title": "Human-LLM friction-locus study records",
+  "description": "Protocol-only schema for future small-N human-LLM procedural disagreement records. It does not define released empirical data and does not alter TRIM-HAA Core or provenance schemas.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/human_coder_record"
+    },
+    {
+      "$ref": "#/$defs/model_coder_record"
+    },
+    {
+      "$ref": "#/$defs/run_manifest"
+    },
+    {
+      "$ref": "#/$defs/allocation_manifest"
+    }
+  ],
+  "$defs": {
+    "sha256_or_placeholder": {
+      "type": "string",
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        {
+          "pattern": "^TO_BE_[A-Z0-9_]+$"
+        }
+      ]
+    },
+    "evidence_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "friction_locus": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "cue_function",
+        "warrant_attribution",
+        "warrant_relation",
+        "operation_function",
+        "boundary_setting",
+        "temporal_layering",
+        "perspective_assignment",
+        "context_inference",
+        "unresolved",
+        null
+      ]
+    },
+    "counterfactual_test": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "test_id",
+        "question",
+        "answer",
+        "cited_evidence",
+        "effect_on_decision",
+        "confidence"
+      ],
+      "properties": {
+        "test_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1
+        },
+        "answer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cited_evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence_id"
+          },
+          "uniqueItems": true
+        },
+        "effect_on_decision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "confidence": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "not_applicable"
+          ]
+        }
+      }
+    },
+    "alternative_pathway": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pathway_id",
+        "description",
+        "cited_evidence",
+        "status"
+      ],
+      "properties": {
+        "pathway_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cited_evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence_id"
+          },
+          "uniqueItems": true
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "retained",
+            "rejected",
+            "unresolved",
+            "not_supplied"
+          ]
+        }
+      }
+    },
+    "shared_record": {
+      "type": "object",
+      "required": [
+        "record_type",
+        "actor_type",
+        "case_id",
+        "record_id",
+        "timestamp",
+        "manual_version",
+        "selected_evidence",
+        "primary_label",
+        "friction_locus_proposed",
+        "friction_locus_operational_status",
+        "final_operational_label",
+        "rationale_mechanism",
+        "uncertainty",
+        "alternative_pathways",
+        "counterfactual_tests",
+        "decision_path",
+        "escalation_required",
+        "escalation_reason",
+        "free_text_rationale",
+        "unresolved_ambiguity",
+        "record_hash"
+      ],
+      "properties": {
+        "record_type": {
+          "type": "string"
+        },
+        "actor_type": {
+          "type": "string",
+          "enum": [
+            "human",
+            "model"
+          ]
+        },
+        "case_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "record_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "manual_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "selected_evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence_id"
+          },
+          "uniqueItems": true
+        },
+        "primary_label": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "friction_locus_proposed": {
+          "$ref": "#/$defs/friction_locus"
+        },
+        "friction_locus_operational_status": {
+          "type": "string",
+          "enum": [
+            "accepted_for_analysis",
+            "requires_human_review",
+            "unresolved",
+            "not_supplied"
+          ]
+        },
+        "final_operational_label": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "rationale_mechanism": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "uncertainty": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "suspended",
+            "not_supplied",
+            null
+          ]
+        },
+        "alternative_pathways": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/alternative_pathway"
+          }
+        },
+        "counterfactual_tests": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/counterfactual_test"
+          }
+        },
+        "decision_path": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "escalation_required": {
+          "type": "boolean"
+        },
+        "escalation_reason": {
+          "type": "string"
+        },
+        "free_text_rationale": {
+          "type": "string"
+        },
+        "unresolved_ambiguity": {
+          "type": "string"
+        },
+        "record_hash": {
+          "$ref": "#/$defs/sha256_or_placeholder"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "friction_locus_operational_status": {
+                "const": "requires_human_review"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "final_operational_label": {
+                "const": "unresolved"
+              },
+              "escalation_required": {
+                "const": true
+              }
+            }
+          }
+        }
+      ]
+    },
+    "human_coder_record": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/shared_record"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "record_type",
+            "actor_type",
+            "analyst_id_pseudonym",
+            "analyst_role",
+            "self_record_status",
+            "exposure_status",
+            "coding_session_id",
+            "source_packet_hash"
+          ],
+          "properties": {
+            "record_type": {
+              "const": "human_coder_record"
+            },
+            "actor_type": {
+              "const": "human"
+            },
+            "case_id": true,
+            "record_id": true,
+            "timestamp": true,
+            "manual_version": true,
+            "selected_evidence": true,
+            "primary_label": true,
+            "friction_locus_proposed": true,
+            "friction_locus_operational_status": true,
+            "final_operational_label": true,
+            "rationale_mechanism": true,
+            "uncertainty": true,
+            "alternative_pathways": true,
+            "counterfactual_tests": true,
+            "decision_path": true,
+            "escalation_required": true,
+            "escalation_reason": true,
+            "free_text_rationale": true,
+            "unresolved_ambiguity": true,
+            "record_hash": true,
+            "analyst_id_pseudonym": {
+              "type": "string",
+              "minLength": 1
+            },
+            "analyst_role": {
+              "type": "string",
+              "enum": [
+                "researcher_analyst",
+                "adjudicator_separate_record"
+              ]
+            },
+            "self_record_status": {
+              "type": "string",
+              "enum": [
+                "researcher_generated",
+                "separate_reflection_record"
+              ]
+            },
+            "exposure_status": {
+              "type": "string",
+              "enum": [
+                "pre_ai",
+                "no_ai_exposure",
+                "post_ai_separate_record"
+              ]
+            },
+            "coding_session_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "source_packet_hash": {
+              "$ref": "#/$defs/sha256_or_placeholder"
+            }
+          },
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "provider"
+                ]
+              },
+              {
+                "required": [
+                  "model"
+                ]
+              },
+              {
+                "required": [
+                  "model_version_if_known"
+                ]
+              },
+              {
+                "required": [
+                  "prompt_version"
+                ]
+              },
+              {
+                "required": [
+                  "raw_output_hash"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "model_coder_record": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/shared_record"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "record_type",
+            "actor_type",
+            "run_id",
+            "provider",
+            "model",
+            "model_version_if_known",
+            "prompt_version",
+            "instruction_condition",
+            "source_packet_hash",
+            "raw_output_hash",
+            "parse_status",
+            "retry_count",
+            "technical_failure_status"
+          ],
+          "properties": {
+            "record_type": {
+              "const": "model_coder_record"
+            },
+            "actor_type": {
+              "const": "model"
+            },
+            "case_id": true,
+            "record_id": true,
+            "timestamp": true,
+            "manual_version": true,
+            "selected_evidence": true,
+            "primary_label": true,
+            "friction_locus_proposed": true,
+            "friction_locus_operational_status": true,
+            "final_operational_label": true,
+            "rationale_mechanism": true,
+            "uncertainty": true,
+            "alternative_pathways": true,
+            "counterfactual_tests": true,
+            "decision_path": true,
+            "escalation_required": true,
+            "escalation_reason": true,
+            "free_text_rationale": true,
+            "unresolved_ambiguity": true,
+            "record_hash": true,
+            "run_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "provider": {
+              "type": "string",
+              "minLength": 1
+            },
+            "model": {
+              "type": "string",
+              "minLength": 1
+            },
+            "model_version_if_known": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "prompt_version": {
+              "type": "string",
+              "minLength": 1
+            },
+            "instruction_condition": {
+              "$ref": "#/$defs/instruction_condition"
+            },
+            "source_packet_hash": {
+              "$ref": "#/$defs/sha256_or_placeholder"
+            },
+            "raw_output_hash": {
+              "$ref": "#/$defs/sha256_or_placeholder"
+            },
+            "parse_status": {
+              "type": "string",
+              "enum": [
+                "not_parsed_yet",
+                "valid_json",
+                "mechanically_repaired",
+                "invalid_unrecoverable"
+              ]
+            },
+            "retry_count": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "technical_failure_status": {
+              "type": "string",
+              "enum": [
+                "none",
+                "no_response_returned",
+                "connection_failure",
+                "provider_execution_failure",
+                "no_output_bytes",
+                "rate_limit_before_response"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "instruction_condition": {
+      "type": "string",
+      "enum": [
+        "A_label_names_short_definitions",
+        "B_concise_decision_rules",
+        "C_full_manual",
+        "stability_primary_condition",
+        "not_applicable"
+      ]
+    },
+    "run_manifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_type",
+        "case_id",
+        "run_id",
+        "run_role",
+        "provider",
+        "model",
+        "model_version_if_known",
+        "timestamp",
+        "manual_version",
+        "manual_file_hash",
+        "prompt_version",
+        "prompt_bundle_version",
+        "system_prompt_hash",
+        "user_prompt_template_hash",
+        "condition_prompt_hash",
+        "instruction_condition",
+        "source_packet_hash",
+        "output_schema_hash",
+        "parameters",
+        "temperature",
+        "top_p",
+        "seed",
+        "tool_availability",
+        "browsing_availability",
+        "system_prompt_status",
+        "provider_version_limitations",
+        "execution_region",
+        "retry_count",
+        "technical_retry_reason",
+        "human_record_exposed",
+        "raw_output_path",
+        "raw_output_hash",
+        "record_output_path",
+        "record_hash",
+        "notes"
+      ],
+      "properties": {
+        "record_type": {
+          "const": "run_manifest"
+        },
+        "case_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "run_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "run_role": {
+          "type": "string",
+          "enum": [
+            "primary_locked_run",
+            "stability_run",
+            "instruction_ablation_run"
+          ]
+        },
+        "provider": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model_version_if_known": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "manual_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "manual_file_hash": {
+          "$ref": "#/$defs/sha256_or_placeholder"
+        },
+        "prompt_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "prompt_bundle_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "system_prompt_hash": {
+          "$ref": "#/$defs/sha256_or_placeholder"
+        },
+        "user_prompt_template_hash": {
+          "$ref": "#/$defs/sha256_or_placeholder"
+        },
+        "condition_prompt_hash": {
+          "$ref": "#/$defs/sha256_or_placeholder"
+        },
+        "instruction_condition": {
+          "$ref": "#/$defs/instruction_condition"
+        },
+        "source_packet_hash": {
+          "$ref": "#/$defs/sha256_or_placeholder"
+        },
+        "output_schema_hash": {
+          "$ref": "#/$defs/sha256_or_placeholder"
+        },
+        "parameters": {
+          "type": "object"
+        },
+        "temperature": {
+          "type": [
+            "number",
+            "string",
+            "null"
+          ]
+        },
+        "top_p": {
+          "type": [
+            "number",
+            "string",
+            "null"
+          ]
+        },
+        "seed": {
+          "type": [
+            "integer",
+            "string",
+            "null"
+          ]
+        },
+        "tool_availability": {
+          "type": "string"
+        },
+        "browsing_availability": {
+          "type": "string"
+        },
+        "system_prompt_status": {
+          "type": "string"
+        },
+        "provider_version_limitations": {
+          "type": "string"
+        },
+        "execution_region": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "retry_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "technical_retry_reason": {
+          "type": "string"
+        },
+        "human_record_exposed": {
+          "const": false
+        },
+        "raw_output_path": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "raw_output_hash": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/sha256_or_placeholder"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "record_output_path": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "record_hash": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/sha256_or_placeholder"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "allocation_manifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_type",
+        "allocation_id",
+        "protocol_version",
+        "sample_manifest_hash",
+        "random_seed",
+        "case_order",
+        "primary_human_actor_id",
+        "human_record_completion_order",
+        "ablation_subset",
+        "condition_assignment",
+        "model_stability_run_count",
+        "second_human_component",
+        "created_at",
+        "created_by",
+        "allocation_hash"
+      ],
+      "properties": {
+        "record_type": {
+          "const": "allocation_manifest"
+        },
+        "allocation_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "protocol_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sample_manifest_hash": {
+          "$ref": "#/$defs/sha256_or_placeholder"
+        },
+        "random_seed": {
+          "type": "string",
+          "minLength": 1
+        },
+        "case_order": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "primary_human_actor_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "human_record_completion_order": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ablation_subset": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "condition_assignment": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/instruction_condition"
+            }
+          }
+        },
+        "model_stability_run_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "second_human_component": {
+          "const": "not_in_current_protocol"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "created_by": {
+          "type": "string",
+          "minLength": 1
+        },
+        "allocation_hash": {
+          "$ref": "#/$defs/sha256_or_placeholder"
+        }
+      }
+    }
+  }
+}

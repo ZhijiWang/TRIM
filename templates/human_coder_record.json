@@ -1,0 +1,55 @@
+{
+  "record_type": "human_coder_record",
+  "actor_type": "human",
+  "case_id": "CASE_ID_TO_BE_ASSIGNED_AFTER_SAMPLE_FREEZE",
+  "record_id": "HUMAN_PRE_CASE_ID_TO_BE_ASSIGNED",
+  "timestamp": "2026-07-01T00:00:00Z",
+  "manual_version": "MANUAL_VERSION_TO_BE_FROZEN",
+  "selected_evidence": [
+    "SEGMENT_ID_TO_BE_SELECTED"
+  ],
+  "primary_label": "label_to_be_assigned",
+  "friction_locus_proposed": "unresolved",
+  "friction_locus_operational_status": "requires_human_review",
+  "final_operational_label": "unresolved",
+  "rationale_mechanism": "mechanism_to_be_assigned",
+  "uncertainty": "high",
+  "alternative_pathways": [
+    {
+      "pathway_id": "ALT_001",
+      "description": "Alternative pathway to be described by coder if retained.",
+      "cited_evidence": [
+        "SEGMENT_ID_TO_BE_SELECTED"
+      ],
+      "status": "unresolved"
+    }
+  ],
+  "counterfactual_tests": [
+    {
+      "test_id": "CF_001",
+      "question": "Which candidate locus would become hardest to sustain if this evidence or rule were removed?",
+      "answer": "answer_to_be_supplied",
+      "cited_evidence": [
+        "SEGMENT_ID_TO_BE_SELECTED"
+      ],
+      "effect_on_decision": "effect_to_be_supplied",
+      "confidence": "not_applicable"
+    }
+  ],
+  "decision_path": [
+    "source packet frozen",
+    "manual version frozen",
+    "human pre-exposure record completed before AI output"
+  ],
+  "escalation_required": true,
+  "escalation_reason": "Template default: unresolved until coder completes and lock validation is performed.",
+  "free_text_rationale": "Coder rationale to be supplied during the future study.",
+  "unresolved_ambiguity": "Unresolved ambiguity to be supplied if present.",
+  "record_hash": "TO_BE_COMPUTED_AFTER_RECORD_COMPLETION",
+  "exposure_status": "pre_ai",
+  "coding_session_id": "SESSION_ID_TO_BE_ASSIGNED",
+  "source_packet_hash": "TO_BE_REPLACED_BY_FROZEN_SOURCE_PACKET_HASH",
+  "analyst_id_pseudonym": "HUMAN_PRIMARY_001",
+  "analyst_role": "researcher_analyst",
+  "self_record_status": "researcher_generated"
+}
