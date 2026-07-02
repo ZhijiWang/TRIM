@@ -36,11 +36,11 @@ disagreement-registration protocol for interpretation-intensive small-N work.
 It does not claim empirical validation, a truth verdict, a universal annotation
 solution, or an exhaustive ontology of interpretation.
 
-The current protocol adopts partial second-human double coding as the intended
-design, with a freeze gate requiring a confirmed second coder before sample
-freeze. If no second coder is available, the protocol must be amended before
-coding and labeled as procedural human-model comparison rather than human
-reliability validation.
+The current protocol adopts Design B: a single-researcher pre-exposure human
+record compared with independently generated model records. It is a procedural
+human-model comparison, not a human intercoder reliability study and not
+validation of human reproducibility. No external human recruitment is permitted
+under the current protocol.
 
 ## Required later steps
 

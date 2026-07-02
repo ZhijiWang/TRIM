@@ -304,8 +304,9 @@
           "required": [
             "record_type",
             "actor_type",
-            "coder_id_pseudonym",
-            "coder_role",
+            "analyst_id_pseudonym",
+            "analyst_role",
+            "self_record_status",
             "exposure_status",
             "coding_session_id",
             "source_packet_hash"
@@ -336,16 +337,22 @@
             "free_text_rationale": true,
             "unresolved_ambiguity": true,
             "record_hash": true,
-            "coder_id_pseudonym": {
+            "analyst_id_pseudonym": {
               "type": "string",
               "minLength": 1
             },
-            "coder_role": {
+            "analyst_role": {
               "type": "string",
               "enum": [
-                "primary_human",
-                "second_human_subset",
+                "researcher_analyst",
                 "adjudicator_separate_record"
+              ]
+            },
+            "self_record_status": {
+              "type": "string",
+              "enum": [
+                "researcher_generated",
+                "separate_reflection_record"
               ]
             },
             "exposure_status": {
@@ -699,9 +706,12 @@
         "sample_manifest_hash",
         "random_seed",
         "case_order",
-        "second_human_subset",
+        "primary_human_actor_id",
+        "human_record_completion_order",
         "ablation_subset",
         "condition_assignment",
+        "model_stability_run_count",
+        "second_human_component",
         "created_at",
         "created_by",
         "allocation_hash"
@@ -731,7 +741,11 @@
             "type": "string"
           }
         },
-        "second_human_subset": {
+        "primary_human_actor_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "human_record_completion_order": {
           "type": "array",
           "items": {
             "type": "string"
@@ -751,6 +765,13 @@
               "$ref": "#/$defs/instruction_condition"
             }
           }
+        },
+        "model_stability_run_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "second_human_component": {
+          "const": "not_in_current_protocol"
         },
         "created_at": {
           "type": "string",

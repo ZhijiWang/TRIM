@@ -8,8 +8,6 @@ outputs. It contains no empirical findings.
 The planned study will compare:
 
 - human pre-exposure records against the primary locked AI run;
-- primary human records against second-human subset records if Design A is
-  confirmed before sample freeze;
 - primary locked AI runs against repeated stability runs;
 - AI outputs across instruction-ablation conditions;
 - final-label relations against procedural-record relations.
@@ -22,29 +20,27 @@ locked records under a stated protocol.
 
 Primary analyses:
 
-1. Final-label relation.
-2. Procedural disagreement decomposition.
-3. Same-label/procedure-different cases.
-4. Different-label/pathway-shared cases.
-5. Predicted versus observed friction-locus confusion.
+1. Final-label correspondence.
+2. Evidence-selection overlap.
+3. Friction-locus correspondence.
+4. Counterfactual-answer divergence.
+5. Decision-path divergence.
+6. Uncertainty relation.
+7. Alternative-pathway relation.
+8. Same-label/procedure-different cases.
+9. Different-label/pathway-shared cases.
+10. Predicted versus observed confusion.
 
 Secondary analyses:
 
 1. Model stability.
 2. Instruction ablation.
-3. Human-human subset comparison if Design A is confirmed.
-4. Coefficient sensitivity analysis.
+3. Descriptive cross-record agreement coefficients.
+4. Qualitative case studies selected by frozen rules.
 
-The primary agreement summary is raw agreement plus Gwet's AC1. Raw agreement
-is retained because it is transparent in a small-N demonstration. Gwet's AC1 is
-the main coefficient summary because sparse, prevalence-imbalanced categories
-can make kappa unstable or counterintuitive. Cohen's kappa and Krippendorff's
-alpha are sensitivity and descriptive checks, not proof of ontological validity.
+Raw counts, proportions, confusion structures, and case-level decomposition are primary. If reported, Cohen's kappa, Krippendorff's alpha, and Gwet's AC1 describe correspondence between one human-record condition and one model-record condition across cases. They do not estimate human intercoder reliability, do not validate the ontology, and do not make the researcher's record a gold standard.
 
-Agreement coefficients describe relations among locked records under stated
-conditions. They do not establish that friction_locus categories are natural
-kinds, that one coder is a gold standard, or that one human coder alone
-establishes human annotation reliability.
+Raw agreement remains the most transparent agreement summary. Gwet's AC1 may be reported as a secondary cross-condition summary under sparse or prevalence-imbalanced categories, with Cohen's kappa and Krippendorff's alpha treated as sensitivity/descriptive checks. No coefficient is primary evidence of ontological validity.
 
 ## Predicted versus observed confusion
 
@@ -77,7 +73,7 @@ Predicted confusion is not treated as ontological or irreducible by default.
 
 ## Reliability and descriptive statistics
 
-The analysis will not rely on Cohen's kappa alone. Planned reporting includes:
+The analysis will not rely on Cohen's kappa alone and will not describe coefficients as human coding reliability. Planned reporting includes:
 
 - raw agreement;
 - per-category support;
@@ -108,7 +104,7 @@ Minimum support rules:
 
 ## Procedural disagreement metrics
 
-For each human-AI pair, compute:
+For each researcher-model record pair, compute:
 
 - final-label exact match;
 - friction-locus exact match;
@@ -230,14 +226,16 @@ The study does not pre-commit to any substantive result.
 
 The demonstration may fail if:
 
-- procedural fields are too unreliable to interpret;
-- outputs cannot be parsed consistently;
-- repeated model runs are too unstable;
+- researcher-specific interpretations dominate results;
+- no evidence beyond final-label comparison is produced;
+- procedural fields cannot be applied consistently;
+- model output is unstable or unparseable;
 - categories collapse empirically;
 - manual distinctions are not teachable;
-- no additional information appears beyond final labels;
+- the study cannot distinguish model effects from case-selection effects;
 - sample construction is too contaminated or biased;
-- human familiarity dominates the transfer set.
+- human familiarity dominates the transfer set;
+- the lack of a second human coder prevents any claim about human reproducibility.
 
 A null or negative result is publishable as a method limitation.
 
@@ -245,9 +243,7 @@ A null or negative result is publishable as a method limitation.
 
 Reports must state that the study is a small-N demonstration of procedural
 representation, not empirical validation of the whole framework. Reports must
-not claim that the eight friction_locus categories are natural kinds, that one
-annotator is a gold standard, that a model output is a truth verdict, or that
-observed instability generalizes beyond the study conditions.
+not claim that the eight friction_locus categories are natural kinds, that the researcher record is a gold standard, that a model output is a truth verdict, that the study estimates human intercoder reliability, or that observed instability generalizes beyond the study conditions.
 
 The study is primarily descriptive. It does not claim broad confirmatory
 hypothesis testing. Ablation and stability analyses are secondary and

@@ -46,9 +46,10 @@
   "free_text_rationale": "Coder rationale to be supplied during the future study.",
   "unresolved_ambiguity": "Unresolved ambiguity to be supplied if present.",
   "record_hash": "TO_BE_COMPUTED_AFTER_RECORD_COMPLETION",
-  "coder_id_pseudonym": "HUMAN_PRIMARY_001",
-  "coder_role": "primary_human",
   "exposure_status": "pre_ai",
   "coding_session_id": "SESSION_ID_TO_BE_ASSIGNED",
-  "source_packet_hash": "TO_BE_REPLACED_BY_FROZEN_SOURCE_PACKET_HASH"
+  "source_packet_hash": "TO_BE_REPLACED_BY_FROZEN_SOURCE_PACKET_HASH",
+  "analyst_id_pseudonym": "HUMAN_PRIMARY_001",
+  "analyst_role": "researcher_analyst",
+  "self_record_status": "researcher_generated"
 }

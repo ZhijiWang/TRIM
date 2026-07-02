@@ -5,9 +5,12 @@
   "sample_manifest_hash": "TO_BE_REPLACED_BY_FROZEN_SAMPLE_MANIFEST_HASH",
   "random_seed": "TO_BE_GENERATED_AND_RECORDED_BEFORE_ALLOCATION",
   "case_order": [],
-  "second_human_subset": [],
+  "primary_human_actor_id": "RESEARCHER_ANALYST_001",
+  "human_record_completion_order": [],
   "ablation_subset": [],
   "condition_assignment": {},
+  "model_stability_run_count": 0,
+  "second_human_component": "not_in_current_protocol",
   "created_at": "2026-07-01T00:00:00Z",
   "created_by": "TO_BE_RECORDED",
   "allocation_hash": "TO_BE_COMPUTED_AFTER_ALLOCATION_FREEZE"

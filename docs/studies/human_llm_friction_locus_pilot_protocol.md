@@ -87,32 +87,70 @@ The provisional lineage table is maintained at
 
 ## Human-comparison design
 
-Design adopted: Design A, partial second-human double coding.
+Design adopted: Design B, single-researcher human-model procedural comparison.
 
-Reason: the study needs at least a limited human-human comparison to avoid
-implying that one human coder can establish human annotation reliability. This
-does not turn the study into full reliability validation. It adds a bounded
-human-human check that is reported separately from human-model comparison.
+Reason: recruiting or evaluating an external second human coder may require
+institutional human-research ethics and governance arrangements that are not
+currently available. The study therefore does not recruit another coder, does
+not create participant-facing materials, and does not estimate human intercoder
+reliability.
 
-Implementation rule:
+Human record:
 
-- one primary human coder codes all cases;
-- a second independent human coder codes a preregistered subset of 8-10 cases;
-- the subset is selected before any coding;
-- the second coder does not see primary human records, model records, model
-  outputs, or expected labels;
-- both human records are locked independently;
-- human-human comparison is reported separately from human-model comparison;
-- the second-human subset is not treated as a gold standard;
-- adjudication, if any, occurs only after all original records are locked and
-  is stored separately.
+- one researcher creates one pre-exposure human record for every case;
+- all human records are completed before any AI output is inspected;
+- human records are locked and hashed;
+- no post-exposure revision is allowed;
+- any later reflection or adjudication is stored separately and never overwrites
+  the original;
+- the human record is not a gold standard;
+- the human record represents one documented interpretive position under a
+  frozen protocol.
 
-Freeze gate: Design A may proceed only if a second coder is confirmed before
-sample freeze. If no second coder is available, the protocol must be explicitly
-amended to Design B before coding begins. Under Design B, the study must be
-labeled a procedural human-model comparison rather than reliability validation;
-agreement coefficients would describe relation between two record-producing
-conditions, not reproducibility among human coders.
+Model records:
+
+- one primary locked model run per case;
+- additional isolated model runs for stability;
+- no human record exposure;
+- no adaptive prompting;
+- all raw outputs preserved;
+- no majority-vote replacement of the primary run.
+
+Comparison estimates correspondence and procedural divergence between two
+different record-producing conditions: researcher-produced pre-exposure records
+and independently generated model records. It does not estimate reproducibility
+among human coders.
+
+Prominent limitation: because the study contains one researcher-produced human
+record per case, it cannot determine whether another human analyst would apply
+the protocol similarly. All findings concern the relation between one documented
+human interpretive position and model records under frozen conditions. This is a
+deliberate scope boundary, not hidden missing data.
+
+The study addresses procedural visibility in human-model comparison. It does
+not establish whether TRIM is reproducible across independent human analysts.
+
+## Ethics and governance boundary
+
+- no external human coder will be recruited in this study;
+- no participant-facing recruitment, consent, compensation, interview, survey,
+  or performance evaluation will occur;
+- the researcher's own analytic records are treated as research outputs;
+- textual cases must be public-domain, openly licensed, or otherwise lawfully
+  used;
+- no private or participant data will be processed;
+- no claim of formal ethics exemption will be made without written
+  institutional confirmation;
+- any future addition of a second human coder would constitute a separate
+  protocol change requiring institutional ethics/governance advice before
+  recruitment or coding;
+- a second human coder cannot be added retrospectively to the frozen study
+  without a new protocol version.
+
+Protocol status fields:
+
+- `institutional_status = not_yet_formally_determined`
+- `external_human_recruitment = prohibited_under_current_protocol`
 
 ## Sample design
 
@@ -196,7 +234,7 @@ reported.
 
 - The case appeared in the released public walkthrough.
 - The case is a manual demonstration example.
-- The case requires confidential, participant, or restricted-source data.
+- The case requires confidential, private, participant, or restricted-source data.
 - The case cannot be represented with a frozen source packet.
 - The case requires secondary scholarship to understand the coding task.
 - The case's expected label is obvious from metadata that cannot be removed.
@@ -348,9 +386,7 @@ Ablation independence requirements:
 
 Allocation is frozen before coding in
 `templates/human_llm_allocation_manifest.json` and the later filled manifest.
-The allocation plan records case order randomization, condition allocation,
-second-human subset selection, ablation subset selection, random seed,
-stratification, and prohibited reallocations.
+The allocation plan records case order randomization, human record completion order, condition allocation, ablation subset selection, model stability run count, random seed, stratification, and prohibited reallocations.
 
 Random seed generation must be documented before allocation. Stratification is
 permitted only when preregistered for layer, language, source tradition, or
@@ -384,10 +420,11 @@ to the human-specific record. Shared procedural fields include:
 - `unresolved_ambiguity`
 - `record_hash`
 
-Human-specific fields include `coder_id_pseudonym`, `coder_role`,
-`exposure_status`, `coding_session_id`, and `source_packet_hash`. Human records
-must not require provider, model, model version, prompt version, or raw model
-output hash.
+Human-specific fields include `analyst_id_pseudonym`, `analyst_role`,
+`self_record_status`, `exposure_status`, `coding_session_id`, and
+`source_packet_hash`. Human records must not require provider, model, model
+version, prompt version, or raw model output hash. They must not describe the
+researcher as a participant, recruited coder, or study subject.
 
 Model-specific fields include `run_id`, `provider`, `model`,
 `model_version_if_known`, `prompt_version`, `instruction_condition`,
@@ -460,8 +497,9 @@ Two records can therefore have:
 
 Stop before coding if source packets are not frozen, rights/provenance status is
 unclear, the manual version is not frozen, prompts are not frozen, or metadata
-reveals expected labels. Stop before sample freeze if Design A is retained but
-no second human coder is confirmed. Stop before model execution if human records
+reveals expected labels. Stop before sample freeze if Design B has not been formally adopted in the
+protocol, institutional ethics/governance status has not been recorded, or
+source rights status is unresolved. Stop before model execution if human records
 are not locked, prompts are adaptive, provider metadata cannot be recorded, or
 output preservation cannot be guaranteed. Stop before analysis if parsing is
 substantively rewriting records, locked records have changed, or comparison
