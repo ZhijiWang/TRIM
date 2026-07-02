@@ -9,155 +9,155 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PACKAGE_VERSION = "v0_2"
+PACKAGE_VERSION = "v0_3_draft"
 CREATED_AT = "2026-07-01T07:20:00+00:00"
-ZIP_PATH = ROOT / "artifacts" / f"TRIM_HAA_position_note_{PACKAGE_VERSION}.zip"
-ZIP_SHA_PATH = ROOT / "artifacts" / f"TRIM_HAA_position_note_{PACKAGE_VERSION}.zip.sha256"
-MANIFEST_PATH = ROOT / "position_note" / "TRIM_HAA_position_note_v0_2_manifest.csv"
+ZIP_PATH = ROOT / "artifacts" / "position_note" / f"TRIM_HAA_position_note_{PACKAGE_VERSION}.zip"
+ZIP_SHA_PATH = ROOT / "artifacts" / "position_note" / f"TRIM_HAA_position_note_{PACKAGE_VERSION}.zip.sha256"
+MANIFEST_PATH = ROOT / "research" / "position_note" / f"TRIM_HAA_position_note_{PACKAGE_VERSION}_manifest.csv"
 FIXED_ZIP_TIMESTAMP = (2026, 1, 1, 0, 0, 0)
 
 
 PACKAGE_FILES: tuple[dict[str, str], ...] = (
     {
-        "artifact": "position_note/TRIM_HAA_position_note_v0_1.md",
+        "artifact": "research/position_note/TRIM_HAA_position_note_v0_1.md",
         "status": "draft",
         "public_release_candidate": "no",
         "notes": "Working-paper draft; blockers unresolved.",
     },
     {
-        "artifact": "position_note/TRIM_HAA_position_note_claim_boundaries.csv",
+        "artifact": "research/position_note/TRIM_HAA_position_note_claim_boundaries.csv",
         "status": "draft",
         "public_release_candidate": "yes_after_review",
         "notes": "Claim-boundary table for public-language review.",
     },
     {
-        "artifact": "position_note/TRIM_HAA_position_note_publication_blockers.md",
+        "artifact": "research/position_note/TRIM_HAA_position_note_publication_blockers.md",
         "status": "draft",
         "public_release_candidate": "yes_after_review",
         "notes": "Publication blockers must be resolved before release.",
     },
     {
-        "artifact": "position_note/TRIM_HAA_position_note_v0_1_review_response.md",
+        "artifact": "research/position_note/TRIM_HAA_position_note_v0_1_review_response.md",
         "status": "draft",
         "public_release_candidate": "yes_after_review",
         "notes": "Reviewer-response memo for position-note hardening.",
     },
     {
-        "artifact": "walkthrough/in_a_grove_v0_1/README.md",
+        "artifact": "examples/in_a_grove_walkthrough/README.md",
         "status": "draft",
         "public_release_candidate": "yes_after_review",
         "notes": "Walkthrough overview.",
     },
     {
-        "artifact": "walkthrough/in_a_grove_v0_1/source_packet.md",
+        "artifact": "examples/in_a_grove_walkthrough/source_packet.md",
         "status": "legal_review_required",
         "public_release_candidate": "no",
         "notes": "Translation status unresolved.",
     },
     {
-        "artifact": "walkthrough/in_a_grove_v0_1/source_provenance.md",
+        "artifact": "examples/in_a_grove_walkthrough/source_provenance.md",
         "status": "draft",
         "public_release_candidate": "yes_after_review",
         "notes": "Source provenance and URLs.",
     },
     {
-        "artifact": "walkthrough/in_a_grove_v0_1/legal_and_translation_review.md",
+        "artifact": "examples/in_a_grove_walkthrough/legal_and_translation_review.md",
         "status": "legal_review_required",
         "public_release_candidate": "yes_after_review",
         "notes": "Copyright blockers.",
     },
     {
-        "artifact": "walkthrough/in_a_grove_v0_1/source_segments.csv",
+        "artifact": "examples/in_a_grove_walkthrough/source_segments.csv",
         "status": "legal_review_required",
         "public_release_candidate": "no",
         "notes": "Contains translated excerpt segments.",
     },
     {
-        "artifact": "walkthrough/in_a_grove_v0_1/annotation_instructions.md",
+        "artifact": "examples/in_a_grove_walkthrough/annotation_instructions.md",
         "status": "draft",
         "public_release_candidate": "yes_after_review",
         "notes": "Local label and mechanism guide.",
     },
     {
-        "artifact": "walkthrough/in_a_grove_v0_1/author_analytic_record.csv",
+        "artifact": "examples/in_a_grove_walkthrough/author_analytic_record.csv",
         "status": "locked",
         "public_release_candidate": "yes_after_review",
         "notes": "Researcher-produced analytic demonstration; not human-subject data and not a gold standard.",
     },
     {
-        "artifact": "walkthrough/in_a_grove_v0_1/author_lock_manifest.csv",
+        "artifact": "examples/in_a_grove_walkthrough/author_lock_manifest.csv",
         "status": "locked",
         "public_release_candidate": "yes_after_review",
         "notes": "Generated with TRIM-HAA locking utilities.",
     },
     {
-        "artifact": "walkthrough/in_a_grove_v0_1/ai_independent_record.csv",
+        "artifact": "examples/in_a_grove_walkthrough/ai_independent_record.csv",
         "status": "frozen",
         "public_release_candidate": "yes_after_review",
         "notes": "Independent model record; not a truth verdict.",
     },
     {
-        "artifact": "walkthrough/in_a_grove_v0_1/ai_raw_output.txt",
+        "artifact": "examples/in_a_grove_walkthrough/ai_raw_output.txt",
         "status": "frozen",
         "public_release_candidate": "provider_terms_review_required",
         "notes": "Exact model output; reproduction terms require review.",
     },
     {
-        "artifact": "walkthrough/in_a_grove_v0_1/prompts/in_a_grove_trim_haa_v0_1.txt",
+        "artifact": "examples/in_a_grove_walkthrough/prompts/in_a_grove_trim_haa_v0_1.txt",
         "status": "frozen",
         "public_release_candidate": "yes_after_review",
         "notes": "Prompt contains no secrets.",
     },
     {
-        "artifact": "walkthrough/in_a_grove_v0_1/prompt_manifest.csv",
+        "artifact": "examples/in_a_grove_walkthrough/prompt_manifest.csv",
         "status": "frozen",
         "public_release_candidate": "yes_after_review",
         "notes": "Prompt hash manifest.",
     },
     {
-        "artifact": "walkthrough/in_a_grove_v0_1/model_run_manifest.csv",
+        "artifact": "examples/in_a_grove_walkthrough/model_run_manifest.csv",
         "status": "frozen",
         "public_release_candidate": "development_artifact_only",
         "notes": "Model-run provenance; locally auditable but not externally reproducible from recorded metadata alone.",
     },
     {
-        "artifact": "walkthrough/in_a_grove_v0_1/outputs/validation_report.csv",
+        "artifact": "examples/in_a_grove_walkthrough/outputs/validation_report.csv",
         "status": "generated",
         "public_release_candidate": "yes_after_review",
         "notes": "Core validation output.",
     },
     {
-        "artifact": "walkthrough/in_a_grove_v0_1/outputs/lock_verification_report.csv",
+        "artifact": "examples/in_a_grove_walkthrough/outputs/lock_verification_report.csv",
         "status": "generated",
         "public_release_candidate": "yes_after_review",
         "notes": "Author lock verification.",
     },
     {
-        "artifact": "walkthrough/in_a_grove_v0_1/outputs/field_comparison.csv",
+        "artifact": "examples/in_a_grove_walkthrough/outputs/field_comparison.csv",
         "status": "generated",
         "public_release_candidate": "yes_after_review",
         "notes": "Field-by-field comparison.",
     },
     {
-        "artifact": "walkthrough/in_a_grove_v0_1/outputs/evidence_comparison.csv",
+        "artifact": "examples/in_a_grove_walkthrough/outputs/evidence_comparison.csv",
         "status": "generated",
         "public_release_candidate": "yes_after_review",
         "notes": "Evidence overlap metrics.",
     },
     {
-        "artifact": "walkthrough/in_a_grove_v0_1/outputs/alternative_comparison.csv",
+        "artifact": "examples/in_a_grove_walkthrough/outputs/alternative_comparison.csv",
         "status": "generated",
         "public_release_candidate": "yes_after_review",
         "notes": "Alternative-pathway comparison.",
     },
     {
-        "artifact": "walkthrough/in_a_grove_v0_1/outputs/candidate_certainty_alternative_mismatch.md",
+        "artifact": "examples/in_a_grove_walkthrough/outputs/candidate_certainty_alternative_mismatch.md",
         "status": "generated",
         "public_release_candidate": "yes_after_review",
         "notes": "Author-defined review-question display; no truth verdict.",
     },
     {
-        "artifact": "walkthrough/in_a_grove_v0_1/outputs/execution_summary.md",
+        "artifact": "examples/in_a_grove_walkthrough/outputs/execution_summary.md",
         "status": "generated",
         "public_release_candidate": "yes_after_review",
         "notes": "Deterministic run summary.",

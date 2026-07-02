@@ -1,0 +1,187 @@
+You are producing one independent TRIM-HAA Core annotation record for a technical walkthrough.
+
+Use only the frozen Japanese-canonical source packet and the non-authoritative English gloss supplied below.
+
+The Japanese text is the only canonical evidence layer.
+
+The English gloss is provided only as an accessibility aid. Do not treat the English wording as an independent evidential source. All formal evidence citations must use the canonical Japanese segment IDs.
+
+Do not infer, reconstruct, imitate, or attempt to agree with any existing human annotation. You have not been given the human record. Produce your own independent record from the packet.
+
+Do not use invented quotations. Do not use unsupported external facts. If external cultural or literary knowledge informs your interpretation, place it only in external_knowledge_note and do not use it as a substitute for packet segment IDs.
+
+The output is a submitted justificatory record, not hidden chain-of-thought. Give a concise rationale sufficient to explain the submitted annotation. Do not provide commentary outside the requested JSON object.
+
+Required output fields:
+- annotation_id
+- case_id
+- parent_annotation_id
+- actor_id
+- actor_type
+- annotation_stage
+- primary_evidence_segment_ids
+- function_label
+- rationale_mechanism
+- uncertainty_flag
+- rationale_note
+- alternative_pathway_present
+- alternative_mechanism
+- alternative_note
+- status
+- external_knowledge_note
+
+Controlled values:
+- annotation_id: IAG_JP_V02_AI_INDEPENDENT
+- case_id: IAG_JP_PUBLIC_002
+- parent_annotation_id: ""
+- actor_id: MODEL_INDEPENDENT
+- actor_type: model
+- annotation_stage: ai_independent
+- uncertainty_flag: low, medium, high
+- alternative_pathway_present: yes, no
+- status: locked
+
+Open-text fields:
+- function_label
+- rationale_mechanism
+- alternative_mechanism
+
+For open-text fields:
+- use short snake_case phrases;
+- choose terms that describe your own submitted interpretation;
+- do not assume that any pre-existing label vocabulary is correct;
+- do not reuse labels merely because they appear in the task instructions;
+- use no_fit only when no concise label can responsibly describe your interpretation.
+
+Evidence rules:
+1. primary_evidence_segment_ids must contain one or more IDs from the canonical Japanese packet.
+2. Separate multiple IDs with a pipe character: |.
+3. Do not cite the English gloss as evidence.
+4. Do not cite external knowledge as evidence.
+5. Do not cite a segment merely because it appears important; include it only if it materially supports your submitted label.
+6. The source heading IAG-JP-FRAME-001 may be cited when the mediated status of the testimony is materially relevant.
+7. Do not assume that the presence of an unidentified person proves homicide, supernatural agency, innocence, guilt, deception, or causal responsibility.
+8. Do not assume that self-stabbing alone settles the complete causal or interpretive account.
+9. Distinguish what the packet states from what you infer.
+
+Alternative-pathway rules:
+- Set alternative_pathway_present to yes only when you retain a genuinely plausible second interpretive pathway.
+- If yes, provide both alternative_mechanism and alternative_note.
+- If no, set alternative_mechanism and alternative_note to empty strings.
+- Do not invent an alternative merely to appear balanced.
+
+Uncertainty rule:
+- uncertainty_flag records your uncertainty about the adequacy of your submitted annotation, not certainty about the historical truth of the fictional event.
+
+Canonical source packet:
+
+IAG-JP-FRAME-001
+Japanese: 巫女の口を借りたる死霊の物語
+English gloss: The account of the dead spirit as conveyed through the mouth of a medium.
+
+IAG-JP-001
+Japanese: 妻はおれがためらう内に、何か一声叫ぶが早いか、たちまち藪の奥へ走り出した。
+English gloss: While I hesitated, my wife gave a cry and at once ran into the depths of the grove.
+
+IAG-JP-002
+Japanese: 盗人も咄嗟に飛びかかったが、これは袖さえ捉えなかったらしい。
+English gloss: The robber sprang after her at once, but apparently did not even catch her sleeve.
+
+IAG-JP-003
+Japanese: おれはただ幻のように、そう云う景色を眺めていた。
+English gloss: I merely watched the scene as though it were an illusion.
+
+IAG-JP-004
+Japanese: 盗人は妻が逃げ去った後、太刀や弓矢を取り上げると、一箇所だけおれの縄を切った。
+English gloss: After my wife had fled, the robber took the long sword and the bow and arrows, then cut through my rope at only one place.
+
+IAG-JP-005
+Japanese: 「今度はおれの身の上だ。」――おれは盗人が藪の外へ、姿を隠してしまう時に、こう呟いたのを覚えている。
+English gloss: “Now it is my turn.” I remember him muttering this as he disappeared from the grove.
+
+IAG-JP-006
+Japanese: その跡はどこも静かだった。いや、まだ誰かの泣く声がする。
+English gloss: After that, everything was quiet. No—someone was still crying.
+
+IAG-JP-007
+Japanese: おれは縄を解きながら、じっと耳を澄ませて見た。
+English gloss: As I untied the rope, I listened closely.
+
+IAG-JP-008
+Japanese: が、その声も気がついて見れば、おれ自身の泣いている声だったではないか？
+English gloss: But when I became aware of it, was that voice not my own crying?
+
+IAG-JP-009
+Japanese: おれはやっと杉の根から、疲れ果てた体を起した。
+English gloss: At last I raised my exhausted body from the foot of the cedar.
+
+IAG-JP-010
+Japanese: おれの前には妻が落した、小刀が一つ光っている。
+English gloss: In front of me, a dagger dropped by my wife was shining.
+
+IAG-JP-011
+Japanese: おれはそれを手にとると、一突きにおれの胸へ刺した。
+English gloss: I took it and drove it into my chest in a single thrust.
+
+IAG-JP-012
+Japanese: 何か腥い塊がおれの口へこみ上げて来る。が、苦しみは少しもない。
+English gloss: Some raw-smelling mass welled up into my mouth. Yet there was no pain at all.
+
+IAG-JP-013
+Japanese: ただ胸が冷たくなると、一層あたりがしんとしてしまった。
+English gloss: As my chest grew cold, the surroundings became stiller.
+
+IAG-JP-014
+Japanese: ああ、何と云う静かさだろう。この山陰の藪の空には、小鳥一羽囀りに来ない。ただ杉や竹の杪に、寂しい日影が漂っている。
+English gloss: Ah, what stillness. Not a single small bird came to sing in the sky above this grove in the mountain's shade. Only a lonely patch of sunlight drifted over the tips of the cedars and bamboo.
+
+IAG-JP-015
+Japanese: 日影が、――それも次第に薄れて来る。――もう杉や竹も見えない。
+English gloss: The light—this too gradually faded. Now I could no longer see the cedars or bamboo.
+
+IAG-JP-016
+Japanese: おれはそこに倒れたまま、深い静かさに包まれている。
+English gloss: I lay there, enveloped in deep stillness.
+
+IAG-JP-017
+Japanese: その時誰か忍び足に、おれの側へ来たものがある。
+English gloss: At that moment, someone approached me with stealthy steps.
+
+IAG-JP-018
+Japanese: おれはそちらを見ようとした。が、おれのまわりには、いつか薄闇が立ちこめている。
+English gloss: I tried to look in that direction, but at some point a dim darkness had gathered around me.
+
+IAG-JP-019
+Japanese: 誰か、――その誰かは見えない手に、そっと胸の小刀を抜いた。
+English gloss: Someone—that someone, with a hand I could not see, gently drew the dagger from my chest.
+
+IAG-JP-020
+Japanese: 同時におれの口の中には、もう一度血潮が溢れて来る。
+English gloss: At the same time, blood once more flooded into my mouth.
+
+IAG-JP-021
+Japanese: おれはそれぎり永久に、中有の闇へ沈んでしまった。
+English gloss: After that, I sank forever into the darkness of chūu.
+
+Return exactly one valid JSON object with this structure:
+
+{
+  "annotation_id": "IAG_JP_V02_AI_INDEPENDENT",
+  "case_id": "IAG_JP_PUBLIC_002",
+  "parent_annotation_id": "",
+  "actor_id": "MODEL_INDEPENDENT",
+  "actor_type": "model",
+  "annotation_stage": "ai_independent",
+  "primary_evidence_segment_ids": "IAG-JP-...",
+  "function_label": "short_snake_case_label",
+  "rationale_mechanism": "short_snake_case_mechanism",
+  "uncertainty_flag": "low|medium|high",
+  "rationale_note": "Concise submitted rationale grounded in the cited Japanese segment IDs.",
+  "alternative_pathway_present": "yes|no",
+  "alternative_mechanism": "short_snake_case_mechanism_or_empty_string",
+  "alternative_note": "Concise alternative rationale or empty string.",
+  "status": "locked",
+  "external_knowledge_note": ""
+}
+
+Return valid JSON only.

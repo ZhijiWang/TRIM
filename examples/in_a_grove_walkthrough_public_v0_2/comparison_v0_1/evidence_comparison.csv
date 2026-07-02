@@ -1,0 +1,9 @@
+case_id,segment_id,author_selected,ai_selected,selection_relation,analytic_role_author,analytic_role_ai,descriptive_note
+IAG_JP_PUBLIC_002,IAG-JP-FRAME-001,yes,yes,shared,mediation frame,mediation frame,Both records cite the mediated testimony frame.
+IAG_JP_PUBLIC_002,IAG-JP-010,no,yes,ai_only,,dagger availability,Selected only by the AI record as part of the dagger sequence.
+IAG_JP_PUBLIC_002,IAG-JP-011,no,yes,ai_only,,self-stabbing action,Selected only by the AI record for the self-stabbing action.
+IAG_JP_PUBLIC_002,IAG-JP-017,yes,yes,shared,unidentified approach,unidentified approach,Both records cite the later unidentified approach.
+IAG_JP_PUBLIC_002,IAG-JP-018,yes,no,author_only,perceptual limitation,,Selected only by the author record for the attempted visual identification under limited visibility.
+IAG_JP_PUBLIC_002,IAG-JP-019,yes,yes,shared,dagger removal,dagger removal,Both records cite removal of the dagger by an unseen hand.
+IAG_JP_PUBLIC_002,IAG-JP-020,yes,yes,shared,renewed bleeding,renewed bleeding,Both records cite renewed bleeding after removal of the dagger.
+IAG_JP_PUBLIC_002,IAG-JP-021,no,yes,ai_only,,terminal narrative closure,Selected only by the AI record for terminal narrative closure.

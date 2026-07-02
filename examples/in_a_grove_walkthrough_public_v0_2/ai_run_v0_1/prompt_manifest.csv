@@ -1,0 +1,2 @@
+prompt_template_id,prompt_path,prompt_sha256,case_id,prompt_version,freeze_date,status,notes
+IAG_JP_V02_AI_PROMPT_V01,examples/in_a_grove_walkthrough_public_v0_2/ai_run_v0_1/prompt.txt,7da94b590e7fca93927a59351936a4796b9828b7d7a2e106800fc1bcc240eca5,IAG_JP_PUBLIC_002,v0.1,2026-07-01,frozen,"Japanese is the canonical evidence layer; English gloss is non-authoritative; the prompt does not expose the human record; no model run has yet occurred."

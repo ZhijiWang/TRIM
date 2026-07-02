@@ -1,53 +1,24 @@
 from pathlib import Path
 
-from trim.vocabulary import (
-    DISCOURSE_LEVELS,
-    FRICTION_LOCI,
-    FUNCTION_LABELS,
-    LANGUAGE_ACCESS_MODES,
-    RATIONALE_MECHANISMS,
-    UNCERTAINTY_FLAGS,
-)
+
+ROOT = Path(__file__).parents[1]
 
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
+def _read(path: Path) -> str:
+    return path.read_text(encoding="utf-8")
 
 
-def test_v0_2_1_codebook_lists_controlled_vocabularies():
-    text = (PROJECT_ROOT / "docs" / "TRIM_codebook_v0_2_1.md").read_text(
-        encoding="utf-8"
-    )
+def test_public_walkthrough_status_is_documented_without_overclaim():
+    research_status = _read(ROOT / "docs" / "research_status.md")
+    readme = _read(ROOT / "README.md")
+    public_dir = ROOT / "examples" / "in_a_grove_walkthrough_public_v0_2"
 
-    for vocabulary in (
-        FUNCTION_LABELS,
-        FRICTION_LOCI,
-        RATIONALE_MECHANISMS,
-        DISCOURSE_LEVELS,
-        UNCERTAINTY_FLAGS,
-        LANGUAGE_ACCESS_MODES,
-    ):
-        for value in vocabulary:
-            assert f"`{value}`" in text
-
-
-def test_context_inference_exclusion_examples_are_documented():
-    text = (
-        PROJECT_ROOT / "docs" / "TRIM_Coding_Manual_v0_2_1_friction_locus.md"
-    ).read_text(encoding="utf-8")
-
-    assert "Explicit-textual-operation exclusion" in text
-    assert "Positive:" in text
-    assert "Near miss:" in text
-    assert "Counterfactual:" in text
-
-
-def test_discourse_level_decision_tree_is_documented():
-    text = (
-        PROJECT_ROOT / "docs" / "discourse_level_guide_v0_2_1.md"
-    ).read_text(encoding="utf-8")
-
-    assert "Testimony/Frame Decision Tree" in text
-    assert "`reported_speech`" in text
-    assert "`frame_narrative`" in text
-    assert "shared_context_ids" in text
-
+    assert public_dir.is_dir()
+    assert "Japanese-canonical public walkthrough v0.2" in research_status
+    assert "locked author/model records and a frozen descriptive comparison" in research_status
+    assert "representability demonstration and descriptive locked-record comparison" in research_status
+    assert "frozen Japanese-canonical public walkthrough v0.2" in readme
+    assert "locked author record, a frozen independent AI run, and a frozen descriptive comparison" in readme
+    assert "not empirical validation" in (research_status + readme)
+    assert "truth verdict" in (research_status + readme)
+    assert "general claim about model behaviour" in research_status

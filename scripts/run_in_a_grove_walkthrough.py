@@ -10,7 +10,7 @@ from typing import Any
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
-    sys.path.insert(0, str(PROJECT_ROOT))
+    sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 from trim_haa.comparison import copied_phrase_overlap, normalised_token_overlap, segment_set_metrics
 from trim_haa.hashing import sha256_file, sha256_text
@@ -19,7 +19,7 @@ from trim_haa.schema import CORE_FIELDS, TrimHAAAnnotation
 from trim_haa.validator import validate_core_record
 
 
-ROOT = PROJECT_ROOT / "walkthrough" / "in_a_grove_v0_1"
+ROOT = PROJECT_ROOT / "examples" / "in_a_grove_walkthrough"
 OUTPUTS = ROOT / "outputs"
 AUTHOR_LOCKED_AT = "2026-07-01T05:20:00+00:00"
 AI_RUN_TIMESTAMP = "2026-07-01T05:40:00+00:00"

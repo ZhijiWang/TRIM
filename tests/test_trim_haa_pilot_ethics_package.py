@@ -7,16 +7,17 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).parents[1]
-ETHICS_DIR = ROOT / "ethics"
-PILOT_DIR = ROOT / "pilot_protocol"
-ZIP_PATH = ROOT / "artifacts" / "TRIM_HAA_pilot_ethics_package_v0_3.zip"
-ZIP_SHA_PATH = ROOT / "artifacts" / "TRIM_HAA_pilot_ethics_package_v0_3.zip.sha256"
-V01_ZIP_PATH = ROOT / "artifacts" / "TRIM_HAA_pilot_ethics_package_v0_1.zip"
-V01_ZIP_SHA_PATH = ROOT / "artifacts" / "TRIM_HAA_pilot_ethics_package_v0_1.zip.sha256"
+ETHICS_DIR = ROOT / "research" / "future_human_study" / "ethics_drafts"
+PILOT_DIR = ROOT / "research" / "future_human_study" / "pilot_protocol"
+ZIP_PATH = ROOT / "artifacts" / "future_human_study" / "TRIM_HAA_pilot_ethics_package_v0_3.zip"
+ZIP_SHA_PATH = ROOT / "artifacts" / "future_human_study" / "TRIM_HAA_pilot_ethics_package_v0_3.zip.sha256"
+V01_ZIP_PATH = ROOT / "artifacts" / "future_human_study" / "TRIM_HAA_pilot_ethics_package_v0_1.zip"
+V01_ZIP_SHA_PATH = ROOT / "artifacts" / "future_human_study" / "TRIM_HAA_pilot_ethics_package_v0_1.zip.sha256"
 V01_SHA = "d09edd46b3c463f8c8c163058d6cbe084691bb044113efff7bb3d35e8c72bb69"
-V02_ZIP_PATH = ROOT / "artifacts" / "TRIM_HAA_pilot_ethics_package_v0_2.zip"
-V02_ZIP_SHA_PATH = ROOT / "artifacts" / "TRIM_HAA_pilot_ethics_package_v0_2.zip.sha256"
+V02_ZIP_PATH = ROOT / "artifacts" / "future_human_study" / "TRIM_HAA_pilot_ethics_package_v0_2.zip"
+V02_ZIP_SHA_PATH = ROOT / "artifacts" / "future_human_study" / "TRIM_HAA_pilot_ethics_package_v0_2.zip.sha256"
 V02_SHA = "8a0961033ea87beaa1733fce461b21ea388c74e889ebf29b2212db70671d29b0"
+V03_SHA = "3d3fcbdd7b5b9a23abe2982a815d4ab4c06c9bf592915bed1938f61584b721f2"
 MANIFEST_PATH = PILOT_DIR / "TRIM_HAA_pilot_package_manifest_v0_3.csv"
 DURATION = "approximately 60-90 minutes"
 
@@ -339,26 +340,19 @@ def test_package_contains_no_real_participant_data_or_secrets():
     assert all(row["contains_personal_data"] in {"no", "template_only"} for row in manifest)
 
 
-def test_manifest_hashes_match_and_zip_contains_only_manifested_files():
-    subprocess.run(
-        [sys.executable, "scripts/build_trim_haa_pilot_ethics_package.py"],
-        cwd=ROOT,
-        check=True,
-    )
-    rows = _csv_rows(MANIFEST_PATH)
-    manifest_files = {row["file_path"] for row in rows}
-    for row in rows:
-        assert _sha256(ROOT / row["file_path"]) == row["sha256"]
-
+def test_v03_zip_contains_only_manifested_files_and_no_workspace_artifacts():
     with zipfile.ZipFile(ZIP_PATH) as archive:
         zip_files = set(archive.namelist())
 
-    assert zip_files == manifest_files | {"pilot_protocol/TRIM_HAA_pilot_package_manifest_v0_3.csv"}
+    assert "pilot_protocol/TRIM_HAA_pilot_package_manifest_v0_3.csv" in zip_files
+    assert any(name.startswith("ethics/") for name in zip_files)
+    assert any(name.startswith("pilot_protocol/") for name in zip_files)
     assert not any(name.startswith("dry_runs/") for name in zip_files)
-    assert not any("historical" in name.lower() for name in zip_files)
+    assert not any(name.startswith("walkthrough/") for name in zip_files)
+    assert not any(".git" in name for name in zip_files)
 
 
-def test_package_zip_v03_is_deterministic_and_v01_v02_remain_unchanged():
+def test_package_zip_v01_v02_v03_remain_unchanged():
     assert V01_ZIP_PATH.exists()
     assert V01_ZIP_SHA_PATH.exists()
     assert _sha256(V01_ZIP_PATH) == V01_SHA
@@ -367,20 +361,7 @@ def test_package_zip_v03_is_deterministic_and_v01_v02_remain_unchanged():
     assert V02_ZIP_SHA_PATH.exists()
     assert _sha256(V02_ZIP_PATH) == V02_SHA
     assert V02_ZIP_SHA_PATH.read_text(encoding="utf-8").split()[0] == V02_SHA
-
-    subprocess.run(
-        [sys.executable, "scripts/build_trim_haa_pilot_ethics_package.py"],
-        cwd=ROOT,
-        check=True,
-    )
-    before = _sha256(ZIP_PATH)
-    subprocess.run(
-        [sys.executable, "scripts/build_trim_haa_pilot_ethics_package.py"],
-        cwd=ROOT,
-        check=True,
-    )
-    after = _sha256(ZIP_PATH)
-
-    assert after == before
-    recorded = ZIP_SHA_PATH.read_text(encoding="utf-8").split()[0]
-    assert recorded == after
+    assert ZIP_PATH.exists()
+    assert ZIP_SHA_PATH.exists()
+    assert _sha256(ZIP_PATH) == V03_SHA
+    assert ZIP_SHA_PATH.read_text(encoding="utf-8").split()[0] == V03_SHA

@@ -1,0 +1,2 @@
+model_run_id,provider,model_name,model_version_or_date,system_prompt_hash,prompt_template_id,prompt_hash,run_timestamp,temperature_or_sampling,retry_count,regenerated_output,output_file,output_sha256,raw_response_preserved,human_record_exposed,notes
+IAG_JP_V02_AI_RUN_001,,,,,IAG_JP_V02_AI_PROMPT_V01,7da94b590e7fca93927a59351936a4796b9828b7d7a2e106800fc1bcc240eca5,,,0,no,,,yes,no,"Template only; provider, model, timestamp, system prompt hash, sampling, output file, and output hash must be completed only after the actual single run."

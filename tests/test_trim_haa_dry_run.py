@@ -8,8 +8,8 @@ import pytest
 
 
 ROOT = Path(__file__).parents[1]
-VALID_ROOT = ROOT / "dry_runs" / "trim_haa_synthetic_v0_1"
-INVALID_ROOT = ROOT / "dry_runs" / "trim_haa_synthetic_v0_1_invalid"
+VALID_ROOT = ROOT / "examples" / "synthetic_dry_run" / "valid"
+INVALID_ROOT = ROOT / "examples" / "synthetic_dry_run" / "invalid"
 
 
 @pytest.fixture(scope="session", autouse=True)
