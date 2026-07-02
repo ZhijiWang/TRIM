@@ -1,0 +1,22 @@
+{
+  "claim_boundary": "Manual construction only; provisional audit vocabulary, no empirical validation, no gold-standard claim.",
+  "contamination_audit_hash": "cead17d8c8b1a5b754cea8ffdd808d35c9d9a724211c28fb0d0e102483796ac2",
+  "contamination_audit_path": "docs/manuals/friction_locus_sample_contamination_audit.md",
+  "created_at": "2026-07-02T00:00:00+10:00",
+  "hash_rules": "SHA-256 over UTF-8 LF-normalized file bytes; self-hash excluded where applicable.",
+  "json_hash": "c022da7b00dbcda4f352022a4b266b337e99550abf674becc53f1f45575697fc",
+  "json_path": "docs/manuals/friction_locus_manual_v0_1.json",
+  "manual_status": "AUTHORITATIVE_FOR_PROTOCOL_REVIEW",
+  "manual_version": "friction_locus_manual_v0_1",
+  "markdown_hash": "c4d2ad94104220a5dc61714ca2484a745e1507416ccbbe7c37636ca3d962928b",
+  "markdown_path": "docs/manuals/friction_locus_manual_v0_1.md",
+  "predicted_confusion_audit_hash": "f5dacda28299cd54eeacaf5c0f18deade16402497eaaafeb8127422c6bb7d63d",
+  "predicted_confusion_audit_path": "docs/manuals/friction_locus_predicted_confusion_audit.md",
+  "provenance_matrix_hash": "ba8c14a0d5b826c4bd7f111ae8cd62e2954274a0d35ea20e006ec008392f244f",
+  "provenance_matrix_path": "docs/manuals/friction_locus_provenance_matrix.csv",
+  "repository_commit": "TO_BE_REPLACED_BY_FINAL_COMMIT",
+  "schema_compatibility_audit_path": "docs/manuals/friction_locus_schema_compatibility_audit.md",
+  "schema_compatibility_status": "compatible",
+  "source_inventory_hash": "a8f13463c3953d20d11b1af8d8844d330ff2f736dc79536f4aaae5d37e4767e0",
+  "source_inventory_path": "docs/manuals/friction_locus_source_inventory.md"
+}

@@ -1,0 +1,1221 @@
+{
+  "categories": {
+    "boundary_setting": {
+      "analytic_question": "Would changing the boundary of the unit or category change the interpretation?",
+      "category_id": "boundary_setting",
+      "confusable_with": [
+        "warrant_relation",
+        "context_inference"
+      ],
+      "counterfactual_tests": [
+        {
+          "answer_states": [
+            "supports_category",
+            "supports_other_category",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "If the interpretive unit, category scope, or speaker boundary were fixed differently, would the proposed interpretation change?",
+          "test_id": "CF_BOUNDARY_SETTING_PRIMARY"
+        },
+        {
+          "answer_states": [
+            "supports_left",
+            "supports_right",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "Ask whether changing the boundary of the annotation would change the result; if the boundary is stable but warrants interact, use warrant_relation.",
+          "test_id": "CF_BOUNDARY_SETTING_PAIR_BOUNDARY_SETTING__WARRANT_RELATION"
+        },
+        {
+          "answer_states": [
+            "supports_left",
+            "supports_right",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "Ask whether the relevant unit/scope is unstable, or whether the unit is stable but needs external contextual inference to support conversion.",
+          "test_id": "CF_BOUNDARY_SETTING_PAIR_BOUNDARY_SETTING__CONTEXT_INFERENCE"
+        }
+      ],
+      "decision_consequence": "The record should identify the unstable boundary and explain the chosen scope.",
+      "definition": "Instability over the relevant case, interpretive unit, category boundary, speaker boundary, or scope of application is dominant.",
+      "do_not_use_when": [
+        "Do not use when the unit is stable and the issue is a missing contextual bridge; use context_inference.",
+        "Do not use for any segmentation note that does not affect the decision.",
+        "Do not use when warrants within a stable boundary interact; use warrant_relation."
+      ],
+      "escalation_condition": "Escalate when the boundary cannot be fixed without evidence outside the packet.",
+      "examples": {
+        "near_miss": {
+          "example_id": "EX_BOUNDARY_SETTING_ARTIFICIAL_NEAR",
+          "provenance": "artificial_minimal_example_not_study_sample",
+          "text": "Artificial near miss: a stable paragraph needs historical background to interpret a term. That is context_inference."
+        },
+        "positive": {
+          "example_id": "EX_BOUNDARY_SETTING_ARTIFICIAL_POS",
+          "provenance": "artificial_minimal_example_not_study_sample",
+          "text": "Artificial example: a two-line notice may belong either to the speaker’s statement or to a narrator’s aside, and the interpretation changes with that boundary."
+        }
+      },
+      "exclusion_indicators": [
+        "The packet boundary is merely administrative.",
+        "The boundary question is resolved before coding and no longer affects the decision."
+      ],
+      "positive_indicators": [
+        "The interpretation changes depending on whether a quoted sentence belongs to one speaker or another.",
+        "The relevant episode boundary is uncertain and affects the label."
+      ],
+      "provenance_note": "Definition inherits the active lineage table and protocol boundaries; operational rules are v0.1 synthesis from lineage, predicted-confusion tests, protocol schema, and legacy manual distinctions.",
+      "use_another_value_when": [
+        "Use context_inference when the unit is stable but external context is needed.",
+        "Use warrant_relation when the boundary is stable and warrants interact.",
+        "Use perspective_assignment when a speaker or focalizer boundary specifically controls standpoint."
+      ],
+      "use_when": [
+        "The record depends on where the case begins or ends.",
+        "A speaker, category, episode, or scope boundary is unstable.",
+        "Different reasonable boundaries would produce different interpretations."
+      ]
+    },
+    "context_inference": {
+      "analytic_question": "Is the local evidence stable but insufficient without a contextual bridge?",
+      "category_id": "context_inference",
+      "confusable_with": [
+        "boundary_setting",
+        "temporal_layering",
+        "warrant_relation"
+      ],
+      "counterfactual_tests": [
+        {
+          "answer_states": [
+            "supports_category",
+            "supports_other_category",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "If the contextual bridge beyond the local anchor were unavailable, would the proposed interpretation no longer be licensed?",
+          "test_id": "CF_CONTEXT_INFERENCE_PRIMARY"
+        },
+        {
+          "answer_states": [
+            "supports_left",
+            "supports_right",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "Ask whether the relevant unit/scope is unstable, or whether the unit is stable but needs external contextual inference to support conversion.",
+          "test_id": "CF_CONTEXT_INFERENCE_PAIR_BOUNDARY_SETTING__CONTEXT_INFERENCE"
+        },
+        {
+          "answer_states": [
+            "supports_left",
+            "supports_right",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "Ask whether later readability is the decisive feature; if yes, use temporal_layering rather than context_inference.",
+          "test_id": "CF_CONTEXT_INFERENCE_PAIR_CONTEXT_INFERENCE__TEMPORAL_LAYERING"
+        },
+        {
+          "answer_states": [
+            "supports_left",
+            "supports_right",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "Ask whether the local text contains interacting warrants; if yes, use warrant_relation. Use context_inference only when the missing contextual bridge is dominant.",
+          "test_id": "CF_CONTEXT_INFERENCE_PAIR_CONTEXT_INFERENCE__WARRANT_RELATION"
+        }
+      ],
+      "decision_consequence": "The record should name the contextual bridge and mark uncertainty when it is not fully supplied by the packet.",
+      "definition": "A contextual bridge beyond the local anchor is the dominant obstacle to evidence-to-interpretation conversion.",
+      "do_not_use_when": [
+        "Do not use as a residual bucket for difficulty.",
+        "Do not use when a time layer in the packet does the work; use temporal_layering.",
+        "Do not use when local warrants interact; use warrant_relation."
+      ],
+      "escalation_condition": "Escalate when the required bridge is external to the packet and cannot be responsibly supplied.",
+      "examples": {
+        "near_miss": {
+          "example_id": "EX_CONTEXT_INFERENCE_ARTIFICIAL_NEAR",
+          "provenance": "artificial_minimal_example_not_study_sample",
+          "text": "Artificial near miss: the local passage contains two explicit rules that conflict. That is warrant_relation."
+        },
+        "positive": {
+          "example_id": "EX_CONTEXT_INFERENCE_ARTIFICIAL_POS",
+          "provenance": "artificial_minimal_example_not_study_sample",
+          "text": "Artificial example: a phrase can function as a legal release only if a recorded institutional convention is accepted as context."
+        }
+      },
+      "exclusion_indicators": [
+        "The context is available locally as a warrant relation.",
+        "The missing bridge is caused by unclear packet boundaries."
+      ],
+      "positive_indicators": [
+        "A local phrase needs an institutional convention to explain its function.",
+        "A stable sentence requires genre context to justify the label."
+      ],
+      "provenance_note": "Definition inherits the active lineage table and protocol boundaries; operational rules are v0.1 synthesis from lineage, predicted-confusion tests, protocol schema, and legacy manual distinctions.",
+      "use_another_value_when": [
+        "Use boundary_setting when the relevant unit or scope itself is unstable.",
+        "Use temporal_layering when later textual framing reclassifies earlier evidence.",
+        "Use warrant_relation when interacting local warrants carry the decision."
+      ],
+      "use_when": [
+        "The packet evidence needs social, genre, institutional, historical, or discourse context to support the interpretation.",
+        "The local unit is stable but the needed bridge is not fully inside it.",
+        "More specific loci have been excluded."
+      ]
+    },
+    "cue_function": {
+      "analytic_question": "Is the unresolved conversion produced by what kind of cue this is, rather than by who uses it, how it is used, or how warrants relate?",
+      "category_id": "cue_function",
+      "confusable_with": [
+        "operation_function",
+        "warrant_attribution"
+      ],
+      "counterfactual_tests": [
+        {
+          "answer_states": [
+            "supports_category",
+            "supports_other_category",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "If the same local content arrived through a different cue family, would the proposed interpretation change while speaker, operation, warrant, time, boundary, and context stayed stable?",
+          "test_id": "CF_CUE_FUNCTION_PRIMARY"
+        },
+        {
+          "answer_states": [
+            "supports_left",
+            "supports_right",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "Ask whether the problem is what this cue type does here, or what an act of interpretation, consultation, confession, recognition, or self-reading does.",
+          "test_id": "CF_CUE_FUNCTION_PAIR_CUE_FUNCTION__OPERATION_FUNCTION"
+        },
+        {
+          "answer_states": [
+            "supports_left",
+            "supports_right",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "Ask whether the cue type itself is underdetermined after excluding more specific loci, or whether one source, sign, medium, speaker, or result is granted standing.",
+          "test_id": "CF_CUE_FUNCTION_PAIR_CUE_FUNCTION__WARRANT_ATTRIBUTION"
+        }
+      ],
+      "decision_consequence": "Use only with care; if accepted, the record says the unresolved converter is cue-family function itself.",
+      "definition": "The cue family itself remains the dominant procedural locus after more specific operation, warrant, relation, perspective, temporal, boundary, and context loci have been excluded.",
+      "do_not_use_when": [
+        "Do not use when a visible interpretive act converts the evidence; use operation_function.",
+        "Do not use when a specific source or sign is granted authority; use warrant_attribution.",
+        "Do not use as a default for difficult cases."
+      ],
+      "escalation_condition": "Escalate when cue_function is proposed but another specific locus remains plausible at equal or higher confidence.",
+      "examples": {
+        "near_miss": {
+          "example_id": "EX_CUE_FUNCTION_ARTIFICIAL_NEAR",
+          "provenance": "artificial_minimal_example_not_study_sample",
+          "text": "Artificial near miss: a judge reads a seal aloud and declares it valid. The visible act of reading and validating is operation_function or warrant_attribution, not cue_function."
+        },
+        "positive": {
+          "example_id": "EX_CUE_FUNCTION_ARTIFICIAL_POS",
+          "provenance": "artificial_minimal_example_not_study_sample",
+          "text": "Artificial example: a packet contains a sealed red mark whose genre is unspecified. The record cannot decide whether the mark functions as warning, authorization, or ritual token, and no speaker, operation, or warrant relation resolves it."
+        }
+      },
+      "exclusion_indicators": [
+        "A named cue appears only as topic vocabulary.",
+        "The cue is stable and the problem is authority, relation, operation, or context."
+      ],
+      "positive_indicators": [
+        "A cue type is named but its procedural role remains unsettled after other checks.",
+        "Different cue-family readings would change the primary interpretation."
+      ],
+      "provenance_note": "Definition inherits the active lineage table and protocol boundaries; operational rules are v0.1 synthesis from lineage, predicted-confusion tests, protocol schema, and legacy manual distinctions.",
+      "use_another_value_when": [
+        "Use operation_function when the act of reading, confessing, consulting, recognizing, or interpreting does the work.",
+        "Use warrant_attribution when the issue is whether one source, sign, or medium has standing.",
+        "Use context_inference when the local cue is stable but needs an external bridge."
+      ],
+      "use_when": [
+        "The record turns on the function of a cue type such as omen, testimony, prophecy, sign, inscription, confession, or token.",
+        "No more specific locus explains the instability.",
+        "The cue family remains unstable even after evidence, speaker, operation, warrant, time, boundary, and context checks."
+      ]
+    },
+    "operation_function": {
+      "analytic_question": "Does an act performed in or by the record do the converting work?",
+      "category_id": "operation_function",
+      "confusable_with": [
+        "cue_function",
+        "warrant_attribution",
+        "warrant_relation",
+        "temporal_layering",
+        "perspective_assignment"
+      ],
+      "counterfactual_tests": [
+        {
+          "answer_states": [
+            "supports_category",
+            "supports_other_category",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "If the visible operation were removed but the same evidence remained, would the proposed interpretation still follow?",
+          "test_id": "CF_OPERATION_FUNCTION_PRIMARY"
+        },
+        {
+          "answer_states": [
+            "supports_left",
+            "supports_right",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "Ask whether the problem is what this cue type does here, or what an act of interpretation, consultation, confession, recognition, or self-reading does.",
+          "test_id": "CF_OPERATION_FUNCTION_PAIR_CUE_FUNCTION__OPERATION_FUNCTION"
+        },
+        {
+          "answer_states": [
+            "supports_left",
+            "supports_right",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "If evidence becomes usable as a warrant through the operation, prefer warrant_attribution; if evidence already has standing and the function depends on handling it, prefer operation_function.",
+          "test_id": "CF_OPERATION_FUNCTION_PAIR_WARRANT_ATTRIBUTION__OPERATION_FUNCTION"
+        },
+        {
+          "answer_states": [
+            "supports_left",
+            "supports_right",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "If the operation itself performs the conversion, prefer operation_function; if it mainly relates multiple warrants, prefer warrant_relation.",
+          "test_id": "CF_OPERATION_FUNCTION_PAIR_OPERATION_FUNCTION__WARRANT_RELATION"
+        },
+        {
+          "answer_states": [
+            "supports_left",
+            "supports_right",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "If the local operation produces the function, prefer operation_function; if a later moment reclassifies earlier evidence, prefer temporal_layering.",
+          "test_id": "CF_OPERATION_FUNCTION_PAIR_OPERATION_FUNCTION__TEMPORAL_LAYERING"
+        },
+        {
+          "answer_states": [
+            "supports_left",
+            "supports_right",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "If the function is produced by local operation, prefer operation_function; if a later moment reclassifies earlier evidence, prefer temporal_layering.",
+          "test_id": "CF_OPERATION_FUNCTION_PAIR_TEMPORAL_LAYERING__OPERATION_FUNCTION"
+        },
+        {
+          "answer_states": [
+            "supports_left",
+            "supports_right",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "Ask whether the function depends on the act of confessing/testifying or on whose perspective/testimonial role controls the annotation.",
+          "test_id": "CF_OPERATION_FUNCTION_PAIR_PERSPECTIVE_ASSIGNMENT__OPERATION_FUNCTION"
+        }
+      ],
+      "decision_consequence": "The record should cite the operation and specify what conversion it performs.",
+      "definition": "A visible interpretive, testimonial, consultative, recognitional, or self-reading operation converts evidence into the primary interpretation.",
+      "do_not_use_when": [
+        "Do not use when the operation only grants standing to one warrant; consider warrant_attribution.",
+        "Do not use when a later time layer reclassifies earlier evidence; use temporal_layering.",
+        "Do not use for any action; the action must perform interpretive conversion."
+      ],
+      "escalation_condition": "Escalate when operation and warrant attribution or temporal layering are equally plausible.",
+      "examples": {
+        "near_miss": {
+          "example_id": "EX_OPERATION_FUNCTION_ARTIFICIAL_NEAR",
+          "provenance": "artificial_minimal_example_not_study_sample",
+          "text": "Artificial near miss: the mark is accepted because it bears an official seal; that is warrant_attribution."
+        },
+        "positive": {
+          "example_id": "EX_OPERATION_FUNCTION_ARTIFICIAL_POS",
+          "provenance": "artificial_minimal_example_not_study_sample",
+          "text": "Artificial example: a messenger deciphers a mark and the decision depends on that deciphering rather than on the mark alone."
+        }
+      },
+      "exclusion_indicators": [
+        "The act is physical but not interpretive.",
+        "The operation is mentioned but not needed for the decision."
+      ],
+      "positive_indicators": [
+        "A character interprets a sign and that act supplies the function.",
+        "A confession changes how earlier evidence is read."
+      ],
+      "provenance_note": "Definition inherits the active lineage table and protocol boundaries; operational rules are v0.1 synthesis from lineage, predicted-confusion tests, protocol schema, and legacy manual distinctions.",
+      "use_another_value_when": [
+        "Use warrant_attribution when authority assigned to a source is dominant.",
+        "Use warrant_relation when the operation primarily ranks or relates multiple warrants.",
+        "Use perspective_assignment when the speaker or standpoint controls the function."
+      ],
+      "use_when": [
+        "The evidence becomes meaningful because someone interprets, recognizes, confesses, testifies, consults, translates, classifies, or self-reads.",
+        "The operation is visible in the packet and not merely inferred as background.",
+        "Changing or removing the operation would change the interpretation."
+      ]
+    },
+    "perspective_assignment": {
+      "analytic_question": "Would changing the speaker, witness position, or standpoint change the interpretation?",
+      "category_id": "perspective_assignment",
+      "confusable_with": [
+        "warrant_relation",
+        "operation_function",
+        "warrant_attribution"
+      ],
+      "counterfactual_tests": [
+        {
+          "answer_states": [
+            "supports_category",
+            "supports_other_category",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "If the same words or observations came from a different standpoint or witness role, would the proposed interpretation change?",
+          "test_id": "CF_PERSPECTIVE_ASSIGNMENT_PRIMARY"
+        },
+        {
+          "answer_states": [
+            "supports_left",
+            "supports_right",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "Ask whether incompatibility among multiple warrants determines the function, or whether changing the speaker/testimonial position would change the annotation.",
+          "test_id": "CF_PERSPECTIVE_ASSIGNMENT_PAIR_WARRANT_RELATION__PERSPECTIVE_ASSIGNMENT"
+        },
+        {
+          "answer_states": [
+            "supports_left",
+            "supports_right",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "Ask whether changing the speaker/testimonial position would change the annotation; if incompatibility among multiple warrants is dominant, use warrant_relation.",
+          "test_id": "CF_PERSPECTIVE_ASSIGNMENT_PAIR_PERSPECTIVE_ASSIGNMENT__WARRANT_RELATION"
+        },
+        {
+          "answer_states": [
+            "supports_left",
+            "supports_right",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "Ask whether the function depends on the act of confessing/testifying or on whose perspective/testimonial role controls the annotation.",
+          "test_id": "CF_PERSPECTIVE_ASSIGNMENT_PAIR_PERSPECTIVE_ASSIGNMENT__OPERATION_FUNCTION"
+        }
+      ],
+      "decision_consequence": "The record should identify the controlling standpoint and its effect.",
+      "definition": "Whose perspective, witness role, testimonial position, focalization, or narrative standpoint determines the function.",
+      "do_not_use_when": [
+        "Do not use merely because a speaker is present.",
+        "Do not use when multiple accounts interact as warrants; use warrant_relation.",
+        "Do not use when a confession or testimony matters as an operation; use operation_function."
+      ],
+      "escalation_condition": "Escalate when perspective control and warrant relation remain inseparable.",
+      "examples": {
+        "near_miss": {
+          "example_id": "EX_PERSPECTIVE_ASSIGNMENT_ARTIFICIAL_NEAR",
+          "provenance": "artificial_minimal_example_not_study_sample",
+          "text": "Artificial near miss: two witnesses disagree and the record ranks their accounts. That is warrant_relation."
+        },
+        "positive": {
+          "example_id": "EX_PERSPECTIVE_ASSIGNMENT_ARTIFICIAL_POS",
+          "provenance": "artificial_minimal_example_not_study_sample",
+          "text": "Artificial example: a line appears certain when read as narrator report but doubtful when read as a frightened witness’s memory."
+        }
+      },
+      "exclusion_indicators": [
+        "Speaker identity is stable and not interpretively consequential.",
+        "The perspective is only one warrant among multiple ranked warrants."
+      ],
+      "positive_indicators": [
+        "The same statement functions differently because it is internal focalization rather than public report.",
+        "A witness role changes whether evidence counts as observation or rumor."
+      ],
+      "provenance_note": "Definition inherits the active lineage table and protocol boundaries; operational rules are v0.1 synthesis from lineage, predicted-confusion tests, protocol schema, and legacy manual distinctions.",
+      "use_another_value_when": [
+        "Use warrant_relation when the issue is conflict among several accounts.",
+        "Use operation_function when the act of confessing, testifying, or recognizing performs conversion.",
+        "Use warrant_attribution when one speaker is simply granted authority."
+      ],
+      "use_when": [
+        "The function depends on who sees, speaks, reports, remembers, or frames the evidence.",
+        "A witness role or focalizer controls the force of the record.",
+        "Changing standpoint would change the primary interpretation."
+      ]
+    },
+    "temporal_layering": {
+      "analytic_question": "Does a later or retrospective layer reclassify what earlier evidence does?",
+      "category_id": "temporal_layering",
+      "confusable_with": [
+        "warrant_relation",
+        "operation_function",
+        "context_inference"
+      ],
+      "counterfactual_tests": [
+        {
+          "answer_states": [
+            "supports_category",
+            "supports_other_category",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "If the later or retrospective layer were removed, would the earlier evidence keep the same function?",
+          "test_id": "CF_TEMPORAL_LAYERING_PRIMARY"
+        },
+        {
+          "answer_states": [
+            "supports_left",
+            "supports_right",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "If removing cross-warrant conflict removes the function, prefer warrant_relation; if removing the later temporal frame removes it, prefer temporal_layering.",
+          "test_id": "CF_TEMPORAL_LAYERING_PAIR_WARRANT_RELATION__TEMPORAL_LAYERING"
+        },
+        {
+          "answer_states": [
+            "supports_left",
+            "supports_right",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "If the local operation produces the function, prefer operation_function; if a later moment reclassifies earlier evidence, prefer temporal_layering.",
+          "test_id": "CF_TEMPORAL_LAYERING_PAIR_OPERATION_FUNCTION__TEMPORAL_LAYERING"
+        },
+        {
+          "answer_states": [
+            "supports_left",
+            "supports_right",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "If removing the later temporal frame removes the function, prefer temporal_layering; if removing cross-warrant conflict removes it, prefer warrant_relation.",
+          "test_id": "CF_TEMPORAL_LAYERING_PAIR_TEMPORAL_LAYERING__WARRANT_RELATION"
+        },
+        {
+          "answer_states": [
+            "supports_left",
+            "supports_right",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "If the function is produced by local operation, prefer operation_function; if a later moment reclassifies earlier evidence, prefer temporal_layering.",
+          "test_id": "CF_TEMPORAL_LAYERING_PAIR_TEMPORAL_LAYERING__OPERATION_FUNCTION"
+        },
+        {
+          "answer_states": [
+            "supports_left",
+            "supports_right",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "Ask whether later readability is the decisive feature; if yes, use temporal_layering rather than context_inference.",
+          "test_id": "CF_TEMPORAL_LAYERING_PAIR_CONTEXT_INFERENCE__TEMPORAL_LAYERING"
+        }
+      ],
+      "decision_consequence": "The record should name the earlier evidence and the later layer that reclassifies it.",
+      "definition": "Later fulfilment, retrospective framing, historical readability, or reuse across time changes the function of earlier evidence.",
+      "do_not_use_when": [
+        "Do not use merely because events happen in sequence.",
+        "Do not use when a local recognition act performs the conversion; use operation_function.",
+        "Do not use when multiple warrants conflict without time-layered reclassification; use warrant_relation."
+      ],
+      "escalation_condition": "Escalate when the record cannot decide whether time layering or local operation is dominant.",
+      "examples": {
+        "near_miss": {
+          "example_id": "EX_TEMPORAL_LAYERING_ARTIFICIAL_NEAR",
+          "provenance": "artificial_minimal_example_not_study_sample",
+          "text": "Artificial near miss: two simultaneous statements conflict. That is warrant_relation."
+        },
+        "positive": {
+          "example_id": "EX_TEMPORAL_LAYERING_ARTIFICIAL_POS",
+          "provenance": "artificial_minimal_example_not_study_sample",
+          "text": "Artificial example: a harmless greeting becomes evidence of threat only after a later reply reveals prior knowledge."
+        }
+      },
+      "exclusion_indicators": [
+        "Chronology is present but not interpretively active.",
+        "A later fact is just another warrant in a conflict."
+      ],
+      "positive_indicators": [
+        "An early promise becomes evidence of irony only after a later reversal.",
+        "A later fulfilment recasts an earlier sign."
+      ],
+      "provenance_note": "Definition inherits the active lineage table and protocol boundaries; operational rules are v0.1 synthesis from lineage, predicted-confusion tests, protocol schema, and legacy manual distinctions.",
+      "use_another_value_when": [
+        "Use operation_function when a visible local act converts evidence.",
+        "Use warrant_relation when conflict among warrants is dominant.",
+        "Use context_inference when historical background is external rather than a textual time layer."
+      ],
+      "use_when": [
+        "A later event changes how earlier evidence functions.",
+        "The record depends on retrospective framing or later readability.",
+        "The same evidence has one local role and another later role."
+      ]
+    },
+    "warrant_attribution": {
+      "analytic_question": "Does the decision turn on whether one item is allowed to count as a warrant?",
+      "category_id": "warrant_attribution",
+      "confusable_with": [
+        "warrant_relation",
+        "operation_function",
+        "cue_function"
+      ],
+      "counterfactual_tests": [
+        {
+          "answer_states": [
+            "supports_category",
+            "supports_other_category",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "If this single source, speaker, medium, sign, or result lost warranting standing, would the proposed interpretation lose its support?",
+          "test_id": "CF_WARRANT_ATTRIBUTION_PRIMARY"
+        },
+        {
+          "answer_states": [
+            "supports_left",
+            "supports_right",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "Ask whether the cue type itself is underdetermined after excluding more specific loci, or whether one source, sign, medium, speaker, or result is granted standing.",
+          "test_id": "CF_WARRANT_ATTRIBUTION_PAIR_CUE_FUNCTION__WARRANT_ATTRIBUTION"
+        },
+        {
+          "answer_states": [
+            "supports_left",
+            "supports_right",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "Count the warrants: if the annotation depends on how more than one warrant interacts, use warrant_relation; if one source receives authority, use warrant_attribution.",
+          "test_id": "CF_WARRANT_ATTRIBUTION_PAIR_WARRANT_ATTRIBUTION__WARRANT_RELATION"
+        },
+        {
+          "answer_states": [
+            "supports_left",
+            "supports_right",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "If evidence becomes usable as a warrant through the operation, prefer warrant_attribution; if evidence already has standing and the function depends on handling it, prefer operation_function.",
+          "test_id": "CF_WARRANT_ATTRIBUTION_PAIR_WARRANT_ATTRIBUTION__OPERATION_FUNCTION"
+        }
+      ],
+      "decision_consequence": "The final record should cite the warrant-bearing item and explain why its standing matters.",
+      "definition": "One source, medium, speaker, sign, or result is granted warranting force for the primary interpretation.",
+      "do_not_use_when": [
+        "Do not use when multiple warrants must be ranked or reconciled; use warrant_relation.",
+        "Do not use when the visible operation itself converts evidence; use operation_function.",
+        "Do not use when standpoint controls the function; use perspective_assignment."
+      ],
+      "escalation_condition": "Escalate when the record cannot decide whether one warrant has standing or multiple warrants are interacting.",
+      "examples": {
+        "near_miss": {
+          "example_id": "EX_WARRANT_ATTRIBUTION_ARTIFICIAL_NEAR",
+          "provenance": "artificial_minimal_example_not_study_sample",
+          "text": "Artificial near miss: two witness notes contradict each other and the record depends on ranking them. That is warrant_relation."
+        },
+        "positive": {
+          "example_id": "EX_WARRANT_ATTRIBUTION_ARTIFICIAL_POS",
+          "provenance": "artificial_minimal_example_not_study_sample",
+          "text": "Artificial example: a witness note is treated as reliable enough to identify the speaker’s intention, and the interpretation would collapse if the note were not granted standing."
+        }
+      },
+      "exclusion_indicators": [
+        "Several sources interact and none singly carries the decision.",
+        "The source’s authority is already stable and the remaining question is how it is handled."
+      ],
+      "positive_indicators": [
+        "One sign is treated as decisive evidence.",
+        "One speaker’s report is granted standing over available alternatives."
+      ],
+      "provenance_note": "Definition inherits the active lineage table and protocol boundaries; operational rules are v0.1 synthesis from lineage, predicted-confusion tests, protocol schema, and legacy manual distinctions.",
+      "use_another_value_when": [
+        "Use warrant_relation when the dominant instability is conflict or ranking among two or more warrants.",
+        "Use operation_function when a reading, confession, consultation, recognition, or self-reading performs the conversion.",
+        "Use perspective_assignment when changing the speaker or witness role changes the interpretation."
+      ],
+      "use_when": [
+        "A single source, speaker, medium, sign, result, or textual item receives authority.",
+        "Removing that item’s standing would change the interpretation.",
+        "The problem is attribution of warranting force, not interaction among multiple warrants."
+      ]
+    },
+    "warrant_relation": {
+      "analytic_question": "Does the interpretation depend on how two or more warrants interact?",
+      "category_id": "warrant_relation",
+      "confusable_with": [
+        "warrant_attribution",
+        "operation_function",
+        "temporal_layering",
+        "perspective_assignment",
+        "boundary_setting",
+        "context_inference"
+      ],
+      "counterfactual_tests": [
+        {
+          "answer_states": [
+            "supports_category",
+            "supports_other_category",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "If the same warrants no longer conflicted, ranked, qualified, or interacted, would the primary interpretation change?",
+          "test_id": "CF_WARRANT_RELATION_PRIMARY"
+        },
+        {
+          "answer_states": [
+            "supports_left",
+            "supports_right",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "Count the warrants: if the annotation depends on how more than one warrant interacts, use warrant_relation; if one source receives authority, use warrant_attribution.",
+          "test_id": "CF_WARRANT_RELATION_PAIR_WARRANT_ATTRIBUTION__WARRANT_RELATION"
+        },
+        {
+          "answer_states": [
+            "supports_left",
+            "supports_right",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "If removing cross-warrant conflict removes the function, prefer warrant_relation; if removing the later temporal frame removes it, prefer temporal_layering.",
+          "test_id": "CF_WARRANT_RELATION_PAIR_WARRANT_RELATION__TEMPORAL_LAYERING"
+        },
+        {
+          "answer_states": [
+            "supports_left",
+            "supports_right",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "Ask whether incompatibility among multiple warrants determines the function, or whether changing the speaker/testimonial position would change the annotation.",
+          "test_id": "CF_WARRANT_RELATION_PAIR_WARRANT_RELATION__PERSPECTIVE_ASSIGNMENT"
+        },
+        {
+          "answer_states": [
+            "supports_left",
+            "supports_right",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "If the operation itself performs the conversion, prefer operation_function; if it mainly relates multiple warrants, prefer warrant_relation.",
+          "test_id": "CF_WARRANT_RELATION_PAIR_OPERATION_FUNCTION__WARRANT_RELATION"
+        },
+        {
+          "answer_states": [
+            "supports_left",
+            "supports_right",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "Ask whether changing the boundary of the annotation would change the result; if the boundary is stable but warrants interact, use warrant_relation.",
+          "test_id": "CF_WARRANT_RELATION_PAIR_BOUNDARY_SETTING__WARRANT_RELATION"
+        },
+        {
+          "answer_states": [
+            "supports_left",
+            "supports_right",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "If removing the later temporal frame removes the function, prefer temporal_layering; if removing cross-warrant conflict removes it, prefer warrant_relation.",
+          "test_id": "CF_WARRANT_RELATION_PAIR_TEMPORAL_LAYERING__WARRANT_RELATION"
+        },
+        {
+          "answer_states": [
+            "supports_left",
+            "supports_right",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "Ask whether changing the speaker/testimonial position would change the annotation; if incompatibility among multiple warrants is dominant, use warrant_relation.",
+          "test_id": "CF_WARRANT_RELATION_PAIR_PERSPECTIVE_ASSIGNMENT__WARRANT_RELATION"
+        },
+        {
+          "answer_states": [
+            "supports_left",
+            "supports_right",
+            "inconclusive",
+            "not_applicable"
+          ],
+          "confidence_required": true,
+          "evidence_required": true,
+          "question": "Ask whether the local text contains interacting warrants; if yes, use warrant_relation. Use context_inference only when the missing contextual bridge is dominant.",
+          "test_id": "CF_WARRANT_RELATION_PAIR_CONTEXT_INFERENCE__WARRANT_RELATION"
+        }
+      ],
+      "decision_consequence": "The record should name the warrants and the relation among them.",
+      "definition": "Conflict, ranking, qualification, suspension, or interaction among multiple warrants is the dominant procedural locus.",
+      "do_not_use_when": [
+        "Do not use merely because records disagree.",
+        "Do not use when one source alone is granted standing; use warrant_attribution.",
+        "Do not use when temporal reclassification is dominant; use temporal_layering."
+      ],
+      "escalation_condition": "Escalate when the record cannot decide whether warrant interaction or perspective, time, operation, or boundary is dominant.",
+      "examples": {
+        "near_miss": {
+          "example_id": "EX_WARRANT_RELATION_ARTIFICIAL_NEAR",
+          "provenance": "artificial_minimal_example_not_study_sample",
+          "text": "Artificial near miss: a single order is simply treated as authoritative. That is warrant_attribution."
+        },
+        "positive": {
+          "example_id": "EX_WARRANT_RELATION_ARTIFICIAL_POS",
+          "provenance": "artificial_minimal_example_not_study_sample",
+          "text": "Artificial example: one note promises release while a later order cancels it; the interpretation turns on the relation between promise and cancellation."
+        }
+      },
+      "exclusion_indicators": [
+        "Only one warrant is operative.",
+        "The relation is incidental and another locus performs conversion."
+      ],
+      "positive_indicators": [
+        "Two reports conflict and the record depends on which is prioritized.",
+        "A sign is qualified by a later statement within the same packet."
+      ],
+      "provenance_note": "Definition inherits the active lineage table and protocol boundaries; operational rules are v0.1 synthesis from lineage, predicted-confusion tests, protocol schema, and legacy manual distinctions.",
+      "use_another_value_when": [
+        "Use warrant_attribution for one source receiving standing.",
+        "Use temporal_layering when later framing changes earlier evidence.",
+        "Use perspective_assignment when standpoint rather than cross-warrant relation determines the function."
+      ],
+      "use_when": [
+        "Multiple warrants point in different or mutually qualifying directions.",
+        "The record ranks, reconciles, suspends, or combines warrants.",
+        "Removing the relation among warrants would change the interpretation."
+      ]
+    }
+  },
+  "category_order": [
+    "cue_function",
+    "warrant_attribution",
+    "warrant_relation",
+    "operation_function",
+    "boundary_setting",
+    "temporal_layering",
+    "perspective_assignment",
+    "context_inference"
+  ],
+  "claim_boundary": "Provisional audit vocabulary for protocol review; not empirical validation, an exhaustive ontology, or a truth standard.",
+  "counterfactual_test_protocol": {
+    "answer_states": [
+      "supports_category",
+      "supports_other_category",
+      "inconclusive",
+      "not_applicable"
+    ],
+    "conflict_policy": "Conflicting tests trigger escalation or unresolved; do not force a dominant locus.",
+    "fields": [
+      "test_id",
+      "question",
+      "answer",
+      "cited_evidence",
+      "effect_on_decision",
+      "confidence"
+    ],
+    "mandatory_when": [
+      "a category is proposed",
+      "a predicted-confusion pair is relevant",
+      "the coder marks medium or high uncertainty",
+      "an alternative pathway is retained"
+    ]
+  },
+  "decision_tree": {
+    "machine_readable_type": "ordered_questions",
+    "nodes": [
+      {
+        "id": "DT1",
+        "no": "ESCALATE_INSUFFICIENT_EVIDENCE",
+        "question": "Are selected evidence and focal interpretive decision recorded?",
+        "yes": "DT2"
+      },
+      {
+        "id": "DT2",
+        "no": "UNRESOLVED",
+        "question": "Is evidence-to-interpretation conversion sufficiently licensed?",
+        "yes": "DT3"
+      },
+      {
+        "id": "DT3",
+        "no": "DT4",
+        "question": "Does an unstable unit, speaker boundary, category boundary, or scope boundary control the decision?",
+        "yes": "boundary_setting"
+      },
+      {
+        "id": "DT4",
+        "no": "DT5",
+        "question": "Does a later, retrospective, or reuse layer reclassify earlier evidence?",
+        "yes": "temporal_layering"
+      },
+      {
+        "id": "DT5",
+        "no": "DT6",
+        "question": "Does standpoint, focalization, witness role, or testimonial position control the function?",
+        "yes": "perspective_assignment"
+      },
+      {
+        "id": "DT6",
+        "no": "DT7",
+        "question": "Does a visible interpretive, testimonial, consultative, recognitional, or self-reading operation perform the conversion?",
+        "yes": "operation_function"
+      },
+      {
+        "id": "DT7",
+        "no": "DT8",
+        "question": "Does one source, medium, speaker, sign, or result receive warranting force?",
+        "yes": "DT7A"
+      },
+      {
+        "id": "DT7A",
+        "no": "warrant_attribution",
+        "question": "Do multiple warrants have to be ranked, reconciled, qualified, suspended, or related?",
+        "yes": "warrant_relation"
+      },
+      {
+        "id": "DT8",
+        "no": "DT9",
+        "question": "Do multiple local warrants interact as the dominant problem?",
+        "yes": "warrant_relation"
+      },
+      {
+        "id": "DT9",
+        "no": "DT10",
+        "question": "Is the cue family itself still the unresolved converter after more specific loci are excluded?",
+        "yes": "cue_function"
+      },
+      {
+        "id": "DT10",
+        "no": "UNRESOLVED",
+        "question": "Is a contextual bridge beyond the local anchor required after more specific loci are excluded?",
+        "yes": "context_inference"
+      },
+      {
+        "escalation_required": true,
+        "id": "ESCALATE_INSUFFICIENT_EVIDENCE",
+        "terminal": "unresolved"
+      },
+      {
+        "escalation_required": true,
+        "id": "UNRESOLVED",
+        "terminal": "unresolved"
+      }
+    ]
+  },
+  "effective_date": "2026-07-02",
+  "evidence_before_locus_rule": "Record evidence and rationale before assigning friction_locus; friction_locus is not a substitute for the primary label.",
+  "examples": [
+    "EX_CUE_FUNCTION_ARTIFICIAL_POS",
+    "EX_CUE_FUNCTION_ARTIFICIAL_NEAR",
+    "EX_WARRANT_ATTRIBUTION_ARTIFICIAL_POS",
+    "EX_WARRANT_ATTRIBUTION_ARTIFICIAL_NEAR",
+    "EX_WARRANT_RELATION_ARTIFICIAL_POS",
+    "EX_WARRANT_RELATION_ARTIFICIAL_NEAR",
+    "EX_OPERATION_FUNCTION_ARTIFICIAL_POS",
+    "EX_OPERATION_FUNCTION_ARTIFICIAL_NEAR",
+    "EX_BOUNDARY_SETTING_ARTIFICIAL_POS",
+    "EX_BOUNDARY_SETTING_ARTIFICIAL_NEAR",
+    "EX_TEMPORAL_LAYERING_ARTIFICIAL_POS",
+    "EX_TEMPORAL_LAYERING_ARTIFICIAL_NEAR",
+    "EX_PERSPECTIVE_ASSIGNMENT_ARTIFICIAL_POS",
+    "EX_PERSPECTIVE_ASSIGNMENT_ARTIFICIAL_NEAR",
+    "EX_CONTEXT_INFERENCE_ARTIFICIAL_POS",
+    "EX_CONTEXT_INFERENCE_ARTIFICIAL_NEAR"
+  ],
+  "global_coding_sequence": [
+    "identify focal interpretive decision",
+    "identify selected evidence",
+    "state proposed primary interpretation",
+    "retain plausible alternatives",
+    "identify where conversion from evidence to interpretation becomes unstable",
+    "apply relevant counterfactual tests",
+    "choose dominant friction locus",
+    "record uncertainty",
+    "escalate where required"
+  ],
+  "manual_status": "AUTHORITATIVE_FOR_PROTOCOL_REVIEW",
+  "manual_version": "friction_locus_manual_v0_1",
+  "one_dominant_locus_rule": {
+    "primary_required": "exactly_one_or_unresolved",
+    "secondary_loci": "record separately in rationale/decision path only if schema permits; do not encode as multiple primary labels",
+    "tie_policy": "ties trigger escalation or unresolved"
+  },
+  "pairwise_disambiguation": [
+    {
+      "directionality": "directional",
+      "error_risk": "Reserved cue_function may be overused when operation_function is the more specific locus.",
+      "left": "cue_function",
+      "pair": "cue_function -> operation_function",
+      "prior_examples": "operation_function has prior positive examples; cue_function has no positive demo example",
+      "right": "operation_function",
+      "source_of_confusion": "A cue type such as prophecy, testimony, or divination may be mistaken for the visible act performed with it.",
+      "test": "Ask whether the problem is what this cue type does here, or what an act of interpretation, consultation, confession, recognition, or self-reading does."
+    },
+    {
+      "directionality": "directional",
+      "error_risk": "Reserved cue_function may be overused when warrant_attribution is the more specific locus.",
+      "left": "cue_function",
+      "pair": "cue_function -> warrant_attribution",
+      "prior_examples": "warrant_attribution has prior positive examples; cue_function has no positive demo example",
+      "right": "warrant_attribution",
+      "source_of_confusion": "A cue family may be confused with the source or medium receiving warranting force.",
+      "test": "Ask whether the cue type itself is underdetermined after excluding more specific loci, or whether one source, sign, medium, speaker, or result is granted standing."
+    },
+    {
+      "directionality": "symmetric",
+      "error_risk": "One-warrant cases may be overcoded as warrant_relation when contextual complexity is present.",
+      "left": "warrant_attribution",
+      "pair": "warrant_attribution -> warrant_relation",
+      "prior_examples": "both have prior positive examples",
+      "right": "warrant_relation",
+      "source_of_confusion": "A single source granted authority may be confused with an interaction among multiple warrants.",
+      "test": "Count the warrants: if the annotation depends on how more than one warrant interacts, use warrant_relation; if one source receives authority, use warrant_attribution."
+    },
+    {
+      "directionality": "symmetric",
+      "error_risk": "Warrant attribution may be overcoded as operation_function when interpretation is visibly present.",
+      "left": "warrant_attribution",
+      "pair": "warrant_attribution -> operation_function",
+      "prior_examples": "both have prior positive examples",
+      "right": "operation_function",
+      "source_of_confusion": "Authority is often assigned through an interpretive act, so granting standing may be confused with visible operation.",
+      "test": "If evidence becomes usable as a warrant through the operation, prefer warrant_attribution; if evidence already has standing and the function depends on handling it, prefer operation_function."
+    },
+    {
+      "directionality": "symmetric",
+      "error_risk": "Warrant conflicts in retrospectively framed cases may be mistaken for temporal_layering, or temporal effects may be flattened into warrant_relation.",
+      "left": "warrant_relation",
+      "pair": "warrant_relation -> temporal_layering",
+      "prior_examples": "both have prior positive examples",
+      "right": "temporal_layering",
+      "source_of_confusion": "Cross-warrant conflict may coexist with retrospective framing or later readability.",
+      "test": "If removing cross-warrant conflict removes the function, prefer warrant_relation; if removing the later temporal frame removes it, prefer temporal_layering."
+    },
+    {
+      "directionality": "symmetric",
+      "error_risk": "Perspective-governed testimony may be overcoded as warrant_relation when multiple accounts are visible.",
+      "left": "warrant_relation",
+      "pair": "warrant_relation -> perspective_assignment",
+      "prior_examples": "both have prior positive examples",
+      "right": "perspective_assignment",
+      "source_of_confusion": "Incompatible testimony or standpoint can look like conflict among warrants or like perspective control.",
+      "test": "Ask whether incompatibility among multiple warrants determines the function, or whether changing the speaker/testimonial position would change the annotation."
+    },
+    {
+      "directionality": "symmetric",
+      "error_risk": "Operations that rank warrants may be overcoded as operation_function when warrant_relation is dominant.",
+      "left": "operation_function",
+      "pair": "operation_function -> warrant_relation",
+      "prior_examples": "both have prior positive examples",
+      "right": "warrant_relation",
+      "source_of_confusion": "An operation can matter because it performs conversion or because it creates, exposes, ranks, or intensifies relations among warrants.",
+      "test": "If the operation itself performs the conversion, prefer operation_function; if it mainly relates multiple warrants, prefer warrant_relation."
+    },
+    {
+      "directionality": "symmetric",
+      "error_risk": "Later reclassification may be overcoded as operation_function when a recognition scene is visible.",
+      "left": "operation_function",
+      "pair": "operation_function -> temporal_layering",
+      "prior_examples": "both have prior positive examples",
+      "right": "temporal_layering",
+      "source_of_confusion": "Recognition or fulfilment can be treated as a local operation or as later reclassification of earlier evidence.",
+      "test": "If the local operation produces the function, prefer operation_function; if a later moment reclassifies earlier evidence, prefer temporal_layering."
+    },
+    {
+      "directionality": "directional",
+      "error_risk": "Boundary_setting may be underused when coders move directly to warrant_relation inside an unstable unit.",
+      "left": "boundary_setting",
+      "pair": "boundary_setting -> warrant_relation",
+      "prior_examples": "warrant_relation has prior positive examples; boundary_setting has no positive demo example",
+      "right": "warrant_relation",
+      "source_of_confusion": "A scope or unit boundary may be confused with the relation among warrants inside a stable unit.",
+      "test": "Ask whether changing the boundary of the annotation would change the result; if the boundary is stable but warrants interact, use warrant_relation."
+    },
+    {
+      "directionality": "directional",
+      "error_risk": "Boundary problems may be absorbed into context_inference as a residual explanation.",
+      "left": "boundary_setting",
+      "pair": "boundary_setting -> context_inference",
+      "prior_examples": "neither boundary_setting nor context_inference has a positive demo example in the cited manual lineage",
+      "right": "context_inference",
+      "source_of_confusion": "A missing boundary may be confused with a missing contextual bridge.",
+      "test": "Ask whether the relevant unit/scope is unstable, or whether the unit is stable but needs external contextual inference to support conversion."
+    },
+    {
+      "directionality": "symmetric",
+      "error_risk": "Temporal_layering may be undercoded when later readability appears alongside multiple warrants.",
+      "left": "temporal_layering",
+      "pair": "temporal_layering -> warrant_relation",
+      "prior_examples": "both have prior positive examples",
+      "right": "warrant_relation",
+      "source_of_confusion": "Later fulfilment, retrospective readability, or reuse may coexist with local warrant conflict.",
+      "test": "If removing the later temporal frame removes the function, prefer temporal_layering; if removing cross-warrant conflict removes it, prefer warrant_relation."
+    },
+    {
+      "directionality": "symmetric",
+      "error_risk": "Temporal effects may be overcoded as operation_function when the text includes a visible recognition act.",
+      "left": "temporal_layering",
+      "pair": "temporal_layering -> operation_function",
+      "prior_examples": "both have prior positive examples",
+      "right": "operation_function",
+      "source_of_confusion": "A visible recognition or fulfilment scene can look like a local operation.",
+      "test": "If the function is produced by local operation, prefer operation_function; if a later moment reclassifies earlier evidence, prefer temporal_layering."
+    },
+    {
+      "directionality": "symmetric",
+      "error_risk": "Perspective_assignment may be undercoded when multiple accounts make warrant conflict salient.",
+      "left": "perspective_assignment",
+      "pair": "perspective_assignment -> warrant_relation",
+      "prior_examples": "both have prior positive examples",
+      "right": "warrant_relation",
+      "source_of_confusion": "Perspective, witness role, or testimonial position may be confused with incompatibility among multiple accounts as warrants.",
+      "test": "Ask whether changing the speaker/testimonial position would change the annotation; if incompatibility among multiple warrants is dominant, use warrant_relation."
+    },
+    {
+      "directionality": "symmetric",
+      "error_risk": "Perspective-governed testimony may be overcoded as operation_function when the speech act is prominent.",
+      "left": "perspective_assignment",
+      "pair": "perspective_assignment -> operation_function",
+      "prior_examples": "both have prior positive examples",
+      "right": "operation_function",
+      "source_of_confusion": "Confession or testimony can be treated as a visible operation or as standpoint-governed perspective.",
+      "test": "Ask whether the function depends on the act of confessing/testifying or on whose perspective/testimonial role controls the annotation."
+    },
+    {
+      "directionality": "directional",
+      "error_risk": "Context_inference may be overused when temporal_layering provides the more specific explanation.",
+      "left": "context_inference",
+      "pair": "context_inference -> temporal_layering",
+      "prior_examples": "temporal_layering has prior positive examples; context_inference has no positive demo example",
+      "right": "temporal_layering",
+      "source_of_confusion": "Historical readability or later framing may be mistaken for external contextual inference.",
+      "test": "Ask whether later readability is the decisive feature; if yes, use temporal_layering rather than context_inference."
+    },
+    {
+      "directionality": "directional",
+      "error_risk": "Context_inference may be overused as a residual category for difficult warrant interactions.",
+      "left": "context_inference",
+      "pair": "context_inference -> warrant_relation",
+      "prior_examples": "warrant_relation has prior positive examples; context_inference has no positive demo example",
+      "right": "warrant_relation",
+      "source_of_confusion": "External or background context may be confused with interaction among warrants within the text.",
+      "test": "Ask whether the local text contains interacting warrants; if yes, use warrant_relation. Use context_inference only when the missing contextual bridge is dominant."
+    }
+  ],
+  "provenance_references": [
+    "docs/studies/friction_locus_lineage_table.csv",
+    "docs/studies/predicted_confusions.csv",
+    "docs/studies/human_llm_friction_locus_pilot_protocol.md",
+    "docs/studies/human_llm_friction_locus_analysis_plan.md",
+    "schemas/human_llm_coder_output.schema.json",
+    "legacy-trim-v0.2.1:docs/TRIM_Coding_Manual_v0_2_1_friction_locus.md"
+  ],
+  "review_required_policy": {
+    "final_operational_label": "unresolved",
+    "model_autonomous_approval": false,
+    "operational_status": "requires_human_review",
+    "original_record_preserved": true
+  },
+  "unresolved_policy": {
+    "allowed": true,
+    "final_operational_label": "unresolved",
+    "use_when": "Evidence and counterfactual tests do not support a responsible dominant locus."
+  }
+}
