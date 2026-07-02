@@ -1,0 +1,50 @@
+{
+  "canonical_text": "L1_STEVENSON_JH_001-S01: From that time forward, Mr. Utterson began to haunt the door in the by-street of shops. In the morning before office hours, at noon when business was plenty and time scarce, at night under the face of the fogged city moon, by all lights and at all hours of solitude or concourse, the lawyer was to be found on his chosen post.\nL1_STEVENSON_JH_001-S02: “If he be Mr. Hyde,” he had thought, “I shall be Mr. Seek.”\nL1_STEVENSON_JH_001-S03: And at last his patience was rewarded. It was a fine dry night; frost in the air; the streets as clean as a ballroom floor; the lamps, unshaken by any wind, drawing a regular pattern of light and shadow. By ten o’clock, when the shops were closed, the by-street was very solitary and, in spite of the low growl of London from all round, very silent. Small sounds carried far; domestic sounds out of the houses were clearly audible on either side of the roadway; and the rumour of",
+  "canonical_text_status": "frozen_packet_text_layer_normalized_from_retrieved_project_gutenberg_lines",
+  "case_id": "L1_STEVENSON_JH_001",
+  "edition": "Project Gutenberg eBook #43, English public-domain edition",
+  "fixed_context": "focal inference line plus adjacent surveillance context",
+  "gloss_authority_status": "not_applicable",
+  "inclusion_layer": "Layer 1",
+  "packet_version": "source_packet_v0_1_2026_07_02",
+  "retrieval_date": "2026-07-02",
+  "rights_note": "Execution-preparation packet uses public-domain Project Gutenberg source text. Public release or redistribution outside this repository review still requires source-specific rights audit.",
+  "rights_status": "public_domain_us_project_gutenberg_or_public_domain_translation",
+  "segments": [
+    {
+      "evidence_id": "L1_STEVENSON_JH_001-S01",
+      "text": "From that time forward, Mr. Utterson began to haunt the door in the by-street of shops. In the morning before office hours, at noon when business was plenty and time scarce, at night under the face of the fogged city moon, by all lights and at all hours of solitude or concourse, the lawyer was to be found on his chosen post."
+    },
+    {
+      "evidence_id": "L1_STEVENSON_JH_001-S02",
+      "text": "“If he be Mr. Hyde,” he had thought, “I shall be Mr. Seek.”"
+    },
+    {
+      "evidence_id": "L1_STEVENSON_JH_001-S03",
+      "text": "And at last his patience was rewarded. It was a fine dry night; frost in the air; the streets as clean as a ballroom floor; the lamps, unshaken by any wind, drawing a regular pattern of light and shadow. By ten o’clock, when the shops were closed, the by-street was very solitary and, in spite of the low growl of London from all round, very silent. Small sounds carried far; domestic sounds out of the houses were clearly audible on either side of the roadway; and the rumour of"
+    }
+  ],
+  "source_citation": "Robert Louis Stevenson, Strange Case of Dr Jekyll and Mr Hyde. Project Gutenberg eBook #43, English public-domain edition. Source lines 406-420. Retrieved 2026-07-02.",
+  "source_file_sha256": "48e3f455c90f42e2aa4e9b0413672974a175121eef5262ebe9d8cdec5b74cf14",
+  "source_language": "English",
+  "source_line_range": "pg43.txt:406-420",
+  "source_packet_hash": "9886ad2ebc49cd9844396adc573642e91db26e06497227903b6e4deb29005a69",
+  "source_packet_hash_canonicalization": "sha256_canonical_json_excluding_source_packet_hash_v1",
+  "source_text_hash": "f1667a3dd1174124e93b83c27f4255f68cd0dcfb49bcecc3a70fdf25cf10baea",
+  "source_universe_id": "L1_PG_HELD_OUT_NARRATIVE_2026_07_02",
+  "source_url_or_source_file_reference": "https://www.gutenberg.org/cache/epub/43/pg43.txt",
+  "text_layer_visibility": {
+    "model_facing_instructions_included": false,
+    "model_text_layers": [
+      "canonical_text"
+    ],
+    "researcher_and_model_identical": true,
+    "researcher_text_layers": [
+      "canonical_text"
+    ],
+    "secondary_scholarship_visible": false
+  },
+  "translation_or_gloss": "",
+  "translation_or_gloss_status": "not_applicable",
+  "work": "Robert Louis Stevenson, Strange Case of Dr Jekyll and Mr Hyde"
+}

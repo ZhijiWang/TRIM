@@ -1,0 +1,44 @@
+{
+  "canonical_text": "L2_BEOWULF_DRAGON_001-S01: Belovèd co-liegemen--his last salutation: \"No brand would I bear, no blade for the dragon, Wist I a way my word-boast to 'complish[1] Else with the monster, as with Grendel I did it; 60 But fire in the battle hot I expect there, Furious flame-burning: so I fixed on my body Target and war-mail. The ward of the barrow[2] I'll not flee from a foot-length, the foeman uncanny. At the wall 'twill befall us as Fate decreeth,",
+  "canonical_text_status": "frozen_packet_text_layer_normalized_from_retrieved_project_gutenberg_lines",
+  "case_id": "L2_BEOWULF_DRAGON_001",
+  "edition": "Project Gutenberg eBook #16328, Francis B. Gummere translation",
+  "fixed_context": "focal boast and weapon-choice passage",
+  "gloss_authority_status": "public_domain_working_translation_for_study_packet",
+  "inclusion_layer": "Layer 2",
+  "packet_version": "source_packet_v0_1_2026_07_02",
+  "retrieval_date": "2026-07-02",
+  "rights_note": "Execution-preparation packet uses public-domain Project Gutenberg source text. Public release or redistribution outside this repository review still requires source-specific rights audit.",
+  "rights_status": "public_domain_us_project_gutenberg_or_public_domain_translation",
+  "segments": [
+    {
+      "evidence_id": "L2_BEOWULF_DRAGON_001-S01",
+      "text": "Belovèd co-liegemen--his last salutation: \"No brand would I bear, no blade for the dragon, Wist I a way my word-boast to 'complish[1] Else with the monster, as with Grendel I did it; 60 But fire in the battle hot I expect there, Furious flame-burning: so I fixed on my body Target and war-mail. The ward of the barrow[2] I'll not flee from a foot-length, the foeman uncanny. At the wall 'twill befall us as Fate decreeth,"
+    }
+  ],
+  "source_citation": "Beowulf. Project Gutenberg eBook #16328, Francis B. Gummere translation. Source lines 5420-5428. Retrieved 2026-07-02.",
+  "source_file_sha256": "c7a27644f8d2d8a4fc631c12c6928e94f26ed7394271e46ab676031b5f3828da",
+  "source_language": "English translation from Old English",
+  "source_line_range": "pg16328.txt:5420-5428",
+  "source_packet_hash": "039070324ba667dbe267a1089943b6caa58b3c9dfe4a4f94f856926960a2841b",
+  "source_packet_hash_canonicalization": "sha256_canonical_json_excluding_source_packet_hash_v1",
+  "source_text_hash": "903ec8fb2700929fa3934fe415a90a62ddeb16faeea41f0a13a67a7fa3e9784e",
+  "source_universe_id": "L2_CLASSICAL_TRANSFER_PD_TRANSLATIONS_2026_07_02",
+  "source_url_or_source_file_reference": "https://www.gutenberg.org/cache/epub/16328/pg16328.txt",
+  "text_layer_visibility": {
+    "model_facing_instructions_included": false,
+    "model_text_layers": [
+      "canonical_text",
+      "translation_or_gloss"
+    ],
+    "researcher_and_model_identical": true,
+    "researcher_text_layers": [
+      "canonical_text",
+      "translation_or_gloss"
+    ],
+    "secondary_scholarship_visible": false
+  },
+  "translation_or_gloss": "L2_BEOWULF_DRAGON_001-S01: Belovèd co-liegemen--his last salutation: \"No brand would I bear, no blade for the dragon, Wist I a way my word-boast to 'complish[1] Else with the monster, as with Grendel I did it; 60 But fire in the battle hot I expect there, Furious flame-burning: so I fixed on my body Target and war-mail. The ward of the barrow[2] I'll not flee from a foot-length, the foeman uncanny. At the wall 'twill befall us as Fate decreeth,",
+  "translation_or_gloss_status": "public_domain_working_translation_for_study_packet",
+  "work": "Beowulf"
+}

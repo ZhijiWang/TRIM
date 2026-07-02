@@ -1,0 +1,50 @@
+{
+  "canonical_text": "L1_POE_TELLTALE_001-S01: THE TELL-TALE HEART.\nL1_POE_TELLTALE_001-S02: True!—nervous—very, very dreadfully nervous I had been and am; but why will you say that I am mad? The disease had sharpened my senses—not destroyed—not dulled them. Above all was the sense of hearing acute. I heard all things in the heaven and in the earth. I heard many things in hell. How, then, am I mad? Hearken! and observe how healthily—how calmly I can tell you the whole story.\nL1_POE_TELLTALE_001-S03: It is impossible to say how first the idea entered my brain; but once conceived, it haunted me day and night. Object there was none. Passion there was none. I loved the old man. He had never wronged me. He had never given me insult. For his gold I had no desire. I think it was his eye! yes, it was this! He had the eye of a vulture—a pale blue eye, with a film over it. Whenever it fell upon me, my blood ran cold; and so by degrees—very",
+  "canonical_text_status": "frozen_packet_text_layer_normalized_from_retrieved_project_gutenberg_lines",
+  "case_id": "L1_POE_TELLTALE_001",
+  "edition": "Project Gutenberg eBook #2148, English public-domain Poe edition",
+  "fixed_context": "opening self-justification and stated motive",
+  "gloss_authority_status": "not_applicable",
+  "inclusion_layer": "Layer 1",
+  "packet_version": "source_packet_v0_1_2026_07_02",
+  "retrieval_date": "2026-07-02",
+  "rights_note": "Execution-preparation packet uses public-domain Project Gutenberg source text. Public release or redistribution outside this repository review still requires source-specific rights audit.",
+  "rights_status": "public_domain_us_project_gutenberg_or_public_domain_translation",
+  "segments": [
+    {
+      "evidence_id": "L1_POE_TELLTALE_001-S01",
+      "text": "THE TELL-TALE HEART."
+    },
+    {
+      "evidence_id": "L1_POE_TELLTALE_001-S02",
+      "text": "True!—nervous—very, very dreadfully nervous I had been and am; but why will you say that I am mad? The disease had sharpened my senses—not destroyed—not dulled them. Above all was the sense of hearing acute. I heard all things in the heaven and in the earth. I heard many things in hell. How, then, am I mad? Hearken! and observe how healthily—how calmly I can tell you the whole story."
+    },
+    {
+      "evidence_id": "L1_POE_TELLTALE_001-S03",
+      "text": "It is impossible to say how first the idea entered my brain; but once conceived, it haunted me day and night. Object there was none. Passion there was none. I loved the old man. He had never wronged me. He had never given me insult. For his gold I had no desire. I think it was his eye! yes, it was this! He had the eye of a vulture—a pale blue eye, with a film over it. Whenever it fell upon me, my blood ran cold; and so by degrees—very"
+    }
+  ],
+  "source_citation": "Edgar Allan Poe, The Tell-Tale Heart. Project Gutenberg eBook #2148, English public-domain Poe edition. Source lines 9279-9295. Retrieved 2026-07-02.",
+  "source_file_sha256": "3545c09ac548ea4991e81116a50283cb5f19af8aaaea4bbb9f8928edf36cb96b",
+  "source_language": "English",
+  "source_line_range": "pg2148.txt:9279-9295",
+  "source_packet_hash": "215ed1bebdf4432f32ed3a4b08c9dbd1a8a416c8c358ec61ddbe4b4a46a533ef",
+  "source_packet_hash_canonicalization": "sha256_canonical_json_excluding_source_packet_hash_v1",
+  "source_text_hash": "6ce8960fe2e1ccae41942792420e76a7f072478b28d856fb41ae8fd5a6b89c8a",
+  "source_universe_id": "L1_PG_HELD_OUT_NARRATIVE_2026_07_02",
+  "source_url_or_source_file_reference": "https://www.gutenberg.org/cache/epub/2148/pg2148.txt",
+  "text_layer_visibility": {
+    "model_facing_instructions_included": false,
+    "model_text_layers": [
+      "canonical_text"
+    ],
+    "researcher_and_model_identical": true,
+    "researcher_text_layers": [
+      "canonical_text"
+    ],
+    "secondary_scholarship_visible": false
+  },
+  "translation_or_gloss": "",
+  "translation_or_gloss_status": "not_applicable",
+  "work": "Edgar Allan Poe, The Tell-Tale Heart"
+}

@@ -1,0 +1,42 @@
+{
+  "canonical_text": "L1_AUSTEN_PNP_001-S01: Occupied in observing Mr. Bingley’s attention to her sister, Elizabeth was far from suspecting that she was herself becoming an object of some interest in the eyes of his friend. Mr. Darcy had at first scarcely allowed her to be pretty: he had looked at her without admiration at the ball; and when they next met, he looked at her only to criticise. But no sooner had he made it clear to himself and his friends that she had hardly a good feature in her face, than he began to find it was rendered uncommonly intelligent by the beautiful expression of her dark eyes. To this discovery succeeded some others equally mortifying. Though he had detected with a critical eye more than one failure of perfect symmetry in her form, he was forced to acknowledge her figure to be light and pleasing; and in spite of his asserting that her manners were not those of the fashionable world, he was caught by their easy playfulness. Of this she was perfectly unaware: to her he was only the man who made himself agreeable nowhere, and who had not thought her handsome enough to dance with.",
+  "canonical_text_status": "frozen_packet_text_layer_normalized_from_retrieved_project_gutenberg_lines",
+  "case_id": "L1_AUSTEN_PNP_001",
+  "edition": "Project Gutenberg eBook #1342, English public-domain edition",
+  "fixed_context": "focal paragraph plus adjacent transition",
+  "gloss_authority_status": "not_applicable",
+  "inclusion_layer": "Layer 1",
+  "packet_version": "source_packet_v0_1_2026_07_02",
+  "retrieval_date": "2026-07-02",
+  "rights_note": "Execution-preparation packet uses public-domain Project Gutenberg source text. Public release or redistribution outside this repository review still requires source-specific rights audit.",
+  "rights_status": "public_domain_us_project_gutenberg_or_public_domain_translation",
+  "segments": [
+    {
+      "evidence_id": "L1_AUSTEN_PNP_001-S01",
+      "text": "Occupied in observing Mr. Bingley’s attention to her sister, Elizabeth was far from suspecting that she was herself becoming an object of some interest in the eyes of his friend. Mr. Darcy had at first scarcely allowed her to be pretty: he had looked at her without admiration at the ball; and when they next met, he looked at her only to criticise. But no sooner had he made it clear to himself and his friends that she had hardly a good feature in her face, than he began to find it was rendered uncommonly intelligent by the beautiful expression of her dark eyes. To this discovery succeeded some others equally mortifying. Though he had detected with a critical eye more than one failure of perfect symmetry in her form, he was forced to acknowledge her figure to be light and pleasing; and in spite of his asserting that her manners were not those of the fashionable world, he was caught by their easy playfulness. Of this she was perfectly unaware: to her he was only the man who made himself agreeable nowhere, and who had not thought her handsome enough to dance with."
+    }
+  ],
+  "source_citation": "Jane Austen, Pride and Prejudice. Project Gutenberg eBook #1342, English public-domain edition. Source lines 1487-1502. Retrieved 2026-07-02.",
+  "source_file_sha256": "b0fb03effbd5b9a024853d786da8cd10670be8e066624260fe55dc45ddabe701",
+  "source_language": "English",
+  "source_line_range": "pg1342.txt:1487-1502",
+  "source_packet_hash": "d5294cdfea60248b5bf0d37065a19c8a951b90e9dc41911609e3671e0b14243d",
+  "source_packet_hash_canonicalization": "sha256_canonical_json_excluding_source_packet_hash_v1",
+  "source_text_hash": "71502942b371370c9537d9c820fce7423cb3e794df2154e7338d282e5d808757",
+  "source_universe_id": "L1_PG_HELD_OUT_NARRATIVE_2026_07_02",
+  "source_url_or_source_file_reference": "https://www.gutenberg.org/cache/epub/1342/pg1342.txt",
+  "text_layer_visibility": {
+    "model_facing_instructions_included": false,
+    "model_text_layers": [
+      "canonical_text"
+    ],
+    "researcher_and_model_identical": true,
+    "researcher_text_layers": [
+      "canonical_text"
+    ],
+    "secondary_scholarship_visible": false
+  },
+  "translation_or_gloss": "",
+  "translation_or_gloss_status": "not_applicable",
+  "work": "Jane Austen, Pride and Prejudice"
+}

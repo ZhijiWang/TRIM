@@ -1,0 +1,5 @@
+Task framing shared by all conditions:
+You are producing an annotation record for a Design B human-model procedural comparison study. The record is not a truth verdict, answer key, or adjudication of the literary passage. Treat the source packet as the only evidence available. Do not browse, use tools, consult external sources, or rely on another session. Preserve uncertainty and alternative pathways when the packet supports them. Cite evidence IDs exactly as they appear in the source packet. Do not infer missing source context beyond the frozen packet.
+
+Structured output requirement shared by all conditions:
+Return one JSON object that conforms to the supplied model_coder_record output schema. Preserve concise free_text_rationale, not hidden chain-of-thought. Include selected_evidence, primary_label, friction_locus_proposed, friction_locus_operational_status, final_operational_label, rationale_mechanism, uncertainty, alternative_pathways, counterfactual_tests, decision_path, escalation_required, escalation_reason, free_text_rationale, unresolved_ambiguity, and the permitted placeholder for record_hash. Do not add fields outside the schema.

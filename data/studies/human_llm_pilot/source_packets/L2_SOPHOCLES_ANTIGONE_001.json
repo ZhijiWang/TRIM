@@ -1,0 +1,44 @@
+{
+  "canonical_text": "L2_SOPHOCLES_ANTIGONE_001-S01: ANTIGONE. Yea, for these laws were not ordained of Zeus, And she who sits enthroned with gods below, Justice, enacted not these human laws. Nor did I deem that thou, a mortal man, Could’st by a breath annul and override The immutable unwritten laws of Heaven. They were not born today nor yesterday; They die not; and none knoweth whence they sprang. I was not like, who feared no mortal’s frown, To disobey these laws and so provoke The wrath of Heaven. I knew that I must die, E’en hadst thou not proclaimed it; and if death",
+  "canonical_text_status": "frozen_packet_text_layer_normalized_from_retrieved_project_gutenberg_lines",
+  "case_id": "L2_SOPHOCLES_ANTIGONE_001",
+  "edition": "Project Gutenberg eBook #31, public-domain English translation",
+  "fixed_context": "focal defense speech plus immediate legal-religious contrast",
+  "gloss_authority_status": "public_domain_working_translation_for_study_packet",
+  "inclusion_layer": "Layer 2",
+  "packet_version": "source_packet_v0_1_2026_07_02",
+  "retrieval_date": "2026-07-02",
+  "rights_note": "Execution-preparation packet uses public-domain Project Gutenberg source text. Public release or redistribution outside this repository review still requires source-specific rights audit.",
+  "rights_status": "public_domain_us_project_gutenberg_or_public_domain_translation",
+  "segments": [
+    {
+      "evidence_id": "L2_SOPHOCLES_ANTIGONE_001-S01",
+      "text": "ANTIGONE. Yea, for these laws were not ordained of Zeus, And she who sits enthroned with gods below, Justice, enacted not these human laws. Nor did I deem that thou, a mortal man, Could’st by a breath annul and override The immutable unwritten laws of Heaven. They were not born today nor yesterday; They die not; and none knoweth whence they sprang. I was not like, who feared no mortal’s frown, To disobey these laws and so provoke The wrath of Heaven. I knew that I must die, E’en hadst thou not proclaimed it; and if death"
+    }
+  ],
+  "source_citation": "Sophocles, Antigone. Project Gutenberg eBook #31, public-domain English translation. Source lines 7340-7352. Retrieved 2026-07-02.",
+  "source_file_sha256": "0c0b1625eaea4153a1c41a456d4b9e1e3016d7931b09c1120878257ea7131351",
+  "source_language": "English translation from Ancient Greek",
+  "source_line_range": "pg31.txt:7340-7352",
+  "source_packet_hash": "fcd3fb2894da6f8210116cc745c0508558926a5af3cb2432b1286e2ebf338ec8",
+  "source_packet_hash_canonicalization": "sha256_canonical_json_excluding_source_packet_hash_v1",
+  "source_text_hash": "44717822941f4e8fd7c08f067795c0f99e8a866fd54e0aa066d46950b980df09",
+  "source_universe_id": "L2_CLASSICAL_TRANSFER_PD_TRANSLATIONS_2026_07_02",
+  "source_url_or_source_file_reference": "https://www.gutenberg.org/cache/epub/31/pg31.txt",
+  "text_layer_visibility": {
+    "model_facing_instructions_included": false,
+    "model_text_layers": [
+      "canonical_text",
+      "translation_or_gloss"
+    ],
+    "researcher_and_model_identical": true,
+    "researcher_text_layers": [
+      "canonical_text",
+      "translation_or_gloss"
+    ],
+    "secondary_scholarship_visible": false
+  },
+  "translation_or_gloss": "L2_SOPHOCLES_ANTIGONE_001-S01: ANTIGONE. Yea, for these laws were not ordained of Zeus, And she who sits enthroned with gods below, Justice, enacted not these human laws. Nor did I deem that thou, a mortal man, Could’st by a breath annul and override The immutable unwritten laws of Heaven. They were not born today nor yesterday; They die not; and none knoweth whence they sprang. I was not like, who feared no mortal’s frown, To disobey these laws and so provoke The wrath of Heaven. I knew that I must die, E’en hadst thou not proclaimed it; and if death",
+  "translation_or_gloss_status": "public_domain_working_translation_for_study_packet",
+  "work": "Sophocles, Antigone"
+}

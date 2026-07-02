@@ -1,0 +1,58 @@
+{
+  "canonical_text": "L1_MELVILLE_BARTLEBY_001-S01: In this very attitude did I sit when I called to him, rapidly stating what it was I wanted him to do—namely, to examine a small paper with me. Imagine my surprise, nay, my consternation, when without moving from his privacy, Bartleby in a singularly mild, firm voice, replied, “I would prefer not to.”\nL1_MELVILLE_BARTLEBY_001-S02: I sat awhile in perfect silence, rallying my stunned faculties. Immediately it occurred to me that my ears had deceived me, or Bartleby had entirely misunderstood my meaning. I repeated my request in the clearest tone I could assume. But in quite as clear a one came the previous reply, “I would prefer not to.”\nL1_MELVILLE_BARTLEBY_001-S03: “Prefer not to,” echoed I, rising in high excitement, and crossing the room with a stride. “What do you mean? Are you moon-struck? I want you to help me compare this sheet here—take it,” and I thrust it towards him.\nL1_MELVILLE_BARTLEBY_001-S04: “I would prefer not to,” said he.\nL1_MELVILLE_BARTLEBY_001-S05: I looked at him steadfastly. His face was leanly composed; his gray eye dimly calm. Not a wrinkle of agitation rippled him. Had there been the least uneasiness, anger, impatience or impertinence in his manner; in other words, had there been any thing ordinarily human about him,",
+  "canonical_text_status": "frozen_packet_text_layer_normalized_from_retrieved_project_gutenberg_lines",
+  "case_id": "L1_MELVILLE_BARTLEBY_001",
+  "edition": "Project Gutenberg eBook #11231, English public-domain edition",
+  "fixed_context": "focal office exchange plus immediate narrator reaction",
+  "gloss_authority_status": "not_applicable",
+  "inclusion_layer": "Layer 1",
+  "packet_version": "source_packet_v0_1_2026_07_02",
+  "retrieval_date": "2026-07-02",
+  "rights_note": "Execution-preparation packet uses public-domain Project Gutenberg source text. Public release or redistribution outside this repository review still requires source-specific rights audit.",
+  "rights_status": "public_domain_us_project_gutenberg_or_public_domain_translation",
+  "segments": [
+    {
+      "evidence_id": "L1_MELVILLE_BARTLEBY_001-S01",
+      "text": "In this very attitude did I sit when I called to him, rapidly stating what it was I wanted him to do—namely, to examine a small paper with me. Imagine my surprise, nay, my consternation, when without moving from his privacy, Bartleby in a singularly mild, firm voice, replied, “I would prefer not to.”"
+    },
+    {
+      "evidence_id": "L1_MELVILLE_BARTLEBY_001-S02",
+      "text": "I sat awhile in perfect silence, rallying my stunned faculties. Immediately it occurred to me that my ears had deceived me, or Bartleby had entirely misunderstood my meaning. I repeated my request in the clearest tone I could assume. But in quite as clear a one came the previous reply, “I would prefer not to.”"
+    },
+    {
+      "evidence_id": "L1_MELVILLE_BARTLEBY_001-S03",
+      "text": "“Prefer not to,” echoed I, rising in high excitement, and crossing the room with a stride. “What do you mean? Are you moon-struck? I want you to help me compare this sheet here—take it,” and I thrust it towards him."
+    },
+    {
+      "evidence_id": "L1_MELVILLE_BARTLEBY_001-S04",
+      "text": "“I would prefer not to,” said he."
+    },
+    {
+      "evidence_id": "L1_MELVILLE_BARTLEBY_001-S05",
+      "text": "I looked at him steadfastly. His face was leanly composed; his gray eye dimly calm. Not a wrinkle of agitation rippled him. Had there been the least uneasiness, anger, impatience or impertinence in his manner; in other words, had there been any thing ordinarily human about him,"
+    }
+  ],
+  "source_citation": "Herman Melville, Bartleby, the Scrivener. Project Gutenberg eBook #11231, English public-domain edition. Source lines 344-366. Retrieved 2026-07-02.",
+  "source_file_sha256": "9fbfe62ac7a129ff21b3eee6c855d5b12c3a43cd349dcab813ac856c8bcc7988",
+  "source_language": "English",
+  "source_line_range": "pg11231.txt:344-366",
+  "source_packet_hash": "289129f75b5b4aeb571d6adca693d22c5f83d76aa785ffa7b58ac247b273f65b",
+  "source_packet_hash_canonicalization": "sha256_canonical_json_excluding_source_packet_hash_v1",
+  "source_text_hash": "949415e66a12f3f22e630ee0643ee68a9757d5d6811ff4bbbef22205dc73cc93",
+  "source_universe_id": "L1_PG_HELD_OUT_NARRATIVE_2026_07_02",
+  "source_url_or_source_file_reference": "https://www.gutenberg.org/cache/epub/11231/pg11231.txt",
+  "text_layer_visibility": {
+    "model_facing_instructions_included": false,
+    "model_text_layers": [
+      "canonical_text"
+    ],
+    "researcher_and_model_identical": true,
+    "researcher_text_layers": [
+      "canonical_text"
+    ],
+    "secondary_scholarship_visible": false
+  },
+  "translation_or_gloss": "",
+  "translation_or_gloss_status": "not_applicable",
+  "work": "Herman Melville, Bartleby, the Scrivener"
+}

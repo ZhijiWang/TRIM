@@ -1,0 +1,42 @@
+{
+  "canonical_text": "L1_JAMES_TS_001-S01: mean the face was—when, on the first of these occasions, at the end of a long June day, I stopped short on emerging from one of the plantations and coming into view of the house. What arrested me on the spot—and with a shock much greater than any vision had allowed for—was the sense that my imagination had, in a flash, turned real. He did stand there!—but high up, beyond the lawn and at the very top of the tower to which, on that first morning, little Flora had conducted me. This tower was one of a pair—square, incongruous, crenelated structures—that were distinguished, for some reason, though I could see little difference, as the new and the old. They flanked opposite ends of the house and were probably architectural absurdities, redeemed in a measure indeed by not being wholly disengaged nor of a height too pretentious, dating, in their gingerbread antiquity, from a romantic revival that was already a respectable past. I admired them, had fancies about them, for we could all profit in a degree, especially when they loomed through the dusk, by the grandeur of their actual battlements; yet it was not at such an elevation that the figure I had",
+  "canonical_text_status": "frozen_packet_text_layer_normalized_from_retrieved_project_gutenberg_lines",
+  "case_id": "L1_JAMES_TS_001",
+  "edition": "Project Gutenberg eBook #209, English public-domain edition",
+  "fixed_context": "focal sighting plus immediate perception report",
+  "gloss_authority_status": "not_applicable",
+  "inclusion_layer": "Layer 1",
+  "packet_version": "source_packet_v0_1_2026_07_02",
+  "retrieval_date": "2026-07-02",
+  "rights_note": "Execution-preparation packet uses public-domain Project Gutenberg source text. Public release or redistribution outside this repository review still requires source-specific rights audit.",
+  "rights_status": "public_domain_us_project_gutenberg_or_public_domain_translation",
+  "segments": [
+    {
+      "evidence_id": "L1_JAMES_TS_001-S01",
+      "text": "mean the face was—when, on the first of these occasions, at the end of a long June day, I stopped short on emerging from one of the plantations and coming into view of the house. What arrested me on the spot—and with a shock much greater than any vision had allowed for—was the sense that my imagination had, in a flash, turned real. He did stand there!—but high up, beyond the lawn and at the very top of the tower to which, on that first morning, little Flora had conducted me. This tower was one of a pair—square, incongruous, crenelated structures—that were distinguished, for some reason, though I could see little difference, as the new and the old. They flanked opposite ends of the house and were probably architectural absurdities, redeemed in a measure indeed by not being wholly disengaged nor of a height too pretentious, dating, in their gingerbread antiquity, from a romantic revival that was already a respectable past. I admired them, had fancies about them, for we could all profit in a degree, especially when they loomed through the dusk, by the grandeur of their actual battlements; yet it was not at such an elevation that the figure I had"
+    }
+  ],
+  "source_citation": "Henry James, The Turn of the Screw. Project Gutenberg eBook #209, English public-domain edition. Source lines 828-844. Retrieved 2026-07-02.",
+  "source_file_sha256": "1a3b6f91ebca6da5935472a88b0eada55c06ab66df10019d7f7ed03487d3cce6",
+  "source_language": "English",
+  "source_line_range": "pg209.txt:828-844",
+  "source_packet_hash": "4216519022d0c44dc5636c8aa7eaed5f3a3a2941eb60e7672bfc2ce42c254430",
+  "source_packet_hash_canonicalization": "sha256_canonical_json_excluding_source_packet_hash_v1",
+  "source_text_hash": "3146717475ee33bc35ff84d1318e0612b03379251e44e3c9e335fdc49c9cd230",
+  "source_universe_id": "L1_PG_HELD_OUT_NARRATIVE_2026_07_02",
+  "source_url_or_source_file_reference": "https://www.gutenberg.org/cache/epub/209/pg209.txt",
+  "text_layer_visibility": {
+    "model_facing_instructions_included": false,
+    "model_text_layers": [
+      "canonical_text"
+    ],
+    "researcher_and_model_identical": true,
+    "researcher_text_layers": [
+      "canonical_text"
+    ],
+    "secondary_scholarship_visible": false
+  },
+  "translation_or_gloss": "",
+  "translation_or_gloss_status": "not_applicable",
+  "work": "Henry James, The Turn of the Screw"
+}

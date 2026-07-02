@@ -1,0 +1,48 @@
+{
+  "canonical_text": "L2_HERODOTUS_SCYTHIAN_001-S01: 131. As this happened often, at length Dareios began to be in straits; and the kings of the Scythians perceiving this sent a herald bearing as gifts to Dareios a bird and a mouse and a frog and five arrows. The Persians accordingly asked the bearer of the gifts as to the meaning of the gifts which were offered; but he said that nothing more had been commanded to him but to give them and get away as speedily as possible; and he bade the Persians find out for themselves, if they had wisdom, that which the gifts were meant to express.\nL2_HERODOTUS_SCYTHIAN_001-S02: 132. Having heard this the Persians took counsel with one another; and the opinion of Dareios was that the Scythians were giving to him both themselves and also earth and water, making his conjecture by this, namely that a mouse is produced in the earth and feeds on the same produce of the earth as man, and a frog in the water, while a bird has great resemblance to a horse; 119 and moreover that in giving the arrows they were delivering up their own might in battle. This was the opinion expressed by Dareios; but the opinion of Gobryas, one of the seven men who killed the Magian, was at variance with it, for he conjectured that the gifts expressed this: \"Unless ye become birds and fly up into the heaven, O Persians, or become mice and sink down under the earth, or become frogs and leap into the lakes, ye shall not return back home, but shall be smitten by these arrows.\"",
+  "canonical_text_status": "frozen_packet_text_layer_normalized_from_retrieved_project_gutenberg_lines",
+  "case_id": "L2_HERODOTUS_SCYTHIAN_001",
+  "edition": "Project Gutenberg eBook #2707, George Rawlinson translation",
+  "fixed_context": "focal sign-interpretation episode plus competing readings",
+  "gloss_authority_status": "public_domain_working_translation_for_study_packet",
+  "inclusion_layer": "Layer 2",
+  "packet_version": "source_packet_v0_1_2026_07_02",
+  "retrieval_date": "2026-07-02",
+  "rights_note": "Execution-preparation packet uses public-domain Project Gutenberg source text. Public release or redistribution outside this repository review still requires source-specific rights audit.",
+  "rights_status": "public_domain_us_project_gutenberg_or_public_domain_translation",
+  "segments": [
+    {
+      "evidence_id": "L2_HERODOTUS_SCYTHIAN_001-S01",
+      "text": "131. As this happened often, at length Dareios began to be in straits; and the kings of the Scythians perceiving this sent a herald bearing as gifts to Dareios a bird and a mouse and a frog and five arrows. The Persians accordingly asked the bearer of the gifts as to the meaning of the gifts which were offered; but he said that nothing more had been commanded to him but to give them and get away as speedily as possible; and he bade the Persians find out for themselves, if they had wisdom, that which the gifts were meant to express."
+    },
+    {
+      "evidence_id": "L2_HERODOTUS_SCYTHIAN_001-S02",
+      "text": "132. Having heard this the Persians took counsel with one another; and the opinion of Dareios was that the Scythians were giving to him both themselves and also earth and water, making his conjecture by this, namely that a mouse is produced in the earth and feeds on the same produce of the earth as man, and a frog in the water, while a bird has great resemblance to a horse; 119 and moreover that in giving the arrows they were delivering up their own might in battle. This was the opinion expressed by Dareios; but the opinion of Gobryas, one of the seven men who killed the Magian, was at variance with it, for he conjectured that the gifts expressed this: \"Unless ye become birds and fly up into the heaven, O Persians, or become mice and sink down under the earth, or become frogs and leap into the lakes, ye shall not return back home, but shall be smitten by these arrows.\""
+    }
+  ],
+  "source_citation": "Herodotus, The Histories. Project Gutenberg eBook #2707, George Rawlinson translation. Source lines 13315-13336. Retrieved 2026-07-02.",
+  "source_file_sha256": "f358029c791bba67238c7b4041c8251af5b622b01ab88a1de103cbfe202567a3",
+  "source_language": "English translation from Ancient Greek",
+  "source_line_range": "pg2707.txt:13315-13336",
+  "source_packet_hash": "75aad061e977a3c505bf4755378b6eddeb73963da82531ccfdee414883298ad7",
+  "source_packet_hash_canonicalization": "sha256_canonical_json_excluding_source_packet_hash_v1",
+  "source_text_hash": "dcd190447123e3e10e5ac07ce956b9f9e574d97d235bee3a8b525cbe293307a0",
+  "source_universe_id": "L2_CLASSICAL_TRANSFER_PD_TRANSLATIONS_2026_07_02",
+  "source_url_or_source_file_reference": "https://www.gutenberg.org/cache/epub/2707/pg2707.txt",
+  "text_layer_visibility": {
+    "model_facing_instructions_included": false,
+    "model_text_layers": [
+      "canonical_text",
+      "translation_or_gloss"
+    ],
+    "researcher_and_model_identical": true,
+    "researcher_text_layers": [
+      "canonical_text",
+      "translation_or_gloss"
+    ],
+    "secondary_scholarship_visible": false
+  },
+  "translation_or_gloss": "L2_HERODOTUS_SCYTHIAN_001-S01: 131. As this happened often, at length Dareios began to be in straits; and the kings of the Scythians perceiving this sent a herald bearing as gifts to Dareios a bird and a mouse and a frog and five arrows. The Persians accordingly asked the bearer of the gifts as to the meaning of the gifts which were offered; but he said that nothing more had been commanded to him but to give them and get away as speedily as possible; and he bade the Persians find out for themselves, if they had wisdom, that which the gifts were meant to express.\nL2_HERODOTUS_SCYTHIAN_001-S02: 132. Having heard this the Persians took counsel with one another; and the opinion of Dareios was that the Scythians were giving to him both themselves and also earth and water, making his conjecture by this, namely that a mouse is produced in the earth and feeds on the same produce of the earth as man, and a frog in the water, while a bird has great resemblance to a horse; 119 and moreover that in giving the arrows they were delivering up their own might in battle. This was the opinion expressed by Dareios; but the opinion of Gobryas, one of the seven men who killed the Magian, was at variance with it, for he conjectured that the gifts expressed this: \"Unless ye become birds and fly up into the heaven, O Persians, or become mice and sink down under the earth, or become frogs and leap into the lakes, ye shall not return back home, but shall be smitten by these arrows.\"",
+  "translation_or_gloss_status": "public_domain_working_translation_for_study_packet",
+  "work": "Herodotus, The Histories"
+}

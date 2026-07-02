@@ -1,0 +1,46 @@
+{
+  "canonical_text": "L1_BRONTE_JE_001-S01: comply!” it said. “Think of his misery; think of his danger—look at his state when left alone; remember his headlong nature; consider the recklessness following on despair—soothe him; save him; love him; tell him you love him and will be his. Who in the world cares for _you_? or who will be injured by what you do?”\nL1_BRONTE_JE_001-S02: Still indomitable was the reply—“_I_ care for myself. The more solitary, the more friendless, the more unsustained I am, the more I will respect myself. I will keep the law given by God; sanctioned by man. I will hold to the principles received by me when I was sane, and not mad—as I am now. Laws and principles are not for the times when there is no temptation: they are for such moments as this, when body and soul rise in mutiny against their rigour; stringent are they; inviolate they shall be. If at my individual convenience I might break them, what would be their worth? They have a worth—so I have always believed; and if I cannot believe it now, it is because I am insane—quite insane: with my veins running fire, and my heart beating faster than I can count its throbs. Preconceived opinions, foregone determinations, are all I have at this hour to stand by: there I plant my foot.”",
+  "canonical_text_status": "frozen_packet_text_layer_normalized_from_retrieved_project_gutenberg_lines",
+  "case_id": "L1_BRONTE_JE_001",
+  "edition": "Project Gutenberg eBook #1260, English public-domain edition",
+  "fixed_context": "focal moral decision plus inner appeal",
+  "gloss_authority_status": "not_applicable",
+  "inclusion_layer": "Layer 1",
+  "packet_version": "source_packet_v0_1_2026_07_02",
+  "retrieval_date": "2026-07-02",
+  "rights_note": "Execution-preparation packet uses public-domain Project Gutenberg source text. Public release or redistribution outside this repository review still requires source-specific rights audit.",
+  "rights_status": "public_domain_us_project_gutenberg_or_public_domain_translation",
+  "segments": [
+    {
+      "evidence_id": "L1_BRONTE_JE_001-S01",
+      "text": "comply!” it said. “Think of his misery; think of his danger—look at his state when left alone; remember his headlong nature; consider the recklessness following on despair—soothe him; save him; love him; tell him you love him and will be his. Who in the world cares for _you_? or who will be injured by what you do?”"
+    },
+    {
+      "evidence_id": "L1_BRONTE_JE_001-S02",
+      "text": "Still indomitable was the reply—“_I_ care for myself. The more solitary, the more friendless, the more unsustained I am, the more I will respect myself. I will keep the law given by God; sanctioned by man. I will hold to the principles received by me when I was sane, and not mad—as I am now. Laws and principles are not for the times when there is no temptation: they are for such moments as this, when body and soul rise in mutiny against their rigour; stringent are they; inviolate they shall be. If at my individual convenience I might break them, what would be their worth? They have a worth—so I have always believed; and if I cannot believe it now, it is because I am insane—quite insane: with my veins running fire, and my heart beating faster than I can count its throbs. Preconceived opinions, foregone determinations, are all I have at this hour to stand by: there I plant my foot.”"
+    }
+  ],
+  "source_citation": "Charlotte Bronte, Jane Eyre. Project Gutenberg eBook #1260, English public-domain edition. Source lines 14628-14647. Retrieved 2026-07-02.",
+  "source_file_sha256": "2988664342a69c6d5352501e1630b54d5bea8f47b50181cc84cedffaa279512d",
+  "source_language": "English",
+  "source_line_range": "pg1260.txt:14628-14647",
+  "source_packet_hash": "fb0a1010d32b269dd0710e06f1562660ae9276dea3be50a105aaf3da60762bb8",
+  "source_packet_hash_canonicalization": "sha256_canonical_json_excluding_source_packet_hash_v1",
+  "source_text_hash": "8d7b71caead92b9304a02452eb9b87e2ff8eebd22541b053ec2c411c870a0438",
+  "source_universe_id": "L1_PG_HELD_OUT_NARRATIVE_2026_07_02",
+  "source_url_or_source_file_reference": "https://www.gutenberg.org/cache/epub/1260/pg1260.txt",
+  "text_layer_visibility": {
+    "model_facing_instructions_included": false,
+    "model_text_layers": [
+      "canonical_text"
+    ],
+    "researcher_and_model_identical": true,
+    "researcher_text_layers": [
+      "canonical_text"
+    ],
+    "secondary_scholarship_visible": false
+  },
+  "translation_or_gloss": "",
+  "translation_or_gloss_status": "not_applicable",
+  "work": "Charlotte Bronte, Jane Eyre"
+}

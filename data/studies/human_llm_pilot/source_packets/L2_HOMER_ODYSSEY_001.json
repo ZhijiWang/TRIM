@@ -1,0 +1,48 @@
+{
+  "canonical_text": "L2_HOMER_ODYSSEY_001-S01: “I then gave him some more; three times did I fill the bowl for him, and three times did he drain it without thought or heed; then, when I saw that the wine had got into his head, I said to him as plausibly as I could: ‘Cyclops, you ask my name and I will tell it you; give me, therefore, the present you promised me; my name is Noman; this is what my father and mother and my friends have always called me.’\nL2_HOMER_ODYSSEY_001-S02: “But the cruel wretch said, ‘Then I will eat all Noman’s comrades before Noman himself, and will keep Noman for the last. This is the present that I will make him.’",
+  "canonical_text_status": "frozen_packet_text_layer_normalized_from_retrieved_project_gutenberg_lines",
+  "case_id": "L2_HOMER_ODYSSEY_001",
+  "edition": "Project Gutenberg eBook #1727, Samuel Butler translation",
+  "fixed_context": "focal deception exchange plus immediate response",
+  "gloss_authority_status": "authoritative_working_translation_for_study_packet",
+  "inclusion_layer": "Layer 2",
+  "packet_version": "source_packet_v0_1_2026_07_02",
+  "retrieval_date": "2026-07-02",
+  "rights_note": "Execution-preparation packet uses public-domain Project Gutenberg source text. Public release or redistribution outside this repository review still requires source-specific rights audit.",
+  "rights_status": "public_domain_us_project_gutenberg_or_public_domain_translation",
+  "segments": [
+    {
+      "evidence_id": "L2_HOMER_ODYSSEY_001-S01",
+      "text": "“I then gave him some more; three times did I fill the bowl for him, and three times did he drain it without thought or heed; then, when I saw that the wine had got into his head, I said to him as plausibly as I could: ‘Cyclops, you ask my name and I will tell it you; give me, therefore, the present you promised me; my name is Noman; this is what my father and mother and my friends have always called me.’"
+    },
+    {
+      "evidence_id": "L2_HOMER_ODYSSEY_001-S02",
+      "text": "“But the cruel wretch said, ‘Then I will eat all Noman’s comrades before Noman himself, and will keep Noman for the last. This is the present that I will make him.’"
+    }
+  ],
+  "source_citation": "Homer, The Odyssey. Project Gutenberg eBook #1727, Samuel Butler translation. Source lines 4107-4116. Retrieved 2026-07-02.",
+  "source_file_sha256": "a6c3adec321585e9563e34093491c3bc3608505d166e391bb2bf8a6be1830b69",
+  "source_language": "English translation from Ancient Greek",
+  "source_line_range": "pg1727.txt:4107-4116",
+  "source_packet_hash": "a73822176877845585495fae3c5f1eb6df850c5aa63198f99e0546fcd16cb046",
+  "source_packet_hash_canonicalization": "sha256_canonical_json_excluding_source_packet_hash_v1",
+  "source_text_hash": "1d2781556f6b9be194373c7758ff4bff9b4044d517b3cda0a3b55a6578295511",
+  "source_universe_id": "L2_CLASSICAL_TRANSFER_PD_TRANSLATIONS_2026_07_02",
+  "source_url_or_source_file_reference": "https://www.gutenberg.org/cache/epub/1727/pg1727.txt",
+  "text_layer_visibility": {
+    "model_facing_instructions_included": false,
+    "model_text_layers": [
+      "canonical_text",
+      "translation_or_gloss"
+    ],
+    "researcher_and_model_identical": true,
+    "researcher_text_layers": [
+      "canonical_text",
+      "translation_or_gloss"
+    ],
+    "secondary_scholarship_visible": false
+  },
+  "translation_or_gloss": "L2_HOMER_ODYSSEY_001-S01: “I then gave him some more; three times did I fill the bowl for him, and three times did he drain it without thought or heed; then, when I saw that the wine had got into his head, I said to him as plausibly as I could: ‘Cyclops, you ask my name and I will tell it you; give me, therefore, the present you promised me; my name is Noman; this is what my father and mother and my friends have always called me.’\nL2_HOMER_ODYSSEY_001-S02: “But the cruel wretch said, ‘Then I will eat all Noman’s comrades before Noman himself, and will keep Noman for the last. This is the present that I will make him.’",
+  "translation_or_gloss_status": "authoritative_working_translation_for_study_packet",
+  "work": "Homer, The Odyssey"
+}

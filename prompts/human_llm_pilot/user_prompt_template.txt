@@ -1,0 +1,9 @@
+Case ID: {{CASE_ID}}
+
+Use the following frozen source packet. Do not add source material, scholarship, or background knowledge beyond this packet.
+
+{{SOURCE_PACKET}}
+
+Use the output schema below. Return only the JSON annotation record.
+
+{{OUTPUT_SCHEMA}}

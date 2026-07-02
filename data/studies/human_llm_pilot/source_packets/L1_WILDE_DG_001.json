@@ -1,0 +1,42 @@
+{
+  "canonical_text": "L1_WILDE_DG_001-S01: “How sad it is!” murmured Dorian Gray with his eyes still fixed upon his own portrait. “How sad it is! I shall grow old, and horrible, and dreadful. But this picture will remain always young. It will never be older than this particular day of June.... If it were only the other way! If it were I who was to be always young, and the picture that was to grow old! For that—for that—I would give everything! Yes, there is nothing in the whole world I would not give! I would give my soul for that!”",
+  "canonical_text_status": "frozen_packet_text_layer_normalized_from_retrieved_project_gutenberg_lines",
+  "case_id": "L1_WILDE_DG_001",
+  "edition": "Project Gutenberg eBook #174, English public-domain edition",
+  "fixed_context": "focal wish and immediate utterance",
+  "gloss_authority_status": "not_applicable",
+  "inclusion_layer": "Layer 1",
+  "packet_version": "source_packet_v0_1_2026_07_02",
+  "retrieval_date": "2026-07-02",
+  "rights_note": "Execution-preparation packet uses public-domain Project Gutenberg source text. Public release or redistribution outside this repository review still requires source-specific rights audit.",
+  "rights_status": "public_domain_us_project_gutenberg_or_public_domain_translation",
+  "segments": [
+    {
+      "evidence_id": "L1_WILDE_DG_001-S01",
+      "text": "“How sad it is!” murmured Dorian Gray with his eyes still fixed upon his own portrait. “How sad it is! I shall grow old, and horrible, and dreadful. But this picture will remain always young. It will never be older than this particular day of June.... If it were only the other way! If it were I who was to be always young, and the picture that was to grow old! For that—for that—I would give everything! Yes, there is nothing in the whole world I would not give! I would give my soul for that!”"
+    }
+  ],
+  "source_citation": "Oscar Wilde, The Picture of Dorian Gray. Project Gutenberg eBook #174, English public-domain edition. Source lines 1041-1048. Retrieved 2026-07-02.",
+  "source_file_sha256": "600bbc501d8ba3f78d8c0c16d5f86687e18d7c45d514b54585686a8229fd204d",
+  "source_language": "English",
+  "source_line_range": "pg174.txt:1041-1048",
+  "source_packet_hash": "a7c1ea478fef30ce8afe0739dfaf1030453ddd51966bd477738a5e5a80615343",
+  "source_packet_hash_canonicalization": "sha256_canonical_json_excluding_source_packet_hash_v1",
+  "source_text_hash": "3d519db6ae0da4fc49c71ccb8ca696dc75cd0709f9bf9ad910181d8dc60cb1bd",
+  "source_universe_id": "L1_PG_HELD_OUT_NARRATIVE_2026_07_02",
+  "source_url_or_source_file_reference": "https://www.gutenberg.org/cache/epub/174/pg174.txt",
+  "text_layer_visibility": {
+    "model_facing_instructions_included": false,
+    "model_text_layers": [
+      "canonical_text"
+    ],
+    "researcher_and_model_identical": true,
+    "researcher_text_layers": [
+      "canonical_text"
+    ],
+    "secondary_scholarship_visible": false
+  },
+  "translation_or_gloss": "",
+  "translation_or_gloss_status": "not_applicable",
+  "work": "Oscar Wilde, The Picture of Dorian Gray"
+}

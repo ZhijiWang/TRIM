@@ -1,0 +1,23 @@
+{
+  "access_method": "OpenAI API Responses API",
+  "browsing": "disabled",
+  "execution_date_field_placeholder": "TO_BE_RECORDED_AT_MODEL_EXECUTION",
+  "execution_region_if_known": "not_known_before_execution",
+  "max_output_tokens": 4000,
+  "model": "gpt-5.4-mini",
+  "model_version_if_known": "provider-managed model ID gpt-5.4-mini; exact provider-side dated revision unavailable before execution",
+  "pricing_reference": "OpenAI API documentation accessed 2026-07-02 listed gpt-5.4-mini at $0.75/input MTok and $4.50/output MTok; verify immediately before execution.",
+  "provider": "OpenAI",
+  "provider_version_limitation_note": "Provider-side model weights, safety layers, and service configuration may change and cannot be fully reconstructed from the frozen local materials alone.",
+  "rate_limit_policy": "Pause and retry only after rate-limit reset as a technical failure with a new run identifier; do not alter prompt or source packet.",
+  "response_format": "JSON object conforming to schemas/human_llm_coder_output.schema.json model_coder_record",
+  "retry_policy": "No retry except technical failure: no response, provider failure, connection failure, or zero output bytes. Retry receives a new run identifier.",
+  "run_isolation_requirement": "Every model run uses a fresh stateless session. No prior case, condition output, human record, or cross-run summary is visible.",
+  "seed_policy": "No seed is frozen unless the execution API exposes a supported seed parameter at run time; unsupported seed is recorded as unavailable.",
+  "spec_frozen_at": "2026-07-02T12:00:00+10:00",
+  "system_prompt_status": "frozen local system_prompt.txt; provider-side system configuration unavailable",
+  "technical_failure_definition": "No response returned, connection failure, provider execution failure, or no output bytes produced.",
+  "temperature": 0,
+  "tools": "disabled",
+  "top_p": 1
+}

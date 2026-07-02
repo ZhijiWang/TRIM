@@ -1,0 +1,15 @@
+{
+  "ablation_runs": 18,
+  "estimate_date": "2026-07-02",
+  "estimated_input_tokens": 1180000,
+  "estimated_output_tokens": 472000,
+  "estimated_upper_bound_cost_usd": 3.02,
+  "expected_number_of_cases": 25,
+  "hard_spending_ceiling_usd": 25.0,
+  "model": "gpt-5.4-mini",
+  "pricing_source_note": "Uses OpenAI API documentation observed on 2026-07-02 for gpt-5.4-mini: $0.75/input MTok and $4.50/output MTok. Pricing must be re-verified immediately before execution.",
+  "primary_runs": 25,
+  "provider": "OpenAI",
+  "stability_runs": 75,
+  "stop_on_cost_rule": "Stop before any run that would cause total billed study execution to exceed USD 25.00; verify live pricing immediately before execution."
+}

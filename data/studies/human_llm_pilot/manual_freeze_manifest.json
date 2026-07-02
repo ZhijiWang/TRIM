@@ -1,0 +1,18 @@
+{
+  "category_definitions_hash": "0679a65fc13957f4f13931f31d840f9fbbbbb1ca71d568eda0c3d7e1f246252f",
+  "category_definitions_path": "docs/studies/friction_locus_lineage_table.csv",
+  "category_definitions_version": "friction_locus_lineage_table_at_main_6998175",
+  "confusable_with_version": "predicted_confusions_at_main_6998175",
+  "counterfactual_test_version": "predicted_confusions_at_main_6998175",
+  "freeze_status": "frozen_for_execution_preparation_no_coding_no_model_execution",
+  "frozen_at": "2026-07-02T12:00:00+10:00",
+  "manual_file_hash": "ca32a16b2dcc16f4d8a025c02a470278f57222c259347689feafd7f594b6e6d8",
+  "manual_path": "docs/studies/human_llm_friction_locus_pilot_protocol.md",
+  "manual_version": "human_llm_friction_locus_manual_v0_1_design_b_freeze_2026_07_02",
+  "predicted_confusions_hash": "dc74ae5f84b626c4ad7fa598e50f0c6f52fced0e3bc7345d07ddbe308e4fb027",
+  "predicted_confusions_path": "docs/studies/predicted_confusions.csv",
+  "repository_commit": "6998175eeca5d349072bf31012c69f2d568f28ec",
+  "reserved_category_policy": "Reserved or review-required categories use friction_locus_proposed with operational status requires_human_review and final_operational_label unresolved.",
+  "schema_hash": "4ce445c04f349cd376f2104dc51df6b66c0f0f31930c634ea18e9576d0633235",
+  "schema_path": "schemas/human_llm_coder_output.schema.json"
+}

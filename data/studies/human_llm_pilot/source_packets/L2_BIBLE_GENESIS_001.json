@@ -1,0 +1,52 @@
+{
+  "canonical_text": "L2_BIBLE_GENESIS_001-S01: Isaac his son; and he took the fire in his hand, and a knife; and they went both of them together.\nL2_BIBLE_GENESIS_001-S02: 22:7 And Isaac spake unto Abraham his father, and said, My father: and he said, Here am I, my son. And he said, Behold the fire and the wood: but where is the lamb for a burnt offering? 22:8 And Abraham said, My son, God will provide himself a lamb for a burnt offering: so they went both of them together.\nL2_BIBLE_GENESIS_001-S03: 22:9 And they came to the place which God had told him of; and Abraham built an altar there, and laid the wood in order, and bound Isaac his",
+  "canonical_text_status": "frozen_packet_text_layer_normalized_from_retrieved_project_gutenberg_lines",
+  "case_id": "L2_BIBLE_GENESIS_001",
+  "edition": "Project Gutenberg eBook #10, King James Version Old Testament text",
+  "fixed_context": "focal question-answer exchange plus immediate sacrificial context",
+  "gloss_authority_status": "public_domain_working_translation_for_study_packet",
+  "inclusion_layer": "Layer 2",
+  "packet_version": "source_packet_v0_1_2026_07_02",
+  "retrieval_date": "2026-07-02",
+  "rights_note": "Execution-preparation packet uses public-domain Project Gutenberg source text. Public release or redistribution outside this repository review still requires source-specific rights audit.",
+  "rights_status": "public_domain_us_project_gutenberg_or_public_domain_translation",
+  "segments": [
+    {
+      "evidence_id": "L2_BIBLE_GENESIS_001-S01",
+      "text": "Isaac his son; and he took the fire in his hand, and a knife; and they went both of them together."
+    },
+    {
+      "evidence_id": "L2_BIBLE_GENESIS_001-S02",
+      "text": "22:7 And Isaac spake unto Abraham his father, and said, My father: and he said, Here am I, my son. And he said, Behold the fire and the wood: but where is the lamb for a burnt offering? 22:8 And Abraham said, My son, God will provide himself a lamb for a burnt offering: so they went both of them together."
+    },
+    {
+      "evidence_id": "L2_BIBLE_GENESIS_001-S03",
+      "text": "22:9 And they came to the place which God had told him of; and Abraham built an altar there, and laid the wood in order, and bound Isaac his"
+    }
+  ],
+  "source_citation": "Genesis, King James Version. Project Gutenberg eBook #10, King James Version Old Testament text. Source lines 1752-1762. Retrieved 2026-07-02.",
+  "source_file_sha256": "6ddeb05fc18e988ab569549603410fecf1a40604d826187c278b3b948a92c0e4",
+  "source_language": "English translation from Biblical Hebrew",
+  "source_line_range": "pg10.txt:1752-1762",
+  "source_packet_hash": "d2d812795d52f0af94e87d187fdd600435f4b4cb506368beb63aae3405cfdbb9",
+  "source_packet_hash_canonicalization": "sha256_canonical_json_excluding_source_packet_hash_v1",
+  "source_text_hash": "aab83d09bebf1f2f8e98ea81642eeac68432650eb46cfe2720aa4ea147833cd3",
+  "source_universe_id": "L2_CLASSICAL_TRANSFER_PD_TRANSLATIONS_2026_07_02",
+  "source_url_or_source_file_reference": "https://www.gutenberg.org/files/10/10-0.txt",
+  "text_layer_visibility": {
+    "model_facing_instructions_included": false,
+    "model_text_layers": [
+      "canonical_text",
+      "translation_or_gloss"
+    ],
+    "researcher_and_model_identical": true,
+    "researcher_text_layers": [
+      "canonical_text",
+      "translation_or_gloss"
+    ],
+    "secondary_scholarship_visible": false
+  },
+  "translation_or_gloss": "L2_BIBLE_GENESIS_001-S01: Isaac his son; and he took the fire in his hand, and a knife; and they went both of them together.\nL2_BIBLE_GENESIS_001-S02: 22:7 And Isaac spake unto Abraham his father, and said, My father: and he said, Here am I, my son. And he said, Behold the fire and the wood: but where is the lamb for a burnt offering? 22:8 And Abraham said, My son, God will provide himself a lamb for a burnt offering: so they went both of them together.\nL2_BIBLE_GENESIS_001-S03: 22:9 And they came to the place which God had told him of; and Abraham built an altar there, and laid the wood in order, and bound Isaac his",
+  "translation_or_gloss_status": "public_domain_working_translation_for_study_packet",
+  "work": "Genesis, King James Version"
+}

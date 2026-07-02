@@ -1,0 +1,17 @@
+{
+  "external_human_recruitment": "prohibited",
+  "formal_ethics_exemption_claimed": false,
+  "institutional_status": "not_yet_formally_determined",
+  "participant_data_collection": "none",
+  "privacy_review_status": "no private or participant data planned; institutional privacy review not yet formally determined",
+  "protocol_design": "Design B",
+  "recorded_at": "2026-07-02T12:00:00+10:00",
+  "researcher_generated_records": "yes_after_freeze_only",
+  "rights_review_status": "source-level rights recorded for execution preparation; formal publication rights review still required",
+  "textual_materials": "public-domain/openly accessible/lawfully used sources with source-specific rights review retained as execution blocker before public redistribution",
+  "unresolved_items": [
+    "Verify source-specific redistribution rights before public packet release.",
+    "Verify current model availability and pricing immediately before execution.",
+    "Obtain institutional governance advice before any protocol expansion involving external humans."
+  ]
+}

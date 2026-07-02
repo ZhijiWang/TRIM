@@ -1,0 +1,42 @@
+{
+  "canonical_text": "L1_HARDY_TESS_001-S01: Why it was that upon this beautiful feminine tissue, sensitive as gossamer, and practically blank as snow as yet, there should have been traced such a coarse pattern as it was doomed to receive; why so often the coarse appropriates the finer thus, the wrong man the woman, the wrong woman the man, many thousand years of analytical philosophy have failed to explain to our sense of order. One may, indeed, admit the possibility of a retribution lurking in the present catastrophe. Doubtless some of Tess d’Urberville’s mailed ancestors rollicking home from a fray had dealt the same measure even more ruthlessly towards peasant girls of their time. But though to visit the sins of the fathers upon the children may be a morality good enough for divinities, it is scorned by average human nature; and it therefore does not mend the matter.",
+  "canonical_text_status": "frozen_packet_text_layer_normalized_from_retrieved_project_gutenberg_lines",
+  "case_id": "L1_HARDY_TESS_001",
+  "edition": "Project Gutenberg eBook #110, English public-domain edition",
+  "fixed_context": "focal narratorial qualification plus inherited-retribution frame",
+  "gloss_authority_status": "not_applicable",
+  "inclusion_layer": "Layer 1",
+  "packet_version": "source_packet_v0_1_2026_07_02",
+  "retrieval_date": "2026-07-02",
+  "rights_note": "Execution-preparation packet uses public-domain Project Gutenberg source text. Public release or redistribution outside this repository review still requires source-specific rights audit.",
+  "rights_status": "public_domain_us_project_gutenberg_or_public_domain_translation",
+  "segments": [
+    {
+      "evidence_id": "L1_HARDY_TESS_001-S01",
+      "text": "Why it was that upon this beautiful feminine tissue, sensitive as gossamer, and practically blank as snow as yet, there should have been traced such a coarse pattern as it was doomed to receive; why so often the coarse appropriates the finer thus, the wrong man the woman, the wrong woman the man, many thousand years of analytical philosophy have failed to explain to our sense of order. One may, indeed, admit the possibility of a retribution lurking in the present catastrophe. Doubtless some of Tess d’Urberville’s mailed ancestors rollicking home from a fray had dealt the same measure even more ruthlessly towards peasant girls of their time. But though to visit the sins of the fathers upon the children may be a morality good enough for divinities, it is scorned by average human nature; and it therefore does not mend the matter."
+    }
+  ],
+  "source_citation": "Thomas Hardy, Tess of the d’Urbervilles. Project Gutenberg eBook #110, English public-domain edition. Source lines 3383-3395. Retrieved 2026-07-02.",
+  "source_file_sha256": "0c36ce3cdb67efbf1b5cfd827fbfb98a3ef5bc9e5db9816570129e8a9fd7e843",
+  "source_language": "English",
+  "source_line_range": "pg110.txt:3383-3395",
+  "source_packet_hash": "7c2de07aa1d61743d107b0711b1d20321b927f241cc08322df97a723c8d256ba",
+  "source_packet_hash_canonicalization": "sha256_canonical_json_excluding_source_packet_hash_v1",
+  "source_text_hash": "7ada1f998dbc83ac72ea2091507a0a6fe9648724d3c687e4965a945bcbbb52dd",
+  "source_universe_id": "L1_PG_HELD_OUT_NARRATIVE_2026_07_02",
+  "source_url_or_source_file_reference": "https://www.gutenberg.org/cache/epub/110/pg110.txt",
+  "text_layer_visibility": {
+    "model_facing_instructions_included": false,
+    "model_text_layers": [
+      "canonical_text"
+    ],
+    "researcher_and_model_identical": true,
+    "researcher_text_layers": [
+      "canonical_text"
+    ],
+    "secondary_scholarship_visible": false
+  },
+  "translation_or_gloss": "",
+  "translation_or_gloss_status": "not_applicable",
+  "work": "Thomas Hardy, Tess of the d’Urbervilles"
+}
