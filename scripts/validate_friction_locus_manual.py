@@ -7,7 +7,6 @@ import csv
 import hashlib
 import json
 import re
-import subprocess
 from pathlib import Path
 from typing import Any
 
@@ -47,20 +46,8 @@ def require(condition: bool, message: str, errors: list[str]) -> None:
 
 
 def pr18_selected_ids() -> list[str]:
-    raw = subprocess.check_output(
-        [
-            "git",
-            "show",
-            "origin/research/human-llm-pilot-freeze:data/studies/human_llm_pilot/sample_manifest.json",
-        ],
-        cwd=ROOT,
-        text=True,
-    )
-    return load_json_from_text(raw)["selected_case_ids"]
-
-
-def load_json_from_text(text: str) -> dict[str, Any]:
-    return json.loads(text)
+    audit = (MANUAL_DIR / "friction_locus_sample_contamination_audit.md").read_text(encoding="utf-8")
+    return re.findall(r"`(L[12]_[A-Z0-9_]+)`", audit)
 
 
 def validate() -> list[str]:
