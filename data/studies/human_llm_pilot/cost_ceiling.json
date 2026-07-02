@@ -1,15 +1,19 @@
 {
   "ablation_runs": 18,
   "estimate_date": "2026-07-02",
-  "estimated_input_tokens": 1180000,
-  "estimated_output_tokens": 472000,
-  "estimated_upper_bound_cost_usd": 3.02,
+  "estimated_input_tokens": "not_final_pending_account_model_verification",
+  "estimated_output_tokens": "not_final_pending_account_model_verification",
+  "estimated_upper_bound_cost_status": "not_final",
+  "estimated_upper_bound_cost_usd": null,
   "expected_number_of_cases": 25,
   "hard_spending_ceiling_usd": 25.0,
-  "model": "gpt-5.4-mini",
-  "pricing_source_note": "Uses OpenAI API documentation observed on 2026-07-02 for gpt-5.4-mini: $0.75/input MTok and $4.50/output MTok. Pricing must be re-verified immediately before execution.",
+  "model": "UNRESOLVED_PENDING_OFFICIAL_VERIFICATION",
+  "original_unverified_model_id": "gpt-5.4-mini",
+  "pricing_source_note": "Official public OpenAI documentation observed on 2026-07-02 lists gpt-5.4-mini standard text pricing at $0.75/input MTok and $4.50/output MTok, but account availability was not verified in this environment, so the execution cost estimate is not final.",
   "primary_runs": 25,
   "provider": "OpenAI",
+  "stability_run_interpretation": "three additional Condition C stability runs beyond the primary run for each selected case",
   "stability_runs": 75,
-  "stop_on_cost_rule": "Stop before any run that would cause total billed study execution to exceed USD 25.00; verify live pricing immediately before execution."
+  "stop_on_cost_rule": "Stop before any run that would cause total billed study execution to exceed USD 25.00; verify model availability and live pricing immediately before execution.",
+  "total_planned_model_runs_after_human_lock": 118
 }

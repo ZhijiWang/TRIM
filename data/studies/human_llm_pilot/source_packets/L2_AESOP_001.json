@@ -1,48 +1,58 @@
 {
-  "canonical_text": "L2_AESOP_001-S01: The Fox and the Grapes\nL2_AESOP_001-S02: A FAMISHED FOX saw some clusters of ripe black grapes hanging from a trellised vine. She resorted to all her tricks to get at them, but wearied herself in vain, for she could not reach them. At last she turned away, hiding her disappointment and saying: “The Grapes are sour, and not ripe as I thought.”",
-  "canonical_text_status": "frozen_packet_text_layer_normalized_from_retrieved_project_gutenberg_lines",
+  "canonical_text_publication_status": "not_in_public_repository",
+  "canonical_text_status": "redacted_from_public_pr_pending_rights_review",
   "case_id": "L2_AESOP_001",
+  "controlled_storage_reference": "controlled_private_study_storage/human_llm_pilot/source_packets/L2_AESOP_001.json",
   "edition": "Project Gutenberg eBook #21, Three Hundred Aesop’s Fables",
-  "fixed_context": "complete short fable passage",
+  "fixed_context": "source span and context rule recorded in metadata; public text layer redacted pending rights review",
   "gloss_authority_status": "public_domain_working_translation_for_study_packet",
   "inclusion_layer": "Layer 2",
-  "packet_version": "source_packet_v0_1_2026_07_02",
+  "packet_version": "source_packet_public_metadata_v0_2_2026_07_02",
+  "private_canonical_text_sha256": "ddc09da520ef44cade680d9328129c75a071426454442819c56d5efadbccc467",
+  "private_source_packet_file_sha256": "d7df3b0ac40c9812a425f50049835c40bc7ef550d6bf35a972c18cca66c28093",
+  "private_source_packet_hash": "1f7e7e97f96528c997c6094106a7d5db7d21f0040336930c2849b60ab8d179a2",
+  "private_source_text_hash": "ddc09da520ef44cade680d9328129c75a071426454442819c56d5efadbccc467",
+  "private_translation_or_gloss_sha256": "ddc09da520ef44cade680d9328129c75a071426454442819c56d5efadbccc467",
+  "public_redistribution_status": "not_confirmed_pending_rights_review",
+  "repository_publication_status": "metadata_only_text_redacted",
   "retrieval_date": "2026-07-02",
-  "rights_note": "Execution-preparation packet uses public-domain Project Gutenberg source text. Public release or redistribution outside this repository review still requires source-specific rights audit.",
-  "rights_status": "public_domain_us_project_gutenberg_or_public_domain_translation",
+  "rights_note": "The public PR stores metadata and private hashes only. Full source text is not redistributed until edition and translation rights are independently cleared.",
+  "rights_status": "rights_review_incomplete_public_text_redacted",
   "segments": [
     {
       "evidence_id": "L2_AESOP_001-S01",
-      "text": "The Fox and the Grapes"
+      "private_text_sha256": "afcc97a173d63a2255acf3063b363afa168a39ac74ee4f417edac373a22f0e80",
+      "text_status": "redacted_from_public_pr_pending_rights_review"
     },
     {
       "evidence_id": "L2_AESOP_001-S02",
-      "text": "A FAMISHED FOX saw some clusters of ripe black grapes hanging from a trellised vine. She resorted to all her tricks to get at them, but wearied herself in vain, for she could not reach them. At last she turned away, hiding her disappointment and saying: “The Grapes are sour, and not ripe as I thought.”"
+      "private_text_sha256": "f5ee9a14413f96ee867b821a44c5ff518fdd013588c77c7f0235e2a2c5dfd3d5",
+      "text_status": "redacted_from_public_pr_pending_rights_review"
     }
   ],
   "source_citation": "Aesop, The Fox and the Grapes. Project Gutenberg eBook #21, Three Hundred Aesop’s Fables. Source lines 4049-4056. Retrieved 2026-07-02.",
   "source_file_sha256": "6596a65f47e4f938bdb7c7a75be0fd59b257475de952cde3babd3f7bf95581ec",
   "source_language": "English translation from Greek/Latin fable tradition",
   "source_line_range": "pg21.txt:4049-4056",
-  "source_packet_hash": "1f7e7e97f96528c997c6094106a7d5db7d21f0040336930c2849b60ab8d179a2",
+  "source_packet_hash": "ae4420fd69d97909c8b778004e17fc86789b362ac334c1bfdb72348afcaeb5e5",
   "source_packet_hash_canonicalization": "sha256_canonical_json_excluding_source_packet_hash_v1",
-  "source_text_hash": "ddc09da520ef44cade680d9328129c75a071426454442819c56d5efadbccc467",
   "source_universe_id": "L2_CLASSICAL_TRANSFER_PD_TRANSLATIONS_2026_07_02",
   "source_url_or_source_file_reference": "https://www.gutenberg.org/cache/epub/21/pg21.txt",
   "text_layer_visibility": {
     "model_facing_instructions_included": false,
     "model_text_layers": [
-      "canonical_text",
-      "translation_or_gloss"
+      "controlled_private_source_packet_after_rights_review"
+    ],
+    "public_repository_text_layers": [
+      "metadata_only_text_redacted"
     ],
     "researcher_and_model_identical": true,
     "researcher_text_layers": [
-      "canonical_text",
-      "translation_or_gloss"
+      "controlled_private_source_packet_after_rights_review"
     ],
     "secondary_scholarship_visible": false
   },
-  "translation_or_gloss": "L2_AESOP_001-S01: The Fox and the Grapes\nL2_AESOP_001-S02: A FAMISHED FOX saw some clusters of ripe black grapes hanging from a trellised vine. She resorted to all her tricks to get at them, but wearied herself in vain, for she could not reach them. At last she turned away, hiding her disappointment and saying: “The Grapes are sour, and not ripe as I thought.”",
+  "translation_or_gloss_publication_status": "not_in_public_repository",
   "translation_or_gloss_status": "public_domain_working_translation_for_study_packet",
   "work": "Aesop, The Fox and the Grapes"
 }

@@ -1,3 +1,5 @@
+STATUS: BLOCKED_NOT_EXECUTION_READY. This prompt scaffold must not be used for model execution until an authoritative friction_locus manual and account-verified model are frozen.
+
 Case ID: {{CASE_ID}}
 
 Use the following frozen source packet. Do not add source material, scholarship, or background knowledge beyond this packet.

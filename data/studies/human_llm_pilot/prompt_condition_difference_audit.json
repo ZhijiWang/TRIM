@@ -1,0 +1,17 @@
+{
+  "audit_status": "BLOCKED",
+  "condition_A_validity": "BLOCKED_SCAFFOLD_ONLY; intended depth is short definitions only, but not executable until manual and model are frozen",
+  "condition_B_validity": "BLOCKED_SCAFFOLD_ONLY; intended depth is concise rules only, but not executable until manual and model are frozen",
+  "condition_C_validity": "INVALID_FOR_EXECUTION_PENDING_AUTHORITATIVE_MANUAL",
+  "difference_assessment": "A, B, and C are retained only as non-executable scaffolds. A future freeze must re-audit condition differences after the authoritative manual and verified model are selected.",
+  "no_model_call": "yes",
+  "no_study_sample_examples": "yes",
+  "shared_requirements_checked": [
+    "same task framing scaffold",
+    "same source packet placeholder",
+    "same output schema placeholder",
+    "same evidence-ID requirement scaffold",
+    "same alternative-pathway requirement scaffold",
+    "same truth/non-gold-standard boundary scaffold"
+  ]
+}

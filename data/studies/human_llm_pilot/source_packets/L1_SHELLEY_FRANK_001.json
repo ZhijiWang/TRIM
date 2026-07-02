@@ -1,46 +1,58 @@
 {
-  "canonical_text": "L1_SHELLEY_FRANK_001-S01: “Devil,” I exclaimed, “do you dare approach me? And do not you fear the fierce vengeance of my arm wreaked on your miserable head? Begone, vile insect! Or rather, stay, that I may trample you to dust! And, oh! That I could, with the extinction of your miserable existence, restore those victims whom you have so diabolically murdered!”\nL1_SHELLEY_FRANK_001-S02: “I expected this reception,” said the dæmon. “All men hate the wretched; how, then, must I be hated, who am miserable beyond all living things! Yet you, my creator, detest and spurn me, thy creature, to whom thou art bound by ties only dissoluble by the annihilation of one of us. You purpose to kill me. How dare you sport thus with life? Do your duty towards me, and I will do mine towards you and the rest of mankind. If you will comply with my conditions, I will leave them and you at peace; but if you refuse, I will glut the maw of death, until it be satiated with the blood of your remaining friends.”",
-  "canonical_text_status": "frozen_packet_text_layer_normalized_from_retrieved_project_gutenberg_lines",
+  "canonical_text_publication_status": "not_in_public_repository",
+  "canonical_text_status": "redacted_from_public_pr_pending_rights_review",
   "case_id": "L1_SHELLEY_FRANK_001",
+  "controlled_storage_reference": "controlled_private_study_storage/human_llm_pilot/source_packets/L1_SHELLEY_FRANK_001.json",
   "edition": "Project Gutenberg eBook #84, English public-domain edition",
-  "fixed_context": "focal confrontation speech plus Victor’s immediate address",
+  "fixed_context": "source span and context rule recorded in metadata; public text layer redacted pending rights review",
   "gloss_authority_status": "not_applicable",
   "inclusion_layer": "Layer 1",
-  "packet_version": "source_packet_v0_1_2026_07_02",
+  "packet_version": "source_packet_public_metadata_v0_2_2026_07_02",
+  "private_canonical_text_sha256": "6d6e6a5fb74189673b173b98cc6714835f087776cbd7768ab65de9e038c27036",
+  "private_source_packet_file_sha256": "aae6d0f4298b66f414fbbd1f9ad3a1261d1e7579896bd5d3668abe7a6732ef39",
+  "private_source_packet_hash": "0cf97a18383b85b0078afc80cc9b2199a7383bf05e843a4bdb157cbe2fcac69c",
+  "private_source_text_hash": "6d6e6a5fb74189673b173b98cc6714835f087776cbd7768ab65de9e038c27036",
+  "private_translation_or_gloss_sha256": "",
+  "public_redistribution_status": "not_confirmed_pending_rights_review",
+  "repository_publication_status": "metadata_only_text_redacted",
   "retrieval_date": "2026-07-02",
-  "rights_note": "Execution-preparation packet uses public-domain Project Gutenberg source text. Public release or redistribution outside this repository review still requires source-specific rights audit.",
-  "rights_status": "public_domain_us_project_gutenberg_or_public_domain_translation",
+  "rights_note": "The public PR stores metadata and private hashes only. Full source text is not redistributed until edition and translation rights are independently cleared.",
+  "rights_status": "rights_review_incomplete_public_text_redacted",
   "segments": [
     {
       "evidence_id": "L1_SHELLEY_FRANK_001-S01",
-      "text": "“Devil,” I exclaimed, “do you dare approach me? And do not you fear the fierce vengeance of my arm wreaked on your miserable head? Begone, vile insect! Or rather, stay, that I may trample you to dust! And, oh! That I could, with the extinction of your miserable existence, restore those victims whom you have so diabolically murdered!”"
+      "private_text_sha256": "f69894f145c660e1e3d3db5f4ab8bd103b91a9a28bf53a9da3a55d5410af40cf",
+      "text_status": "redacted_from_public_pr_pending_rights_review"
     },
     {
       "evidence_id": "L1_SHELLEY_FRANK_001-S02",
-      "text": "“I expected this reception,” said the dæmon. “All men hate the wretched; how, then, must I be hated, who am miserable beyond all living things! Yet you, my creator, detest and spurn me, thy creature, to whom thou art bound by ties only dissoluble by the annihilation of one of us. You purpose to kill me. How dare you sport thus with life? Do your duty towards me, and I will do mine towards you and the rest of mankind. If you will comply with my conditions, I will leave them and you at peace; but if you refuse, I will glut the maw of death, until it be satiated with the blood of your remaining friends.”"
+      "private_text_sha256": "b6e89b78f778432bdeb498a7ead874447c4f9ef7f58d95fc9b02a1b3afcfd3b8",
+      "text_status": "redacted_from_public_pr_pending_rights_review"
     }
   ],
   "source_citation": "Mary Wollstonecraft Shelley, Frankenstein; or, The Modern Prometheus. Project Gutenberg eBook #84, English public-domain edition. Source lines 3018-3032. Retrieved 2026-07-02.",
   "source_file_sha256": "1888b0938bcfc8e127bf00c22054f06c7c999391c11ceeb3c2ffbff73b264fc4",
   "source_language": "English",
   "source_line_range": "pg84.txt:3018-3032",
-  "source_packet_hash": "0cf97a18383b85b0078afc80cc9b2199a7383bf05e843a4bdb157cbe2fcac69c",
+  "source_packet_hash": "cb48e25b02c60aab4f6f2e5084ee64622c86c7f8e18fcfd7350d325adc050059",
   "source_packet_hash_canonicalization": "sha256_canonical_json_excluding_source_packet_hash_v1",
-  "source_text_hash": "6d6e6a5fb74189673b173b98cc6714835f087776cbd7768ab65de9e038c27036",
   "source_universe_id": "L1_PG_HELD_OUT_NARRATIVE_2026_07_02",
   "source_url_or_source_file_reference": "https://www.gutenberg.org/cache/epub/84/pg84.txt",
   "text_layer_visibility": {
     "model_facing_instructions_included": false,
     "model_text_layers": [
-      "canonical_text"
+      "controlled_private_source_packet_after_rights_review"
+    ],
+    "public_repository_text_layers": [
+      "metadata_only_text_redacted"
     ],
     "researcher_and_model_identical": true,
     "researcher_text_layers": [
-      "canonical_text"
+      "controlled_private_source_packet_after_rights_review"
     ],
     "secondary_scholarship_visible": false
   },
-  "translation_or_gloss": "",
+  "translation_or_gloss_publication_status": "not_applicable",
   "translation_or_gloss_status": "not_applicable",
   "work": "Mary Wollstonecraft Shelley, Frankenstein; or, The Modern Prometheus"
 }

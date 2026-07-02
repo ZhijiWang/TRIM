@@ -1,42 +1,53 @@
 {
-  "canonical_text": "L1_HARDY_TESS_001-S01: Why it was that upon this beautiful feminine tissue, sensitive as gossamer, and practically blank as snow as yet, there should have been traced such a coarse pattern as it was doomed to receive; why so often the coarse appropriates the finer thus, the wrong man the woman, the wrong woman the man, many thousand years of analytical philosophy have failed to explain to our sense of order. One may, indeed, admit the possibility of a retribution lurking in the present catastrophe. Doubtless some of Tess d’Urberville’s mailed ancestors rollicking home from a fray had dealt the same measure even more ruthlessly towards peasant girls of their time. But though to visit the sins of the fathers upon the children may be a morality good enough for divinities, it is scorned by average human nature; and it therefore does not mend the matter.",
-  "canonical_text_status": "frozen_packet_text_layer_normalized_from_retrieved_project_gutenberg_lines",
+  "canonical_text_publication_status": "not_in_public_repository",
+  "canonical_text_status": "redacted_from_public_pr_pending_rights_review",
   "case_id": "L1_HARDY_TESS_001",
+  "controlled_storage_reference": "controlled_private_study_storage/human_llm_pilot/source_packets/L1_HARDY_TESS_001.json",
   "edition": "Project Gutenberg eBook #110, English public-domain edition",
-  "fixed_context": "focal narratorial qualification plus inherited-retribution frame",
+  "fixed_context": "source span and context rule recorded in metadata; public text layer redacted pending rights review",
   "gloss_authority_status": "not_applicable",
   "inclusion_layer": "Layer 1",
-  "packet_version": "source_packet_v0_1_2026_07_02",
+  "packet_version": "source_packet_public_metadata_v0_2_2026_07_02",
+  "private_canonical_text_sha256": "7ada1f998dbc83ac72ea2091507a0a6fe9648724d3c687e4965a945bcbbb52dd",
+  "private_source_packet_file_sha256": "2530fd222c84e2f3144328096cbd8d18321d54800fdf69f2a05c3eb5fcf8c241",
+  "private_source_packet_hash": "7c2de07aa1d61743d107b0711b1d20321b927f241cc08322df97a723c8d256ba",
+  "private_source_text_hash": "7ada1f998dbc83ac72ea2091507a0a6fe9648724d3c687e4965a945bcbbb52dd",
+  "private_translation_or_gloss_sha256": "",
+  "public_redistribution_status": "not_confirmed_pending_rights_review",
+  "repository_publication_status": "metadata_only_text_redacted",
   "retrieval_date": "2026-07-02",
-  "rights_note": "Execution-preparation packet uses public-domain Project Gutenberg source text. Public release or redistribution outside this repository review still requires source-specific rights audit.",
-  "rights_status": "public_domain_us_project_gutenberg_or_public_domain_translation",
+  "rights_note": "The public PR stores metadata and private hashes only. Full source text is not redistributed until edition and translation rights are independently cleared.",
+  "rights_status": "rights_review_incomplete_public_text_redacted",
   "segments": [
     {
       "evidence_id": "L1_HARDY_TESS_001-S01",
-      "text": "Why it was that upon this beautiful feminine tissue, sensitive as gossamer, and practically blank as snow as yet, there should have been traced such a coarse pattern as it was doomed to receive; why so often the coarse appropriates the finer thus, the wrong man the woman, the wrong woman the man, many thousand years of analytical philosophy have failed to explain to our sense of order. One may, indeed, admit the possibility of a retribution lurking in the present catastrophe. Doubtless some of Tess d’Urberville’s mailed ancestors rollicking home from a fray had dealt the same measure even more ruthlessly towards peasant girls of their time. But though to visit the sins of the fathers upon the children may be a morality good enough for divinities, it is scorned by average human nature; and it therefore does not mend the matter."
+      "private_text_sha256": "24a3faa68124923f37be9f48fa5d603bbc413fe2c013d3fae9548ecc9bc8faee",
+      "text_status": "redacted_from_public_pr_pending_rights_review"
     }
   ],
   "source_citation": "Thomas Hardy, Tess of the d’Urbervilles. Project Gutenberg eBook #110, English public-domain edition. Source lines 3383-3395. Retrieved 2026-07-02.",
   "source_file_sha256": "0c36ce3cdb67efbf1b5cfd827fbfb98a3ef5bc9e5db9816570129e8a9fd7e843",
   "source_language": "English",
   "source_line_range": "pg110.txt:3383-3395",
-  "source_packet_hash": "7c2de07aa1d61743d107b0711b1d20321b927f241cc08322df97a723c8d256ba",
+  "source_packet_hash": "fc59b457b9817736a23919439ef769163fbe51359f463a8a2e56c49faf8b6d7c",
   "source_packet_hash_canonicalization": "sha256_canonical_json_excluding_source_packet_hash_v1",
-  "source_text_hash": "7ada1f998dbc83ac72ea2091507a0a6fe9648724d3c687e4965a945bcbbb52dd",
   "source_universe_id": "L1_PG_HELD_OUT_NARRATIVE_2026_07_02",
   "source_url_or_source_file_reference": "https://www.gutenberg.org/cache/epub/110/pg110.txt",
   "text_layer_visibility": {
     "model_facing_instructions_included": false,
     "model_text_layers": [
-      "canonical_text"
+      "controlled_private_source_packet_after_rights_review"
+    ],
+    "public_repository_text_layers": [
+      "metadata_only_text_redacted"
     ],
     "researcher_and_model_identical": true,
     "researcher_text_layers": [
-      "canonical_text"
+      "controlled_private_source_packet_after_rights_review"
     ],
     "secondary_scholarship_visible": false
   },
-  "translation_or_gloss": "",
+  "translation_or_gloss_publication_status": "not_applicable",
   "translation_or_gloss_status": "not_applicable",
   "work": "Thomas Hardy, Tess of the d’Urbervilles"
 }

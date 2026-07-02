@@ -146,7 +146,7 @@ manual causes a particular model behavior.
 
 ## Stability analysis
 
-For 3-5 repeated independent model runs per case:
+For this freeze package, the planned stability interpretation is three additional independent Condition C runs per selected case beyond the primary locked run. The primary run is not counted as a stability run. If the blocked manual/model/right-status issues are later resolved, preserve the following stability rules:
 
 - preserve every raw output and parsed record;
 - compute self-consistency rate for primary label and friction_locus;

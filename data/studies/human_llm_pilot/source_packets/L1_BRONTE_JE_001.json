@@ -1,46 +1,58 @@
 {
-  "canonical_text": "L1_BRONTE_JE_001-S01: comply!” it said. “Think of his misery; think of his danger—look at his state when left alone; remember his headlong nature; consider the recklessness following on despair—soothe him; save him; love him; tell him you love him and will be his. Who in the world cares for _you_? or who will be injured by what you do?”\nL1_BRONTE_JE_001-S02: Still indomitable was the reply—“_I_ care for myself. The more solitary, the more friendless, the more unsustained I am, the more I will respect myself. I will keep the law given by God; sanctioned by man. I will hold to the principles received by me when I was sane, and not mad—as I am now. Laws and principles are not for the times when there is no temptation: they are for such moments as this, when body and soul rise in mutiny against their rigour; stringent are they; inviolate they shall be. If at my individual convenience I might break them, what would be their worth? They have a worth—so I have always believed; and if I cannot believe it now, it is because I am insane—quite insane: with my veins running fire, and my heart beating faster than I can count its throbs. Preconceived opinions, foregone determinations, are all I have at this hour to stand by: there I plant my foot.”",
-  "canonical_text_status": "frozen_packet_text_layer_normalized_from_retrieved_project_gutenberg_lines",
+  "canonical_text_publication_status": "not_in_public_repository",
+  "canonical_text_status": "redacted_from_public_pr_pending_rights_review",
   "case_id": "L1_BRONTE_JE_001",
+  "controlled_storage_reference": "controlled_private_study_storage/human_llm_pilot/source_packets/L1_BRONTE_JE_001.json",
   "edition": "Project Gutenberg eBook #1260, English public-domain edition",
-  "fixed_context": "focal moral decision plus inner appeal",
+  "fixed_context": "source span and context rule recorded in metadata; public text layer redacted pending rights review",
   "gloss_authority_status": "not_applicable",
   "inclusion_layer": "Layer 1",
-  "packet_version": "source_packet_v0_1_2026_07_02",
+  "packet_version": "source_packet_public_metadata_v0_2_2026_07_02",
+  "private_canonical_text_sha256": "8d7b71caead92b9304a02452eb9b87e2ff8eebd22541b053ec2c411c870a0438",
+  "private_source_packet_file_sha256": "bc8595d6aa86978e484ef7d9affe7ad658fb1b1115a8ed273d9f7c288e2738b5",
+  "private_source_packet_hash": "fb0a1010d32b269dd0710e06f1562660ae9276dea3be50a105aaf3da60762bb8",
+  "private_source_text_hash": "8d7b71caead92b9304a02452eb9b87e2ff8eebd22541b053ec2c411c870a0438",
+  "private_translation_or_gloss_sha256": "",
+  "public_redistribution_status": "not_confirmed_pending_rights_review",
+  "repository_publication_status": "metadata_only_text_redacted",
   "retrieval_date": "2026-07-02",
-  "rights_note": "Execution-preparation packet uses public-domain Project Gutenberg source text. Public release or redistribution outside this repository review still requires source-specific rights audit.",
-  "rights_status": "public_domain_us_project_gutenberg_or_public_domain_translation",
+  "rights_note": "The public PR stores metadata and private hashes only. Full source text is not redistributed until edition and translation rights are independently cleared.",
+  "rights_status": "rights_review_incomplete_public_text_redacted",
   "segments": [
     {
       "evidence_id": "L1_BRONTE_JE_001-S01",
-      "text": "comply!” it said. “Think of his misery; think of his danger—look at his state when left alone; remember his headlong nature; consider the recklessness following on despair—soothe him; save him; love him; tell him you love him and will be his. Who in the world cares for _you_? or who will be injured by what you do?”"
+      "private_text_sha256": "6f1062f325a2e8da321268bc8c315361d0f01f4745ad605069cce52a98771ee8",
+      "text_status": "redacted_from_public_pr_pending_rights_review"
     },
     {
       "evidence_id": "L1_BRONTE_JE_001-S02",
-      "text": "Still indomitable was the reply—“_I_ care for myself. The more solitary, the more friendless, the more unsustained I am, the more I will respect myself. I will keep the law given by God; sanctioned by man. I will hold to the principles received by me when I was sane, and not mad—as I am now. Laws and principles are not for the times when there is no temptation: they are for such moments as this, when body and soul rise in mutiny against their rigour; stringent are they; inviolate they shall be. If at my individual convenience I might break them, what would be their worth? They have a worth—so I have always believed; and if I cannot believe it now, it is because I am insane—quite insane: with my veins running fire, and my heart beating faster than I can count its throbs. Preconceived opinions, foregone determinations, are all I have at this hour to stand by: there I plant my foot.”"
+      "private_text_sha256": "5a6aa637d0a6a53c1d21a7953a5d10d2094845700c29ec00583cc2938e708e68",
+      "text_status": "redacted_from_public_pr_pending_rights_review"
     }
   ],
   "source_citation": "Charlotte Bronte, Jane Eyre. Project Gutenberg eBook #1260, English public-domain edition. Source lines 14628-14647. Retrieved 2026-07-02.",
   "source_file_sha256": "2988664342a69c6d5352501e1630b54d5bea8f47b50181cc84cedffaa279512d",
   "source_language": "English",
   "source_line_range": "pg1260.txt:14628-14647",
-  "source_packet_hash": "fb0a1010d32b269dd0710e06f1562660ae9276dea3be50a105aaf3da60762bb8",
+  "source_packet_hash": "6b2cdf09dbfcf0984ba258a665a35634891e6a560680cc49f8577a0a8ed3d561",
   "source_packet_hash_canonicalization": "sha256_canonical_json_excluding_source_packet_hash_v1",
-  "source_text_hash": "8d7b71caead92b9304a02452eb9b87e2ff8eebd22541b053ec2c411c870a0438",
   "source_universe_id": "L1_PG_HELD_OUT_NARRATIVE_2026_07_02",
   "source_url_or_source_file_reference": "https://www.gutenberg.org/cache/epub/1260/pg1260.txt",
   "text_layer_visibility": {
     "model_facing_instructions_included": false,
     "model_text_layers": [
-      "canonical_text"
+      "controlled_private_source_packet_after_rights_review"
+    ],
+    "public_repository_text_layers": [
+      "metadata_only_text_redacted"
     ],
     "researcher_and_model_identical": true,
     "researcher_text_layers": [
-      "canonical_text"
+      "controlled_private_source_packet_after_rights_review"
     ],
     "secondary_scholarship_visible": false
   },
-  "translation_or_gloss": "",
+  "translation_or_gloss_publication_status": "not_applicable",
   "translation_or_gloss_status": "not_applicable",
   "work": "Charlotte Bronte, Jane Eyre"
 }

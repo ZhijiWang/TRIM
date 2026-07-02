@@ -1,6 +1,6 @@
 # Human-LLM Friction-Locus Protocol Freeze Checklist
 
-Status: sample, source, manual, prompt, allocation, cost, and governance freeze completed for execution preparation only. This checklist does not authorize model execution before human records are completed, locked, and hashed.
+Status: `BLOCKED`. Sample selection and allocation arithmetic are documented, but the execution package is not complete. Manual, prompt, model, rights, and private source-packet readiness remain blocked.
 
 ## Completed before or during sample freeze
 
@@ -28,17 +28,28 @@ Status: sample, source, manual, prompt, allocation, cost, and governance freeze 
 - [x] Sample manifest prepared.
 - [x] Sample manifest hash recorded.
 - [x] Source rights status recorded for every selected case.
-- [x] Source packet specification frozen.
-- [x] Source packet hashes recorded.
+- [x] Public source packets redacted pending rights review.
+- [ ] Public redistribution rights cleared for every selected case.
+- [ ] Controlled private source packets cleared for execution use.
+- [x] Public source packet metadata hashes recorded.
 - [x] Textual rights status recorded.
-- [x] Canonical-language and translation/gloss policy frozen.
+- [ ] Canonical-language and translation/gloss policy execution-ready.
 - [x] Context-window and paratext-removal rules frozen.
-- [x] Counterfactual tests frozen.
-- [x] Predicted-confusion table frozen against the frozen manual.
-- [x] Prompts A/B/C frozen.
+- [ ] Authoritative current Design B friction_locus manual frozen.
+- [ ] Counterfactual tests frozen against an authoritative current manual.
+- [ ] Predicted-confusion table frozen against an authoritative current manual.
+- [ ] Prompts A/B/C frozen as executable.
 - [x] Ablation execution order or randomization rule frozen.
-- [x] Model parameters and tool/browsing availability rules frozen.
+- [ ] Account-verified model and decoding parameters frozen.
 - [x] Ethics/privacy status confirmed without formal exemption claim.
+
+## Current blockers before researcher coding
+
+- [ ] Authoritative manual identified or created under a later authorised task.
+- [ ] Source and translation rights cleared, or controlled private packet storage approved.
+- [ ] Public metadata packets reconciled with controlled private source packets.
+- [ ] Prompt bundle regenerated from the authoritative manual.
+- [ ] Execution model verified against the authenticated account.
 
 ## Not completed before researcher coding
 

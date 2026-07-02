@@ -1,18 +1,53 @@
 {
+  "candidate_manual_files": [
+    {
+      "assessment": "study protocol; not a complete operational friction_locus coding manual",
+      "commit": "6998175eeca5d349072bf31012c69f2d568f28ec",
+      "hash": "5c070f988d69d6136fe7d7c35e409ae49c8ad287b613dd447a9662e36749fb99",
+      "path": "docs/studies/human_llm_friction_locus_pilot_protocol.md"
+    },
+    {
+      "assessment": "category lineage/definition table only; lacks full decision-tree and operational manual guidance",
+      "commit": "6998175eeca5d349072bf31012c69f2d568f28ec",
+      "hash": "0679a65fc13957f4f13931f31d840f9fbbbbb1ca71d568eda0c3d7e1f246252f",
+      "path": "docs/studies/friction_locus_lineage_table.csv"
+    },
+    {
+      "assessment": "counterfactual/confusable table only; not a manual",
+      "commit": "6998175eeca5d349072bf31012c69f2d568f28ec",
+      "hash": "dc74ae5f84b626c4ad7fa598e50f0c6f52fced0e3bc7345d07ddbe308e4fb027",
+      "path": "docs/studies/predicted_confusions.csv"
+    },
+    {
+      "assessment": "historical legacy TRIM manual found in archival tag; not an active authoritative Design B manual",
+      "commit": "252f4b1c867751bd996885ec674f5f546ddbc110",
+      "hash": "5a41d3c7b85d2134d02be6ce4aa7b85bac00a6ece158a54a4d94baa05adc8de6",
+      "path": "docs/TRIM_Coding_Manual_v0_2_1_friction_locus.md"
+    }
+  ],
   "category_definitions_hash": "0679a65fc13957f4f13931f31d840f9fbbbbb1ca71d568eda0c3d7e1f246252f",
   "category_definitions_path": "docs/studies/friction_locus_lineage_table.csv",
-  "category_definitions_version": "friction_locus_lineage_table_at_main_6998175",
-  "confusable_with_version": "predicted_confusions_at_main_6998175",
-  "counterfactual_test_version": "predicted_confusions_at_main_6998175",
-  "freeze_status": "frozen_for_execution_preparation_no_coding_no_model_execution",
+  "category_definitions_status": "supporting_table_not_authoritative_manual",
+  "freeze_status": "BLOCKED_INCOMPLETE_AUTHORITATIVE_MANUAL",
   "frozen_at": "2026-07-02T12:00:00+10:00",
-  "manual_file_hash": "ca32a16b2dcc16f4d8a025c02a470278f57222c259347689feafd7f594b6e6d8",
-  "manual_path": "docs/studies/human_llm_friction_locus_pilot_protocol.md",
-  "manual_version": "human_llm_friction_locus_manual_v0_1_design_b_freeze_2026_07_02",
+  "gap_report_path": "docs/studies/human_llm_manual_gap_report.md",
+  "manual_file_hash": null,
+  "manual_freeze_status": "BLOCKED_INCOMPLETE_AUTHORITATIVE_MANUAL",
+  "manual_path": null,
+  "manual_version": "UNRESOLVED_PENDING_AUTHORITATIVE_MANUAL",
   "predicted_confusions_hash": "dc74ae5f84b626c4ad7fa598e50f0c6f52fced0e3bc7345d07ddbe308e4fb027",
   "predicted_confusions_path": "docs/studies/predicted_confusions.csv",
+  "predicted_confusions_status": "supporting_table_not_authoritative_manual",
   "repository_commit": "6998175eeca5d349072bf31012c69f2d568f28ec",
-  "reserved_category_policy": "Reserved or review-required categories use friction_locus_proposed with operational status requires_human_review and final_operational_label unresolved.",
+  "required_operational_components_missing": [
+    "authoritative current manual path/version",
+    "complete use-when/use-another guidance in active current manual",
+    "complete decision tree adopted for Design B",
+    "positive examples approved for manual without leaking study sample",
+    "reserved/review-required policy adopted in active manual",
+    "Condition C deterministic inclusion of complete authoritative manual"
+  ],
+  "reserved_category_policy": "Not frozen as executable; reserved/review-required policy must be specified in the authoritative manual before execution.",
   "schema_hash": "4ce445c04f349cd376f2104dc51df6b66c0f0f31930c634ea18e9576d0633235",
   "schema_path": "schemas/human_llm_coder_output.schema.json"
 }

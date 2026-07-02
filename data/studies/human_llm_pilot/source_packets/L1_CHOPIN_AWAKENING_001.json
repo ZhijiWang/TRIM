@@ -1,50 +1,63 @@
 {
-  "canonical_text": "L1_CHOPIN_AWAKENING_001-S01: But the beginning of things, of a world especially, is necessarily vague, tangled, chaotic, and exceedingly disturbing. How few of us ever emerge from such beginning! How many souls perish in its tumult!\nL1_CHOPIN_AWAKENING_001-S02: The voice of the sea is seductive; never ceasing, whispering, clamoring, murmuring, inviting the soul to wander for a spell in abysses of solitude; to lose itself in mazes of inward contemplation.\nL1_CHOPIN_AWAKENING_001-S03: The voice of the sea speaks to the soul. The touch of the sea is sensuous, enfolding the body in its soft, close embrace.",
-  "canonical_text_status": "frozen_packet_text_layer_normalized_from_retrieved_project_gutenberg_lines",
+  "canonical_text_publication_status": "not_in_public_repository",
+  "canonical_text_status": "redacted_from_public_pr_pending_rights_review",
   "case_id": "L1_CHOPIN_AWAKENING_001",
+  "controlled_storage_reference": "controlled_private_study_storage/human_llm_pilot/source_packets/L1_CHOPIN_AWAKENING_001.json",
   "edition": "Project Gutenberg eBook #160, English public-domain edition",
-  "fixed_context": "focal thematic passage plus immediate transition",
+  "fixed_context": "source span and context rule recorded in metadata; public text layer redacted pending rights review",
   "gloss_authority_status": "not_applicable",
   "inclusion_layer": "Layer 1",
-  "packet_version": "source_packet_v0_1_2026_07_02",
+  "packet_version": "source_packet_public_metadata_v0_2_2026_07_02",
+  "private_canonical_text_sha256": "8211ffd9ca3d2db82ae5c6d5c2bdf3f4dc1fae4fbe554e6fe197a551ac939642",
+  "private_source_packet_file_sha256": "185abaef21de11c20b7db6ed9a1044113b356e88219dedcd4b0bd54696a2bd97",
+  "private_source_packet_hash": "3163a60bb350678cdc78f4833ac27c05f65c3d19129b386c4a9c82e3271474e8",
+  "private_source_text_hash": "8211ffd9ca3d2db82ae5c6d5c2bdf3f4dc1fae4fbe554e6fe197a551ac939642",
+  "private_translation_or_gloss_sha256": "",
+  "public_redistribution_status": "not_confirmed_pending_rights_review",
+  "repository_publication_status": "metadata_only_text_redacted",
   "retrieval_date": "2026-07-02",
-  "rights_note": "Execution-preparation packet uses public-domain Project Gutenberg source text. Public release or redistribution outside this repository review still requires source-specific rights audit.",
-  "rights_status": "public_domain_us_project_gutenberg_or_public_domain_translation",
+  "rights_note": "The public PR stores metadata and private hashes only. Full source text is not redistributed until edition and translation rights are independently cleared.",
+  "rights_status": "rights_review_incomplete_public_text_redacted",
   "segments": [
     {
       "evidence_id": "L1_CHOPIN_AWAKENING_001-S01",
-      "text": "But the beginning of things, of a world especially, is necessarily vague, tangled, chaotic, and exceedingly disturbing. How few of us ever emerge from such beginning! How many souls perish in its tumult!"
+      "private_text_sha256": "86977563803f8b90d4c6a6a4ff85034bae3cef7611e88da71125c36e0c73bbe6",
+      "text_status": "redacted_from_public_pr_pending_rights_review"
     },
     {
       "evidence_id": "L1_CHOPIN_AWAKENING_001-S02",
-      "text": "The voice of the sea is seductive; never ceasing, whispering, clamoring, murmuring, inviting the soul to wander for a spell in abysses of solitude; to lose itself in mazes of inward contemplation."
+      "private_text_sha256": "e8e1006481896e6893bb54fc0863681cfa9143be7bb7af257fbd29f92cadfd14",
+      "text_status": "redacted_from_public_pr_pending_rights_review"
     },
     {
       "evidence_id": "L1_CHOPIN_AWAKENING_001-S03",
-      "text": "The voice of the sea speaks to the soul. The touch of the sea is sensuous, enfolding the body in its soft, close embrace."
+      "private_text_sha256": "5011131196f749a18adcd5e65adb277702130c4ed8484d49e0329466b9cb25d2",
+      "text_status": "redacted_from_public_pr_pending_rights_review"
     }
   ],
   "source_citation": "Kate Chopin, The Awakening. Project Gutenberg eBook #160, English public-domain edition. Source lines 681-690. Retrieved 2026-07-02.",
   "source_file_sha256": "97bbaf5c99f0d9bcf40cec2100c1c16c7073731c86c76b621ca93a7f897b971e",
   "source_language": "English",
   "source_line_range": "pg160.txt:681-690",
-  "source_packet_hash": "3163a60bb350678cdc78f4833ac27c05f65c3d19129b386c4a9c82e3271474e8",
+  "source_packet_hash": "df0bd8fcae2407f6a1f3d8ca6653471d52268da7e66da0ee727ec819871ff246",
   "source_packet_hash_canonicalization": "sha256_canonical_json_excluding_source_packet_hash_v1",
-  "source_text_hash": "8211ffd9ca3d2db82ae5c6d5c2bdf3f4dc1fae4fbe554e6fe197a551ac939642",
   "source_universe_id": "L1_PG_HELD_OUT_NARRATIVE_2026_07_02",
   "source_url_or_source_file_reference": "https://www.gutenberg.org/cache/epub/160/pg160.txt",
   "text_layer_visibility": {
     "model_facing_instructions_included": false,
     "model_text_layers": [
-      "canonical_text"
+      "controlled_private_source_packet_after_rights_review"
+    ],
+    "public_repository_text_layers": [
+      "metadata_only_text_redacted"
     ],
     "researcher_and_model_identical": true,
     "researcher_text_layers": [
-      "canonical_text"
+      "controlled_private_source_packet_after_rights_review"
     ],
     "secondary_scholarship_visible": false
   },
-  "translation_or_gloss": "",
+  "translation_or_gloss_publication_status": "not_applicable",
   "translation_or_gloss_status": "not_applicable",
   "work": "Kate Chopin, The Awakening"
 }

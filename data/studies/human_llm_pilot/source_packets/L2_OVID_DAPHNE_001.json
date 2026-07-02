@@ -1,48 +1,58 @@
 {
-  "canonical_text": "L2_OVID_DAPHNE_001-S01: Yet he that follows, aided by the wings of love, is the swifter, and denies her {any} rest; and is {now} just at her back as she flies, and is breathing upon her hair scattered upon her neck. Her strength being {now} spent, she grows pale, and being quite faint, with the fatigue of so swift a flight, looking upon the waters of Peneus, she says, “Give me, my father, thy aid, if you rivers have divine power. Oh Earth, either yawn {to swallow me}, or by changing it, destroy that form, by which I have pleased too much, and which causes me to be injured.”\nL2_OVID_DAPHNE_001-S02: Hardly had she ended her prayer, {when} a heavy torpor seizes her limbs; {and} her soft breasts are covered with a thin bark. Her hair grows into green leaves, her arms into branches; her feet, the moment before so swift, adhere by sluggish roots; a {leafy} canopy overspreads her features; her elegance alone[84] remains in her. This, too, Phœbus admires, and placing his right hand upon the stock, he perceives that the breast still throbs beneath the new bark; and {then}, embracing the branches as though limbs in his arms, he gives kisses to the wood, {and} yet the wood shrinks from his kisses. To her the God said: “But since thou canst not be my wife, at least thou shalt be my tree; my hair, my lyre,[85] my quiver shall always have thee, oh laurel! Thou shalt be",
-  "canonical_text_status": "frozen_packet_text_layer_normalized_from_retrieved_project_gutenberg_lines",
+  "canonical_text_publication_status": "not_in_public_repository",
+  "canonical_text_status": "redacted_from_public_pr_pending_rights_review",
   "case_id": "L2_OVID_DAPHNE_001",
+  "controlled_storage_reference": "controlled_private_study_storage/human_llm_pilot/source_packets/L2_OVID_DAPHNE_001.json",
   "edition": "Project Gutenberg eBook #21765, The Metamorphoses of Ovid, Books I-VII",
-  "fixed_context": "focal transformation plus immediate pursuit context",
+  "fixed_context": "source span and context rule recorded in metadata; public text layer redacted pending rights review",
   "gloss_authority_status": "public_domain_working_translation_for_study_packet",
   "inclusion_layer": "Layer 2",
-  "packet_version": "source_packet_v0_1_2026_07_02",
+  "packet_version": "source_packet_public_metadata_v0_2_2026_07_02",
+  "private_canonical_text_sha256": "16637ccfbc68746be0b7d397294b8d4fea2097f7a376d0e91ebf50058d8f92a2",
+  "private_source_packet_file_sha256": "ff49fb6068cdaefd93faa1be5c3621c14c94f00820a7c18da73c78f279ec4ad0",
+  "private_source_packet_hash": "ac3ef631583ff1c13500c83685eb1bb992b30e13a7b9cd6b4b45f5b61657f781",
+  "private_source_text_hash": "16637ccfbc68746be0b7d397294b8d4fea2097f7a376d0e91ebf50058d8f92a2",
+  "private_translation_or_gloss_sha256": "16637ccfbc68746be0b7d397294b8d4fea2097f7a376d0e91ebf50058d8f92a2",
+  "public_redistribution_status": "not_confirmed_pending_rights_review",
+  "repository_publication_status": "metadata_only_text_redacted",
   "retrieval_date": "2026-07-02",
-  "rights_note": "Execution-preparation packet uses public-domain Project Gutenberg source text. Public release or redistribution outside this repository review still requires source-specific rights audit.",
-  "rights_status": "public_domain_us_project_gutenberg_or_public_domain_translation",
+  "rights_note": "The public PR stores metadata and private hashes only. Full source text is not redistributed until edition and translation rights are independently cleared.",
+  "rights_status": "rights_review_incomplete_public_text_redacted",
   "segments": [
     {
       "evidence_id": "L2_OVID_DAPHNE_001-S01",
-      "text": "Yet he that follows, aided by the wings of love, is the swifter, and denies her {any} rest; and is {now} just at her back as she flies, and is breathing upon her hair scattered upon her neck. Her strength being {now} spent, she grows pale, and being quite faint, with the fatigue of so swift a flight, looking upon the waters of Peneus, she says, “Give me, my father, thy aid, if you rivers have divine power. Oh Earth, either yawn {to swallow me}, or by changing it, destroy that form, by which I have pleased too much, and which causes me to be injured.”"
+      "private_text_sha256": "c647d5e6341bbe0f151550b004cf1af686a99a70fe77a0f8b94d122478e6b8d2",
+      "text_status": "redacted_from_public_pr_pending_rights_review"
     },
     {
       "evidence_id": "L2_OVID_DAPHNE_001-S02",
-      "text": "Hardly had she ended her prayer, {when} a heavy torpor seizes her limbs; {and} her soft breasts are covered with a thin bark. Her hair grows into green leaves, her arms into branches; her feet, the moment before so swift, adhere by sluggish roots; a {leafy} canopy overspreads her features; her elegance alone[84] remains in her. This, too, Phœbus admires, and placing his right hand upon the stock, he perceives that the breast still throbs beneath the new bark; and {then}, embracing the branches as though limbs in his arms, he gives kisses to the wood, {and} yet the wood shrinks from his kisses. To her the God said: “But since thou canst not be my wife, at least thou shalt be my tree; my hair, my lyre,[85] my quiver shall always have thee, oh laurel! Thou shalt be"
+      "private_text_sha256": "bf901021a208f8923d7ae514de6f92e74d72e80df64d0388d170fe2bbca617d5",
+      "text_status": "redacted_from_public_pr_pending_rights_review"
     }
   ],
   "source_citation": "Ovid, Metamorphoses, Daphne episode. Project Gutenberg eBook #21765, The Metamorphoses of Ovid, Books I-VII. Source lines 1944-1963. Retrieved 2026-07-02.",
   "source_file_sha256": "174a30e40f5dc4dc1340ea60193bfc1168789114da824a55a4869ff29e1e1227",
   "source_language": "English translation from Latin",
   "source_line_range": "pg21765.txt:1944-1963",
-  "source_packet_hash": "ac3ef631583ff1c13500c83685eb1bb992b30e13a7b9cd6b4b45f5b61657f781",
+  "source_packet_hash": "a7f309fa0a591369396b88a15c59d5f0e000efb9485534c7df55cca57f3d838c",
   "source_packet_hash_canonicalization": "sha256_canonical_json_excluding_source_packet_hash_v1",
-  "source_text_hash": "16637ccfbc68746be0b7d397294b8d4fea2097f7a376d0e91ebf50058d8f92a2",
   "source_universe_id": "L2_CLASSICAL_TRANSFER_PD_TRANSLATIONS_2026_07_02",
   "source_url_or_source_file_reference": "https://www.gutenberg.org/cache/epub/21765/pg21765.txt",
   "text_layer_visibility": {
     "model_facing_instructions_included": false,
     "model_text_layers": [
-      "canonical_text",
-      "translation_or_gloss"
+      "controlled_private_source_packet_after_rights_review"
+    ],
+    "public_repository_text_layers": [
+      "metadata_only_text_redacted"
     ],
     "researcher_and_model_identical": true,
     "researcher_text_layers": [
-      "canonical_text",
-      "translation_or_gloss"
+      "controlled_private_source_packet_after_rights_review"
     ],
     "secondary_scholarship_visible": false
   },
-  "translation_or_gloss": "L2_OVID_DAPHNE_001-S01: Yet he that follows, aided by the wings of love, is the swifter, and denies her {any} rest; and is {now} just at her back as she flies, and is breathing upon her hair scattered upon her neck. Her strength being {now} spent, she grows pale, and being quite faint, with the fatigue of so swift a flight, looking upon the waters of Peneus, she says, “Give me, my father, thy aid, if you rivers have divine power. Oh Earth, either yawn {to swallow me}, or by changing it, destroy that form, by which I have pleased too much, and which causes me to be injured.”\nL2_OVID_DAPHNE_001-S02: Hardly had she ended her prayer, {when} a heavy torpor seizes her limbs; {and} her soft breasts are covered with a thin bark. Her hair grows into green leaves, her arms into branches; her feet, the moment before so swift, adhere by sluggish roots; a {leafy} canopy overspreads her features; her elegance alone[84] remains in her. This, too, Phœbus admires, and placing his right hand upon the stock, he perceives that the breast still throbs beneath the new bark; and {then}, embracing the branches as though limbs in his arms, he gives kisses to the wood, {and} yet the wood shrinks from his kisses. To her the God said: “But since thou canst not be my wife, at least thou shalt be my tree; my hair, my lyre,[85] my quiver shall always have thee, oh laurel! Thou shalt be",
+  "translation_or_gloss_publication_status": "not_in_public_repository",
   "translation_or_gloss_status": "public_domain_working_translation_for_study_packet",
   "work": "Ovid, Metamorphoses, Daphne episode"
 }

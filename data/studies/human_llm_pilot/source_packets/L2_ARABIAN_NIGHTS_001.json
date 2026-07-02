@@ -1,56 +1,68 @@
 {
-  "canonical_text": "L2_ARABIAN_NIGHTS_001-S01: When the usual hour arrived the grand-vizir conducted Scheherazade to the palace, and left her alone with the Sultan, who bade her raise her veil and was amazed at her beauty.  But seeing her eyes full of tears, he asked what was the matter.  \"Sire,\" replied Scheherazade, \"I have a sister who loves me as tenderly as I love her.  Grant me the favour of allowing her to sleep this night in the same room, as it is the last we shall be together.\"  Schahriar consented to Scheherazade's petition and Dinarzade was sent for.\nL2_ARABIAN_NIGHTS_001-S02: An hour before daybreak Dinarzade awoke, and exclaimed, as she had promised, \"My dear sister, if you are not asleep, tell me I pray you, before the sun rises, one of your charming stories.  It is the last time that I shall have the pleasure of hearing you.\"\nL2_ARABIAN_NIGHTS_001-S03: Scheherazade did not answer her sister, but turned to the Sultan. \"Will your highness permit me to do as my sister asks?\" said she.\nL2_ARABIAN_NIGHTS_001-S04: \"Willingly,\" he answered.  So Scheherazade began.",
-  "canonical_text_status": "frozen_packet_text_layer_normalized_from_retrieved_project_gutenberg_lines",
+  "canonical_text_publication_status": "not_in_public_repository",
+  "canonical_text_status": "redacted_from_public_pr_pending_rights_review",
   "case_id": "L2_ARABIAN_NIGHTS_001",
+  "controlled_storage_reference": "controlled_private_study_storage/human_llm_pilot/source_packets/L2_ARABIAN_NIGHTS_001.json",
   "edition": "Project Gutenberg eBook #128, The Arabian Nights Entertainments",
-  "fixed_context": "focal first-night request plus story opening",
+  "fixed_context": "source span and context rule recorded in metadata; public text layer redacted pending rights review",
   "gloss_authority_status": "public_domain_working_translation_for_study_packet",
   "inclusion_layer": "Layer 2",
-  "packet_version": "source_packet_v0_1_2026_07_02",
+  "packet_version": "source_packet_public_metadata_v0_2_2026_07_02",
+  "private_canonical_text_sha256": "4bc1a0424344ee3961d3bd9621d580ab4207a2b0043cc91d6cc9426ca1725e90",
+  "private_source_packet_file_sha256": "91fcf65f16558beddb04e2552263e3faa1335bb92905149be882c46a62b0afb0",
+  "private_source_packet_hash": "bd11b79c6862eaad5d64d81d4c3fc61ddc60ed9916d6dad231ff1814b6b3ed82",
+  "private_source_text_hash": "4bc1a0424344ee3961d3bd9621d580ab4207a2b0043cc91d6cc9426ca1725e90",
+  "private_translation_or_gloss_sha256": "4bc1a0424344ee3961d3bd9621d580ab4207a2b0043cc91d6cc9426ca1725e90",
+  "public_redistribution_status": "not_confirmed_pending_rights_review",
+  "repository_publication_status": "metadata_only_text_redacted",
   "retrieval_date": "2026-07-02",
-  "rights_note": "Execution-preparation packet uses public-domain Project Gutenberg source text. Public release or redistribution outside this repository review still requires source-specific rights audit.",
-  "rights_status": "public_domain_us_project_gutenberg_or_public_domain_translation",
+  "rights_note": "The public PR stores metadata and private hashes only. Full source text is not redistributed until edition and translation rights are independently cleared.",
+  "rights_status": "rights_review_incomplete_public_text_redacted",
   "segments": [
     {
       "evidence_id": "L2_ARABIAN_NIGHTS_001-S01",
-      "text": "When the usual hour arrived the grand-vizir conducted Scheherazade to the palace, and left her alone with the Sultan, who bade her raise her veil and was amazed at her beauty.  But seeing her eyes full of tears, he asked what was the matter.  \"Sire,\" replied Scheherazade, \"I have a sister who loves me as tenderly as I love her.  Grant me the favour of allowing her to sleep this night in the same room, as it is the last we shall be together.\"  Schahriar consented to Scheherazade's petition and Dinarzade was sent for."
+      "private_text_sha256": "ac5269a2356fb05597b85565c8bda7bf8b6edafcefda74d91fdbd08ace9e5d5c",
+      "text_status": "redacted_from_public_pr_pending_rights_review"
     },
     {
       "evidence_id": "L2_ARABIAN_NIGHTS_001-S02",
-      "text": "An hour before daybreak Dinarzade awoke, and exclaimed, as she had promised, \"My dear sister, if you are not asleep, tell me I pray you, before the sun rises, one of your charming stories.  It is the last time that I shall have the pleasure of hearing you.\""
+      "private_text_sha256": "00ec8c7013f85e19cd7e6f59ccc041f3c98d0708e5ef516ae177f63ef7bd98e0",
+      "text_status": "redacted_from_public_pr_pending_rights_review"
     },
     {
       "evidence_id": "L2_ARABIAN_NIGHTS_001-S03",
-      "text": "Scheherazade did not answer her sister, but turned to the Sultan. \"Will your highness permit me to do as my sister asks?\" said she."
+      "private_text_sha256": "c796544829f9c0aa96f293ad1618fbef9a77b85a176ea3d9ada94c6840775503",
+      "text_status": "redacted_from_public_pr_pending_rights_review"
     },
     {
       "evidence_id": "L2_ARABIAN_NIGHTS_001-S04",
-      "text": "\"Willingly,\" he answered.  So Scheherazade began."
+      "private_text_sha256": "589972f7f92acbf0d965645680d5bf11ba14e4b9c98e9577d2ec362c764d61c4",
+      "text_status": "redacted_from_public_pr_pending_rights_review"
     }
   ],
   "source_citation": "The Arabian Nights Entertainments, frame tale of Scheherazade. Project Gutenberg eBook #128, The Arabian Nights Entertainments. Source lines 296-313. Retrieved 2026-07-02.",
   "source_file_sha256": "718e2ea4a31d4b4f135d6d8647d2c54e5014e403b001e263fcc93dc9207ca0c1",
   "source_language": "English translation from Arabic/Persian narrative tradition",
   "source_line_range": "pg128.txt:296-313",
-  "source_packet_hash": "bd11b79c6862eaad5d64d81d4c3fc61ddc60ed9916d6dad231ff1814b6b3ed82",
+  "source_packet_hash": "ff4bfdc202e243576b8faf1157e1ded774e28784ff48d04f3bd7f8389a98116f",
   "source_packet_hash_canonicalization": "sha256_canonical_json_excluding_source_packet_hash_v1",
-  "source_text_hash": "4bc1a0424344ee3961d3bd9621d580ab4207a2b0043cc91d6cc9426ca1725e90",
   "source_universe_id": "L2_CLASSICAL_TRANSFER_PD_TRANSLATIONS_2026_07_02",
   "source_url_or_source_file_reference": "https://www.gutenberg.org/cache/epub/128/pg128.txt",
   "text_layer_visibility": {
     "model_facing_instructions_included": false,
     "model_text_layers": [
-      "canonical_text",
-      "translation_or_gloss"
+      "controlled_private_source_packet_after_rights_review"
+    ],
+    "public_repository_text_layers": [
+      "metadata_only_text_redacted"
     ],
     "researcher_and_model_identical": true,
     "researcher_text_layers": [
-      "canonical_text",
-      "translation_or_gloss"
+      "controlled_private_source_packet_after_rights_review"
     ],
     "secondary_scholarship_visible": false
   },
-  "translation_or_gloss": "L2_ARABIAN_NIGHTS_001-S01: When the usual hour arrived the grand-vizir conducted Scheherazade to the palace, and left her alone with the Sultan, who bade her raise her veil and was amazed at her beauty.  But seeing her eyes full of tears, he asked what was the matter.  \"Sire,\" replied Scheherazade, \"I have a sister who loves me as tenderly as I love her.  Grant me the favour of allowing her to sleep this night in the same room, as it is the last we shall be together.\"  Schahriar consented to Scheherazade's petition and Dinarzade was sent for.\nL2_ARABIAN_NIGHTS_001-S02: An hour before daybreak Dinarzade awoke, and exclaimed, as she had promised, \"My dear sister, if you are not asleep, tell me I pray you, before the sun rises, one of your charming stories.  It is the last time that I shall have the pleasure of hearing you.\"\nL2_ARABIAN_NIGHTS_001-S03: Scheherazade did not answer her sister, but turned to the Sultan. \"Will your highness permit me to do as my sister asks?\" said she.\nL2_ARABIAN_NIGHTS_001-S04: \"Willingly,\" he answered.  So Scheherazade began.",
+  "translation_or_gloss_publication_status": "not_in_public_repository",
   "translation_or_gloss_status": "public_domain_working_translation_for_study_packet",
   "work": "The Arabian Nights Entertainments, frame tale of Scheherazade"
 }

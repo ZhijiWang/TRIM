@@ -1,46 +1,58 @@
 {
-  "canonical_text": "L1_WHARTON_MIRTH_001-S01: capture. She was too self-engrossed to penetrate the recesses of his shyness, and besides, why should she care to give herself the trouble? At most it might amuse her to make sport of his simplicity for an evening—after that he would be merely a burden to her, and knowing this, she was far too experienced to encourage him. But the mere thought of that other woman, who could take a man up and toss him aside as she willed, without having to regard him as a possible factor in her plans, filled Lily Bart with envy. She had been bored all the afternoon by Percy Gryce—the mere thought seemed to waken an echo of his droning voice—but she could not ignore him on the morrow, she must follow up her success, must submit to more boredom, must be ready with fresh compliances and adaptabilities, and all on the bare chance that he might ultimately decide to do her the honour of boring her for life.\nL1_WHARTON_MIRTH_001-S02: It was a hateful fate—but how escape from it? What choice had she? To be herself, or a Gerty Farish. As she entered her bedroom, with its softly-shaded lights, her lace dressing-gown lying across the silken bedspread, her little embroidered slippers before the fire, a vase of carnations filling the air with perfume, and the last novels and magazines lying uncut on a table beside the reading-lamp, she had a vision of Miss Farish’s cramped flat, with its cheap conveniences and hideous wall-papers. No; she was not made for mean and shabby surroundings, for the squalid compromises of poverty. Her whole being dilated in an atmosphere of luxury; it",
-  "canonical_text_status": "frozen_packet_text_layer_normalized_from_retrieved_project_gutenberg_lines",
+  "canonical_text_publication_status": "not_in_public_repository",
+  "canonical_text_status": "redacted_from_public_pr_pending_rights_review",
   "case_id": "L1_WHARTON_MIRTH_001",
+  "controlled_storage_reference": "controlled_private_study_storage/human_llm_pilot/source_packets/L1_WHARTON_MIRTH_001.json",
   "edition": "Project Gutenberg eBook #284, English public-domain edition",
-  "fixed_context": "focal interior reflection plus immediate social-material contrast",
+  "fixed_context": "source span and context rule recorded in metadata; public text layer redacted pending rights review",
   "gloss_authority_status": "not_applicable",
   "inclusion_layer": "Layer 1",
-  "packet_version": "source_packet_v0_1_2026_07_02",
+  "packet_version": "source_packet_public_metadata_v0_2_2026_07_02",
+  "private_canonical_text_sha256": "606505e6d8076c8b5b999973cc17ad111cd2d38e8f604620154b7637b25b6346",
+  "private_source_packet_file_sha256": "5a90578a075786bd2a1a1e86e4448b6d1e9ff3328ac221cad07a2bd2cde41ea8",
+  "private_source_packet_hash": "f9280c74ec617a438fa3f65f932a9b5a1bb9fc411e14d4d962dd4efe190a3433",
+  "private_source_text_hash": "606505e6d8076c8b5b999973cc17ad111cd2d38e8f604620154b7637b25b6346",
+  "private_translation_or_gloss_sha256": "",
+  "public_redistribution_status": "not_confirmed_pending_rights_review",
+  "repository_publication_status": "metadata_only_text_redacted",
   "retrieval_date": "2026-07-02",
-  "rights_note": "Execution-preparation packet uses public-domain Project Gutenberg source text. Public release or redistribution outside this repository review still requires source-specific rights audit.",
-  "rights_status": "public_domain_us_project_gutenberg_or_public_domain_translation",
+  "rights_note": "The public PR stores metadata and private hashes only. Full source text is not redistributed until edition and translation rights are independently cleared.",
+  "rights_status": "rights_review_incomplete_public_text_redacted",
   "segments": [
     {
       "evidence_id": "L1_WHARTON_MIRTH_001-S01",
-      "text": "capture. She was too self-engrossed to penetrate the recesses of his shyness, and besides, why should she care to give herself the trouble? At most it might amuse her to make sport of his simplicity for an evening—after that he would be merely a burden to her, and knowing this, she was far too experienced to encourage him. But the mere thought of that other woman, who could take a man up and toss him aside as she willed, without having to regard him as a possible factor in her plans, filled Lily Bart with envy. She had been bored all the afternoon by Percy Gryce—the mere thought seemed to waken an echo of his droning voice—but she could not ignore him on the morrow, she must follow up her success, must submit to more boredom, must be ready with fresh compliances and adaptabilities, and all on the bare chance that he might ultimately decide to do her the honour of boring her for life."
+      "private_text_sha256": "f635d59e523b9f923de1b7483d1ca68a757d5f1281a67d5beeeff9057b38a8b7",
+      "text_status": "redacted_from_public_pr_pending_rights_review"
     },
     {
       "evidence_id": "L1_WHARTON_MIRTH_001-S02",
-      "text": "It was a hateful fate—but how escape from it? What choice had she? To be herself, or a Gerty Farish. As she entered her bedroom, with its softly-shaded lights, her lace dressing-gown lying across the silken bedspread, her little embroidered slippers before the fire, a vase of carnations filling the air with perfume, and the last novels and magazines lying uncut on a table beside the reading-lamp, she had a vision of Miss Farish’s cramped flat, with its cheap conveniences and hideous wall-papers. No; she was not made for mean and shabby surroundings, for the squalid compromises of poverty. Her whole being dilated in an atmosphere of luxury; it"
+      "private_text_sha256": "173f84b2b6615a39ee094529b2206c10cb082da2c9294bd5b8a6d55b6a8b9e91",
+      "text_status": "redacted_from_public_pr_pending_rights_review"
     }
   ],
   "source_citation": "Edith Wharton, The House of Mirth. Project Gutenberg eBook #284, English public-domain edition. Source lines 1058-1082. Retrieved 2026-07-02.",
   "source_file_sha256": "4d4fd8d6faa5ab0739c2db9ad51da85760dea7e53cce0524b455da714d626d6f",
   "source_language": "English",
   "source_line_range": "pg284.txt:1058-1082",
-  "source_packet_hash": "f9280c74ec617a438fa3f65f932a9b5a1bb9fc411e14d4d962dd4efe190a3433",
+  "source_packet_hash": "d7ce1e41ec28af1371d644556c6bc95c855d66905ee2c0e4073f5fcc912bb6da",
   "source_packet_hash_canonicalization": "sha256_canonical_json_excluding_source_packet_hash_v1",
-  "source_text_hash": "606505e6d8076c8b5b999973cc17ad111cd2d38e8f604620154b7637b25b6346",
   "source_universe_id": "L1_PG_HELD_OUT_NARRATIVE_2026_07_02",
   "source_url_or_source_file_reference": "https://www.gutenberg.org/cache/epub/284/pg284.txt",
   "text_layer_visibility": {
     "model_facing_instructions_included": false,
     "model_text_layers": [
-      "canonical_text"
+      "controlled_private_source_packet_after_rights_review"
+    ],
+    "public_repository_text_layers": [
+      "metadata_only_text_redacted"
     ],
     "researcher_and_model_identical": true,
     "researcher_text_layers": [
-      "canonical_text"
+      "controlled_private_source_packet_after_rights_review"
     ],
     "secondary_scholarship_visible": false
   },
-  "translation_or_gloss": "",
+  "translation_or_gloss_publication_status": "not_applicable",
   "translation_or_gloss_status": "not_applicable",
   "work": "Edith Wharton, The House of Mirth"
 }

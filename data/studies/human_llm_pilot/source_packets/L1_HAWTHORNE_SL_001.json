@@ -1,46 +1,58 @@
 {
-  "canonical_text": "L1_HAWTHORNE_SL_001-S01: was wrought or fastened into her dress. In a moment, however, wisely judging that one token of her shame would but poorly serve to hide another, she took the baby on her arm, and, with a burning blush, and yet a haughty smile, and a glance that would not be abashed, looked around at her towns-people and neighbors. On the breast of her gown, in fine red cloth, surrounded with an elaborate embroidery and fantastic flourishes of gold-thread, appeared the letter A. It was so artistically done, and with so much fertility and gorgeous luxuriance of fancy, that it had all the effect of a last and fitting decoration to the apparel which she wore; and which was of a splendor in accordance with the taste of the age, but greatly beyond what was allowed by the sumptuary regulations of the colony.\nL1_HAWTHORNE_SL_001-S02: The young woman was tall, with a figure of perfect elegance on a large scale. She had dark and abundant hair, so glossy that it threw off the sunshine with a gleam, and a face which, besides being beautiful from regularity of feature and richness of complexion, had the impressiveness belonging to a marked brow and deep black eyes. She was",
-  "canonical_text_status": "frozen_packet_text_layer_normalized_from_retrieved_project_gutenberg_lines",
+  "canonical_text_publication_status": "not_in_public_repository",
+  "canonical_text_status": "redacted_from_public_pr_pending_rights_review",
   "case_id": "L1_HAWTHORNE_SL_001",
+  "controlled_storage_reference": "controlled_private_study_storage/human_llm_pilot/source_packets/L1_HAWTHORNE_SL_001.json",
   "edition": "Project Gutenberg eBook #25344, English public-domain edition",
-  "fixed_context": "focal scaffold description plus immediate physical/narrative framing",
+  "fixed_context": "source span and context rule recorded in metadata; public text layer redacted pending rights review",
   "gloss_authority_status": "not_applicable",
   "inclusion_layer": "Layer 1",
-  "packet_version": "source_packet_v0_1_2026_07_02",
+  "packet_version": "source_packet_public_metadata_v0_2_2026_07_02",
+  "private_canonical_text_sha256": "ea4a11048e85022263c79853aa85e428eb04e188d62436636dc5e56a1f86487f",
+  "private_source_packet_file_sha256": "ff72f714f7cff10b4c5103aff16c503e95eddc401bb6221257f92bea463343d5",
+  "private_source_packet_hash": "47551db63da2ace72657edd9b4c1c84ec4e53fbad2c721f689427c2b07e5e9b2",
+  "private_source_text_hash": "ea4a11048e85022263c79853aa85e428eb04e188d62436636dc5e56a1f86487f",
+  "private_translation_or_gloss_sha256": "",
+  "public_redistribution_status": "not_confirmed_pending_rights_review",
+  "repository_publication_status": "metadata_only_text_redacted",
   "retrieval_date": "2026-07-02",
-  "rights_note": "Execution-preparation packet uses public-domain Project Gutenberg source text. Public release or redistribution outside this repository review still requires source-specific rights audit.",
-  "rights_status": "public_domain_us_project_gutenberg_or_public_domain_translation",
+  "rights_note": "The public PR stores metadata and private hashes only. Full source text is not redistributed until edition and translation rights are independently cleared.",
+  "rights_status": "rights_review_incomplete_public_text_redacted",
   "segments": [
     {
       "evidence_id": "L1_HAWTHORNE_SL_001-S01",
-      "text": "was wrought or fastened into her dress. In a moment, however, wisely judging that one token of her shame would but poorly serve to hide another, she took the baby on her arm, and, with a burning blush, and yet a haughty smile, and a glance that would not be abashed, looked around at her towns-people and neighbors. On the breast of her gown, in fine red cloth, surrounded with an elaborate embroidery and fantastic flourishes of gold-thread, appeared the letter A. It was so artistically done, and with so much fertility and gorgeous luxuriance of fancy, that it had all the effect of a last and fitting decoration to the apparel which she wore; and which was of a splendor in accordance with the taste of the age, but greatly beyond what was allowed by the sumptuary regulations of the colony."
+      "private_text_sha256": "1cfcc7dd27f415be169f21c281db05ed47ad3d3e19c84a37b8aca85c28af6a50",
+      "text_status": "redacted_from_public_pr_pending_rights_review"
     },
     {
       "evidence_id": "L1_HAWTHORNE_SL_001-S02",
-      "text": "The young woman was tall, with a figure of perfect elegance on a large scale. She had dark and abundant hair, so glossy that it threw off the sunshine with a gleam, and a face which, besides being beautiful from regularity of feature and richness of complexion, had the impressiveness belonging to a marked brow and deep black eyes. She was"
+      "private_text_sha256": "3dfd3cbe0c0d613e7f288c254ec4c71014a0b78ce84b8daec8c2f6a334287369",
+      "text_status": "redacted_from_public_pr_pending_rights_review"
     }
   ],
   "source_citation": "Nathaniel Hawthorne, The Scarlet Letter. Project Gutenberg eBook #25344, English public-domain edition. Source lines 1808-1825. Retrieved 2026-07-02.",
   "source_file_sha256": "f5c3e08ba84b38970970cba7a7e4836b8e9d4c30f6afe4c78b9b99ca84c754e3",
   "source_language": "English",
   "source_line_range": "pg25344.txt:1808-1825",
-  "source_packet_hash": "47551db63da2ace72657edd9b4c1c84ec4e53fbad2c721f689427c2b07e5e9b2",
+  "source_packet_hash": "26eb2b36ab58d76ce9b258343c3b1ce4f6c45a80b960a9803a1744189322f848",
   "source_packet_hash_canonicalization": "sha256_canonical_json_excluding_source_packet_hash_v1",
-  "source_text_hash": "ea4a11048e85022263c79853aa85e428eb04e188d62436636dc5e56a1f86487f",
   "source_universe_id": "L1_PG_HELD_OUT_NARRATIVE_2026_07_02",
   "source_url_or_source_file_reference": "https://www.gutenberg.org/cache/epub/25344/pg25344.txt",
   "text_layer_visibility": {
     "model_facing_instructions_included": false,
     "model_text_layers": [
-      "canonical_text"
+      "controlled_private_source_packet_after_rights_review"
+    ],
+    "public_repository_text_layers": [
+      "metadata_only_text_redacted"
     ],
     "researcher_and_model_identical": true,
     "researcher_text_layers": [
-      "canonical_text"
+      "controlled_private_source_packet_after_rights_review"
     ],
     "secondary_scholarship_visible": false
   },
-  "translation_or_gloss": "",
+  "translation_or_gloss_publication_status": "not_applicable",
   "translation_or_gloss_status": "not_applicable",
   "work": "Nathaniel Hawthorne, The Scarlet Letter"
 }

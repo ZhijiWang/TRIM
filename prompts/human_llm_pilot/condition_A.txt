@@ -1,15 +1,5 @@
+STATUS: BLOCKED_NOT_EXECUTION_READY. This prompt scaffold must not be used for model execution until an authoritative friction_locus manual and account-verified model are frozen.
+
 Condition A: label names and short definitions only.
 
-Controlled friction_locus vocabulary, using the frozen lineage table as category-definition source:
-- cue_function: use only when the cue family itself remains the dominant unresolved converter after more specific loci are excluded.
-- warrant_attribution: use when one source, medium, speaker, sign, or result is granted warranting force for the function label.
-- warrant_relation: use when conflict, ranking, qualification, suspension, or interaction among multiple warrants is the dominant procedural locus.
-- operation_function: use when a visible interpretive, testimonial, consultative, recognitional, or self-reading operation converts evidence to function.
-- boundary_setting: use when the relevant case, interpretive unit, category boundary, speaker boundary, or scope of application is unstable.
-- temporal_layering: use when later fulfilment, retrospective framing, historical readability, or reuse across time changes the function of earlier evidence.
-- perspective_assignment: use when speaker, witness role, testimonial position, focalization, or narrative standpoint determines the function.
-- context_inference: use when a contextual bridge beyond the local anchor is the dominant obstacle to evidence-to-function conversion.
-- unresolved: use when the record cannot responsibly choose a controlled category under the frozen instructions.
-
-
-Do not use a decision tree, detailed counterfactual tests, confusable-with guidance, or examples. Apply the short definitions only. If a category is reserved or review-required under the vocabulary, mark the operational status as requires_human_review and use final_operational_label = unresolved.
+This draft remains non-executable. It may later provide category names, short definitions, common task framing, and shared output instructions only. It must not include the full decision tree, detailed counterfactual tests, confusable-with guidance, or study-sample examples.

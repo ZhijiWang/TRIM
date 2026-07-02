@@ -1,48 +1,58 @@
 {
-  "canonical_text": "L2_MALORY_MORTE_001-S01: said thus:—Whoso pulleth out this sword of this stone and anvil, is rightwise king born of all England. Then the people marvelled, and told it to the Archbishop.\nL2_MALORY_MORTE_001-S02: I command, said the Archbishop, that ye keep you within your church and pray unto God still, that no man touch the sword till the high mass be all done. So when all masses were done all the lords went to behold the stone and the sword. And when they saw the scripture some assayed, such as would have been king. But none might stir the sword nor move it. He is not here, said the Archbishop, that shall achieve the sword, but doubt not God will make him known. But this is my counsel, said the Archbishop, that we let purvey ten knights, men of good fame, and they to keep this sword. So it was ordained, and then there was made a cry, that every man should assay that would, for to win the sword. And upon New Year’s Day the barons let make a jousts and a tournament, that all knights that would joust or tourney there might play, and all this was ordained for to keep the lords together and the commons, for the Archbishop trusted that God would make him known that should win the",
-  "canonical_text_status": "frozen_packet_text_layer_normalized_from_retrieved_project_gutenberg_lines",
+  "canonical_text_publication_status": "not_in_public_repository",
+  "canonical_text_status": "redacted_from_public_pr_pending_rights_review",
   "case_id": "L2_MALORY_MORTE_001",
+  "controlled_storage_reference": "controlled_private_study_storage/human_llm_pilot/source_packets/L2_MALORY_MORTE_001.json",
   "edition": "Project Gutenberg eBook #1251, Le Morte d’Arthur: Volume 1",
-  "fixed_context": "focal inscription plus immediate trial context",
+  "fixed_context": "source span and context rule recorded in metadata; public text layer redacted pending rights review",
   "gloss_authority_status": "public_domain_working_text",
   "inclusion_layer": "Layer 2",
-  "packet_version": "source_packet_v0_1_2026_07_02",
+  "packet_version": "source_packet_public_metadata_v0_2_2026_07_02",
+  "private_canonical_text_sha256": "a645678ce59e01b95ed7f3eb73a222579d0d463121c7d0e7088422ea90b8cb97",
+  "private_source_packet_file_sha256": "6152f992077ad36de8e1a1ac5e08cce6b8be6b7ee55b2c87e5145a285e7210ab",
+  "private_source_packet_hash": "bf01b657a4b82ecd01d81c8d5dc6e785908f565bb936f0cc0a56dcd576d0f2aa",
+  "private_source_text_hash": "a645678ce59e01b95ed7f3eb73a222579d0d463121c7d0e7088422ea90b8cb97",
+  "private_translation_or_gloss_sha256": "a645678ce59e01b95ed7f3eb73a222579d0d463121c7d0e7088422ea90b8cb97",
+  "public_redistribution_status": "not_confirmed_pending_rights_review",
+  "repository_publication_status": "metadata_only_text_redacted",
   "retrieval_date": "2026-07-02",
-  "rights_note": "Execution-preparation packet uses public-domain Project Gutenberg source text. Public release or redistribution outside this repository review still requires source-specific rights audit.",
-  "rights_status": "public_domain_us_project_gutenberg_or_public_domain_translation",
+  "rights_note": "The public PR stores metadata and private hashes only. Full source text is not redistributed until edition and translation rights are independently cleared.",
+  "rights_status": "rights_review_incomplete_public_text_redacted",
   "segments": [
     {
       "evidence_id": "L2_MALORY_MORTE_001-S01",
-      "text": "said thus:—Whoso pulleth out this sword of this stone and anvil, is rightwise king born of all England. Then the people marvelled, and told it to the Archbishop."
+      "private_text_sha256": "0a71c3b0c94d249f31a87ea38bce429de597a1276b3f0b2703d70a662ffb5470",
+      "text_status": "redacted_from_public_pr_pending_rights_review"
     },
     {
       "evidence_id": "L2_MALORY_MORTE_001-S02",
-      "text": "I command, said the Archbishop, that ye keep you within your church and pray unto God still, that no man touch the sword till the high mass be all done. So when all masses were done all the lords went to behold the stone and the sword. And when they saw the scripture some assayed, such as would have been king. But none might stir the sword nor move it. He is not here, said the Archbishop, that shall achieve the sword, but doubt not God will make him known. But this is my counsel, said the Archbishop, that we let purvey ten knights, men of good fame, and they to keep this sword. So it was ordained, and then there was made a cry, that every man should assay that would, for to win the sword. And upon New Year’s Day the barons let make a jousts and a tournament, that all knights that would joust or tourney there might play, and all this was ordained for to keep the lords together and the commons, for the Archbishop trusted that God would make him known that should win the"
+      "private_text_sha256": "4024c058a7d153c9da47ee6dd62cd3566960f49bb549f29401fb50f1605121ad",
+      "text_status": "redacted_from_public_pr_pending_rights_review"
     }
   ],
   "source_citation": "Thomas Malory, Le Morte d’Arthur. Project Gutenberg eBook #1251, Le Morte d’Arthur: Volume 1. Source lines 1285-1302. Retrieved 2026-07-02.",
   "source_file_sha256": "669d51cb2abedcdafbab8053316e5c60c3f8b7ec3b04a1c1b71e5df33231b3d0",
   "source_language": "English/Middle English public-domain edition",
   "source_line_range": "pg1251.txt:1285-1302",
-  "source_packet_hash": "bf01b657a4b82ecd01d81c8d5dc6e785908f565bb936f0cc0a56dcd576d0f2aa",
+  "source_packet_hash": "8630433edd758b454fc4961a25adc63df7168d8b6c31c269df3fdfd9a2cd5bc7",
   "source_packet_hash_canonicalization": "sha256_canonical_json_excluding_source_packet_hash_v1",
-  "source_text_hash": "a645678ce59e01b95ed7f3eb73a222579d0d463121c7d0e7088422ea90b8cb97",
   "source_universe_id": "L2_CLASSICAL_TRANSFER_PD_TRANSLATIONS_2026_07_02",
   "source_url_or_source_file_reference": "https://www.gutenberg.org/cache/epub/1251/pg1251.txt",
   "text_layer_visibility": {
     "model_facing_instructions_included": false,
     "model_text_layers": [
-      "canonical_text",
-      "translation_or_gloss"
+      "controlled_private_source_packet_after_rights_review"
+    ],
+    "public_repository_text_layers": [
+      "metadata_only_text_redacted"
     ],
     "researcher_and_model_identical": true,
     "researcher_text_layers": [
-      "canonical_text",
-      "translation_or_gloss"
+      "controlled_private_source_packet_after_rights_review"
     ],
     "secondary_scholarship_visible": false
   },
-  "translation_or_gloss": "L2_MALORY_MORTE_001-S01: said thus:—Whoso pulleth out this sword of this stone and anvil, is rightwise king born of all England. Then the people marvelled, and told it to the Archbishop.\nL2_MALORY_MORTE_001-S02: I command, said the Archbishop, that ye keep you within your church and pray unto God still, that no man touch the sword till the high mass be all done. So when all masses were done all the lords went to behold the stone and the sword. And when they saw the scripture some assayed, such as would have been king. But none might stir the sword nor move it. He is not here, said the Archbishop, that shall achieve the sword, but doubt not God will make him known. But this is my counsel, said the Archbishop, that we let purvey ten knights, men of good fame, and they to keep this sword. So it was ordained, and then there was made a cry, that every man should assay that would, for to win the sword. And upon New Year’s Day the barons let make a jousts and a tournament, that all knights that would joust or tourney there might play, and all this was ordained for to keep the lords together and the commons, for the Archbishop trusted that God would make him known that should win the",
+  "translation_or_gloss_publication_status": "not_in_public_repository",
   "translation_or_gloss_status": "public_domain_working_text",
   "work": "Thomas Malory, Le Morte d’Arthur"
 }

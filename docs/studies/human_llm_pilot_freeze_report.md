@@ -1,23 +1,39 @@
 # Human-LLM Pilot Freeze Report
 
-Status: execution-preparation freeze only. No researcher coding, human annotation record, model call, model output, empirical agreement calculation, or findings were created.
+Status: `BLOCKED`. This PR is execution-preparation only. No researcher coding, human annotation record, model call, model output, empirical agreement calculation, or findings were created.
+
+## Component Status
+
+- sample_freeze_status: `FROZEN_WITH_COUNT_RECONCILIATION`
+- source_packet_freeze_status: `BLOCKED_PUBLIC_TEXT_REDACTED_PENDING_RIGHTS_AND_PRIVATE_PACKET_AUDIT`
+- rights_freeze_status: `BLOCKED_RIGHTS_REVIEW_REQUIRED`
+- manual_freeze_status: `BLOCKED_INCOMPLETE_AUTHORITATIVE_MANUAL`
+- prompt_freeze_status: `BLOCKED_PENDING_AUTHORITATIVE_MANUAL_AND_ACCOUNT_VERIFIED_MODEL`
+- model_freeze_status: `BLOCKED_PENDING_ACCOUNT_AVAILABILITY_VERIFICATION`
+- allocation_freeze_status: `FROZEN_ARITHMETIC_CLARIFIED_EXECUTION_BLOCKED_PENDING_MANUAL_MODEL_RIGHTS`
+- governance_status: `not_yet_formally_determined`
+- overall_execution_readiness: `BLOCKED`
+
+No human coding may begin from this package.
 
 ## Candidate-Universe Definition
 
-Layer 1 uses a bounded held-out same-domain universe: public-domain literary and narrative passages from named Project Gutenberg editions, excluding the released In a Grove walkthrough, public demos, manual examples, direct manual-development examples, direct friction-locus definition examples, counterfactual-test development examples, and predicted-confusion construction examples. The source universe is `L1_PG_HELD_OUT_NARRATIVE_2026_07_02`.
+Layer 1 uses a bounded held-out same-domain universe: public-domain literary and narrative passages from named Project Gutenberg editions, excluding the released In a Grove walkthrough, public demos, manual examples, direct manual-development examples, direct friction-locus definition examples, counterfactual-test development examples, and predicted-confusion construction examples.
 
-Layer 2 uses a bounded transfer universe: public-domain English working translations of classical, scriptural, medieval, and frame-narrative material. The source universe is `L2_CLASSICAL_TRANSFER_PD_TRANSLATIONS_2026_07_02`. It is classified as transfer/external application, not uncontaminated model exposure. Researcher prior familiarity is recorded for every candidate.
+Layer 2 uses a bounded transfer universe: public-domain working translations of classical, scriptural, medieval, and frame-narrative material. It is transfer/external application, not an uncontaminated layer. The study does not claim any source is unknown to the model.
 
-The study does not claim any source is unknown to the model.
-
-## Screening Summary
+## Screening Reconciliation
 
 - Candidate rows screened: 30
-- Eligible selected cases: 25
-- Excluded or not selected candidates: 5
-- Exclusion counts by reason: {'EXCL_CONTEXT_TOO_LARGE': 3, 'EXCL_DUPLICATE_STRUCTURE': 1, 'EXCL_TRANSLATION_UNRESOLVED': 1}
+- Eligible candidates: 26
+- Ineligible candidates: 4
+- Eligible but not selected candidates: 1
+- Selected candidates: 25
+- Arithmetic: 30 = 25 selected + 1 eligible-not-selected + 4 ineligible.
+- Eligibility exclusion counts: `EXCL_CONTEXT_TOO_LARGE` = 3; `EXCL_TRANSLATION_UNRESOLVED` = 1.
+- Post-eligibility non-selection counts: `NOT_SELECTED_DUPLICATE_STRUCTURE` = 1.
 - Selection method: eligibility-threshold census at target layer size after pre-label screening; no anticipated labels, expected disagreement, or friction_locus values were used.
-- Random seed: 20260702; used for case-order allocation. No down-sampling was needed after eligibility because selected eligible counts matched layer targets.
+- Random seed: 20260702 for case-order allocation.
 
 ## Final Selected Sample
 
@@ -29,60 +45,63 @@ The study does not claim any source is unknown to the model.
 
 ## Language, Familiarity, and Rights
 
-- Language distribution: {'English': 15, 'English translation from Ancient Greek': 3, 'English translation from Biblical Hebrew': 2, 'English translation from Greek/Latin fable tradition': 1, 'English translation from Latin': 1, 'English/Middle English public-domain edition': 1, 'English translation from Old English': 1, 'English translation from Arabic/Persian narrative tradition': 1}
-- Researcher-familiarity distribution: {'casual_familiarity': 25}
-- Rights status: selected packets use Project Gutenberg public-domain source files or public-domain-translation working text layers with source-specific rights notes. Public release or redistribution beyond study review still requires rights review.
+- Researcher-familiarity distribution after audit: no known prior reading = 1; title/general-cultural familiarity only = 15; prior casual reading = 9.
+- No case was changed based on familiarity after selection.
+- Public source packets now contain metadata only. Full passage text and translation text are redacted pending edition-specific and translation-specific rights review.
+- Rights status: blocked for public redistribution until source-specific review is complete.
 
-## Frozen Sources
+## Source Packets
 
-- Source packet count: 25
+- Public source packet count: 25
 - Source manifest: `data/studies/human_llm_pilot/source_manifest.csv`
-- Source manifest SHA-256: `a94e61123573083f89f10074c38980bd7d04117ae7e1dac34d40014bf62b6b34`
-- Selection log SHA-256: `91a53729693b26e610a6c0325c8d1c1d881654a6023381dcae5075163773c540`
-- Researcher and model text-layer rule: identical frozen source packet layers for direct comparison.
-- Source packets include no expected label, no friction_locus, no manual hints, no secondary scholarship, no researcher interpretation, and no model-facing instructions.
+- Rights manifest: `data/studies/human_llm_pilot/source_rights_manifest.csv`
+- Substantive audit: `data/studies/human_llm_pilot/source_packet_substantive_audit.csv`
+- Public packets include no expected label, no friction_locus, no manual hints, no secondary scholarship, no researcher interpretation, and no model-facing instructions.
+- The future researcher and model must receive identical controlled private source layers after rights review.
 
 ## Manual Freeze
 
-- Manual version: `human_llm_friction_locus_manual_v0_1_design_b_freeze_2026_07_02`
-- Manual path: `docs/studies/human_llm_friction_locus_pilot_protocol.md`
-- Manual commit: `6998175eeca5d349072bf31012c69f2d568f28ec`
-- Manual hash: `ca32a16b2dcc16f4d8a025c02a470278f57222c259347689feafd7f594b6e6d8`
-- Category definitions hash: `0679a65fc13957f4f13931f31d840f9fbbbbb1ca71d568eda0c3d7e1f246252f`
-- Predicted-confusions hash: `dc74ae5f84b626c4ad7fa598e50f0c6f52fced0e3bc7345d07ddbe308e4fb027`
-- Output schema hash: `4ce445c04f349cd376f2104dc51df6b66c0f0f31930c634ea18e9576d0633235`
+- Manual status: `BLOCKED_INCOMPLETE_AUTHORITATIVE_MANUAL`
+- Authoritative manual path: none identified.
+- Active candidates audited: protocol, lineage table, predicted-confusions table, output schema.
+- Historical candidates found: legacy TRIM friction_locus manuals in the archival tag at commit `252f4b1c867751bd996885ec674f5f546ddbc110`.
+- Completeness result: no active authoritative current Design B manual contains all category definitions, use-when/use-another guidance, confusable-with guidance, counterfactual tests, decision tree, examples, reserved-category rules, and escalation rules.
+- Gap report: `docs/studies/human_llm_manual_gap_report.md`
 
 ## Prompt Bundle
 
-- Prompt bundle version: `human_llm_pilot_prompts_v0_1_2026_07_02`
-- System prompt hash: `879fd81bf2571880e8ae63ec8c9397d589817188dc3f1389d54d251925fdc918`
-- Condition A hash: `6af92aee8ab8ad8a20c809f6d35484a255dd91ae84a99becbb1abfb73cfdbe3e`
-- Condition B hash: `8f635cb2b576f8fe0fc70611a228dbada8a0bfde67fe671108597721606b8ea7`
-- Condition C hash: `22c3ed8b332187f440ffa6f1df4ce75d145541357e79e53397673d1fda775d38`
-- User prompt template hash: `14552ba57aa8a753fa19ac3dab47a6540b4e94acf94e13504ef51620958d56e1`
-- Browsing/tools: disabled.
-- Session isolation: fresh stateless session for every case-condition-run.
+- Prompt bundle status: `BLOCKED_NOT_EXECUTION_READY`
+- Condition A validity: blocked scaffold only.
+- Condition B validity: blocked scaffold only.
+- Condition C validity: invalid for execution pending authoritative manual.
+- Difference audit: `docs/studies/human_llm_prompt_condition_audit.md`
+- Browsing/tools: disabled in the scaffold.
+- Session isolation: retained as a future execution rule.
 
 ## Model Specification
 
-- Provider/model: OpenAI `gpt-5.4-mini`
-- Decoding: temperature 0, top_p 1, max output tokens 4000.
-- Provider-version limitation: Provider-side model weights, safety layers, and service configuration may change and cannot be fully reconstructed from the frozen local materials alone.
+- Original recorded model ID: `gpt-5.4-mini`
+- Official public documentation status: `gpt-5.4-mini` appears in current OpenAI model documentation and pricing documentation checked on 2026-07-02.
+- Account availability: not verified because no authenticated OpenAI API credential was available in this environment.
+- Frozen execution model: `UNRESOLVED_PENDING_OFFICIAL_VERIFICATION`
+- Model freeze status: `BLOCKED`
+- Cost estimate status: not final.
 
 ## Allocation, Stability, and Ablation
 
 - Allocation ID: `human_llm_pilot_design_b_allocation_v0_1_2026_07_02`
-- Allocation hash: `26de231340ede2c8aeb4197c8fdd3630741d5baf1eefc7244ac41dbc1d478d24`
 - Primary condition: one Condition C run for all cases after all human records are locked.
 - Ablation subset size: 6 cases; conditions A/B/C in separate isolated sessions.
-- Stability design: 3 stability runs per selected case under Condition C.
+- Stability interpretation: three additional Condition C stability runs beyond the primary run for each selected case.
+- Planned runs: 25 primary + 75 additional stability + 18 ablation = 118.
+- The primary run is not double-counted in the stability-run count.
 - No case receives model execution before its human record is locked.
 
 ## Cost Ceiling
 
-- Estimated upper-bound cost: USD 3.02
 - Hard spending ceiling: USD 25.00
-- Pricing note: Uses OpenAI API documentation observed on 2026-07-02 for gpt-5.4-mini: $0.75/input MTok and $4.50/output MTok. Pricing must be re-verified immediately before execution.
+- Estimated upper-bound cost: not final.
+- Pricing note: official public OpenAI documentation observed on 2026-07-02 lists `gpt-5.4-mini` standard text pricing, but account availability and execution pricing must be verified before any run.
 
 ## Governance Status
 
@@ -91,15 +110,16 @@ The study does not claim any source is unknown to the model.
 - Participant data collection: none.
 - Institutional status: `not_yet_formally_determined`.
 - Formal ethics exemption claimed: false.
-- Privacy review: no private or participant data planned; institutional privacy review not yet formally determined
-- Rights review: source-level rights recorded for execution preparation; formal publication rights review still required
+- Privacy review: not yet formally determined.
+- Rights review: blocked for public redistribution.
 
 ## Unresolved Execution Blockers
 
-- Verify source-specific redistribution rights before public packet release.
-- Verify model availability and current pricing immediately before execution.
-- Complete and lock all researcher human records before any model execution.
-- Preserve raw model outputs and run manifests when execution later occurs.
+- Complete or identify the authoritative current Design B friction_locus manual.
+- Clear source and translation redistribution rights or keep full packets in controlled private storage only.
+- Verify the execution model against the authenticated account.
+- Re-audit prompt/model compatibility after the manual and model are frozen.
+- Complete private source-packet substantive validity review before coding.
 
 ## Non-Execution Confirmation
 

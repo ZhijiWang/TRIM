@@ -1,48 +1,58 @@
 {
-  "canonical_text": "L2_HOMER_ODYSSEY_001-S01: “I then gave him some more; three times did I fill the bowl for him, and three times did he drain it without thought or heed; then, when I saw that the wine had got into his head, I said to him as plausibly as I could: ‘Cyclops, you ask my name and I will tell it you; give me, therefore, the present you promised me; my name is Noman; this is what my father and mother and my friends have always called me.’\nL2_HOMER_ODYSSEY_001-S02: “But the cruel wretch said, ‘Then I will eat all Noman’s comrades before Noman himself, and will keep Noman for the last. This is the present that I will make him.’",
-  "canonical_text_status": "frozen_packet_text_layer_normalized_from_retrieved_project_gutenberg_lines",
+  "canonical_text_publication_status": "not_in_public_repository",
+  "canonical_text_status": "redacted_from_public_pr_pending_rights_review",
   "case_id": "L2_HOMER_ODYSSEY_001",
+  "controlled_storage_reference": "controlled_private_study_storage/human_llm_pilot/source_packets/L2_HOMER_ODYSSEY_001.json",
   "edition": "Project Gutenberg eBook #1727, Samuel Butler translation",
-  "fixed_context": "focal deception exchange plus immediate response",
+  "fixed_context": "source span and context rule recorded in metadata; public text layer redacted pending rights review",
   "gloss_authority_status": "authoritative_working_translation_for_study_packet",
   "inclusion_layer": "Layer 2",
-  "packet_version": "source_packet_v0_1_2026_07_02",
+  "packet_version": "source_packet_public_metadata_v0_2_2026_07_02",
+  "private_canonical_text_sha256": "1d2781556f6b9be194373c7758ff4bff9b4044d517b3cda0a3b55a6578295511",
+  "private_source_packet_file_sha256": "b171e01e83e2cfe9b429f0c737789b8615db8916f005dc1fcd94c79b535433d0",
+  "private_source_packet_hash": "a73822176877845585495fae3c5f1eb6df850c5aa63198f99e0546fcd16cb046",
+  "private_source_text_hash": "1d2781556f6b9be194373c7758ff4bff9b4044d517b3cda0a3b55a6578295511",
+  "private_translation_or_gloss_sha256": "1d2781556f6b9be194373c7758ff4bff9b4044d517b3cda0a3b55a6578295511",
+  "public_redistribution_status": "not_confirmed_pending_rights_review",
+  "repository_publication_status": "metadata_only_text_redacted",
   "retrieval_date": "2026-07-02",
-  "rights_note": "Execution-preparation packet uses public-domain Project Gutenberg source text. Public release or redistribution outside this repository review still requires source-specific rights audit.",
-  "rights_status": "public_domain_us_project_gutenberg_or_public_domain_translation",
+  "rights_note": "The public PR stores metadata and private hashes only. Full source text is not redistributed until edition and translation rights are independently cleared.",
+  "rights_status": "rights_review_incomplete_public_text_redacted",
   "segments": [
     {
       "evidence_id": "L2_HOMER_ODYSSEY_001-S01",
-      "text": "“I then gave him some more; three times did I fill the bowl for him, and three times did he drain it without thought or heed; then, when I saw that the wine had got into his head, I said to him as plausibly as I could: ‘Cyclops, you ask my name and I will tell it you; give me, therefore, the present you promised me; my name is Noman; this is what my father and mother and my friends have always called me.’"
+      "private_text_sha256": "0d82f47a10dd4821da88813d76aa70f18c6cac5d7d2f4edb7f7450340dac3e4e",
+      "text_status": "redacted_from_public_pr_pending_rights_review"
     },
     {
       "evidence_id": "L2_HOMER_ODYSSEY_001-S02",
-      "text": "“But the cruel wretch said, ‘Then I will eat all Noman’s comrades before Noman himself, and will keep Noman for the last. This is the present that I will make him.’"
+      "private_text_sha256": "c495ea80fb612d14f9291339139db5de1f30eb254b01092a072b9d018befac30",
+      "text_status": "redacted_from_public_pr_pending_rights_review"
     }
   ],
   "source_citation": "Homer, The Odyssey. Project Gutenberg eBook #1727, Samuel Butler translation. Source lines 4107-4116. Retrieved 2026-07-02.",
   "source_file_sha256": "a6c3adec321585e9563e34093491c3bc3608505d166e391bb2bf8a6be1830b69",
   "source_language": "English translation from Ancient Greek",
   "source_line_range": "pg1727.txt:4107-4116",
-  "source_packet_hash": "a73822176877845585495fae3c5f1eb6df850c5aa63198f99e0546fcd16cb046",
+  "source_packet_hash": "69af9872b0cad2acb0032a134f8c9c553ea4aef12e318f3699185e38b7e938f9",
   "source_packet_hash_canonicalization": "sha256_canonical_json_excluding_source_packet_hash_v1",
-  "source_text_hash": "1d2781556f6b9be194373c7758ff4bff9b4044d517b3cda0a3b55a6578295511",
   "source_universe_id": "L2_CLASSICAL_TRANSFER_PD_TRANSLATIONS_2026_07_02",
   "source_url_or_source_file_reference": "https://www.gutenberg.org/cache/epub/1727/pg1727.txt",
   "text_layer_visibility": {
     "model_facing_instructions_included": false,
     "model_text_layers": [
-      "canonical_text",
-      "translation_or_gloss"
+      "controlled_private_source_packet_after_rights_review"
+    ],
+    "public_repository_text_layers": [
+      "metadata_only_text_redacted"
     ],
     "researcher_and_model_identical": true,
     "researcher_text_layers": [
-      "canonical_text",
-      "translation_or_gloss"
+      "controlled_private_source_packet_after_rights_review"
     ],
     "secondary_scholarship_visible": false
   },
-  "translation_or_gloss": "L2_HOMER_ODYSSEY_001-S01: “I then gave him some more; three times did I fill the bowl for him, and three times did he drain it without thought or heed; then, when I saw that the wine had got into his head, I said to him as plausibly as I could: ‘Cyclops, you ask my name and I will tell it you; give me, therefore, the present you promised me; my name is Noman; this is what my father and mother and my friends have always called me.’\nL2_HOMER_ODYSSEY_001-S02: “But the cruel wretch said, ‘Then I will eat all Noman’s comrades before Noman himself, and will keep Noman for the last. This is the present that I will make him.’",
+  "translation_or_gloss_publication_status": "not_in_public_repository",
   "translation_or_gloss_status": "authoritative_working_translation_for_study_packet",
   "work": "Homer, The Odyssey"
 }

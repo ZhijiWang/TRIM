@@ -7,7 +7,8 @@
     "L2_BIBLE_SAMUEL_001",
     "L2_AESOP_001"
   ],
-  "allocation_hash": "26de231340ede2c8aeb4197c8fdd3630741d5baf1eefc7244ac41dbc1d478d24",
+  "allocation_freeze_status": "FROZEN_ARITHMETIC_CLARIFIED_EXECUTION_BLOCKED_PENDING_MANUAL_MODEL_RIGHTS",
+  "allocation_hash": "ce03def17f2e7aefee63e77f1296e5902de702fbea1d1748944327ea1f0a69e8",
   "allocation_hash_canonicalization": "sha256_canonical_json_excluding_allocation_hash_v1",
   "allocation_id": "human_llm_pilot_design_b_allocation_v0_1_2026_07_02",
   "case_order": [
@@ -131,15 +132,17 @@
     "L2_ARABIAN_NIGHTS_001"
   ],
   "model_stability_run_count": 3,
+  "model_stability_run_count_interpretation": "three additional Condition C stability runs beyond the primary run for each selected case",
   "planned_model_run_counts": {
     "ablation_condition_runs": 18,
     "primary_condition_C_runs": 25,
-    "stability_runs": 75,
+    "primary_run_double_counted_in_stability_runs": false,
+    "stability_runs_additional_beyond_primary": 75,
     "total_planned_model_runs_after_human_lock": 118
   },
   "primary_human_actor_id": "researcher_analyst_001",
   "protocol_version": "Design B protocol at PR17 merge commit 6998175",
   "random_seed": 20260702,
-  "sample_manifest_hash": "f32f76f8766112624f815bed1e0ab37738a12eb39d9396d6d852eb3cf4aefd2e",
+  "sample_manifest_hash": "1ebcaef44ac560622f9c56a91c9534d46929f2e9d5bbb5e722107188c9adf7a6",
   "second_human_component": "not_in_current_protocol"
 }

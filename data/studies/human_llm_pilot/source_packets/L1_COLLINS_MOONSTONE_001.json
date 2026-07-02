@@ -1,54 +1,68 @@
 {
-  "canonical_text": "L1_COLLINS_MOONSTONE_001-S01: I carried the linen to the dry sand of the beach, and there unrolled and smoothed it out. There was no mistaking it as an article of dress. It was a nightgown.\nL1_COLLINS_MOONSTONE_001-S02: The uppermost side, when I spread it out, presented to view innumerable folds and creases, and nothing more. I tried the undermost side, next—and instantly discovered the smear of the paint from the door of Rachel’s boudoir!\nL1_COLLINS_MOONSTONE_001-S03: My eyes remained riveted on the stain, and my mind took me back at a leap from present to past. The very words of Sergeant Cuff recurred to me, as if the man himself was at my side again, pointing to the unanswerable inference which he drew from the smear on the door.\nL1_COLLINS_MOONSTONE_001-S04: “Find out whether there is any article of dress in this house with the stain of paint on it. Find out who that dress belongs to. Find out how the person can account for having been in the room, and smeared the paint between midnight and three in the morning. If the person can’t satisfy you, you haven’t far to look for the hand that took the",
-  "canonical_text_status": "frozen_packet_text_layer_normalized_from_retrieved_project_gutenberg_lines",
+  "canonical_text_publication_status": "not_in_public_repository",
+  "canonical_text_status": "redacted_from_public_pr_pending_rights_review",
   "case_id": "L1_COLLINS_MOONSTONE_001",
+  "controlled_storage_reference": "controlled_private_study_storage/human_llm_pilot/source_packets/L1_COLLINS_MOONSTONE_001.json",
   "edition": "Project Gutenberg eBook #155, English public-domain edition",
-  "fixed_context": "focal evidence discovery plus remembered inference",
+  "fixed_context": "source span and context rule recorded in metadata; public text layer redacted pending rights review",
   "gloss_authority_status": "not_applicable",
   "inclusion_layer": "Layer 1",
-  "packet_version": "source_packet_v0_1_2026_07_02",
+  "packet_version": "source_packet_public_metadata_v0_2_2026_07_02",
+  "private_canonical_text_sha256": "88fc0226132892838989602f29db7daa1ac59e411bc5c90b1ee47e9e44a6be73",
+  "private_source_packet_file_sha256": "d850a5a8be2088f30ce6a7ba5d1030ceb636284f51e49888a2bbd26c3648ed05",
+  "private_source_packet_hash": "56897b26c511fdeca02aa44671e61cd443d6c612af1d03684f4e02d01f9340d3",
+  "private_source_text_hash": "88fc0226132892838989602f29db7daa1ac59e411bc5c90b1ee47e9e44a6be73",
+  "private_translation_or_gloss_sha256": "",
+  "public_redistribution_status": "not_confirmed_pending_rights_review",
+  "repository_publication_status": "metadata_only_text_redacted",
   "retrieval_date": "2026-07-02",
-  "rights_note": "Execution-preparation packet uses public-domain Project Gutenberg source text. Public release or redistribution outside this repository review still requires source-specific rights audit.",
-  "rights_status": "public_domain_us_project_gutenberg_or_public_domain_translation",
+  "rights_note": "The public PR stores metadata and private hashes only. Full source text is not redistributed until edition and translation rights are independently cleared.",
+  "rights_status": "rights_review_incomplete_public_text_redacted",
   "segments": [
     {
       "evidence_id": "L1_COLLINS_MOONSTONE_001-S01",
-      "text": "I carried the linen to the dry sand of the beach, and there unrolled and smoothed it out. There was no mistaking it as an article of dress. It was a nightgown."
+      "private_text_sha256": "def73e16bbd4edfc3734999adc9d36c2cae2b253d174daec0dcd27f4fdbba7f9",
+      "text_status": "redacted_from_public_pr_pending_rights_review"
     },
     {
       "evidence_id": "L1_COLLINS_MOONSTONE_001-S02",
-      "text": "The uppermost side, when I spread it out, presented to view innumerable folds and creases, and nothing more. I tried the undermost side, next—and instantly discovered the smear of the paint from the door of Rachel’s boudoir!"
+      "private_text_sha256": "da26346e9dd3eca1e39ac40eb8e7cafb3400f3a3ff5fad654fe7d2c23070c426",
+      "text_status": "redacted_from_public_pr_pending_rights_review"
     },
     {
       "evidence_id": "L1_COLLINS_MOONSTONE_001-S03",
-      "text": "My eyes remained riveted on the stain, and my mind took me back at a leap from present to past. The very words of Sergeant Cuff recurred to me, as if the man himself was at my side again, pointing to the unanswerable inference which he drew from the smear on the door."
+      "private_text_sha256": "2809d40269033ffe5da4f3240d8b4756d5e0889a1a809387655bc34e6bff1958",
+      "text_status": "redacted_from_public_pr_pending_rights_review"
     },
     {
       "evidence_id": "L1_COLLINS_MOONSTONE_001-S04",
-      "text": "“Find out whether there is any article of dress in this house with the stain of paint on it. Find out who that dress belongs to. Find out how the person can account for having been in the room, and smeared the paint between midnight and three in the morning. If the person can’t satisfy you, you haven’t far to look for the hand that took the"
+      "private_text_sha256": "2d2a2f72f7d61ed9afb46a5320a10237a94acb8cc19b73dd76e96a4316f9a06d",
+      "text_status": "redacted_from_public_pr_pending_rights_review"
     }
   ],
   "source_citation": "Wilkie Collins, The Moonstone. Project Gutenberg eBook #155, English public-domain edition. Source lines 13712-13730. Retrieved 2026-07-02.",
   "source_file_sha256": "66693c12dc8b4a93916d8129f5691c3726dac88900d2857c8a761731c9ea6ab9",
   "source_language": "English",
   "source_line_range": "pg155.txt:13712-13730",
-  "source_packet_hash": "56897b26c511fdeca02aa44671e61cd443d6c612af1d03684f4e02d01f9340d3",
+  "source_packet_hash": "dea5bb24ae7b0387abf6ae0ac7d1e57d50089b85feaeb0fdcc615e7d99d7cfe4",
   "source_packet_hash_canonicalization": "sha256_canonical_json_excluding_source_packet_hash_v1",
-  "source_text_hash": "88fc0226132892838989602f29db7daa1ac59e411bc5c90b1ee47e9e44a6be73",
   "source_universe_id": "L1_PG_HELD_OUT_NARRATIVE_2026_07_02",
   "source_url_or_source_file_reference": "https://www.gutenberg.org/cache/epub/155/pg155.txt",
   "text_layer_visibility": {
     "model_facing_instructions_included": false,
     "model_text_layers": [
-      "canonical_text"
+      "controlled_private_source_packet_after_rights_review"
+    ],
+    "public_repository_text_layers": [
+      "metadata_only_text_redacted"
     ],
     "researcher_and_model_identical": true,
     "researcher_text_layers": [
-      "canonical_text"
+      "controlled_private_source_packet_after_rights_review"
     ],
     "secondary_scholarship_visible": false
   },
-  "translation_or_gloss": "",
+  "translation_or_gloss_publication_status": "not_applicable",
   "translation_or_gloss_status": "not_applicable",
   "work": "Wilkie Collins, The Moonstone"
 }

@@ -1,54 +1,68 @@
 {
-  "canonical_text": "L1_DICKENS_GE_001-S01: I could not have spoken one word, though it had been to save my life. I stood, with a hand on the chair-back and a hand on my breast, where I seemed to be suffocating,—I stood so, looking wildly at him, until I grasped at the chair, when the room began to surge and turn. He caught me, drew me to the sofa, put me up against the cushions, and bent on one knee before me, bringing the face that I now well remembered, and that I shuddered at, very near to mine.\nL1_DICKENS_GE_001-S02: “Yes, Pip, dear boy, I’ve made a gentleman on you! It’s me wot has done it! I swore that time, sure as ever I earned a guinea, that guinea should go to you. I swore arterwards, sure as ever I spec’lated and got rich, you should get rich. I lived rough, that you should live smooth; I worked hard, that you should be above work. What odds, dear boy? Do I tell it, fur you to feel a obligation? Not a bit. I tell it, fur you to know as that there hunted dunghill dog wot you kep life in, got his head so high that he could make a gentleman,—and, Pip, you’re him!”\nL1_DICKENS_GE_001-S03: The abhorrence in which I held the man, the dread I had of him, the repugnance with which I shrank from him, could not have been exceeded if he had been some terrible beast.\nL1_DICKENS_GE_001-S04: “Look’ee here, Pip. I’m your second father. You’re my son,—more to me nor any son. I’ve put away money, only for you to spend. When I was a hired-out shepherd in a solitary hut, not seeing no faces but faces of sheep till I half forgot wot men’s and women’s faces wos like, I see yourn. I drops my knife many a time in that hut when I was a-eating my dinner or my supper, and I says, ‘Here’s the boy again, a looking at me whiles I eats and drinks!’ I see you there a many times, as plain as ever I see you on them misty marshes. ‘Lord strike me dead!’ I says each time,—and I goes out in the air to say it under the open heavens,—‘but wot, if I gets liberty and money, I’ll make that boy a gentleman!’ And I done it. Why, look at you, dear boy! Look at these",
-  "canonical_text_status": "frozen_packet_text_layer_normalized_from_retrieved_project_gutenberg_lines",
+  "canonical_text_publication_status": "not_in_public_repository",
+  "canonical_text_status": "redacted_from_public_pr_pending_rights_review",
   "case_id": "L1_DICKENS_GE_001",
+  "controlled_storage_reference": "controlled_private_study_storage/human_llm_pilot/source_packets/L1_DICKENS_GE_001.json",
   "edition": "Project Gutenberg eBook #1400, English public-domain edition",
-  "fixed_context": "focal revelation plus immediate reaction and kinship claim",
+  "fixed_context": "source span and context rule recorded in metadata; public text layer redacted pending rights review",
   "gloss_authority_status": "not_applicable",
   "inclusion_layer": "Layer 1",
-  "packet_version": "source_packet_v0_1_2026_07_02",
+  "packet_version": "source_packet_public_metadata_v0_2_2026_07_02",
+  "private_canonical_text_sha256": "2d29b52e6e37a15ec602bc9493f1aa5f2888a05ea9be0c9a07aeb9c1561f092f",
+  "private_source_packet_file_sha256": "f8f10efab8b3d27c55fed399400cfc5b9872e0ae57f09fe0177e8b7864218158",
+  "private_source_packet_hash": "0c2561c6bd4d07a8479341fb6230d4a10906a08d89f2fcc7c4ac199de58bc491",
+  "private_source_text_hash": "2d29b52e6e37a15ec602bc9493f1aa5f2888a05ea9be0c9a07aeb9c1561f092f",
+  "private_translation_or_gloss_sha256": "",
+  "public_redistribution_status": "not_confirmed_pending_rights_review",
+  "repository_publication_status": "metadata_only_text_redacted",
   "retrieval_date": "2026-07-02",
-  "rights_note": "Execution-preparation packet uses public-domain Project Gutenberg source text. Public release or redistribution outside this repository review still requires source-specific rights audit.",
-  "rights_status": "public_domain_us_project_gutenberg_or_public_domain_translation",
+  "rights_note": "The public PR stores metadata and private hashes only. Full source text is not redistributed until edition and translation rights are independently cleared.",
+  "rights_status": "rights_review_incomplete_public_text_redacted",
   "segments": [
     {
       "evidence_id": "L1_DICKENS_GE_001-S01",
-      "text": "I could not have spoken one word, though it had been to save my life. I stood, with a hand on the chair-back and a hand on my breast, where I seemed to be suffocating,—I stood so, looking wildly at him, until I grasped at the chair, when the room began to surge and turn. He caught me, drew me to the sofa, put me up against the cushions, and bent on one knee before me, bringing the face that I now well remembered, and that I shuddered at, very near to mine."
+      "private_text_sha256": "89af90b3d48837d08e6ada9700909c7ee9529ac7e9a2e6096e5be5160533895a",
+      "text_status": "redacted_from_public_pr_pending_rights_review"
     },
     {
       "evidence_id": "L1_DICKENS_GE_001-S02",
-      "text": "“Yes, Pip, dear boy, I’ve made a gentleman on you! It’s me wot has done it! I swore that time, sure as ever I earned a guinea, that guinea should go to you. I swore arterwards, sure as ever I spec’lated and got rich, you should get rich. I lived rough, that you should live smooth; I worked hard, that you should be above work. What odds, dear boy? Do I tell it, fur you to feel a obligation? Not a bit. I tell it, fur you to know as that there hunted dunghill dog wot you kep life in, got his head so high that he could make a gentleman,—and, Pip, you’re him!”"
+      "private_text_sha256": "712f958266d611688d03896edec91e0fd8b7799bc34a811b4909d9e2838d8b7f",
+      "text_status": "redacted_from_public_pr_pending_rights_review"
     },
     {
       "evidence_id": "L1_DICKENS_GE_001-S03",
-      "text": "The abhorrence in which I held the man, the dread I had of him, the repugnance with which I shrank from him, could not have been exceeded if he had been some terrible beast."
+      "private_text_sha256": "ac0a6fc7930cfb0530d6135df466abdbb56aa078c332cf721448ccdefd314b1c",
+      "text_status": "redacted_from_public_pr_pending_rights_review"
     },
     {
       "evidence_id": "L1_DICKENS_GE_001-S04",
-      "text": "“Look’ee here, Pip. I’m your second father. You’re my son,—more to me nor any son. I’ve put away money, only for you to spend. When I was a hired-out shepherd in a solitary hut, not seeing no faces but faces of sheep till I half forgot wot men’s and women’s faces wos like, I see yourn. I drops my knife many a time in that hut when I was a-eating my dinner or my supper, and I says, ‘Here’s the boy again, a looking at me whiles I eats and drinks!’ I see you there a many times, as plain as ever I see you on them misty marshes. ‘Lord strike me dead!’ I says each time,—and I goes out in the air to say it under the open heavens,—‘but wot, if I gets liberty and money, I’ll make that boy a gentleman!’ And I done it. Why, look at you, dear boy! Look at these"
+      "private_text_sha256": "c3898ac66c06ff134192fe99f9a2f466af8f84550fc4e8242fdf13f5d611c33d",
+      "text_status": "redacted_from_public_pr_pending_rights_review"
     }
   ],
   "source_citation": "Charles Dickens, Great Expectations. Project Gutenberg eBook #1400, English public-domain edition. Source lines 13469-13500. Retrieved 2026-07-02.",
   "source_file_sha256": "93885e8339a9e2470e4bf28a0bb360f406644c576fda65c3fc74b368fa8fe7ea",
   "source_language": "English",
   "source_line_range": "pg1400.txt:13469-13500",
-  "source_packet_hash": "0c2561c6bd4d07a8479341fb6230d4a10906a08d89f2fcc7c4ac199de58bc491",
+  "source_packet_hash": "4be799b7b01f9173814d74db1d93d1905e977010e648f1b0f1949d2e5117e8f3",
   "source_packet_hash_canonicalization": "sha256_canonical_json_excluding_source_packet_hash_v1",
-  "source_text_hash": "2d29b52e6e37a15ec602bc9493f1aa5f2888a05ea9be0c9a07aeb9c1561f092f",
   "source_universe_id": "L1_PG_HELD_OUT_NARRATIVE_2026_07_02",
   "source_url_or_source_file_reference": "https://www.gutenberg.org/cache/epub/1400/pg1400.txt",
   "text_layer_visibility": {
     "model_facing_instructions_included": false,
     "model_text_layers": [
-      "canonical_text"
+      "controlled_private_source_packet_after_rights_review"
+    ],
+    "public_repository_text_layers": [
+      "metadata_only_text_redacted"
     ],
     "researcher_and_model_identical": true,
     "researcher_text_layers": [
-      "canonical_text"
+      "controlled_private_source_packet_after_rights_review"
     ],
     "secondary_scholarship_visible": false
   },
-  "translation_or_gloss": "",
+  "translation_or_gloss_publication_status": "not_applicable",
   "translation_or_gloss_status": "not_applicable",
   "work": "Charles Dickens, Great Expectations"
 }

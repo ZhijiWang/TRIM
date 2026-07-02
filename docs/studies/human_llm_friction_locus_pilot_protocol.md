@@ -379,9 +379,11 @@ run produce under the specified instruction condition?
 
 ### Stability analysis
 
-For each case, run 3-5 additional independent model runs under the stability
-condition. Preserve all runs. Do not substitute a majority vote for the primary
-run. A modal label may be reported only as a secondary summary. Calculate
+For this freeze package, the planned stability interpretation is three
+additional independent model runs under the stability condition for each case,
+beyond the primary locked run. The primary run is not counted as a stability
+run. Preserve all runs. Do not substitute a majority vote for the primary run. A
+modal label may be reported only as a secondary summary. Calculate
 self-consistency rate and label entropy, and preserve the full distribution of
 outputs.
 

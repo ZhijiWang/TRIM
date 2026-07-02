@@ -1,0 +1,22 @@
+{
+  "arithmetic": "screened = selected + eligible_not_selected + ineligible",
+  "arithmetic_result": true,
+  "eligibility_exclusion_reason_counts": {
+    "EXCL_CONTEXT_TOO_LARGE": 3,
+    "EXCL_TRANSLATION_UNRESOLVED": 1
+  },
+  "eligible_count": 26,
+  "eligible_not_selected_count": 1,
+  "ineligible_count": 4,
+  "notes": "Eligibility exclusions and post-eligibility non-selection are separated; EXCL_* codes are no longer used for eligible but non-selected cases.",
+  "post_eligibility_non_selection_reason_counts": {
+    "NOT_SELECTED_DUPLICATE_STRUCTURE": 1
+  },
+  "screened_count": 30,
+  "selected_count": 25,
+  "terminal_category_counts": {
+    "eligible_not_selected": 1,
+    "ineligible": 4,
+    "selected": 25
+  }
+}

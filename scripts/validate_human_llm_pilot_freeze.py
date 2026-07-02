@@ -1,4 +1,4 @@
-"""Validate the frozen Design B human-LLM pilot preparation materials."""
+"""Validate the blocked Design B human-LLM pilot preparation materials."""
 
 from __future__ import annotations
 
@@ -18,7 +18,13 @@ PROMPTS_DIR = ROOT / "prompts" / "human_llm_pilot"
 EXPECTED_MAIN_SHA = "6998175eeca5d349072bf31012c69f2d568f28ec"
 EXPECTED_SAMPLE_SIZE = 25
 EXPECTED_LAYER_COUNTS = {"Layer 1": 15, "Layer 2": 10}
+EXPECTED_TERMINAL_COUNTS = {
+    "selected": 25,
+    "eligible_not_selected": 1,
+    "ineligible": 4,
+}
 FORBIDDEN_PACKET_FIELDS = {
+    "canonical_text",
     "expected_label",
     "friction_locus",
     "manual_hint",
@@ -27,10 +33,10 @@ FORBIDDEN_PACKET_FIELDS = {
     "primary_label",
     "researcher_interpretation",
     "secondary_scholarship",
+    "translation_or_gloss",
 }
 FORBIDDEN_FREEZE_FILE_TOKENS = {
     "agreement",
-    "findings",
     "human_annotation",
     "human_record",
     "model_output",
@@ -48,11 +54,6 @@ def sha_bytes(data: bytes) -> str:
 def normalized_file_sha(path: Path) -> str:
     data = path.read_bytes().replace(b"\r\n", b"\n").replace(b"\r", b"\n")
     return sha_bytes(data)
-
-
-def text_sha(text: str) -> str:
-    normalized = text.replace("\r\n", "\n").replace("\r", "\n").encode("utf-8")
-    return sha_bytes(normalized)
 
 
 def canonical_json_hash(payload: dict[str, Any], hash_field: str) -> str:
@@ -101,7 +102,13 @@ def validate() -> list[str]:
     model_spec = load_json(DATA_DIR / "model_execution_spec.json")
     cost = load_json(DATA_DIR / "cost_ceiling.json")
     governance = load_json(DATA_DIR / "governance_status.json")
+    freeze_status = load_json(DATA_DIR / "freeze_status.json")
+    reconciliation = load_json(DATA_DIR / "candidate_count_reconciliation.json")
+    prompt_audit = load_json(DATA_DIR / "prompt_condition_difference_audit.json")
     source_rows = read_csv(DATA_DIR / "source_manifest.csv")
+    rights_rows = read_csv(DATA_DIR / "source_rights_manifest.csv")
+    substantive_rows = read_csv(DATA_DIR / "source_packet_substantive_audit.csv")
+    familiarity_rows = read_csv(DATA_DIR / "researcher_familiarity_audit.csv")
     selection_rows = read_csv(DOCS_DIR / "human_llm_sample_selection_log.csv")
 
     selected_ids = sample["selected_case_ids"]
@@ -117,45 +124,55 @@ def validate() -> list[str]:
         errors,
     )
     require(
-        allocation["allocation_hash"] == canonical_json_hash(allocation, "allocation_hash"),
-        "allocation hash mismatch",
+        sample["selection_log_hash"] == normalized_file_sha(DOCS_DIR / "human_llm_sample_selection_log.csv"),
+        "selection-log hash mismatch",
         errors,
     )
     require(
-        allocation["sample_manifest_hash"] == sample["sample_manifest_hash"],
-        "allocation references wrong sample hash",
-        errors,
-    )
-    require(
-        allocation["second_human_component"] == "not_in_current_protocol",
-        "allocation unexpectedly includes second human component",
-        errors,
-    )
-    require(
-        "before human lock" in allocation["condition_assignment"]["visibility_constraints"],
-        "allocation must prohibit model execution before human lock",
+        sample["source_manifest_hash"] == normalized_file_sha(DATA_DIR / "source_manifest.csv"),
+        "source-manifest hash mismatch",
         errors,
     )
 
+    require(reconciliation["screened_count"] == 30, "screened count mismatch", errors)
+    require(reconciliation["eligible_count"] == 26, "eligible count mismatch", errors)
+    require(reconciliation["ineligible_count"] == 4, "ineligible count mismatch", errors)
+    require(reconciliation["eligible_not_selected_count"] == 1, "eligible-not-selected count mismatch", errors)
+    require(reconciliation["selected_count"] == EXPECTED_SAMPLE_SIZE, "selected count mismatch", errors)
+    require(reconciliation["arithmetic_result"] is True, "candidate arithmetic is not reconciled", errors)
+
+    terminal_counts: dict[str, int] = {}
+    for row in selection_rows:
+        terminal_counts[row["terminal_category"]] = terminal_counts.get(row["terminal_category"], 0) + 1
+        if row["terminal_category"] == "eligible_not_selected":
+            require(not row["exclusion_reason_code"], "eligible non-selected row still uses EXCL code", errors)
+            require(row["non_selection_reason_code"].startswith("NOT_SELECTED_"), "missing non-selection reason", errors)
+        if row["terminal_category"] == "ineligible":
+            require(row["eligibility_exclusion_reason_code"].startswith("EXCL_"), "ineligible row lacks EXCL code", errors)
+    require(terminal_counts == EXPECTED_TERMINAL_COUNTS, f"terminal counts mismatch: {terminal_counts}", errors)
+
     source_by_case = {row["case_id"]: row for row in source_rows}
+    rights_by_case = {row["case_id"]: row for row in rights_rows}
+    substantive_by_case = {row["case_id"]: row for row in substantive_rows}
+    familiarity_by_case = {row["case_id"]: row for row in familiarity_rows}
     require(set(source_by_case) == set(selected_ids), "source manifest and sample disagree", errors)
+    require(set(rights_by_case) == set(selected_ids), "rights manifest and sample disagree", errors)
+    require(set(substantive_by_case) == set(selected_ids), "substantive audit and sample disagree", errors)
+    require(set(familiarity_by_case) == set(selected_ids), "familiarity audit and sample disagree", errors)
+
     selected_log_rows = {
         row["candidate_id"]: row
         for row in selection_rows
         if row["inclusion_status"] == "selected"
     }
-    excluded_log_ids = {
-        row["candidate_id"]
-        for row in selection_rows
-        if row["inclusion_status"] != "selected"
-    }
     require(set(selected_log_rows) == set(selected_ids), "selection log and sample disagree", errors)
-    require(not (excluded_log_ids & set(selected_ids)), "excluded case appears in final sample", errors)
 
     for case_id in selected_ids:
         packet_path = ROOT / source_by_case[case_id]["source_packet_path"]
         packet = load_json(packet_path)
         manifest_row = source_by_case[case_id]
+        rights_row = rights_by_case[case_id]
+        substantive_row = substantive_by_case[case_id]
         require(packet["case_id"] == case_id, f"{case_id}: packet case ID mismatch", errors)
         require(
             normalized_file_sha(packet_path) == manifest_row["source_packet_sha256"],
@@ -170,16 +187,30 @@ def validate() -> list[str]:
             errors,
         )
         require(
-            text_sha(packet["canonical_text"]) == manifest_row["canonical_text_sha256"],
-            f"{case_id}: canonical text hash mismatch",
+            not (FORBIDDEN_PACKET_FIELDS & set(packet)),
+            f"{case_id}: public packet contains text or interpretive fields",
             errors,
         )
-        if packet["translation_or_gloss"]:
-            require(
-                text_sha(packet["translation_or_gloss"]) == manifest_row["translation_gloss_sha256"],
-                f"{case_id}: translation/gloss hash mismatch",
-                errors,
-            )
+        require(
+            packet["canonical_text_publication_status"] == "not_in_public_repository",
+            f"{case_id}: canonical text publication status not redacted",
+            errors,
+        )
+        require(
+            packet["public_redistribution_status"] == "not_confirmed_pending_rights_review",
+            f"{case_id}: redistribution status is overstated",
+            errors,
+        )
+        require(
+            packet["repository_publication_status"] == "metadata_only_text_redacted",
+            f"{case_id}: repository publication status is not metadata-only",
+            errors,
+        )
+        require(
+            packet["controlled_storage_reference"].startswith("controlled_private_study_storage/"),
+            f"{case_id}: controlled storage reference missing or unsafe",
+            errors,
+        )
         require(
             packet["text_layer_visibility"]["researcher_and_model_identical"] is True,
             f"{case_id}: researcher/model text layers differ",
@@ -196,13 +227,23 @@ def validate() -> list[str]:
             errors,
         )
         require(
-            "unclear" not in packet["rights_status"],
-            f"{case_id}: rights status remains unclear",
+            all(segment.get("text_status") == "redacted_from_public_pr_pending_rights_review" for segment in packet["segments"]),
+            f"{case_id}: segment text is not redacted",
             errors,
         )
         require(
-            not (FORBIDDEN_PACKET_FIELDS & set(packet)),
-            f"{case_id}: empirical or interpretive fields appear in packet",
+            rights_row["public_redistribution_status"] == "not_confirmed_pending_rights_review",
+            f"{case_id}: rights row overstates redistribution clearance",
+            errors,
+        )
+        require(
+            rights_row["repository_publication_status"] == "metadata_only_text_redacted",
+            f"{case_id}: rights row does not preserve public redaction",
+            errors,
+        )
+        require(
+            substantive_row["failure"] == "none_public_execution_blocked_by_rights_redaction",
+            f"{case_id}: substantive audit failure: {substantive_row['failure']}",
             errors,
         )
         if packet["inclusion_layer"] == "Layer 1":
@@ -221,34 +262,32 @@ def validate() -> list[str]:
             errors,
         )
 
-    require(
-        normalized_file_sha(ROOT / manual["manual_path"]) == manual["manual_file_hash"],
-        "manual file hash mismatch",
-        errors,
-    )
+    familiarity_levels = {row["researcher_familiarity_level"] for row in familiarity_rows}
+    require(len(familiarity_levels) >= 3, "familiarity audit still uses a blanket value", errors)
+    require("casual_familiarity" not in familiarity_levels, "old blanket familiarity value remains", errors)
+
     require(manual["repository_commit"] == EXPECTED_MAIN_SHA, "manual commit mismatch", errors)
+    require(manual["manual_path"] is None, "manual path should be unresolved", errors)
+    require(manual["manual_file_hash"] is None, "manual hash should be unresolved", errors)
     require(
-        normalized_file_sha(ROOT / manual["predicted_confusions_path"])
-        == manual["predicted_confusions_hash"],
-        "predicted-confusions hash mismatch",
+        manual["manual_freeze_status"] == "BLOCKED_INCOMPLETE_AUTHORITATIVE_MANUAL",
+        "manual status must be blocked",
         errors,
     )
-    require(
-        normalized_file_sha(ROOT / manual["schema_path"]) == manual["schema_hash"],
-        "manual schema hash mismatch",
-        errors,
-    )
-    require(
-        normalized_file_sha(ROOT / manual["category_definitions_path"])
-        == manual["category_definitions_hash"],
-        "category-definition hash mismatch",
-        errors,
-    )
+    for key in ["predicted_confusions", "category_definitions", "schema"]:
+        require(
+            normalized_file_sha(ROOT / manual[f"{key}_path"]) == manual[f"{key}_hash"],
+            f"{key} hash mismatch",
+            errors,
+        )
+
     schema = load_json(ROOT / manual["schema_path"])
     schema_categories = set(schema["$defs"]["friction_locus"]["enum"])
     lineage_rows = read_csv(ROOT / manual["category_definitions_path"])
     lineage_categories = {row["TRIM category"] for row in lineage_rows}
     predicted_rows = read_csv(ROOT / manual["predicted_confusions_path"])
+    substantive_categories = {item for item in schema_categories if item not in {"unresolved", None}}
+    require(len(substantive_categories) == 8, "schema must retain eight substantive friction_locus values", errors)
     for row in predicted_rows:
         pair = row["category pair"]
         left, sep, right = pair.partition(" -> ")
@@ -273,51 +312,77 @@ def validate() -> list[str]:
             f"{key} hash mismatch",
             errors,
         )
+    require(prompts["prompt_bundle_status"] == "BLOCKED_NOT_EXECUTION_READY", "prompt bundle must be blocked", errors)
+    require(prompts["condition_C_status"] == "BLOCKED_INCOMPLETE_AUTHORITATIVE_MANUAL", "Condition C must be blocked", errors)
     require(prompts["browsing_status"] == "disabled", "browsing must be disabled", errors)
     require(prompts["tool_status"] == "disabled", "tools must be disabled", errors)
+    require(prompt_audit["audit_status"] == "BLOCKED", "prompt audit must be blocked", errors)
+    for prompt_name in ["condition_A.txt", "condition_B.txt", "condition_C.txt"]:
+        text = (PROMPTS_DIR / prompt_name).read_text(encoding="utf-8")
+        require("BLOCKED_NOT_EXECUTION_READY" in text, f"{prompt_name} lacks blocked status", errors)
     require("{{SOURCE_PACKET}}" in (PROMPTS_DIR / "user_prompt_template.txt").read_text(encoding="utf-8"), "source packet placeholder missing", errors)
     require("{{OUTPUT_SCHEMA}}" in (PROMPTS_DIR / "user_prompt_template.txt").read_text(encoding="utf-8"), "output schema placeholder missing", errors)
 
-    require(model_spec["provider"] == "OpenAI", "provider is unresolved", errors)
-    require(model_spec["model"], "model is unresolved", errors)
+    require(model_spec["provider"] == "OpenAI", "provider changed", errors)
+    require(model_spec["original_unverified_model_id"] == "gpt-5.4-mini", "original model ID not recorded", errors)
+    require(model_spec["model"] == "UNRESOLVED_PENDING_OFFICIAL_VERIFICATION", "model must remain unresolved", errors)
+    require(model_spec["model_freeze_status"] == "BLOCKED", "model status must be blocked", errors)
+    require(model_spec["account_availability_verified"] is False, "account availability is overstated", errors)
+    require(model_spec["model_called"] is False, "model call recorded during freeze", errors)
     require(model_spec["browsing"] == "disabled", "model browsing not disabled", errors)
     require(model_spec["tools"] == "disabled", "model tools not disabled", errors)
-    require(cost["hard_spending_ceiling_usd"] >= cost["estimated_upper_bound_cost_usd"], "cost ceiling below estimate", errors)
+    require(cost["estimated_upper_bound_cost_status"] == "not_final", "cost estimate must remain non-final", errors)
+    require(cost["estimated_upper_bound_cost_usd"] is None, "cost estimate should not be final", errors)
+    require(cost["total_planned_model_runs_after_human_lock"] == 118, "total planned run count mismatch", errors)
+
     require(
-        governance["protocol_design"] == "Design B",
-        "governance protocol design mismatch",
+        allocation["allocation_hash"] == canonical_json_hash(allocation, "allocation_hash"),
+        "allocation hash mismatch",
         errors,
     )
     require(
-        governance["external_human_recruitment"] == "prohibited",
-        "external recruitment not prohibited",
+        allocation["sample_manifest_hash"] == sample["sample_manifest_hash"],
+        "allocation references wrong sample hash",
         errors,
     )
-    require(
-        governance["participant_data_collection"] == "none",
-        "participant data collection unexpectedly present",
-        errors,
-    )
-    require(
-        governance["formal_ethics_exemption_claimed"] is False,
-        "formal ethics exemption is claimed",
-        errors,
-    )
+    require(allocation["second_human_component"] == "not_in_current_protocol", "second human component added", errors)
+    require(allocation["planned_model_run_counts"]["primary_condition_C_runs"] == 25, "primary run count mismatch", errors)
+    require(allocation["planned_model_run_counts"]["stability_runs_additional_beyond_primary"] == 75, "stability run count mismatch", errors)
+    require(allocation["planned_model_run_counts"]["ablation_condition_runs"] == 18, "ablation run count mismatch", errors)
+    require(allocation["planned_model_run_counts"]["total_planned_model_runs_after_human_lock"] == 118, "allocation total mismatch", errors)
+    require(allocation["planned_model_run_counts"]["primary_run_double_counted_in_stability_runs"] is False, "primary run double-counted", errors)
+    require("before human lock" in allocation["condition_assignment"]["visibility_constraints"], "allocation must prohibit model execution before human lock", errors)
+
+    require(governance["protocol_design"] == "Design B", "governance protocol design mismatch", errors)
+    require(governance["external_human_recruitment"] == "prohibited", "external recruitment not prohibited", errors)
+    require(governance["participant_data_collection"] == "none", "participant data collection unexpectedly present", errors)
+    require(governance["formal_ethics_exemption_claimed"] is False, "formal ethics exemption is claimed", errors)
+    require(governance["overall_execution_readiness"] == "BLOCKED", "governance readiness must be blocked", errors)
+
+    require(freeze_status["overall_execution_readiness"] == "BLOCKED", "overall readiness must be blocked", errors)
+    require(freeze_status["manual_freeze_status"] == "BLOCKED_INCOMPLETE_AUTHORITATIVE_MANUAL", "manual freeze status mismatch", errors)
+    require(freeze_status["rights_freeze_status"] == "BLOCKED_RIGHTS_REVIEW_REQUIRED", "rights freeze status mismatch", errors)
+    require(freeze_status["model_freeze_status"].startswith("BLOCKED"), "model freeze status mismatch", errors)
+    require(freeze_status["human_coding_occurred"] is False, "human coding occurred", errors)
+    require(freeze_status["model_called"] is False, "model called", errors)
+    require(freeze_status["results_generated"] is False, "results generated", errors)
 
     freeze_report = (DOCS_DIR / "human_llm_pilot_freeze_report.md").read_text(encoding="utf-8")
     for phrase in [
-        "Human coding occurred: no.",
+        "overall_execution_readiness: `BLOCKED`",
+        "Manual status: `BLOCKED_INCOMPLETE_AUTHORITATIVE_MANUAL`",
+        "Public source packets now contain metadata only.",
         "Model called: no.",
-        "Model outputs created: no.",
-        "Findings generated: no.",
         "Released walkthrough artifacts modified: no.",
     ]:
         require(phrase in freeze_report, f"freeze report missing boundary: {phrase}", errors)
 
     checklist = (DOCS_DIR / "human_llm_protocol_freeze_checklist.md").read_text(encoding="utf-8")
     for incomplete in [
+        "- [ ] Authoritative current Design B friction_locus manual frozen.",
+        "- [ ] Prompts A/B/C frozen as executable.",
+        "- [ ] Account-verified model and decoding parameters frozen.",
         "- [ ] Researcher records completed.",
-        "- [ ] Human record hashes computed and verified.",
         "- [ ] Run manifests populated.",
         "- [ ] Raw-output hashes computed immediately after receipt.",
         "- [ ] Stability-run completion recorded.",

@@ -3,6 +3,7 @@
   "case_id": "CASE_ID_TO_BE_ASSIGNED_AFTER_SAMPLE_FREEZE",
   "run_id": "AI_PRIMARY_CASE_ID_TO_BE_ASSIGNED",
   "run_role": "primary_locked_run",
+  "stability_run_count_interpretation": "stability runs are additional beyond the primary locked run when later executed",
   "provider": "provider_to_be_recorded_at_execution",
   "model": "model_to_be_recorded_at_execution",
   "model_version_if_known": null,

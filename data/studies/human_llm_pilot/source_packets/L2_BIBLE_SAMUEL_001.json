@@ -1,48 +1,58 @@
 {
-  "canonical_text": "L2_BIBLE_SAMUEL_001-S01: said to Nathan, As the LORD liveth, the man that hath done this thing shall surely die: 12:6 And he shall restore the lamb fourfold, because he did this thing, and because he had no pity.\nL2_BIBLE_SAMUEL_001-S02: 12:7 And Nathan said to David, Thou art the man. Thus saith the LORD God of Israel, I anointed thee king over Israel, and I delivered thee out of the hand of Saul; 12:8 And I gave thee thy master’s house, and thy master’s wives into thy bosom, and gave thee the house of Israel and of Judah; and if that had been too little, I would moreover have given unto thee such and such things.",
-  "canonical_text_status": "frozen_packet_text_layer_normalized_from_retrieved_project_gutenberg_lines",
+  "canonical_text_publication_status": "not_in_public_repository",
+  "canonical_text_status": "redacted_from_public_pr_pending_rights_review",
   "case_id": "L2_BIBLE_SAMUEL_001",
+  "controlled_storage_reference": "controlled_private_study_storage/human_llm_pilot/source_packets/L2_BIBLE_SAMUEL_001.json",
   "edition": "Project Gutenberg eBook #10, King James Version Old Testament text",
-  "fixed_context": "focal parable application plus immediate divine indictment",
+  "fixed_context": "source span and context rule recorded in metadata; public text layer redacted pending rights review",
   "gloss_authority_status": "public_domain_working_translation_for_study_packet",
   "inclusion_layer": "Layer 2",
-  "packet_version": "source_packet_v0_1_2026_07_02",
+  "packet_version": "source_packet_public_metadata_v0_2_2026_07_02",
+  "private_canonical_text_sha256": "431f1405348ebe23f5fd8f31f367afc02312c998f2ff2389ebba1c6f7713fbb6",
+  "private_source_packet_file_sha256": "96a5c9432c6c3e754a112d52163c923269285ac4048eb1a43fc97d39a51362ad",
+  "private_source_packet_hash": "50fc0e2ef2ead553323ed682f185871dd5cb700f2449c14bc6aec726e2920a02",
+  "private_source_text_hash": "431f1405348ebe23f5fd8f31f367afc02312c998f2ff2389ebba1c6f7713fbb6",
+  "private_translation_or_gloss_sha256": "431f1405348ebe23f5fd8f31f367afc02312c998f2ff2389ebba1c6f7713fbb6",
+  "public_redistribution_status": "not_confirmed_pending_rights_review",
+  "repository_publication_status": "metadata_only_text_redacted",
   "retrieval_date": "2026-07-02",
-  "rights_note": "Execution-preparation packet uses public-domain Project Gutenberg source text. Public release or redistribution outside this repository review still requires source-specific rights audit.",
-  "rights_status": "public_domain_us_project_gutenberg_or_public_domain_translation",
+  "rights_note": "The public PR stores metadata and private hashes only. Full source text is not redistributed until edition and translation rights are independently cleared.",
+  "rights_status": "rights_review_incomplete_public_text_redacted",
   "segments": [
     {
       "evidence_id": "L2_BIBLE_SAMUEL_001-S01",
-      "text": "said to Nathan, As the LORD liveth, the man that hath done this thing shall surely die: 12:6 And he shall restore the lamb fourfold, because he did this thing, and because he had no pity."
+      "private_text_sha256": "69099f96f8cc20c373f5237c80270224a93f27073b2aec24ac13d688af866049",
+      "text_status": "redacted_from_public_pr_pending_rights_review"
     },
     {
       "evidence_id": "L2_BIBLE_SAMUEL_001-S02",
-      "text": "12:7 And Nathan said to David, Thou art the man. Thus saith the LORD God of Israel, I anointed thee king over Israel, and I delivered thee out of the hand of Saul; 12:8 And I gave thee thy master’s house, and thy master’s wives into thy bosom, and gave thee the house of Israel and of Judah; and if that had been too little, I would moreover have given unto thee such and such things."
+      "private_text_sha256": "1476d0c937ddee850f49a4dcef32a629e0b90ee89d367a69ea2bbaa42e4b979c",
+      "text_status": "redacted_from_public_pr_pending_rights_review"
     }
   ],
   "source_citation": "2 Samuel, King James Version. Project Gutenberg eBook #10, King James Version Old Testament text. Source lines 27608-27617. Retrieved 2026-07-02.",
   "source_file_sha256": "6ddeb05fc18e988ab569549603410fecf1a40604d826187c278b3b948a92c0e4",
   "source_language": "English translation from Biblical Hebrew",
   "source_line_range": "pg10.txt:27608-27617",
-  "source_packet_hash": "50fc0e2ef2ead553323ed682f185871dd5cb700f2449c14bc6aec726e2920a02",
+  "source_packet_hash": "06f4ece579190925e3089cdadb608fb5ae97a28fccf35a41afb0f9c3c039e2a7",
   "source_packet_hash_canonicalization": "sha256_canonical_json_excluding_source_packet_hash_v1",
-  "source_text_hash": "431f1405348ebe23f5fd8f31f367afc02312c998f2ff2389ebba1c6f7713fbb6",
   "source_universe_id": "L2_CLASSICAL_TRANSFER_PD_TRANSLATIONS_2026_07_02",
   "source_url_or_source_file_reference": "https://www.gutenberg.org/files/10/10-0.txt",
   "text_layer_visibility": {
     "model_facing_instructions_included": false,
     "model_text_layers": [
-      "canonical_text",
-      "translation_or_gloss"
+      "controlled_private_source_packet_after_rights_review"
+    ],
+    "public_repository_text_layers": [
+      "metadata_only_text_redacted"
     ],
     "researcher_and_model_identical": true,
     "researcher_text_layers": [
-      "canonical_text",
-      "translation_or_gloss"
+      "controlled_private_source_packet_after_rights_review"
     ],
     "secondary_scholarship_visible": false
   },
-  "translation_or_gloss": "L2_BIBLE_SAMUEL_001-S01: said to Nathan, As the LORD liveth, the man that hath done this thing shall surely die: 12:6 And he shall restore the lamb fourfold, because he did this thing, and because he had no pity.\nL2_BIBLE_SAMUEL_001-S02: 12:7 And Nathan said to David, Thou art the man. Thus saith the LORD God of Israel, I anointed thee king over Israel, and I delivered thee out of the hand of Saul; 12:8 And I gave thee thy master’s house, and thy master’s wives into thy bosom, and gave thee the house of Israel and of Judah; and if that had been too little, I would moreover have given unto thee such and such things.",
+  "translation_or_gloss_publication_status": "not_in_public_repository",
   "translation_or_gloss_status": "public_domain_working_translation_for_study_packet",
   "work": "2 Samuel, King James Version"
 }

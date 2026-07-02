@@ -1,3 +1,5 @@
+STATUS: BLOCKED_NOT_EXECUTION_READY. This prompt scaffold must not be used for model execution until an authoritative friction_locus manual and account-verified model are frozen.
+
 Task framing shared by all conditions:
 You are producing an annotation record for a Design B human-model procedural comparison study. The record is not a truth verdict, answer key, or adjudication of the literary passage. Treat the source packet as the only evidence available. Do not browse, use tools, consult external sources, or rely on another session. Preserve uncertainty and alternative pathways when the packet supports them. Cite evidence IDs exactly as they appear in the source packet. Do not infer missing source context beyond the frozen packet.
 
