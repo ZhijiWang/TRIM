@@ -1,0 +1,5 @@
+participant_id,cases_total,ai_exposure_cases,control_cases,label_changes,label_adoptions,ai_evidence_incorporations,evidence_convergence_increases,evidential_displacements,mechanism_adoptions,uncertainty_decreases,uncertainty_increases,alternative_suppressions,alternative_generations,alternative_modifications,rejected_ai_outputs,rereading_not_ai_reports,high_copy_overlap_warnings
+P01,6,4,2,2,1,1,0,0,0,1,1,0,0,0,1,1,0
+P02,6,4,2,1,0,2,2,1,1,1,1,0,0,0,0,1,0
+P03,6,4,2,1,0,0,0,0,0,0,3,1,1,1,0,1,0
+P04,6,4,2,3,1,2,2,1,1,1,1,0,1,0,1,2,1

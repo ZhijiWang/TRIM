@@ -1,0 +1,3 @@
+annotation_id,case_id,parent_annotation_id,actor_id,actor_type,annotation_stage,primary_evidence_segment_ids,function_label,rationale_mechanism,uncertainty_flag,rationale_note,alternative_pathway_present,alternative_mechanism,alternative_note,status
+H01_CASE01_PRE,CASE01,,H01,human,human_pre,CASE01_S1,label_a,supports,medium,Submitted human justificatory record.,no,,,draft
+

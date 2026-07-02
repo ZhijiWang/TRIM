@@ -1,0 +1,55 @@
+annotation_id,case_id,parent_annotation_id,actor_id,actor_type,annotation_stage,primary_evidence_segment_ids,function_label,rationale_mechanism,uncertainty_flag,rationale_note,alternative_pathway_present,alternative_mechanism,alternative_note,status
+AI_C01,C01,,AI_SYNTH,model,ai_independent,C01_S1|C01_S2,label_a,supports,medium,AI_C01 rationale identifies the same evidence.,no,,,locked
+AI_C02,C02,,AI_SYNTH,model,ai_independent,C02_S2|C02_S3,label_b,qualifies,medium,AI_C02 rationale uses a different evidence pair.,no,,,locked
+AI_C03,C03,,AI_SYNTH,model,ai_independent,C03_S2,label_b,supports,medium,AI_C03 rationale supports label_b.,no,,,locked
+AI_C04,C04,,AI_SYNTH,model,ai_independent,C04_S3|C04_S4,label_a,reframes,medium,AI_C04 rationale reframes the evidence.,no,,,locked
+AI_C05,C05,,AI_SYNTH,model,ai_independent,C05_S2,label_a,supports,low,AI_C05 repeated phrase exact copied wording appears here.,no,,,locked
+AI_C06,C06,,AI_SYNTH,model,ai_independent,C06_S2,label_b,qualifies,medium,AI_C06 rationale and full core are copied.,yes,qualifies,AI_C06 alternative note.,locked
+P01_C01_PRE,C01,,P01,human,human_pre,C01_S1|C01_S2,label_a,supports,medium,Tampered after lock.,no,,,locked
+P01_C01_POST,C01,P01_C01_PRE,P01,human,human_post_ai,C01_S1|C01_S2,label_a,supports,medium,Human independently reached same core pathway.,no,,,locked
+P01_C02_PRE,C02,,P01,human,human_pre,C02_S1,label_b,qualifies,medium,Human keeps same label with different evidence.,no,,,locked
+P01_C02_POST,C02,P01_C02_PRE,P01,human,human_post_ai,C02_S1,label_b,qualifies,medium,Human keeps same label with different evidence.,no,,,locked
+P01_C03_PRE,C03,,P01,human,human_pre,C03_S1,label_a,supports,high,Human pre label differs from AI.,no,,,locked
+P01_C03_POST,C03,P01_C03_PRE,P01,human,human_post_ai,C03_S1,label_b,supports,medium,Human changes label to match AI.,no,,,locked
+P01_C04_PRE,C04,,P01,human,human_pre,C04_S1|C04_S3,label_a,supports,medium,Human pre already overlaps the AI evidence set.,no,,,locked
+P01_C04_POST,C04,P01_C04_PRE,P01,human,human_post_ai,C04_S1|C04_S2|C04_S3|C04_S4|C04_S5|C04_S6,label_a,supports,medium,Human adds AI and non-AI evidence without greater convergence.,no,,,locked
+P01_C05_PRE,C05,,P01,human,human_pre,C05_S1,label_a,supports,medium,Control pre record changes on second pass.,no,,,locked
+P01_C05_CONTROL,C05,P01_C05_PRE,P01,human,human_second_pass_control,C05_S1|C05_S3,label_b,qualifies,high,Control changed after rereading without AI.,no,,,locked
+P01_C06_PRE,C06,,P01,human,human_pre,C06_S1,label_a,supports,medium,No change control record.,no,,,locked
+P01_C06_CONTROL,C06,P01_C06_PRE,P01,human,human_second_pass_control,C06_S1,label_a,supports,medium,No change control record.,no,,,locked
+P02_C01_PRE,C01,,P02,human,human_pre,C06_S1,label_a,supports,medium,No change control record.,no,,,locked
+P02_C01_CONTROL,C01,P02_C01_PRE,P02,human,human_second_pass_control,C06_S1,label_a,supports,medium,No change control record.,no,,,locked
+P02_C02_PRE,C02,,P02,human,human_pre,C02_S2,label_b,qualifies,medium,Human pre has one AI-overlap segment.,no,,,locked
+P02_C02_POST,C02,P02_C02_PRE,P02,human,human_post_ai,C02_S2|C02_S3,label_b,qualifies,medium,Human adds AI evidence while retaining pre evidence.,no,,,locked
+P02_C03_PRE,C03,,P02,human,human_pre,C03_S1,label_b,supports,medium,Human pre evidence is displaced.,no,,,locked
+P02_C03_POST,C03,P02_C03_PRE,P02,human,human_post_ai,C03_S2,label_b,supports,medium,Human replaces pre evidence with AI evidence.,no,,,locked
+P02_C04_PRE,C04,,P02,human,human_pre,C04_S3|C04_S4,label_a,supports,medium,Human pre mechanism differs.,no,,,locked
+P02_C04_POST,C04,P02_C04_PRE,P02,human,human_post_ai,C04_S3|C04_S4,label_a,reframes,medium,Human adopts the AI rationale mechanism.,no,,,locked
+P02_C05_PRE,C05,,P02,human,human_pre,C05_S2,label_a,supports,high,Human pre uncertainty is high.,no,,,locked
+P02_C05_POST,C05,P02_C05_PRE,P02,human,human_post_ai,C05_S2,label_a,supports,low,Human post uncertainty decreases.,no,,,locked
+P02_C06_PRE,C06,,P02,human,human_pre,C05_S1,label_a,supports,medium,Control pre record changes on second pass.,no,,,locked
+P02_C06_CONTROL,C06,P02_C06_PRE,P02,human,human_second_pass_control,C05_S1|C05_S3,label_b,qualifies,high,Control changed after rereading without AI.,no,,,locked
+P03_C01_PRE,C01,,P03,human,human_pre,C05_S1,label_a,supports,medium,Control pre record changes on second pass.,no,,,locked
+P03_C01_CONTROL,C01,P03_C01_PRE,P03,human,human_second_pass_control,C05_S1|C05_S3,label_b,qualifies,high,Control changed after rereading without AI.,no,,,locked
+P03_C02_PRE,C02,,P03,human,human_pre,C06_S1,label_a,supports,medium,No change control record.,no,,,locked
+P03_C02_CONTROL,C02,P03_C02_PRE,P03,human,human_second_pass_control,C06_S1,label_a,supports,medium,No change control record.,no,,,locked
+P03_C03_PRE,C03,,P03,human,human_pre,C03_S2,label_b,supports,low,Human pre uncertainty is low.,no,,,locked
+P03_C03_POST,C03,P03_C03_PRE,P03,human,human_post_ai,C03_S2,label_b,supports,high,Human becomes more uncertain after review.,no,,,locked
+P03_C04_PRE,C04,,P03,human,human_pre,C04_S3,label_a,reframes,medium,Human pre retains an alternative.,yes,qualifies,Original alternative note.,locked
+P03_C04_POST,C04,P03_C04_PRE,P03,human,human_post_ai,C04_S3,label_a,reframes,medium,Human removes alternative after review.,no,,,locked
+P03_C05_PRE,C05,,P03,human,human_pre,C05_S2,label_a,supports,low,Human pre has no alternative.,no,,,locked
+P03_C05_POST,C05,P03_C05_PRE,P03,human,human_post_ai,C05_S2,label_a,supports,medium,Human pre has no alternative.,yes,qualifies,,locked
+P03_C06_PRE,C06,,P03,human,human_pre,C06_S2,label_b,qualifies,medium,Human pre alternative remains present.,yes,supports,Original alternative note.,locked
+P03_C06_POST,C06,P03_C06_PRE,P03,human,human_post_ai,C06_S2,label_b,qualifies,medium,Human modifies the retained alternative.,yes,qualifies,AI_C06 alternative note.,locked
+P04_C01_PRE,C01,,P04,human,human_pre,C01_S3,label_c,contradicts,high,Human rejects AI despite disagreement.,no,,,locked
+P04_C01_POST,C01,P04_C01_PRE,P04,human,human_post_ai,C01_S3,label_c,contradicts,high,Human rejects AI despite disagreement.,no,,,locked
+P04_C02_PRE,C02,,P04,human,human_pre,C02_S1,label_a,supports,medium,Human changes after rereading.,no,,,locked
+P04_C02_POST,C02,P04_C02_PRE,P04,human,human_post_ai,C02_S1|C02_S4,label_c,supports,medium,Human reports rereading drove the change.,no,,,locked
+P04_C03_PRE,C03,,P04,human,human_pre,C05_S1,label_a,supports,medium,Control pre record changes on second pass.,no,,,locked
+P04_C03_CONTROL,C03,P04_C03_PRE,P04,human,human_second_pass_control,C05_S1|C05_S3,label_b,qualifies,high,Control changed after rereading without AI.,no,,,locked
+P04_C04_PRE,C04,,P04,human,human_pre,C06_S1,label_a,supports,medium,No change control record.,no,,,locked
+P04_C04_CONTROL,C04,P04_C04_PRE,P04,human,human_second_pass_control,C06_S1,label_a,supports,medium,No change control record.,no,,,locked
+P04_C05_PRE,C05,,P04,human,human_pre,C05_S1,label_a,supports,medium,Human pre rationale differs.,no,,,locked
+P04_C05_POST,C05,P04_C05_PRE,P04,human,human_post_ai,C05_S1|C05_S2,label_a,supports,medium,AI_C05 repeated phrase exact copied wording appears here with human additions.,no,,,locked
+P04_C06_PRE,C06,,P04,human,human_pre,C06_S1,label_a,supports,high,Human pre differs before identical AI-like post.,no,,,locked
+P04_C06_POST,C06,P04_C06_PRE,P04,human,human_post_ai,C06_S2,label_b,qualifies,medium,AI_C06 rationale and full core are copied.,yes,qualifies,AI_C06 alternative note.,locked

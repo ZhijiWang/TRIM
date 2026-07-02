@@ -1,0 +1,37 @@
+annotation_id,case_id,parent_annotation_id,actor_id,actor_type,annotation_stage,primary_evidence_segment_ids,function_label,rationale_mechanism,uncertainty_flag,rationale_note,alternative_pathway_present,alternative_mechanism,alternative_note,status
+H01_C01_PRE,C01,,H01,human,human_pre,C01_S1|C01_S2,label_a,supports,medium,Human pre record for same label and same evidence.,no,,,locked
+AI_C01,C01,,AI_MODEL,model,ai_independent,C01_S1|C01_S2,label_a,supports,medium,AI submitted rationale for same label and same evidence.,no,,,locked
+H01_C01_POST,C01,H01_C01_PRE,H01,human,human_post_ai,C01_S1|C01_S2,label_a,supports,medium,Human post record remains aligned after AI review.,no,,,locked
+H01_C02_PRE,C02,,H01,human,human_pre,C02_S1,label_a,supports,medium,Human pre record with same label but different evidence.,no,,,locked
+AI_C02,C02,,AI_MODEL,model,ai_independent,C02_S2,label_a,supports,medium,AI record with same label but different evidence.,no,,,locked
+H01_C02_POST,C02,H01_C02_PRE,H01,human,human_post_ai,C02_S1,label_a,supports,medium,Human post record does not adopt AI evidence.,no,,,locked
+H01_C03_PRE,C03,,H01,human,human_pre,C03_S1,label_a,supports,high,Human pre label differs from AI before exposure.,no,,,locked
+AI_C03,C03,,AI_MODEL,model,ai_independent,C03_S1,label_b,supports,medium,AI record proposes a different label.,no,,,locked
+H01_C03_POST,C03,H01_C03_PRE,H01,human,human_post_ai,C03_S1,label_b,supports,medium,Human post record changes label to match AI.,no,,,locked
+H01_C04_PRE,C04,,H01,human,human_pre,C04_S1,label_a,supports,medium,Human pre evidence omits a segment later selected by AI.,no,,,locked
+AI_C04,C04,,AI_MODEL,model,ai_independent,C04_S1|C04_S2,label_a,supports,medium,AI selects an additional evidence segment.,no,,,locked
+H01_C04_POST,C04,H01_C04_PRE,H01,human,human_post_ai,C04_S1|C04_S2,label_a,supports,medium,Human post record adds the AI evidence segment.,no,,,locked
+H01_C05_PRE,C05,,H01,human,human_pre,C05_S1,label_a,supports,medium,Human pre evidence is replaced after AI exposure.,no,,,locked
+AI_C05,C05,,AI_MODEL,model,ai_independent,C05_S2,label_a,supports,medium,AI selects an alternative evidence segment.,no,,,locked
+H01_C05_POST,C05,H01_C05_PRE,H01,human,human_post_ai,C05_S2,label_a,supports,medium,Human post evidence replaces pre evidence with AI evidence.,no,,,locked
+H01_C06_PRE,C06,,H01,human,human_pre,C06_S1,label_a,supports,medium,Human pre mechanism differs from AI.,no,,,locked
+AI_C06,C06,,AI_MODEL,model,ai_independent,C06_S1,label_a,reframes,medium,AI record uses a different mechanism.,no,,,locked
+H01_C06_POST,C06,H01_C06_PRE,H01,human,human_post_ai,C06_S1,label_a,reframes,medium,Human post mechanism changes to AI mechanism.,no,,,locked
+H01_C07_PRE,C07,,H01,human,human_pre,C07_S1,label_a,supports,high,Human pre uncertainty is high.,no,,,locked
+AI_C07,C07,,AI_MODEL,model,ai_independent,C07_S1,label_a,supports,low,AI record is lower uncertainty.,no,,,locked
+H01_C07_POST,C07,H01_C07_PRE,H01,human,human_post_ai,C07_S1,label_a,supports,low,Human post uncertainty decreases after AI exposure.,no,,,locked
+H01_C08_PRE,C08,,H01,human,human_pre,C08_S1,label_a,supports,medium,Human pre retains an alternative.,yes,qualifies,Alternative remains viable before exposure.,locked
+AI_C08,C08,,AI_MODEL,model,ai_independent,C08_S1,label_a,supports,low,AI record contains no alternative.,no,,,locked
+H01_C08_POST,C08,H01_C08_PRE,H01,human,human_post_ai,C08_S1,label_a,supports,low,Human post record removes the alternative.,no,,,locked
+H01_C09_PRE,C09,,H01,human,human_pre,C09_S1,label_a,supports,low,Human pre has no alternative.,no,,,locked
+AI_C09,C09,,AI_MODEL,model,ai_independent,C09_S1,label_a,qualifies,medium,AI record suggests a possible alternative.,yes,qualifies,AI-generated alternative record.,locked
+H01_C09_POST,C09,H01_C09_PRE,H01,human,human_post_ai,C09_S1,label_a,supports,medium,Human post record adds an alternative.,yes,qualifies,New human alternative after review.,locked
+H01_C10_PRE,C10,,H01,human,human_pre,C10_S1,label_a,supports,medium,Human pre record for no-AI control.,no,,,locked
+AI_C10,C10,,AI_MODEL,model,ai_independent,C10_S1,label_a,supports,medium,AI record exists but is not shown in control.,no,,,locked
+H01_C10_CONTROL,C10,H01_C10_PRE,H01,human,human_second_pass_control,C10_S1|C10_S2,label_a,supports,medium,Human changes evidence after rereading without AI exposure.,no,,,locked
+H01_C11_PRE,C11,,H01,human,human_pre,C11_S1|C11_S2,label_a,supports,medium,Human pre evidence overlaps AI on one segment.,no,,,locked
+AI_C11,C11,,AI_MODEL,model,ai_independent,C11_S2|C11_S3,label_a,supports,medium,AI evidence includes one new segment.,no,,,locked
+H01_C11_POST,C11,H01_C11_PRE,H01,human,human_post_ai,C11_S1|C11_S3,label_a,supports,medium,Human incorporates AI segment but does not increase Jaccard convergence.,no,,,locked
+H01_C12_PRE,C12,,H01,human,human_pre,C12_S1,label_a,supports,medium,Human pre alternative will be revised but retained.,yes,supports,Original alternative note.,locked
+AI_C12,C12,,AI_MODEL,model,ai_independent,C12_S1,label_a,qualifies,medium,AI proposes a different alternative mechanism.,yes,qualifies,AI alternative note.,locked
+H01_C12_POST,C12,H01_C12_PRE,H01,human,human_post_ai,C12_S1,label_a,supports,medium,Human post retains alternative but revises mechanism and note.,yes,qualifies,AI alternative note.,locked

@@ -1,0 +1,3 @@
+lock_manifest_id,annotation_id,case_id,annotation_stage,actor_id,canonical_record_sha256,locked_at,lock_status,locked_by,notes
+LOCK_CASE01_PRE,H01_CASE01_PRE,CASE01,human_pre,H01,REPLACE_WITH_SHA256,2026-07-01T00:00:00Z,locked,researcher_id,Generated from canonical TRIM-HAA Core payload.
+

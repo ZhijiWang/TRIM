@@ -1,0 +1,4 @@
+annotation_id,participant_id,case_id,warning_type,warning_message,expected_in_synthetic_design,interpretation_limit
+P04_C06_POST,P04,C06,exposure_event_id,Multiple exposure events for one human-post record.,yes,"Warning only; not a classification of bias, error, invalid judgment, or coder quality."
+P04_C06_POST,P04,C06,rationale_note,Rationale contains unusually high copied phrase overlap with AI rationale.,yes,"Warning only; not a classification of bias, error, invalid judgment, or coder quality."
+P04_C06_POST,P04,C06,annotation,Post-AI record is identical to AI record across all submitted core fields.,yes,"Warning only; not a classification of bias, error, invalid judgment, or coder quality."
