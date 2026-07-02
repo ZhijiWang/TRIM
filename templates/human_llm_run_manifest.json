@@ -1,0 +1,24 @@
+{
+  "record_type": "run_manifest",
+  "case_id": "CASE_ID_TO_BE_ASSIGNED_AFTER_SAMPLE_FREEZE",
+  "run_id": "AI_PRIMARY_CASE_ID_TO_BE_ASSIGNED",
+  "run_role": "primary_locked_run",
+  "provider": "provider_to_be_recorded_at_execution",
+  "model": "model_to_be_recorded_at_execution",
+  "model_version_if_known": null,
+  "timestamp": "2026-07-01T00:00:00Z",
+  "prompt_version": "prompt_version_to_be_frozen",
+  "instruction_condition": "C_full_manual",
+  "parameters": {
+    "temperature_or_sampling": "to_be_recorded",
+    "max_output_tokens": "to_be_recorded"
+  },
+  "retry_count": 0,
+  "technical_retry_reason": "none",
+  "human_record_exposed": false,
+  "raw_output_path": null,
+  "raw_output_hash": null,
+  "record_output_path": null,
+  "record_hash": null,
+  "notes": "Template only. Do not execute a model until sample, prompt, manual version, and run protocol are frozen."
+}

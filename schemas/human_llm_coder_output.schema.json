@@ -1,0 +1,438 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ZhijiWang/TRIM/schemas/human_llm_coder_output.schema.json",
+  "title": "Human-LLM friction-locus coder output and run manifest",
+  "description": "Protocol-only schema for future small-N human-LLM procedural disagreement records. It does not define released empirical data.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/coder_output"
+    },
+    {
+      "$ref": "#/$defs/run_manifest"
+    }
+  ],
+  "$defs": {
+    "evidence_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "counterfactual_test": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "test_id",
+        "question",
+        "answer",
+        "cited_evidence",
+        "effect_on_decision",
+        "confidence"
+      ],
+      "properties": {
+        "test_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1
+        },
+        "answer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cited_evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence_id"
+          },
+          "uniqueItems": true
+        },
+        "effect_on_decision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "confidence": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "not_applicable"
+          ]
+        }
+      }
+    },
+    "alternative_pathway": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pathway_id",
+        "description",
+        "cited_evidence",
+        "status"
+      ],
+      "properties": {
+        "pathway_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cited_evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence_id"
+          },
+          "uniqueItems": true
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "retained",
+            "rejected",
+            "unresolved",
+            "not_supplied"
+          ]
+        }
+      }
+    },
+    "coder_output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_type",
+        "case_id",
+        "run_id",
+        "provider",
+        "model",
+        "model_version_if_known",
+        "timestamp",
+        "prompt_version",
+        "instruction_condition",
+        "selected_evidence",
+        "primary_label",
+        "friction_locus_proposed",
+        "friction_locus_operational_status",
+        "final_operational_label",
+        "rationale_mechanism",
+        "uncertainty",
+        "alternative_pathways",
+        "counterfactual_tests",
+        "decision_path",
+        "escalation_required",
+        "escalation_reason",
+        "free_text_rationale",
+        "unresolved_ambiguity",
+        "parse_status",
+        "raw_output_hash"
+      ],
+      "properties": {
+        "record_type": {
+          "const": "coder_output"
+        },
+        "case_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "run_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "provider": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "model_version_if_known": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "prompt_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "instruction_condition": {
+          "type": "string",
+          "enum": [
+            "A_label_names_short_definitions",
+            "B_concise_decision_rules",
+            "C_full_manual",
+            "human_manual_condition",
+            "not_applicable"
+          ]
+        },
+        "selected_evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence_id"
+          },
+          "uniqueItems": true
+        },
+        "primary_label": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "friction_locus_proposed": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "cue_function",
+            "warrant_attribution",
+            "warrant_relation",
+            "operation_function",
+            "boundary_setting",
+            "temporal_layering",
+            "perspective_assignment",
+            "context_inference",
+            "unresolved",
+            null
+          ]
+        },
+        "friction_locus_operational_status": {
+          "type": "string",
+          "enum": [
+            "accepted_for_analysis",
+            "requires_human_review",
+            "unresolved",
+            "not_supplied"
+          ]
+        },
+        "final_operational_label": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "rationale_mechanism": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "uncertainty": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "suspended",
+            "not_supplied",
+            null
+          ]
+        },
+        "alternative_pathways": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/alternative_pathway"
+          }
+        },
+        "counterfactual_tests": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/counterfactual_test"
+          }
+        },
+        "decision_path": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "escalation_required": {
+          "type": "boolean"
+        },
+        "escalation_reason": {
+          "type": "string"
+        },
+        "free_text_rationale": {
+          "type": "string"
+        },
+        "unresolved_ambiguity": {
+          "type": "string"
+        },
+        "parse_status": {
+          "type": "string",
+          "enum": [
+            "not_parsed_yet",
+            "valid_json",
+            "mechanically_repaired",
+            "invalid_unrecoverable",
+            "human_entered"
+          ]
+        },
+        "raw_output_hash": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "friction_locus_operational_status": {
+                "const": "requires_human_review"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "final_operational_label": {
+                "const": "unresolved"
+              },
+              "escalation_required": {
+                "const": true
+              }
+            }
+          }
+        }
+      ]
+    },
+    "run_manifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_type",
+        "case_id",
+        "run_id",
+        "run_role",
+        "provider",
+        "model",
+        "model_version_if_known",
+        "timestamp",
+        "prompt_version",
+        "instruction_condition",
+        "parameters",
+        "retry_count",
+        "technical_retry_reason",
+        "human_record_exposed",
+        "raw_output_path",
+        "raw_output_hash",
+        "record_output_path",
+        "record_hash",
+        "notes"
+      ],
+      "properties": {
+        "record_type": {
+          "const": "run_manifest"
+        },
+        "case_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "run_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "run_role": {
+          "type": "string",
+          "enum": [
+            "primary_locked_run",
+            "stability_run",
+            "instruction_ablation_run",
+            "human_record_manifest"
+          ]
+        },
+        "provider": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "model_version_if_known": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "prompt_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "instruction_condition": {
+          "type": "string",
+          "enum": [
+            "A_label_names_short_definitions",
+            "B_concise_decision_rules",
+            "C_full_manual",
+            "human_manual_condition",
+            "not_applicable"
+          ]
+        },
+        "parameters": {
+          "type": "object"
+        },
+        "retry_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "technical_retry_reason": {
+          "type": "string"
+        },
+        "human_record_exposed": {
+          "type": "boolean"
+        },
+        "raw_output_path": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "raw_output_hash": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "record_output_path": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "record_hash": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "record_type": "coder_output",
+  "case_id": "CASE_ID_TO_BE_ASSIGNED_AFTER_SAMPLE_FREEZE",
+  "run_id": "HUMAN_PRE_CASE_ID_TO_BE_ASSIGNED",
+  "provider": "human",
+  "model": null,
+  "model_version_if_known": null,
+  "timestamp": "2026-07-01T00:00:00Z",
+  "prompt_version": "manual_version_to_be_frozen",
+  "instruction_condition": "human_manual_condition",
+  "selected_evidence": [
+    "SEGMENT_ID_TO_BE_SELECTED"
+  ],
+  "primary_label": "label_to_be_assigned",
+  "friction_locus_proposed": "unresolved",
+  "friction_locus_operational_status": "requires_human_review",
+  "final_operational_label": "unresolved",
+  "rationale_mechanism": "mechanism_to_be_assigned",
+  "uncertainty": "high",
+  "alternative_pathways": [
+    {
+      "pathway_id": "ALT_001",
+      "description": "Alternative pathway to be described by coder if retained.",
+      "cited_evidence": [
+        "SEGMENT_ID_TO_BE_SELECTED"
+      ],
+      "status": "unresolved"
+    }
+  ],
+  "counterfactual_tests": [
+    {
+      "test_id": "CF_001",
+      "question": "Which candidate locus would become hardest to sustain if this evidence or rule were removed?",
+      "answer": "answer_to_be_supplied",
+      "cited_evidence": [
+        "SEGMENT_ID_TO_BE_SELECTED"
+      ],
+      "effect_on_decision": "effect_to_be_supplied",
+      "confidence": "not_applicable"
+    }
+  ],
+  "decision_path": [
+    "source packet frozen",
+    "manual version frozen",
+    "human pre-exposure record completed before AI output"
+  ],
+  "escalation_required": true,
+  "escalation_reason": "Template default: unresolved until coder completes and lock validation is performed.",
+  "free_text_rationale": "Coder rationale to be supplied during the future study.",
+  "unresolved_ambiguity": "Unresolved ambiguity to be supplied if present.",
+  "parse_status": "human_entered",
+  "raw_output_hash": null
+}
