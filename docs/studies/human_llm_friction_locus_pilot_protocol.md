@@ -38,6 +38,10 @@ working method artifact.
 
 ## Literature positioning
 
+This literature positioning is provisional until every cited source is
+independently verified. It avoids publication metadata and does not expand the
+literature review for length.
+
 Hermeneutic and non-dogmatic annotation work, including Gius and Jacke and
 CATMA-related annotation traditions, has emphasized that literary annotation is
 not merely the recovery of one stable answer. Such work makes interpretive
@@ -81,6 +85,35 @@ the ambiguity instead of inventing certainty.
 The provisional lineage table is maintained at
 `docs/studies/friction_locus_lineage_table.csv`.
 
+## Human-comparison design
+
+Design adopted: Design A, partial second-human double coding.
+
+Reason: the study needs at least a limited human-human comparison to avoid
+implying that one human coder can establish human annotation reliability. This
+does not turn the study into full reliability validation. It adds a bounded
+human-human check that is reported separately from human-model comparison.
+
+Implementation rule:
+
+- one primary human coder codes all cases;
+- a second independent human coder codes a preregistered subset of 8-10 cases;
+- the subset is selected before any coding;
+- the second coder does not see primary human records, model records, model
+  outputs, or expected labels;
+- both human records are locked independently;
+- human-human comparison is reported separately from human-model comparison;
+- the second-human subset is not treated as a gold standard;
+- adjudication, if any, occurs only after all original records are locked and
+  is stored separately.
+
+Freeze gate: Design A may proceed only if a second coder is confirmed before
+sample freeze. If no second coder is available, the protocol must be explicitly
+amended to Design B before coding begins. Under Design B, the study must be
+labeled a procedural human-model comparison rather than reliability validation;
+agreement coefficients would describe relation between two record-producing
+conditions, not reproducibility among human coders.
+
 ## Sample design
 
 The study uses a two-layer sample totaling 20-30 cases. Cases are not selected
@@ -88,9 +121,45 @@ to force every category to appear. Natural prevalence must be preserved, and
 zero-frequency categories must be reported as not observed rather than filled by
 constructed positive examples.
 
+Sampling must follow an auditable selection workflow:
+
+1. Define the source universe for each layer.
+2. Create a candidate pool with stable candidate IDs.
+3. Screen eligibility before final selection.
+4. Record the case selector, selector's prior knowledge, and whether labels or
+   expected friction loci were visible during selection.
+5. Record inclusion and exclusion decisions with reason codes.
+6. Freeze the final sample manifest before any coding.
+7. Record the final sample-freeze timestamp and sample manifest hash.
+
+The protocol-only selection-log template is
+`docs/studies/human_llm_sample_selection_log.csv`. It must remain empty of
+actual cases until a later sample-selection task.
+
+Exclusion-reason codes:
+
+- `released_walkthrough_case`
+- `manual_demo_case`
+- `insufficient_source_provenance`
+- `rights_or_access_unclear`
+- `requires_secondary_scholarship`
+- `span_not_freezable`
+- `metadata_reveals_expected_label`
+- `selected_to_force_category`
+- `confidential_or_participant_data`
+- `outside_layer_definition`
+- `other_documented_reason`
+
 ### Layer 1: held-out same-domain cases
 
 Target: 12-18 cases.
+
+Same-domain means cases drawn from interpretation-intensive literary or
+narrative texts where the coding task turns on evidence selection, warranting,
+perspective, temporal framing, boundary-setting, context inference, uncertainty,
+or alternative interpretive pathways. Held-out means excluded from manual/demo
+development and from the released public walkthrough; it does not mean unknown
+to the model or absent from its possible training data.
 
 Cases must:
 
@@ -153,6 +222,25 @@ requires stratification. Metadata likely to reveal expected labels, prior demo
 status, or researcher hypotheses is removed or neutralized before coding. Each
 case requires a frozen source packet before any human or AI coding begins.
 
+## Source, translation, and context controls
+
+Every frozen packet must state:
+
+- canonical-language source status;
+- translation or gloss status;
+- whether the model sees source text, translation/gloss, or both;
+- whether human and model coders see identical text layers;
+- context-window boundaries;
+- secondary scholarship exclusion;
+- paratext removal;
+- proper-name and metadata masking where needed;
+- version or edition citation;
+- source rights status.
+
+If different language-access conditions are used, they are separate
+experimental conditions or are excluded from direct agreement estimates.
+Language effects must not be conflated with human-model coder effects.
+
 ## Human coding protocol
 
 1. The human coder receives a frozen case packet and a specified manual version
@@ -206,6 +294,19 @@ outputs.
 The repeated stability runs answer a different question: how stable are model
 annotations under repeated execution with the same frozen materials?
 
+### Model-run independence and reproducibility controls
+
+Each model run must record exact decoding parameters, temperature, top_p if
+available, seed if supported, tool availability, browsing availability, system
+prompt or its unavailability, provider-side version limitations, execution
+date, region if relevant, retry policy, rate-limit failure handling, technical
+failure definition, and independence of repeated runs.
+
+Repeated stability runs must be conducted in isolated sessions. No conversation
+state, prior output, human record, or cross-run summary may be visible. API and
+model stochasticity and provider-side updates limit exact reproducibility; this
+limitation must be reported with the run manifests.
+
 ## Instruction-ablation design
 
 Use at least three conditions on a subset of cases:
@@ -224,23 +325,54 @@ across conditions may reflect robust task structure, model priors, insensitive
 instructions, contamination, or ceiling/floor effects. Those explanations must
 not be collapsed into a single causal claim without an additional design.
 
+For the small-N pilot, the allocation design is: all selected ablation cases
+receive all three conditions in separate independent sessions, unless a
+pre-freeze cost ceiling makes this infeasible. If infeasible, the protocol must
+be amended to a preregistered balanced incomplete design before execution.
+
+Ablation independence requirements:
+
+- separate stateless session for every case-condition-run;
+- no conversation reuse;
+- no output from another condition visible;
+- identical case packet across conditions;
+- identical task framing except the intended instruction difference;
+- fixed model and parameters across conditions;
+- frozen prompt for each condition;
+- frozen execution order or randomized/counterbalanced order;
+- no adaptive prompting;
+- no retries except documented technical failure;
+- raw output preserved before parsing.
+
+## Allocation and randomization plan
+
+Allocation is frozen before coding in
+`templates/human_llm_allocation_manifest.json` and the later filled manifest.
+The allocation plan records case order randomization, condition allocation,
+second-human subset selection, ablation subset selection, random seed,
+stratification, and prohibited reallocations.
+
+Random seed generation must be documented before allocation. Stratification is
+permitted only when preregistered for layer, language, source tradition, or
+case-length balance. Post hoc reallocations are prohibited except for documented
+administrative failure before any coder sees the affected case; any such change
+requires a new allocation manifest and hash.
+
 ## Mandatory structured AI output
 
-AI output must be machine-readable and must conform to
-`schemas/human_llm_coder_output.schema.json`. Required fields include:
+AI output must be machine-readable and must conform to the model-specific
+record in `schemas/human_llm_coder_output.schema.json`. Human records conform
+to the human-specific record. Shared procedural fields include:
 
 - `case_id`
-- `run_id`
-- `provider`
-- `model`
-- `model_version_if_known`
+- `record_id`
 - `timestamp`
-- `prompt_version`
-- `instruction_condition`
+- `manual_version`
 - `selected_evidence`
 - `primary_label`
 - `friction_locus_proposed`
 - `friction_locus_operational_status`
+- `final_operational_label`
 - `rationale_mechanism`
 - `uncertainty`
 - `alternative_pathways`
@@ -249,8 +381,19 @@ AI output must be machine-readable and must conform to
 - `escalation_required`
 - `escalation_reason`
 - `free_text_rationale`
-- `parse_status`
-- `raw_output_hash`
+- `unresolved_ambiguity`
+- `record_hash`
+
+Human-specific fields include `coder_id_pseudonym`, `coder_role`,
+`exposure_status`, `coding_session_id`, and `source_packet_hash`. Human records
+must not require provider, model, model version, prompt version, or raw model
+output hash.
+
+Model-specific fields include `run_id`, `provider`, `model`,
+`model_version_if_known`, `prompt_version`, `instruction_condition`,
+`source_packet_hash`, `raw_output_hash`, `parse_status`, `retry_count`, and
+`technical_failure_status`. API keys, account identifiers, and secret
+credentials must never be stored.
 
 For every relevant confusable pair, `counterfactual_tests` must record:
 
@@ -317,9 +460,10 @@ Two records can therefore have:
 
 Stop before coding if source packets are not frozen, rights/provenance status is
 unclear, the manual version is not frozen, prompts are not frozen, or metadata
-reveals expected labels. Stop before model execution if human records are not
-locked, prompts are adaptive, provider metadata cannot be recorded, or output
-preservation cannot be guaranteed. Stop before analysis if parsing is
+reveals expected labels. Stop before sample freeze if Design A is retained but
+no second human coder is confirmed. Stop before model execution if human records
+are not locked, prompts are adaptive, provider metadata cannot be recorded, or
+output preservation cannot be guaranteed. Stop before analysis if parsing is
 substantively rewriting records, locked records have changed, or comparison
 rules were not pre-specified.
 

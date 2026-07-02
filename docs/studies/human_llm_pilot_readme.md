@@ -12,12 +12,18 @@ procedurally rather than only as label divergence?
 - `human_llm_friction_locus_analysis_plan.md`: analysis plan.
 - `friction_locus_lineage_table.csv`: provisional lineage and validity table.
 - `predicted_confusions.csv`: manual-derived predicted confusable pairs.
+- `human_llm_sample_selection_log.csv`: empty protocol-only selection log
+  template.
+- `human_llm_protocol_freeze_checklist.md`: incomplete checklist for a later
+  freeze task.
 
 Related machine-readable planning files:
 
 - `schemas/human_llm_coder_output.schema.json`
-- `templates/human_llm_case_record.json`
+- `templates/human_coder_record.json`
+- `templates/model_coder_record.json`
 - `templates/human_llm_run_manifest.json`
+- `templates/human_llm_allocation_manifest.json`
 
 ## Scope
 
@@ -29,6 +35,12 @@ The protocol positions TRIM as a teachable and auditable
 disagreement-registration protocol for interpretation-intensive small-N work.
 It does not claim empirical validation, a truth verdict, a universal annotation
 solution, or an exhaustive ontology of interpretation.
+
+The current protocol adopts partial second-human double coding as the intended
+design, with a freeze gate requiring a confirmed second coder before sample
+freeze. If no second coder is available, the protocol must be amended before
+coding and labeled as procedural human-model comparison rather than human
+reliability validation.
 
 ## Required later steps
 

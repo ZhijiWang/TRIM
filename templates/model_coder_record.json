@@ -1,0 +1,61 @@
+{
+  "record_type": "model_coder_record",
+  "actor_type": "model",
+  "case_id": "CASE_ID_TO_BE_ASSIGNED_AFTER_SAMPLE_FREEZE",
+  "record_id": "MODEL_RECORD_CASE_ID_TO_BE_ASSIGNED",
+  "timestamp": "2026-07-01T00:00:00Z",
+  "manual_version": "MANUAL_VERSION_TO_BE_FROZEN",
+  "selected_evidence": [
+    "SEGMENT_ID_TO_BE_SELECTED"
+  ],
+  "primary_label": "label_to_be_assigned",
+  "friction_locus_proposed": "unresolved",
+  "friction_locus_operational_status": "requires_human_review",
+  "final_operational_label": "unresolved",
+  "rationale_mechanism": "mechanism_to_be_assigned",
+  "uncertainty": "high",
+  "alternative_pathways": [
+    {
+      "pathway_id": "ALT_001",
+      "description": "Alternative pathway supplied by model if retained.",
+      "cited_evidence": [
+        "SEGMENT_ID_TO_BE_SELECTED"
+      ],
+      "status": "unresolved"
+    }
+  ],
+  "counterfactual_tests": [
+    {
+      "test_id": "CF_001",
+      "question": "Which candidate locus would become hardest to sustain if this evidence or rule were removed?",
+      "answer": "answer_to_be_supplied",
+      "cited_evidence": [
+        "SEGMENT_ID_TO_BE_SELECTED"
+      ],
+      "effect_on_decision": "effect_to_be_supplied",
+      "confidence": "not_applicable"
+    }
+  ],
+  "decision_path": [
+    "source packet frozen",
+    "manual version frozen",
+    "stateless model session",
+    "raw output preserved before parsing"
+  ],
+  "escalation_required": true,
+  "escalation_reason": "Template default: unresolved until model output is generated, parsed, and validated.",
+  "free_text_rationale": "Model rationale to be supplied by future run.",
+  "unresolved_ambiguity": "Unresolved ambiguity to be supplied if present.",
+  "record_hash": "TO_BE_COMPUTED_AFTER_RECORD_COMPLETION",
+  "run_id": "MODEL_RUN_ID_TO_BE_ASSIGNED",
+  "provider": "PROVIDER_TO_BE_RECORDED_AT_EXECUTION",
+  "model": "MODEL_TO_BE_RECORDED_AT_EXECUTION",
+  "model_version_if_known": null,
+  "prompt_version": "PROMPT_VERSION_TO_BE_FROZEN",
+  "instruction_condition": "C_full_manual",
+  "source_packet_hash": "TO_BE_REPLACED_BY_FROZEN_SOURCE_PACKET_HASH",
+  "raw_output_hash": "TO_BE_COMPUTED_FROM_PRESERVED_RAW_OUTPUT",
+  "parse_status": "not_parsed_yet",
+  "retry_count": 0,
+  "technical_failure_status": "none"
+}

@@ -1,13 +1,10 @@
 {
-  "record_type": "coder_output",
+  "record_type": "human_coder_record",
+  "actor_type": "human",
   "case_id": "CASE_ID_TO_BE_ASSIGNED_AFTER_SAMPLE_FREEZE",
-  "run_id": "HUMAN_PRE_CASE_ID_TO_BE_ASSIGNED",
-  "provider": "human",
-  "model": null,
-  "model_version_if_known": null,
+  "record_id": "HUMAN_PRE_CASE_ID_TO_BE_ASSIGNED",
   "timestamp": "2026-07-01T00:00:00Z",
-  "prompt_version": "manual_version_to_be_frozen",
-  "instruction_condition": "human_manual_condition",
+  "manual_version": "MANUAL_VERSION_TO_BE_FROZEN",
   "selected_evidence": [
     "SEGMENT_ID_TO_BE_SELECTED"
   ],
@@ -48,6 +45,10 @@
   "escalation_reason": "Template default: unresolved until coder completes and lock validation is performed.",
   "free_text_rationale": "Coder rationale to be supplied during the future study.",
   "unresolved_ambiguity": "Unresolved ambiguity to be supplied if present.",
-  "parse_status": "human_entered",
-  "raw_output_hash": null
+  "record_hash": "TO_BE_COMPUTED_AFTER_RECORD_COMPLETION",
+  "coder_id_pseudonym": "HUMAN_PRIMARY_001",
+  "coder_role": "primary_human",
+  "exposure_status": "pre_ai",
+  "coding_session_id": "SESSION_ID_TO_BE_ASSIGNED",
+  "source_packet_hash": "TO_BE_REPLACED_BY_FROZEN_SOURCE_PACKET_HASH"
 }

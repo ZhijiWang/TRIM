@@ -8,6 +8,8 @@ outputs. It contains no empirical findings.
 The planned study will compare:
 
 - human pre-exposure records against the primary locked AI run;
+- primary human records against second-human subset records if Design A is
+  confirmed before sample freeze;
 - primary locked AI runs against repeated stability runs;
 - AI outputs across instruction-ablation conditions;
 - final-label relations against procedural-record relations.
@@ -15,6 +17,34 @@ The planned study will compare:
 No author record is treated as a truth verdict, and no model record is treated
 as an answer key. Agreement and disagreement are descriptive properties of
 locked records under a stated protocol.
+
+## Analysis hierarchy
+
+Primary analyses:
+
+1. Final-label relation.
+2. Procedural disagreement decomposition.
+3. Same-label/procedure-different cases.
+4. Different-label/pathway-shared cases.
+5. Predicted versus observed friction-locus confusion.
+
+Secondary analyses:
+
+1. Model stability.
+2. Instruction ablation.
+3. Human-human subset comparison if Design A is confirmed.
+4. Coefficient sensitivity analysis.
+
+The primary agreement summary is raw agreement plus Gwet's AC1. Raw agreement
+is retained because it is transparent in a small-N demonstration. Gwet's AC1 is
+the main coefficient summary because sparse, prevalence-imbalanced categories
+can make kappa unstable or counterintuitive. Cohen's kappa and Krippendorff's
+alpha are sensitivity and descriptive checks, not proof of ontological validity.
+
+Agreement coefficients describe relations among locked records under stated
+conditions. They do not establish that friction_locus categories are natural
+kinds, that one coder is a gold standard, or that one human coder alone
+establishes human annotation reliability.
 
 ## Predicted versus observed confusion
 
@@ -63,6 +93,19 @@ The analysis will not rely on Cohen's kappa alone. Planned reporting includes:
 Zero-frequency categories cannot be meaningfully evaluated for reliability.
 The study will not manufacture positive examples to stabilize statistics.
 
+Minimum support rules:
+
+- Per-category coefficients require at least five observations in the relevant
+  category and at least two coders or record-producing conditions in the
+  comparison set.
+- Bootstrap confidence intervals require enough nonzero support to resample
+  without degenerating into all-zero or all-one samples; otherwise report counts
+  and exact proportions only.
+- Zero-support and near-zero-support categories are reported as not observed or
+  insufficiently supported.
+- Sparse categories may be included in macro summaries only with an explicit
+  support table.
+
 ## Procedural disagreement metrics
 
 For each human-AI pair, compute:
@@ -101,6 +144,8 @@ Planned outcomes:
 
 The ablation does not test training-data contamination. Similar outputs across
 conditions may have multiple explanations and must be reported cautiously.
+It is secondary and exploratory; it does not by itself establish that the full
+manual causes a particular model behavior.
 
 ## Stability analysis
 
@@ -113,6 +158,13 @@ For 3-5 repeated independent model runs per case:
 - report the full output distribution;
 - report modal label only as a secondary summary;
 - never replace the primary locked run with a majority vote.
+
+Repeated runs must use isolated sessions. The run manifest records temperature,
+top_p if available, seed if supported, tool and browsing availability, system
+prompt status, provider-side version limitations, execution date, region if
+relevant, retry policy, rate-limit failure handling, and technical failure
+status. Provider-side model updates and stochastic decoding limit exact
+reproducibility and must be reported.
 
 ## Main figures and tables
 
@@ -138,16 +190,25 @@ Table 7: Model self-consistency and entropy.
 
 ## Qualitative case studies
 
-Select 2-4 qualitative case studies after descriptive analysis. Candidate case
-study types:
+Select 2-4 qualitative case studies after descriptive analysis using this
+deterministic selection algorithm:
 
-- same final label with divergent evidence and warrants;
-- different final labels with shared alternatives and pathway structure;
-- predicted confusion confirmed at a specific procedural boundary;
-- unexpected confusion that suggests a manual blind spot.
+1. Select the same-final-label case with greatest procedural divergence.
+2. Select the different-final-label case with greatest pathway/evidence overlap.
+3. Select one case from the most frequent predicted confusion pair.
+4. Select one case from the most consequential unexpected confusion, where
+   consequence is defined before coding as affecting escalation status,
+   alternative-pathway retention, or inclusion in a primary-analysis table.
 
-Case studies must not be selected to imply general model behavior or truth of
-one interpretation.
+Tie-breaking:
+
+1. Prefer the case with more complete counterfactual-test data.
+2. If still tied, prefer the case with higher evidence-union count.
+3. If still tied, prefer the earliest case in the frozen randomized order.
+
+Case studies must not be selected for rhetorical vividness, narrative drama, or
+whether they support a preferred conclusion. They must not be used to imply
+general model behavior or truth of one interpretation.
 
 ## Demonstration-study success criteria
 
@@ -187,3 +248,9 @@ representation, not empirical validation of the whole framework. Reports must
 not claim that the eight friction_locus categories are natural kinds, that one
 annotator is a gold standard, that a model output is a truth verdict, or that
 observed instability generalizes beyond the study conditions.
+
+The study is primarily descriptive. It does not claim broad confirmatory
+hypothesis testing. Ablation and stability analyses are secondary and
+exploratory. Multiple metrics do not constitute multiple independent
+confirmations. No model-general or domain-general inference is made. Findings
+are tied to the frozen cases, model, prompt, manual, and execution dates.
