@@ -1,8 +1,23 @@
 # Friction Locus Sample Contamination Audit
 
-Status: pass.
+Internal status name: `identifier_and_path_contamination_audit`.
 
-## Selected IDs searched
+## Checks Actually Performed
+
+- Identifier check against the selected PR #18 case IDs listed below.
+- `L1_` / `L2_` case-ID prefix check in authoritative Markdown and JSON manual files.
+- Study source-packet path string check in authoritative Markdown and JSON manual files.
+- Manual-example provenance check confirming examples are declared artificial minimal examples.
+
+## Checks Not Performed
+
+- Private passage-level textual overlap check: not performed.
+- Semantic correspondence check against private source packets: not performed.
+- Renamed-example/passsage equivalence review: not performed.
+
+Reason: this task is prohibited from inspecting private source-packet text.
+
+## Selected IDs Searched
 
 - `L1_AUSTEN_PNP_001`
 - `L1_SHELLEY_FRANK_001`
@@ -30,16 +45,17 @@ Status: pass.
 - `L2_BEOWULF_DRAGON_001`
 - `L2_ARABIAN_NIGHTS_001`
 
-## Textual overlap check performed
-
-The authoritative Markdown and JSON manual files were searched for every selected PR #18 case ID and for `L1_` / `L2_`-style case-ID prefixes. Worked examples were checked by provenance and are artificial minimal examples, not study passages.
-
 ## Findings
 
-- Selected case ID matches in authoritative manual files: 0.
-- `L1_`/`L2_` prefix matches in authoritative manual files: no.
-- Study source packet paths in authoritative manual files: no.
+- Selected case ID matches in authoritative Markdown/JSON manual files: 0.
+- `L1_` / `L2_` prefix matches in authoritative Markdown/JSON manual files: 0.
+- Study source-packet path string matches in authoritative Markdown/JSON manual files: 0.
+- Worked-example provenance: artificial minimal examples only.
 
-## Conclusion
+## Residual Risk
 
-The v0.1 authoritative manual does not use PR #18 selected case IDs, selected source passages, or selected packet paths as examples or evidence for category design.
+Passage-level and semantic contamination against private study packets were not tested in this task. A later independent review must compare the artificial examples against controlled private packets if that review is authorized to inspect those packets.
+
+## Limited Conclusion
+
+No selected study identifiers or source-packet paths were found in the authoritative manual files. Passage-level and semantic contamination against private study packets were not tested in this task.

@@ -20,3 +20,7 @@ Inventory created for `friction_locus_manual_v0_1`. The newest document is not t
 | `docs/TRIM_Coding_Manual_v0_2_1_rationale_mechanism.md` | `252f4b1c867751bd996885ec674f5f546ddbc110` | legacy archive | legacy source | adjacent rationale mechanism field | separates friction_locus from rationale_mechanism | Adjacent-field manual, not friction_locus authority | yes, terminology separation only |
 | `docs/legacy_removal_inventory.csv` | `6998175eeca5d349072bf31012c69f2d568f28ec` | 2026-07-02 branch baseline | release-note/archival source | none directly | records removal of legacy manuals from active tree | Confirms legacy manuals are historical, not active docs | yes, status classification |
 | `examples/in_a_grove_walkthrough_public_v0_2/*` | `6998175eeca5d349072bf31012c69f2d568f28ec` | public walkthrough release | example-only source | no friction_locus manual categories | demonstrates non-adjudicative audit boundaries | Not a Design B manual; case material is not reused as manual example here | no, avoided for examples |
+
+## v0.1 Protocol Audit Repair Note
+
+The repaired draft uses source records above plus declared synthesis IDs in the provenance matrix. The manual remains `DRAFT_INCOMPLETE` pending independent re-audit.
