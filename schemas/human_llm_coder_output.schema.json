@@ -534,9 +534,15 @@
         "model_version_if_known",
         "timestamp",
         "manual_version",
+        "manual_file_hash",
         "prompt_version",
+        "prompt_bundle_version",
+        "system_prompt_hash",
+        "user_prompt_template_hash",
+        "condition_prompt_hash",
         "instruction_condition",
         "source_packet_hash",
+        "output_schema_hash",
         "parameters",
         "temperature",
         "top_p",
@@ -597,14 +603,33 @@
           "type": "string",
           "minLength": 1
         },
+        "manual_file_hash": {
+          "$ref": "#/$defs/sha256_or_placeholder"
+        },
         "prompt_version": {
           "type": "string",
           "minLength": 1
+        },
+        "prompt_bundle_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "system_prompt_hash": {
+          "$ref": "#/$defs/sha256_or_placeholder"
+        },
+        "user_prompt_template_hash": {
+          "$ref": "#/$defs/sha256_or_placeholder"
+        },
+        "condition_prompt_hash": {
+          "$ref": "#/$defs/sha256_or_placeholder"
         },
         "instruction_condition": {
           "$ref": "#/$defs/instruction_condition"
         },
         "source_packet_hash": {
+          "$ref": "#/$defs/sha256_or_placeholder"
+        },
+        "output_schema_hash": {
           "$ref": "#/$defs/sha256_or_placeholder"
         },
         "parameters": {

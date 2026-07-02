@@ -71,7 +71,7 @@ Observed confusions will be interpreted with these non-exclusive categories:
 
 Predicted confusion is not treated as ontological or irreducible by default.
 
-## Reliability and descriptive statistics
+## Descriptive agreement statistics
 
 The analysis will not rely on Cohen's kappa alone and will not describe coefficients as human coding reliability. Planned reporting includes:
 
@@ -86,8 +86,9 @@ The analysis will not rely on Cohen's kappa alone and will not describe coeffici
 - bootstrap confidence intervals if sample size permits;
 - explicit reporting of category absence as not observed.
 
-Zero-frequency categories cannot be meaningfully evaluated for reliability.
-The study will not manufacture positive examples to stabilize statistics.
+Zero-frequency categories cannot be meaningfully evaluated with per-category
+agreement coefficients. The study will not manufacture positive examples to
+stabilize statistics.
 
 Minimum support rules:
 

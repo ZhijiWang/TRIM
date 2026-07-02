@@ -72,9 +72,10 @@ human interpretation.
 
 The `friction_locus` categories are a provisional audit vocabulary. They are
 derived from recurring interpretive decision points in prior TRIM work, but they
-are not claimed to exhaust all forms of interpretation. Agreement on these
-categories would demonstrate teachability and reproducibility of the protocol,
-not ontological truth.
+are not claimed to exhaust all forms of interpretation. Agreement in this study
+may show that the frozen protocol can produce comparable records under the
+specific researcher-model conditions studied. It does not establish
+reproducibility across independent human analysts or ontological truth.
 
 Category lineage should be mapped to relevant traditions where defensible,
 including argumentation theory, narratology, hermeneutics, discourse analysis,
@@ -174,6 +175,12 @@ The protocol-only selection-log template is
 `docs/studies/human_llm_sample_selection_log.csv`. It must remain empty of
 actual cases until a later sample-selection task.
 
+A source universe must be bounded before individual case selection by one or
+more named works, a named anthology, a fixed edition, a frozen scene or passage
+list, or another enumerated corpus boundary. The boundary is recorded before
+candidate screening begins, and later expansion requires a new universe record
+and rationale.
+
 Exclusion-reason codes:
 
 - `released_walkthrough_case`
@@ -188,6 +195,17 @@ Exclusion-reason codes:
 - `outside_layer_definition`
 - `other_documented_reason`
 
+Each candidate also records `manual_development_influence` with one of these
+values:
+
+- `none_known`
+- `indirect`
+- `direct`
+- `uncertain`
+
+Cases with direct influence on friction-locus definitions, counterfactual tests,
+or predicted-confusion examples are excluded from the held-out same-domain layer.
+
 ### Layer 1: held-out same-domain cases
 
 Target: 12-18 cases.
@@ -195,7 +213,10 @@ Target: 12-18 cases.
 Same-domain means cases drawn from interpretation-intensive literary or
 narrative texts where the coding task turns on evidence selection, warranting,
 perspective, temporal framing, boundary-setting, context inference, uncertainty,
-or alternative interpretive pathways. Held-out means excluded from manual/demo
+or alternative interpretive pathways. Each case must contain an identifiable
+evidence-to-function or evidence-to-label decision, permit at least one explicit
+rationale and, where relevant, an alternative pathway, and be analyzable without
+unrestricted external scholarship. Held-out means excluded from manual/demo
 development and from the released public walkthrough; it does not mean unknown
 to the model or absent from its possible training data.
 
@@ -207,6 +228,13 @@ Cases must:
   major domain-transfer burden;
 - include interpretation-intensive evidence-to-label decisions;
 - be short enough for independent coding from a frozen packet.
+
+Provisional case-length rule: the preferred canonical-text span is
+approximately 100-600 words in English-equivalent length. Word equivalence is
+not exact across languages. Shorter spans are allowed when the interpretive unit
+is self-contained. Longer spans are allowed only when the frozen context-window
+rule requires them, and each exception must be documented in the source
+manifest.
 
 ### Layer 2: transfer cases
 
@@ -234,6 +262,8 @@ reported.
 
 - The case appeared in the released public walkthrough.
 - The case is a manual demonstration example.
+- The case directly shaped friction-locus definitions, counterfactual tests, or
+  predicted-confusion examples.
 - The case requires confidential, private, participant, or restricted-source data.
 - The case cannot be represented with a frozen source packet.
 - The case requires secondary scholarship to understand the coding task.
@@ -244,9 +274,9 @@ reported.
 
 One case is one bounded interpretive episode or passage packet with a stable
 case ID, source citation, segment IDs, and visible coding instructions. The
-coder sees the frozen case packet only: source text, permitted translation or
-gloss, segment IDs, contextual passages if pre-specified, and the manual
-version assigned to that condition.
+researcher analyst and model see the frozen case packet only: source text,
+permitted translation or gloss, segment IDs, contextual passages if
+pre-specified, and the manual version assigned to that condition.
 
 Contextual passages may be included only when they are frozen before coding and
 identified as context rather than primary evidence. Secondary scholarship is
@@ -254,6 +284,14 @@ excluded from the coder packet unless a later protocol explicitly studies
 scholarly-context effects. If translation is used, the source text remains
 canonical where the coder has language access; glosses or translations are
 marked non-authoritative unless the study design names them as the working text.
+
+The default context window is one focal passage plus one immediately preceding
+and one immediately following structural unit where available. A structural unit
+may be a paragraph, scene, testimony block, stanza, entry, or other
+source-appropriate unit defined before coding. Researcher and model packets must
+use the same context window for direct correspondence estimates. No
+case-specific expansion is allowed after coding begins. Any extended context is
+frozen before coding and listed in the source manifest.
 
 Case order is randomized within layer and condition unless a blocking variable
 requires stratification. Metadata likely to reveal expected labels, prior demo
@@ -266,6 +304,7 @@ Every frozen packet must state:
 
 - canonical-language source status;
 - translation or gloss status;
+- whether a translation or gloss is authoritative or non-authoritative;
 - whether the model sees source text, translation/gloss, or both;
 - whether human and model coders see identical text layers;
 - context-window boundaries;
@@ -277,13 +316,28 @@ Every frozen packet must state:
 
 If different language-access conditions are used, they are separate
 experimental conditions or are excluded from direct agreement estimates.
-Language effects must not be conflated with human-model coder effects.
+Language effects must not be conflated with human-model record-condition
+effects.
+
+Direct human-model correspondence estimates are computed only for records
+created from identical text layers. Model-training familiarity cannot be
+verified; canonical-text familiarity is recorded as a limitation, not treated as
+evidence that a case is uncontaminated. Researcher familiarity is recorded as
+prior close analysis, prior publication use, prior annotation, casual
+familiarity, or no known prior analysis. Prior familiarity does not
+automatically exclude transfer cases, but it must be reported.
+
+Each candidate requires source citation, edition or version, rights status,
+public-domain, open-license, or lawful-use basis, source retrieval date, source
+file or URL reference, source text hash, and translation or gloss provenance
+where used.
 
 ## Human coding protocol
 
-1. The human coder receives a frozen case packet and a specified manual version
-   or instruction condition.
-2. The human coder completes all records before any AI output is inspected.
+1. The researcher analyst receives a frozen case packet and a specified manual
+   version or instruction condition.
+2. The researcher analyst completes all records before any AI output is
+   inspected.
 3. Human records are locked and hashed.
 4. No post-exposure revision is allowed.
 5. Any later adjudication is stored separately and never overwrites the original
@@ -302,9 +356,11 @@ Human records must include:
 - free-text rationale;
 - unresolved ambiguity.
 
-If a human coder later reviews AI output, that exposure is recorded in a
-separate exposure or adjudication layer. The original pre-exposure record
-remains unchanged.
+If the researcher analyst later reflects on AI output after comparison, that
+post-comparison analytic review is recorded in a separate reflection,
+exposure, or adjudication layer. The original pre-exposure record remains
+unchanged. Any future external human-coder component requires a separate
+protocol version and governance review before recruitment or coding.
 
 ## AI coding design
 
@@ -344,6 +400,57 @@ Repeated stability runs must be conducted in isolated sessions. No conversation
 state, prior output, human record, or cross-run summary may be visible. API and
 model stochasticity and provider-side updates limit exact reproducibility; this
 limitation must be reported with the run manifests.
+
+## Study-local hashing rules
+
+These rules apply only to this study protocol and do not create a new
+repository-wide hashing framework. Self-referential hash fields include
+`record_hash`, `allocation_hash`, `sample_manifest_hash`, `source_packet_hash`,
+`prompt_hash`, and `raw_output_hash`.
+
+Hashes are SHA-256 values computed over UTF-8 bytes with LF line endings.
+Canonical JSON payloads are produced by recursively sorting object keys,
+preserving array order, serializing without insignificant whitespace, encoding
+as UTF-8, and excluding the target hash field from the object before
+serialization. CSV and text payloads use their exact frozen UTF-8 bytes after LF
+normalization. No timestamp or metadata may be added after hashing; any
+post-hash modification invalidates the hash. The canonicalization procedure
+version must be recorded with the manifest or record that uses the hash.
+
+Each model run manifest contains or references `system_prompt_hash`,
+`user_prompt_template_hash`, `condition_prompt_hash`, `source_packet_hash`,
+`output_schema_hash`, `manual_version`, `manual_file_hash`, and
+`prompt_bundle_version`. Prompt hashes are computed before model execution. Raw
+model output is hashed immediately after receipt and before parsing. Parsed
+model records are hashed separately from raw output. Technical failures remain
+recorded and are not silently overwritten. A retry caused by technical failure
+receives a new `run_id` and its own manifest entry.
+
+## Manual freeze requirements
+
+Before empirical coding, one exact manual file path and one exact commit SHA
+must be designated. The manual file SHA-256 must be recorded. Category
+definitions, counterfactual tests, confusable-with relations, and
+reserved/review-required category rules must be frozen. The
+`docs/studies/predicted_confusions.csv` table must be checked against that exact
+manual version.
+
+No manual wording may change after researcher coding begins. Any later revision
+requires a new protocol/manual version and cannot overwrite original records.
+An exact commit/file reference is preferred over duplicating the manual unless
+duplication is required for archival clarity. This PR does not freeze the manual.
+
+## Prompt freeze requirements
+
+Before model execution, instruction conditions A, B, and C must each have an
+exact system prompt, exact user prompt template, exact source-packet insertion
+rule, exact output-schema instruction, exact model/provider, exact decoding
+parameters, browsing/tool status, session-isolation rule, retry policy,
+technical-failure policy, prompt version ID, prompt hashes, and execution-order
+or counterbalancing rule.
+
+Prompts are not frozen in PR #17. Final prompt text belongs to a later prompt
+freeze task.
 
 ## Instruction-ablation design
 
