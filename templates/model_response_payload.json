@@ -1,0 +1,105 @@
+{
+  "selected_evidence": [
+    "EVIDENCE_ID_FROM_SOURCE_PACKET"
+  ],
+  "primary_label": "MODEL_AUTHORED_PRIMARY_INTERPRETATION_LABEL_OR_NULL",
+  "friction_locus_proposed": "unresolved",
+  "rationale_mechanism": "MODEL_AUTHORED_RATIONALE_MECHANISM_OR_NULL",
+  "uncertainty": "high",
+  "alternative_pathways": [
+    {
+      "pathway_id": "ALT_001",
+      "description": "Model-authored alternative pathway if retained.",
+      "cited_evidence": [
+        "EVIDENCE_ID_FROM_SOURCE_PACKET"
+      ],
+      "status": "unresolved"
+    }
+  ],
+  "counterfactual_tests": [
+    {
+      "test_id": "CF_001",
+      "question": "Model-authored or condition-supplied counterfactual question.",
+      "answer": "Model-authored answer.",
+      "cited_evidence": [
+        "EVIDENCE_ID_FROM_SOURCE_PACKET"
+      ],
+      "effect_on_decision": "Model-authored effect on the proposed locus.",
+      "confidence": "not_applicable"
+    }
+  ],
+  "candidate_loci": [
+    {
+      "category": "cue_function",
+      "state": "insufficient_evidence",
+      "cited_evidence": [],
+      "rationale": "Model-authored cue-family substitution assessment.",
+      "confidence": "not_applicable"
+    },
+    {
+      "category": "warrant_attribution",
+      "state": "insufficient_evidence",
+      "cited_evidence": [],
+      "rationale": "Model-authored warranting-standing assessment.",
+      "confidence": "not_applicable"
+    },
+    {
+      "category": "warrant_relation",
+      "state": "insufficient_evidence",
+      "cited_evidence": [],
+      "rationale": "Model-authored relation-among-warrants assessment.",
+      "confidence": "not_applicable"
+    },
+    {
+      "category": "operation_function",
+      "state": "insufficient_evidence",
+      "cited_evidence": [],
+      "rationale": "Model-authored interpretive-operation assessment.",
+      "confidence": "not_applicable"
+    },
+    {
+      "category": "boundary_setting",
+      "state": "insufficient_evidence",
+      "cited_evidence": [],
+      "rationale": "Model-authored scope-boundary assessment.",
+      "confidence": "not_applicable"
+    },
+    {
+      "category": "temporal_layering",
+      "state": "insufficient_evidence",
+      "cited_evidence": [],
+      "rationale": "Model-authored temporal-layer assessment.",
+      "confidence": "not_applicable"
+    },
+    {
+      "category": "perspective_assignment",
+      "state": "insufficient_evidence",
+      "cited_evidence": [],
+      "rationale": "Model-authored standpoint or voice assessment.",
+      "confidence": "not_applicable"
+    },
+    {
+      "category": "context_inference",
+      "state": "insufficient_evidence",
+      "cited_evidence": [],
+      "rationale": "Model-authored contextual-bridge assessment.",
+      "confidence": "not_applicable"
+    }
+  ],
+  "decision_path": [
+    "Model-authored concise decision-path summary."
+  ],
+  "review_policy_applied": {
+    "category": "unresolved",
+    "status": "not_applicable",
+    "trigger": [
+      "unresolved_model_payload"
+    ],
+    "requires_human_review": true,
+    "final_label_before_review": "unresolved"
+  },
+  "escalation_required": true,
+  "escalation_reason": "Model-authored escalation reason if required.",
+  "free_text_rationale": "Model-authored concise rationale.",
+  "unresolved_ambiguity": "Model-authored ambiguity statement if present."
+}

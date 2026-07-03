@@ -7,7 +7,7 @@ be modified by this protocol.
 
 ## Primary research question
 
-What becomes visible when interpretive disagreement is represented
+What becomes visible when interpretive difference is represented
 procedurally rather than only as label divergence?
 
 ## Secondary research questions
@@ -462,7 +462,10 @@ Use at least three conditions on a subset of cases:
 - B. concise decision rules;
 - C. full manual including counterfactual tests and confusable-with guidance.
 
-The purpose is to test whether richer procedural guidance produces observable
+The manipulation is a shared structured annotation baseline with increasing
+levels of interpretive guidance: A supplies short category definitions, B adds
+concise operational rules, and C supplies full manual guidance. The purpose is
+to test whether increased interpretive guidance is associated with observable
 changes in evidence selection, counterfactual adherence, friction_locus
 assignment, uncertainty, alternative-pathway retention, and rationale
 structure.

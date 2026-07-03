@@ -16,6 +16,40 @@ def sha256(path: Path) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+def sha_text(text: str) -> str:
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def normalized_text(path: Path) -> str:
+    return path.read_bytes().replace(b"\r\n", b"\n").replace(b"\r", b"\n").decode("utf-8")
+
+
+def condition_payload(condition: str) -> str:
+    base = normalized_text(ROOT / "prompts" / "human_llm_pilot" / f"condition_{condition}.txt")
+    if condition == "C":
+        manual = normalized_text(ROOT / "docs" / "manuals" / "friction_locus_manual_v0_1.json")
+        return base.rstrip("\n") + "\nBEGIN_FULL_MANUAL_JSON\n" + manual.rstrip("\n") + "\nEND_FULL_MANUAL_JSON\n"
+    return base if base.endswith("\n") else base + "\n"
+
+
+def assembled_prompt_template(condition: str) -> str:
+    return "".join(
+        [
+            "BEGIN_SHARED_SYSTEM\n"
+            + normalized_text(ROOT / "prompts" / "human_llm_pilot" / "system_prompt.txt").rstrip("\n")
+            + "\nEND_SHARED_SYSTEM\n",
+            f"BEGIN_CONDITION_{condition}\n"
+            + condition_payload(condition).rstrip("\n")
+            + f"\nEND_CONDITION_{condition}\n",
+            normalized_text(ROOT / "prompts" / "human_llm_pilot" / "source_packet_envelope.txt").rstrip("\n") + "\n",
+            "BEGIN_MODEL_RESPONSE_SCHEMA\n"
+            + normalized_text(ROOT / "schemas" / "human_llm_model_response.schema.json").rstrip("\n")
+            + "\nEND_MODEL_RESPONSE_SCHEMA\n",
+            normalized_text(ROOT / "prompts" / "human_llm_pilot" / "case_and_run_context.txt").rstrip("\n") + "\n",
+        ]
+    )
+
+
 def load_json(path: Path):
     with path.open(encoding="utf-8") as handle:
         return json.load(handle)
@@ -125,6 +159,9 @@ def test_manual_prompt_and_schema_hashes_match_blocked_files():
         "condition_C",
         "human_researcher_instructions",
         "output_schema",
+        "model_response_schema",
+        "model_response_template",
+        "source_packet_envelope",
     ]:
         assert sha256(ROOT / prompts[f"{key}_path"]) == prompts[f"{key}_hash"]
 
@@ -140,21 +177,105 @@ def test_prompts_are_blocked_scaffolds_not_execution_ready():
 
     assert prompts["prompt_bundle_status"] == "BLOCKED_NOT_EXECUTION_READY"
     assert prompts["manual_compatibility_status"] == "PASSED_AUTHORITATIVE_MANUAL_REFERENCE_VERIFIED"
-    assert prompts["prompt_compatibility_status"] == "PASSED_SCHEMA_AND_MANUAL_COMPATIBILITY_EXECUTION_BLOCKED"
-    assert prompt_audit["audit_status"] == "PASSED_MANUAL_COMPATIBILITY_EXECUTION_BLOCKED"
+    assert prompts["static_prompt_schema_status"] == "PASSED_MODEL_RESPONSE_SCHEMA_COMPATIBILITY_EXECUTION_BLOCKED"
+    assert prompts["prompt_assembly_status"] == "PASSED_PROMPT_ASSEMBLY_SPECIFIED_EXECUTION_BLOCKED"
+    assert prompts["model_response_enrichment_status"] == "PASSED_CONTRACT_SPECIFIED_EXECUTION_BLOCKED"
+    assert prompts["condition_manipulation_status"] == "PASSED_SHARED_BASELINE_WITH_DECLARED_INSTRUCTION_DEPTH_INCREMENTS_EXECUTION_BLOCKED"
+    assert prompts["prompt_compatibility_status"].startswith("BLOCKED")
+    assert prompt_audit["audit_status"] == "PASSED_STATIC_PROMPT_SCHEMA_AND_ASSEMBLY_COMPATIBILITY_EXECUTION_BLOCKED"
     assert "not a truth verdict" in system_prompt
     assert "Do not browse, use tools" in system_prompt
-    assert "candidate_loci" in system_prompt
-    assert "review_policy_applied" in system_prompt
+    assert "model-authored annotation payload only" in system_prompt
+    assert "Do not include record_type" in system_prompt
+    assert "raw_output_hash" in system_prompt
     assert "{{CASE_ID}}" in user_template
     assert "{{SOURCE_PACKET}}" in user_template
-    assert "{{OUTPUT_SCHEMA}}" in user_template
+    assert "{{MODEL_RESPONSE_SCHEMA}}" in user_template
     assert "short definitions only" in condition_a
     assert "concise decision rules" in condition_b
     assert "manual_merge_commit: 6364add9a89f3fe6d26043727b9d44cb21a76db0" in condition_c
     assert "exactly eight structured candidate_loci entries" in condition_c
+    assert "BEGIN_FULL_MANUAL_JSON" in condition_c
     assert "cue_function requires positive cue-family substitution evidence" in condition_c
     assert "context_inference requires a named, documented, protocol-permitted contextual bridge" in condition_c
+
+
+def test_prompt_assembly_injects_full_manual_and_is_hashable():
+    assembly = load_json(DATA_DIR / "prompt_assembly_manifest.json")
+    manual_hash = "797d79fcdb29fc32850c3778c6afb029ac0768207ea33f66d714fe8fa8cb591a"
+
+    assert assembly["assembly_order"] == [
+        "SYSTEM_PROMPT",
+        "CONDITION_PAYLOAD",
+        "SOURCE_PACKET_ENVELOPE",
+        "MODEL_RESPONSE_SCHEMA",
+        "CASE_AND_RUN_CONTEXT",
+    ]
+    assert assembly["condition_C_manual_injection"]["source_sha256"] == manual_hash
+    assert assembly["condition_C_manual_injection"]["repository_or_tool_access_required_by_model"] is False
+    assert "BEGIN_FULL_MANUAL_JSON" in condition_payload("C")
+    assert '"manual_version": "friction_locus_manual_v0_1"' in condition_payload("C")
+    assert assembly["condition_payload_hashes"]["C"] == sha_text(condition_payload("C"))
+    for condition in ["A", "B", "C"]:
+        assert assembly["assembled_prompt_template_hashes"][condition] == sha_text(assembled_prompt_template(condition))
+    assert len(set(assembly["assembled_prompt_template_hashes"].values())) == 3
+
+
+def test_model_response_schema_excludes_runtime_metadata_and_enrichment_adds_it():
+    response_schema = load_json(ROOT / "schemas" / "human_llm_model_response.schema.json")
+    response_template = load_json(ROOT / "templates" / "model_response_payload.json")
+    final_template = load_json(ROOT / "templates" / "model_coder_record.json")
+    contract = (DOCS_DIR / "model_record_enrichment_contract.md").read_text(encoding="utf-8")
+
+    forbidden = {
+        "record_type",
+        "actor_type",
+        "record_id",
+        "timestamp",
+        "record_hash",
+        "run_id",
+        "provider",
+        "model",
+        "model_version_if_known",
+        "prompt_version",
+        "instruction_condition",
+        "source_packet_hash",
+        "raw_output_hash",
+        "parse_status",
+        "retry_count",
+        "technical_failure_status",
+        "review_of_record_id",
+        "review_of_record_hash",
+    }
+    assert response_schema["additionalProperties"] is False
+    assert not (forbidden & set(response_schema["properties"]))
+    assert not (forbidden & set(response_template))
+    assert set(response_schema["required"]).issubset(response_template)
+    assert "record_hash" not in response_template
+    assert "raw_output_hash" in final_template
+    assert "record_hash" in final_template
+    assert final_template["review_of_record_id"] is None
+    assert final_template["review_of_record_hash"] is None
+    assert "preserve exact raw response bytes/text" in contract
+    assert "final `record_hash` is computed only after enrichment" in contract
+    assert "parse failure is represented in the run manifest or failure record without inventing annotation values" in contract
+
+
+def test_human_model_content_comparability_and_condition_manipulation_are_documented():
+    parity = (DOCS_DIR / "pr18_prompt_parity_audit.md").read_text(encoding="utf-8")
+    manipulation = (DOCS_DIR / "pr18_condition_manipulation_audit.md").read_text(encoding="utf-8")
+    access = (DOCS_DIR / "human_coder_access_and_record_spec.md").read_text(encoding="utf-8")
+
+    assert "full authoritative JSON manual" in parity
+    assert "Unresolved substantive asymmetries: none" in parity
+    assert "human may search within the supplied manual" in parity
+    assert "shared structured annotation baseline with increasing levels of interpretive guidance" in manipulation
+    assert "Condition A adds" in manipulation
+    assert "Condition B adds" in manipulation
+    assert "Condition C adds" in manipulation
+    assert "Condition B does not contain the full manual" in manipulation
+    assert "Search within the supplied manual is allowed" in access
+    assert "The human coder does not manually calculate cryptographic hashes" in access
 
 
 def test_allocation_governance_and_non_execution_status():
@@ -187,10 +308,16 @@ def test_allocation_governance_and_non_execution_status():
     assert model_spec["tools"] == "disabled"
     assert cost["estimated_upper_bound_cost_status"] == "not_final"
     assert freeze_status["manual_compatibility_status"] == "PASSED_AUTHORITATIVE_MANUAL_REFERENCE_VERIFIED"
-    assert freeze_status["prompt_compatibility_status"] == "PASSED_SCHEMA_AND_MANUAL_COMPATIBILITY_EXECUTION_BLOCKED"
+    assert freeze_status["static_prompt_schema_status"] == "PASSED_MODEL_RESPONSE_SCHEMA_COMPATIBILITY_EXECUTION_BLOCKED"
+    assert freeze_status["prompt_assembly_status"] == "PASSED_PROMPT_ASSEMBLY_SPECIFIED_EXECUTION_BLOCKED"
+    assert freeze_status["model_response_enrichment_status"] == "PASSED_CONTRACT_SPECIFIED_EXECUTION_BLOCKED"
+    assert freeze_status["human_model_content_comparability_status"] == "PASSED_WITH_DOCUMENTED_INTERFACE_AND_METADATA_ASYMMETRIES_EXECUTION_BLOCKED"
+    assert freeze_status["condition_manipulation_status"] == "PASSED_SHARED_BASELINE_WITH_DECLARED_INSTRUCTION_DEPTH_INCREMENTS_EXECUTION_BLOCKED"
+    assert freeze_status["prompt_compatibility_status"].startswith("BLOCKED")
     assert freeze_status["rights_freeze_status"] == "BLOCKED_RIGHTS_REVIEW_REQUIRED"
     assert freeze_status["private_packet_status"].startswith("BLOCKED")
     assert freeze_status["model_account_status"].startswith("BLOCKED")
+    assert freeze_status["runtime_settings_status"] == "BLOCKED_PENDING_PROVIDER_ACCOUNT_VERIFICATION"
     assert freeze_status["execution_authorization_status"].startswith("BLOCKED")
     assert freeze_status["overall_execution_readiness"].startswith("BLOCKED")
 
@@ -205,7 +332,10 @@ def test_allocation_governance_and_non_execution_status():
 
     assert "- [ ] Researcher records completed." in checklist
     assert "- [x] Authoritative current Design B friction_locus manual referenced for protocol review." in checklist
-    assert "- [x] Prompt bundle rebuilt for manual/schema compatibility." in checklist
+    assert "- [x] Prompt bundle rebuilt for static schema compatibility and deterministic assembly." in checklist
+    assert "- [x] Deterministic prompt assembly specified." in checklist
+    assert "- [x] Model-authored payload separated from harness metadata." in checklist
     assert "- [ ] Prompts A/B/C frozen as executable." in checklist
     assert "- [ ] Account-verified model and decoding parameters frozen." in checklist
+    assert "- [ ] Runtime settings frozen against verified provider/account behavior." in checklist
     assert "- [ ] Run manifests populated." in checklist

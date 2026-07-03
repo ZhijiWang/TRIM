@@ -16,6 +16,10 @@ procedurally rather than only as label divergence?
 - `human_llm_pilot_freeze_report.md`: current blocked freeze-status report.
 - `human_llm_manual_gap_report.md`: historical audit superseded by the merged authoritative manual PR #19.
 - `human_llm_rights_redaction_note.md`: public-packet text redaction notice.
+- `human_llm_prompt_assembly_spec.md`: deterministic prompt assembly specification.
+- `model_record_enrichment_contract.md`: model-authored payload and harness-enrichment contract.
+- `human_coder_access_and_record_spec.md`: human manual-access and record-assembly specification.
+- `pr18_condition_manipulation_audit.md`: A/B/C manipulation-boundary audit.
 - `human_llm_protocol_freeze_checklist.md`: checklist with completed and
   blocked components.
 
@@ -53,7 +57,7 @@ Before implementation:
 3. Resolve source and translation rights before using full text in a public or
    executable packet.
 4. Verify the model against the authenticated execution account.
-5. Keep prompt execution blocked until rights, private-packet handling, model/account verification, and final authorization pass.
+5. Keep prompt execution blocked until rights, private-packet handling, model/account verification, runtime settings, prompt preservation, and final authorization pass.
 6. Complete and lock human coding before any AI execution.
 7. Preserve raw model outputs before parsing.
 8. Analyze procedural disagreement without treating either record as a gold

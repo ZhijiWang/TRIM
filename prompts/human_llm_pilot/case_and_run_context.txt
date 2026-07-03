@@ -1,0 +1,8 @@
+BEGIN_CASE_AND_RUN_CONTEXT
+case_id: {{CASE_ID}}
+run_id: {{RUN_ID}}
+instruction_condition: {{INSTRUCTION_CONDITION}}
+prompt_bundle_version: {{PROMPT_BUNDLE_VERSION}}
+assembled_prompt_hash: {{ASSEMBLED_PROMPT_HASH}}
+source_packet_hash: {{SOURCE_PACKET_HASH}}
+END_CASE_AND_RUN_CONTEXT

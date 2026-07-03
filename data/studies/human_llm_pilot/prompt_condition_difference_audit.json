@@ -1,21 +1,24 @@
 {
-  "audit_status": "PASSED_MANUAL_COMPATIBILITY_EXECUTION_BLOCKED",
-  "condition_A_validity": "COMPATIBLE_WITH_AUTHORITATIVE_SCHEMA; short definitions only; execution blocked pending rights, private packets, and account-verified model",
-  "condition_B_validity": "COMPATIBLE_WITH_AUTHORITATIVE_SCHEMA; concise rules only; execution blocked pending rights, private packets, and account-verified model",
-  "condition_C_validity": "REBUILT_AGAINST_AUTHORITATIVE_MANUAL; compatible but not execution-authorized",
-  "difference_assessment": "A, B, and C differ only in intended instruction depth. Shared source packet placeholder, task framing, output schema, non-truth-verdict boundary, evidence-ID requirement, alternative handling, no-browsing/no-tools rule, and session isolation are retained.",
+  "audit_status": "PASSED_STATIC_PROMPT_SCHEMA_AND_ASSEMBLY_COMPATIBILITY_EXECUTION_BLOCKED",
+  "condition_A_validity": "COMPATIBLE_WITH_MODEL_RESPONSE_SCHEMA; short definitions and review-status wording only; execution blocked pending rights, private packets, account-verified model, runtime settings, and final authorization",
+  "condition_B_validity": "COMPATIBLE_WITH_MODEL_RESPONSE_SCHEMA; concise operational rules only; no full manual content; execution blocked pending rights, private packets, account-verified model, runtime settings, and final authorization",
+  "condition_C_validity": "DETERMINISTIC_FULL_JSON_MANUAL_INJECTION_SPECIFIED; compatible but not execution-authorized",
+  "difference_assessment": "A, B, and C share the same system prompt, source-packet envelope, model response schema, non-truth-verdict boundary, evidence-ID requirement, alternative handling, no-browsing/no-tools rule, and session isolation. They differ only in the declared condition payload.",
+  "manipulation_name": "shared structured annotation baseline with increasing levels of interpretive guidance",
   "no_model_call": "yes",
   "no_study_sample_examples": "yes",
   "shared_requirements_checked": [
     "same task framing",
     "same source packet placeholder",
-    "same output schema",
+    "same model response schema",
     "same evidence-ID requirement",
     "same alternative-pathway requirement",
     "same truth/non-gold-standard boundary",
     "same candidate_loci structure",
     "same review_policy_applied structure",
-    "same review linkage fields",
     "same no-browsing/no-tools rule"
-  ]
+  ],
+  "condition_A_increment": "category names, short definitions, and review-status wording",
+  "condition_B_increment": "concise operational sequence, candidate-count dominance rules, cue/context positive rules, and review-linkage rule",
+  "condition_C_increment": "full authoritative JSON manual content, full pairwise guidance, complete counterfactual suite, governance details, and manual worked examples"
 }

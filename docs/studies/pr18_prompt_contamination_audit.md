@@ -23,4 +23,6 @@ Results:
 - study source-packet paths found in prompts: False
 - category-specific hints tied to selected cases: none found by identifier/path inspection.
 
-Conclusion: no selected case IDs, source-packet paths, or manual worked-example IDs were found in the prompt files. This is a limited prompt-content audit only and does not claim passage-level or semantic contamination checking.
+Condition C assembly injects the full authoritative JSON manual, which contains manual worked examples by design. Those examples are visible to both human Condition C and model Condition C, are not selected PR #18 cases, and are governed by the manual-access specification. The prompt header files themselves do not contain manual worked-example IDs.
+
+Conclusion: no selected case IDs, source-packet paths, or manual worked-example IDs were found in the prompt header files. This is a limited prompt-content audit only and does not claim passage-level or semantic contamination checking.

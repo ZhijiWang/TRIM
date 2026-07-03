@@ -123,7 +123,8 @@ substantially overlap.
 
 ## Instruction-ablation analysis
 
-Instruction conditions:
+Instruction conditions use a shared structured annotation baseline with
+increasing levels of interpretive guidance:
 
 - A: label names and short definitions only;
 - B: concise decision rules;

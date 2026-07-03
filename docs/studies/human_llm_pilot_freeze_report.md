@@ -1,6 +1,6 @@
 # Human-LLM Pilot Freeze Report
 
-Status: `BLOCKED_PENDING_RIGHTS_PRIVATE_PACKETS_MODEL_ACCOUNT_AND_FINAL_EXECUTION_AUTHORIZATION`. This PR is execution-preparation only. No researcher coding, human annotation record, model call, model output, empirical agreement calculation, or findings were created.
+Status: `BLOCKED_PENDING_RIGHTS_PRIVATE_PACKETS_MODEL_ACCOUNT_PROMPT_ASSEMBLY_RUNTIME_ENRICHMENT_AND_FINAL_EXECUTION_AUTHORIZATION`. This PR is execution-preparation only. No researcher coding, human annotation record, model call, model output, empirical agreement calculation, or findings were created.
 
 ## Component Status
 
@@ -9,11 +9,17 @@ Status: `BLOCKED_PENDING_RIGHTS_PRIVATE_PACKETS_MODEL_ACCOUNT_AND_FINAL_EXECUTIO
 - rights_freeze_status: `BLOCKED_RIGHTS_REVIEW_REQUIRED`
 - private_packet_status: `BLOCKED_PRIVATE_PACKET_AUDIT_REQUIRED_BEFORE_CODING`
 - manual_freeze_status: `MANUAL_COMPATIBILITY_PASSED_AUTHORITATIVE_FOR_PROTOCOL_REVIEW`
-- prompt_freeze_status: `PROMPT_SCHEMA_COMPATIBLE_EXECUTION_BLOCKED_PENDING_RIGHTS_PRIVATE_PACKETS_MODEL_ACCOUNT`
+- prompt_freeze_status: `STATIC_PROMPT_SCHEMA_AND_ASSEMBLY_COMPATIBLE_EXECUTION_BLOCKED_PENDING_RIGHTS_PRIVATE_PACKETS_MODEL_ACCOUNT_RUNTIME_SETTINGS`
+- static_prompt_schema_status: `PASSED_MODEL_RESPONSE_SCHEMA_COMPATIBILITY_EXECUTION_BLOCKED`
+- prompt_assembly_status: `PASSED_PROMPT_ASSEMBLY_SPECIFIED_EXECUTION_BLOCKED`
+- model_response_enrichment_status: `PASSED_CONTRACT_SPECIFIED_EXECUTION_BLOCKED`
+- human_model_content_comparability_status: `PASSED_WITH_DOCUMENTED_INTERFACE_AND_METADATA_ASYMMETRIES_EXECUTION_BLOCKED`
+- condition_manipulation_status: `PASSED_SHARED_BASELINE_WITH_DECLARED_INSTRUCTION_DEPTH_INCREMENTS_EXECUTION_BLOCKED`
+- runtime_settings_status: `BLOCKED_PENDING_PROVIDER_ACCOUNT_VERIFICATION`
 - model_freeze_status: `BLOCKED_PENDING_ACCOUNT_AVAILABILITY_VERIFICATION`
 - allocation_freeze_status: `FROZEN_ARITHMETIC_CLARIFIED_EXECUTION_BLOCKED_PENDING_RIGHTS_PRIVATE_PACKETS_MODEL_ACCOUNT`
 - governance_status: `not_yet_formally_determined`
-- overall_execution_readiness: `BLOCKED_PENDING_RIGHTS_PRIVATE_PACKETS_MODEL_ACCOUNT_AND_FINAL_EXECUTION_AUTHORIZATION`
+- overall_execution_readiness: `BLOCKED_PENDING_RIGHTS_PRIVATE_PACKETS_MODEL_ACCOUNT_PROMPT_ASSEMBLY_RUNTIME_ENRICHMENT_AND_FINAL_EXECUTION_AUTHORIZATION`
 
 No human coding may begin from this package.
 
@@ -55,10 +61,18 @@ Public source packet count: 25. Public source packets contain metadata only. Ful
 
 - Prompt bundle status: `BLOCKED_NOT_EXECUTION_READY`
 - Manual compatibility: passed.
-- Prompt/schema compatibility: passed.
-- Condition C: rebuilt against authoritative manual.
+- Static prompt/schema compatibility: passed for the model-authored response schema.
+- Prompt assembly: specified and hashable; execution still blocked.
+- Model response enrichment contract: specified.
+- Human/model content comparability: passed with documented interface and metadata asymmetries.
+- Condition manipulation: renamed and frozen as shared structured annotation baseline with increasing levels of interpretive guidance.
+- Condition C: full authoritative JSON manual injection specified.
 - Difference audit: `docs/studies/human_llm_prompt_condition_audit.md`
 - Prompt parity audit: `docs/studies/pr18_prompt_parity_audit.md`
+- Prompt assembly spec: `docs/studies/human_llm_prompt_assembly_spec.md`
+- Model enrichment contract: `docs/studies/model_record_enrichment_contract.md`
+- Human access spec: `docs/studies/human_coder_access_and_record_spec.md`
+- Condition manipulation audit: `docs/studies/pr18_condition_manipulation_audit.md`
 - Prompt contamination audit: `docs/studies/pr18_prompt_contamination_audit.md`
 - Browsing/tools: disabled.
 - Session isolation: retained as a future execution rule.

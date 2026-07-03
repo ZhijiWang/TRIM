@@ -1,4 +1,4 @@
-STATUS: BLOCKED_NOT_EXECUTION_READY. Condition C has been rebuilt against the merged authoritative manual and is compatible with the study-specific schema. It must not be used for study execution until rights, controlled private packets, model/account access, and final execution authorization pass.
+STATUS: BLOCKED_NOT_EXECUTION_READY. Condition C has been rebuilt against the merged authoritative manual and deterministic prompt assembly. It must not be used for study execution until rights, controlled private packets, model/account access, runtime settings, prompt preservation, and final execution authorization pass.
 
 Condition C: full manual condition.
 
@@ -15,7 +15,11 @@ Manual identity:
 - coder_schema_path: schemas/human_llm_coder_output.schema.json
 - coder_schema_sha256: 2abdf5f5690aada67f1694f8d83dfe95236fbcba46c1bbcfca169567dbda7b12
 
-Use the full authoritative manual by deterministic reference to the exact JSON and Markdown hashes above. Do not use the manual worked examples as study inputs. Do not expose expected outcomes, gold labels, or case-specific hints.
+Condition C manual delivery:
+The execution harness must inject the full authoritative JSON manual content, not only the repository path or hash. The injected content source is docs/manuals/friction_locus_manual_v0_1.json with SHA-256 797d79fcdb29fc32850c3778c6afb029ac0768207ea33f66d714fe8fa8cb591a. It is inserted verbatim as UTF-8 LF-normalized text between BEGIN_FULL_MANUAL_JSON and END_FULL_MANUAL_JSON in the assembled model input. The model receives the manual content in the prompt and must not browse, use tools, or retrieve repository files.
+
+Worked examples:
+The full manual JSON includes manual worked examples. They are artificial or non-study training/manual examples and are visible in Condition C to both the human coder and model. Do not copy example outcomes mechanically, do not treat examples as study cases, and do not expose expected outcomes, gold labels, or case-specific hints.
 
 Category set:
 Use exactly eight substantive values: cue_function, warrant_attribution, warrant_relation, operation_function, boundary_setting, temporal_layering, perspective_assignment, context_inference. Handle unresolved separately as an operational/final state, not as a candidate category. Do not add legacy categories.

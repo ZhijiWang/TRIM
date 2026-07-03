@@ -1,13 +1,16 @@
-STATUS: BLOCKED_NOT_EXECUTION_READY. These researcher instructions are manual/schema-compatible but must not be used for human coding until rights, controlled private packets, model/account status, and final execution authorization pass.
+STATUS: BLOCKED_NOT_EXECUTION_READY. These researcher instructions are manual/schema-compatible but must not be used for human coding until rights, controlled private packets, human access preservation, and final execution authorization pass.
 
 Researcher record instructions:
 - Use the same source packet layers that the model will later receive.
+- Use the full authoritative JSON manual version friction_locus_manual_v0_1 with SHA-256 797d79fcdb29fc32850c3778c6afb029ac0768207ea33f66d714fe8fa8cb591a.
 - Do not view model output before the human record is completed and locked.
 - Record selected_evidence, primary_label, candidate_loci, alternative_pathways, counterfactual_tests, proposed locus, review_policy_applied, operational status, final operational label, escalation, uncertainty, decision_path, and rationale.
 - Evaluate all eight candidate_loci categories: cue_function, warrant_attribution, warrant_relation, operation_function, boundary_setting, temporal_layering, perspective_assignment, context_inference.
 - Do not use category order as priority.
 - Preserve uncertainty and alternatives; do not force a substantive locus when unresolved is warranted.
-- Do not use manual worked examples or selected study cases as category examples during coding.
+- Manual worked examples are visible to both human Condition C and model Condition C. They are training/manual examples, not study inputs; do not copy example outcomes mechanically.
+- Search within the supplied manual is allowed and must be recorded as a documented interface affordance.
+- The human coder authors interpretive fields; the system adds record ID, timestamp, source packet hash, coding session ID where system-generated, and final record hash.
 - Any later review/adjudication record must be separate and must link to the original record by review_of_record_id and review_of_record_hash.
 
 Manual reference: friction_locus_manual_v0_1 at merge commit 6364add9a89f3fe6d26043727b9d44cb21a76db0.

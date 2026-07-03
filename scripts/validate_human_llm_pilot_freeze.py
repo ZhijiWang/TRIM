@@ -112,6 +112,167 @@ def read_csv(path: Path) -> list[dict[str, str]]:
         return list(csv.DictReader(handle))
 
 
+def normalized_text(path: Path) -> str:
+    return path.read_bytes().replace(b"\r\n", b"\n").replace(b"\r", b"\n").decode("utf-8")
+
+
+def condition_payload(condition: str) -> str:
+    base = normalized_text(PROMPTS_DIR / f"condition_{condition}.txt")
+    if condition == "C":
+        manual = normalized_text(ROOT / EXPECTED_MANUAL["manual_json_path"])
+        return base.rstrip("\n") + "\nBEGIN_FULL_MANUAL_JSON\n" + manual.rstrip("\n") + "\nEND_FULL_MANUAL_JSON\n"
+    return base if base.endswith("\n") else base + "\n"
+
+
+def assembled_prompt_template(condition: str) -> str:
+    return "".join(
+        [
+            "BEGIN_SHARED_SYSTEM\n"
+            + normalized_text(PROMPTS_DIR / "system_prompt.txt").rstrip("\n")
+            + "\nEND_SHARED_SYSTEM\n",
+            f"BEGIN_CONDITION_{condition}\n"
+            + condition_payload(condition).rstrip("\n")
+            + f"\nEND_CONDITION_{condition}\n",
+            normalized_text(PROMPTS_DIR / "source_packet_envelope.txt").rstrip("\n") + "\n",
+            "BEGIN_MODEL_RESPONSE_SCHEMA\n"
+            + normalized_text(ROOT / "schemas" / "human_llm_model_response.schema.json").rstrip("\n")
+            + "\nEND_MODEL_RESPONSE_SCHEMA\n",
+            normalized_text(PROMPTS_DIR / "case_and_run_context.txt").rstrip("\n") + "\n",
+        ]
+    )
+
+
+def validate_model_response_payload(payload: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    required = {
+        "selected_evidence",
+        "primary_label",
+        "friction_locus_proposed",
+        "rationale_mechanism",
+        "uncertainty",
+        "alternative_pathways",
+        "counterfactual_tests",
+        "candidate_loci",
+        "decision_path",
+        "review_policy_applied",
+        "escalation_required",
+        "escalation_reason",
+        "free_text_rationale",
+        "unresolved_ambiguity",
+    }
+    forbidden_runtime = {
+        "record_type",
+        "actor_type",
+        "record_id",
+        "timestamp",
+        "record_hash",
+        "run_id",
+        "provider",
+        "model",
+        "model_version_if_known",
+        "prompt_version",
+        "instruction_condition",
+        "source_packet_hash",
+        "raw_output_hash",
+        "parse_status",
+        "retry_count",
+        "technical_failure_status",
+        "review_of_record_id",
+        "review_of_record_hash",
+    }
+    extra = set(payload) - required
+    missing = required - set(payload)
+    errors.extend(f"model response extra field: {field}" for field in sorted(extra))
+    errors.extend(f"model response missing field: {field}" for field in sorted(missing))
+    if forbidden_runtime & set(payload):
+        errors.append("model response contains runtime metadata")
+    candidate_loci = payload.get("candidate_loci", [])
+    if isinstance(candidate_loci, list):
+        categories = [item.get("category") for item in candidate_loci if isinstance(item, dict)]
+        if set(categories) != set(EXPECTED_CATEGORIES) or len(categories) != len(EXPECTED_CATEGORIES):
+            errors.append("model response candidate_loci category set mismatch")
+        for item in candidate_loci:
+            if not isinstance(item, dict):
+                errors.append("model response candidate_loci entry is not object")
+                continue
+            for key in ["category", "state", "cited_evidence", "rationale", "confidence"]:
+                if key not in item:
+                    errors.append(f"model response candidate_loci missing {key}")
+            if item.get("state") == "candidate_supported" and not item.get("cited_evidence"):
+                errors.append(f"supported candidate lacks cited evidence: {item.get('category')}")
+    else:
+        errors.append("model response candidate_loci is not a list")
+    return errors
+
+
+def enrich_model_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    enriched = {
+        "record_type": "model_coder_record",
+        "actor_type": "model",
+        "case_id": "TEST_CASE",
+        "record_id": "MODEL_TEST_RECORD_001",
+        "timestamp": "2026-07-03T00:00:00Z",
+        "manual_version": "friction_locus_manual_v0_1",
+        **payload,
+        "friction_locus_operational_status": "requires_human_review",
+        "final_operational_label": "unresolved",
+        "review_of_record_id": None,
+        "review_of_record_hash": None,
+        "run_id": "RUN_TEST_001",
+        "provider": "OpenAI",
+        "model": "UNRESOLVED_PENDING_OFFICIAL_VERIFICATION",
+        "model_version_if_known": None,
+        "prompt_version": "human_llm_pilot_prompts_v0_3_2026_07_03_prompt_assembly_enrichment_blocked",
+        "instruction_condition": "C_full_manual",
+        "source_packet_hash": "0" * 64,
+        "raw_output_hash": "1" * 64,
+        "parse_status": "valid_json",
+        "retry_count": 0,
+        "technical_failure_status": "none",
+    }
+    record_hash_payload = json.dumps(
+        {k: v for k, v in sorted(enriched.items()) if k != "record_hash"},
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    enriched["record_hash"] = sha_bytes(record_hash_payload)
+    return enriched
+
+
+def validate_enriched_model_record(record: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    for key in [
+        "record_type",
+        "actor_type",
+        "case_id",
+        "record_id",
+        "timestamp",
+        "manual_version",
+        "record_hash",
+        "run_id",
+        "provider",
+        "model",
+        "prompt_version",
+        "instruction_condition",
+        "source_packet_hash",
+        "raw_output_hash",
+        "parse_status",
+        "retry_count",
+        "technical_failure_status",
+    ]:
+        if key not in record:
+            errors.append(f"enriched model record missing {key}")
+    if record.get("record_type") != "model_coder_record":
+        errors.append("enriched model record_type mismatch")
+    if record.get("review_of_record_id") is not None or record.get("review_of_record_hash") is not None:
+        errors.append("original model proposal review linkage must be null")
+    if not isinstance(record.get("record_hash"), str) or len(record["record_hash"]) != 64:
+        errors.append("enriched model record hash invalid")
+    errors.extend(validate_model_response_payload({k: record[k] for k in load_json(ROOT / "schemas" / "human_llm_model_response.schema.json")["required"] if k in record}))
+    return errors
+
+
 def require(condition: bool, message: str, errors: list[str]) -> None:
     if not condition:
         errors.append(message)
@@ -157,7 +318,9 @@ def validate() -> list[str]:
     freeze_status = load_json(DATA_DIR / "freeze_status.json")
     reconciliation = load_json(DATA_DIR / "candidate_count_reconciliation.json")
     prompt_audit = load_json(DATA_DIR / "prompt_condition_difference_audit.json")
+    assembly = load_json(DATA_DIR / "prompt_assembly_manifest.json")
     freeze_pkg = load_json(DATA_DIR / "freeze_package_manifest.json")
+    model_response_template = load_json(ROOT / "templates" / "model_response_payload.json")
     source_rows = read_csv(DATA_DIR / "source_manifest.csv")
     rights_rows = read_csv(DATA_DIR / "source_rights_manifest.csv")
     substantive_rows = read_csv(DATA_DIR / "source_packet_substantive_audit.csv")
@@ -281,6 +444,9 @@ def validate() -> list[str]:
         "condition_C",
         "human_researcher_instructions",
         "output_schema",
+        "model_response_schema",
+        "model_response_template",
+        "source_packet_envelope",
     ]:
         path_key = f"{key}_path"
         hash_key = f"{key}_hash"
@@ -291,10 +457,65 @@ def validate() -> list[str]:
         )
     require(prompts["prompt_bundle_status"] == "BLOCKED_NOT_EXECUTION_READY", "prompt bundle must remain blocked", errors)
     require(prompts["manual_compatibility_status"] == "PASSED_AUTHORITATIVE_MANUAL_REFERENCE_VERIFIED", "manual compatibility status mismatch", errors)
-    require(prompts["prompt_compatibility_status"] == "PASSED_SCHEMA_AND_MANUAL_COMPATIBILITY_EXECUTION_BLOCKED", "prompt compatibility status mismatch", errors)
-    require(prompts["condition_C_status"].startswith("CONDITION_C_REBUILT_COMPATIBLE"), "Condition C status mismatch", errors)
+    require(prompts["static_prompt_schema_status"] == "PASSED_MODEL_RESPONSE_SCHEMA_COMPATIBILITY_EXECUTION_BLOCKED", "static prompt/schema status mismatch", errors)
+    require(prompts["prompt_assembly_status"] == "PASSED_PROMPT_ASSEMBLY_SPECIFIED_EXECUTION_BLOCKED", "prompt assembly status mismatch", errors)
+    require(prompts["model_response_enrichment_status"] == "PASSED_CONTRACT_SPECIFIED_EXECUTION_BLOCKED", "enrichment status mismatch", errors)
+    require(prompts["human_model_content_comparability_status"] == "PASSED_WITH_DOCUMENTED_INTERFACE_AND_METADATA_ASYMMETRIES_EXECUTION_BLOCKED", "human/model content comparability status mismatch", errors)
+    require(prompts["condition_manipulation_status"] == "PASSED_SHARED_BASELINE_WITH_DECLARED_INSTRUCTION_DEPTH_INCREMENTS_EXECUTION_BLOCKED", "condition manipulation status mismatch", errors)
+    require(prompts["prompt_compatibility_status"].startswith("BLOCKED"), "prompt compatibility should remain blocked until execution gates pass", errors)
+    require(prompts["condition_C_status"] == "CONDITION_C_FULL_JSON_MANUAL_INJECTION_SPECIFIED_EXECUTION_BLOCKED", "Condition C status mismatch", errors)
     require(prompts["browsing_status"] == "disabled", "browsing must be disabled", errors)
     require(prompts["tool_status"] == "disabled", "tools must be disabled", errors)
+
+    require(assembly["assembly_order"] == ["SYSTEM_PROMPT", "CONDITION_PAYLOAD", "SOURCE_PACKET_ENVELOPE", "MODEL_RESPONSE_SCHEMA", "CASE_AND_RUN_CONTEXT"], "prompt assembly order mismatch", errors)
+    require(assembly["condition_C_manual_injection"]["repository_or_tool_access_required_by_model"] is False, "Condition C requires repository/tool access", errors)
+    require(assembly["condition_C_manual_injection"]["source_sha256"] == EXPECTED_MANUAL["manual_json_sha256"], "Condition C manual injection hash mismatch", errors)
+    for condition in ["A", "B", "C"]:
+        require(
+            sha_bytes(condition_payload(condition).encode("utf-8")) == assembly["condition_payload_hashes"][condition],
+            f"condition payload hash mismatch for {condition}",
+            errors,
+        )
+        require(
+            sha_bytes(assembled_prompt_template(condition).encode("utf-8")) == assembly["assembled_prompt_template_hashes"][condition],
+            f"assembled prompt template hash mismatch for {condition}",
+            errors,
+        )
+    require("BEGIN_FULL_MANUAL_JSON" in condition_payload("C"), "Condition C assembled payload lacks manual begin delimiter", errors)
+    require("END_FULL_MANUAL_JSON" in condition_payload("C"), "Condition C assembled payload lacks manual end delimiter", errors)
+    require(EXPECTED_MANUAL["manual_json_sha256"] == normalized_file_sha(ROOT / assembly["condition_C_manual_injection"]["source_path"]), "injected manual file hash mismatch", errors)
+
+    response_schema = load_json(ROOT / prompts["model_response_schema_path"])
+    forbidden_model_response_fields = {
+        "record_type",
+        "actor_type",
+        "record_id",
+        "timestamp",
+        "record_hash",
+        "run_id",
+        "provider",
+        "model",
+        "model_version_if_known",
+        "prompt_version",
+        "instruction_condition",
+        "source_packet_hash",
+        "raw_output_hash",
+        "parse_status",
+        "retry_count",
+        "technical_failure_status",
+        "review_of_record_id",
+        "review_of_record_hash",
+    }
+    require(response_schema["additionalProperties"] is False, "model response schema must reject additional properties", errors)
+    require(not (forbidden_model_response_fields & set(response_schema["properties"])), "model response schema includes runtime metadata fields", errors)
+    errors.extend(validate_model_response_payload(model_response_template))
+    bad_payload = dict(model_response_template)
+    bad_payload["raw_output_hash"] = "0" * 64
+    require(validate_model_response_payload(bad_payload), "runtime metadata in model response was not rejected", errors)
+    enriched = enrich_model_payload(model_response_template)
+    errors.extend(validate_enriched_model_record(enriched))
+    require("record_hash" not in model_response_template, "model response template has pre-enrichment record_hash", errors)
+    require("record_hash" in enriched, "enriched model record lacks record_hash", errors)
 
     prompt_a_text = (PROMPTS_DIR / "condition_A.txt").read_text(encoding="utf-8")
     prompt_b_text = (PROMPTS_DIR / "condition_B.txt").read_text(encoding="utf-8")
@@ -305,9 +526,7 @@ def validate() -> list[str]:
     for phrase in [
         "candidate_loci",
         "review_policy_applied",
-        "review_of_record_id",
-        "review_of_record_hash",
-        "final_operational_label",
+        "model-authored annotation payload",
         "not execution authorization",
     ]:
         require(phrase in all_prompt_text, f"prompt bundle missing required phrase: {phrase}", errors)
@@ -320,14 +539,20 @@ def validate() -> list[str]:
         "context_inference requires a named, documented, protocol-permitted contextual bridge",
         "cue_function requires positive cue-family substitution evidence",
         "cannot be selected because all other categories failed",
+        "BEGIN_FULL_MANUAL_JSON",
     ]:
         require(phrase in prompt_c_text, f"Condition C missing requirement: {phrase}", errors)
     require("{{SOURCE_PACKET}}" in user_text, "source packet placeholder missing", errors)
-    require("{{OUTPUT_SCHEMA}}" in user_text, "output schema placeholder missing", errors)
-    require(prompt_audit["audit_status"] == "PASSED_MANUAL_COMPATIBILITY_EXECUTION_BLOCKED", "prompt audit status mismatch", errors)
+    require("{{MODEL_RESPONSE_SCHEMA}}" in user_text, "model response schema placeholder missing", errors)
+    require(prompt_audit["audit_status"] == "PASSED_STATIC_PROMPT_SCHEMA_AND_ASSEMBLY_COMPATIBILITY_EXECUTION_BLOCKED", "prompt audit status mismatch", errors)
 
     parity = (DOCS_DIR / "pr18_prompt_parity_audit.md").read_text(encoding="utf-8")
     require("Unresolved substantive asymmetries: none" in parity, "prompt parity unresolved asymmetry remains", errors)
+    require("full authoritative JSON manual" in parity, "prompt parity does not specify human/model manual content", errors)
+    manipulation = (DOCS_DIR / "pr18_condition_manipulation_audit.md").read_text(encoding="utf-8")
+    require("shared structured annotation baseline with increasing levels of interpretive guidance" in manipulation, "condition manipulation name missing", errors)
+    require("Condition B does not contain the full manual" in manipulation, "condition B full-manual exclusion missing", errors)
+    require("Condition C receives the declared full guidance" in manipulation, "condition C full-guidance check missing", errors)
     contamination = (DOCS_DIR / "pr18_prompt_contamination_audit.md").read_text(encoding="utf-8")
     require("passage-level contamination comparison: not performed" in contamination, "contamination audit overclaims passage check", errors)
     require("semantic contamination comparison: not performed" in contamination, "contamination audit overclaims semantic check", errors)
@@ -349,12 +574,31 @@ def validate() -> list[str]:
         require(example_id not in all_prompt_text, f"manual example ID appears in prompts: {example_id}", errors)
 
     require(freeze_pkg["base_main_commit"] == EXPECTED_MAIN_SHA, "freeze package base main mismatch", errors)
-    require(freeze_pkg["pr18_head_before_update"] == EXPECTED_PR18_START_SHA, "freeze package starting PR18 head mismatch", errors)
+    require(freeze_pkg["pr18_head_before_update"] == "95bdabc07e0223e6836253c17982db4efcf7b6e8", "freeze package starting PR18 head mismatch", errors)
     require(freeze_pkg["manual_merge_commit"] == EXPECTED_MAIN_SHA, "freeze package manual merge mismatch", errors)
     require(freeze_pkg["manual_markdown_hash"] == EXPECTED_MANUAL["manual_markdown_sha256"], "freeze package markdown hash mismatch", errors)
     require(freeze_pkg["manual_json_hash"] == EXPECTED_MANUAL["manual_json_sha256"], "freeze package json hash mismatch", errors)
     require(freeze_pkg["manual_manifest_hash"] == EXPECTED_MANUAL["manual_manifest_sha256"], "freeze package manifest hash mismatch", errors)
     require(freeze_pkg["coder_schema_hash"] == EXPECTED_MANUAL["coder_schema_sha256"], "freeze package schema hash mismatch", errors)
+    for path_key, hash_key in [
+        ("prompt_assembly_spec_path", "prompt_assembly_spec_hash"),
+        ("prompt_assembly_manifest_path", "prompt_assembly_manifest_hash"),
+        ("model_response_schema_path", "model_response_schema_hash"),
+        ("model_record_enrichment_contract_path", "model_record_enrichment_contract_hash"),
+        ("human_access_spec_path", "human_access_spec_hash"),
+        ("prompt_condition_manipulation_audit_path", "prompt_condition_manipulation_audit_hash"),
+        ("prompt_contamination_audit_path", "prompt_contamination_audit_hash"),
+        ("prompt_parity_audit_path", "prompt_parity_audit_hash"),
+        ("runtime_spec_path", "runtime_spec_hash"),
+        ("prompt_bundle_manifest_path", "prompt_bundle_manifest_hash"),
+    ]:
+        require(normalized_file_sha(ROOT / freeze_pkg[path_key]) == freeze_pkg[hash_key], f"freeze package hash mismatch for {path_key}", errors)
+    require(freeze_pkg["static_prompt_schema_status"] == "PASSED_MODEL_RESPONSE_SCHEMA_COMPATIBILITY_EXECUTION_BLOCKED", "freeze package static schema status mismatch", errors)
+    require(freeze_pkg["prompt_assembly_status"] == "PASSED_PROMPT_ASSEMBLY_SPECIFIED_EXECUTION_BLOCKED", "freeze package assembly status mismatch", errors)
+    require(freeze_pkg["model_response_enrichment_status"] == "PASSED_CONTRACT_SPECIFIED_EXECUTION_BLOCKED", "freeze package enrichment status mismatch", errors)
+    require(freeze_pkg["human_model_content_comparability_status"] == "PASSED_WITH_DOCUMENTED_INTERFACE_AND_METADATA_ASYMMETRIES_EXECUTION_BLOCKED", "freeze package comparability status mismatch", errors)
+    require(freeze_pkg["condition_manipulation_status"] == "PASSED_SHARED_BASELINE_WITH_DECLARED_INSTRUCTION_DEPTH_INCREMENTS_EXECUTION_BLOCKED", "freeze package manipulation status mismatch", errors)
+    require(freeze_pkg["runtime_settings_status"] == "BLOCKED_PENDING_PROVIDER_ACCOUNT_VERIFICATION", "freeze package runtime status mismatch", errors)
     require(freeze_pkg["freeze_package_manifest_hash"] == canonical_json_hash(freeze_pkg, "freeze_package_manifest_hash"), "freeze package manifest hash mismatch", errors)
     require(freeze_pkg["execution_authorization_status"].startswith("BLOCKED"), "execution authorization is not blocked", errors)
 
@@ -366,6 +610,9 @@ def validate() -> list[str]:
     require(model_spec["model_called"] is False, "model call recorded during freeze", errors)
     require(model_spec["browsing"] == "disabled", "model browsing not disabled", errors)
     require(model_spec["tools"] == "disabled", "model tools not disabled", errors)
+    require(model_spec["response_format"].startswith("structured JSON required by schemas/human_llm_model_response.schema.json"), "model response schema not used in execution spec", errors)
+    require(model_spec["raw_response_preservation"].startswith("exact raw response"), "raw response preservation missing", errors)
+    require(model_spec["runtime_settings_status"] == "BLOCKED_PENDING_PROVIDER_ACCOUNT_VERIFICATION", "runtime settings status mismatch", errors)
     require(cost["estimated_upper_bound_cost_status"] == "not_final", "cost estimate must remain non-final", errors)
     require(cost["estimated_upper_bound_cost_usd"] is None, "cost estimate should not be final", errors)
     require(cost["total_planned_model_runs_after_human_lock"] == 118, "total planned run count mismatch", errors)
@@ -387,10 +634,16 @@ def validate() -> list[str]:
 
     require(freeze_status["overall_execution_readiness"].startswith("BLOCKED"), "overall readiness must be blocked", errors)
     require(freeze_status["manual_compatibility_status"] == "PASSED_AUTHORITATIVE_MANUAL_REFERENCE_VERIFIED", "manual status mismatch", errors)
-    require(freeze_status["prompt_compatibility_status"] == "PASSED_SCHEMA_AND_MANUAL_COMPATIBILITY_EXECUTION_BLOCKED", "prompt status mismatch", errors)
+    require(freeze_status["static_prompt_schema_status"] == "PASSED_MODEL_RESPONSE_SCHEMA_COMPATIBILITY_EXECUTION_BLOCKED", "static prompt/schema status mismatch", errors)
+    require(freeze_status["prompt_assembly_status"] == "PASSED_PROMPT_ASSEMBLY_SPECIFIED_EXECUTION_BLOCKED", "prompt assembly status mismatch", errors)
+    require(freeze_status["model_response_enrichment_status"] == "PASSED_CONTRACT_SPECIFIED_EXECUTION_BLOCKED", "model response enrichment status mismatch", errors)
+    require(freeze_status["human_model_content_comparability_status"] == "PASSED_WITH_DOCUMENTED_INTERFACE_AND_METADATA_ASYMMETRIES_EXECUTION_BLOCKED", "human/model content comparability status mismatch", errors)
+    require(freeze_status["condition_manipulation_status"] == "PASSED_SHARED_BASELINE_WITH_DECLARED_INSTRUCTION_DEPTH_INCREMENTS_EXECUTION_BLOCKED", "condition manipulation status mismatch", errors)
+    require(freeze_status["prompt_compatibility_status"].startswith("BLOCKED"), "prompt status should remain blocked", errors)
     require(freeze_status["rights_freeze_status"] == "BLOCKED_RIGHTS_REVIEW_REQUIRED", "rights freeze status mismatch", errors)
     require(freeze_status["private_packet_status"].startswith("BLOCKED"), "private packet status mismatch", errors)
     require(freeze_status["model_account_status"].startswith("BLOCKED"), "model account status mismatch", errors)
+    require(freeze_status["runtime_settings_status"] == "BLOCKED_PENDING_PROVIDER_ACCOUNT_VERIFICATION", "runtime settings status should be blocked", errors)
     require(freeze_status["execution_authorization_status"].startswith("BLOCKED"), "execution authorization should be blocked", errors)
     require(freeze_status["human_coding_occurred"] is False, "human coding occurred", errors)
     require(freeze_status["model_called"] is False, "model called", errors)
@@ -398,10 +651,12 @@ def validate() -> list[str]:
 
     freeze_report = (DOCS_DIR / "human_llm_pilot_freeze_report.md").read_text(encoding="utf-8")
     for phrase in [
-        "overall_execution_readiness: `BLOCKED_PENDING_RIGHTS_PRIVATE_PACKETS_MODEL_ACCOUNT_AND_FINAL_EXECUTION_AUTHORIZATION`",
+        "overall_execution_readiness: `BLOCKED_PENDING_RIGHTS_PRIVATE_PACKETS_MODEL_ACCOUNT_PROMPT_ASSEMBLY_RUNTIME_ENRICHMENT_AND_FINAL_EXECUTION_AUTHORIZATION`",
         "Manual status: `AUTHORITATIVE_FOR_PROTOCOL_REVIEW`",
         "Manual compatibility: passed.",
-        "Prompt/schema compatibility: passed.",
+        "Static prompt/schema compatibility: passed for the model-authored response schema.",
+        "Prompt assembly: specified and hashable; execution still blocked.",
+        "Model response enrichment contract: specified.",
         "Private packets inspected in this task: no.",
         "Released walkthrough artifacts modified: no.",
     ]:
@@ -410,7 +665,11 @@ def validate() -> list[str]:
     checklist = (DOCS_DIR / "human_llm_protocol_freeze_checklist.md").read_text(encoding="utf-8")
     for complete in [
         "- [x] Authoritative current Design B friction_locus manual referenced for protocol review.",
-        "- [x] Prompt bundle rebuilt for manual/schema compatibility.",
+        "- [x] Prompt bundle rebuilt for static schema compatibility and deterministic assembly.",
+        "- [x] Deterministic prompt assembly specified.",
+        "- [x] Model-authored payload separated from harness metadata.",
+        "- [x] Human manual access specified.",
+        "- [x] A/B/C manipulation boundary renamed and frozen.",
     ]:
         require(complete in checklist, f"checklist missing completed item: {complete}", errors)
     for incomplete in [
