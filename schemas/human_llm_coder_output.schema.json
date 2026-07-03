@@ -51,6 +51,274 @@
         null
       ]
     },
+    "substantive_friction_locus": {
+      "type": "string",
+      "enum": [
+        "cue_function",
+        "warrant_attribution",
+        "warrant_relation",
+        "operation_function",
+        "boundary_setting",
+        "temporal_layering",
+        "perspective_assignment",
+        "context_inference"
+      ]
+    },
+    "candidate_locus_state": {
+      "type": "string",
+      "enum": [
+        "candidate_supported",
+        "candidate_not_supported",
+        "insufficient_evidence",
+        "not_applicable"
+      ]
+    },
+    "candidate_locus": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "category",
+        "state",
+        "cited_evidence",
+        "rationale",
+        "confidence"
+      ],
+      "properties": {
+        "category": {
+          "$ref": "#/$defs/substantive_friction_locus"
+        },
+        "state": {
+          "$ref": "#/$defs/candidate_locus_state"
+        },
+        "cited_evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence_id"
+          },
+          "uniqueItems": true
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        },
+        "confidence": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "not_applicable"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "state": {
+                "const": "candidate_supported"
+              }
+            },
+            "required": [
+              "state"
+            ]
+          },
+          "then": {
+            "properties": {
+              "cited_evidence": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "candidate_loci": {
+      "type": "array",
+      "description": "Structured Stage A candidate-detection results. The array order is not a priority order; validators compare categories as a set.",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": {
+        "$ref": "#/$defs/candidate_locus"
+      },
+      "allOf": [
+        {
+          "contains": {
+            "properties": {
+              "category": {
+                "const": "cue_function"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "properties": {
+              "category": {
+                "const": "warrant_attribution"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "properties": {
+              "category": {
+                "const": "warrant_relation"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "properties": {
+              "category": {
+                "const": "operation_function"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "properties": {
+              "category": {
+                "const": "boundary_setting"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "properties": {
+              "category": {
+                "const": "temporal_layering"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "properties": {
+              "category": {
+                "const": "perspective_assignment"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "properties": {
+              "category": {
+                "const": "context_inference"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "minContains": 1,
+          "maxContains": 1
+        }
+      ]
+    },
+    "review_policy_applied": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "category",
+        "status",
+        "trigger",
+        "requires_human_review",
+        "final_label_before_review"
+      ],
+      "properties": {
+        "category": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "cue_function",
+            "warrant_attribution",
+            "warrant_relation",
+            "operation_function",
+            "boundary_setting",
+            "temporal_layering",
+            "perspective_assignment",
+            "context_inference",
+            null
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "standard",
+            "review_sensitive",
+            "reserved",
+            "not_applicable"
+          ]
+        },
+        "trigger": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "requires_human_review": {
+          "type": "boolean"
+        },
+        "final_label_before_review": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "review_record_hash": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^(sha256:[a-f0-9]{64})$"
+    },
     "counterfactual_test": {
       "type": "object",
       "additionalProperties": false,
@@ -151,9 +419,13 @@
         "uncertainty",
         "alternative_pathways",
         "counterfactual_tests",
+        "candidate_loci",
         "decision_path",
+        "review_policy_applied",
         "escalation_required",
         "escalation_reason",
+        "review_of_record_id",
+        "review_of_record_hash",
         "free_text_rationale",
         "unresolved_ambiguity",
         "record_hash"
@@ -248,6 +520,9 @@
             "$ref": "#/$defs/counterfactual_test"
           }
         },
+        "candidate_loci": {
+          "$ref": "#/$defs/candidate_loci"
+        },
         "decision_path": {
           "type": "array",
           "items": {
@@ -255,11 +530,24 @@
             "minLength": 1
           }
         },
+        "review_policy_applied": {
+          "$ref": "#/$defs/review_policy_applied"
+        },
         "escalation_required": {
           "type": "boolean"
         },
         "escalation_reason": {
           "type": "string"
+        },
+        "review_of_record_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "review_of_record_hash": {
+          "$ref": "#/$defs/review_record_hash"
         },
         "free_text_rationale": {
           "type": "string"
@@ -331,9 +619,13 @@
             "uncertainty": true,
             "alternative_pathways": true,
             "counterfactual_tests": true,
+            "candidate_loci": true,
             "decision_path": true,
+            "review_policy_applied": true,
             "escalation_required": true,
             "escalation_reason": true,
+            "review_of_record_id": true,
+            "review_of_record_hash": true,
             "free_text_rationale": true,
             "unresolved_ambiguity": true,
             "record_hash": true,
@@ -400,6 +692,40 @@
               }
             ]
           }
+        },
+        {
+          "if": {
+            "properties": {
+              "analyst_role": {
+                "const": "adjudicator_separate_record"
+              }
+            },
+            "required": [
+              "analyst_role"
+            ]
+          },
+          "then": {
+            "properties": {
+              "review_of_record_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "review_of_record_hash": {
+                "type": "string",
+                "pattern": "^sha256:[a-f0-9]{64}$"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "review_of_record_id": {
+                "const": null
+              },
+              "review_of_record_hash": {
+                "const": null
+              }
+            }
+          }
         }
       ]
     },
@@ -446,9 +772,13 @@
             "uncertainty": true,
             "alternative_pathways": true,
             "counterfactual_tests": true,
+            "candidate_loci": true,
             "decision_path": true,
+            "review_policy_applied": true,
             "escalation_required": true,
             "escalation_reason": true,
+            "review_of_record_id": true,
+            "review_of_record_hash": true,
             "free_text_rationale": true,
             "unresolved_ambiguity": true,
             "record_hash": true,

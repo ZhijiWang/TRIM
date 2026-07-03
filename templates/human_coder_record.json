@@ -36,13 +36,82 @@
       "confidence": "not_applicable"
     }
   ],
+  "candidate_loci": [
+    {
+      "category": "cue_function",
+      "state": "insufficient_evidence",
+      "cited_evidence": [],
+      "rationale": "Coder must record a positive cue-family substitution test or explain why evidence is insufficient.",
+      "confidence": "not_applicable"
+    },
+    {
+      "category": "warrant_attribution",
+      "state": "insufficient_evidence",
+      "cited_evidence": [],
+      "rationale": "Coder must test whether warranting standing is the candidate locus.",
+      "confidence": "not_applicable"
+    },
+    {
+      "category": "warrant_relation",
+      "state": "insufficient_evidence",
+      "cited_evidence": [],
+      "rationale": "Coder must test whether relations among warrants are the candidate locus.",
+      "confidence": "not_applicable"
+    },
+    {
+      "category": "operation_function",
+      "state": "insufficient_evidence",
+      "cited_evidence": [],
+      "rationale": "Coder must test whether an interpretive operation is the candidate locus.",
+      "confidence": "not_applicable"
+    },
+    {
+      "category": "boundary_setting",
+      "state": "insufficient_evidence",
+      "cited_evidence": [],
+      "rationale": "Coder must test whether a scope or unit boundary is the candidate locus.",
+      "confidence": "not_applicable"
+    },
+    {
+      "category": "temporal_layering",
+      "state": "insufficient_evidence",
+      "cited_evidence": [],
+      "rationale": "Coder must test whether temporal layering is the candidate locus.",
+      "confidence": "not_applicable"
+    },
+    {
+      "category": "perspective_assignment",
+      "state": "insufficient_evidence",
+      "cited_evidence": [],
+      "rationale": "Coder must test whether standpoint or voice assignment is the candidate locus.",
+      "confidence": "not_applicable"
+    },
+    {
+      "category": "context_inference",
+      "state": "insufficient_evidence",
+      "cited_evidence": [],
+      "rationale": "Coder must test whether a documented contextual bridge is the candidate locus.",
+      "confidence": "not_applicable"
+    }
+  ],
   "decision_path": [
     "source packet frozen",
     "manual version frozen",
     "human pre-exposure record completed before AI output"
   ],
+  "review_policy_applied": {
+    "category": null,
+    "status": "not_applicable",
+    "trigger": [
+      "template_unresolved"
+    ],
+    "requires_human_review": true,
+    "final_label_before_review": "unresolved"
+  },
   "escalation_required": true,
   "escalation_reason": "Template default: unresolved until coder completes and lock validation is performed.",
+  "review_of_record_id": null,
+  "review_of_record_hash": null,
   "free_text_rationale": "Coder rationale to be supplied during the future study.",
   "unresolved_ambiguity": "Unresolved ambiguity to be supplied if present.",
   "record_hash": "TO_BE_COMPUTED_AFTER_RECORD_COMPLETION",
