@@ -23,4 +23,8 @@ Inventory created for `friction_locus_manual_v0_1`. The newest document is not t
 
 ## v0.1 Protocol Audit Repair Note
 
-The repaired draft uses source records above plus declared synthesis IDs in the provenance matrix. The manual remains `DRAFT_INCOMPLETE` pending independent re-audit.
+The repaired manual uses source records above plus declared synthesis IDs in the provenance matrix. Status is `AUTHORITATIVE_FOR_PROTOCOL_REVIEW`, meaning structurally complete for protocol review only; no empirical validation or coding authorization is claimed.
+
+## Final narrow correction note
+
+The final narrow correction retains historical source wording as provenance but revises manual authority for cue_function through `SYN_V0_1_CUE_POSITIVE_CRITERION`. The study-specific coder schema supplies `candidate_loci`, `review_policy_applied`, and review linkage fields for protocol review representability.

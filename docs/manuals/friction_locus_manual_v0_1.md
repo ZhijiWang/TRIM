@@ -1,103 +1,70 @@
 # Friction Locus Coding Manual v0.1
 
-Manual version: `friction_locus_manual_v0_1`  
-Status: `DRAFT_INCOMPLETE`
-Effective date: 2026-07-02
+Status: `AUTHORITATIVE_FOR_PROTOCOL_REVIEW`
 
-## 1. Scope and claim boundary
+This manual is structurally complete and coherent for protocol review only. It is not empirically validated, not coder-reliability validated, not an ontology claim, and not authorization to begin coding.
 
-This draft is a provisional audit vocabulary for small-N, interpretation-intensive annotation. It is designed to make evidence selection, counterfactual tests, uncertainty, alternative pathways, and procedural disagreement reviewable. It is not an exhaustive ontology of interpretation, not a natural-category claim, and not empirical validation. Agreement under this manual would demonstrate procedural comparability under stated conditions, not ontological truth. The manual does not make one coder a gold standard. The categories identify the dominant procedural locus of unresolved interpretive friction: the point at which conversion from selected evidence to interpretation becomes unstable.
+## 1. Scope and Claim Boundary
+Structurally complete and coherent for protocol review only; not empirically validated, not coder-reliability validated, not an ontology claim, and not authorization to begin coding.
 
-## 2. Core concepts
+## 2. Core Concepts
+- `proposed_locus`: The substantive locus proposed by the original coder or model record.
+- `candidate_loci`: The authoritative structured Stage A record: exactly one state for each of the eight substantive categories.
+- `operational_status`: The status assigned after review-policy and dominance checks.
+- `final_operational_label`: The label admitted for analysis before any later separate review event.
+- `review_policy_applied`: The structured category-specific policy applied to the proposed locus.
+- `escalation_required`: Whether the record requires human review or cannot be resolved under the manual.
+- `review_of_record_id`: For adjudicator separate records, the original proposal record being reviewed.
+- `review_of_record_hash`: For adjudicator separate records, the immutable hash of the original proposal record.
+- `original_record_preserved`: Original proposal records are not overwritten by later review records.
 
-- **evidence**: Text selected as support and cited by stable evidence ID.
-- **function/label**: The primary interpretive claim or label being audited.
-- **warrant**: A source, sign, speaker, medium, result, or relation licensing movement from evidence to interpretation.
-- **operation**: A visible interpretive, testimonial, consultative, recognitional, classificatory, or self-reading act.
-- **relation**: Conflict, ranking, qualification, interaction, or suspension among warrants.
-- **perspective**: Speaker, witness role, focalization, testimonial position, or epistemic standpoint.
-- **temporal layer**: Later, retrospective, reuse, fulfilment, or historical-readability layer affecting earlier evidence.
-- **boundary**: Case, unit, category, speaker-attachment, episode, or scope boundary.
-- **context**: A named bridge beyond the local anchor, with documented source and protocol permission.
-- **dominant friction locus**: The best-supported procedural locus after candidate detection and dominance resolution.
-- **unresolved**: A final state when no responsible dominant locus can be selected.
-- **alternative pathway**: A plausible route preserved rather than silently discarded.
-- **escalation**: A governance flag for review, insufficient evidence, conflict, or review-policy trigger.
+## 3. Global Coding Sequence
+1. identify focal interpretive decision
+2. identify selected evidence
+3. state proposed primary interpretation
+4. retain plausible alternatives
+5. evaluate candidate detection for all eight categories without early termination
+6. apply relevant primary and pairwise counterfactual tests
+7. resolve dominance without category-order priority
+8. record proposed_locus, operational_status, final_operational_label, uncertainty, alternatives, and escalation separately
 
-## 3. Global coding sequence
+## 4. Evidence-Before-Locus Rule
+Record evidence and rationale before assigning friction_locus. friction_locus is not a substitute for the primary label or interpretation.
 
-1. identify focal interpretive decision.
-2. identify selected evidence.
-3. state proposed primary interpretation.
-4. retain plausible alternatives.
-5. evaluate candidate detection for all eight categories without early termination.
-6. apply relevant primary and pairwise counterfactual tests.
-7. resolve dominance without category-order priority.
-8. record proposed_locus, operational_status, final_operational_label, uncertainty, alternatives, and escalation separately.
+## 5. One Dominant Locus Rule
+- `primary_required`: exactly_one_substantive_proposed_locus_or_unresolved
+- `secondary_loci`: candidate_loci and alternatives may be recorded in decision_path/counterfactual_tests; do not encode multiple final labels
+- `tie_policy`: ties trigger unresolved plus escalation
 
-## 4. Evidence-before-locus rule
-
-Coders must record selected evidence and rationale before assigning `friction_locus`. The question is: is there enough recorded evidence and rationale to identify and compare plausible procedural loci? This is separate from whether the primary interpretation is fully justified. A fully licensed interpretation can still have a friction locus; an underlicensed interpretation may still reveal where friction would occur.
-
-## 5. One dominant locus rule
-
-Each record requires exactly one substantive `proposed_locus` or `unresolved`. Candidate loci may be recorded for comparison, but they are not arbitrary multi-label final outputs. If tests leave two or more loci tied, contradictory, or insufficiently supported, use `unresolved` for `final_operational_label` and set `escalation_required = true`.
-
-## 6. Governance fields
-
-- **proposed_locus**: The substantive locus proposed by the coder or model before governance review.
-- **operational_status**: Status for analysis use: accepted_for_analysis, requires_human_review, unresolved, or not_supplied.
-- **final_operational_label**: The label admitted for analysis after applying review policy. This may be unresolved even when proposed_locus is substantive.
-- **escalation_required**: Boolean review flag.
-- **review_policy**: Category-specific governance rule applied to proposed_locus.
-- **original_record_preserved**: The original proposal remains unchanged; later review creates a separate review record.
-
-Governance rules:
-- Human proposal, model proposal, and post-review decision are distinct events.
-- A model proposal never autonomously approves a review-required value.
-- For model-proposed review-required categories preserve proposed_locus, set operational_status requires_human_review, set final_operational_label unresolved, set escalation_required true, and create any later review as a separate record.
-- unresolved as final_operational_label is distinct from a substantive proposed_locus.
-
-## 7. Category review policies
-
-- `cue_function`: status `reserved`; human proposal allowed = `true`; model proposal allowed = `true`; model review required = `true`; final label before review = `unresolved`. Basis: Lineage table calls cue_function a provisional reserved value with no positive demo example.
-- `warrant_attribution`: status `standard`; human proposal allowed = `true`; model proposal allowed = `true`; model review required = `false`; final label before review = `None`. Basis: Lineage table says prior positive examples and relatively clear lineage.
-- `warrant_relation`: status `standard`; human proposal allowed = `true`; model proposal allowed = `true`; model review required = `false`; final label before review = `None`. Basis: Lineage table says prior positive examples and defensible relation to argumentation theory.
-- `operation_function`: status `standard`; human proposal allowed = `true`; model proposal allowed = `true`; model review required = `false`; final label before review = `None`. Basis: Lineage table says prior positive examples and teachable rule.
-- `boundary_setting`: status `review_sensitive`; human proposal allowed = `true`; model proposal allowed = `true`; model review required = `true`; final label before review = `unresolved`. Basis: Lineage table calls boundary_setting an operational value awaiting positive out-of-sample testing.
-- `temporal_layering`: status `standard`; human proposal allowed = `true`; model proposal allowed = `true`; model review required = `false`; final label before review = `None`. Basis: Lineage table says prior positive examples and clear lineage.
-- `perspective_assignment`: status `standard`; human proposal allowed = `true`; model proposal allowed = `true`; model review required = `false`; final label before review = `None`. Basis: Lineage table says prior positive examples and defensible lineage.
-- `context_inference`: status `review_sensitive`; human proposal allowed = `true`; model proposal allowed = `true`; model review required = `true`; final label before review = `unresolved`. Basis: Lineage table calls context_inference awaiting positive out-of-sample testing and vulnerable to residual use.
-
-## 8. Eight category sections
-
+## 6. Eight Category Sections
 ### `cue_function`
-- **Definition**: The cue family itself remains the dominant procedural locus after more specific loci have been tested and excluded.
-- **Analytic question**: Is the unresolved conversion produced by what kind of cue this is rather than by who uses it, how it is used, how warrants relate, or what context is needed?
+- **Definition**: Cue-family substitution changes the proposed interpretation while evidence content, speaker attachment, standpoint, operation, warrant standing, warrant relation, temporal position, boundary, and contextual bridge remain stable.
+- **Analytic question**: Would substituting the cue family while holding the other procedural variables stable change the proposed interpretation?
 - **Use when**:
-  - The cue type, such as omen, testimony, prophecy, sign, inscription, confession, or token, is itself unstable as a converter.
-  - All more specific candidate loci have been evaluated and do not better explain the friction.
-  - Changing the cue family while holding evidence content, standpoint, operation, warrant, time, boundary, and context stable would change the interpretation.
+  - At least two plausible cue-family functions can be specified.
+  - Cue-family substitution changes the proposed interpretation.
+  - Evidence content, speaker attachment, standpoint, operation, warrant standing, warrant relation, temporal position, boundary, and contextual bridge are held stable.
+  - The cue family itself, not the mere presence of a cue word, explains the change.
 - **Do not use when**:
   - Do not use because a cue word appears in the passage.
-  - Do not use when a visible interpretive act performs the conversion; use operation_function.
-  - Do not use when one source, speaker, sign, or medium receives standing; use warrant_attribution.
+  - Do not use when the proposed support depends on elimination of all other categories rather than positive cue-family substitution evidence.
+  - Do not use when the claimed change is actually produced by operation, warrant standing, warrant relation, perspective, temporal layer, boundary, or documented contextual bridge.
 - **Use another value when**:
-  - Use operation_function when the act of reading, recognizing, consulting, confessing, testifying, or interpreting performs conversion.
-  - Use warrant_attribution when the issue is whether one source, sign, speaker, medium, or result has standing.
-  - Use context_inference when a named contextual bridge, not cue family, licenses the conversion.
+  - Use operation_function when a visible interpretive act performs the conversion.
+  - Use warrant_attribution when standing is assigned to one source, medium, sign, speaker, or result.
+  - Use context_inference when a documented contextual bridge, not cue-family substitution, supplies the conversion.
 - **Positive indicators**:
-  - A cue family has more than one plausible procedural role.
-  - A substitution of cue family changes the interpretation while other variables are held constant.
+  - Two or more cue-family functions are explicitly specified.
+  - Substituting cue family changes the proposed interpretation while other procedural variables remain stable.
+  - The rationale explains why the cue family itself changes the interpretation.
 - **Exclusion indicators**:
-  - A more specific locus remains supported.
-  - The cue is only topic vocabulary.
-- **Candidate detection question**: Does cue-family function itself remain a plausible source of procedural friction after more specific loci are evaluated?
-- **Primary counterfactual**: `CF_CUE_FUNCTION_PRIMARY`: If the same local content arrived through a different cue family, with speaker, operation, warrant, time, boundary, and context held stable, would the proposed interpretation change?
-- **Confusable with**: `operation_function`, `warrant_attribution`
-- **Review policy**: `reserved`; model review required = `true`.
-- **Escalation condition**: Escalate if primary or pairwise counterfactual tests are inconclusive, contradictory, unsupported by evidence, or trigger the category review policy.
-- **Provenance**: Active lineage and predicted-confusion sources are inherited where possible; candidate-detection, dominance, and governance details are declared v0.1 synthesis.
+  - The only support is that no other category was supported.
+  - The rationale points to a cue word but does not specify cue-family substitution.
+  - The manipulation changes operation, standing, perspective, time, boundary, or context along with cue family.
+- **Candidate detection question**: Would substituting the cue family while holding the other procedural variables stable change the proposed interpretation?
+- **Primary counterfactual**: If cue family were substituted while evidence content, speaker attachment, standpoint, operation, warrant standing, warrant relation, temporal position, boundary, and contextual bridge remained stable, would the proposed interpretation change?
+- **Review policy**: status `reserved`, requires human review for model = `True`, final label before review = `unresolved`
+- **Provenance note**: Revised by SYN_V0_1_CUE_POSITIVE_CRITERION from lineage-table residual wording into positive cue-family substitution criteria.
 
 ### `warrant_attribution`
 - **Definition**: One source, medium, speaker, sign, or result is granted warranting force for the primary interpretation.
@@ -121,11 +88,9 @@ Governance rules:
   - Several sources interact and none singly carries the decision.
   - The source’s standing is stable and another locus explains conversion.
 - **Candidate detection question**: Does one source, speaker, medium, sign, or result plausibly receive warranting force?
-- **Primary counterfactual**: `CF_WARRANT_ATTRIBUTION_PRIMARY`: If this single source, speaker, medium, sign, or result lost warranting standing, would the proposed interpretation lose its support?
-- **Confusable with**: `warrant_relation`, `operation_function`, `cue_function`, `perspective_assignment`
-- **Review policy**: `standard`; model review required = `false`.
-- **Escalation condition**: Escalate if primary or pairwise counterfactual tests are inconclusive, contradictory, unsupported by evidence, or trigger the category review policy.
-- **Provenance**: Active lineage and predicted-confusion sources are inherited where possible; candidate-detection, dominance, and governance details are declared v0.1 synthesis.
+- **Primary counterfactual**: If this single source, speaker, medium, sign, or result lost warranting standing, would the proposed interpretation lose its support?
+- **Review policy**: status `standard`, requires human review for model = `False`, final label before review = `null`
+- **Provenance note**: Active lineage and predicted-confusion sources are inherited where possible; candidate-detection, dominance, and governance details are declared v0.1 synthesis.
 
 ### `warrant_relation`
 - **Definition**: Conflict, ranking, qualification, suspension, or interaction among multiple warrants is the dominant procedural locus.
@@ -149,11 +114,9 @@ Governance rules:
   - Only one warrant is operative.
   - The relation is incidental and another locus performs conversion.
 - **Candidate detection question**: Do two or more local warrants plausibly interact, conflict, rank, qualify, or suspend each other?
-- **Primary counterfactual**: `CF_WARRANT_RELATION_PRIMARY`: If the same warrants no longer conflicted, ranked, qualified, suspended, or interacted, would the primary interpretation change?
-- **Confusable with**: `warrant_attribution`, `operation_function`, `temporal_layering`, `perspective_assignment`, `boundary_setting`, `context_inference`
-- **Review policy**: `standard`; model review required = `false`.
-- **Escalation condition**: Escalate if primary or pairwise counterfactual tests are inconclusive, contradictory, unsupported by evidence, or trigger the category review policy.
-- **Provenance**: Active lineage and predicted-confusion sources are inherited where possible; candidate-detection, dominance, and governance details are declared v0.1 synthesis.
+- **Primary counterfactual**: If the same warrants no longer conflicted, ranked, qualified, suspended, or interacted, would the primary interpretation change?
+- **Review policy**: status `standard`, requires human review for model = `False`, final label before review = `null`
+- **Provenance note**: Active lineage and predicted-confusion sources are inherited where possible; candidate-detection, dominance, and governance details are declared v0.1 synthesis.
 
 ### `operation_function`
 - **Definition**: A visible interpretive, testimonial, consultative, recognitional, or self-reading operation converts evidence into the primary interpretation.
@@ -177,11 +140,9 @@ Governance rules:
   - The act is physical but not interpretive.
   - The operation is mentioned but not needed for the decision.
 - **Candidate detection question**: Does a visible interpretive, testimonial, consultative, recognitional, or self-reading operation plausibly perform conversion?
-- **Primary counterfactual**: `CF_OPERATION_FUNCTION_PRIMARY`: If the visible operation were removed but the same evidence remained, would the proposed interpretation still follow?
-- **Confusable with**: `cue_function`, `warrant_attribution`, `warrant_relation`, `temporal_layering`, `perspective_assignment`
-- **Review policy**: `standard`; model review required = `false`.
-- **Escalation condition**: Escalate if primary or pairwise counterfactual tests are inconclusive, contradictory, unsupported by evidence, or trigger the category review policy.
-- **Provenance**: Active lineage and predicted-confusion sources are inherited where possible; candidate-detection, dominance, and governance details are declared v0.1 synthesis.
+- **Primary counterfactual**: If the visible operation were removed but the same evidence remained, would the proposed interpretation still follow?
+- **Review policy**: status `standard`, requires human review for model = `False`, final label before review = `null`
+- **Provenance note**: Active lineage and predicted-confusion sources are inherited where possible; candidate-detection, dominance, and governance details are declared v0.1 synthesis.
 
 ### `boundary_setting`
 - **Definition**: Instability over the relevant case, interpretive unit, category boundary, speaker attachment, or scope of application is dominant.
@@ -205,11 +166,9 @@ Governance rules:
   - The boundary is fixed before coding and no longer affects the decision.
   - A stable boundary leaves a perspective or warrant issue as dominant.
 - **Candidate detection question**: Does uncertain unit, scope, category, episode, or speaker attachment plausibly control the result?
-- **Primary counterfactual**: `CF_BOUNDARY_SETTING_PRIMARY`: If the interpretive unit, category scope, or speaker attachment were fixed differently while standpoint stayed constant, would the proposed interpretation change?
-- **Confusable with**: `warrant_relation`, `context_inference`, `perspective_assignment`
-- **Review policy**: `review_sensitive`; model review required = `true`.
-- **Escalation condition**: Escalate if primary or pairwise counterfactual tests are inconclusive, contradictory, unsupported by evidence, or trigger the category review policy.
-- **Provenance**: Active lineage and predicted-confusion sources are inherited where possible; candidate-detection, dominance, and governance details are declared v0.1 synthesis.
+- **Primary counterfactual**: If the interpretive unit, category scope, or speaker attachment were fixed differently while standpoint stayed constant, would the proposed interpretation change?
+- **Review policy**: status `review_sensitive`, requires human review for model = `True`, final label before review = `unresolved`
+- **Provenance note**: Active lineage and predicted-confusion sources are inherited where possible; candidate-detection, dominance, and governance details are declared v0.1 synthesis.
 
 ### `temporal_layering`
 - **Definition**: Later fulfilment, retrospective framing, historical readability, or reuse across time changes the function of earlier evidence.
@@ -233,11 +192,9 @@ Governance rules:
   - Chronology is present but not interpretively active.
   - A later fact is simply another warrant in a conflict.
 - **Candidate detection question**: Does a later, retrospective, reuse, fulfilment, or historical-readability layer plausibly reclassify earlier evidence?
-- **Primary counterfactual**: `CF_TEMPORAL_LAYERING_PRIMARY`: If the later or retrospective layer were removed, would the earlier evidence keep the same function?
-- **Confusable with**: `warrant_relation`, `operation_function`, `context_inference`
-- **Review policy**: `standard`; model review required = `false`.
-- **Escalation condition**: Escalate if primary or pairwise counterfactual tests are inconclusive, contradictory, unsupported by evidence, or trigger the category review policy.
-- **Provenance**: Active lineage and predicted-confusion sources are inherited where possible; candidate-detection, dominance, and governance details are declared v0.1 synthesis.
+- **Primary counterfactual**: If the later or retrospective layer were removed, would the earlier evidence keep the same function?
+- **Review policy**: status `standard`, requires human review for model = `False`, final label before review = `null`
+- **Provenance note**: Active lineage and predicted-confusion sources are inherited where possible; candidate-detection, dominance, and governance details are declared v0.1 synthesis.
 
 ### `perspective_assignment`
 - **Definition**: Whose perspective, witness role, testimonial position, focalization, or epistemic standpoint determines the function.
@@ -261,11 +218,9 @@ Governance rules:
   - Speaker identity is stable and not consequential.
   - The perspective is only one warrant among multiple ranked warrants.
 - **Candidate detection question**: Does stable attachment plus standpoint, focalization, witness role, or epistemic position plausibly control interpretation?
-- **Primary counterfactual**: `CF_PERSPECTIVE_ASSIGNMENT_PRIMARY`: If the same words or observations came from a different standpoint or witness role with attachment held stable, would the proposed interpretation change?
-- **Confusable with**: `warrant_relation`, `operation_function`, `warrant_attribution`, `boundary_setting`
-- **Review policy**: `standard`; model review required = `false`.
-- **Escalation condition**: Escalate if primary or pairwise counterfactual tests are inconclusive, contradictory, unsupported by evidence, or trigger the category review policy.
-- **Provenance**: Active lineage and predicted-confusion sources are inherited where possible; candidate-detection, dominance, and governance details are declared v0.1 synthesis.
+- **Primary counterfactual**: If the same words or observations came from a different standpoint or witness role with attachment held stable, would the proposed interpretation change?
+- **Review policy**: status `standard`, requires human review for model = `False`, final label before review = `null`
+- **Provenance note**: Active lineage and predicted-confusion sources are inherited where possible; candidate-detection, dominance, and governance details are declared v0.1 synthesis.
 
 ### `context_inference`
 - **Definition**: A named contextual bridge beyond the local anchor is the dominant positive support needed for evidence-to-interpretation conversion.
@@ -290,340 +245,403 @@ Governance rules:
   - The bridge is actually a local warrant.
   - The bridge is outside the packet and the protocol does not permit its use.
 - **Candidate detection question**: Is there positive evidence for a named contextual bridge that is necessary, cited, typed, and protocol-permitted?
-- **Primary counterfactual**: `CF_CONTEXT_INFERENCE_PRIMARY`: If the named contextual bridge were unavailable, would the proposed interpretation no longer be licensed by the local anchor?
-- **Confusable with**: `boundary_setting`, `temporal_layering`, `warrant_relation`
-- **Context positive-evidence requirements**:
-  - bridge_name
-  - bridge_type
-  - where_bridge_is_documented
-  - why_local_evidence_is_insufficient_without_it
-  - why_bridge_is_context_rather_than_new_warrant
-  - inside_or_outside_packet
-  - protocol_permission
-  - confidence
-  - Selection by elimination alone is not allowed.
-- **Review policy**: `review_sensitive`; model review required = `true`.
-- **Escalation condition**: Escalate if primary or pairwise counterfactual tests are inconclusive, contradictory, unsupported by evidence, or trigger the category review policy.
-- **Provenance**: Active lineage and predicted-confusion sources are inherited where possible; candidate-detection, dominance, and governance details are declared v0.1 synthesis.
+- **Primary counterfactual**: If the named contextual bridge were unavailable, would the proposed interpretation no longer be licensed by the local anchor?
+- **Review policy**: status `review_sensitive`, requires human review for model = `True`, final label before review = `unresolved`
+- **Provenance note**: Active lineage and predicted-confusion sources are inherited where possible; candidate-detection, dominance, and governance details are declared v0.1 synthesis.
 
-## 9. Candidate detection and dominance resolution
-
-Stage A evaluates all eight candidate checks and produces a candidate set. Candidate-check order has no priority and must not determine the outcome. Stage B resolves dominance from the candidate set: no candidate reaches unresolved with escalation; one candidate requires the primary counterfactual; two candidates require pairwise disambiguation; more than two candidates require only the pairwise tests needed to compare plausible candidates and must not force a tournament winner; conflicting tests reach unresolved with escalation; review-sensitive or reserved proposals apply category-specific review policy.
-
-## 10. Pairwise disambiguation
-
+## 7. Pairwise Disambiguation
 ### `cue_function -> operation_function`
-- **Why confusion is expected**: A cue type such as prophecy, testimony, or divination may be mistaken for the visible act performed with it.
-- **Exact observable distinction**: Cue-family uncertainty concerns what kind of cue is operating; operation_function concerns a visible act performed with or on the cue.
-- **Decisive question**: Holding cue content constant, does removing the act of interpreting/consulting/recognizing remove the conversion?
-- **Counterfactual manipulation**: Ask whether the problem is what this cue type does here, or what an act of interpretation, consultation, confession, recognition, or self-reading does.
-- **Expected answer pattern**: If removing the act removes conversion, operation_function wins; if changing cue family while the act stays constant changes conversion, cue_function remains plausible.
-- **Directional error risk**: Reserved cue_function may be overused when operation_function is the more specific locus.
-- **Unresolved condition**: If observable manipulations support both sides, neither side, or require unavailable evidence, set final_operational_label to unresolved and set escalation_required true.
+- **why_confusion_expected**: A cue type such as prophecy, testimony, or divination may be mistaken for the visible act performed with it.
+- **distinction**: Cue-family uncertainty concerns what kind of cue is operating; operation_function concerns a visible act performed with or on the cue.
+- **question**: Hold the operation stable and substitute cue family; then hold cue family stable and alter the operation. Which manipulation changes the interpretation?
+- **counterfactual_manipulation**: Ask whether the problem is what this cue type does here, or what an act of interpretation, consultation, confession, recognition, or self-reading does.
+- **pattern**: cue_function remains plausible only when cue-family substitution changes interpretation with operation and other variables stable; operation_function is supported when altering the operation changes conversion while cue family remains stable.
+- **directional_error_risk**: Reserved cue_function may be proposed without positive cue-family substitution evidence.
+- **unresolved_condition**: Unresolved if cue family and operation cannot be varied separately.
 
 ### `cue_function -> warrant_attribution`
-- **Why confusion is expected**: A cue family may be confused with the source or medium receiving warranting force.
-- **Exact observable distinction**: Cue function concerns cue-family role; warrant_attribution concerns one source, sign, speaker, medium, or result receiving standing.
-- **Decisive question**: Holding cue family constant, does loss of warranting standing remove support?
-- **Counterfactual manipulation**: Ask whether the cue type itself is underdetermined after excluding more specific loci, or whether one source, sign, medium, speaker, or result is granted standing.
-- **Expected answer pattern**: If standing is decisive, warrant_attribution wins; if standing is stable and cue family remains unstable, cue_function remains plausible.
-- **Directional error risk**: Reserved cue_function may be overused when warrant_attribution is the more specific locus.
-- **Unresolved condition**: If observable manipulations support both sides, neither side, or require unavailable evidence, set final_operational_label to unresolved and set escalation_required true.
+- **why_confusion_expected**: A cue family may be confused with the source or medium receiving warranting force.
+- **distinction**: Cue function concerns cue-family role; warrant_attribution concerns one source, sign, speaker, medium, or result receiving standing.
+- **question**: Hold warrant standing stable and substitute cue family; then hold cue family stable and change standing. Which manipulation changes the interpretation?
+- **counterfactual_manipulation**: Hold warrant standing stable and substitute cue family; then hold cue family stable and change standing.
+- **pattern**: cue_function remains plausible only when cue-family substitution changes interpretation with standing stable; warrant_attribution is supported when changing standing changes interpretation while cue family remains stable.
+- **directional_error_risk**: Reserved cue_function may be proposed when the record actually turns on warranting standing.
+- **unresolved_condition**: Unresolved if cue family and standing cannot be varied separately.
 
 ### `warrant_attribution -> warrant_relation`
-- **Why confusion is expected**: A single source granted authority may be confused with an interaction among multiple warrants.
-- **Exact observable distinction**: One source receives standing versus two or more warrants interacting, ranking, qualifying, or conflicting.
-- **Decisive question**: Count the operative warrants: would removing interaction among warrants change the interpretation?
-- **Counterfactual manipulation**: Count the warrants: if the annotation depends on how more than one warrant interacts, use warrant_relation; if one source receives authority, use warrant_attribution.
-- **Expected answer pattern**: One decisive warrant supports warrant_attribution; interacting warrants support warrant_relation.
-- **Directional error risk**: One-warrant cases may be overcoded as warrant_relation when contextual complexity is present.
-- **Unresolved condition**: If observable manipulations support both sides, neither side, or require unavailable evidence, set final_operational_label to unresolved and set escalation_required true.
+- **why_confusion_expected**: A single source granted authority may be confused with an interaction among multiple warrants.
+- **distinction**: One source receives standing versus two or more warrants interacting, ranking, qualifying, or conflicting.
+- **question**: Count the operative warrants: would removing interaction among warrants change the interpretation?
+- **counterfactual_manipulation**: Count the warrants: if the annotation depends on how more than one warrant interacts, use warrant_relation; if one source receives authority, use warrant_attribution.
+- **pattern**: One decisive warrant supports warrant_attribution; interacting warrants support warrant_relation.
+- **directional_error_risk**: One-warrant cases may be overcoded as warrant_relation when contextual complexity is present.
+- **unresolved_condition**: If observable manipulations support both sides, neither side, or require unavailable evidence, set final_operational_label to unresolved and set escalation_required true.
 
 ### `warrant_attribution -> operation_function`
-- **Why confusion is expected**: Authority is often assigned through an interpretive act, so granting standing may be confused with visible operation.
-- **Exact observable distinction**: Authority assigned to one source versus a visible operation performing conversion.
-- **Decisive question**: Apply two manipulations: remove warranting standing while preserving the operation; then remove the operation while granting standing in advance.
-- **Counterfactual manipulation**: If evidence becomes usable as a warrant through the operation, prefer warrant_attribution; if evidence already has standing and the function depends on handling it, prefer operation_function.
-- **Expected answer pattern**: If standing removal is decisive, warrant_attribution wins; if operation removal is decisive, operation_function wins; if both are necessary and neither dominates, unresolved.
-- **Directional error risk**: Warrant attribution may be overcoded as operation_function when interpretation is visibly present.
-- **Unresolved condition**: If observable manipulations support both sides, neither side, or require unavailable evidence, set final_operational_label to unresolved and set escalation_required true.
+- **why_confusion_expected**: Authority is often assigned through an interpretive act, so granting standing may be confused with visible operation.
+- **distinction**: Authority assigned to one source versus a visible operation performing conversion.
+- **question**: Two-way test: remove warranting standing while preserving the operation; then remove the operation while granting standing in advance. Which removal blocks the specific interpretation?
+- **counterfactual_manipulation**: Standing-removal and operation-removal are both required.
+- **pattern**: If removing the operation leaves accepted evidence but no specific interpretation, operation_function is dominant; if removing standing makes the evidence unusable even with the operation, warrant_attribution is necessary but may be prerequisite rather than dominant.
+- **directional_error_risk**: Warrant attribution may be overcoded as operation_function when interpretation is visibly present.
+- **unresolved_condition**: Unresolved if the record cannot distinguish standing from the visible operation.
 
 ### `warrant_relation -> temporal_layering`
-- **Why confusion is expected**: Cross-warrant conflict may coexist with retrospective framing or later readability.
-- **Exact observable distinction**: Local warrants interacting versus a later or retrospective layer reclassifying earlier evidence.
-- **Decisive question**: Does removing cross-warrant interaction or removing the later temporal frame change the interpretation more directly?
-- **Counterfactual manipulation**: If removing cross-warrant conflict removes the function, prefer warrant_relation; if removing the later temporal frame removes it, prefer temporal_layering.
-- **Expected answer pattern**: Interaction decisive supports warrant_relation; later/reuse frame decisive supports temporal_layering.
-- **Directional error risk**: Warrant conflicts in retrospectively framed cases may be mistaken for temporal_layering, or temporal effects may be flattened into warrant_relation.
-- **Unresolved condition**: If observable manipulations support both sides, neither side, or require unavailable evidence, set final_operational_label to unresolved and set escalation_required true.
+- **why_confusion_expected**: Cross-warrant conflict may coexist with retrospective framing or later readability.
+- **distinction**: Local warrants interacting versus a later or retrospective layer reclassifying earlier evidence.
+- **question**: Does removing cross-warrant interaction or removing the later temporal frame change the interpretation more directly?
+- **counterfactual_manipulation**: If removing cross-warrant conflict removes the function, prefer warrant_relation; if removing the later temporal frame removes it, prefer temporal_layering.
+- **pattern**: Interaction decisive supports warrant_relation; later/reuse frame decisive supports temporal_layering.
+- **directional_error_risk**: Warrant conflicts in retrospectively framed cases may be mistaken for temporal_layering, or temporal effects may be flattened into warrant_relation.
+- **unresolved_condition**: If observable manipulations support both sides, neither side, or require unavailable evidence, set final_operational_label to unresolved and set escalation_required true.
 
 ### `warrant_relation -> perspective_assignment`
-- **Why confusion is expected**: Incompatible testimony or standpoint can look like conflict among warrants or like perspective control.
-- **Exact observable distinction**: Two or more accounts interact, conflict, rank, or qualify each other versus one standpoint’s position changing function.
-- **Decisive question**: If standpoint is held constant, does warrant interaction still drive the decision; if warrant relation is held constant, does changing standpoint change function?
-- **Counterfactual manipulation**: Ask whether incompatibility among multiple warrants determines the function, or whether changing the speaker/testimonial position would change the annotation.
-- **Expected answer pattern**: Account interaction supports warrant_relation; standpoint change supports perspective_assignment.
-- **Directional error risk**: Perspective-governed testimony may be overcoded as warrant_relation when multiple accounts are visible.
-- **Unresolved condition**: If observable manipulations support both sides, neither side, or require unavailable evidence, set final_operational_label to unresolved and set escalation_required true.
+- **why_confusion_expected**: Incompatible testimony or standpoint can look like conflict among warrants or like perspective control.
+- **distinction**: Two or more accounts interact, conflict, rank, or qualify each other versus one standpoint’s position changing function.
+- **question**: If standpoint is held constant, does warrant interaction still drive the decision; if warrant relation is held constant, does changing standpoint change function?
+- **counterfactual_manipulation**: Ask whether incompatibility among multiple warrants determines the function, or whether changing the speaker/testimonial position would change the annotation.
+- **pattern**: Account interaction supports warrant_relation; standpoint change supports perspective_assignment.
+- **directional_error_risk**: Perspective-governed testimony may be overcoded as warrant_relation when multiple accounts are visible.
+- **unresolved_condition**: If observable manipulations support both sides, neither side, or require unavailable evidence, set final_operational_label to unresolved and set escalation_required true.
 
 ### `operation_function -> warrant_relation`
-- **Why confusion is expected**: An operation can matter because it performs conversion or because it creates, exposes, ranks, or intensifies relations among warrants.
-- **Exact observable distinction**: Operation performs conversion versus operation mainly creates or ranks relations among warrants.
-- **Decisive question**: If the operation is removed but warrant relation remains, does the function persist; if the warrant relation is removed but operation remains, does the function persist?
-- **Counterfactual manipulation**: If the operation itself performs the conversion, prefer operation_function; if it mainly relates multiple warrants, prefer warrant_relation.
-- **Expected answer pattern**: Operation decisive supports operation_function; relation decisive supports warrant_relation.
-- **Directional error risk**: Operations that rank warrants may be overcoded as operation_function when warrant_relation is dominant.
-- **Unresolved condition**: If observable manipulations support both sides, neither side, or require unavailable evidence, set final_operational_label to unresolved and set escalation_required true.
+- **why_confusion_expected**: An operation can matter because it performs conversion or because it creates, exposes, ranks, or intensifies relations among warrants.
+- **distinction**: Operation performs conversion versus operation mainly creates or ranks relations among warrants.
+- **question**: If the operation is removed but warrant relation remains, does the function persist; if the warrant relation is removed but operation remains, does the function persist?
+- **counterfactual_manipulation**: If the operation itself performs the conversion, prefer operation_function; if it mainly relates multiple warrants, prefer warrant_relation.
+- **pattern**: Operation decisive supports operation_function; relation decisive supports warrant_relation.
+- **directional_error_risk**: Operations that rank warrants may be overcoded as operation_function when warrant_relation is dominant.
+- **unresolved_condition**: If observable manipulations support both sides, neither side, or require unavailable evidence, set final_operational_label to unresolved and set escalation_required true.
 
 ### `operation_function -> temporal_layering`
-- **Why confusion is expected**: Recognition or fulfilment can be treated as a local operation or as later reclassification of earlier evidence.
-- **Exact observable distinction**: Visible act converts evidence versus later time position or retrospective framing reclassifies evidence.
-- **Decisive question**: If the later time position remains but the interpretive act is removed, does reclassification still occur; if the act remains but later framing is removed, does reclassification still occur?
-- **Counterfactual manipulation**: If the local operation produces the function, prefer operation_function; if a later moment reclassifies earlier evidence, prefer temporal_layering.
-- **Expected answer pattern**: Act-removal decisive supports operation_function; later-frame removal decisive supports temporal_layering; both necessary without dominance means unresolved.
-- **Directional error risk**: Later reclassification may be overcoded as operation_function when a recognition scene is visible.
-- **Unresolved condition**: If observable manipulations support both sides, neither side, or require unavailable evidence, set final_operational_label to unresolved and set escalation_required true.
+- **why_confusion_expected**: Recognition or fulfilment can be treated as a local operation or as later reclassification of earlier evidence.
+- **distinction**: Visible act converts evidence versus later time position or retrospective framing reclassifies evidence.
+- **question**: If the later time position remains but the interpretive act is removed, does reclassification still occur; if the act remains but later framing is removed, does reclassification still occur?
+- **counterfactual_manipulation**: If the local operation produces the function, prefer operation_function; if a later moment reclassifies earlier evidence, prefer temporal_layering.
+- **pattern**: Act-removal decisive supports operation_function; later-frame removal decisive supports temporal_layering; both necessary without dominance means unresolved.
+- **directional_error_risk**: Later reclassification may be overcoded as operation_function when a recognition scene is visible.
+- **unresolved_condition**: If observable manipulations support both sides, neither side, or require unavailable evidence, set final_operational_label to unresolved and set escalation_required true.
 
 ### `boundary_setting -> warrant_relation`
-- **Why confusion is expected**: A scope or unit boundary may be confused with the relation among warrants inside a stable unit.
-- **Exact observable distinction**: Changing unit, attachment, or scope changes result versus warrants interact inside a stable unit.
-- **Decisive question**: Hold warrant content constant and alter unit/scope; then hold unit/scope constant and alter warrant relation. Which change controls?
-- **Counterfactual manipulation**: Ask whether changing the boundary of the annotation would change the result; if the boundary is stable but warrants interact, use warrant_relation.
-- **Expected answer pattern**: Boundary change decisive supports boundary_setting; warrant interaction decisive supports warrant_relation.
-- **Directional error risk**: Boundary_setting may be underused when coders move directly to warrant_relation inside an unstable unit.
-- **Unresolved condition**: If observable manipulations support both sides, neither side, or require unavailable evidence, set final_operational_label to unresolved and set escalation_required true.
+- **why_confusion_expected**: A scope or unit boundary may be confused with the relation among warrants inside a stable unit.
+- **distinction**: Changing unit, attachment, or scope changes result versus warrants interact inside a stable unit.
+- **question**: Hold warrant content constant and alter unit/scope; then hold unit/scope constant and alter warrant relation. Which change controls?
+- **counterfactual_manipulation**: Ask whether changing the boundary of the annotation would change the result; if the boundary is stable but warrants interact, use warrant_relation.
+- **pattern**: Boundary change decisive supports boundary_setting; warrant interaction decisive supports warrant_relation.
+- **directional_error_risk**: Boundary_setting may be underused when coders move directly to warrant_relation inside an unstable unit.
+- **unresolved_condition**: If observable manipulations support both sides, neither side, or require unavailable evidence, set final_operational_label to unresolved and set escalation_required true.
 
 ### `boundary_setting -> context_inference`
-- **Why confusion is expected**: A missing boundary may be confused with a missing contextual bridge.
-- **Exact observable distinction**: Changing the unit or scope changes the result versus unit is stable and a named contextual bridge is required.
-- **Decisive question**: If unit/scope is fixed differently does result change; if unit is stable, can a named contextual bridge be cited as necessary?
-- **Counterfactual manipulation**: Ask whether the relevant unit/scope is unstable, or whether the unit is stable but needs external contextual inference to support conversion.
-- **Expected answer pattern**: Unit/scope change supports boundary_setting; stable unit plus named bridge supports context_inference.
-- **Directional error risk**: Boundary problems may be absorbed into context_inference as a residual explanation.
-- **Unresolved condition**: If observable manipulations support both sides, neither side, or require unavailable evidence, set final_operational_label to unresolved and set escalation_required true.
+- **why_confusion_expected**: A missing boundary may be confused with a missing contextual bridge.
+- **distinction**: Changing the unit or scope changes the result versus unit is stable and a named contextual bridge is required.
+- **question**: If unit/scope is fixed differently does result change; if unit is stable, can a named contextual bridge be cited as necessary?
+- **counterfactual_manipulation**: Ask whether the relevant unit/scope is unstable, or whether the unit is stable but needs external contextual inference to support conversion.
+- **pattern**: Unit/scope change supports boundary_setting; stable unit plus named bridge supports context_inference.
+- **directional_error_risk**: Boundary problems may be absorbed into context_inference as a residual explanation.
+- **unresolved_condition**: If observable manipulations support both sides, neither side, or require unavailable evidence, set final_operational_label to unresolved and set escalation_required true.
 
 ### `temporal_layering -> warrant_relation`
-- **Why confusion is expected**: Later fulfilment, retrospective readability, or reuse may coexist with local warrant conflict.
-- **Exact observable distinction**: Later/reuse layer reclassifies earlier evidence versus local warrant interaction.
-- **Decisive question**: Does removing the later layer or removing warrant interaction change the decision more directly?
-- **Counterfactual manipulation**: If removing the later temporal frame removes the function, prefer temporal_layering; if removing cross-warrant conflict removes it, prefer warrant_relation.
-- **Expected answer pattern**: Later layer decisive supports temporal_layering; interaction decisive supports warrant_relation.
-- **Directional error risk**: Temporal_layering may be undercoded when later readability appears alongside multiple warrants.
-- **Unresolved condition**: If observable manipulations support both sides, neither side, or require unavailable evidence, set final_operational_label to unresolved and set escalation_required true.
+- **why_confusion_expected**: Later fulfilment, retrospective readability, or reuse may coexist with local warrant conflict.
+- **distinction**: Later/reuse layer reclassifies earlier evidence versus local warrant interaction.
+- **question**: Does removing the later layer or removing warrant interaction change the decision more directly?
+- **counterfactual_manipulation**: If removing the later temporal frame removes the function, prefer temporal_layering; if removing cross-warrant conflict removes it, prefer warrant_relation.
+- **pattern**: Later layer decisive supports temporal_layering; interaction decisive supports warrant_relation.
+- **directional_error_risk**: Temporal_layering may be undercoded when later readability appears alongside multiple warrants.
+- **unresolved_condition**: If observable manipulations support both sides, neither side, or require unavailable evidence, set final_operational_label to unresolved and set escalation_required true.
 
 ### `temporal_layering -> operation_function`
-- **Why confusion is expected**: A visible recognition or fulfilment scene can look like a local operation.
-- **Exact observable distinction**: Temporal reclassification versus visible local operation.
-- **Decisive question**: If the act remains but later framing is removed, and if later framing remains but the act is removed, which removal changes the decision?
-- **Counterfactual manipulation**: If the function is produced by local operation, prefer operation_function; if a later moment reclassifies earlier evidence, prefer temporal_layering.
-- **Expected answer pattern**: Later-frame removal decisive supports temporal_layering; act removal decisive supports operation_function.
-- **Directional error risk**: Temporal effects may be overcoded as operation_function when the text includes a visible recognition act.
-- **Unresolved condition**: If observable manipulations support both sides, neither side, or require unavailable evidence, set final_operational_label to unresolved and set escalation_required true.
+- **why_confusion_expected**: A visible recognition or fulfilment scene can look like a local operation.
+- **distinction**: Temporal reclassification versus visible local operation.
+- **question**: If the act remains but later framing is removed, and if later framing remains but the act is removed, which removal changes the decision?
+- **counterfactual_manipulation**: If the function is produced by local operation, prefer operation_function; if a later moment reclassifies earlier evidence, prefer temporal_layering.
+- **pattern**: Later-frame removal decisive supports temporal_layering; act removal decisive supports operation_function.
+- **directional_error_risk**: Temporal effects may be overcoded as operation_function when the text includes a visible recognition act.
+- **unresolved_condition**: If observable manipulations support both sides, neither side, or require unavailable evidence, set final_operational_label to unresolved and set escalation_required true.
 
 ### `perspective_assignment -> warrant_relation`
-- **Why confusion is expected**: Perspective, witness role, or testimonial position may be confused with incompatibility among multiple accounts as warrants.
-- **Exact observable distinction**: One standpoint’s position changes function versus two or more accounts interact, conflict, rank, or qualify each other.
-- **Decisive question**: Does changing standpoint alone change function, or does the relation among accounts do the work?
-- **Counterfactual manipulation**: Ask whether changing the speaker/testimonial position would change the annotation; if incompatibility among multiple warrants is dominant, use warrant_relation.
-- **Expected answer pattern**: Standpoint decisive supports perspective_assignment; account interaction decisive supports warrant_relation.
-- **Directional error risk**: Perspective_assignment may be undercoded when multiple accounts make warrant conflict salient.
-- **Unresolved condition**: If observable manipulations support both sides, neither side, or require unavailable evidence, set final_operational_label to unresolved and set escalation_required true.
+- **why_confusion_expected**: Perspective, witness role, or testimonial position may be confused with incompatibility among multiple accounts as warrants.
+- **distinction**: One standpoint’s position changes function versus two or more accounts interact, conflict, rank, or qualify each other.
+- **question**: Does changing standpoint alone change function, or does the relation among accounts do the work?
+- **counterfactual_manipulation**: Ask whether changing the speaker/testimonial position would change the annotation; if incompatibility among multiple warrants is dominant, use warrant_relation.
+- **pattern**: Standpoint decisive supports perspective_assignment; account interaction decisive supports warrant_relation.
+- **directional_error_risk**: Perspective_assignment may be undercoded when multiple accounts make warrant conflict salient.
+- **unresolved_condition**: If observable manipulations support both sides, neither side, or require unavailable evidence, set final_operational_label to unresolved and set escalation_required true.
 
 ### `perspective_assignment -> operation_function`
-- **Why confusion is expected**: Confession or testimony can be treated as a visible operation or as standpoint-governed perspective.
-- **Exact observable distinction**: Standpoint controls interpretation versus a speech/reading/confession/testimony act performs conversion.
-- **Decisive question**: If the act remains but standpoint changes, and if standpoint remains but act is removed, which manipulation controls?
-- **Counterfactual manipulation**: Ask whether the function depends on the act of confessing/testifying or on whose perspective/testimonial role controls the annotation.
-- **Expected answer pattern**: Standpoint change supports perspective_assignment; act removal supports operation_function.
-- **Directional error risk**: Perspective-governed testimony may be overcoded as operation_function when the speech act is prominent.
-- **Unresolved condition**: If observable manipulations support both sides, neither side, or require unavailable evidence, set final_operational_label to unresolved and set escalation_required true.
+- **why_confusion_expected**: Confession or testimony can be treated as a visible operation or as standpoint-governed perspective.
+- **distinction**: Standpoint controls interpretation versus a speech/reading/confession/testimony act performs conversion.
+- **question**: If the act remains but standpoint changes, and if standpoint remains but act is removed, which manipulation controls?
+- **counterfactual_manipulation**: Ask whether the function depends on the act of confessing/testifying or on whose perspective/testimonial role controls the annotation.
+- **pattern**: Standpoint change supports perspective_assignment; act removal supports operation_function.
+- **directional_error_risk**: Perspective-governed testimony may be overcoded as operation_function when the speech act is prominent.
+- **unresolved_condition**: If observable manipulations support both sides, neither side, or require unavailable evidence, set final_operational_label to unresolved and set escalation_required true.
 
 ### `context_inference -> temporal_layering`
-- **Why confusion is expected**: Historical readability or later framing may be mistaken for external contextual inference.
-- **Exact observable distinction**: External or non-local contextual bridge versus later/reuse layer in the text.
-- **Decisive question**: Is the needed bridge documented as context outside the local anchor, or is reclassification produced by a later textual layer?
-- **Counterfactual manipulation**: Ask whether later readability is the decisive feature; if yes, use temporal_layering rather than context_inference.
-- **Expected answer pattern**: Named external/non-local bridge supports context_inference; later textual layer supports temporal_layering.
-- **Directional error risk**: Context_inference may be overused when temporal_layering provides the more specific explanation.
-- **Unresolved condition**: If observable manipulations support both sides, neither side, or require unavailable evidence, set final_operational_label to unresolved and set escalation_required true.
+- **why_confusion_expected**: Historical readability or later framing may be mistaken for external contextual inference.
+- **distinction**: External or non-local contextual bridge versus later/reuse layer in the text.
+- **question**: Is the needed bridge documented as context outside the local anchor, or is reclassification produced by a later textual layer?
+- **counterfactual_manipulation**: Ask whether later readability is the decisive feature; if yes, use temporal_layering rather than context_inference.
+- **pattern**: Named external/non-local bridge supports context_inference; later textual layer supports temporal_layering.
+- **directional_error_risk**: Context_inference may be overused when temporal_layering provides the more specific explanation.
+- **unresolved_condition**: If observable manipulations support both sides, neither side, or require unavailable evidence, set final_operational_label to unresolved and set escalation_required true.
 
 ### `context_inference -> warrant_relation`
-- **Why confusion is expected**: External or background context may be confused with interaction among warrants within the text.
-- **Exact observable distinction**: External or non-local bridge licenses conversion versus locally available warrants interact.
-- **Decisive question**: Can locally available warrants explain conversion without the contextual bridge?
-- **Counterfactual manipulation**: Ask whether the local text contains interacting warrants; if yes, use warrant_relation. Use context_inference only when the missing contextual bridge is dominant.
-- **Expected answer pattern**: If local interaction suffices, warrant_relation wins; if a named bridge is necessary and permitted, context_inference wins.
-- **Directional error risk**: Context_inference may be overused as a residual category for difficult warrant interactions.
-- **Unresolved condition**: If observable manipulations support both sides, neither side, or require unavailable evidence, set final_operational_label to unresolved and set escalation_required true.
+- **why_confusion_expected**: External or background context may be confused with interaction among warrants within the text.
+- **distinction**: External or non-local bridge licenses conversion versus locally available warrants interact.
+- **question**: Can locally available warrants explain conversion without the contextual bridge?
+- **counterfactual_manipulation**: Ask whether the local text contains interacting warrants; if yes, use warrant_relation. Use context_inference only when the missing contextual bridge is dominant.
+- **pattern**: If local interaction suffices, warrant_relation wins; if a named bridge is necessary and permitted, context_inference wins.
+- **directional_error_risk**: Context_inference may be overused as a residual category for difficult warrant interactions.
+- **unresolved_condition**: If observable manipulations support both sides, neither side, or require unavailable evidence, set final_operational_label to unresolved and set escalation_required true.
 
 ### `boundary_setting -> perspective_assignment`
-- **Why confusion is expected**: Added in v0.1 repair because audit identified this distinction as operationally necessary.
-- **Exact observable distinction**: Uncertain attachment, scope, or unit boundary versus stable attachment with standpoint, focalization, witness role, or epistemic position changing interpretation.
-- **Decisive question**: Hold standpoint constant and alter unit or speaker attachment; then hold attachment constant and alter standpoint. Which manipulation changes the result?
-- **Counterfactual manipulation**: Hold standpoint constant and alter unit or speaker attachment; then hold attachment constant and alter standpoint. Which manipulation changes the result?
-- **Expected answer pattern**: Attachment/scope change supports boundary_setting; standpoint change with stable attachment supports perspective_assignment.
-- **Directional error risk**: Unresolved or wrong-locus risk if attachment, standpoint, and authority are not separated.
-- **Unresolved condition**: If observable manipulations support both sides, neither side, or require unavailable evidence, set final_operational_label to unresolved and set escalation_required true.
+- **why_confusion_expected**: Added in v0.1 repair because audit identified this distinction as operationally necessary.
+- **distinction**: Uncertain attachment, scope, or unit boundary versus stable attachment with standpoint, focalization, witness role, or epistemic position changing interpretation.
+- **question**: Hold standpoint constant and alter unit or speaker attachment; then hold attachment constant and alter standpoint. Which manipulation changes the result?
+- **counterfactual_manipulation**: Hold standpoint constant and alter unit or speaker attachment; then hold attachment constant and alter standpoint. Which manipulation changes the result?
+- **pattern**: Attachment/scope change supports boundary_setting; standpoint change with stable attachment supports perspective_assignment.
+- **directional_error_risk**: Unresolved or wrong-locus risk if attachment, standpoint, and authority are not separated.
+- **unresolved_condition**: If observable manipulations support both sides, neither side, or require unavailable evidence, set final_operational_label to unresolved and set escalation_required true.
 
 ### `perspective_assignment -> warrant_attribution`
-- **Why confusion is expected**: Added in v0.1 repair because audit identified this distinction as operationally necessary.
-- **Exact observable distinction**: Standpoint or witness position controls interpretation versus one speaker or source receives standing or authority.
-- **Decisive question**: If the same source retains authority but standpoint changes, does interpretation change; if standpoint stays constant but authority is withdrawn, does support fail?
-- **Counterfactual manipulation**: If the same source retains authority but standpoint changes, does interpretation change; if standpoint stays constant but authority is withdrawn, does support fail?
-- **Expected answer pattern**: Standpoint change supports perspective_assignment; authority withdrawal supports warrant_attribution.
-- **Directional error risk**: Unresolved or wrong-locus risk if attachment, standpoint, and authority are not separated.
-- **Unresolved condition**: If observable manipulations support both sides, neither side, or require unavailable evidence, set final_operational_label to unresolved and set escalation_required true.
+- **why_confusion_expected**: Added in v0.1 repair because audit identified this distinction as operationally necessary.
+- **distinction**: Standpoint or witness position controls interpretation versus one speaker or source receives standing or authority.
+- **question**: If the same source retains authority but standpoint changes, does interpretation change; if standpoint stays constant but authority is withdrawn, does support fail?
+- **counterfactual_manipulation**: If the same source retains authority but standpoint changes, does interpretation change; if standpoint stays constant but authority is withdrawn, does support fail?
+- **pattern**: Standpoint change supports perspective_assignment; authority withdrawal supports warrant_attribution.
+- **directional_error_risk**: Unresolved or wrong-locus risk if attachment, standpoint, and authority are not separated.
+- **unresolved_condition**: If observable manipulations support both sides, neither side, or require unavailable evidence, set final_operational_label to unresolved and set escalation_required true.
 
-## 11. Counterfactual-test protocol
+## 8. Decision Tree
+Stage A evaluates all eight categories and stores the result in `candidate_loci`. Array order is not category priority. Stage B resolves dominance from the supported-candidate set, counterfactual tests, and review-policy application.
 
-Counterfactual tests are mandatory when a category is supported, when two or more categories are supported, when review policy is triggered, when uncertainty is medium or high, or when an alternative pathway is retained. Each test records `test_id`, `question`, `answer`, `cited_evidence`, `effect_on_decision`, and `confidence`. Conflicting tests produce `final_operational_label = unresolved` and `escalation_required = true`.
+- `no_supported_candidate`: {'escalation_required': True, 'final_operational_label': 'unresolved', 'operational_status': 'unresolved', 'proposed_locus': 'unresolved', 'reason': 'No candidate locus received candidate_supported.'}
+- `one_supported_candidate`: Apply that category primary counterfactual test. If supported, retain as proposed_locus and apply review policy. If inconclusive or contradictory, final_operational_label unresolved and escalation_required true.
+- `two_supported_candidates`: Apply relevant pairwise disambiguation test and both removal/substitution counterfactuals where relevant. Choose dominant locus only when one side is better supported; otherwise unresolved with escalation.
+- `more_than_two_supported_candidates`: Apply pairwise tests needed to compare plausible candidates. Do not use tournament ordering. If no stable dominant locus emerges, unresolved with escalation.
+- `review_sensitive_or_reserved_proposal`: Apply category-specific review policy. Model proposals requiring review preserve proposed_locus but set operational_status requires_human_review, final_operational_label unresolved, escalation_required true.
+- `conflicting_counterfactual_tests`: {'escalation_required': True, 'final_operational_label': 'unresolved', 'operational_status': 'unresolved'}
 
-## 12. Uncertainty and alternatives
+## 9. Reserved/Review-Required Policy
+`cue_function` is reserved. `boundary_setting` and `context_inference` are review-sensitive. Model proposals of these categories require human review, unresolved final label before review, and escalation. Later review never overwrites the original proposed record.
 
-Uncertainty level, alternative pathway, unresolved locus, and escalation are distinct. A low-uncertainty record may retain an alternative. A high-uncertainty record may still propose a locus if tests support dominance. `unresolved` is a final-label state, not the same as a substantive proposed locus.
+## 10. Counterfactual-Test Protocol
+- `allowed_answer_states`: ['candidate_supported', 'candidate_not_supported', 'insufficient_evidence', 'not_applicable', 'supports_left', 'supports_right', 'supports_both', 'supports_neither', 'inconclusive']
+- `conflict_policy`: Conflicting tests produce final_operational_label unresolved and escalation_required true.
+- `fields`: ['test_id', 'question', 'answer', 'cited_evidence', 'effect_on_decision', 'confidence']
+- `mandatory_when`: ['category is candidate_supported', 'two or more categories are candidate_supported', 'review policy is triggered', 'uncertainty is medium or high', 'alternative pathway is retained']
 
-## 13. Worked examples
+## 11. Uncertainty and Alternatives
+Uncertainty level, alternative pathway, unresolved locus, and escalation are distinct fields and must not be collapsed.
 
-All examples are artificial minimal examples. They are training/manual examples and are ineligible for held-out testing.
-
+## 12. Worked Examples
 ### `WEX_RESOLVED_WARRANT_ATTRIBUTION` (resolved)
-- **training_manual_status**: training_manual_example_ineligible_for_held_out_testing
+- **record_id**: WEX_RESOLVED_WARRANT_ATTRIBUTION_REC
+- **record_hash**: b4a6501695499e7efe0788c248ce44a9bfca774ef5e38279219c491666ce0a74
 - **actor_event_type**: human_proposal
-- **focal_interpretive_decision**: Does the notice function as authorization?
-- **proposed_primary_interpretation**: The notice functions as authorization.
-- **candidate_loci**: ['warrant_attribution']
-- **alternative_pathway**: It could be a mere informational notice if the signature had no standing.
-- **primary_counterfactual_test**: If this single source, speaker, medium, sign, or result lost warranting standing, would the proposed interpretation lose its support?
-- **primary_test_answer**: supports_category: without the clerk signature standing, authorization is unsupported.
-- **cited_evidence**: ['EX_RES_01']
-- **pairwise_counterfactual_test**: not_applicable: only one candidate supported.
-- **pairwise_test_answer**: not_applicable
-- **confidence**: high
-- **effect_on_decision**: Retain warrant_attribution as dominant.
+- **analyst_role**: researcher_analyst
+- **review_of_record_id**: null
+- **review_of_record_hash**: null
+- **focal_interpretive_decision**: Does the notice carry procedural standing?
+- **proposed_primary_interpretation**: The notice functions because official standing is attributed to that source.
 - **proposed_locus**: warrant_attribution
 - **operational_status**: accepted_for_analysis
 - **final_operational_label**: warrant_attribution
-- **uncertainty**: low
 - **escalation_required**: False
+- **escalation_reason**: none
+- **review_policy_applied**: {'category': 'warrant_attribution', 'status': 'standard', 'trigger': ['warrant_attribution_proposal'], 'requires_human_review': False, 'final_label_before_review': null}
+- **primary_counterfactual_test**: If source standing were removed while the words remained, would the interpretation still follow?
+- **primary_test_answer**: supports_category: without standing, the notice no longer performs the function.
+- **pairwise_counterfactual_test**: No second supported candidate required pairwise dominance testing.
+- **pairwise_test_answer**: not_applicable
+- **effect_on_decision**: Choose warrant_attribution.
+- **decision_path**: ['candidate_loci recorded for all eight categories', 'only warrant_attribution candidate_supported', 'standard review policy permits accepted_for_analysis']
 - **original_record_preserved**: True
-- **decision_path**: ['candidate_detection:warrant_attribution supported', 'primary_counterfactual supports category', 'standard review policy permits accepted_for_analysis']
 - **provenance**: artificial minimal example; not PR #18 material
-- **selected_evidence**: [{'evidence_id': 'EX_RES_01', 'text': 'Artificial packet: A notice bears a named clerk signature, and the local rule says clerk signatures authorize entry.'}]
-- **review_policy_applied**: {'status': 'standard', 'trigger': ['single source, medium, speaker, sign, or result receives warranting force'], 'human_proposal_allowed': True, 'model_proposal_allowed': True, 'requires_human_review_for_model': False, 'final_label_before_review': None, 'source_basis': 'Lineage table says prior positive examples and relatively clear lineage.'}
+- **candidate_loci**:
+  - `cue_function`: `candidate_not_supported`; evidence=[]; confidence=`medium`; rationale=Counterfactual test did not support cue_function.
+  - `warrant_attribution`: `candidate_supported`; evidence=['EX_ATTR_01']; confidence=`medium`; rationale=Positive counterfactual support recorded for warrant_attribution.
+  - `warrant_relation`: `candidate_not_supported`; evidence=[]; confidence=`medium`; rationale=Counterfactual test did not support warrant_relation.
+  - `operation_function`: `candidate_not_supported`; evidence=[]; confidence=`medium`; rationale=Counterfactual test did not support operation_function.
+  - `boundary_setting`: `candidate_not_supported`; evidence=[]; confidence=`medium`; rationale=Counterfactual test did not support boundary_setting.
+  - `temporal_layering`: `candidate_not_supported`; evidence=[]; confidence=`medium`; rationale=Counterfactual test did not support temporal_layering.
+  - `perspective_assignment`: `candidate_not_supported`; evidence=[]; confidence=`medium`; rationale=Counterfactual test did not support perspective_assignment.
+  - `context_inference`: `candidate_not_supported`; evidence=[]; confidence=`medium`; rationale=Counterfactual test did not support context_inference.
 
 ### `WEX_PAIR_OPERATION_ATTRIBUTION` (pairwise)
-- **training_manual_status**: training_manual_example_ineligible_for_held_out_testing
+- **record_id**: WEX_PAIR_OPERATION_ATTRIBUTION_REC
+- **record_hash**: 84be5d7bef78ec4cc1381089d5a551f14c92825845b8ca62a08cdde94d556ff9
 - **actor_event_type**: human_proposal
-- **focal_interpretive_decision**: Does the token function as an order?
-- **proposed_primary_interpretation**: The token functions as an order because the clerk interprets it aloud.
-- **candidate_loci**: ['operation_function', 'warrant_attribution']
-- **alternative_pathway**: The clerk could be treated as an authority whose standing alone makes the token count.
-- **primary_counterfactual_test**: If the visible operation were removed but the same evidence remained, would the proposed interpretation still follow?
-- **primary_test_answer**: supports_category: without the reading act, the token does not become an order.
-- **cited_evidence**: ['EX_PAIR_01']
-- **pairwise_counterfactual_test**: Apply two manipulations: remove warranting standing while preserving the operation; then remove the operation while granting standing in advance.
-- **pairwise_test_answer**: supports_operation_function: removing warranting standing while preserving the reading still leaves the act as conversion in the packet; removing the operation while granting standing in advance removes the observed conversion.
-- **confidence**: medium
-- **effect_on_decision**: Choose operation_function over warrant_attribution.
+- **analyst_role**: researcher_analyst
+- **review_of_record_id**: null
+- **review_of_record_hash**: null
+- **focal_interpretive_decision**: Does the symbol sequence function as the command OPEN?
+- **proposed_primary_interpretation**: The sequence yields the command because a visible decoding operation is applied to an already admitted source.
 - **proposed_locus**: operation_function
 - **operational_status**: accepted_for_analysis
 - **final_operational_label**: operation_function
-- **uncertainty**: medium
 - **escalation_required**: False
+- **escalation_reason**: none
+- **review_policy_applied**: {'category': 'operation_function', 'status': 'standard', 'trigger': ['operation_function_proposal'], 'requires_human_review': False, 'final_label_before_review': null}
+- **primary_counterfactual_test**: If the decoding operation were removed while codebook standing remained accepted, would the specific command still be available?
+- **primary_test_answer**: supports_category: the codebook remains valid evidence, but without decoding the command OPEN is unavailable.
+- **pairwise_counterfactual_test**: Two-way test: remove source standing while preserving decoding; then remove decoding while granting standing in advance.
+- **pairwise_test_answer**: standing-removal result: the source becomes unusable even if the operation is known. operation-removal result: the source remains accepted but the specific command is unavailable. Operation is dominant because standing is a prerequisite while decoding performs the actual evidence-to-interpretation conversion.
+- **effect_on_decision**: Choose operation_function while recording warrant_attribution as supported but prerequisite.
+- **decision_path**: ['candidate_loci recorded for all eight categories', 'operation_function and warrant_attribution candidate_supported', 'two-way pairwise counterfactual applied', 'operation performs conversion after standing is granted', 'standard review policy permits accepted_for_analysis']
 - **original_record_preserved**: True
-- **decision_path**: ['candidate_detection supports operation_function and warrant_attribution', 'two-candidate pairwise test applied', 'operation removal more decisive', 'standard review policy']
 - **provenance**: artificial minimal example; not PR #18 material
-- **selected_evidence**: [{'evidence_id': 'EX_PAIR_01', 'text': 'Artificial packet: A clerk reads an unsigned token aloud and declares its meaning under a rule already accepted by all parties.'}]
-- **review_policy_applied**: {'status': 'standard', 'trigger': ['visible operation converts evidence to function'], 'human_proposal_allowed': True, 'model_proposal_allowed': True, 'requires_human_review_for_model': False, 'final_label_before_review': None, 'source_basis': 'Lineage table says prior positive examples and teachable rule.'}
+- **candidate_loci**:
+  - `cue_function`: `candidate_not_supported`; evidence=[]; confidence=`medium`; rationale=Counterfactual test did not support cue_function.
+  - `warrant_attribution`: `candidate_supported`; evidence=['EX_PAIR_01']; confidence=`medium`; rationale=Positive counterfactual support recorded for warrant_attribution.
+  - `warrant_relation`: `candidate_not_supported`; evidence=[]; confidence=`medium`; rationale=Counterfactual test did not support warrant_relation.
+  - `operation_function`: `candidate_supported`; evidence=['EX_PAIR_01']; confidence=`medium`; rationale=Positive counterfactual support recorded for operation_function.
+  - `boundary_setting`: `candidate_not_supported`; evidence=[]; confidence=`medium`; rationale=Counterfactual test did not support boundary_setting.
+  - `temporal_layering`: `candidate_not_supported`; evidence=[]; confidence=`medium`; rationale=Counterfactual test did not support temporal_layering.
+  - `perspective_assignment`: `candidate_not_supported`; evidence=[]; confidence=`medium`; rationale=Counterfactual test did not support perspective_assignment.
+  - `context_inference`: `candidate_not_supported`; evidence=[]; confidence=`medium`; rationale=Counterfactual test did not support context_inference.
 
 ### `WEX_REVIEW_REQUIRED_CUE_FUNCTION_MODEL` (review_required)
-- **training_manual_status**: training_manual_example_ineligible_for_held_out_testing
+- **record_id**: WEX_REVIEW_REQUIRED_CUE_FUNCTION_MODEL_REC
+- **record_hash**: cd59bc7a41f9177f50aa754cdd298925f172103c8e9db11c246080de9543a036
 - **actor_event_type**: model_proposal
-- **focal_interpretive_decision**: Does the blue mark function as warning or authorization?
-- **proposed_primary_interpretation**: The mark functions as a cue whose family is unresolved.
-- **candidate_loci**: ['cue_function']
-- **alternative_pathway**: The mark might be a sign with warranting standing if a rule of authority were present, but no such rule is cited.
-- **primary_counterfactual_test**: If the same local content arrived through a different cue family, with speaker, operation, warrant, time, boundary, and context held stable, would the proposed interpretation change?
-- **primary_test_answer**: supports_category but review policy applies: changing cue family would change interpretation, yet cue_function is reserved.
-- **cited_evidence**: ['EX_REV_01']
-- **pairwise_counterfactual_test**: not_applicable: no more specific candidate supported.
-- **pairwise_test_answer**: not_applicable
-- **confidence**: medium
-- **effect_on_decision**: Preserve proposed_locus cue_function but do not admit it as final without review.
+- **analyst_role**: researcher_analyst
+- **review_of_record_id**: null
+- **review_of_record_hash**: null
+- **focal_interpretive_decision**: Does cue family itself change how the warning functions?
+- **proposed_primary_interpretation**: The warning changes function when its cue family is substituted under otherwise stable variables.
 - **proposed_locus**: cue_function
 - **operational_status**: requires_human_review
 - **final_operational_label**: unresolved
-- **uncertainty**: medium
 - **escalation_required**: True
+- **escalation_reason**: reserved category proposed by model
+- **review_policy_applied**: {'category': 'cue_function', 'status': 'reserved', 'trigger': ['cue_function_proposal'], 'requires_human_review': True, 'final_label_before_review': 'unresolved'}
+- **primary_counterfactual_test**: If cue family were substituted while evidence content, speaker attachment, standpoint, operation, warrant standing, warrant relation, temporal position, boundary, and contextual bridge remained stable, would the proposed interpretation change?
+- **primary_test_answer**: supports_category: cue-family substitution changes the proposed interpretation while other variables are held stable.
+- **pairwise_counterfactual_test**: Compare cue-family substitution against operation and warrant-standing manipulations.
+- **pairwise_test_answer**: supports_cue_function but review policy applies because cue_function is reserved.
+- **effect_on_decision**: Preserve proposed_locus cue_function but final label remains unresolved before separate review.
+- **decision_path**: ['candidate_loci recorded for all eight categories', 'positive cue-family substitution evidence supports cue_function', 'reserved category proposed by model', 'requires_human_review; final unresolved before review']
 - **original_record_preserved**: True
-- **decision_path**: ['candidate_detection supports cue_function only', 'primary counterfactual supports cue_function', 'reserved category proposed by model', 'requires_human_review; final unresolved']
 - **provenance**: artificial minimal example; not PR #18 material
-- **selected_evidence**: [{'evidence_id': 'EX_REV_01', 'text': 'Artificial packet: An unexplained blue mark appears; no speaker, operation, warrant relation, time layer, boundary issue, perspective, or contextual bridge is supported.'}]
-- **review_policy_applied**: {'status': 'reserved', 'trigger': ['cue family remains plausible after all more specific loci are tested', 'proposal is made by a model record', 'counterfactual tests do not support another specific locus'], 'human_proposal_allowed': True, 'model_proposal_allowed': True, 'requires_human_review_for_model': True, 'final_label_before_review': 'unresolved', 'source_basis': 'Lineage table calls cue_function a provisional reserved value with no positive demo example.'}
+- **candidate_loci**:
+  - `cue_function`: `candidate_supported`; evidence=['EX_CUE_01']; confidence=`medium`; rationale=Positive counterfactual support recorded for cue_function.
+  - `warrant_attribution`: `candidate_not_supported`; evidence=[]; confidence=`medium`; rationale=Counterfactual test did not support warrant_attribution.
+  - `warrant_relation`: `candidate_not_supported`; evidence=[]; confidence=`medium`; rationale=Counterfactual test did not support warrant_relation.
+  - `operation_function`: `candidate_not_supported`; evidence=[]; confidence=`medium`; rationale=Counterfactual test did not support operation_function.
+  - `boundary_setting`: `candidate_not_supported`; evidence=[]; confidence=`medium`; rationale=Counterfactual test did not support boundary_setting.
+  - `temporal_layering`: `candidate_not_supported`; evidence=[]; confidence=`medium`; rationale=Counterfactual test did not support temporal_layering.
+  - `perspective_assignment`: `candidate_not_supported`; evidence=[]; confidence=`medium`; rationale=Counterfactual test did not support perspective_assignment.
+  - `context_inference`: `candidate_not_supported`; evidence=[]; confidence=`medium`; rationale=Counterfactual test did not support context_inference.
 
 ### `WEX_UNRESOLVED_NO_CANDIDATE` (unresolved)
-- **training_manual_status**: training_manual_example_ineligible_for_held_out_testing
+- **record_id**: WEX_UNRESOLVED_NO_CANDIDATE_REC
+- **record_hash**: a2b93d094c1ec01932dfa10279e3a19c718452b4a74b1404b24ecc295e203c60
 - **actor_event_type**: human_proposal
-- **focal_interpretive_decision**: Cannot be identified from the record.
-- **proposed_primary_interpretation**: No responsible primary interpretation is supplied.
-- **candidate_loci**: ['none_supported']
-- **alternative_pathway**: No complete alternative can be evaluated because evidence and rationale are insufficient.
-- **primary_counterfactual_test**: Is there enough recorded evidence and rationale to identify and compare plausible procedural loci?
-- **primary_test_answer**: insufficient_evidence
-- **cited_evidence**: ['EX_UNR_01']
-- **pairwise_counterfactual_test**: not_applicable: no candidate set.
-- **pairwise_test_answer**: not_applicable
-- **confidence**: low
-- **effect_on_decision**: Use unresolved and escalate for insufficient evidence.
+- **analyst_role**: researcher_analyst
+- **review_of_record_id**: null
+- **review_of_record_hash**: null
+- **focal_interpretive_decision**: Can a dominant procedural locus be identified?
+- **proposed_primary_interpretation**: No stable primary interpretation is available from the recorded evidence.
 - **proposed_locus**: unresolved
 - **operational_status**: unresolved
 - **final_operational_label**: unresolved
-- **uncertainty**: high
 - **escalation_required**: True
+- **escalation_reason**: insufficient evidence for candidate detection
+- **review_policy_applied**: {'category': None, 'status': 'not_applicable', 'trigger': ['unresolved_no_policy'], 'requires_human_review': False, 'final_label_before_review': null}
+- **primary_counterfactual_test**: Is there enough recorded evidence and rationale to identify and compare plausible procedural loci?
+- **primary_test_answer**: insufficient_evidence for all eight candidate entries.
+- **pairwise_counterfactual_test**: No supported candidates are available for pairwise testing.
+- **pairwise_test_answer**: not_applicable
+- **effect_on_decision**: Final operational label remains unresolved and escalates for insufficient evidence.
+- **decision_path**: ['candidate_loci recorded for all eight categories', 'no candidate_supported entries', 'ESCALATE_INSUFFICIENT_EVIDENCE', 'final unresolved']
 - **original_record_preserved**: True
-- **decision_path**: ['evidence sufficiency question failed', 'ESCALATE_INSUFFICIENT_EVIDENCE', 'final unresolved']
 - **provenance**: artificial minimal example; not PR #18 material
-- **selected_evidence**: [{'evidence_id': 'EX_UNR_01', 'text': 'Artificial packet: A sentence is fragmentary and the rationale gives no stable interpretive decision.'}]
-- **review_policy_applied**: {'status': 'not_applicable'}
+- **candidate_loci**:
+  - `cue_function`: `insufficient_evidence`; evidence=[]; confidence=`not_applicable`; rationale=Evidence is insufficient to evaluate cue_function.
+  - `warrant_attribution`: `insufficient_evidence`; evidence=[]; confidence=`not_applicable`; rationale=Evidence is insufficient to evaluate warrant_attribution.
+  - `warrant_relation`: `insufficient_evidence`; evidence=[]; confidence=`not_applicable`; rationale=Evidence is insufficient to evaluate warrant_relation.
+  - `operation_function`: `insufficient_evidence`; evidence=[]; confidence=`not_applicable`; rationale=Evidence is insufficient to evaluate operation_function.
+  - `boundary_setting`: `insufficient_evidence`; evidence=[]; confidence=`not_applicable`; rationale=Evidence is insufficient to evaluate boundary_setting.
+  - `temporal_layering`: `insufficient_evidence`; evidence=[]; confidence=`not_applicable`; rationale=Evidence is insufficient to evaluate temporal_layering.
+  - `perspective_assignment`: `insufficient_evidence`; evidence=[]; confidence=`not_applicable`; rationale=Evidence is insufficient to evaluate perspective_assignment.
+  - `context_inference`: `insufficient_evidence`; evidence=[]; confidence=`not_applicable`; rationale=Evidence is insufficient to evaluate context_inference.
 
 ### `WEX_CONFLICTING_OPERATION_TEMPORAL` (conflicting_tests)
-- **training_manual_status**: training_manual_example_ineligible_for_held_out_testing
+- **record_id**: WEX_CONFLICTING_OPERATION_TEMPORAL_REC
+- **record_hash**: 77f33d715b6acc5e74e3cbd97b3fbfc7f5d9cca513bc12e5656ccd7d5a457d3a
 - **actor_event_type**: human_proposal
-- **focal_interpretive_decision**: Does the earlier phrase function as a promise?
-- **proposed_primary_interpretation**: The earlier phrase may function as a promise.
-- **candidate_loci**: ['operation_function', 'temporal_layering']
-- **alternative_pathway**: The promise reading could be produced by the announcement as an operation or by the later temporal position as reclassification.
-- **primary_counterfactual_test**: If the visible operation were removed but the same evidence remained, would the proposed interpretation still follow?
-- **primary_test_answer**: supports_category: removing the announcement act weakens conversion.
-- **cited_evidence**: ['EX_CON_01']
-- **pairwise_counterfactual_test**: If the later time position remains but the interpretive act is removed, does reclassification still occur; if the act remains but later framing is removed, does reclassification still occur?
-- **pairwise_test_answer**: conflicting: later framing and recognition act are not separable in the artificial packet.
-- **confidence**: low
-- **effect_on_decision**: Do not force a winner; use unresolved and escalate.
+- **analyst_role**: researcher_analyst
+- **review_of_record_id**: null
+- **review_of_record_hash**: null
+- **focal_interpretive_decision**: Does the interpretation turn on the recognition act or the later temporal layer?
+- **proposed_primary_interpretation**: Both the operation and the later layer appear to control the interpretation.
 - **proposed_locus**: unresolved
 - **operational_status**: unresolved
 - **final_operational_label**: unresolved
-- **uncertainty**: high
 - **escalation_required**: True
+- **escalation_reason**: conflicting counterfactual tests
+- **review_policy_applied**: {'category': None, 'status': 'not_applicable', 'trigger': ['unresolved_no_policy'], 'requires_human_review': False, 'final_label_before_review': null}
+- **primary_counterfactual_test**: If the visible recognition operation were removed, would the interpretation still follow?
+- **primary_test_answer**: supports_category, but temporal-layer test also supports a different category.
+- **pairwise_counterfactual_test**: Separate operation removal from later-layer removal.
+- **pairwise_test_answer**: inconclusive: the packet cannot vary act and later frame separately.
+- **effect_on_decision**: Conflicting tests require unresolved final label and escalation.
+- **decision_path**: ['candidate_loci recorded for all eight categories', 'operation_function and temporal_layering candidate_supported', 'pairwise test cannot separate act from later frame', 'conflicting tests terminal', 'final unresolved with escalation']
 - **original_record_preserved**: True
-- **decision_path**: ['candidate_detection supports operation_function and temporal_layering', 'pairwise test cannot separate act from later frame', 'conflicting tests terminal', 'final unresolved with escalation']
 - **provenance**: artificial minimal example; not PR #18 material
-- **selected_evidence**: [{'evidence_id': 'EX_CON_01', 'text': 'Artificial packet: A reader later announces that an earlier phrase was a promise, and the announcement itself is also the only visible act of recognition.'}]
-- **review_policy_applied**: {'status': 'not_applicable'}
+- **candidate_loci**:
+  - `cue_function`: `candidate_not_supported`; evidence=[]; confidence=`medium`; rationale=Counterfactual test did not support cue_function.
+  - `warrant_attribution`: `candidate_not_supported`; evidence=[]; confidence=`medium`; rationale=Counterfactual test did not support warrant_attribution.
+  - `warrant_relation`: `candidate_not_supported`; evidence=[]; confidence=`medium`; rationale=Counterfactual test did not support warrant_relation.
+  - `operation_function`: `candidate_supported`; evidence=['EX_CONFLICT_01']; confidence=`medium`; rationale=Positive counterfactual support recorded for operation_function.
+  - `boundary_setting`: `candidate_not_supported`; evidence=[]; confidence=`medium`; rationale=Counterfactual test did not support boundary_setting.
+  - `temporal_layering`: `candidate_supported`; evidence=['EX_CONFLICT_01']; confidence=`medium`; rationale=Positive counterfactual support recorded for temporal_layering.
+  - `perspective_assignment`: `candidate_not_supported`; evidence=[]; confidence=`medium`; rationale=Counterfactual test did not support perspective_assignment.
+  - `context_inference`: `candidate_not_supported`; evidence=[]; confidence=`medium`; rationale=Counterfactual test did not support context_inference.
 
-## 14. Non-examples and failure modes
+### `WEX_REVIEW_RECORD_FOR_CUE_FUNCTION` (linked_review_record)
+- **record_id**: WEX_REVIEW_RECORD_FOR_CUE_FUNCTION_REC
+- **record_hash**: 0bef883e9f280f6c782700d9059af55357baa09553185dd407cabeee5acb2bb7
+- **actor_event_type**: adjudicator_review
+- **analyst_role**: adjudicator_separate_record
+- **review_of_record_id**: WEX_REVIEW_REQUIRED_CUE_FUNCTION_MODEL_REC
+- **review_of_record_hash**: sha256:cd59bc7a41f9177f50aa754cdd298925f172103c8e9db11c246080de9543a036
+- **focal_interpretive_decision**: Separate review of the reserved cue_function proposal.
+- **proposed_primary_interpretation**: The original model proposal is reviewed without overwriting it.
+- **proposed_locus**: cue_function
+- **operational_status**: requires_human_review
+- **final_operational_label**: unresolved
+- **escalation_required**: True
+- **escalation_reason**: reserved category review retained unresolved
+- **review_policy_applied**: {'category': 'cue_function', 'status': 'reserved', 'trigger': ['cue_function_proposal'], 'requires_human_review': True, 'final_label_before_review': 'unresolved'}
+- **primary_counterfactual_test**: If cue family were substituted while evidence content, speaker attachment, standpoint, operation, warrant standing, warrant relation, temporal position, boundary, and contextual bridge remained stable, would the proposed interpretation change?
+- **primary_test_answer**: review_outcome: retained unresolved pending additional protocol decision.
+- **pairwise_counterfactual_test**: Review record cites original candidate and pairwise tests rather than mutating them.
+- **pairwise_test_answer**: Original proposed_locus remains cue_function in the preserved proposal record.
+- **effect_on_decision**: Review record preserves original proposal and records separate final review outcome.
+- **decision_path**: ['linked to original proposal record_id and record_hash', 'original proposed_locus preserved', 'separate review event records final decision', 'original record not overwritten']
+- **original_record_preserved**: True
+- **provenance**: artificial minimal example; not PR #18 material
+- **candidate_loci**:
+  - `cue_function`: `candidate_supported`; evidence=['EX_CUE_01']; confidence=`medium`; rationale=Positive counterfactual support recorded for cue_function.
+  - `warrant_attribution`: `candidate_not_supported`; evidence=[]; confidence=`medium`; rationale=Counterfactual test did not support warrant_attribution.
+  - `warrant_relation`: `candidate_not_supported`; evidence=[]; confidence=`medium`; rationale=Counterfactual test did not support warrant_relation.
+  - `operation_function`: `candidate_not_supported`; evidence=[]; confidence=`medium`; rationale=Counterfactual test did not support operation_function.
+  - `boundary_setting`: `candidate_not_supported`; evidence=[]; confidence=`medium`; rationale=Counterfactual test did not support boundary_setting.
+  - `temporal_layering`: `candidate_not_supported`; evidence=[]; confidence=`medium`; rationale=Counterfactual test did not support temporal_layering.
+  - `perspective_assignment`: `candidate_not_supported`; evidence=[]; confidence=`medium`; rationale=Counterfactual test did not support perspective_assignment.
+  - `context_inference`: `candidate_not_supported`; evidence=[]; confidence=`medium`; rationale=Counterfactual test did not support context_inference.
 
-- Choosing a locus from topic words alone.
-- Treating disagreement as automatically a warrant relation.
-- Using context_inference as a residual bucket.
-- Selecting context_inference solely because no other category fits.
-- Confusing narrative time with temporal_layering.
-- Confusing speaker presence with perspective_assignment.
-- Confusing uncertain speaker attachment with perspective_assignment.
-- Confusing an interpretive act with warrant attribution.
-- Forcing cue_function when another specific locus applies.
-- Using final-label disagreement as the locus itself.
+## 13. Non-Examples and Failure Modes
+- choosing a locus from topic words alone
+- treating disagreement as automatically a warrant relation
+- using context_inference as a residual bucket
+- confusing narrative time with temporal_layering
+- confusing speaker presence with perspective_assignment
+- confusing an interpretive act with warrant attribution
+- using cue_function because no other category was supported
+- using final-label disagreement as the locus itself
 
-## 15. Versioning and freeze rule
-
-Manual version: `friction_locus_manual_v0_1`. Status: `DRAFT_INCOMPLETE`. Hashes are recorded in `docs/manuals/friction_locus_manual_manifest.json`. Later changes require recomputing affected hashes. Records coded under an older version are never silently migrated. No pre-merge file claims to contain a future merge commit.
+## 14. Versioning and Freeze Rule
+Manual version: `friction_locus_manual_v0_1`. Status: `AUTHORITATIVE_FOR_PROTOCOL_REVIEW`. Hashes are recorded in `docs/manuals/friction_locus_manual_manifest.json`. Later changes require a new version or documented revision. Records coded under an older version are never silently migrated.
