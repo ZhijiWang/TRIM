@@ -634,7 +634,7 @@ def validate() -> list[str]:
         require(example_id not in all_prompt_text, f"manual example ID appears in prompts: {example_id}", errors)
 
     require(freeze_pkg["base_main_commit"] == EXPECTED_MAIN_SHA, "freeze package base main mismatch", errors)
-    require(freeze_pkg["pr18_head_before_update"] == "95bdabc07e0223e6836253c17982db4efcf7b6e8", "freeze package starting PR18 head mismatch", errors)
+    require(freeze_pkg["pr18_head_before_update"] == "83271a08b2bc3c3542b5a48c4ca7e6469c1d84b1", "freeze package starting PR18 head mismatch", errors)
     require(freeze_pkg["manual_merge_commit"] == EXPECTED_MAIN_SHA, "freeze package manual merge mismatch", errors)
     require(freeze_pkg["manual_markdown_hash"] == EXPECTED_MANUAL["manual_markdown_sha256"], "freeze package markdown hash mismatch", errors)
     require(freeze_pkg["manual_json_hash"] == EXPECTED_MANUAL["manual_json_sha256"], "freeze package json hash mismatch", errors)
