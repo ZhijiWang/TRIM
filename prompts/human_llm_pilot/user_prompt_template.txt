@@ -6,6 +6,6 @@ Use the following frozen controlled source packet. Do not add source material, s
 
 {{SOURCE_PACKET}}
 
-Use the model response schema below. Return only the JSON model-authored annotation payload conforming to schemas/human_llm_model_response.schema.json. Do not return runtime metadata, hashes, provider metadata, run identifiers, parse status, retry count, or review-linkage fields.
+Use the model response schema below. Return only the JSON model-authored annotation payload conforming to schemas/human_llm_model_response.schema.json. Do not add fields outside that schema.
 
 {{MODEL_RESPONSE_SCHEMA}}

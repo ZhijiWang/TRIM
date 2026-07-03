@@ -69,4 +69,8 @@ After raw preservation and parsing, the harness adds:
 
 The final `record_hash` is computed only after enrichment. The enriched record validates against `schemas/human_llm_coder_output.schema.json`.
 
+The assembled prompt hash is harness-only metadata. It is computed from the exact model-visible assembled prompt after substitution and is stored in run manifests, request preservation records, execution logs, or enriched records if the final schema supports it. It is never written back into the model-visible prompt.
+
+If a provider wraps the prompt in a request JSON object, a provider request hash may be preserved separately. It is not the same as the model-visible assembled prompt instance hash.
+
 Review/adjudication records are separate later records. They link to the original proposal by `review_of_record_id` and `review_of_record_hash` and never overwrite the original model proposal.

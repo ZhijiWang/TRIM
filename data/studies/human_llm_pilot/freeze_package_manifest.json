@@ -7,6 +7,7 @@
     "controlled private packet audit",
     "account-verified model and execution settings",
     "runtime settings verification",
+    "pricing verification",
     "final execution authorization"
   ],
   "claim_boundary": "Authoritative for protocol review only; not empirical validation, coder-reliability validation, ontology validation, or execution authorization.",
@@ -16,15 +17,15 @@
   "condition_C_payload_hash": "0f9d7df2f47190dd2e7632dc616ded3dc1eba041e75c55a59d55b16483575cbf",
   "condition_manipulation_status": "PASSED_SHARED_BASELINE_WITH_DECLARED_INSTRUCTION_DEPTH_INCREMENTS_EXECUTION_BLOCKED",
   "current_pr18_branch_commit": "NON_CIRCULAR_NOT_RECORDED_IN_FILE_SEE_PR_HEAD",
-  "execution_authorization_status": "BLOCKED_PENDING_RIGHTS_PRIVATE_PACKETS_MODEL_ACCOUNT_PROMPT_ASSEMBLY_RUNTIME_ENRICHMENT_AND_FINAL_EXECUTION_AUTHORIZATION",
+  "execution_authorization_status": "BLOCKED_PENDING_RIGHTS_PRIVATE_PACKETS_MODEL_ACCOUNT_RUNTIME_SETTINGS_PRICING_AND_FINAL_EXECUTION_AUTHORIZATION",
   "final_coder_schema_hash": "2abdf5f5690aada67f1694f8d83dfe95236fbcba46c1bbcfca169567dbda7b12",
   "final_coder_schema_path": "schemas/human_llm_coder_output.schema.json",
-  "freeze_package_manifest_hash": "eee31ca8f09d99b81c0ff5e332ffe096ba8b598a0df2cf898fd1ea8d10f334d7",
+  "freeze_package_manifest_hash": "a6ee5a53103324f67ae71d9311458a91db2fd7ea54c915b917df5a31bdda3a5b",
   "freeze_package_manifest_version": "human_llm_pilot_freeze_package_manifest_v0_3",
   "hash_rules": "SHA-256 over LF-normalized bytes for files; canonical JSON excluding freeze_package_manifest_hash for this manifest.",
-  "human_access_spec_hash": "33966add15bd9839c27bbb395d33f409b257d06a6f0589c4437a5fdbd3385e8f",
+  "human_access_spec_hash": "f5e15038967bb7f3462d7c434caf595138e0360174781543a050ff61c8c461c7",
   "human_access_spec_path": "docs/studies/human_coder_access_and_record_spec.md",
-  "human_model_content_comparability_status": "PASSED_WITH_DOCUMENTED_INTERFACE_AND_METADATA_ASYMMETRIES_EXECUTION_BLOCKED",
+  "human_model_content_comparability_status": "PASSED_IDENTICAL_SOURCE_AND_MANUAL_CONTENT_WITH_DOCUMENTED_ACCESS_AFFORDANCE_ASYMMETRIES_EXECUTION_BLOCKED",
   "manual_compatibility_status": "PASSED_AUTHORITATIVE_MANUAL_REFERENCE_VERIFIED",
   "manual_json_hash": "797d79fcdb29fc32850c3778c6afb029ac0768207ea33f66d714fe8fa8cb591a",
   "manual_manifest_hash": "1b80c0931a0ed8159aaeeb6e7b348331beb33130776469f223ae2a8cfe89d8de",
@@ -32,25 +33,25 @@
   "manual_merge_commit": "6364add9a89f3fe6d26043727b9d44cb21a76db0",
   "model_account_status": "BLOCKED_PENDING_ACCOUNT_AVAILABILITY_VERIFICATION",
   "model_response_enrichment_status": "PASSED_CONTRACT_SPECIFIED_EXECUTION_BLOCKED",
-  "model_response_schema_hash": "5fa46985faf7ddf0e1fa4cf47773ab680730249302dec3c1a50d6d447d8c78c5",
+  "model_response_schema_hash": "84fbc5413951c712925d85738bc820d776c1ab06172382f143e48495d4a095ec",
   "model_response_schema_path": "schemas/human_llm_model_response.schema.json",
   "model_response_template_hash": "1d69ddfadb2806617d5f8298630b806d2021c449bfb152f6c742e78bce3768c8",
   "model_response_template_path": "templates/model_response_payload.json",
-  "model_record_enrichment_contract_hash": "47bdc506e8027ebf5535a2f9f001b778d847fe6dc34b3bdb38651176b1288454",
+  "model_record_enrichment_contract_hash": "b70af7690845d3870c05332d929b517c8d4b8e4aeef650a516faaad200393953",
   "model_record_enrichment_contract_path": "docs/studies/model_record_enrichment_contract.md",
-  "overall_freeze_status": "BLOCKED_PENDING_RIGHTS_PRIVATE_PACKETS_MODEL_ACCOUNT_PROMPT_ASSEMBLY_RUNTIME_ENRICHMENT_AND_FINAL_EXECUTION_AUTHORIZATION",
+  "overall_freeze_status": "BLOCKED_PENDING_RIGHTS_PRIVATE_PACKETS_MODEL_ACCOUNT_RUNTIME_SETTINGS_PRICING_AND_FINAL_EXECUTION_AUTHORIZATION",
   "pr18_head_before_update": "95bdabc07e0223e6836253c17982db4efcf7b6e8",
   "private_packet_status": "BLOCKED_PRIVATE_PACKET_AUDIT_REQUIRED_BEFORE_CODING",
-  "prompt_assembly_manifest_hash": "2e0199700202b1f23cbe9e6dc01ce509c5b4a119c332ee102e919df9e3761aa7",
+  "prompt_assembly_manifest_hash": "1c20de3eef8279220df8e6be2ae3337fc4a40e9f91d789ca8f305e601c805d08",
   "prompt_assembly_manifest_path": "data/studies/human_llm_pilot/prompt_assembly_manifest.json",
-  "prompt_assembly_spec_hash": "79ed4e43d4b769305c3ca0738508fe040341c01e189d4c2149b7628608fe4aa4",
+  "prompt_assembly_spec_hash": "432eea5a45406088b508ddbf0872603a25f8b44e8c5b23d94d13becd67b76e7b",
   "prompt_assembly_spec_path": "docs/studies/human_llm_prompt_assembly_spec.md",
   "prompt_assembly_status": "PASSED_PROMPT_ASSEMBLY_SPECIFIED_EXECUTION_BLOCKED",
-  "prompt_bundle_manifest_hash": "fea96e08258e5c4b34a0094853788ac5871e6efd3b78aa8b56ddbea28a0e97bc",
+  "prompt_bundle_manifest_hash": "10ff7213bafb95b02c3a68c2e2ffd15edf96f4d5a864fb7e600a31cc4aac670f",
   "prompt_bundle_manifest_path": "data/studies/human_llm_pilot/prompt_bundle_manifest.json",
   "prompt_files": {
     "case_and_run_context": {
-      "hash": "b8e9c62da7b4dedf8151192e53cdb6004589cb5586f96719c0e334463e34769f",
+      "hash": "18a9052fd8a9973b7b2a129540f02f27b62e60db991d368613dee153c8043a93",
       "path": "prompts/human_llm_pilot/case_and_run_context.txt"
     },
     "condition_A": {
@@ -70,7 +71,7 @@
       "path": "prompts/human_llm_pilot/human_researcher_instructions.txt"
     },
     "model_response_schema": {
-      "hash": "5fa46985faf7ddf0e1fa4cf47773ab680730249302dec3c1a50d6d447d8c78c5",
+      "hash": "84fbc5413951c712925d85738bc820d776c1ab06172382f143e48495d4a095ec",
       "path": "schemas/human_llm_model_response.schema.json"
     },
     "source_packet_envelope": {
@@ -78,11 +79,11 @@
       "path": "prompts/human_llm_pilot/source_packet_envelope.txt"
     },
     "system_prompt": {
-      "hash": "14614f9dbf01ef9482a56a50365e73ddaa8e426b16fcc28816c6b311f64496bc",
+      "hash": "74f36915bf6139464b83338e53d4e6b137772e8a6b595e5fc28f2f235cf1275e",
       "path": "prompts/human_llm_pilot/system_prompt.txt"
     },
     "user_prompt_template": {
-      "hash": "5af55502c0caa10984e8f0aec7a7457d9e0dc3a19cd4587abd7a39d51dca335c",
+      "hash": "1ef75f8dde6a8d56fe394c2c899e3228b2c8cfd4a334b466dd9b96ed81482ebf",
       "path": "prompts/human_llm_pilot/user_prompt_template.txt"
     }
   },
@@ -90,11 +91,12 @@
   "prompt_condition_manipulation_audit_path": "docs/studies/pr18_condition_manipulation_audit.md",
   "prompt_contamination_audit_hash": "020a3d7578e483c87c867d8cc012a0269f35824217af009f2eb22a11e8cb3228",
   "prompt_contamination_audit_path": "docs/studies/pr18_prompt_contamination_audit.md",
-  "prompt_parity_audit_hash": "5efd77abd105f0fe5ae9aaa7d71be8915c30a2ce15f13cd701dda2c0da8f10fa",
+  "prompt_parity_audit_hash": "1ee593b8fc4c1c7b5c57a3e2c4a9dba2c32648bc4a5a28942b45d5e1f7fd587f",
   "prompt_parity_audit_path": "docs/studies/pr18_prompt_parity_audit.md",
   "rights_status": "BLOCKED_RIGHTS_REVIEW_REQUIRED",
   "runtime_settings_status": "BLOCKED_PENDING_PROVIDER_ACCOUNT_VERIFICATION",
-  "runtime_spec_hash": "e4292a4cc94fcdfe0bf429e2d49dac3b7cb71746c830f5a30a3363561430082a",
+  "pricing_status": "BLOCKED_PENDING_PROVIDER_ACCOUNT_PRICING_RECHECK",
+  "runtime_spec_hash": "a17cd1f2a5d61a8a4734ad936757669d89c9d70466b5e4eedba3f83039e24af4",
   "runtime_spec_path": "docs/studies/human_llm_runtime_and_retry_spec.md",
   "selected_case_manifest_hash": "1ebcaef44ac560622f9c56a91c9534d46929f2e9d5bbb5e722107188c9adf7a6",
   "static_prompt_schema_status": "PASSED_MODEL_RESPONSE_SCHEMA_COMPATIBILITY_EXECUTION_BLOCKED"

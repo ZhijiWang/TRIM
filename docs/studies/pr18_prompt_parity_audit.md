@@ -1,17 +1,17 @@
 # PR #18 Prompt Parity and Comparability Audit
 
-Status: `passed_with_documented_interface_and_metadata_asymmetries_execution_blocked`
+Status: `passed_identical_source_and_manual_content_with_documented_access_affordance_asymmetries_execution_blocked`
 
 Manual reference: `friction_locus_manual_v0_1` at `6364add9a89f3fe6d26043727b9d44cb21a76db0`.
 
-This audit separates primary human-versus-model Condition C comparability from the A/B/C model-condition manipulation. It does not authorize execution.
+This audit separates primary human-versus-model Condition C comparability from the A/B/C model-condition manipulation. It does not authorize execution. Source packet and manual content are identical; access affordances differ.
 
 ## Primary Human Versus Model Condition C Comparability
 
 | Dimension | Human Condition C | Model Condition C | Assessment |
 |---|---|---|---|
 | source packet | controlled private packet after rights/private-packet clearance | same controlled private packet after rights/private-packet clearance | identical once gates pass |
-| substantive manual content | full authoritative JSON manual | full authoritative JSON manual injected into assembled prompt | identical substantive content |
+| substantive manual content | full authoritative JSON manual | full authoritative JSON manual injected into assembled prompt | identical content |
 | category definitions | authoritative eight categories | same | identical |
 | candidate rules | all eight candidate-locus states required | same | identical |
 | counterfactual guidance | full manual guidance | full manual guidance | identical |
@@ -20,12 +20,12 @@ This audit separates primary human-versus-model Condition C comparability from t
 | output fields | final human record includes interpretive fields plus system-added metadata | model-authored payload first; harness later enriches final record | intentional metadata/enrichment asymmetry |
 | unresolved permission | allowed and required where evidence/tests do not support a final locus | same | identical |
 | review policy | same reserved/review-sensitive/standard policy | same; model proposal later enriched by harness | functionally equivalent |
-| interface affordance | human may search within the supplied manual | model receives prompt text and no tools | documented interface asymmetry |
+| interface affordance | human may search within the supplied manual and navigate back and forth manually | model receives the same manual in one assembled context and no tools | documented access-affordance asymmetry, not a content difference |
 | timing | human record locked before any model execution | model runs occur only after human lock | intentional methodological asymmetry |
 | record locking | human record hash computed after completion | model raw response hash before parsing, final record hash after enrichment | intentional role-specific asymmetry |
 | metadata enrichment | system adds record ID, timestamp, source hash, session ID, record hash | harness adds run/provider/prompt/source/raw-output/parse/retry metadata | intentional role-specific asymmetry |
 
-Unresolved substantive asymmetries: none identified in the specified content. Execution remains blocked for rights, private-packet handling, model/account verification, runtime settings, and final authorization.
+Unresolved substantive content asymmetries: none identified in the specified source packet and manual content. Documented access affordance asymmetries remain: human manual search, human manual navigation, human timing and locking, role-specific metadata, and model-only harness enrichment. Execution remains blocked for rights, private-packet handling, model/account verification, runtime settings, pricing, and final authorization.
 
 ## A/B/C Model-Condition Manipulation
 

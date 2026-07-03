@@ -34,3 +34,5 @@ Refusal, truncated output, no response, provider failure, rate limiting, and mal
 ## Preservation and Cost Logging
 
 The harness must preserve raw request representation where available, complete assembled prompt text, raw response text, hashes, provider response metadata, token counts where available, and cost logs. Current pricing and account availability must be re-verified immediately before execution.
+
+The assembled prompt instance hash is computed after source-packet and model-visible case variable substitution and before provider submission. It is stored outside the prompt. Provider request hash, if available, is a separate hash of provider-specific request wrapping.

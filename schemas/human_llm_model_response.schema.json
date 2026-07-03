@@ -203,12 +203,126 @@
     },
     "candidate_loci": {
       "type": "array",
+      "description": "Structured Stage A candidate-detection results. The array order is not a priority order; validators compare categories as a set.",
       "minItems": 8,
       "maxItems": 8,
       "items": {
         "$ref": "#/$defs/candidate_locus"
       },
-      "uniqueItems": true
+      "allOf": [
+        {
+          "contains": {
+            "properties": {
+              "category": {
+                "const": "cue_function"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "properties": {
+              "category": {
+                "const": "warrant_attribution"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "properties": {
+              "category": {
+                "const": "warrant_relation"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "properties": {
+              "category": {
+                "const": "operation_function"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "properties": {
+              "category": {
+                "const": "boundary_setting"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "properties": {
+              "category": {
+                "const": "temporal_layering"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "properties": {
+              "category": {
+                "const": "perspective_assignment"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "properties": {
+              "category": {
+                "const": "context_inference"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "minContains": 1,
+          "maxContains": 1
+        }
+      ]
     },
     "alternative_pathway": {
       "type": "object",

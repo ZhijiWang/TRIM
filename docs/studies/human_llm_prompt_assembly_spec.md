@@ -16,6 +16,27 @@ Every model request must be assembled in this exact order:
 
 No component may be omitted, reordered, or replaced without creating a new prompt bundle version.
 
+## Exact Component Join Rule
+
+The five top-level components are joined with exactly two LF characters between components and exactly one final trailing LF after the last component.
+
+The byte-equivalent rule is:
+
+```python
+normalize(SYSTEM_PROMPT).rstrip("\n")
++ "\n\n"
++ normalize(CONDITION_PAYLOAD).rstrip("\n")
++ "\n\n"
++ normalize(SOURCE_PACKET_ENVELOPE).rstrip("\n")
++ "\n\n"
++ normalize(MODEL_RESPONSE_SCHEMA).rstrip("\n")
++ "\n\n"
++ normalize(CASE_AND_RUN_CONTEXT).rstrip("\n")
++ "\n"
+```
+
+The final trailing newline is included. `normalize(...)` means decode as UTF-8 and convert CRLF and CR to LF.
+
 ## Shared Components
 
 - `SYSTEM_PROMPT`: `prompts/human_llm_pilot/system_prompt.txt`
@@ -60,11 +81,29 @@ The Condition C payload is:
 
 ## Hashing Rules
 
-Component hashes are SHA-256 over UTF-8 bytes after LF normalization.
+Component hash: SHA-256 over each source component's UTF-8 bytes after LF normalization.
 
 The assembled condition payload hash is SHA-256 over the exact condition payload after applying the Condition C manual injection rule when applicable.
 
-The complete assembled prompt hash is SHA-256 over the exact five-part assembled text in the frozen order above. The template-level assembled prompt hash uses the public placeholders exactly as written. Case-level execution must compute and preserve a separate complete assembled input hash after replacing placeholders with the controlled source packet, case ID, run ID, instruction condition, prompt bundle version, and source packet hash.
+Assembled prompt template hash: SHA-256 over the assembled prompt while public placeholders remain unchanged.
+
+Assembled prompt instance hash: SHA-256 over the assembled prompt after substituting the controlled source packet and explicitly model-visible variables: case ID, instruction condition, and prompt bundle version. This is the authoritative hash of the exact model-visible input.
+
+Provider request hash: if the API wraps the model-visible prompt into a provider-specific JSON request, preserve a separate provider request hash where available. Do not confuse provider request hash with the model-visible assembled prompt instance hash.
+
+No prompt field may depend on the resulting assembled prompt hash. `assembled_prompt_hash`, source packet hash, provider, model, run ID, runtime settings, retry metadata, and other harness-only metadata are stored outside the model-visible prompt.
+
+Correct sequence:
+
+1. Load each source component.
+2. Normalize CRLF and CR to LF.
+3. Substitute controlled source packet, case ID, instruction condition, prompt bundle version, and any explicitly model-visible case variables.
+4. Assemble the five components using the exact join rule above.
+5. Preserve the exact model-visible assembled text.
+6. Compute SHA-256 over its UTF-8 bytes.
+7. Store the resulting hash outside the prompt.
+8. Submit the already-hashed exact text to the provider.
+9. Preserve the provider-visible request representation where available.
 
 ## Preservation Rule
 
@@ -77,6 +116,7 @@ Before any model call, the harness must preserve:
 - exact case/run context;
 - complete assembled model-visible input;
 - complete assembled model-visible input hash;
+- provider request hash separately from the model-visible prompt hash where available;
 - provider-visible request representation where available.
 
 No model call may occur in this PR.

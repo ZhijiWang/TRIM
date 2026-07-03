@@ -33,21 +33,46 @@ def condition_payload(condition: str) -> str:
 
 
 def assembled_prompt_template(condition: str) -> str:
-    return "".join(
-        [
-            "BEGIN_SHARED_SYSTEM\n"
-            + normalized_text(ROOT / "prompts" / "human_llm_pilot" / "system_prompt.txt").rstrip("\n")
-            + "\nEND_SHARED_SYSTEM\n",
-            f"BEGIN_CONDITION_{condition}\n"
-            + condition_payload(condition).rstrip("\n")
-            + f"\nEND_CONDITION_{condition}\n",
-            normalized_text(ROOT / "prompts" / "human_llm_pilot" / "source_packet_envelope.txt").rstrip("\n") + "\n",
-            "BEGIN_MODEL_RESPONSE_SCHEMA\n"
-            + normalized_text(ROOT / "schemas" / "human_llm_model_response.schema.json").rstrip("\n")
-            + "\nEND_MODEL_RESPONSE_SCHEMA\n",
-            normalized_text(ROOT / "prompts" / "human_llm_pilot" / "case_and_run_context.txt").rstrip("\n") + "\n",
-        ]
-    )
+    components = [
+        normalized_text(ROOT / "prompts" / "human_llm_pilot" / "system_prompt.txt"),
+        condition_payload(condition),
+        normalized_text(ROOT / "prompts" / "human_llm_pilot" / "source_packet_envelope.txt"),
+        normalized_text(ROOT / "schemas" / "human_llm_model_response.schema.json"),
+        normalized_text(ROOT / "prompts" / "human_llm_pilot" / "case_and_run_context.txt"),
+    ]
+    return "\n\n".join(component.rstrip("\n") for component in components) + "\n"
+
+
+def assembled_prompt_instance(condition: str, **substitutions: str) -> str:
+    text = assembled_prompt_template(condition)
+    for key, value in substitutions.items():
+        text = text.replace("{{" + key + "}}", value)
+    return text
+
+
+EXPECTED_CATEGORIES = [
+    "cue_function",
+    "warrant_attribution",
+    "warrant_relation",
+    "operation_function",
+    "boundary_setting",
+    "temporal_layering",
+    "perspective_assignment",
+    "context_inference",
+]
+
+
+def schema_exact_category_map(schema):
+    found = {}
+    for item in schema["$defs"]["candidate_loci"]["allOf"]:
+        category = item["contains"]["properties"]["category"]["const"]
+        found[category] = (item["minContains"], item["maxContains"])
+    return found
+
+
+def candidate_set_is_valid(candidate_loci):
+    categories = [item.get("category") for item in candidate_loci]
+    return len(candidate_loci) == 8 and set(categories) == set(EXPECTED_CATEGORIES) and len(categories) == len(set(categories))
 
 
 def load_json(path: Path):
@@ -186,8 +211,8 @@ def test_prompts_are_blocked_scaffolds_not_execution_ready():
     assert "not a truth verdict" in system_prompt
     assert "Do not browse, use tools" in system_prompt
     assert "model-authored annotation payload only" in system_prompt
-    assert "Do not include record_type" in system_prompt
-    assert "raw_output_hash" in system_prompt
+    assert "Do not add fields outside that schema" in system_prompt
+    assert "Harness-only metadata is added later" in system_prompt
     assert "{{CASE_ID}}" in user_template
     assert "{{SOURCE_PACKET}}" in user_template
     assert "{{MODEL_RESPONSE_SCHEMA}}" in user_template
@@ -213,12 +238,49 @@ def test_prompt_assembly_injects_full_manual_and_is_hashable():
     ]
     assert assembly["condition_C_manual_injection"]["source_sha256"] == manual_hash
     assert assembly["condition_C_manual_injection"]["repository_or_tool_access_required_by_model"] is False
+    assert assembly["component_joiner"] == "\\n\\n"
+    assert assembly["component_trailing_newline_rule"] == "include exactly one final trailing LF after CASE_AND_RUN_CONTEXT"
+    assert assembly["model_visible_context_fields"] == ["case_id", "instruction_condition", "prompt_bundle_version"]
+    for field in ["assembled_prompt_hash", "source_packet_hash", "provider", "model", "run_id", "runtime_settings", "retry_metadata"]:
+        assert field in assembly["harness_only_context_fields"]
     assert "BEGIN_FULL_MANUAL_JSON" in condition_payload("C")
     assert '"manual_version": "friction_locus_manual_v0_1"' in condition_payload("C")
     assert assembly["condition_payload_hashes"]["C"] == sha_text(condition_payload("C"))
     for condition in ["A", "B", "C"]:
         assert assembly["assembled_prompt_template_hashes"][condition] == sha_text(assembled_prompt_template(condition))
     assert len(set(assembly["assembled_prompt_template_hashes"].values())) == 3
+    assert assembled_prompt_template("C").endswith("\n")
+    assert "\n\n".join(part.rstrip("\n") for part in assembled_prompt_template("C").split("\n\n")) != ""
+    for forbidden in [
+        "assembled_prompt_hash",
+        "{{ASSEMBLED_PROMPT_HASH}}",
+        "run_id:",
+        "{{RUN_ID}}",
+        "source_packet_hash:",
+        "{{SOURCE_PACKET_HASH}}",
+        "provider:",
+        "model:",
+        "runtime_settings",
+        "retry_metadata",
+    ]:
+        assert forbidden not in assembled_prompt_template("C")
+
+    instance = assembled_prompt_instance(
+        "C",
+        CONTROLLED_SOURCE_PACKET_JSON='{"case_id":"TEST","segments":[]}',
+        CASE_ID="TEST",
+        INSTRUCTION_CONDITION="C_full_manual",
+        PROMPT_BUNDLE_VERSION="human_llm_pilot_prompts_v0_3_2026_07_03_prompt_assembly_enrichment_blocked",
+    )
+    changed = assembled_prompt_instance(
+        "C",
+        CONTROLLED_SOURCE_PACKET_JSON='{"case_id":"TEST","segments":[{"id":"E1"}]}',
+        CASE_ID="TEST",
+        INSTRUCTION_CONDITION="C_full_manual",
+        PROMPT_BUNDLE_VERSION="human_llm_pilot_prompts_v0_3_2026_07_03_prompt_assembly_enrichment_blocked",
+    )
+    assert sha_text(instance) != assembly["assembled_prompt_template_hashes"]["C"]
+    assert sha_text(instance) != sha_text(changed)
 
 
 def test_model_response_schema_excludes_runtime_metadata_and_enrichment_adds_it():
@@ -249,8 +311,26 @@ def test_model_response_schema_excludes_runtime_metadata_and_enrichment_adds_it(
     }
     assert response_schema["additionalProperties"] is False
     assert not (forbidden & set(response_schema["properties"]))
+    assert schema_exact_category_map(response_schema) == {category: (1, 1) for category in EXPECTED_CATEGORIES}
     assert not (forbidden & set(response_template))
     assert set(response_schema["required"]).issubset(response_template)
+    assert candidate_set_is_valid(response_template["candidate_loci"])
+    duplicate = json.loads(json.dumps(response_template))
+    duplicate["candidate_loci"][1]["category"] = duplicate["candidate_loci"][0]["category"]
+    duplicate["candidate_loci"][1]["rationale"] = "Different rationale for duplicate category."
+    assert not candidate_set_is_valid(duplicate["candidate_loci"])
+    missing = json.loads(json.dumps(response_template))
+    missing["candidate_loci"] = [item for item in missing["candidate_loci"] if item["category"] != "context_inference"]
+    assert not candidate_set_is_valid(missing["candidate_loci"])
+    extra = json.loads(json.dumps(response_template))
+    extra["candidate_loci"].append(dict(extra["candidate_loci"][0]))
+    assert not candidate_set_is_valid(extra["candidate_loci"])
+    unresolved = json.loads(json.dumps(response_template))
+    unresolved["candidate_loci"][0]["category"] = "unresolved"
+    assert not candidate_set_is_valid(unresolved["candidate_loci"])
+    final_schema = load_json(ROOT / "schemas" / "human_llm_coder_output.schema.json")
+    assert response_schema["$defs"]["substantive_friction_locus"]["enum"] == final_schema["$defs"]["substantive_friction_locus"]["enum"]
+    assert response_schema["$defs"]["candidate_locus_state"]["enum"] == final_schema["$defs"]["candidate_locus_state"]["enum"]
     assert "record_hash" not in response_template
     assert "raw_output_hash" in final_template
     assert "record_hash" in final_template
@@ -266,9 +346,10 @@ def test_human_model_content_comparability_and_condition_manipulation_are_docume
     manipulation = (DOCS_DIR / "pr18_condition_manipulation_audit.md").read_text(encoding="utf-8")
     access = (DOCS_DIR / "human_coder_access_and_record_spec.md").read_text(encoding="utf-8")
 
-    assert "full authoritative JSON manual" in parity
-    assert "Unresolved substantive asymmetries: none" in parity
+    assert "Source packet and manual content are identical; access affordances differ." in parity
+    assert "Unresolved substantive content asymmetries: none" in parity
     assert "human may search within the supplied manual" in parity
+    assert "same manual in one assembled context" in parity
     assert "shared structured annotation baseline with increasing levels of interpretive guidance" in manipulation
     assert "Condition A adds" in manipulation
     assert "Condition B adds" in manipulation
@@ -311,13 +392,14 @@ def test_allocation_governance_and_non_execution_status():
     assert freeze_status["static_prompt_schema_status"] == "PASSED_MODEL_RESPONSE_SCHEMA_COMPATIBILITY_EXECUTION_BLOCKED"
     assert freeze_status["prompt_assembly_status"] == "PASSED_PROMPT_ASSEMBLY_SPECIFIED_EXECUTION_BLOCKED"
     assert freeze_status["model_response_enrichment_status"] == "PASSED_CONTRACT_SPECIFIED_EXECUTION_BLOCKED"
-    assert freeze_status["human_model_content_comparability_status"] == "PASSED_WITH_DOCUMENTED_INTERFACE_AND_METADATA_ASYMMETRIES_EXECUTION_BLOCKED"
+    assert freeze_status["human_model_content_comparability_status"] == "PASSED_IDENTICAL_SOURCE_AND_MANUAL_CONTENT_WITH_DOCUMENTED_ACCESS_AFFORDANCE_ASYMMETRIES_EXECUTION_BLOCKED"
     assert freeze_status["condition_manipulation_status"] == "PASSED_SHARED_BASELINE_WITH_DECLARED_INSTRUCTION_DEPTH_INCREMENTS_EXECUTION_BLOCKED"
     assert freeze_status["prompt_compatibility_status"].startswith("BLOCKED")
     assert freeze_status["rights_freeze_status"] == "BLOCKED_RIGHTS_REVIEW_REQUIRED"
     assert freeze_status["private_packet_status"].startswith("BLOCKED")
     assert freeze_status["model_account_status"].startswith("BLOCKED")
     assert freeze_status["runtime_settings_status"] == "BLOCKED_PENDING_PROVIDER_ACCOUNT_VERIFICATION"
+    assert freeze_status["pricing_status"] == "BLOCKED_PENDING_PROVIDER_ACCOUNT_PRICING_RECHECK"
     assert freeze_status["execution_authorization_status"].startswith("BLOCKED")
     assert freeze_status["overall_execution_readiness"].startswith("BLOCKED")
 

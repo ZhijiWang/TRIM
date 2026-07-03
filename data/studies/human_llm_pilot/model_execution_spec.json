@@ -24,7 +24,23 @@
   "provider_version_limitation_note": "Provider-side model weights, safety layers, and service configuration may change and cannot be fully reconstructed from frozen local materials alone.",
   "rate_limit_policy": "not_frozen_pending_account_verification",
   "prompt_assembly_status": "PASSED_PROMPT_ASSEMBLY_SPECIFIED_EXECUTION_BLOCKED",
-  "raw_request_preservation": "complete assembled prompt and provider-visible request representation must be preserved before execution when available",
+  "assembled_prompt_hash_location": "harness-only metadata stored outside the model-visible prompt",
+  "model_visible_context_fields": [
+    "case_id",
+    "instruction_condition",
+    "prompt_bundle_version"
+  ],
+  "harness_only_context_fields": [
+    "assembled_prompt_hash",
+    "source_packet_hash",
+    "provider",
+    "model",
+    "run_id",
+    "runtime_settings",
+    "retry_metadata",
+    "pricing_metadata"
+  ],
+  "raw_request_preservation": "complete assembled prompt and provider-visible request representation must be preserved before execution when available; assembled_prompt_hash is computed after substitution and stored outside the prompt",
   "raw_response_preservation": "exact raw response bytes/text must be preserved and hashed before parsing or repair",
   "response_format": "structured JSON required by schemas/human_llm_model_response.schema.json; not execution-frozen pending account/model verification",
   "retry_policy": "Transport or provider failure retry only after model is verified; malformed JSON gets at most one documented mechanical repair attempt after raw preservation; substantive reruns are separate recorded attempts.",

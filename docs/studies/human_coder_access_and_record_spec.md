@@ -23,7 +23,7 @@ No external browsing or secondary scholarship is allowed unless the frozen sourc
 
 ## Search and Notes
 
-Search within the supplied manual is allowed. This is an interface asymmetry relative to model prompt scanning, but the substantive manual content is identical. Personal procedural notes are allowed only if they are made before coding begins, contain no case-specific source text or expected outcomes, and are archived with the session materials if used.
+Search within the supplied manual is allowed, and the human may navigate back and forth manually within the supplied packet and manual. This is an access-affordance asymmetry relative to the model, which receives the same manual in one assembled context and no tools. It is not a substantive content difference. Personal procedural notes are allowed only if they are made before coding begins, contain no case-specific source text or expected outcomes, and are archived with the session materials if used.
 
 ## Human-Authored and System-Added Fields
 

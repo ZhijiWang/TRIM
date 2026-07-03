@@ -1,6 +1,6 @@
 # Human-LLM Friction-Locus Protocol Freeze Checklist
 
-Status: `BLOCKED`. Sample selection and allocation arithmetic are documented, but the execution package is not complete. Manual compatibility, static prompt/schema compatibility, deterministic prompt assembly, model-response enrichment, and condition manipulation are specified; executable prompt authorization, model/account verification, runtime settings, rights, and private source-packet readiness remain blocked.
+Status: `BLOCKED`. Sample selection and allocation arithmetic are documented, but the execution package is not complete. Manual compatibility, static prompt/schema compatibility, deterministic non-self-referential prompt assembly, model-response enrichment, exact eight-category model-response coverage, and condition manipulation are specified; executable prompt authorization, model/account verification, runtime settings, pricing, rights, and private source-packet readiness remain blocked.
 
 ## Completed before or during sample freeze
 
@@ -39,6 +39,8 @@ Status: `BLOCKED`. Sample selection and allocation arithmetic are documented, bu
 - [x] Counterfactual tests referenced through the authoritative current manual.
 - [x] Predicted-confusion table reconciled against the authoritative current manual.
 - [x] Deterministic prompt assembly specified.
+- [x] Assembled prompt hash kept outside model-visible prompt.
+- [x] Exact eight-category model-response candidate coverage enforced.
 - [x] Model-authored payload separated from harness metadata.
 - [x] Human manual access specified.
 - [x] A/B/C manipulation boundary renamed and frozen.
