@@ -1,36 +1,17 @@
 # Human-LLM Pilot Manual Gap Report
 
-Status: `BLOCKED_INCOMPLETE_AUTHORITATIVE_MANUAL`
+Status: `SUPERSEDED_BY_AUTHORITATIVE_MANUAL_PR19`
 
-This audit found no complete authoritative current Design B friction_locus coding manual in the active repository tree. The freeze therefore cannot treat the protocol, lineage table, and predicted-confusions table as an executable manual bundle.
+This report is retained as the historical blocker audit from the earlier freeze revision. The blocker it identified has now been resolved by PR #19, merged at `6364add9a89f3fe6d26043727b9d44cb21a76db0`.
 
-## Candidate Files Audited
+Authoritative manual now referenced by PR #18:
 
-| Candidate | Commit | Assessment |
-| --- | --- | --- |
-| `docs/studies/human_llm_friction_locus_pilot_protocol.md` | `6998175eeca5d349072bf31012c69f2d568f28ec` | Study protocol. It defines Design B and study governance, but it is not a complete operational coding manual. |
-| `docs/studies/friction_locus_lineage_table.csv` | `6998175eeca5d349072bf31012c69f2d568f28ec` | Category lineage and short definitions. It does not provide a full decision procedure. |
-| `docs/studies/predicted_confusions.csv` | `6998175eeca5d349072bf31012c69f2d568f28ec` | Confusable-pair and counterfactual-test table. It is supporting material, not a manual. |
-| `docs/TRIM_Coding_Manual_v0_2_1_friction_locus.md` | `252f4b1c867751bd996885ec674f5f546ddbc110` | Historical legacy TRIM manual found in the archival tag. It is not in the active tree and has not been adopted as the authoritative current Design B manual. |
-| `docs/TRIM_Coding_Manual_v0_2_friction_locus_final.md` | `252f4b1c867751bd996885ec674f5f546ddbc110` | Earlier historical legacy TRIM manual. It is not an active current Design B manual. |
+- manual_version: `friction_locus_manual_v0_1`
+- manual_status: `AUTHORITATIVE_FOR_PROTOCOL_REVIEW`
+- Markdown: `docs/manuals/friction_locus_manual_v0_1.md` / `f26f5de05819c4fd36c0d88e7d86320d7374c27185c36575b18b584fc5d9b426`
+- JSON: `docs/manuals/friction_locus_manual_v0_1.json` / `797d79fcdb29fc32850c3778c6afb029ac0768207ea33f66d714fe8fa8cb591a`
+- schema: `schemas/human_llm_coder_output.schema.json` / `2abdf5f5690aada67f1694f8d83dfe95236fbcba46c1bbcfca169567dbda7b12`
 
-## Completeness Result
+The historical finding remains useful as a record: the protocol, lineage table, and predicted-confusions table alone were not a complete manual. They are now supporting materials, not the authority for Condition C.
 
-No active file was found that contains all required operational components:
-
-- all controlled category values with operational definitions;
-- use-when guidance for each value;
-- use-another-value guidance for near misses;
-- confusable-with guidance;
-- counterfactual tests;
-- a full decision tree;
-- positive examples approved for manual use without leaking study-sample material;
-- reserved or review-required category rules;
-- escalation rules.
-
-The legacy manuals contain substantial operational guidance, but they are historical TRIM documents. Re-adopting or revising them for Design B would be a new manual-authoring task, not a correction that can be silently made inside this freeze revision.
-
-## Consequence
-
-The manual freeze remains blocked. Condition C cannot be execution-ready because it cannot include or deterministically reference a complete authoritative current manual. Conditions A and B remain non-executable scaffolds until the manual and model are both frozen.
-
+Execution remains blocked by rights review, private source-packet audit, model/account verification, and final execution authorization.

@@ -1,5 +1,19 @@
-STATUS: BLOCKED_NOT_EXECUTION_READY. This prompt scaffold must not be used for model execution until an authoritative friction_locus manual and account-verified model are frozen.
+STATUS: BLOCKED_NOT_EXECUTION_READY. This condition is manual/schema-compatible but must not be used for study execution until rights, controlled private packets, model/account access, and final execution authorization pass.
 
 Condition B: concise decision rules.
 
-This draft remains non-executable. It may later provide concise operational rules and limited disambiguation only. It must not include the full manual, full decision tree, detailed counterfactual suite, or study-sample examples.
+Apply concise operational rules only. Do not use the full manual, full decision tree, full counterfactual suite, detailed worked examples, or study-sample examples.
+
+Concise rules:
+1. Record selected evidence before choosing a proposed locus.
+2. Evaluate all eight substantive categories and store one structured candidate_loci entry for each.
+3. Do not treat candidate_loci array order as priority.
+4. If no category is supported, set final_operational_label to unresolved and escalate.
+5. If one category is supported, apply its primary counterfactual and review policy.
+6. If two categories are supported, apply a pairwise counterfactual and record why one dominates or why unresolved is retained.
+7. If more than two categories are supported, compare them without using category order; unresolved with escalation is allowed.
+8. cue_function requires positive cue-family substitution evidence and cannot be selected because all other categories failed.
+9. context_inference requires a named, documented, protocol-permitted contextual bridge and cannot be used as a fallback.
+10. Model proposals of cue_function, boundary_setting, or context_inference require human review, unresolved final label before review, and escalation.
+11. Preserve alternatives and uncertainty separately from unresolved and escalation.
+12. Review records are separate events and must link to the original proposal record by ID and hash.

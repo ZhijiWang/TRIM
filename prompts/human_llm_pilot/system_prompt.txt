@@ -1,7 +1,25 @@
-STATUS: BLOCKED_NOT_EXECUTION_READY. This prompt scaffold must not be used for model execution until an authoritative friction_locus manual and account-verified model are frozen.
+STATUS: BLOCKED_NOT_EXECUTION_READY. This prompt scaffold is compatible with the authoritative manual reference, but it must not be used for study execution until rights, controlled private packets, model/account access, and final execution authorization pass.
 
 Task framing shared by all conditions:
 You are producing an annotation record for a Design B human-model procedural comparison study. The record is not a truth verdict, answer key, or adjudication of the literary passage. Treat the source packet as the only evidence available. Do not browse, use tools, consult external sources, or rely on another session. Preserve uncertainty and alternative pathways when the packet supports them. Cite evidence IDs exactly as they appear in the source packet. Do not infer missing source context beyond the frozen packet.
 
-Structured output requirement shared by all conditions:
-Return one JSON object that conforms to the supplied model_coder_record output schema. Preserve concise free_text_rationale, not hidden chain-of-thought. Include selected_evidence, primary_label, friction_locus_proposed, friction_locus_operational_status, final_operational_label, rationale_mechanism, uncertainty, alternative_pathways, counterfactual_tests, decision_path, escalation_required, escalation_reason, free_text_rationale, unresolved_ambiguity, and the permitted placeholder for record_hash. Do not add fields outside the schema.
+Manual reference shared by all conditions:
+- manual_version: friction_locus_manual_v0_1
+- manual_status: AUTHORITATIVE_FOR_PROTOCOL_REVIEW
+- manual_merge_commit: 6364add9a89f3fe6d26043727b9d44cb21a76db0
+- manual_json_path: docs/manuals/friction_locus_manual_v0_1.json
+- manual_json_sha256: 797d79fcdb29fc32850c3778c6afb029ac0768207ea33f66d714fe8fa8cb591a
+- coder_schema_path: schemas/human_llm_coder_output.schema.json
+- coder_schema_sha256: 2abdf5f5690aada67f1694f8d83dfe95236fbcba46c1bbcfca169567dbda7b12
+- claim_boundary: Authoritative for protocol review only; not empirical validation, coder-reliability validation, ontology validation, or execution authorization.
+
+Structured output requirement shared by all model conditions:
+Return one JSON object conforming to schemas/human_llm_coder_output.schema.json as a model_coder_record. Include: record_type, actor_type, case_id, record_id, timestamp, manual_version, selected_evidence, primary_label, friction_locus_proposed, friction_locus_operational_status, final_operational_label, rationale_mechanism, uncertainty, alternative_pathways, counterfactual_tests, candidate_loci, decision_path, review_policy_applied, escalation_required, escalation_reason, review_of_record_id, review_of_record_hash, free_text_rationale, unresolved_ambiguity, record_hash, run_id, provider, model, model_version_if_known, prompt_version, instruction_condition, source_packet_hash, raw_output_hash, parse_status, retry_count, and technical_failure_status.
+
+candidate_loci requirements:
+Return exactly eight candidate_loci entries, one for each substantive category: cue_function, warrant_attribution, warrant_relation, operation_function, boundary_setting, temporal_layering, perspective_assignment, context_inference. Do not include unresolved as a candidate category. Use one state per category: candidate_supported, candidate_not_supported, insufficient_evidence, or not_applicable. A candidate_supported entry requires cited_evidence. Every candidate entry requires rationale and confidence. Array order is not priority.
+
+Governance requirements:
+cue_function is reserved. boundary_setting and context_inference are review-sensitive. warrant_attribution, warrant_relation, operation_function, temporal_layering, and perspective_assignment are standard. A model proposal of a reserved or review-sensitive category requires review_policy_applied.requires_human_review = true, friction_locus_operational_status = requires_human_review, final_operational_label = unresolved, and escalation_required = true. Standard-category final_label_before_review is null. Review/adjudication records are separate records with review_of_record_id and review_of_record_hash; original proposal records leave those fields null.
+
+Do not expose hidden chain-of-thought. Use concise free_text_rationale and structured counterfactual_tests instead.

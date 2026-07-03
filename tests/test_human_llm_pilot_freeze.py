@@ -101,11 +101,18 @@ def test_public_source_packets_are_redacted_and_non_empirical():
 def test_manual_prompt_and_schema_hashes_match_blocked_files():
     manual = load_json(DATA_DIR / "manual_freeze_manifest.json")
     prompts = load_json(DATA_DIR / "prompt_bundle_manifest.json")
+    manual_ref = load_json(DATA_DIR / "authoritative_manual_reference.json")
 
-    assert manual["repository_commit"] == "6998175eeca5d349072bf31012c69f2d568f28ec"
-    assert manual["manual_path"] is None
-    assert manual["manual_file_hash"] is None
-    assert manual["manual_freeze_status"] == "BLOCKED_INCOMPLETE_AUTHORITATIVE_MANUAL"
+    assert manual_ref["manual_merge_commit"] == "6364add9a89f3fe6d26043727b9d44cb21a76db0"
+    assert manual_ref["manual_status"] == "AUTHORITATIVE_FOR_PROTOCOL_REVIEW"
+    assert manual["repository_commit"] == "6364add9a89f3fe6d26043727b9d44cb21a76db0"
+    assert manual["manual_path"] == "docs/manuals/friction_locus_manual_v0_1.md"
+    assert manual["manual_file_hash"] == "f26f5de05819c4fd36c0d88e7d86320d7374c27185c36575b18b584fc5d9b426"
+    assert manual["manual_json_hash"] == "797d79fcdb29fc32850c3778c6afb029ac0768207ea33f66d714fe8fa8cb591a"
+    assert manual["manual_manifest_hash"] == "1b80c0931a0ed8159aaeeb6e7b348331beb33130776469f223ae2a8cfe89d8de"
+    assert manual["manual_freeze_status"] == "MANUAL_COMPATIBILITY_PASSED_AUTHORITATIVE_FOR_PROTOCOL_REVIEW"
+    assert manual["schema_hash"] == "2abdf5f5690aada67f1694f8d83dfe95236fbcba46c1bbcfca169567dbda7b12"
+    assert manual["schema_compatibility"] == "compatible"
     assert sha256(ROOT / manual["predicted_confusions_path"]) == manual["predicted_confusions_hash"]
     assert sha256(ROOT / manual["category_definitions_path"]) == manual["category_definitions_hash"]
     assert sha256(ROOT / manual["schema_path"]) == manual["schema_hash"]
@@ -116,6 +123,7 @@ def test_manual_prompt_and_schema_hashes_match_blocked_files():
         "condition_A",
         "condition_B",
         "condition_C",
+        "human_researcher_instructions",
         "output_schema",
     ]:
         assert sha256(ROOT / prompts[f"{key}_path"]) == prompts[f"{key}_hash"]
@@ -131,15 +139,22 @@ def test_prompts_are_blocked_scaffolds_not_execution_ready():
     condition_c = (ROOT / "prompts" / "human_llm_pilot" / "condition_C.txt").read_text(encoding="utf-8")
 
     assert prompts["prompt_bundle_status"] == "BLOCKED_NOT_EXECUTION_READY"
-    assert prompt_audit["audit_status"] == "BLOCKED"
+    assert prompts["manual_compatibility_status"] == "PASSED_AUTHORITATIVE_MANUAL_REFERENCE_VERIFIED"
+    assert prompts["prompt_compatibility_status"] == "PASSED_SCHEMA_AND_MANUAL_COMPATIBILITY_EXECUTION_BLOCKED"
+    assert prompt_audit["audit_status"] == "PASSED_MANUAL_COMPATIBILITY_EXECUTION_BLOCKED"
     assert "not a truth verdict" in system_prompt
     assert "Do not browse, use tools" in system_prompt
+    assert "candidate_loci" in system_prompt
+    assert "review_policy_applied" in system_prompt
     assert "{{CASE_ID}}" in user_template
     assert "{{SOURCE_PACKET}}" in user_template
     assert "{{OUTPUT_SCHEMA}}" in user_template
     assert "short definitions only" in condition_a
     assert "concise decision rules" in condition_b
-    assert "no complete authoritative current Design B friction_locus manual" in condition_c
+    assert "manual_merge_commit: 6364add9a89f3fe6d26043727b9d44cb21a76db0" in condition_c
+    assert "exactly eight structured candidate_loci entries" in condition_c
+    assert "cue_function requires positive cue-family substitution evidence" in condition_c
+    assert "context_inference requires a named, documented, protocol-permitted contextual bridge" in condition_c
 
 
 def test_allocation_governance_and_non_execution_status():
@@ -171,7 +186,13 @@ def test_allocation_governance_and_non_execution_status():
     assert model_spec["browsing"] == "disabled"
     assert model_spec["tools"] == "disabled"
     assert cost["estimated_upper_bound_cost_status"] == "not_final"
-    assert freeze_status["overall_execution_readiness"] == "BLOCKED"
+    assert freeze_status["manual_compatibility_status"] == "PASSED_AUTHORITATIVE_MANUAL_REFERENCE_VERIFIED"
+    assert freeze_status["prompt_compatibility_status"] == "PASSED_SCHEMA_AND_MANUAL_COMPATIBILITY_EXECUTION_BLOCKED"
+    assert freeze_status["rights_freeze_status"] == "BLOCKED_RIGHTS_REVIEW_REQUIRED"
+    assert freeze_status["private_packet_status"].startswith("BLOCKED")
+    assert freeze_status["model_account_status"].startswith("BLOCKED")
+    assert freeze_status["execution_authorization_status"].startswith("BLOCKED")
+    assert freeze_status["overall_execution_readiness"].startswith("BLOCKED")
 
     for phrase in [
         "Human coding occurred: no.",
@@ -183,6 +204,8 @@ def test_allocation_governance_and_non_execution_status():
         assert phrase in report
 
     assert "- [ ] Researcher records completed." in checklist
-    assert "- [ ] Authoritative current Design B friction_locus manual frozen." in checklist
+    assert "- [x] Authoritative current Design B friction_locus manual referenced for protocol review." in checklist
+    assert "- [x] Prompt bundle rebuilt for manual/schema compatibility." in checklist
+    assert "- [ ] Prompts A/B/C frozen as executable." in checklist
     assert "- [ ] Account-verified model and decoding parameters frozen." in checklist
     assert "- [ ] Run manifests populated." in checklist

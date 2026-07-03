@@ -1,0 +1,15 @@
+{
+  "claim_boundary": "Authoritative for protocol review only; not empirical validation, coder-reliability validation, ontology validation, or execution authorization.",
+  "coder_schema_path": "schemas/human_llm_coder_output.schema.json",
+  "coder_schema_sha256": "2abdf5f5690aada67f1694f8d83dfe95236fbcba46c1bbcfca169567dbda7b12",
+  "manual_json_path": "docs/manuals/friction_locus_manual_v0_1.json",
+  "manual_json_sha256": "797d79fcdb29fc32850c3778c6afb029ac0768207ea33f66d714fe8fa8cb591a",
+  "manual_manifest_path": "docs/manuals/friction_locus_manual_manifest.json",
+  "manual_manifest_sha256": "1b80c0931a0ed8159aaeeb6e7b348331beb33130776469f223ae2a8cfe89d8de",
+  "manual_markdown_path": "docs/manuals/friction_locus_manual_v0_1.md",
+  "manual_markdown_sha256": "f26f5de05819c4fd36c0d88e7d86320d7374c27185c36575b18b584fc5d9b426",
+  "manual_merge_commit": "6364add9a89f3fe6d26043727b9d44cb21a76db0",
+  "manual_status": "AUTHORITATIVE_FOR_PROTOCOL_REVIEW",
+  "manual_version": "friction_locus_manual_v0_1",
+  "schema_compatibility": "compatible"
+}

@@ -1,6 +1,6 @@
 # Human-LLM Friction-Locus Protocol Freeze Checklist
 
-Status: `BLOCKED`. Sample selection and allocation arithmetic are documented, but the execution package is not complete. Manual, prompt, model, rights, and private source-packet readiness remain blocked.
+Status: `BLOCKED`. Sample selection and allocation arithmetic are documented, but the execution package is not complete. Manual compatibility is resolved; executable prompt authorization, model, rights, and private source-packet readiness remain blocked.
 
 ## Completed before or during sample freeze
 
@@ -35,9 +35,9 @@ Status: `BLOCKED`. Sample selection and allocation arithmetic are documented, bu
 - [x] Textual rights status recorded.
 - [ ] Canonical-language and translation/gloss policy execution-ready.
 - [x] Context-window and paratext-removal rules frozen.
-- [ ] Authoritative current Design B friction_locus manual frozen.
-- [ ] Counterfactual tests frozen against an authoritative current manual.
-- [ ] Predicted-confusion table frozen against an authoritative current manual.
+- [x] Authoritative current Design B friction_locus manual referenced for protocol review.
+- [x] Counterfactual tests referenced through the authoritative current manual.
+- [x] Predicted-confusion table reconciled against the authoritative current manual.
 - [ ] Prompts A/B/C frozen as executable.
 - [x] Ablation execution order or randomization rule frozen.
 - [ ] Account-verified model and decoding parameters frozen.
@@ -48,7 +48,7 @@ Status: `BLOCKED`. Sample selection and allocation arithmetic are documented, bu
 - [ ] Authoritative manual identified or created under a later authorised task.
 - [ ] Source and translation rights cleared, or controlled private packet storage approved.
 - [ ] Public metadata packets reconciled with controlled private source packets.
-- [ ] Prompt bundle regenerated from the authoritative manual.
+- [x] Prompt bundle rebuilt for manual/schema compatibility.
 - [ ] Execution model verified against the authenticated account.
 
 ## Not completed before researcher coding

@@ -1,0 +1,61 @@
+{
+  "authoritative_manual_reference_hash": "7eef33cdea1c8574a2b6251748c3d9ec98af9be47df3ff626cf8c9b42a26f016",
+  "authoritative_manual_reference_path": "data/studies/human_llm_pilot/authoritative_manual_reference.json",
+  "base_main_commit": "6364add9a89f3fe6d26043727b9d44cb21a76db0",
+  "blocked_reasons": [
+    "source redistribution rights",
+    "controlled private packet audit",
+    "account-verified model and execution settings",
+    "final execution authorization"
+  ],
+  "claim_boundary": "Authoritative for protocol review only; not empirical validation, coder-reliability validation, ontology validation, or execution authorization.",
+  "coder_schema_hash": "2abdf5f5690aada67f1694f8d83dfe95236fbcba46c1bbcfca169567dbda7b12",
+  "condition_C_hash": "476a3bf6d13ba1d2de51256416d0216e256b3c8b9ad2a49356be1fa5e8ed73ac",
+  "condition_C_path": "prompts/human_llm_pilot/condition_C.txt",
+  "current_pr18_branch_commit": "NON_CIRCULAR_NOT_RECORDED_IN_FILE_SEE_PR_HEAD",
+  "execution_authorization_status": "BLOCKED_PENDING_RIGHTS_PRIVATE_PACKETS_MODEL_ACCOUNT_AND_FINAL_EXECUTION_AUTHORIZATION",
+  "freeze_package_manifest_hash": "24cf3777b48ec23dcf07147b3c7827d3324634e08980f93dba4c328578b4a170",
+  "freeze_package_manifest_version": "human_llm_pilot_freeze_package_manifest_v0_2",
+  "hash_rules": "SHA-256 over LF-normalized bytes for files; canonical JSON excluding freeze_package_manifest_hash for this manifest.",
+  "manual_compatibility_status": "PASSED_AUTHORITATIVE_MANUAL_REFERENCE_VERIFIED",
+  "manual_json_hash": "797d79fcdb29fc32850c3778c6afb029ac0768207ea33f66d714fe8fa8cb591a",
+  "manual_manifest_hash": "1b80c0931a0ed8159aaeeb6e7b348331beb33130776469f223ae2a8cfe89d8de",
+  "manual_markdown_hash": "f26f5de05819c4fd36c0d88e7d86320d7374c27185c36575b18b584fc5d9b426",
+  "manual_merge_commit": "6364add9a89f3fe6d26043727b9d44cb21a76db0",
+  "model_account_status": "BLOCKED_PENDING_ACCOUNT_AVAILABILITY_VERIFICATION",
+  "pr18_head_before_update": "d22c5879eed4a1f5b751fecdf1dfbbe1a27d860b",
+  "private_packet_status": "BLOCKED_PRIVATE_PACKET_AUDIT_REQUIRED_BEFORE_CODING",
+  "prompt_compatibility_status": "PASSED_SCHEMA_AND_MANUAL_COMPATIBILITY_EXECUTION_BLOCKED",
+  "prompt_files": {
+    "condition_A": {
+      "hash": "4846c78ae12f5f875acd6b99c9f951b1b2996d218995b0c3bed6d16e94c9b1fe",
+      "path": "prompts/human_llm_pilot/condition_A.txt"
+    },
+    "condition_B": {
+      "hash": "4d29d8ce3f9949601ab29a4b75d62fe8025095558093e48f0884e377aa5f1349",
+      "path": "prompts/human_llm_pilot/condition_B.txt"
+    },
+    "condition_C": {
+      "hash": "476a3bf6d13ba1d2de51256416d0216e256b3c8b9ad2a49356be1fa5e8ed73ac",
+      "path": "prompts/human_llm_pilot/condition_C.txt"
+    },
+    "human_researcher_instructions": {
+      "hash": "d991195ff90bc63b375f0c0c9f33896faeb146dee7af3331403b38e38fee7251",
+      "path": "prompts/human_llm_pilot/human_researcher_instructions.txt"
+    },
+    "output_schema": {
+      "hash": "2abdf5f5690aada67f1694f8d83dfe95236fbcba46c1bbcfca169567dbda7b12",
+      "path": "schemas/human_llm_coder_output.schema.json"
+    },
+    "system_prompt": {
+      "hash": "155478266c1a1fd7d2a347710c5d2a6343378cb487f0091a62f48095ec63b99a",
+      "path": "prompts/human_llm_pilot/system_prompt.txt"
+    },
+    "user_prompt_template": {
+      "hash": "abed95ce23c44ef5079687dc0d15d3679228e8a6094fc4db5c2a2c5259767c24",
+      "path": "prompts/human_llm_pilot/user_prompt_template.txt"
+    }
+  },
+  "rights_status": "BLOCKED_RIGHTS_REVIEW_REQUIRED",
+  "selected_case_manifest_hash": "1ebcaef44ac560622f9c56a91c9534d46929f2e9d5bbb5e722107188c9adf7a6"
+}

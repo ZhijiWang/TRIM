@@ -1,5 +1,17 @@
-STATUS: BLOCKED_NOT_EXECUTION_READY. This prompt scaffold must not be used for model execution until an authoritative friction_locus manual and account-verified model are frozen.
+STATUS: BLOCKED_NOT_EXECUTION_READY. This condition is manual/schema-compatible but must not be used for study execution until rights, controlled private packets, model/account access, and final execution authorization pass.
 
 Condition A: label names and short definitions only.
 
-This draft remains non-executable. It may later provide category names, short definitions, common task framing, and shared output instructions only. It must not include the full decision tree, detailed counterfactual tests, confusable-with guidance, or study-sample examples.
+Use only the eight category names and short definitions supplied below, plus the shared task framing and shared structured output schema. Do not use the full decision tree, pairwise disambiguation guidance, detailed counterfactual suite, confusable-with guidance, or manual worked examples. Do not use any study case as an example.
+
+Category names:
+- cue_function: cue-family substitution may change interpretation while other procedural variables are stable; reserved before review.
+- warrant_attribution: standing or warranting force is attributed to one source, sign, speaker, medium, or result.
+- warrant_relation: multiple warrants interact, conflict, qualify, rank, or suspend one another.
+- operation_function: a visible interpretive operation converts evidence into the proposed interpretation.
+- boundary_setting: a scope, unit, speaker, category, or case boundary controls the interpretation; review-sensitive before final use.
+- temporal_layering: later, retrospective, repeated, or fulfilled temporal layers change how evidence functions.
+- perspective_assignment: standpoint, focalization, witness role, or testimonial position controls the interpretation.
+- context_inference: a named, documented, protocol-permitted contextual bridge is necessary; review-sensitive and never a fallback.
+
+Even in Condition A, return the full structured schema, including all eight candidate_loci states and review_policy_applied. If the short-definition information is insufficient, use unresolved and escalation rather than forcing a substantive locus.

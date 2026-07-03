@@ -12,7 +12,8 @@
   "textual_materials": "public-domain/openly accessible/lawfully used sources with source-specific rights review retained as execution blocker before public redistribution",
   "unresolved_items": [
     "Verify source-specific redistribution rights before public packet release.",
-    "Verify current model availability and pricing immediately before execution.",
+    "Audit controlled private source packets before researcher coding.",
+    "Verify current model availability, account access, endpoint behavior, and pricing immediately before execution.",
     "Obtain institutional governance advice before any protocol expansion involving external humans."
   ]
 }

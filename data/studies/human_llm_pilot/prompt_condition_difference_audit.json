@@ -1,17 +1,21 @@
 {
-  "audit_status": "BLOCKED",
-  "condition_A_validity": "BLOCKED_SCAFFOLD_ONLY; intended depth is short definitions only, but not executable until manual and model are frozen",
-  "condition_B_validity": "BLOCKED_SCAFFOLD_ONLY; intended depth is concise rules only, but not executable until manual and model are frozen",
-  "condition_C_validity": "INVALID_FOR_EXECUTION_PENDING_AUTHORITATIVE_MANUAL",
-  "difference_assessment": "A, B, and C are retained only as non-executable scaffolds. A future freeze must re-audit condition differences after the authoritative manual and verified model are selected.",
+  "audit_status": "PASSED_MANUAL_COMPATIBILITY_EXECUTION_BLOCKED",
+  "condition_A_validity": "COMPATIBLE_WITH_AUTHORITATIVE_SCHEMA; short definitions only; execution blocked pending rights, private packets, and account-verified model",
+  "condition_B_validity": "COMPATIBLE_WITH_AUTHORITATIVE_SCHEMA; concise rules only; execution blocked pending rights, private packets, and account-verified model",
+  "condition_C_validity": "REBUILT_AGAINST_AUTHORITATIVE_MANUAL; compatible but not execution-authorized",
+  "difference_assessment": "A, B, and C differ only in intended instruction depth. Shared source packet placeholder, task framing, output schema, non-truth-verdict boundary, evidence-ID requirement, alternative handling, no-browsing/no-tools rule, and session isolation are retained.",
   "no_model_call": "yes",
   "no_study_sample_examples": "yes",
   "shared_requirements_checked": [
-    "same task framing scaffold",
+    "same task framing",
     "same source packet placeholder",
-    "same output schema placeholder",
-    "same evidence-ID requirement scaffold",
-    "same alternative-pathway requirement scaffold",
-    "same truth/non-gold-standard boundary scaffold"
+    "same output schema",
+    "same evidence-ID requirement",
+    "same alternative-pathway requirement",
+    "same truth/non-gold-standard boundary",
+    "same candidate_loci structure",
+    "same review_policy_applied structure",
+    "same review linkage fields",
+    "same no-browsing/no-tools rule"
   ]
 }

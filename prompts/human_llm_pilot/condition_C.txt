@@ -1,5 +1,45 @@
-STATUS: BLOCKED_NOT_EXECUTION_READY. This prompt scaffold must not be used for model execution until an authoritative friction_locus manual and account-verified model are frozen.
+STATUS: BLOCKED_NOT_EXECUTION_READY. Condition C has been rebuilt against the merged authoritative manual and is compatible with the study-specific schema. It must not be used for study execution until rights, controlled private packets, model/account access, and final execution authorization pass.
 
 Condition C: full manual condition.
 
-This draft remains invalid for execution because no complete authoritative current Design B friction_locus manual has been identified. Condition C must later include or deterministically reference the complete authoritative operational manual, full counterfactual tests, confusable-with guidance, decision rules, and escalation rules. The current protocol, lineage table, and predicted-confusions table do not collectively constitute that manual.
+Manual identity:
+- manual_version: friction_locus_manual_v0_1
+- manual_status: AUTHORITATIVE_FOR_PROTOCOL_REVIEW
+- manual_merge_commit: 6364add9a89f3fe6d26043727b9d44cb21a76db0
+- manual_markdown_path: docs/manuals/friction_locus_manual_v0_1.md
+- manual_markdown_sha256: f26f5de05819c4fd36c0d88e7d86320d7374c27185c36575b18b584fc5d9b426
+- manual_json_path: docs/manuals/friction_locus_manual_v0_1.json
+- manual_json_sha256: 797d79fcdb29fc32850c3778c6afb029ac0768207ea33f66d714fe8fa8cb591a
+- manual_manifest_path: docs/manuals/friction_locus_manual_manifest.json
+- manual_manifest_sha256: 1b80c0931a0ed8159aaeeb6e7b348331beb33130776469f223ae2a8cfe89d8de
+- coder_schema_path: schemas/human_llm_coder_output.schema.json
+- coder_schema_sha256: 2abdf5f5690aada67f1694f8d83dfe95236fbcba46c1bbcfca169567dbda7b12
+
+Use the full authoritative manual by deterministic reference to the exact JSON and Markdown hashes above. Do not use the manual worked examples as study inputs. Do not expose expected outcomes, gold labels, or case-specific hints.
+
+Category set:
+Use exactly eight substantive values: cue_function, warrant_attribution, warrant_relation, operation_function, boundary_setting, temporal_layering, perspective_assignment, context_inference. Handle unresolved separately as an operational/final state, not as a candidate category. Do not add legacy categories.
+
+Candidate detection:
+Evaluate all eight categories and return exactly eight structured candidate_loci entries. Use one state for each category: candidate_supported, candidate_not_supported, insufficient_evidence, or not_applicable. Supported candidates require cited evidence. Every entry requires rationale and confidence. Category order must not determine the result.
+
+Dominance resolution:
+- no supported candidate: final_operational_label = unresolved; escalation_required = true.
+- one supported candidate: apply the primary counterfactual and review policy.
+- two supported candidates: apply the relevant pairwise counterfactual; record why one dominates or why unresolved remains.
+- more than two supported candidates: compare without category order; unresolved with escalation is allowed.
+- conflicting tests: final_operational_label = unresolved; escalation_required = true.
+
+Governance:
+cue_function is reserved. boundary_setting and context_inference are review-sensitive. warrant_attribution, warrant_relation, operation_function, temporal_layering, and perspective_assignment are standard. Model proposals of reserved or review-sensitive categories require review_policy_applied.requires_human_review = true, friction_locus_operational_status = requires_human_review, final_operational_label = unresolved, and escalation_required = true. Original proposal records must be preserved.
+
+Review linkage:
+Proposal records use review_of_record_id = null and review_of_record_hash = null. A later adjudicator_separate_record must be a separate record, must include review_of_record_id and review_of_record_hash, and must not overwrite the original proposed_locus.
+
+Context rule:
+context_inference requires a named, documented, protocol-permitted contextual bridge. It cannot be selected by elimination or as a fallback.
+
+Cue rule:
+cue_function requires positive cue-family substitution evidence while other procedural variables remain stable. It cannot be selected because all other categories failed.
+
+Manual compatibility is not execution authorization. If the source packet, model/account settings, rights, or private packet handling are not cleared, no model run may occur.

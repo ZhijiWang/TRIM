@@ -1,8 +1,8 @@
-STATUS: BLOCKED_NOT_EXECUTION_READY. This prompt scaffold must not be used for model execution until an authoritative friction_locus manual and account-verified model are frozen.
+STATUS: BLOCKED_NOT_EXECUTION_READY. This user prompt template is manual/schema-compatible but must not be used for study execution until rights, controlled private packets, model/account access, and final execution authorization pass.
 
 Case ID: {{CASE_ID}}
 
-Use the following frozen source packet. Do not add source material, scholarship, or background knowledge beyond this packet.
+Use the following frozen controlled source packet. Do not add source material, scholarship, or background knowledge beyond this packet. The same visible source layers must be used for the researcher and future model comparison.
 
 {{SOURCE_PACKET}}
 

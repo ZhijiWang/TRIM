@@ -14,8 +14,7 @@ procedurally rather than only as label divergence?
 - `predicted_confusions.csv`: manual-derived predicted confusable pairs.
 - `human_llm_sample_selection_log.csv`: populated sample-selection log.
 - `human_llm_pilot_freeze_report.md`: current blocked freeze-status report.
-- `human_llm_manual_gap_report.md`: audit showing that no complete
-  authoritative current Design B manual has been identified.
+- `human_llm_manual_gap_report.md`: historical audit superseded by the merged authoritative manual PR #19.
 - `human_llm_rights_redaction_note.md`: public-packet text redaction notice.
 - `human_llm_protocol_freeze_checklist.md`: checklist with completed and
   blocked components.
@@ -50,11 +49,11 @@ under the current protocol.
 Before implementation:
 
 1. Independently audit this protocol.
-2. Resolve the authoritative friction_locus manual blocker.
+2. Reference the merged authoritative friction_locus manual from PR #19 (completed for protocol review).
 3. Resolve source and translation rights before using full text in a public or
    executable packet.
 4. Verify the model against the authenticated execution account.
-5. Regenerate executable prompt versions after the manual and model are frozen.
+5. Keep prompt execution blocked until rights, private-packet handling, model/account verification, and final authorization pass.
 6. Complete and lock human coding before any AI execution.
 7. Preserve raw model outputs before parsing.
 8. Analyze procedural disagreement without treating either record as a gold
