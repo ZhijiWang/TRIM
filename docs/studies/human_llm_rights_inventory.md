@@ -1,0 +1,49 @@
+# Human-LLM pilot rights inventory
+
+Status: preparation-only. This document does not approve rights, translations, private-packet access, human coding, model execution, or public redistribution.
+
+PR #18 freeze reference: `eac65f27bbe302a17e5f508ac1d516178e917aea`.
+Overall execution status remains: `BLOCKED_PENDING_RIGHTS_PRIVATE_PACKETS_MODEL_ACCOUNT_RUNTIME_SETTINGS_PRICING_AND_FINAL_EXECUTION_AUTHORIZATION`.
+
+This inventory is built from public PR #18 metadata only. It contains no private source-packet text and no private packet hashes. Project Gutenberg or other source metadata is treated as a starting point for documentary review, not as proof that public redistribution or provider transmission is cleared in all relevant jurisdictions.
+
+## Status summary
+
+- Selected cases: 25
+- Rights-source review unresolved: 25
+- Translation-specific review unresolved: 10
+- Private-packet inspection blocked: 25
+
+## Inventory
+
+| Case ID | Source title or identifier | Author / tradition | Language layer | Rights status | Translation status | Evidence path | Private packet inspection | Unresolved question |
+|---|---|---|---|---|---|---|---|---|
+| L1_AUSTEN_PNP_001 | Jane Austen, Pride and Prejudice | Jane Austen | English | RIGHTS_SOURCE_REVIEW_REQUIRED | not_applicable | none recorded | blocked | Source- and edition-specific rights evidence is required before private-packet inspection or execution. |
+| L1_SHELLEY_FRANK_001 | Mary Wollstonecraft Shelley, Frankenstein; or, The Modern Prometheus | Mary Wollstonecraft Shelley | English | RIGHTS_SOURCE_REVIEW_REQUIRED | not_applicable | none recorded | blocked | Source- and edition-specific rights evidence is required before private-packet inspection or execution. |
+| L1_DICKENS_GE_001 | Charles Dickens, Great Expectations | Charles Dickens | English | RIGHTS_SOURCE_REVIEW_REQUIRED | not_applicable | none recorded | blocked | Source- and edition-specific rights evidence is required before private-packet inspection or execution. |
+| L1_BRONTE_JE_001 | Charlotte Bronte, Jane Eyre | Charlotte Bronte | English | RIGHTS_SOURCE_REVIEW_REQUIRED | not_applicable | none recorded | blocked | Source- and edition-specific rights evidence is required before private-packet inspection or execution. |
+| L1_WILDE_DG_001 | Oscar Wilde, The Picture of Dorian Gray | Oscar Wilde | English | RIGHTS_SOURCE_REVIEW_REQUIRED | not_applicable | none recorded | blocked | Source- and edition-specific rights evidence is required before private-packet inspection or execution. |
+| L1_JAMES_TS_001 | Henry James, The Turn of the Screw | Henry James | English | RIGHTS_SOURCE_REVIEW_REQUIRED | not_applicable | none recorded | blocked | Source- and edition-specific rights evidence is required before private-packet inspection or execution. |
+| L1_STEVENSON_JH_001 | Robert Louis Stevenson, Strange Case of Dr Jekyll and Mr Hyde | Robert Louis Stevenson | English | RIGHTS_SOURCE_REVIEW_REQUIRED | not_applicable | none recorded | blocked | Source- and edition-specific rights evidence is required before private-packet inspection or execution. |
+| L1_POE_TELLTALE_001 | Edgar Allan Poe, The Tell-Tale Heart | Edgar Allan Poe | English | RIGHTS_SOURCE_REVIEW_REQUIRED | not_applicable | none recorded | blocked | Source- and edition-specific rights evidence is required before private-packet inspection or execution. |
+| L1_HAWTHORNE_SL_001 | Nathaniel Hawthorne, The Scarlet Letter | Nathaniel Hawthorne | English | RIGHTS_SOURCE_REVIEW_REQUIRED | not_applicable | none recorded | blocked | Source- and edition-specific rights evidence is required before private-packet inspection or execution. |
+| L1_CHOPIN_AWAKENING_001 | Kate Chopin, The Awakening | Kate Chopin | English | RIGHTS_SOURCE_REVIEW_REQUIRED | not_applicable | none recorded | blocked | Source- and edition-specific rights evidence is required before private-packet inspection or execution. |
+| L1_HARDY_TESS_001 | Thomas Hardy, Tess of the d’Urbervilles | Thomas Hardy | English | RIGHTS_SOURCE_REVIEW_REQUIRED | not_applicable | none recorded | blocked | Source- and edition-specific rights evidence is required before private-packet inspection or execution. |
+| L1_MELVILLE_BARTLEBY_001 | Herman Melville, Bartleby, the Scrivener | Herman Melville | English | RIGHTS_SOURCE_REVIEW_REQUIRED | not_applicable | none recorded | blocked | Source- and edition-specific rights evidence is required before private-packet inspection or execution. |
+| L1_WHARTON_MIRTH_001 | Edith Wharton, The House of Mirth | Edith Wharton | English | RIGHTS_SOURCE_REVIEW_REQUIRED | not_applicable | none recorded | blocked | Source- and edition-specific rights evidence is required before private-packet inspection or execution. |
+| L1_COLLINS_MOONSTONE_001 | Wilkie Collins, The Moonstone | Wilkie Collins | English | RIGHTS_SOURCE_REVIEW_REQUIRED | not_applicable | none recorded | blocked | Source- and edition-specific rights evidence is required before private-packet inspection or execution. |
+| L1_CONRAD_SECRET_001 | Joseph Conrad, The Secret Sharer | Joseph Conrad | English | RIGHTS_SOURCE_REVIEW_REQUIRED | not_applicable | none recorded | blocked | Source- and edition-specific rights evidence is required before private-packet inspection or execution. |
+| L2_HOMER_ODYSSEY_001 | Homer, The Odyssey | Homeric tradition | English translation from Ancient Greek | RIGHTS_TRANSLATION_REVIEW_REQUIRED | translation_rights_not_independently_verified_pending_review | none recorded | blocked | Translation-specific rights evidence and source/edition evidence are required before private-packet inspection or execution. |
+| L2_SOPHOCLES_ANTIGONE_001 | Sophocles, Antigone | Sophocles | English translation from Ancient Greek | RIGHTS_TRANSLATION_REVIEW_REQUIRED | translation_rights_not_independently_verified_pending_review | none recorded | blocked | Translation-specific rights evidence and source/edition evidence are required before private-packet inspection or execution. |
+| L2_HERODOTUS_SCYTHIAN_001 | Herodotus, The Histories | Herodotus | English translation from Ancient Greek | RIGHTS_TRANSLATION_REVIEW_REQUIRED | translation_rights_not_independently_verified_pending_review | none recorded | blocked | Translation-specific rights evidence and source/edition evidence are required before private-packet inspection or execution. |
+| L2_BIBLE_GENESIS_001 | Genesis, King James Version | Biblical Hebrew tradition | English translation from Biblical Hebrew | RIGHTS_TRANSLATION_REVIEW_REQUIRED | translation_rights_not_independently_verified_pending_review | none recorded | blocked | Translation-specific rights evidence and source/edition evidence are required before private-packet inspection or execution. |
+| L2_BIBLE_SAMUEL_001 | 2 Samuel, King James Version | Biblical Hebrew tradition | English translation from Biblical Hebrew | RIGHTS_TRANSLATION_REVIEW_REQUIRED | translation_rights_not_independently_verified_pending_review | none recorded | blocked | Translation-specific rights evidence and source/edition evidence are required before private-packet inspection or execution. |
+| L2_AESOP_001 | Aesop, The Fox and the Grapes | Aesop / fable tradition | English translation from Greek/Latin fable tradition | RIGHTS_TRANSLATION_REVIEW_REQUIRED | translation_rights_not_independently_verified_pending_review | none recorded | blocked | Translation-specific rights evidence and source/edition evidence are required before private-packet inspection or execution. |
+| L2_OVID_DAPHNE_001 | Ovid, Metamorphoses, Daphne episode | Ovid | English translation from Latin | RIGHTS_TRANSLATION_REVIEW_REQUIRED | translation_rights_not_independently_verified_pending_review | none recorded | blocked | Translation-specific rights evidence and source/edition evidence are required before private-packet inspection or execution. |
+| L2_MALORY_MORTE_001 | Thomas Malory, Le Morte d’Arthur | Thomas Malory | English/Middle English public-domain edition | RIGHTS_TRANSLATION_REVIEW_REQUIRED | translation_rights_not_independently_verified_pending_review | none recorded | blocked | Translation-specific rights evidence and source/edition evidence are required before private-packet inspection or execution. |
+| L2_BEOWULF_DRAGON_001 | Beowulf | anonymous Old English poet/tradition | English translation from Old English | RIGHTS_TRANSLATION_REVIEW_REQUIRED | translation_rights_not_independently_verified_pending_review | none recorded | blocked | Translation-specific rights evidence and source/edition evidence are required before private-packet inspection or execution. |
+| L2_ARABIAN_NIGHTS_001 | The Arabian Nights Entertainments, frame tale of Scheherazade | Arabic/Persian frame-tale tradition | English translation from Arabic/Persian narrative tradition | RIGHTS_TRANSLATION_REVIEW_REQUIRED | translation_rights_not_independently_verified_pending_review | none recorded | blocked | Translation-specific rights evidence and source/edition evidence are required before private-packet inspection or execution. |
+
+## Review rule
+
+A case may move to a non-blocked rights status only after documentary evidence is recorded in a rights-evidence record that validates against `schemas/human_llm_rights_evidence.schema.json`. Translation or edition cases require translation- or edition-specific evidence rather than a generic source-provider reference.

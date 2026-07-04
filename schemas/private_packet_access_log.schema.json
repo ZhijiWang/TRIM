@@ -1,0 +1,190 @@
+{
+  "$id": "https://github.com/ZhijiWang/TRIM/schemas/private_packet_access_log.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "content_viewed": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "authorization_reference": {
+            "minLength": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "content_transmitted_to_provider": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "authorization_reference": {
+            "minLength": 1
+          },
+          "destination": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "private_packet_gate_status": {
+            "const": "PASSED"
+          },
+          "provider_model_account_status": {
+            "const": "PASSED"
+          },
+          "rights_status_at_access": {
+            "enum": [
+              "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
+              "RIGHTS_DOCUMENTED_LICENSED"
+            ]
+          },
+          "runtime_settings_status": {
+            "const": "PASSED"
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "access_event_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "access_reason": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "access_timestamp": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "actor_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "actor_role": {
+      "enum": [
+        "rights_reviewer",
+        "private_packet_auditor",
+        "human_coder",
+        "execution_harness",
+        "principal_investigator",
+        "other_documented"
+      ]
+    },
+    "authorization_reference": {
+      "type": "string"
+    },
+    "case_id": {
+      "pattern": "^(L1|L2)_[A-Z0-9_]+_[0-9]{3}$",
+      "type": "string"
+    },
+    "content_exported": {
+      "type": "boolean"
+    },
+    "content_transformed": {
+      "type": "boolean"
+    },
+    "content_transmitted_to_provider": {
+      "type": "boolean"
+    },
+    "content_viewed": {
+      "type": "boolean"
+    },
+    "destination": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "notes": {
+      "type": "string"
+    },
+    "packet_hash_after": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "packet_hash_before": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "packet_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "private_packet_gate_status": {
+      "enum": [
+        "PASSED",
+        "BLOCKED",
+        "NOT_ASSESSED"
+      ]
+    },
+    "provider_model_account_status": {
+      "enum": [
+        "PASSED",
+        "BLOCKED",
+        "NOT_ASSESSED"
+      ]
+    },
+    "record_hash": {
+      "description": "SHA-256 over canonical JSON excluding record_hash.",
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "rights_status_at_access": {
+      "enum": [
+        "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
+        "RIGHTS_DOCUMENTED_LICENSED",
+        "RIGHTS_TRANSLATION_REVIEW_REQUIRED",
+        "RIGHTS_SOURCE_REVIEW_REQUIRED",
+        "RIGHTS_UNKNOWN_BLOCKED",
+        "RIGHTS_NOT_ASSESSED_BLOCKED"
+      ]
+    },
+    "runtime_settings_status": {
+      "enum": [
+        "PASSED",
+        "BLOCKED",
+        "NOT_ASSESSED"
+      ]
+    }
+  },
+  "required": [
+    "access_event_id",
+    "packet_id",
+    "case_id",
+    "actor_id",
+    "actor_role",
+    "access_reason",
+    "access_timestamp",
+    "packet_hash_before",
+    "packet_hash_after",
+    "content_viewed",
+    "content_transformed",
+    "content_exported",
+    "content_transmitted_to_provider",
+    "destination",
+    "rights_status_at_access",
+    "provider_model_account_status",
+    "private_packet_gate_status",
+    "runtime_settings_status",
+    "authorization_reference",
+    "notes",
+    "record_hash"
+  ],
+  "title": "Human-LLM pilot private packet access log",
+  "type": "object"
+}
