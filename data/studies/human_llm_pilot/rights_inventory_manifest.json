@@ -15,15 +15,15 @@
       "notes": "Metadata copied from public PR #18 manifests only; no packet text or private packet hash is included in this inventory.",
       "private_packet_inspection_blocked": true,
       "private_packet_model_transmission_blocked": true,
-      "public_domain_status": "public_domain_likely_by_publication_date_pending_jurisdiction_review",
+      "public_domain_status": "documented_public_domain_source_evidence_recorded_for_protocol_review",
       "rights_evidence_path": "data/studies/human_llm_pilot/rights_evidence/L1_AUSTEN_PNP_001.rights.json",
-      "rights_status": "RIGHTS_SOURCE_REVIEW_REQUIRED",
+      "rights_status": "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
       "source_packet_status": "CONTROLLED_PRIVATE_PACKET_TEXT_REDACTED_PENDING_RIGHTS_REVIEW",
       "source_provider": "Project Gutenberg",
       "source_title_or_identifier": "Jane Austen, Pride and Prejudice",
       "source_url_or_reference": "https://www.gutenberg.org/cache/epub/1342/pg1342.txt",
       "translation_status": "not_applicable",
-      "unresolved_rights_question": "Source-, edition-, and jurisdiction-specific rights evidence remains unresolved; public source metadata has been recorded but does not approve private-packet inspection, provider transmission, human coding, or model execution."
+      "unresolved_rights_question": "L1 public-domain/source evidence is documented for protocol review, but this does not approve private-packet inspection, provider transmission, human coding, model execution, or global/public redistribution beyond the documented source/provider basis."
     },
     {
       "author_or_source_tradition": "Mary Wollstonecraft Shelley",
@@ -34,15 +34,15 @@
       "notes": "Metadata copied from public PR #18 manifests only; no packet text or private packet hash is included in this inventory.",
       "private_packet_inspection_blocked": true,
       "private_packet_model_transmission_blocked": true,
-      "public_domain_status": "public_domain_likely_by_publication_date_pending_jurisdiction_review",
+      "public_domain_status": "documented_public_domain_source_evidence_recorded_for_protocol_review",
       "rights_evidence_path": "data/studies/human_llm_pilot/rights_evidence/L1_SHELLEY_FRANK_001.rights.json",
-      "rights_status": "RIGHTS_SOURCE_REVIEW_REQUIRED",
+      "rights_status": "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
       "source_packet_status": "CONTROLLED_PRIVATE_PACKET_TEXT_REDACTED_PENDING_RIGHTS_REVIEW",
       "source_provider": "Project Gutenberg",
       "source_title_or_identifier": "Mary Wollstonecraft Shelley, Frankenstein; or, The Modern Prometheus",
       "source_url_or_reference": "https://www.gutenberg.org/cache/epub/84/pg84.txt",
       "translation_status": "not_applicable",
-      "unresolved_rights_question": "Source-, edition-, and jurisdiction-specific rights evidence remains unresolved; public source metadata has been recorded but does not approve private-packet inspection, provider transmission, human coding, or model execution."
+      "unresolved_rights_question": "L1 public-domain/source evidence is documented for protocol review, but this does not approve private-packet inspection, provider transmission, human coding, model execution, or global/public redistribution beyond the documented source/provider basis."
     },
     {
       "author_or_source_tradition": "Charles Dickens",
@@ -53,15 +53,15 @@
       "notes": "Metadata copied from public PR #18 manifests only; no packet text or private packet hash is included in this inventory.",
       "private_packet_inspection_blocked": true,
       "private_packet_model_transmission_blocked": true,
-      "public_domain_status": "public_domain_likely_by_publication_date_pending_jurisdiction_review",
+      "public_domain_status": "documented_public_domain_source_evidence_recorded_for_protocol_review",
       "rights_evidence_path": "data/studies/human_llm_pilot/rights_evidence/L1_DICKENS_GE_001.rights.json",
-      "rights_status": "RIGHTS_SOURCE_REVIEW_REQUIRED",
+      "rights_status": "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
       "source_packet_status": "CONTROLLED_PRIVATE_PACKET_TEXT_REDACTED_PENDING_RIGHTS_REVIEW",
       "source_provider": "Project Gutenberg",
       "source_title_or_identifier": "Charles Dickens, Great Expectations",
       "source_url_or_reference": "https://www.gutenberg.org/cache/epub/1400/pg1400.txt",
       "translation_status": "not_applicable",
-      "unresolved_rights_question": "Source-, edition-, and jurisdiction-specific rights evidence remains unresolved; public source metadata has been recorded but does not approve private-packet inspection, provider transmission, human coding, or model execution."
+      "unresolved_rights_question": "L1 public-domain/source evidence is documented for protocol review, but this does not approve private-packet inspection, provider transmission, human coding, model execution, or global/public redistribution beyond the documented source/provider basis."
     },
     {
       "author_or_source_tradition": "Charlotte Bronte",
@@ -72,15 +72,15 @@
       "notes": "Metadata copied from public PR #18 manifests only; no packet text or private packet hash is included in this inventory.",
       "private_packet_inspection_blocked": true,
       "private_packet_model_transmission_blocked": true,
-      "public_domain_status": "public_domain_likely_by_publication_date_pending_jurisdiction_review",
+      "public_domain_status": "documented_public_domain_source_evidence_recorded_for_protocol_review",
       "rights_evidence_path": "data/studies/human_llm_pilot/rights_evidence/L1_BRONTE_JE_001.rights.json",
-      "rights_status": "RIGHTS_SOURCE_REVIEW_REQUIRED",
+      "rights_status": "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
       "source_packet_status": "CONTROLLED_PRIVATE_PACKET_TEXT_REDACTED_PENDING_RIGHTS_REVIEW",
       "source_provider": "Project Gutenberg",
       "source_title_or_identifier": "Charlotte Bronte, Jane Eyre",
       "source_url_or_reference": "https://www.gutenberg.org/cache/epub/1260/pg1260.txt",
       "translation_status": "not_applicable",
-      "unresolved_rights_question": "Source-, edition-, and jurisdiction-specific rights evidence remains unresolved; public source metadata has been recorded but does not approve private-packet inspection, provider transmission, human coding, or model execution."
+      "unresolved_rights_question": "L1 public-domain/source evidence is documented for protocol review, but this does not approve private-packet inspection, provider transmission, human coding, model execution, or global/public redistribution beyond the documented source/provider basis."
     },
     {
       "author_or_source_tradition": "Oscar Wilde",
@@ -91,15 +91,15 @@
       "notes": "Metadata copied from public PR #18 manifests only; no packet text or private packet hash is included in this inventory.",
       "private_packet_inspection_blocked": true,
       "private_packet_model_transmission_blocked": true,
-      "public_domain_status": "public_domain_likely_by_publication_date_pending_jurisdiction_review",
+      "public_domain_status": "documented_public_domain_source_evidence_recorded_for_protocol_review",
       "rights_evidence_path": "data/studies/human_llm_pilot/rights_evidence/L1_WILDE_DG_001.rights.json",
-      "rights_status": "RIGHTS_SOURCE_REVIEW_REQUIRED",
+      "rights_status": "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
       "source_packet_status": "CONTROLLED_PRIVATE_PACKET_TEXT_REDACTED_PENDING_RIGHTS_REVIEW",
       "source_provider": "Project Gutenberg",
       "source_title_or_identifier": "Oscar Wilde, The Picture of Dorian Gray",
       "source_url_or_reference": "https://www.gutenberg.org/cache/epub/174/pg174.txt",
       "translation_status": "not_applicable",
-      "unresolved_rights_question": "Source-, edition-, and jurisdiction-specific rights evidence remains unresolved; public source metadata has been recorded but does not approve private-packet inspection, provider transmission, human coding, or model execution."
+      "unresolved_rights_question": "L1 public-domain/source evidence is documented for protocol review, but this does not approve private-packet inspection, provider transmission, human coding, model execution, or global/public redistribution beyond the documented source/provider basis."
     },
     {
       "author_or_source_tradition": "Henry James",
@@ -110,15 +110,15 @@
       "notes": "Metadata copied from public PR #18 manifests only; no packet text or private packet hash is included in this inventory.",
       "private_packet_inspection_blocked": true,
       "private_packet_model_transmission_blocked": true,
-      "public_domain_status": "public_domain_likely_by_publication_date_pending_jurisdiction_review",
+      "public_domain_status": "documented_public_domain_source_evidence_recorded_for_protocol_review",
       "rights_evidence_path": "data/studies/human_llm_pilot/rights_evidence/L1_JAMES_TS_001.rights.json",
-      "rights_status": "RIGHTS_SOURCE_REVIEW_REQUIRED",
+      "rights_status": "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
       "source_packet_status": "CONTROLLED_PRIVATE_PACKET_TEXT_REDACTED_PENDING_RIGHTS_REVIEW",
       "source_provider": "Project Gutenberg",
       "source_title_or_identifier": "Henry James, The Turn of the Screw",
       "source_url_or_reference": "https://www.gutenberg.org/cache/epub/209/pg209.txt",
       "translation_status": "not_applicable",
-      "unresolved_rights_question": "Source-, edition-, and jurisdiction-specific rights evidence remains unresolved; public source metadata has been recorded but does not approve private-packet inspection, provider transmission, human coding, or model execution."
+      "unresolved_rights_question": "L1 public-domain/source evidence is documented for protocol review, but this does not approve private-packet inspection, provider transmission, human coding, model execution, or global/public redistribution beyond the documented source/provider basis."
     },
     {
       "author_or_source_tradition": "Robert Louis Stevenson",
@@ -129,15 +129,15 @@
       "notes": "Metadata copied from public PR #18 manifests only; no packet text or private packet hash is included in this inventory.",
       "private_packet_inspection_blocked": true,
       "private_packet_model_transmission_blocked": true,
-      "public_domain_status": "public_domain_likely_by_publication_date_pending_jurisdiction_review",
+      "public_domain_status": "documented_public_domain_source_evidence_recorded_for_protocol_review",
       "rights_evidence_path": "data/studies/human_llm_pilot/rights_evidence/L1_STEVENSON_JH_001.rights.json",
-      "rights_status": "RIGHTS_SOURCE_REVIEW_REQUIRED",
+      "rights_status": "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
       "source_packet_status": "CONTROLLED_PRIVATE_PACKET_TEXT_REDACTED_PENDING_RIGHTS_REVIEW",
       "source_provider": "Project Gutenberg",
       "source_title_or_identifier": "Robert Louis Stevenson, Strange Case of Dr Jekyll and Mr Hyde",
       "source_url_or_reference": "https://www.gutenberg.org/cache/epub/43/pg43.txt",
       "translation_status": "not_applicable",
-      "unresolved_rights_question": "Source-, edition-, and jurisdiction-specific rights evidence remains unresolved; public source metadata has been recorded but does not approve private-packet inspection, provider transmission, human coding, or model execution."
+      "unresolved_rights_question": "L1 public-domain/source evidence is documented for protocol review, but this does not approve private-packet inspection, provider transmission, human coding, model execution, or global/public redistribution beyond the documented source/provider basis."
     },
     {
       "author_or_source_tradition": "Edgar Allan Poe",
@@ -148,15 +148,15 @@
       "notes": "Metadata copied from public PR #18 manifests only; no packet text or private packet hash is included in this inventory.",
       "private_packet_inspection_blocked": true,
       "private_packet_model_transmission_blocked": true,
-      "public_domain_status": "public_domain_likely_by_publication_date_pending_jurisdiction_review",
+      "public_domain_status": "documented_public_domain_source_evidence_recorded_for_protocol_review",
       "rights_evidence_path": "data/studies/human_llm_pilot/rights_evidence/L1_POE_TELLTALE_001.rights.json",
-      "rights_status": "RIGHTS_SOURCE_REVIEW_REQUIRED",
+      "rights_status": "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
       "source_packet_status": "CONTROLLED_PRIVATE_PACKET_TEXT_REDACTED_PENDING_RIGHTS_REVIEW",
       "source_provider": "Project Gutenberg",
       "source_title_or_identifier": "Edgar Allan Poe, The Tell-Tale Heart",
       "source_url_or_reference": "https://www.gutenberg.org/cache/epub/2148/pg2148.txt",
       "translation_status": "not_applicable",
-      "unresolved_rights_question": "Source-, edition-, and jurisdiction-specific rights evidence remains unresolved; public source metadata has been recorded but does not approve private-packet inspection, provider transmission, human coding, or model execution."
+      "unresolved_rights_question": "L1 public-domain/source evidence is documented for protocol review, but this does not approve private-packet inspection, provider transmission, human coding, model execution, or global/public redistribution beyond the documented source/provider basis."
     },
     {
       "author_or_source_tradition": "Nathaniel Hawthorne",
@@ -167,15 +167,15 @@
       "notes": "Metadata copied from public PR #18 manifests only; no packet text or private packet hash is included in this inventory.",
       "private_packet_inspection_blocked": true,
       "private_packet_model_transmission_blocked": true,
-      "public_domain_status": "public_domain_likely_by_publication_date_pending_jurisdiction_review",
+      "public_domain_status": "documented_public_domain_source_evidence_recorded_for_protocol_review",
       "rights_evidence_path": "data/studies/human_llm_pilot/rights_evidence/L1_HAWTHORNE_SL_001.rights.json",
-      "rights_status": "RIGHTS_SOURCE_REVIEW_REQUIRED",
+      "rights_status": "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
       "source_packet_status": "CONTROLLED_PRIVATE_PACKET_TEXT_REDACTED_PENDING_RIGHTS_REVIEW",
       "source_provider": "Project Gutenberg",
       "source_title_or_identifier": "Nathaniel Hawthorne, The Scarlet Letter",
       "source_url_or_reference": "https://www.gutenberg.org/cache/epub/25344/pg25344.txt",
       "translation_status": "not_applicable",
-      "unresolved_rights_question": "Source-, edition-, and jurisdiction-specific rights evidence remains unresolved; public source metadata has been recorded but does not approve private-packet inspection, provider transmission, human coding, or model execution."
+      "unresolved_rights_question": "L1 public-domain/source evidence is documented for protocol review, but this does not approve private-packet inspection, provider transmission, human coding, model execution, or global/public redistribution beyond the documented source/provider basis."
     },
     {
       "author_or_source_tradition": "Kate Chopin",
@@ -186,15 +186,15 @@
       "notes": "Metadata copied from public PR #18 manifests only; no packet text or private packet hash is included in this inventory.",
       "private_packet_inspection_blocked": true,
       "private_packet_model_transmission_blocked": true,
-      "public_domain_status": "public_domain_likely_by_publication_date_pending_jurisdiction_review",
+      "public_domain_status": "documented_public_domain_source_evidence_recorded_for_protocol_review",
       "rights_evidence_path": "data/studies/human_llm_pilot/rights_evidence/L1_CHOPIN_AWAKENING_001.rights.json",
-      "rights_status": "RIGHTS_SOURCE_REVIEW_REQUIRED",
+      "rights_status": "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
       "source_packet_status": "CONTROLLED_PRIVATE_PACKET_TEXT_REDACTED_PENDING_RIGHTS_REVIEW",
       "source_provider": "Project Gutenberg",
       "source_title_or_identifier": "Kate Chopin, The Awakening",
       "source_url_or_reference": "https://www.gutenberg.org/cache/epub/160/pg160.txt",
       "translation_status": "not_applicable",
-      "unresolved_rights_question": "Source-, edition-, and jurisdiction-specific rights evidence remains unresolved; public source metadata has been recorded but does not approve private-packet inspection, provider transmission, human coding, or model execution."
+      "unresolved_rights_question": "L1 public-domain/source evidence is documented for protocol review, but this does not approve private-packet inspection, provider transmission, human coding, model execution, or global/public redistribution beyond the documented source/provider basis."
     },
     {
       "author_or_source_tradition": "Thomas Hardy",
@@ -205,15 +205,15 @@
       "notes": "Metadata copied from public PR #18 manifests only; no packet text or private packet hash is included in this inventory.",
       "private_packet_inspection_blocked": true,
       "private_packet_model_transmission_blocked": true,
-      "public_domain_status": "public_domain_likely_by_publication_date_pending_jurisdiction_review",
+      "public_domain_status": "documented_public_domain_source_evidence_recorded_for_protocol_review",
       "rights_evidence_path": "data/studies/human_llm_pilot/rights_evidence/L1_HARDY_TESS_001.rights.json",
-      "rights_status": "RIGHTS_SOURCE_REVIEW_REQUIRED",
+      "rights_status": "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
       "source_packet_status": "CONTROLLED_PRIVATE_PACKET_TEXT_REDACTED_PENDING_RIGHTS_REVIEW",
       "source_provider": "Project Gutenberg",
       "source_title_or_identifier": "Thomas Hardy, Tess of the d’Urbervilles",
       "source_url_or_reference": "https://www.gutenberg.org/cache/epub/110/pg110.txt",
       "translation_status": "not_applicable",
-      "unresolved_rights_question": "Source-, edition-, and jurisdiction-specific rights evidence remains unresolved; public source metadata has been recorded but does not approve private-packet inspection, provider transmission, human coding, or model execution."
+      "unresolved_rights_question": "L1 public-domain/source evidence is documented for protocol review, but this does not approve private-packet inspection, provider transmission, human coding, model execution, or global/public redistribution beyond the documented source/provider basis."
     },
     {
       "author_or_source_tradition": "Herman Melville",
@@ -224,15 +224,15 @@
       "notes": "Metadata copied from public PR #18 manifests only; no packet text or private packet hash is included in this inventory.",
       "private_packet_inspection_blocked": true,
       "private_packet_model_transmission_blocked": true,
-      "public_domain_status": "public_domain_likely_by_publication_date_pending_jurisdiction_review",
+      "public_domain_status": "documented_public_domain_source_evidence_recorded_for_protocol_review",
       "rights_evidence_path": "data/studies/human_llm_pilot/rights_evidence/L1_MELVILLE_BARTLEBY_001.rights.json",
-      "rights_status": "RIGHTS_SOURCE_REVIEW_REQUIRED",
+      "rights_status": "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
       "source_packet_status": "CONTROLLED_PRIVATE_PACKET_TEXT_REDACTED_PENDING_RIGHTS_REVIEW",
       "source_provider": "Project Gutenberg",
       "source_title_or_identifier": "Herman Melville, Bartleby, the Scrivener",
       "source_url_or_reference": "https://www.gutenberg.org/cache/epub/11231/pg11231.txt",
       "translation_status": "not_applicable",
-      "unresolved_rights_question": "Source-, edition-, and jurisdiction-specific rights evidence remains unresolved; public source metadata has been recorded but does not approve private-packet inspection, provider transmission, human coding, or model execution."
+      "unresolved_rights_question": "L1 public-domain/source evidence is documented for protocol review, but this does not approve private-packet inspection, provider transmission, human coding, model execution, or global/public redistribution beyond the documented source/provider basis."
     },
     {
       "author_or_source_tradition": "Edith Wharton",
@@ -243,15 +243,15 @@
       "notes": "Metadata copied from public PR #18 manifests only; no packet text or private packet hash is included in this inventory.",
       "private_packet_inspection_blocked": true,
       "private_packet_model_transmission_blocked": true,
-      "public_domain_status": "public_domain_likely_by_publication_date_pending_jurisdiction_review",
+      "public_domain_status": "documented_public_domain_source_evidence_recorded_for_protocol_review",
       "rights_evidence_path": "data/studies/human_llm_pilot/rights_evidence/L1_WHARTON_MIRTH_001.rights.json",
-      "rights_status": "RIGHTS_SOURCE_REVIEW_REQUIRED",
+      "rights_status": "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
       "source_packet_status": "CONTROLLED_PRIVATE_PACKET_TEXT_REDACTED_PENDING_RIGHTS_REVIEW",
       "source_provider": "Project Gutenberg",
       "source_title_or_identifier": "Edith Wharton, The House of Mirth",
       "source_url_or_reference": "https://www.gutenberg.org/cache/epub/284/pg284.txt",
       "translation_status": "not_applicable",
-      "unresolved_rights_question": "Source-, edition-, and jurisdiction-specific rights evidence remains unresolved; public source metadata has been recorded but does not approve private-packet inspection, provider transmission, human coding, or model execution."
+      "unresolved_rights_question": "L1 public-domain/source evidence is documented for protocol review, but this does not approve private-packet inspection, provider transmission, human coding, model execution, or global/public redistribution beyond the documented source/provider basis."
     },
     {
       "author_or_source_tradition": "Wilkie Collins",
@@ -262,15 +262,15 @@
       "notes": "Metadata copied from public PR #18 manifests only; no packet text or private packet hash is included in this inventory.",
       "private_packet_inspection_blocked": true,
       "private_packet_model_transmission_blocked": true,
-      "public_domain_status": "public_domain_likely_by_publication_date_pending_jurisdiction_review",
+      "public_domain_status": "documented_public_domain_source_evidence_recorded_for_protocol_review",
       "rights_evidence_path": "data/studies/human_llm_pilot/rights_evidence/L1_COLLINS_MOONSTONE_001.rights.json",
-      "rights_status": "RIGHTS_SOURCE_REVIEW_REQUIRED",
+      "rights_status": "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
       "source_packet_status": "CONTROLLED_PRIVATE_PACKET_TEXT_REDACTED_PENDING_RIGHTS_REVIEW",
       "source_provider": "Project Gutenberg",
       "source_title_or_identifier": "Wilkie Collins, The Moonstone",
       "source_url_or_reference": "https://www.gutenberg.org/cache/epub/155/pg155.txt",
       "translation_status": "not_applicable",
-      "unresolved_rights_question": "Source-, edition-, and jurisdiction-specific rights evidence remains unresolved; public source metadata has been recorded but does not approve private-packet inspection, provider transmission, human coding, or model execution."
+      "unresolved_rights_question": "L1 public-domain/source evidence is documented for protocol review, but this does not approve private-packet inspection, provider transmission, human coding, model execution, or global/public redistribution beyond the documented source/provider basis."
     },
     {
       "author_or_source_tradition": "Joseph Conrad",
@@ -281,15 +281,15 @@
       "notes": "Metadata copied from public PR #18 manifests only; no packet text or private packet hash is included in this inventory.",
       "private_packet_inspection_blocked": true,
       "private_packet_model_transmission_blocked": true,
-      "public_domain_status": "public_domain_likely_by_publication_date_pending_jurisdiction_review",
+      "public_domain_status": "documented_public_domain_source_evidence_recorded_for_protocol_review",
       "rights_evidence_path": "data/studies/human_llm_pilot/rights_evidence/L1_CONRAD_SECRET_001.rights.json",
-      "rights_status": "RIGHTS_SOURCE_REVIEW_REQUIRED",
+      "rights_status": "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
       "source_packet_status": "CONTROLLED_PRIVATE_PACKET_TEXT_REDACTED_PENDING_RIGHTS_REVIEW",
       "source_provider": "Project Gutenberg",
       "source_title_or_identifier": "Joseph Conrad, The Secret Sharer",
       "source_url_or_reference": "https://www.gutenberg.org/cache/epub/220/pg220.txt",
       "translation_status": "not_applicable",
-      "unresolved_rights_question": "Source-, edition-, and jurisdiction-specific rights evidence remains unresolved; public source metadata has been recorded but does not approve private-packet inspection, provider transmission, human coding, or model execution."
+      "unresolved_rights_question": "L1 public-domain/source evidence is documented for protocol review, but this does not approve private-packet inspection, provider transmission, human coding, model execution, or global/public redistribution beyond the documented source/provider basis."
     },
     {
       "author_or_source_tradition": "Homeric tradition",
@@ -484,7 +484,7 @@
   ],
   "rights_inventory_version": "human_llm_rights_inventory_v0_1",
   "rights_status_summary": {
-    "RIGHTS_SOURCE_REVIEW_REQUIRED": 15,
+    "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN": 15,
     "RIGHTS_TRANSLATION_REVIEW_REQUIRED": 10
   },
   "selected_case_count": 25,
@@ -495,6 +495,6 @@
     "pr_number": 18,
     "sample_manifest_hash": "1ebcaef44ac560622f9c56a91c9534d46929f2e9d5bbb5e722107188c9adf7a6"
   },
-  "source_rights_unresolved_count": 25,
+  "source_rights_unresolved_count": 0,
   "translation_rights_unresolved_count": 10
 }

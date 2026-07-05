@@ -43,6 +43,8 @@ EXPECTED_CASE_IDS = [
     "L2_BEOWULF_DRAGON_001",
     "L2_ARABIAN_NIGHTS_001",
 ]
+L1_CASE_IDS = [case_id for case_id in EXPECTED_CASE_IDS if case_id.startswith("L1_")]
+L2_CASE_IDS = [case_id for case_id in EXPECTED_CASE_IDS if case_id.startswith("L2_")]
 NON_BLOCKED_RIGHTS = {"RIGHTS_DOCUMENTED_PUBLIC_DOMAIN", "RIGHTS_DOCUMENTED_LICENSED"}
 BLOCKED_RIGHTS = {
     "RIGHTS_TRANSLATION_REVIEW_REQUIRED",
@@ -326,8 +328,18 @@ def validate() -> list[str]:
     require(len(records) == 25, "rights inventory must contain 25 selected cases", errors)
     require([record.get("case_id") for record in records] == EXPECTED_CASE_IDS, "rights inventory case order or IDs mismatch", errors)
     require(rights_manifest["selected_case_count"] == len(EXPECTED_CASE_IDS), "selected case count mismatch", errors)
-    require(rights_manifest["translation_rights_unresolved_count"] == 10, "translation unresolved count mismatch", errors)
-    require(rights_manifest["source_rights_unresolved_count"] == 25, "source unresolved count mismatch", errors)
+    require(
+        rights_manifest["translation_rights_unresolved_count"]
+        == sum(1 for record in records if record.get("rights_status") == "RIGHTS_TRANSLATION_REVIEW_REQUIRED"),
+        "translation unresolved count mismatch",
+        errors,
+    )
+    require(
+        rights_manifest["source_rights_unresolved_count"]
+        == sum(1 for record in records if record.get("rights_status") == "RIGHTS_SOURCE_REVIEW_REQUIRED"),
+        "source unresolved count mismatch",
+        errors,
+    )
     require(rights_manifest["private_packet_inspection_blocked_count"] == 25, "private packet blocked count mismatch", errors)
 
     evidence_records: dict[str, dict[str, Any]] = {}
@@ -348,6 +360,18 @@ def validate() -> list[str]:
         require(record.get("private_packet_model_transmission_blocked") is True, f"{record.get('case_id')}: private provider transmission must be blocked", errors)
         require(not contains_private_text_markers(record), f"{record.get('case_id')}: rights inventory contains private text marker", errors)
     require(set(evidence_records) == set(EXPECTED_CASE_IDS), "rights evidence case set mismatch", errors)
+    for case_id in L1_CASE_IDS:
+        require(
+            evidence_records[case_id].get("status") == "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
+            f"{case_id}: L1 evidence pass should document public-domain/source evidence",
+            errors,
+        )
+    for case_id in L2_CASE_IDS:
+        require(
+            evidence_records[case_id].get("status") == "RIGHTS_TRANSLATION_REVIEW_REQUIRED",
+            f"{case_id}: L2 translation case must remain blocked in this pass",
+            errors,
+        )
 
     require(not contains_private_text_markers(rights_manifest), "rights inventory manifest contains private text markers", errors)
     require("no private source-packet text" in rights_doc_text, "rights inventory must state no private text", errors)

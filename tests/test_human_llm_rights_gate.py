@@ -174,14 +174,27 @@ def test_rights_statuses_keep_execution_blocked():
     gate_manifest = load_json("data/studies/human_llm_pilot/gate_status_manifest.json")
 
     assert manifest["translation_rights_unresolved_count"] == 10
-    assert manifest["source_rights_unresolved_count"] == 25
+    assert manifest["source_rights_unresolved_count"] == 0
+    assert manifest["rights_status_summary"] == {
+        "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN": 15,
+        "RIGHTS_TRANSLATION_REVIEW_REQUIRED": 10,
+    }
     assert manifest["overall_execution_status"] == OVERALL_BLOCKED_STATUS
     gate_status = {gate["gate"]: gate["status"] for gate in gate_manifest["gates"]}
     assert gate_status["rights_evidence"] == "BLOCKED"
     assert gate_status["controlled_private_packet_handling"] == "BLOCKED"
     assert gate_status["human_coding"] == "BLOCKED"
     assert gate_status["model_execution"] == "BLOCKED"
-    assert all(record["rights_status"] in BLOCKED_RIGHTS for record in manifest["records"])
+    assert all(
+        record["rights_status"] == "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN"
+        for record in manifest["records"]
+        if record["case_id"].startswith("L1_")
+    )
+    assert all(
+        record["rights_status"] == "RIGHTS_TRANSLATION_REVIEW_REQUIRED"
+        for record in manifest["records"]
+        if record["case_id"].startswith("L2_")
+    )
 
 
 def test_blocked_rights_evidence_record_can_exist_without_documentary_evidence():
@@ -199,6 +212,18 @@ def test_blocked_translation_rights_evidence_record_remains_valid():
     )
 
     assert validate_rights_evidence_record(record) == []
+
+
+def test_l2_translation_records_remain_blocked():
+    manifest = load_json("data/studies/human_llm_pilot/rights_inventory_manifest.json")
+
+    l2_records = [record for record in manifest["records"] if record["case_id"].startswith("L2_")]
+    assert len(l2_records) == 10
+    assert all(record["rights_status"] == "RIGHTS_TRANSLATION_REVIEW_REQUIRED" for record in l2_records)
+    for inventory_record in l2_records:
+        evidence = load_json(inventory_record["rights_evidence_path"])
+        assert evidence["status"] == "RIGHTS_TRANSLATION_REVIEW_REQUIRED"
+        assert validate_rights_evidence_record(evidence) == []
 
 
 def test_blocked_rights_record_with_empty_reviewer_fails():
@@ -229,6 +254,27 @@ def test_non_blocked_public_domain_empty_jurisdiction_note_fails():
     record = passed_public_domain_record(jurisdiction_note="")
 
     assert any("non-empty jurisdiction_note" in error for error in validate_rights_evidence_record(record))
+
+
+def test_l1_documented_public_domain_records_validate_with_evidence():
+    manifest = load_json("data/studies/human_llm_pilot/rights_inventory_manifest.json")
+
+    l1_records = [record for record in manifest["records"] if record["case_id"].startswith("L1_")]
+    assert len(l1_records) == 15
+    for inventory_record in l1_records:
+        evidence = load_json(inventory_record["rights_evidence_path"])
+        assert evidence["status"] == "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN"
+        assert evidence["review_date"] is not None
+        assert evidence["translation_rights_basis"] == "not_applicable"
+        assert evidence["evidence_urls_or_citations"]
+        assert "private-packet inspection" in evidence["notes"].lower()
+        assert validate_rights_evidence_record(evidence) == []
+
+
+def test_l1_documented_public_domain_record_with_placeholder_basis_fails():
+    record = passed_public_domain_record(rights_basis="blocked_pending_documentary_review")
+
+    assert any("blocked placeholder for rights_basis" in error for error in validate_rights_evidence_record(record))
 
 
 def test_non_blocked_rights_evidence_requires_documentary_evidence():
