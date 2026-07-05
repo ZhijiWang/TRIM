@@ -298,6 +298,7 @@ def validate() -> list[str]:
 
     rights_doc = docs / "human_llm_rights_inventory.md"
     rights_manifest_path = data / "rights_inventory_manifest.json"
+    rights_evidence_dir = data / "rights_evidence"
     protocol_path = docs / "private_packet_handling_protocol.md"
     gate_manifest_path = data / "gate_status_manifest.json"
     plan_path = docs / "human_llm_gate_resolution_plan.md"
@@ -306,6 +307,7 @@ def validate() -> list[str]:
 
     for path in [rights_doc, rights_manifest_path, protocol_path, gate_manifest_path, plan_path, rights_schema_path, access_schema_path]:
         require(path.exists(), f"missing required rights/private-packet gate file: {path}", errors)
+    require(rights_evidence_dir.exists(), "missing rights evidence directory", errors)
 
     if errors:
         return errors
@@ -328,11 +330,24 @@ def validate() -> list[str]:
     require(rights_manifest["source_rights_unresolved_count"] == 25, "source unresolved count mismatch", errors)
     require(rights_manifest["private_packet_inspection_blocked_count"] == 25, "private packet blocked count mismatch", errors)
 
+    evidence_records: dict[str, dict[str, Any]] = {}
     for record in records:
-        require(record.get("rights_status") in BLOCKED_RIGHTS, f"{record.get('case_id')}: rights should remain blocked", errors)
+        evidence_path = record.get("rights_evidence_path")
+        require(isinstance(evidence_path, str) and bool(evidence_path), f"{record.get('case_id')}: rights evidence path required", errors)
+        evidence_file = ROOT / evidence_path if isinstance(evidence_path, str) else ROOT / "__missing__"
+        require(evidence_file.exists(), f"{record.get('case_id')}: rights evidence file missing", errors)
+        if evidence_file.exists():
+            evidence = load_json(evidence_file)
+            evidence_records[record["case_id"]] = evidence
+            for evidence_error in validate_rights_evidence_record(evidence):
+                errors.append(f"{record.get('case_id')}: {evidence_error}")
+            require(evidence.get("case_id") == record.get("case_id"), f"{record.get('case_id')}: evidence case_id mismatch", errors)
+            require(evidence.get("status") == record.get("rights_status"), f"{record.get('case_id')}: inventory/evidence status mismatch", errors)
+            require(not contains_private_text_markers(evidence), f"{record.get('case_id')}: evidence contains private text marker", errors)
         require(record.get("private_packet_inspection_blocked") is True, f"{record.get('case_id')}: private inspection must be blocked", errors)
-        require(record.get("rights_evidence_path") is None, f"{record.get('case_id')}: evidence path should be absent until evidence exists", errors)
+        require(record.get("private_packet_model_transmission_blocked") is True, f"{record.get('case_id')}: private provider transmission must be blocked", errors)
         require(not contains_private_text_markers(record), f"{record.get('case_id')}: rights inventory contains private text marker", errors)
+    require(set(evidence_records) == set(EXPECTED_CASE_IDS), "rights evidence case set mismatch", errors)
 
     require(not contains_private_text_markers(rights_manifest), "rights inventory manifest contains private text markers", errors)
     require("no private source-packet text" in rights_doc_text, "rights inventory must state no private text", errors)
@@ -374,7 +389,13 @@ def validate() -> list[str]:
         require(gate_status[gate]["status"].startswith("PASSED"), f"{gate}: expected passed status", errors)
         require(gate_status[gate]["execution_remains_blocked"] is True, f"{gate}: execution must remain blocked", errors)
     for gate in blocked_gates:
-        require(gate_status[gate]["status"] == "BLOCKED", f"{gate}: expected blocked status", errors)
+        if gate == "rights_evidence":
+            if any(record.get("rights_status") in BLOCKED_RIGHTS for record in records):
+                require(gate_status[gate]["status"] == "BLOCKED", f"{gate}: expected blocked status while any rights record is unresolved", errors)
+            else:
+                require(gate_status[gate]["status"].startswith("PASSED"), f"{gate}: expected passed status only when every rights record is non-blocked", errors)
+        else:
+            require(gate_status[gate]["status"] == "BLOCKED", f"{gate}: expected blocked status", errors)
         require(gate_status[gate]["execution_remains_blocked"] is True, f"{gate}: execution must remain blocked", errors)
 
     require(gate_manifest["overall_execution_status"] == OVERALL_BLOCKED_STATUS, "gate manifest overall status mismatch", errors)

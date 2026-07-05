@@ -1,0 +1,24 @@
+{
+  "case_id": "L1_STEVENSON_JH_001",
+  "edition_rights_basis": "blocked_pending_edition_review; public inventory records source provider Project Gutenberg and edition/source status: Project Gutenberg eBook #43, English public-domain edition",
+  "evidence_documents": [
+    "docs/studies/human_llm_rights_inventory.md",
+    "data/studies/human_llm_pilot/rights_inventory_manifest.json"
+  ],
+  "evidence_urls_or_citations": [
+    "https://www.gutenberg.org/cache/epub/43/pg43.txt",
+    "https://www.gutenberg.org/policy/license.html"
+  ],
+  "jurisdiction_note": "blocked_pending_jurisdiction_specific_review; public source URL responded to header availability check, but redistribution/provider-transmission rights are not approved by this record.",
+  "notes": "Evidence record created from public metadata and public source URL header availability only. It does not inspect source text, does not approve rights, does not approve translation rights, does not approve private-packet inspection, and does not authorize provider transmission, human coding, or model execution.",
+  "publication_or_death_date_evidence": "blocked_pending_publication_or_death_date_review; public inventory records source/tradition metadata: Robert Louis Stevenson / Project Gutenberg eBook #43, English public-domain edition",
+  "record_hash": "sha256:76bf9a2fce5ef60db3999bb19d88c1078daa62cc12d45015522f7ea6e563b851",
+  "review_date": null,
+  "reviewer": "author-assisted internal rights evidence preparation",
+  "rights_basis": "blocked_pending_documentary_review_public_source_metadata_collected",
+  "source_identifier": "Robert Louis Stevenson, Strange Case of Dr Jekyll and Mr Hyde",
+  "source_layer": "English",
+  "status": "RIGHTS_SOURCE_REVIEW_REQUIRED",
+  "translation_rights_basis": "not_applicable",
+  "uncertainty": "not_assessed"
+}

@@ -65,7 +65,7 @@
     },
     {
       "dependency": "final execution remains blocked while any required gate is blocked",
-      "evidence_path": "docs/studies/human_llm_rights_inventory.md",
+      "evidence_path": "docs/studies/human_llm_rights_evidence_summary.md",
       "execution_remains_blocked": true,
       "gate": "rights_evidence",
       "review_date": null,

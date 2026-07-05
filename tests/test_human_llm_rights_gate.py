@@ -5,6 +5,7 @@ from copy import deepcopy
 from pathlib import Path
 
 from scripts.validate_human_llm_rights_gate import (
+    BLOCKED_RIGHTS,
     EXPECTED_CASE_IDS,
     OVERALL_BLOCKED_STATUS,
     canonical_record_hash,
@@ -137,6 +138,37 @@ def test_rights_inventory_matches_selected_cases_and_contains_no_private_text():
     assert all(record["private_packet_inspection_blocked"] is True for record in manifest["records"])
 
 
+def test_all_25_rights_evidence_records_exist_and_validate():
+    manifest = load_json("data/studies/human_llm_pilot/rights_inventory_manifest.json")
+
+    evidence_paths = [ROOT / record["rights_evidence_path"] for record in manifest["records"]]
+    assert len(evidence_paths) == 25
+    assert all(path.exists() for path in evidence_paths)
+
+    for path in evidence_paths:
+        evidence = json.loads(path.read_text(encoding="utf-8"))
+        assert validate_rights_evidence_record(evidence) == []
+
+
+def test_rights_evidence_record_hashes_are_correct():
+    manifest = load_json("data/studies/human_llm_pilot/rights_inventory_manifest.json")
+
+    for record in manifest["records"]:
+        evidence = load_json(record["rights_evidence_path"])
+        assert evidence["record_hash"] == canonical_record_hash(evidence)
+
+
+def test_inventory_and_rights_evidence_records_agree():
+    manifest = load_json("data/studies/human_llm_pilot/rights_inventory_manifest.json")
+
+    for record in manifest["records"]:
+        evidence = load_json(record["rights_evidence_path"])
+        assert evidence["case_id"] == record["case_id"]
+        assert evidence["status"] == record["rights_status"]
+        assert record["private_packet_inspection_blocked"] is True
+        assert record["private_packet_model_transmission_blocked"] is True
+
+
 def test_rights_statuses_keep_execution_blocked():
     manifest = load_json("data/studies/human_llm_pilot/rights_inventory_manifest.json")
     gate_manifest = load_json("data/studies/human_llm_pilot/gate_status_manifest.json")
@@ -149,10 +181,22 @@ def test_rights_statuses_keep_execution_blocked():
     assert gate_status["controlled_private_packet_handling"] == "BLOCKED"
     assert gate_status["human_coding"] == "BLOCKED"
     assert gate_status["model_execution"] == "BLOCKED"
+    assert all(record["rights_status"] in BLOCKED_RIGHTS for record in manifest["records"])
 
 
 def test_blocked_rights_evidence_record_can_exist_without_documentary_evidence():
     record = blocked_rights_record()
+
+    assert validate_rights_evidence_record(record) == []
+
+
+def test_blocked_translation_rights_evidence_record_remains_valid():
+    record = blocked_rights_record(
+        case_id="L2_HOMER_ODYSSEY_001",
+        source_layer="English translation from Ancient Greek",
+        status="RIGHTS_TRANSLATION_REVIEW_REQUIRED",
+        translation_rights_basis="blocked_pending_translation_specific_review",
+    )
 
     assert validate_rights_evidence_record(record) == []
 
@@ -297,6 +341,18 @@ def test_provider_transmission_invalid_while_gates_blocked():
     assert any("provider/model gate" in error for error in errors)
     assert any("private-packet gate" in error for error in errors)
     assert any("runtime settings" in error for error in errors)
+
+
+def test_private_packet_handling_remains_separately_blocked_even_with_rights_records():
+    gate_manifest = load_json("data/studies/human_llm_pilot/gate_status_manifest.json")
+    gate_status = {gate["gate"]: gate["status"] for gate in gate_manifest["gates"]}
+
+    assert gate_status["rights_evidence"] == "BLOCKED"
+    assert gate_status["controlled_private_packet_handling"] == "BLOCKED"
+    assert gate_status["provider_model_account"] == "BLOCKED"
+    assert gate_status["runtime_settings"] == "BLOCKED"
+    assert gate_status["human_coding"] == "BLOCKED"
+    assert gate_status["model_execution"] == "BLOCKED"
 
 
 def test_provider_transmission_without_export_flag_fails():
