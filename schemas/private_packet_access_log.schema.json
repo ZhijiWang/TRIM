@@ -68,17 +68,64 @@
             "minLength": 1,
             "type": "string"
           },
+          "packet_hash_after": {
+            "pattern": "^sha256:[a-f0-9]{64}$",
+            "type": "string"
+          },
           "private_packet_gate_status": {
             "const": "PASSED"
           },
           "transformation_type": {
             "enum": [
-              "hash_verification_only",
               "normalization_for_hashing",
               "redaction_for_public_metadata",
               "packet_construction",
               "provider_request_construction"
             ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "transformation_type": {
+            "enum": [
+              "normalization_for_hashing",
+              "redaction_for_public_metadata",
+              "packet_construction",
+              "provider_request_construction"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "content_transformed": {
+            "const": true
+          },
+          "packet_hash_after": {
+            "pattern": "^sha256:[a-f0-9]{64}$",
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "transformation_type": {
+            "const": "none"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "content_transformed": {
+            "const": false
+          },
+          "packet_hash_after": {
+            "type": "null"
           }
         }
       }

@@ -87,6 +87,12 @@ TRANSLATION_EVIDENCE_TOKENS = {
     "edition",
     "source_edition",
 }
+ACTUAL_TRANSFORMATION_TYPES = {
+    "normalization_for_hashing",
+    "redaction_for_public_metadata",
+    "packet_construction",
+    "provider_request_construction",
+}
 ISO_TIMESTAMP_RE = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})$")
 
 
@@ -235,8 +241,11 @@ def validate_access_log_record(record: dict[str, Any]) -> list[str]:
         if destination and "local_controlled_storage" not in destination:
             require(record.get("provider_model_account_status") == "PASSED", "external export requires provider/model gate passed", errors)
             require(record.get("runtime_settings_status") == "PASSED", "external export requires runtime settings passed", errors)
+    packet_hash_after = record.get("packet_hash_after")
+    valid_after_hash = isinstance(packet_hash_after, str) and re.fullmatch(r"sha256:[a-f0-9]{64}", packet_hash_after)
     if record.get("content_transformed"):
-        require(transformation_type != "none", "transformed content requires transformation_type", errors)
+        require(valid_after_hash, "content_transformed=true requires valid non-null packet_hash_after", errors)
+        require(transformation_type in ACTUAL_TRANSFORMATION_TYPES, "transformed content requires actual transformation_type", errors)
         require(record.get("private_packet_gate_status") == "PASSED", "transformation requires private-packet gate passed", errors)
         require("transform" in str(record.get("notes", "")).lower() or "normalization" in str(record.get("notes", "")).lower() or "hash" in str(record.get("notes", "")).lower(), "transformation requires rationale in notes", errors)
         if transformation_type in {"packet_construction", "provider_request_construction"}:
@@ -246,7 +255,18 @@ def validate_access_log_record(record: dict[str, Any]) -> list[str]:
             require(record.get("runtime_settings_status") == "PASSED", "provider request construction requires runtime settings passed", errors)
     else:
         require(transformation_type in {None, "none", "hash_verification_only"}, "non-transformed event cannot use transformation type requiring content change", errors)
-    if record.get("packet_hash_after") is not None:
+    if transformation_type in ACTUAL_TRANSFORMATION_TYPES:
+        require(record.get("content_transformed") is True, "actual transformation type requires content_transformed=true", errors)
+        require(valid_after_hash, "actual transformation type requires valid packet_hash_after", errors)
+    if transformation_type == "none":
+        require(record.get("content_transformed") is False, "transformation_type=none requires content_transformed=false", errors)
+        require(packet_hash_after is None, "transformation_type=none requires packet_hash_after=null", errors)
+    if packet_hash_after is not None:
+        require(
+            valid_after_hash,
+            "packet_hash_after must be a valid sha256 value",
+            errors,
+        )
         require(
             record.get("content_transformed") or transformation_type == "hash_verification_only",
             "packet_hash_after requires transformation or hash-verification event",

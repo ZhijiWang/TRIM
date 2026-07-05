@@ -48,6 +48,8 @@ Transformation requires a non-empty authorization reference, a transformation ty
 - `packet_construction`;
 - `provider_request_construction`.
 
+Any event that transforms, normalizes, redacts, constructs, or prepares packet content must record a valid after-hash. Hash-only verification may record an after-hash without content transformation, but must be explicitly classified as `hash_verification_only` and documented in the notes.
+
 Hash-only verification is a special event type. It may record `packet_hash_after` without viewing or changing packet text, but it still requires authorization and notes explaining the after-hash reason.
 
 If `packet_hash_after` is recorded for any other reason, the event must be a documented transformation. A non-transformed event should normally leave `packet_hash_after` null.

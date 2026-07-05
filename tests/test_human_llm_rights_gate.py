@@ -322,7 +322,7 @@ def test_transformation_without_transformation_type_fails():
         notes="transformation rationale documented",
     )
 
-    assert any("requires transformation_type" in error for error in validate_access_log_record(record))
+    assert any("requires actual transformation_type" in error for error in validate_access_log_record(record))
 
 
 def test_transformation_without_rationale_fails():
@@ -342,6 +342,88 @@ def test_packet_hash_after_without_transformation_or_hash_verification_fails():
     assert any("packet_hash_after requires transformation" in error for error in validate_access_log_record(record))
 
 
+def test_content_transformed_true_with_null_after_hash_fails():
+    record = access_record(
+        content_transformed=True,
+        transformation_type="normalization_for_hashing",
+        packet_hash_after=None,
+        private_packet_gate_status="PASSED",
+        notes="normalization transformation rationale documented",
+    )
+
+    assert any("content_transformed=true requires valid non-null packet_hash_after" in error for error in validate_access_log_record(record))
+
+
+def test_normalization_for_hashing_with_null_after_hash_fails():
+    record = access_record(
+        content_transformed=True,
+        transformation_type="normalization_for_hashing",
+        packet_hash_after=None,
+        private_packet_gate_status="PASSED",
+        notes="normalization transformation rationale documented",
+    )
+
+    assert any("valid packet_hash_after" in error for error in validate_access_log_record(record))
+
+
+def test_redaction_for_public_metadata_with_null_after_hash_fails():
+    record = access_record(
+        content_transformed=True,
+        transformation_type="redaction_for_public_metadata",
+        packet_hash_after=None,
+        private_packet_gate_status="PASSED",
+        notes="redaction transform rationale documented",
+    )
+
+    assert any("valid packet_hash_after" in error for error in validate_access_log_record(record))
+
+
+def test_packet_construction_with_null_after_hash_fails():
+    record = access_record(
+        content_transformed=True,
+        transformation_type="packet_construction",
+        packet_hash_after=None,
+        rights_status_at_access="RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
+        private_packet_gate_status="PASSED",
+        notes="packet construction transform rationale documented",
+    )
+
+    assert any("valid packet_hash_after" in error for error in validate_access_log_record(record))
+
+
+def test_provider_request_construction_with_null_after_hash_fails():
+    record = access_record(
+        content_transformed=True,
+        transformation_type="provider_request_construction",
+        packet_hash_after=None,
+        rights_status_at_access="RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
+        provider_model_account_status="PASSED",
+        private_packet_gate_status="PASSED",
+        runtime_settings_status="PASSED",
+        notes="provider request construction transform rationale documented",
+    )
+
+    assert any("valid packet_hash_after" in error for error in validate_access_log_record(record))
+
+
+def test_transformation_type_none_with_after_hash_fails():
+    record = access_record(packet_hash_after="sha256:" + "d" * 64)
+
+    assert any("transformation_type=none requires packet_hash_after=null" in error for error in validate_access_log_record(record))
+
+
+def test_transformation_type_none_with_content_transformed_true_fails():
+    record = access_record(
+        content_transformed=True,
+        transformation_type="none",
+        packet_hash_after="sha256:" + "e" * 64,
+        private_packet_gate_status="PASSED",
+        notes="transformation rationale documented",
+    )
+
+    assert any("transformed content requires actual transformation_type" in error for error in validate_access_log_record(record))
+
+
 def test_hash_only_verification_with_authorization_and_no_text_viewing_passes():
     record = access_record(
         transformation_type="hash_verification_only",
@@ -350,6 +432,35 @@ def test_hash_only_verification_with_authorization_and_no_text_viewing_passes():
     )
 
     assert validate_access_log_record(record) == []
+
+
+def test_actual_transformation_with_valid_after_hash_passes_when_required_gate_passes():
+    record = access_record(
+        content_transformed=True,
+        transformation_type="normalization_for_hashing",
+        packet_hash_after="sha256:" + "f" * 64,
+        private_packet_gate_status="PASSED",
+        notes="normalization transformation hash rationale documented",
+    )
+
+    assert validate_access_log_record(record) == []
+
+
+def test_provider_request_construction_still_requires_provider_and_runtime_gates():
+    record = access_record(
+        content_transformed=True,
+        transformation_type="provider_request_construction",
+        packet_hash_after="sha256:" + "1" * 64,
+        rights_status_at_access="RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
+        private_packet_gate_status="PASSED",
+        provider_model_account_status="BLOCKED",
+        runtime_settings_status="BLOCKED",
+        notes="provider request construction transform hash rationale documented",
+    )
+
+    errors = validate_access_log_record(record)
+    assert any("provider/model gate" in error for error in errors)
+    assert any("runtime settings" in error for error in errors)
 
 
 def test_access_log_raw_text_like_fields_fail():
