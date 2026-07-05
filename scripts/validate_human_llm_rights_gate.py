@@ -52,10 +52,16 @@ BLOCKED_RIGHTS = {
 }
 PRIVATE_TEXT_KEYS = {
     "canonical_text",
+    "content",
+    "excerpt",
     "source_text",
     "translation_text",
     "gloss_text",
     "fixed_context",
+    "model_input_text",
+    "packet_text",
+    "prompt_text",
+    "raw_packet",
     "source_packet_text",
     "private_source_text_hash",
     "private_source_packet_hash",
@@ -66,6 +72,22 @@ PRIVATE_TEXT_PATTERNS = [
     "fixed context:",
     "controlled packet text",
 ]
+BLOCKED_PLACEHOLDER_TOKENS = {
+    "blocked_pending",
+    "pending",
+    "not_assessed",
+    "not yet assessed",
+    "not_resolved",
+    "review_required",
+}
+TRANSLATION_EVIDENCE_TOKENS = {
+    "translation",
+    "translator",
+    "translated",
+    "edition",
+    "source_edition",
+}
+ISO_TIMESTAMP_RE = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})$")
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -98,12 +120,50 @@ def contains_private_text_markers(value: Any) -> bool:
     return False
 
 
+def non_empty_text(record: dict[str, Any], field: str) -> bool:
+    return isinstance(record.get(field), str) and bool(record[field].strip())
+
+
+def looks_like_blocked_placeholder(value: Any) -> bool:
+    text = str(value or "").strip().lower()
+    return not text or any(token in text for token in BLOCKED_PLACEHOLDER_TOKENS)
+
+
+def has_documentary_evidence(record: dict[str, Any]) -> bool:
+    return bool(record.get("evidence_documents")) or bool(record.get("evidence_urls_or_citations"))
+
+
+def is_translation_rights_record(record: dict[str, Any]) -> bool:
+    source_layer = str(record.get("source_layer", ""))
+    translation_basis = str(record.get("translation_rights_basis", ""))
+    return (
+        "translation" in source_layer.lower()
+        or record.get("status") == "RIGHTS_TRANSLATION_REVIEW_REQUIRED"
+        or translation_basis.strip().lower() != "not_applicable"
+    )
+
+
+def has_translation_specific_evidence(record: dict[str, Any]) -> bool:
+    evidence_items = list(record.get("evidence_documents") or []) + list(record.get("evidence_urls_or_citations") or [])
+    joined = "\n".join(str(item).lower() for item in evidence_items)
+    return any(token in joined for token in TRANSLATION_EVIDENCE_TOKENS)
+
+
 def validate_rights_evidence_record(record: dict[str, Any]) -> list[str]:
     errors: list[str] = []
     status = record.get("status")
-    source_layer = str(record.get("source_layer", ""))
     require(bool(record.get("case_id")), "rights evidence requires case_id", errors)
     require(status in NON_BLOCKED_RIGHTS | BLOCKED_RIGHTS, "rights evidence status is invalid", errors)
+    for field in [
+        "reviewer",
+        "rights_basis",
+        "jurisdiction_note",
+        "publication_or_death_date_evidence",
+        "translation_rights_basis",
+        "edition_rights_basis",
+        "notes",
+    ]:
+        require(non_empty_text(record, field), f"rights evidence requires non-empty {field}", errors)
     require(
         isinstance(record.get("record_hash"), str)
         and re.fullmatch(r"sha256:[a-f0-9]{64}", record["record_hash"]),
@@ -111,12 +171,24 @@ def validate_rights_evidence_record(record: dict[str, Any]) -> list[str]:
         errors,
     )
     if status in NON_BLOCKED_RIGHTS:
-        has_evidence = bool(record.get("evidence_documents")) or bool(record.get("evidence_urls_or_citations"))
-        require(has_evidence, "non-blocked rights evidence requires documentary evidence", errors)
-        require(bool(record.get("review_date")), "non-blocked rights evidence requires review_date", errors)
-    if "translation" in source_layer.lower() and status in NON_BLOCKED_RIGHTS:
-        translation_basis = str(record.get("translation_rights_basis", ""))
-        require(bool(translation_basis.strip()), "translation case cannot pass without translation-specific evidence", errors)
+        require(isinstance(record.get("review_date"), str) and re.fullmatch(r"\d{4}-\d{2}-\d{2}", record["review_date"]), "non-blocked rights evidence requires non-null YYYY-MM-DD review_date", errors)
+        require(has_documentary_evidence(record), "non-blocked rights evidence requires documentary evidence", errors)
+        require(record.get("uncertainty") != "not_assessed", "non-blocked rights evidence cannot use not_assessed uncertainty", errors)
+        for field in [
+            "reviewer",
+            "rights_basis",
+            "jurisdiction_note",
+            "publication_or_death_date_evidence",
+            "edition_rights_basis",
+            "notes",
+        ]:
+            require(not looks_like_blocked_placeholder(record.get(field)), f"non-blocked rights evidence cannot use blocked placeholder for {field}", errors)
+        if is_translation_rights_record(record):
+            require(non_empty_text(record, "translation_rights_basis"), "translation case cannot pass without translation-specific evidence", errors)
+            require(not looks_like_blocked_placeholder(record.get("translation_rights_basis")), "non-blocked translation case cannot use blocked translation_rights_basis", errors)
+            require(has_translation_specific_evidence(record), "non-blocked translation case requires translation-specific evidence item or citation", errors)
+    elif is_translation_rights_record(record):
+        require(non_empty_text(record, "translation_rights_basis"), "blocked translation record still requires translation_rights_basis placeholder", errors)
     require(record.get("record_hash") == canonical_record_hash(record), "rights evidence record_hash mismatch", errors)
     require(not contains_private_text_markers(record), "rights evidence record must not include private source text", errors)
     return errors
@@ -124,6 +196,13 @@ def validate_rights_evidence_record(record: dict[str, Any]) -> list[str]:
 
 def validate_access_log_record(record: dict[str, Any]) -> list[str]:
     errors: list[str] = []
+    for field in ["authorization_reference", "access_reason", "actor_id", "access_timestamp", "packet_id", "case_id", "notes"]:
+        require(non_empty_text(record, field), f"access log requires non-empty {field}", errors)
+    require(
+        isinstance(record.get("access_timestamp"), str) and ISO_TIMESTAMP_RE.fullmatch(record["access_timestamp"]),
+        "access log requires ISO-like timestamp with timezone",
+        errors,
+    )
     require(
         isinstance(record.get("record_hash"), str)
         and re.fullmatch(r"sha256:[a-f0-9]{64}", record["record_hash"]),
@@ -131,15 +210,62 @@ def validate_access_log_record(record: dict[str, Any]) -> list[str]:
         errors,
     )
     require(not contains_private_text_markers(record), "access log must not include raw source text", errors)
+    transformation_type = record.get("transformation_type")
+    require(
+        transformation_type
+        in {
+            "none",
+            "hash_verification_only",
+            "normalization_for_hashing",
+            "redaction_for_public_metadata",
+            "packet_construction",
+            "provider_request_construction",
+        },
+        "access log requires valid transformation_type",
+        errors,
+    )
     if record.get("content_viewed"):
-        require(bool(str(record.get("authorization_reference", "")).strip()), "viewing packet text requires authorization_reference", errors)
+        require(non_empty_text(record, "authorization_reference"), "viewing packet text requires authorization_reference", errors)
+    if record.get("content_exported"):
+        require(record.get("rights_status_at_access") in NON_BLOCKED_RIGHTS, "export requires non-blocked rights", errors)
+        require(record.get("private_packet_gate_status") == "PASSED", "export requires private-packet gate passed", errors)
+        require(non_empty_text(record, "destination"), "export requires destination", errors)
+        require("export" in str(record.get("notes", "")).lower(), "export requires export rationale in notes", errors)
+        destination = str(record.get("destination", "")).lower()
+        if destination and "local_controlled_storage" not in destination:
+            require(record.get("provider_model_account_status") == "PASSED", "external export requires provider/model gate passed", errors)
+            require(record.get("runtime_settings_status") == "PASSED", "external export requires runtime settings passed", errors)
+    if record.get("content_transformed"):
+        require(transformation_type != "none", "transformed content requires transformation_type", errors)
+        require(record.get("private_packet_gate_status") == "PASSED", "transformation requires private-packet gate passed", errors)
+        require("transform" in str(record.get("notes", "")).lower() or "normalization" in str(record.get("notes", "")).lower() or "hash" in str(record.get("notes", "")).lower(), "transformation requires rationale in notes", errors)
+        if transformation_type in {"packet_construction", "provider_request_construction"}:
+            require(record.get("rights_status_at_access") in NON_BLOCKED_RIGHTS, "packet/provider construction requires non-blocked rights", errors)
+        if transformation_type == "provider_request_construction":
+            require(record.get("provider_model_account_status") == "PASSED", "provider request construction requires provider/model gate passed", errors)
+            require(record.get("runtime_settings_status") == "PASSED", "provider request construction requires runtime settings passed", errors)
+    else:
+        require(transformation_type in {None, "none", "hash_verification_only"}, "non-transformed event cannot use transformation type requiring content change", errors)
+    if record.get("packet_hash_after") is not None:
+        require(
+            record.get("content_transformed") or transformation_type == "hash_verification_only",
+            "packet_hash_after requires transformation or hash-verification event",
+            errors,
+        )
+        require(
+            "hash" in str(record.get("notes", "")).lower() or "after" in str(record.get("notes", "")).lower(),
+            "packet_hash_after requires notes explaining after-hash reason",
+            errors,
+        )
     if record.get("content_transmitted_to_provider"):
         require(record.get("rights_status_at_access") in NON_BLOCKED_RIGHTS, "provider transmission requires non-blocked rights", errors)
         require(record.get("provider_model_account_status") == "PASSED", "provider transmission requires provider/model gate passed", errors)
         require(record.get("private_packet_gate_status") == "PASSED", "provider transmission requires private-packet gate passed", errors)
         require(record.get("runtime_settings_status") == "PASSED", "provider transmission requires runtime settings passed", errors)
-        require(bool(str(record.get("destination", "")).strip()), "provider transmission requires destination", errors)
-        require(bool(str(record.get("authorization_reference", "")).strip()), "provider transmission requires authorization_reference", errors)
+        require(record.get("content_exported") is True, "provider transmission must also be classified as export", errors)
+        require(non_empty_text(record, "destination"), "provider transmission requires destination", errors)
+        require(non_empty_text(record, "authorization_reference"), "provider transmission requires authorization_reference", errors)
+        require("provider" in str(record.get("notes", "")).lower(), "provider transmission requires provider rationale in notes", errors)
     require(record.get("record_hash") == canonical_record_hash(record), "access log record_hash mismatch", errors)
     return errors
 

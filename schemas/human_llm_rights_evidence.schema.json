@@ -31,8 +31,51 @@
             }
           }
         ],
+        "properties": {
+          "edition_rights_basis": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "jurisdiction_note": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "notes": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "publication_or_death_date_evidence": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "review_date": {
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "type": "string"
+          },
+          "reviewer": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "rights_basis": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "uncertainty": {
+            "enum": [
+              "low",
+              "medium",
+              "high"
+            ]
+          }
+        },
         "required": [
-          "review_date"
+          "review_date",
+          "reviewer",
+          "rights_basis",
+          "jurisdiction_note",
+          "publication_or_death_date_evidence",
+          "edition_rights_basis",
+          "notes"
         ]
       }
     },
@@ -47,7 +90,25 @@
       "then": {
         "properties": {
           "translation_rights_basis": {
-            "minLength": 1
+            "minLength": 1,
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "RIGHTS_TRANSLATION_REVIEW_REQUIRED"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "translation_rights_basis": {
+            "minLength": 1,
+            "type": "string"
           }
         }
       }
@@ -59,6 +120,7 @@
       "type": "string"
     },
     "edition_rights_basis": {
+      "minLength": 1,
       "type": "string"
     },
     "evidence_documents": {
@@ -76,12 +138,15 @@
       "type": "array"
     },
     "jurisdiction_note": {
+      "minLength": 1,
       "type": "string"
     },
     "notes": {
+      "minLength": 1,
       "type": "string"
     },
     "publication_or_death_date_evidence": {
+      "minLength": 1,
       "type": "string"
     },
     "record_hash": {
@@ -97,9 +162,11 @@
       ]
     },
     "reviewer": {
+      "minLength": 1,
       "type": "string"
     },
     "rights_basis": {
+      "minLength": 1,
       "type": "string"
     },
     "source_identifier": {
@@ -121,6 +188,7 @@
       ]
     },
     "translation_rights_basis": {
+      "minLength": 1,
       "type": "string"
     },
     "uncertainty": {

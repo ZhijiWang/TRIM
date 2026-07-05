@@ -26,6 +26,93 @@ def with_hash(record):
     return record
 
 
+def blocked_rights_record(**overrides):
+    record = {
+        "case_id": "L1_AUSTEN_PNP_001",
+        "source_layer": "English original",
+        "source_identifier": "metadata-only source identifier",
+        "rights_basis": "blocked_pending_documentary_review",
+        "jurisdiction_note": "blocked_pending_jurisdiction_review",
+        "publication_or_death_date_evidence": "blocked_pending_publication_date_review",
+        "translation_rights_basis": "not_applicable",
+        "edition_rights_basis": "blocked_pending_edition_review",
+        "evidence_documents": [],
+        "evidence_urls_or_citations": [],
+        "reviewer": "blocked_pending_reviewer_assignment",
+        "review_date": None,
+        "status": "RIGHTS_SOURCE_REVIEW_REQUIRED",
+        "uncertainty": "not_assessed",
+        "notes": "blocked pending documentary evidence",
+        "record_hash": "",
+    }
+    record.update(overrides)
+    return with_hash(record)
+
+
+def passed_public_domain_record(**overrides):
+    record = {
+        "case_id": "L1_AUSTEN_PNP_001",
+        "source_layer": "English original",
+        "source_identifier": "metadata-only source identifier",
+        "rights_basis": "documented public-domain basis",
+        "jurisdiction_note": "documented jurisdiction note",
+        "publication_or_death_date_evidence": "documented publication date evidence",
+        "translation_rights_basis": "not_applicable",
+        "edition_rights_basis": "documented edition/source basis",
+        "evidence_documents": ["rights/evidence/source_edition_public_domain.md"],
+        "evidence_urls_or_citations": [],
+        "reviewer": "rights reviewer",
+        "review_date": "2026-07-04",
+        "status": "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
+        "uncertainty": "low",
+        "notes": "documented non-blocked rights record",
+        "record_hash": "",
+    }
+    record.update(overrides)
+    return with_hash(record)
+
+
+def passed_translation_record(**overrides):
+    record = passed_public_domain_record(
+        case_id="L2_HOMER_ODYSSEY_001",
+        source_layer="English translation from Ancient Greek",
+        translation_rights_basis="documented translator and translation edition rights basis",
+        evidence_documents=["rights/evidence/translator_translation_source_edition.md"],
+        notes="documented non-blocked translation rights record",
+    )
+    record.update(overrides)
+    return with_hash(record)
+
+
+def access_record(**overrides):
+    record = {
+        "access_event_id": "ACCESS-001",
+        "packet_id": "PKT-001",
+        "case_id": "L1_AUSTEN_PNP_001",
+        "actor_id": "auditor",
+        "actor_role": "private_packet_auditor",
+        "access_reason": "authorized metadata-only gate test",
+        "access_timestamp": "2026-07-04T00:00:00+10:00",
+        "packet_hash_before": "sha256:" + "a" * 64,
+        "transformation_type": "none",
+        "packet_hash_after": None,
+        "content_viewed": False,
+        "content_transformed": False,
+        "content_exported": False,
+        "content_transmitted_to_provider": False,
+        "destination": None,
+        "rights_status_at_access": "RIGHTS_SOURCE_REVIEW_REQUIRED",
+        "provider_model_account_status": "BLOCKED",
+        "private_packet_gate_status": "BLOCKED",
+        "runtime_settings_status": "BLOCKED",
+        "authorization_reference": "AUTH-001",
+        "notes": "authorized administrative event without packet text viewing",
+        "record_hash": "",
+    }
+    record.update(overrides)
+    return with_hash(record)
+
+
 def test_rights_gate_validator_passes():
     result = subprocess.run(
         [sys.executable, "scripts/validate_human_llm_rights_gate.py"],
@@ -65,135 +152,144 @@ def test_rights_statuses_keep_execution_blocked():
 
 
 def test_blocked_rights_evidence_record_can_exist_without_documentary_evidence():
-    record = with_hash(
-        {
-            "case_id": "L1_AUSTEN_PNP_001",
-            "source_layer": "English original",
-            "source_identifier": "metadata-only source identifier",
-            "rights_basis": "",
-            "jurisdiction_note": "not yet assessed",
-            "publication_or_death_date_evidence": "",
-            "translation_rights_basis": "",
-            "edition_rights_basis": "",
-            "evidence_documents": [],
-            "evidence_urls_or_citations": [],
-            "reviewer": "author-assisted internal preparation",
-            "review_date": None,
-            "status": "RIGHTS_SOURCE_REVIEW_REQUIRED",
-            "uncertainty": "not_assessed",
-            "notes": "blocked pending documentary evidence",
-            "record_hash": "",
-        }
-    )
+    record = blocked_rights_record()
 
     assert validate_rights_evidence_record(record) == []
 
 
+def test_blocked_rights_record_with_empty_reviewer_fails():
+    record = blocked_rights_record(reviewer="")
+
+    assert any("non-empty reviewer" in error for error in validate_rights_evidence_record(record))
+
+
+def test_blocked_rights_record_with_empty_rights_basis_fails():
+    record = blocked_rights_record(rights_basis="")
+
+    assert any("non-empty rights_basis" in error for error in validate_rights_evidence_record(record))
+
+
+def test_non_blocked_public_domain_null_review_date_fails():
+    record = passed_public_domain_record(review_date=None)
+
+    assert any("non-null YYYY-MM-DD review_date" in error for error in validate_rights_evidence_record(record))
+
+
+def test_non_blocked_public_domain_empty_reviewer_fails():
+    record = passed_public_domain_record(reviewer="")
+
+    assert any("non-empty reviewer" in error for error in validate_rights_evidence_record(record))
+
+
+def test_non_blocked_public_domain_empty_jurisdiction_note_fails():
+    record = passed_public_domain_record(jurisdiction_note="")
+
+    assert any("non-empty jurisdiction_note" in error for error in validate_rights_evidence_record(record))
+
+
 def test_non_blocked_rights_evidence_requires_documentary_evidence():
-    record = with_hash(
-        {
-            "case_id": "L1_AUSTEN_PNP_001",
-            "source_layer": "English original",
-            "source_identifier": "metadata-only source identifier",
-            "rights_basis": "public domain asserted",
-            "jurisdiction_note": "reviewed jurisdiction note",
-            "publication_or_death_date_evidence": "publication date evidence",
-            "translation_rights_basis": "",
-            "edition_rights_basis": "edition evidence",
-            "evidence_documents": [],
-            "evidence_urls_or_citations": [],
-            "reviewer": "rights reviewer",
-            "review_date": "2026-07-04",
-            "status": "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
-            "uncertainty": "low",
-            "notes": "missing evidence should fail",
-            "record_hash": "",
-        }
-    )
+    record = passed_public_domain_record(evidence_documents=[], evidence_urls_or_citations=[])
 
     assert any("documentary evidence" in error for error in validate_rights_evidence_record(record))
 
 
-def test_translation_case_cannot_pass_without_translation_specific_evidence():
-    record = with_hash(
-        {
-            "case_id": "L2_HOMER_ODYSSEY_001",
-            "source_layer": "English translation from Ancient Greek",
-            "source_identifier": "metadata-only source identifier",
-            "rights_basis": "public domain asserted",
-            "jurisdiction_note": "reviewed jurisdiction note",
-            "publication_or_death_date_evidence": "publication date evidence",
-            "translation_rights_basis": "",
-            "edition_rights_basis": "edition evidence",
-            "evidence_documents": ["rights/evidence/example.md"],
-            "evidence_urls_or_citations": [],
-            "reviewer": "rights reviewer",
-            "review_date": "2026-07-04",
-            "status": "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
-            "uncertainty": "low",
-            "notes": "missing translation basis should fail",
-            "record_hash": "",
-        }
-    )
+def test_non_blocked_licensed_record_requires_evidence():
+    record = passed_public_domain_record(status="RIGHTS_DOCUMENTED_LICENSED", evidence_documents=[], evidence_urls_or_citations=[])
 
-    assert any("translation-specific evidence" in error for error in validate_rights_evidence_record(record))
+    assert any("documentary evidence" in error for error in validate_rights_evidence_record(record))
+
+
+def test_non_blocked_record_rejects_not_assessed_uncertainty():
+    record = passed_public_domain_record(uncertainty="not_assessed")
+
+    assert any("not_assessed" in error for error in validate_rights_evidence_record(record))
+
+
+def test_translation_case_cannot_pass_without_translation_specific_evidence():
+    record = passed_translation_record(translation_rights_basis="blocked_pending_translation_review")
+
+    assert any("blocked translation_rights_basis" in error for error in validate_rights_evidence_record(record))
+
+
+def test_translation_case_cannot_pass_without_translation_specific_evidence_item():
+    record = passed_translation_record(evidence_documents=["rights/evidence/general_public_domain.md"])
+
+    assert any("translation-specific evidence item" in error for error in validate_rights_evidence_record(record))
+
+
+def test_translation_case_with_translation_specific_evidence_passes():
+    record = passed_translation_record()
+
+    assert validate_rights_evidence_record(record) == []
+
+
+def test_rights_record_hash_rule_remains_non_circular():
+    record = passed_public_domain_record()
+    tampered = deepcopy(record)
+    tampered["rights_basis"] = "changed after hash"
+
+    assert validate_rights_evidence_record(record) == []
+    assert any("record_hash mismatch" in error for error in validate_rights_evidence_record(tampered))
 
 
 def test_access_to_packet_text_requires_authorization_reference():
-    record = with_hash(
-        {
-            "access_event_id": "ACCESS-001",
-            "packet_id": "PKT-001",
-            "case_id": "L1_AUSTEN_PNP_001",
-            "actor_id": "auditor",
-            "actor_role": "private_packet_auditor",
-            "access_reason": "protocol test",
-            "access_timestamp": "2026-07-04T00:00:00+10:00",
-            "packet_hash_before": "sha256:" + "a" * 64,
-            "packet_hash_after": None,
-            "content_viewed": True,
-            "content_transformed": False,
-            "content_exported": False,
-            "content_transmitted_to_provider": False,
-            "destination": None,
-            "rights_status_at_access": "RIGHTS_SOURCE_REVIEW_REQUIRED",
-            "provider_model_account_status": "BLOCKED",
-            "private_packet_gate_status": "BLOCKED",
-            "runtime_settings_status": "BLOCKED",
-            "authorization_reference": "",
-            "notes": "viewing without authorization should fail",
-            "record_hash": "",
-        }
-    )
+    record = access_record(content_viewed=True, authorization_reference="")
 
     assert any("authorization_reference" in error for error in validate_access_log_record(record))
 
 
+def test_any_access_record_with_empty_authorization_reference_fails():
+    record = access_record(authorization_reference="")
+
+    assert any("non-empty authorization_reference" in error for error in validate_access_log_record(record))
+
+
+def test_export_without_destination_fails():
+    record = access_record(
+        content_exported=True,
+        rights_status_at_access="RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
+        private_packet_gate_status="PASSED",
+        provider_model_account_status="PASSED",
+        runtime_settings_status="PASSED",
+        destination=None,
+        notes="export rationale documented",
+    )
+
+    assert any("export requires destination" in error for error in validate_access_log_record(record))
+
+
+def test_export_while_rights_blocked_fails():
+    record = access_record(
+        content_exported=True,
+        destination="local_controlled_storage",
+        private_packet_gate_status="PASSED",
+        notes="export rationale documented",
+    )
+
+    assert any("export requires non-blocked rights" in error for error in validate_access_log_record(record))
+
+
+def test_export_while_private_packet_gate_blocked_fails():
+    record = access_record(
+        content_exported=True,
+        destination="local_controlled_storage",
+        rights_status_at_access="RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
+        private_packet_gate_status="BLOCKED",
+        notes="export rationale documented",
+    )
+
+    assert any("export requires private-packet gate passed" in error for error in validate_access_log_record(record))
+
+
 def test_provider_transmission_invalid_while_gates_blocked():
-    record = with_hash(
-        {
-            "access_event_id": "ACCESS-002",
-            "packet_id": "PKT-001",
-            "case_id": "L1_AUSTEN_PNP_001",
-            "actor_id": "execution-harness",
-            "actor_role": "execution_harness",
-            "access_reason": "provider transmission",
-            "access_timestamp": "2026-07-04T00:00:00+10:00",
-            "packet_hash_before": "sha256:" + "b" * 64,
-            "packet_hash_after": None,
-            "content_viewed": True,
-            "content_transformed": False,
-            "content_exported": True,
-            "content_transmitted_to_provider": True,
-            "destination": "provider endpoint",
-            "rights_status_at_access": "RIGHTS_SOURCE_REVIEW_REQUIRED",
-            "provider_model_account_status": "BLOCKED",
-            "private_packet_gate_status": "BLOCKED",
-            "runtime_settings_status": "BLOCKED",
-            "authorization_reference": "AUTH-001",
-            "notes": "transmission while blocked should fail",
-            "record_hash": "",
-        }
+    record = access_record(
+        actor_id="execution-harness",
+        actor_role="execution_harness",
+        content_viewed=True,
+        content_exported=True,
+        content_transmitted_to_provider=True,
+        destination="provider endpoint",
+        notes="provider transmission export while blocked should fail",
     )
 
     errors = validate_access_log_record(record)
@@ -201,6 +297,67 @@ def test_provider_transmission_invalid_while_gates_blocked():
     assert any("provider/model gate" in error for error in errors)
     assert any("private-packet gate" in error for error in errors)
     assert any("runtime settings" in error for error in errors)
+
+
+def test_provider_transmission_without_export_flag_fails():
+    record = access_record(
+        content_transmitted_to_provider=True,
+        content_exported=False,
+        destination="provider endpoint",
+        rights_status_at_access="RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
+        provider_model_account_status="PASSED",
+        private_packet_gate_status="PASSED",
+        runtime_settings_status="PASSED",
+        notes="provider transmission rationale documented",
+    )
+
+    assert any("classified as export" in error for error in validate_access_log_record(record))
+
+
+def test_transformation_without_transformation_type_fails():
+    record = access_record(
+        content_transformed=True,
+        transformation_type="none",
+        private_packet_gate_status="PASSED",
+        notes="transformation rationale documented",
+    )
+
+    assert any("requires transformation_type" in error for error in validate_access_log_record(record))
+
+
+def test_transformation_without_rationale_fails():
+    record = access_record(
+        content_transformed=True,
+        transformation_type="normalization_for_hashing",
+        private_packet_gate_status="PASSED",
+        notes="authorized event",
+    )
+
+    assert any("transformation requires rationale" in error for error in validate_access_log_record(record))
+
+
+def test_packet_hash_after_without_transformation_or_hash_verification_fails():
+    record = access_record(packet_hash_after="sha256:" + "c" * 64)
+
+    assert any("packet_hash_after requires transformation" in error for error in validate_access_log_record(record))
+
+
+def test_hash_only_verification_with_authorization_and_no_text_viewing_passes():
+    record = access_record(
+        transformation_type="hash_verification_only",
+        packet_hash_after="sha256:" + "a" * 64,
+        notes="authorized hash verification after controlled metadata check",
+    )
+
+    assert validate_access_log_record(record) == []
+
+
+def test_access_log_raw_text_like_fields_fail():
+    record = access_record()
+    record["packet_text"] = "some source text"
+    record["record_hash"] = canonical_record_hash(record)
+
+    assert any("raw source text" in error for error in validate_access_log_record(record))
 
 
 def test_public_gate_artifacts_do_not_contain_private_packet_text_markers():

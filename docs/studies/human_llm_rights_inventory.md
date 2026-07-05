@@ -47,3 +47,5 @@ This inventory is built from public PR #18 metadata only. It contains no private
 ## Review rule
 
 A case may move to a non-blocked rights status only after documentary evidence is recorded in a rights-evidence record that validates against `schemas/human_llm_rights_evidence.schema.json`. Translation or edition cases require translation- or edition-specific evidence rather than a generic source-provider reference.
+
+For non-blocked translation records, at least one evidence document or citation must explicitly identify translation-specific support. The validator recognizes evidence items containing terms such as `translation`, `translator`, `translated`, `edition`, or `source_edition`.

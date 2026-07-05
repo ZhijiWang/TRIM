@@ -14,7 +14,71 @@
       "then": {
         "properties": {
           "authorization_reference": {
-            "minLength": 1
+            "minLength": 1,
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "content_exported": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "authorization_reference": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "destination": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "private_packet_gate_status": {
+            "const": "PASSED"
+          },
+          "rights_status_at_access": {
+            "enum": [
+              "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
+              "RIGHTS_DOCUMENTED_LICENSED"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "content_transformed": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "authorization_reference": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "notes": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "private_packet_gate_status": {
+            "const": "PASSED"
+          },
+          "transformation_type": {
+            "enum": [
+              "hash_verification_only",
+              "normalization_for_hashing",
+              "redaction_for_public_metadata",
+              "packet_construction",
+              "provider_request_construction"
+            ]
           }
         }
       }
@@ -30,7 +94,11 @@
       "then": {
         "properties": {
           "authorization_reference": {
-            "minLength": 1
+            "minLength": 1,
+            "type": "string"
+          },
+          "content_exported": {
+            "const": true
           },
           "destination": {
             "minLength": 1,
@@ -66,6 +134,7 @@
     },
     "access_timestamp": {
       "minLength": 1,
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(Z|[+-]\\d{2}:\\d{2})$",
       "type": "string"
     },
     "actor_id": {
@@ -83,6 +152,7 @@
       ]
     },
     "authorization_reference": {
+      "minLength": 1,
       "type": "string"
     },
     "case_id": {
@@ -108,6 +178,7 @@
       ]
     },
     "notes": {
+      "minLength": 1,
       "type": "string"
     },
     "packet_hash_after": {
@@ -160,6 +231,16 @@
         "BLOCKED",
         "NOT_ASSESSED"
       ]
+    },
+    "transformation_type": {
+      "enum": [
+        "none",
+        "hash_verification_only",
+        "normalization_for_hashing",
+        "redaction_for_public_metadata",
+        "packet_construction",
+        "provider_request_construction"
+      ]
     }
   },
   "required": [
@@ -171,6 +252,7 @@
     "access_reason",
     "access_timestamp",
     "packet_hash_before",
+    "transformation_type",
     "packet_hash_after",
     "content_viewed",
     "content_transformed",
