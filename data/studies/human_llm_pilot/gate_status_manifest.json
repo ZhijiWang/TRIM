@@ -64,13 +64,13 @@
       "this_pr_changes_status": false
     },
     {
-      "dependency": "final execution remains blocked while any required gate is blocked; translation/edition evidence remains unresolved for selected L2 cases",
+      "dependency": "rights evidence documented for all selected cases; final execution remains blocked while downstream gates are blocked",
       "evidence_path": "docs/studies/human_llm_rights_evidence_summary.md",
       "execution_remains_blocked": true,
       "gate": "rights_evidence",
       "review_date": null,
       "reviewer": "author-assisted internal preparation",
-      "status": "BLOCKED",
+      "status": "PASSED_WITH_DOWNSTREAM_GATES_BLOCKED",
       "this_pr_changes_status": true
     },
     {

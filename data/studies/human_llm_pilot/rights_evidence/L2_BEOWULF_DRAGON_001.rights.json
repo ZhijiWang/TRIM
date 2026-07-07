@@ -1,6 +1,6 @@
 {
   "case_id": "L2_BEOWULF_DRAGON_001",
-  "edition_rights_basis": "blocked_pending_edition_reconciliation; Public inventory/source status names a Francis B. Gummere translation, but Gutendex metadata for Project Gutenberg eBook #16328 identifies J. Lesslie Hall as translator. The exact translation/edition used must be reconciled before the case can pass.",
+  "edition_rights_basis": "Project Gutenberg eBook #16328 is the public source/edition reference recorded for this case; public catalog metadata identifies the source title as \"Beowulf: An Anglo-Saxon Epic Poem\" and reports copyright=false. The prior inventory label naming Francis B. Gummere was stale for the recorded Project Gutenberg eBook #16328 source; public metadata consistently supports the J. Lesslie Hall translation for this source reference. The study packet remains controlled and is not approved for inspection or provider transmission by this evidence record.",
   "evidence_documents": [
     "docs/studies/human_llm_rights_inventory.md",
     "data/studies/human_llm_pilot/rights_inventory_manifest.json",
@@ -10,18 +10,19 @@
     "https://www.gutenberg.org/ebooks/16328",
     "https://www.gutenberg.org/ebooks/16328.rdf",
     "https://gutendex.com/books/16328",
+    "translation_or_source_edition_metadata:https://gutendex.com/books/16328",
     "https://www.gutenberg.org/policy/license.html"
   ],
-  "jurisdiction_note": "blocked_pending_translation_edition_reconciliation; no private-packet inspection, provider transmission, human coding, model execution, or global clearance is approved.",
-  "notes": "L2 documentary translation/source evidence pass found a public metadata conflict for the recorded translation/edition. The case remains blocked; no private source-packet text was inspected or committed. Private-packet inspection, controlled private-packet handling, provider transmission, provider/model/account verification, runtime settings, pricing, final authorization, human coding, and model execution remain blocked.",
-  "publication_or_death_date_evidence": "blocked_pending_translation_edition_reconciliation; Public inventory/source status names a Francis B. Gummere translation, but Gutendex metadata for Project Gutenberg eBook #16328 identifies J. Lesslie Hall as translator. The exact translation/edition used must be reconciled before the case can pass.",
-  "record_hash": "sha256:66fbbd8315a0066f70925c7c79a3b7f1e0e9cd8a252ed22228df3a262fac3b62",
-  "review_date": null,
+  "jurisdiction_note": "Conservative protocol-review note: the evidence supports the documented Project Gutenberg/Gutendex public-domain/source-provider basis for the recorded translation or edition. This record does not claim global copyright clearance and does not approve private-packet inspection, provider transmission, human coding, model execution, or public redistribution beyond the documented source/provider basis. Downstream gates remain blocked.",
+  "notes": "Two-case L2 reconciliation completed using public metadata and public source/provider citations only; no private source-packet text was inspected or committed. The prior inventory label naming Francis B. Gummere was stale for the recorded Project Gutenberg eBook #16328 source; public metadata consistently supports the J. Lesslie Hall translation for this source reference. Private-packet inspection, controlled private-packet handling, provider transmission, provider/model/account verification, runtime settings, pricing, final authorization, human coding, and model execution remain blocked.",
+  "publication_or_death_date_evidence": "Public catalog metadata identifies the relevant translation/source edition as \"Beowulf: An Anglo-Saxon Epic Poem\" and records J. Lesslie Hall (John Lesslie Hall) with date evidence: 1856-1928. This is the translation/edition-specific date evidence used for protocol review.",
+  "record_hash": "sha256:8ba8c88aaff368964a3d5ace03fd4eb66c0016f7831e4c56e129699cc5946755",
+  "review_date": "2026-07-07",
   "reviewer": "author-assisted internal rights evidence preparation",
-  "rights_basis": "blocked_pending_translation_edition_reconciliation_public_metadata_conflict",
+  "rights_basis": "Documentary translation/source evidence recorded for protocol review: Public committed metadata for the case points to Project Gutenberg eBook #16328; Gutendex and Project Gutenberg metadata identify eBook #16328 as Beowulf: An Anglo-Saxon Epic Poem translated by J. Lesslie Hall, with copyright=false in public catalog metadata. The prior inventory label naming Francis B. Gummere was stale for the recorded Project Gutenberg eBook #16328 source; public metadata consistently supports the J. Lesslie Hall translation for this source reference. The original/traditional source alone is not treated as sufficient; this record relies on the public translation/source-edition metadata for the selected Project Gutenberg source.",
   "source_identifier": "Beowulf",
   "source_layer": "English translation from Old English",
-  "status": "RIGHTS_TRANSLATION_REVIEW_REQUIRED",
-  "translation_rights_basis": "blocked_pending_translation_specific_review_public_metadata_conflict; Public inventory/source status names a Francis B. Gummere translation, but Gutendex metadata for Project Gutenberg eBook #16328 identifies J. Lesslie Hall as translator. The exact translation/edition used must be reconciled before the case can pass.",
-  "uncertainty": "not_assessed"
+  "status": "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
+  "translation_rights_basis": "Translation/edition-specific evidence: J. Lesslie Hall (John Lesslie Hall); 1856-1928; Project Gutenberg/Gutendex eBook #16328 metadata for \"Beowulf: An Anglo-Saxon Epic Poem\" reports copyright=false. This translation/edition basis is documented for protocol review only and does not authorize downstream private-packet or provider use.",
+  "uncertainty": "medium"
 }

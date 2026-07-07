@@ -45,10 +45,6 @@ EXPECTED_CASE_IDS = [
 ]
 L1_CASE_IDS = [case_id for case_id in EXPECTED_CASE_IDS if case_id.startswith("L1_")]
 L2_CASE_IDS = [case_id for case_id in EXPECTED_CASE_IDS if case_id.startswith("L2_")]
-L2_TRANSLATION_CONFLICT_CASE_IDS = {
-    "L2_HERODOTUS_SCYTHIAN_001",
-    "L2_BEOWULF_DRAGON_001",
-}
 NON_BLOCKED_RIGHTS = {"RIGHTS_DOCUMENTED_PUBLIC_DOMAIN", "RIGHTS_DOCUMENTED_LICENSED"}
 BLOCKED_RIGHTS = {
     "RIGHTS_TRANSLATION_REVIEW_REQUIRED",
@@ -370,13 +366,6 @@ def validate() -> list[str]:
             f"{case_id}: L1 evidence pass should document public-domain/source evidence",
             errors,
         )
-    for case_id in L2_TRANSLATION_CONFLICT_CASE_IDS:
-        require(
-            evidence_records[case_id].get("status") == "RIGHTS_TRANSLATION_REVIEW_REQUIRED",
-            f"{case_id}: translation/edition metadata conflict should remain blocked",
-            errors,
-        )
-
     require(not contains_private_text_markers(rights_manifest), "rights inventory manifest contains private text markers", errors)
     require("no private source-packet text" in rights_doc_text, "rights inventory must state no private text", errors)
     require("does not approve rights" in rights_doc_text, "rights inventory must avoid rights approval", errors)

@@ -9,28 +9,17 @@ Overall execution status remains: `BLOCKED_PENDING_RIGHTS_PRIVATE_PACKETS_MODEL_
 - Rights evidence records: 25
 - L1 documented public-domain count: 15
 - L2 cases assessed: 10
-- L2 cases moved to `RIGHTS_DOCUMENTED_PUBLIC_DOMAIN`: 8
-- L2 cases remaining `RIGHTS_TRANSLATION_REVIEW_REQUIRED`: 2
-- Status counts: {'RIGHTS_DOCUMENTED_PUBLIC_DOMAIN': 23, 'RIGHTS_TRANSLATION_REVIEW_REQUIRED': 2}
-- Passed source/translation rights count: 23
+- L2 cases moved to `RIGHTS_DOCUMENTED_PUBLIC_DOMAIN`: 10
+- L2 cases remaining `RIGHTS_TRANSLATION_REVIEW_REQUIRED`: 0
+- Status counts: {'RIGHTS_DOCUMENTED_PUBLIC_DOMAIN': 25}
+- Passed source/translation rights count: 25
 - Unresolved source-rights count: 0
-- Unresolved translation-rights count: 2
+- Unresolved translation-rights count: 0
 
-## Documented L2 translation/source evidence records
+## Two-case reconciliation result
 
-- `L2_HOMER_ODYSSEY_001`: `RIGHTS_DOCUMENTED_PUBLIC_DOMAIN`; evidence `data/studies/human_llm_pilot/rights_evidence/L2_HOMER_ODYSSEY_001.rights.json`; private-packet inspection remains blocked.
-- `L2_SOPHOCLES_ANTIGONE_001`: `RIGHTS_DOCUMENTED_PUBLIC_DOMAIN`; evidence `data/studies/human_llm_pilot/rights_evidence/L2_SOPHOCLES_ANTIGONE_001.rights.json`; private-packet inspection remains blocked.
-- `L2_BIBLE_GENESIS_001`: `RIGHTS_DOCUMENTED_PUBLIC_DOMAIN`; evidence `data/studies/human_llm_pilot/rights_evidence/L2_BIBLE_GENESIS_001.rights.json`; private-packet inspection remains blocked.
-- `L2_BIBLE_SAMUEL_001`: `RIGHTS_DOCUMENTED_PUBLIC_DOMAIN`; evidence `data/studies/human_llm_pilot/rights_evidence/L2_BIBLE_SAMUEL_001.rights.json`; private-packet inspection remains blocked.
-- `L2_AESOP_001`: `RIGHTS_DOCUMENTED_PUBLIC_DOMAIN`; evidence `data/studies/human_llm_pilot/rights_evidence/L2_AESOP_001.rights.json`; private-packet inspection remains blocked.
-- `L2_OVID_DAPHNE_001`: `RIGHTS_DOCUMENTED_PUBLIC_DOMAIN`; evidence `data/studies/human_llm_pilot/rights_evidence/L2_OVID_DAPHNE_001.rights.json`; private-packet inspection remains blocked.
-- `L2_MALORY_MORTE_001`: `RIGHTS_DOCUMENTED_PUBLIC_DOMAIN`; evidence `data/studies/human_llm_pilot/rights_evidence/L2_MALORY_MORTE_001.rights.json`; private-packet inspection remains blocked.
-- `L2_ARABIAN_NIGHTS_001`: `RIGHTS_DOCUMENTED_PUBLIC_DOMAIN`; evidence `data/studies/human_llm_pilot/rights_evidence/L2_ARABIAN_NIGHTS_001.rights.json`; private-packet inspection remains blocked.
-
-## L2 cases still rights-blocked
-
-- `L2_HERODOTUS_SCYTHIAN_001`: `RIGHTS_TRANSLATION_REVIEW_REQUIRED`; evidence `data/studies/human_llm_pilot/rights_evidence/L2_HERODOTUS_SCYTHIAN_001.rights.json`; remaining question: Public inventory/source status names a George Rawlinson translation, but Gutendex metadata for Project Gutenberg eBook #2707 identifies G. C. Macaulay as translator. The exact translation/edition used must be reconciled before the case can pass. No private-packet inspection, provider transmission, human coding, or model execution is approved.
-- `L2_BEOWULF_DRAGON_001`: `RIGHTS_TRANSLATION_REVIEW_REQUIRED`; evidence `data/studies/human_llm_pilot/rights_evidence/L2_BEOWULF_DRAGON_001.rights.json`; remaining question: Public inventory/source status names a Francis B. Gummere translation, but Gutendex metadata for Project Gutenberg eBook #16328 identifies J. Lesslie Hall as translator. The exact translation/edition used must be reconciled before the case can pass. No private-packet inspection, provider transmission, human coding, or model execution is approved.
+- `L2_HERODOTUS_SCYTHIAN_001`: reconciled to Project Gutenberg eBook #2707 / G. C. Macaulay translation from public metadata; rights evidence status `RIGHTS_DOCUMENTED_PUBLIC_DOMAIN`; private-packet inspection remains blocked.
+- `L2_BEOWULF_DRAGON_001`: reconciled to Project Gutenberg eBook #16328 / J. Lesslie Hall translation from public metadata; rights evidence status `RIGHTS_DOCUMENTED_PUBLIC_DOMAIN`; private-packet inspection remains blocked.
 
 ## Execution boundary
 

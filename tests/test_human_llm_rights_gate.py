@@ -173,27 +173,18 @@ def test_rights_statuses_keep_execution_blocked():
     manifest = load_json("data/studies/human_llm_pilot/rights_inventory_manifest.json")
     gate_manifest = load_json("data/studies/human_llm_pilot/gate_status_manifest.json")
 
-    assert manifest["translation_rights_unresolved_count"] == 2
+    assert manifest["translation_rights_unresolved_count"] == 0
     assert manifest["source_rights_unresolved_count"] == 0
     assert manifest["rights_status_summary"] == {
-        "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN": 23,
-        "RIGHTS_TRANSLATION_REVIEW_REQUIRED": 2,
+        "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN": 25,
     }
     assert manifest["overall_execution_status"] == OVERALL_BLOCKED_STATUS
     gate_status = {gate["gate"]: gate["status"] for gate in gate_manifest["gates"]}
-    assert gate_status["rights_evidence"] == "BLOCKED"
+    assert gate_status["rights_evidence"] == "PASSED_WITH_DOWNSTREAM_GATES_BLOCKED"
     assert gate_status["controlled_private_packet_handling"] == "BLOCKED"
     assert gate_status["human_coding"] == "BLOCKED"
     assert gate_status["model_execution"] == "BLOCKED"
-    assert all(
-        record["rights_status"] == "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN"
-        for record in manifest["records"]
-        if record["case_id"].startswith("L1_")
-    )
-    l2_status = {record["case_id"]: record["rights_status"] for record in manifest["records"] if record["case_id"].startswith("L2_")}
-    assert sum(status == "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN" for status in l2_status.values()) == 8
-    assert l2_status["L2_HERODOTUS_SCYTHIAN_001"] == "RIGHTS_TRANSLATION_REVIEW_REQUIRED"
-    assert l2_status["L2_BEOWULF_DRAGON_001"] == "RIGHTS_TRANSLATION_REVIEW_REQUIRED"
+    assert all(record["rights_status"] == "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN" for record in manifest["records"])
 
 
 def test_blocked_rights_evidence_record_can_exist_without_documentary_evidence():
@@ -218,8 +209,7 @@ def test_l2_translation_records_have_documented_or_blocked_statuses():
 
     l2_records = [record for record in manifest["records"] if record["case_id"].startswith("L2_")]
     assert len(l2_records) == 10
-    assert sum(record["rights_status"] == "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN" for record in l2_records) == 8
-    assert sum(record["rights_status"] == "RIGHTS_TRANSLATION_REVIEW_REQUIRED" for record in l2_records) == 2
+    assert all(record["rights_status"] == "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN" for record in l2_records)
     for inventory_record in l2_records:
         evidence = load_json(inventory_record["rights_evidence_path"])
         assert evidence["status"] == inventory_record["rights_status"]
@@ -321,7 +311,7 @@ def test_l2_documented_translation_records_include_translation_specific_evidence
         for record in manifest["records"]
         if record["case_id"].startswith("L2_") and record["rights_status"] == "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN"
     ]
-    assert len(documented_l2) == 8
+    assert len(documented_l2) == 10
     for inventory_record in documented_l2:
         evidence = load_json(inventory_record["rights_evidence_path"])
         evidence_text = "\n".join(evidence["evidence_urls_or_citations"]).lower()
@@ -349,11 +339,16 @@ def test_kjv_records_use_conservative_jurisdiction_note():
         assert validate_rights_evidence_record(evidence) == []
 
 
-def test_beowulf_and_herodotus_translation_metadata_conflicts_remain_blocked():
-    for case_id in ["L2_BEOWULF_DRAGON_001", "L2_HERODOTUS_SCYTHIAN_001"]:
+def test_beowulf_and_herodotus_translation_metadata_conflicts_are_reconciled():
+    expected = {
+        "L2_BEOWULF_DRAGON_001": "J. Lesslie Hall",
+        "L2_HERODOTUS_SCYTHIAN_001": "G. C. Macaulay",
+    }
+    for case_id, translator in expected.items():
         evidence = load_json(f"data/studies/human_llm_pilot/rights_evidence/{case_id}.rights.json")
-        assert evidence["status"] == "RIGHTS_TRANSLATION_REVIEW_REQUIRED"
-        assert "public_metadata_conflict" in evidence["translation_rights_basis"]
+        assert evidence["status"] == "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN"
+        assert translator in evidence["translation_rights_basis"]
+        assert "prior inventory label" in evidence["notes"]
         assert validate_rights_evidence_record(evidence) == []
 
 
@@ -459,7 +454,7 @@ def test_private_packet_handling_remains_separately_blocked_even_with_rights_rec
     gate_manifest = load_json("data/studies/human_llm_pilot/gate_status_manifest.json")
     gate_status = {gate["gate"]: gate["status"] for gate in gate_manifest["gates"]}
 
-    assert gate_status["rights_evidence"] == "BLOCKED"
+    assert gate_status["rights_evidence"] == "PASSED_WITH_DOWNSTREAM_GATES_BLOCKED"
     assert gate_status["controlled_private_packet_handling"] == "BLOCKED"
     assert gate_status["provider_model_account"] == "BLOCKED"
     assert gate_status["runtime_settings"] == "BLOCKED"
