@@ -302,6 +302,7 @@ def validate() -> list[str]:
     rights_manifest_path = data / "rights_inventory_manifest.json"
     rights_evidence_dir = data / "rights_evidence"
     protocol_path = docs / "private_packet_handling_protocol.md"
+    private_packet_approval_path = data / "private_packet_handling_approval.json"
     gate_manifest_path = data / "gate_status_manifest.json"
     plan_path = docs / "human_llm_gate_resolution_plan.md"
     rights_schema_path = schemas / "human_llm_rights_evidence.schema.json"
@@ -319,6 +320,7 @@ def validate() -> list[str]:
     rights_schema = load_json(rights_schema_path)
     access_schema = load_json(access_schema_path)
     protocol = protocol_path.read_text(encoding="utf-8")
+    private_packet_approval = load_json(private_packet_approval_path) if private_packet_approval_path.exists() else {}
     plan = plan_path.read_text(encoding="utf-8")
     rights_doc_text = rights_doc.read_text(encoding="utf-8")
 
@@ -373,6 +375,16 @@ def validate() -> list[str]:
     require("Human coding may not start until" in protocol, "protocol must block human coding", errors)
     require("Model execution may not start until" in protocol, "protocol must block model execution", errors)
     require("This PR does not authorize" in plan, "gate plan must avoid execution authorization", errors)
+    require(private_packet_approval_path.exists(), "controlled private-packet approval record is required", errors)
+    if private_packet_approval:
+        require(private_packet_approval.get("approval_status") == "PASSED_WITH_CONTROLLED_ACCESS_ONLY", "private-packet approval status mismatch", errors)
+        require(private_packet_approval.get("execution_authorization") == "not_authorized", "private-packet approval must not authorize execution", errors)
+        require(private_packet_approval.get("private_packet_text_inspected") is False, "private-packet approval must not inspect packet text", errors)
+        require(private_packet_approval.get("private_source_text_committed") is False, "private-packet approval must not commit source text", errors)
+        require(private_packet_approval.get("model_called") is False, "private-packet approval must not call model", errors)
+        require(private_packet_approval.get("outputs_generated") is False, "private-packet approval must not generate outputs", errors)
+        require(private_packet_approval.get("record_hash") == canonical_record_hash(private_packet_approval), "private-packet approval hash mismatch", errors)
+        require(not contains_private_text_markers(private_packet_approval), "private-packet approval contains private text marker", errors)
 
     schema_names = {rights_schema["title"], access_schema["title"]}
     require("Human-LLM pilot rights evidence record" in schema_names, "rights evidence schema title mismatch", errors)
@@ -390,10 +402,10 @@ def validate() -> list[str]:
         "enrichment_contract",
         "condition_manipulation",
         "human_model_content_comparability",
+        "controlled_private_packet_handling",
     }
     blocked_gates = {
         "rights_evidence",
-        "controlled_private_packet_handling",
         "provider_model_account",
         "runtime_settings",
         "pricing",

@@ -23,4 +23,6 @@ Overall execution status remains: `BLOCKED_PENDING_RIGHTS_PRIVATE_PACKETS_MODEL_
 
 ## Execution boundary
 
-All private packet inspections remain blocked for all 25 selected cases. Controlled private-packet handling remains blocked. Provider transmission remains blocked for all 25 selected cases. Provider/model/account verification remains blocked. Runtime settings remain blocked. Pricing remains blocked. Final authorization remains blocked. Human coding remains blocked. Model execution remains blocked. No source text, private packet text, model input, human annotation, or study output is included in these evidence records.
+Private packet handling is approved only for controlled local storage, metadata-only public documentation, hash verification, and future separately authorized access-log events. The approval record is `data/studies/human_llm_pilot/private_packet_handling_approval.json`.
+
+Private packet inspection remains blocked unless a future access event has a non-empty authorization reference and validates against `schemas/private_packet_access_log.schema.json`. Provider transmission remains blocked for all 25 selected cases. Provider/model/account verification remains blocked. Runtime settings remain blocked. Pricing remains blocked. Final authorization remains blocked. Human coding remains blocked. Model execution remains blocked. No source text, private packet text, model input, human annotation, or study output is included in these evidence records.

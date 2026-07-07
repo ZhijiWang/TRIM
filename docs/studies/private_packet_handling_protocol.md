@@ -1,8 +1,12 @@
 # Private packet handling protocol
 
-Status: protocol draft for gate preparation. This document does not authorize private-packet inspection, human coding, model execution, provider transmission, or public redistribution.
+Status: controlled-access protocol approved for metadata-only gate preparation. This document does not authorize unlogged private-packet inspection, human coding, model execution, provider transmission, or public redistribution.
 
 Overall execution status remains: `BLOCKED_PENDING_RIGHTS_PRIVATE_PACKETS_MODEL_ACCOUNT_RUNTIME_SETTINGS_PRICING_AND_FINAL_EXECUTION_AUTHORIZATION`.
+
+Approval record: `data/studies/human_llm_pilot/private_packet_handling_approval.json`.
+
+The controlled private-packet handling gate permits only controlled local storage, metadata-only public documentation, hash verification, and future access events that are separately authorized and logged. No private packet text was inspected for this approval.
 
 ## Access control
 
@@ -10,7 +14,7 @@ Private packets may be accessed only after a documented authorization reference 
 
 Private packets may reside only in an approved controlled local or institutional storage location. They must not be committed to this repository, copied into public pull requests, pasted into issue or PR comments, included in tests, printed, exported, or transmitted to a model provider unless the relevant rights, private-packet, provider, runtime, pricing, and final-authorization gates have all passed.
 
-Before access, the reviewer must confirm that the case ID is selected in PR #18 metadata, the current packet hash is known from controlled storage, the rights status is recorded, and the access event can be logged against `schemas/private_packet_access_log.schema.json`.
+Before access, the reviewer must confirm that the case ID is selected in PR #18 metadata, the current packet hash is known from controlled storage, the rights status is recorded, the access event has a non-empty authorization reference, and the access event can be logged against `schemas/private_packet_access_log.schema.json`.
 
 ## Audit trail
 

@@ -1,0 +1,33 @@
+{
+  "access_boundary": "Private packet access requires a non-empty authorization reference and a validating access-log record. This approval does not itself create any access event and does not inspect packet text.",
+  "access_log_rule": "Every private-packet access event must validate against schemas/private_packet_access_log.schema.json and scripts/validate_human_llm_rights_gate.py. Access logs must contain no raw source text, excerpts, prompt inputs, model inputs, or source-derived packet contents.",
+  "approval_record_version": "human_llm_private_packet_handling_approval_v0_1",
+  "approval_status": "PASSED_WITH_CONTROLLED_ACCESS_ONLY",
+  "date": "2026-07-07",
+  "execution_authorization": "not_authorized",
+  "explicit_boundary": "This approval does not authorize provider transmission, human coding, model execution, final execution, public redistribution, or model-visible prompt generation.",
+  "export_rule": "Export remains blocked unless separately authorized and logged with non-blocked rights, passed private-packet handling, destination, export rationale, and any required downstream gates.",
+  "hash_verification_rule": "Packet hashes may be verified without exposing text. Hash-only verification must use transformation_type=hash_verification_only or none as appropriate, content_viewed=false unless viewing occurred, content_exported=false, content_transmitted_to_provider=false, and a valid record_hash.",
+  "human_coding_rule": "Human coding remains blocked until final authorization, documented coding environment, packet hash verification, and record-locking readiness are complete.",
+  "model_called": false,
+  "model_execution_rule": "Model execution remains blocked until provider/model/account, runtime settings, pricing, request preservation, provider transmission, and final authorization gates pass.",
+  "outputs_generated": false,
+  "private_packet_text_inspected": false,
+  "private_source_text_committed": false,
+  "provider_transmission_rule": "Provider transmission remains blocked until provider/model/account and runtime gates pass, provider data handling is reviewed, provider transmission is separately authorized, and final execution authorization is granted.",
+  "public_artifact_rule": "Public artifacts may contain approved metadata and non-content hashes only. They must not contain private packet contents, copyrighted excerpts, generated prompts containing source material, or source-derived fixtures.",
+  "record_hash": "sha256:9cbf0c2c6434a4d33c0c13a912fe8ba419abf0af49628a2438c684c02536f368",
+  "reviewer": "author-assisted internal private-packet gate review",
+  "rights_evidence_status": "PASSED_WITH_DOWNSTREAM_GATES_BLOCKED for all 25 selected cases",
+  "scope": "Controlled private-packet handling protocol approval for metadata-only gate preparation in PR #20. This approval covers storage, hash verification, and access-log requirements only.",
+  "storage_boundary": "Private packets remain in controlled local or institutional storage. Private packet text must not be committed to public artifacts, tests, logs, pull requests, or prompts.",
+  "transformation_after_hash_rule": "Any transformation, normalization, redaction, packet construction, or provider-request construction requires a transformation type, rationale, passed private-packet gate status, and valid packet_hash_after. Hash-only verification may record an after-hash only when explicitly classified and explained.",
+  "unresolved_downstream_gates": [
+    "provider_model_account",
+    "runtime_settings",
+    "pricing",
+    "final_authorization",
+    "human_coding",
+    "model_execution"
+  ]
+}

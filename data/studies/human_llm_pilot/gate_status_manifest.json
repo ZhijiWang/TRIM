@@ -74,13 +74,13 @@
       "this_pr_changes_status": true
     },
     {
-      "dependency": "final execution remains blocked while any required gate is blocked",
-      "evidence_path": "docs/studies/private_packet_handling_protocol.md",
+      "dependency": "controlled local storage and logged access are approved; final execution remains blocked while provider/model/account, runtime, pricing, final authorization, human coding, and model execution gates are blocked",
+      "evidence_path": "data/studies/human_llm_pilot/private_packet_handling_approval.json",
       "execution_remains_blocked": true,
       "gate": "controlled_private_packet_handling",
-      "review_date": null,
-      "reviewer": "author-assisted internal preparation",
-      "status": "BLOCKED",
+      "review_date": "2026-07-07",
+      "reviewer": "author-assisted internal private-packet gate review",
+      "status": "PASSED_WITH_CONTROLLED_ACCESS_ONLY",
       "this_pr_changes_status": true
     },
     {

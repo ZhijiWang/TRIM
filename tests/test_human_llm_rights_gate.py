@@ -181,7 +181,7 @@ def test_rights_statuses_keep_execution_blocked():
     assert manifest["overall_execution_status"] == OVERALL_BLOCKED_STATUS
     gate_status = {gate["gate"]: gate["status"] for gate in gate_manifest["gates"]}
     assert gate_status["rights_evidence"] == "PASSED_WITH_DOWNSTREAM_GATES_BLOCKED"
-    assert gate_status["controlled_private_packet_handling"] == "BLOCKED"
+    assert gate_status["controlled_private_packet_handling"] == "PASSED_WITH_CONTROLLED_ACCESS_ONLY"
     assert gate_status["human_coding"] == "BLOCKED"
     assert gate_status["model_execution"] == "BLOCKED"
     assert all(record["rights_status"] == "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN" for record in manifest["records"])
@@ -455,11 +455,45 @@ def test_private_packet_handling_remains_separately_blocked_even_with_rights_rec
     gate_status = {gate["gate"]: gate["status"] for gate in gate_manifest["gates"]}
 
     assert gate_status["rights_evidence"] == "PASSED_WITH_DOWNSTREAM_GATES_BLOCKED"
-    assert gate_status["controlled_private_packet_handling"] == "BLOCKED"
+    assert gate_status["controlled_private_packet_handling"] == "PASSED_WITH_CONTROLLED_ACCESS_ONLY"
     assert gate_status["provider_model_account"] == "BLOCKED"
     assert gate_status["runtime_settings"] == "BLOCKED"
+    assert gate_status["pricing"] == "BLOCKED"
+    assert gate_status["final_authorization"] == "BLOCKED"
     assert gate_status["human_coding"] == "BLOCKED"
     assert gate_status["model_execution"] == "BLOCKED"
+
+
+def test_controlled_private_packet_approval_record_exists_and_preserves_execution_block():
+    approval = load_json("data/studies/human_llm_pilot/private_packet_handling_approval.json")
+    gate_manifest = load_json("data/studies/human_llm_pilot/gate_status_manifest.json")
+    gate_status = {gate["gate"]: gate for gate in gate_manifest["gates"]}
+
+    assert approval["approval_status"] == "PASSED_WITH_CONTROLLED_ACCESS_ONLY"
+    assert approval["execution_authorization"] == "not_authorized"
+    assert approval["private_packet_text_inspected"] is False
+    assert approval["private_source_text_committed"] is False
+    assert approval["model_called"] is False
+    assert approval["outputs_generated"] is False
+    assert approval["record_hash"] == canonical_record_hash(approval)
+    assert gate_status["controlled_private_packet_handling"]["evidence_path"] == "data/studies/human_llm_pilot/private_packet_handling_approval.json"
+    assert gate_status["controlled_private_packet_handling"]["execution_remains_blocked"] is True
+    assert set(approval["unresolved_downstream_gates"]) == {
+        "provider_model_account",
+        "runtime_settings",
+        "pricing",
+        "final_authorization",
+        "human_coding",
+        "model_execution",
+    }
+
+
+def test_controlled_private_packet_gate_requires_protocol_and_approval_in_validator():
+    validator = (ROOT / "scripts/validate_human_llm_rights_gate.py").read_text(encoding="utf-8")
+
+    assert "controlled private-packet approval record is required" in validator
+    assert "private-packet approval must not authorize execution" in validator
+    assert "private-packet approval must not inspect packet text" in validator
 
 
 def test_provider_transmission_without_export_flag_fails():
