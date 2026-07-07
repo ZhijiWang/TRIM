@@ -1,24 +1,28 @@
 {
   "case_id": "L2_OVID_DAPHNE_001",
-  "edition_rights_basis": "blocked_pending_edition_review; public inventory records source provider Project Gutenberg and edition/source status: Project Gutenberg eBook #21765, The Metamorphoses of Ovid, Books I-VII",
+  "edition_rights_basis": "Project Gutenberg eBook #21765 is the public source/edition reference recorded for this case; public catalog metadata identifies the source title as \"The Metamorphoses of Ovid, Books I-VII\" and reports copyright=false. The study packet remains controlled and is not approved for inspection or provider transmission by this evidence record.",
   "evidence_documents": [
     "docs/studies/human_llm_rights_inventory.md",
-    "data/studies/human_llm_pilot/rights_inventory_manifest.json"
+    "data/studies/human_llm_pilot/rights_inventory_manifest.json",
+    "docs/studies/human_llm_rights_evidence_summary.md"
   ],
   "evidence_urls_or_citations": [
-    "https://www.gutenberg.org/cache/epub/21765/pg21765.txt",
-    "https://www.gutenberg.org/policy/license.html"
+    "https://www.gutenberg.org/ebooks/21765",
+    "https://www.gutenberg.org/ebooks/21765.rdf",
+    "https://gutendex.com/books/21765",
+    "https://www.gutenberg.org/policy/license.html",
+    "translation_or_source_edition_metadata:https://gutendex.com/books/21765"
   ],
-  "jurisdiction_note": "blocked_pending_jurisdiction_specific_review; public source URL responded to header availability check, but redistribution/provider-transmission rights are not approved by this record.",
-  "notes": "Evidence record created from public metadata and public source URL header availability only. It does not inspect source text, does not approve rights, does not approve translation rights, does not approve private-packet inspection, and does not authorize provider transmission, human coding, or model execution.",
-  "publication_or_death_date_evidence": "blocked_pending_publication_or_death_date_review; public inventory records source/tradition metadata: Ovid / Project Gutenberg eBook #21765, The Metamorphoses of Ovid, Books I-VII",
-  "record_hash": "sha256:19da6661509a01f67df116385425663a84404a68f92381016d2873d6af3f0498",
-  "review_date": null,
+  "jurisdiction_note": "Conservative protocol-review note: the evidence supports the documented Project Gutenberg/Gutendex public-domain/source-provider basis for the recorded translation or edition. This record does not claim global copyright clearance and does not approve private-packet inspection, provider transmission, human coding, model execution, or public redistribution beyond the documented source/provider basis. Downstream gates remain blocked.",
+  "notes": "L2 documentary translation/source evidence pass completed using public metadata and public source/provider citations only; no private source-packet text was inspected or committed. Private-packet inspection, controlled private-packet handling, provider transmission, provider/model/account verification, runtime settings, pricing, final authorization, human coding, and model execution remain blocked.",
+  "publication_or_death_date_evidence": "Public catalog metadata identifies the relevant translation/source edition as \"The Metamorphoses of Ovid, Books I-VII\" and records Henry T. Riley with date evidence: 1816-1878. This is the translation/edition-specific date evidence used for protocol review.",
+  "record_hash": "sha256:4a513f798145ed92ccc738e6b174aaec835ebe4d1142534c745710a63a0c6819",
+  "review_date": "2026-07-07",
   "reviewer": "author-assisted internal rights evidence preparation",
-  "rights_basis": "blocked_pending_documentary_review_public_source_metadata_collected",
+  "rights_basis": "Documentary translation/source evidence recorded for protocol review: Gutendex and Project Gutenberg metadata identify Project Gutenberg eBook #21765 as The Metamorphoses of Ovid, Books I-VII translated by Henry T. Riley, with copyright=false in public catalog metadata. The original/traditional source alone is not treated as sufficient; this record relies on the public translation or source-edition metadata for the selected Project Gutenberg source.",
   "source_identifier": "Ovid, Metamorphoses, Daphne episode",
   "source_layer": "English translation from Latin",
-  "status": "RIGHTS_TRANSLATION_REVIEW_REQUIRED",
-  "translation_rights_basis": "blocked_pending_translation_specific_review_public_source_metadata_collected",
-  "uncertainty": "not_assessed"
+  "status": "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
+  "translation_rights_basis": "Translation/edition-specific evidence: Henry T. Riley; 1816-1878; Project Gutenberg/Gutendex eBook #21765 metadata for \"The Metamorphoses of Ovid, Books I-VII\" reports copyright=false. This translation/edition basis is documented for protocol review only and does not authorize downstream private-packet or provider use.",
+  "uncertainty": "medium"
 }

@@ -7,46 +7,30 @@ Overall execution status remains: `BLOCKED_PENDING_RIGHTS_PRIVATE_PACKETS_MODEL_
 ## Counts
 
 - Rights evidence records: 25
-- L1 cases assessed: 15
-- L1 cases moved to `RIGHTS_DOCUMENTED_PUBLIC_DOMAIN`: 15
-- L1 cases remaining `RIGHTS_SOURCE_REVIEW_REQUIRED`: 0
-- L2 cases remaining `RIGHTS_TRANSLATION_REVIEW_REQUIRED`: 10
-- Status counts: {'RIGHTS_DOCUMENTED_PUBLIC_DOMAIN': 15, 'RIGHTS_TRANSLATION_REVIEW_REQUIRED': 10}
-- Passed source-rights count: 15
+- L1 documented public-domain count: 15
+- L2 cases assessed: 10
+- L2 cases moved to `RIGHTS_DOCUMENTED_PUBLIC_DOMAIN`: 8
+- L2 cases remaining `RIGHTS_TRANSLATION_REVIEW_REQUIRED`: 2
+- Status counts: {'RIGHTS_DOCUMENTED_PUBLIC_DOMAIN': 23, 'RIGHTS_TRANSLATION_REVIEW_REQUIRED': 2}
+- Passed source/translation rights count: 23
 - Unresolved source-rights count: 0
-- Passed translation-rights count: 0
-- Unresolved translation-rights count: 10
+- Unresolved translation-rights count: 2
 
-## Documented L1 source evidence records
+## Documented L2 translation/source evidence records
 
-- `L1_AUSTEN_PNP_001`: `RIGHTS_DOCUMENTED_PUBLIC_DOMAIN`; evidence `data/studies/human_llm_pilot/rights_evidence/L1_AUSTEN_PNP_001.rights.json`; private-packet inspection remains blocked.
-- `L1_SHELLEY_FRANK_001`: `RIGHTS_DOCUMENTED_PUBLIC_DOMAIN`; evidence `data/studies/human_llm_pilot/rights_evidence/L1_SHELLEY_FRANK_001.rights.json`; private-packet inspection remains blocked.
-- `L1_DICKENS_GE_001`: `RIGHTS_DOCUMENTED_PUBLIC_DOMAIN`; evidence `data/studies/human_llm_pilot/rights_evidence/L1_DICKENS_GE_001.rights.json`; private-packet inspection remains blocked.
-- `L1_BRONTE_JE_001`: `RIGHTS_DOCUMENTED_PUBLIC_DOMAIN`; evidence `data/studies/human_llm_pilot/rights_evidence/L1_BRONTE_JE_001.rights.json`; private-packet inspection remains blocked.
-- `L1_WILDE_DG_001`: `RIGHTS_DOCUMENTED_PUBLIC_DOMAIN`; evidence `data/studies/human_llm_pilot/rights_evidence/L1_WILDE_DG_001.rights.json`; private-packet inspection remains blocked.
-- `L1_JAMES_TS_001`: `RIGHTS_DOCUMENTED_PUBLIC_DOMAIN`; evidence `data/studies/human_llm_pilot/rights_evidence/L1_JAMES_TS_001.rights.json`; private-packet inspection remains blocked.
-- `L1_STEVENSON_JH_001`: `RIGHTS_DOCUMENTED_PUBLIC_DOMAIN`; evidence `data/studies/human_llm_pilot/rights_evidence/L1_STEVENSON_JH_001.rights.json`; private-packet inspection remains blocked.
-- `L1_POE_TELLTALE_001`: `RIGHTS_DOCUMENTED_PUBLIC_DOMAIN`; evidence `data/studies/human_llm_pilot/rights_evidence/L1_POE_TELLTALE_001.rights.json`; private-packet inspection remains blocked.
-- `L1_HAWTHORNE_SL_001`: `RIGHTS_DOCUMENTED_PUBLIC_DOMAIN`; evidence `data/studies/human_llm_pilot/rights_evidence/L1_HAWTHORNE_SL_001.rights.json`; private-packet inspection remains blocked.
-- `L1_CHOPIN_AWAKENING_001`: `RIGHTS_DOCUMENTED_PUBLIC_DOMAIN`; evidence `data/studies/human_llm_pilot/rights_evidence/L1_CHOPIN_AWAKENING_001.rights.json`; private-packet inspection remains blocked.
-- `L1_HARDY_TESS_001`: `RIGHTS_DOCUMENTED_PUBLIC_DOMAIN`; evidence `data/studies/human_llm_pilot/rights_evidence/L1_HARDY_TESS_001.rights.json`; private-packet inspection remains blocked.
-- `L1_MELVILLE_BARTLEBY_001`: `RIGHTS_DOCUMENTED_PUBLIC_DOMAIN`; evidence `data/studies/human_llm_pilot/rights_evidence/L1_MELVILLE_BARTLEBY_001.rights.json`; private-packet inspection remains blocked.
-- `L1_WHARTON_MIRTH_001`: `RIGHTS_DOCUMENTED_PUBLIC_DOMAIN`; evidence `data/studies/human_llm_pilot/rights_evidence/L1_WHARTON_MIRTH_001.rights.json`; private-packet inspection remains blocked.
-- `L1_COLLINS_MOONSTONE_001`: `RIGHTS_DOCUMENTED_PUBLIC_DOMAIN`; evidence `data/studies/human_llm_pilot/rights_evidence/L1_COLLINS_MOONSTONE_001.rights.json`; private-packet inspection remains blocked.
-- `L1_CONRAD_SECRET_001`: `RIGHTS_DOCUMENTED_PUBLIC_DOMAIN`; evidence `data/studies/human_llm_pilot/rights_evidence/L1_CONRAD_SECRET_001.rights.json`; private-packet inspection remains blocked.
+- `L2_HOMER_ODYSSEY_001`: `RIGHTS_DOCUMENTED_PUBLIC_DOMAIN`; evidence `data/studies/human_llm_pilot/rights_evidence/L2_HOMER_ODYSSEY_001.rights.json`; private-packet inspection remains blocked.
+- `L2_SOPHOCLES_ANTIGONE_001`: `RIGHTS_DOCUMENTED_PUBLIC_DOMAIN`; evidence `data/studies/human_llm_pilot/rights_evidence/L2_SOPHOCLES_ANTIGONE_001.rights.json`; private-packet inspection remains blocked.
+- `L2_BIBLE_GENESIS_001`: `RIGHTS_DOCUMENTED_PUBLIC_DOMAIN`; evidence `data/studies/human_llm_pilot/rights_evidence/L2_BIBLE_GENESIS_001.rights.json`; private-packet inspection remains blocked.
+- `L2_BIBLE_SAMUEL_001`: `RIGHTS_DOCUMENTED_PUBLIC_DOMAIN`; evidence `data/studies/human_llm_pilot/rights_evidence/L2_BIBLE_SAMUEL_001.rights.json`; private-packet inspection remains blocked.
+- `L2_AESOP_001`: `RIGHTS_DOCUMENTED_PUBLIC_DOMAIN`; evidence `data/studies/human_llm_pilot/rights_evidence/L2_AESOP_001.rights.json`; private-packet inspection remains blocked.
+- `L2_OVID_DAPHNE_001`: `RIGHTS_DOCUMENTED_PUBLIC_DOMAIN`; evidence `data/studies/human_llm_pilot/rights_evidence/L2_OVID_DAPHNE_001.rights.json`; private-packet inspection remains blocked.
+- `L2_MALORY_MORTE_001`: `RIGHTS_DOCUMENTED_PUBLIC_DOMAIN`; evidence `data/studies/human_llm_pilot/rights_evidence/L2_MALORY_MORTE_001.rights.json`; private-packet inspection remains blocked.
+- `L2_ARABIAN_NIGHTS_001`: `RIGHTS_DOCUMENTED_PUBLIC_DOMAIN`; evidence `data/studies/human_llm_pilot/rights_evidence/L2_ARABIAN_NIGHTS_001.rights.json`; private-packet inspection remains blocked.
 
-## Cases still rights-blocked
+## L2 cases still rights-blocked
 
-- `L2_HOMER_ODYSSEY_001`: `RIGHTS_TRANSLATION_REVIEW_REQUIRED`; evidence `data/studies/human_llm_pilot/rights_evidence/L2_HOMER_ODYSSEY_001.rights.json`; remaining question: Translation-specific rights evidence remains unresolved; public source metadata has been recorded but does not approve translation rights, private-packet inspection, provider transmission, human coding, or model execution.
-- `L2_SOPHOCLES_ANTIGONE_001`: `RIGHTS_TRANSLATION_REVIEW_REQUIRED`; evidence `data/studies/human_llm_pilot/rights_evidence/L2_SOPHOCLES_ANTIGONE_001.rights.json`; remaining question: Translation-specific rights evidence remains unresolved; public source metadata has been recorded but does not approve translation rights, private-packet inspection, provider transmission, human coding, or model execution.
-- `L2_HERODOTUS_SCYTHIAN_001`: `RIGHTS_TRANSLATION_REVIEW_REQUIRED`; evidence `data/studies/human_llm_pilot/rights_evidence/L2_HERODOTUS_SCYTHIAN_001.rights.json`; remaining question: Translation-specific rights evidence remains unresolved; public source metadata has been recorded but does not approve translation rights, private-packet inspection, provider transmission, human coding, or model execution.
-- `L2_BIBLE_GENESIS_001`: `RIGHTS_TRANSLATION_REVIEW_REQUIRED`; evidence `data/studies/human_llm_pilot/rights_evidence/L2_BIBLE_GENESIS_001.rights.json`; remaining question: Translation-specific rights evidence remains unresolved; public source metadata has been recorded but does not approve translation rights, private-packet inspection, provider transmission, human coding, or model execution.
-- `L2_BIBLE_SAMUEL_001`: `RIGHTS_TRANSLATION_REVIEW_REQUIRED`; evidence `data/studies/human_llm_pilot/rights_evidence/L2_BIBLE_SAMUEL_001.rights.json`; remaining question: Translation-specific rights evidence remains unresolved; public source metadata has been recorded but does not approve translation rights, private-packet inspection, provider transmission, human coding, or model execution.
-- `L2_AESOP_001`: `RIGHTS_TRANSLATION_REVIEW_REQUIRED`; evidence `data/studies/human_llm_pilot/rights_evidence/L2_AESOP_001.rights.json`; remaining question: Translation-specific rights evidence remains unresolved; public source metadata has been recorded but does not approve translation rights, private-packet inspection, provider transmission, human coding, or model execution.
-- `L2_OVID_DAPHNE_001`: `RIGHTS_TRANSLATION_REVIEW_REQUIRED`; evidence `data/studies/human_llm_pilot/rights_evidence/L2_OVID_DAPHNE_001.rights.json`; remaining question: Translation-specific rights evidence remains unresolved; public source metadata has been recorded but does not approve translation rights, private-packet inspection, provider transmission, human coding, or model execution.
-- `L2_MALORY_MORTE_001`: `RIGHTS_TRANSLATION_REVIEW_REQUIRED`; evidence `data/studies/human_llm_pilot/rights_evidence/L2_MALORY_MORTE_001.rights.json`; remaining question: Translation-specific rights evidence remains unresolved; public source metadata has been recorded but does not approve translation rights, private-packet inspection, provider transmission, human coding, or model execution.
-- `L2_BEOWULF_DRAGON_001`: `RIGHTS_TRANSLATION_REVIEW_REQUIRED`; evidence `data/studies/human_llm_pilot/rights_evidence/L2_BEOWULF_DRAGON_001.rights.json`; remaining question: Translation-specific rights evidence remains unresolved; public source metadata has been recorded but does not approve translation rights, private-packet inspection, provider transmission, human coding, or model execution.
-- `L2_ARABIAN_NIGHTS_001`: `RIGHTS_TRANSLATION_REVIEW_REQUIRED`; evidence `data/studies/human_llm_pilot/rights_evidence/L2_ARABIAN_NIGHTS_001.rights.json`; remaining question: Translation-specific rights evidence remains unresolved; public source metadata has been recorded but does not approve translation rights, private-packet inspection, provider transmission, human coding, or model execution.
+- `L2_HERODOTUS_SCYTHIAN_001`: `RIGHTS_TRANSLATION_REVIEW_REQUIRED`; evidence `data/studies/human_llm_pilot/rights_evidence/L2_HERODOTUS_SCYTHIAN_001.rights.json`; remaining question: Public inventory/source status names a George Rawlinson translation, but Gutendex metadata for Project Gutenberg eBook #2707 identifies G. C. Macaulay as translator. The exact translation/edition used must be reconciled before the case can pass. No private-packet inspection, provider transmission, human coding, or model execution is approved.
+- `L2_BEOWULF_DRAGON_001`: `RIGHTS_TRANSLATION_REVIEW_REQUIRED`; evidence `data/studies/human_llm_pilot/rights_evidence/L2_BEOWULF_DRAGON_001.rights.json`; remaining question: Public inventory/source status names a Francis B. Gummere translation, but Gutendex metadata for Project Gutenberg eBook #16328 identifies J. Lesslie Hall as translator. The exact translation/edition used must be reconciled before the case can pass. No private-packet inspection, provider transmission, human coding, or model execution is approved.
 
 ## Execution boundary
 

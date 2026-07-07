@@ -1,24 +1,28 @@
 {
   "case_id": "L2_AESOP_001",
-  "edition_rights_basis": "blocked_pending_edition_review; public inventory records source provider Project Gutenberg and edition/source status: Project Gutenberg eBook #21, Three Hundred Aesop’s Fables",
+  "edition_rights_basis": "Project Gutenberg eBook #21 is the public source/edition reference recorded for this case; public catalog metadata identifies the source title as \"Three hundred Aesop’s fables: Translated by George Fyler Townsend\" and reports copyright=false. The study packet remains controlled and is not approved for inspection or provider transmission by this evidence record.",
   "evidence_documents": [
     "docs/studies/human_llm_rights_inventory.md",
-    "data/studies/human_llm_pilot/rights_inventory_manifest.json"
+    "data/studies/human_llm_pilot/rights_inventory_manifest.json",
+    "docs/studies/human_llm_rights_evidence_summary.md"
   ],
   "evidence_urls_or_citations": [
-    "https://www.gutenberg.org/cache/epub/21/pg21.txt",
-    "https://www.gutenberg.org/policy/license.html"
+    "https://www.gutenberg.org/ebooks/21",
+    "https://www.gutenberg.org/ebooks/21.rdf",
+    "https://gutendex.com/books/21",
+    "https://www.gutenberg.org/policy/license.html",
+    "translation_or_source_edition_metadata:https://gutendex.com/books/21"
   ],
-  "jurisdiction_note": "blocked_pending_jurisdiction_specific_review; public source URL responded to header availability check, but redistribution/provider-transmission rights are not approved by this record.",
-  "notes": "Evidence record created from public metadata and public source URL header availability only. It does not inspect source text, does not approve rights, does not approve translation rights, does not approve private-packet inspection, and does not authorize provider transmission, human coding, or model execution.",
-  "publication_or_death_date_evidence": "blocked_pending_publication_or_death_date_review; public inventory records source/tradition metadata: Aesop / fable tradition / Project Gutenberg eBook #21, Three Hundred Aesop’s Fables",
-  "record_hash": "sha256:f1c8897f6e362e3b100a94a5103e7f27a9801d6b446f093b55d82e587d8942b9",
-  "review_date": null,
+  "jurisdiction_note": "Conservative protocol-review note: the evidence supports the documented Project Gutenberg/Gutendex public-domain/source-provider basis for the recorded translation or edition. This record does not claim global copyright clearance and does not approve private-packet inspection, provider transmission, human coding, model execution, or public redistribution beyond the documented source/provider basis. Downstream gates remain blocked.",
+  "notes": "L2 documentary translation/source evidence pass completed using public metadata and public source/provider citations only; no private source-packet text was inspected or committed. Private-packet inspection, controlled private-packet handling, provider transmission, provider/model/account verification, runtime settings, pricing, final authorization, human coding, and model execution remain blocked.",
+  "publication_or_death_date_evidence": "Public catalog metadata identifies the relevant translation/source edition as \"Three hundred Aesop’s fables: Translated by George Fyler Townsend\" and records George Fyler Townsend with date evidence: 1814-1900. This is the translation/edition-specific date evidence used for protocol review.",
+  "record_hash": "sha256:6517ce079c9cb7ae6b5137916d76d4f58783450fd7e0f6aa1fd4f4a3c190955b",
+  "review_date": "2026-07-07",
   "reviewer": "author-assisted internal rights evidence preparation",
-  "rights_basis": "blocked_pending_documentary_review_public_source_metadata_collected",
+  "rights_basis": "Documentary translation/source evidence recorded for protocol review: Gutendex and Project Gutenberg metadata identify Project Gutenberg eBook #21 as Three hundred Aesop’s fables translated by George Fyler Townsend, with copyright=false in public catalog metadata. The original/traditional source alone is not treated as sufficient; this record relies on the public translation or source-edition metadata for the selected Project Gutenberg source.",
   "source_identifier": "Aesop, The Fox and the Grapes",
   "source_layer": "English translation from Greek/Latin fable tradition",
-  "status": "RIGHTS_TRANSLATION_REVIEW_REQUIRED",
-  "translation_rights_basis": "blocked_pending_translation_specific_review_public_source_metadata_collected",
-  "uncertainty": "not_assessed"
+  "status": "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
+  "translation_rights_basis": "Translation/edition-specific evidence: George Fyler Townsend; 1814-1900; Project Gutenberg/Gutendex eBook #21 metadata for \"Three hundred Aesop’s fables: Translated by George Fyler Townsend\" reports copyright=false. This translation/edition basis is documented for protocol review only and does not authorize downstream private-packet or provider use.",
+  "uncertainty": "medium"
 }

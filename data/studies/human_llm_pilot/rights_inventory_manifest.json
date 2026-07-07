@@ -300,15 +300,15 @@
       "notes": "Metadata copied from public PR #18 manifests only; no packet text or private packet hash is included in this inventory.",
       "private_packet_inspection_blocked": true,
       "private_packet_model_transmission_blocked": true,
-      "public_domain_status": "public_domain_likely_by_publication_date_pending_jurisdiction_review",
+      "public_domain_status": "documented_translation_or_source_edition_evidence_recorded_for_protocol_review",
       "rights_evidence_path": "data/studies/human_llm_pilot/rights_evidence/L2_HOMER_ODYSSEY_001.rights.json",
-      "rights_status": "RIGHTS_TRANSLATION_REVIEW_REQUIRED",
+      "rights_status": "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
       "source_packet_status": "CONTROLLED_PRIVATE_PACKET_TEXT_REDACTED_PENDING_RIGHTS_REVIEW",
       "source_provider": "Project Gutenberg",
       "source_title_or_identifier": "Homer, The Odyssey",
       "source_url_or_reference": "https://www.gutenberg.org/cache/epub/1727/pg1727.txt",
-      "translation_status": "translation_rights_not_independently_verified_pending_review",
-      "unresolved_rights_question": "Translation-specific rights evidence remains unresolved; public source metadata has been recorded but does not approve translation rights, private-packet inspection, provider transmission, human coding, or model execution."
+      "translation_status": "translation_or_source_edition_evidence_documented_for_protocol_review",
+      "unresolved_rights_question": "L2 translation/source-edition evidence is documented for protocol review, but this does not approve private-packet inspection, provider transmission, human coding, model execution, or global/public redistribution beyond the documented source/provider basis."
     },
     {
       "author_or_source_tradition": "Sophocles",
@@ -319,15 +319,15 @@
       "notes": "Metadata copied from public PR #18 manifests only; no packet text or private packet hash is included in this inventory.",
       "private_packet_inspection_blocked": true,
       "private_packet_model_transmission_blocked": true,
-      "public_domain_status": "public_domain_likely_by_publication_date_pending_jurisdiction_review",
+      "public_domain_status": "documented_translation_or_source_edition_evidence_recorded_for_protocol_review",
       "rights_evidence_path": "data/studies/human_llm_pilot/rights_evidence/L2_SOPHOCLES_ANTIGONE_001.rights.json",
-      "rights_status": "RIGHTS_TRANSLATION_REVIEW_REQUIRED",
+      "rights_status": "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
       "source_packet_status": "CONTROLLED_PRIVATE_PACKET_TEXT_REDACTED_PENDING_RIGHTS_REVIEW",
       "source_provider": "Project Gutenberg",
       "source_title_or_identifier": "Sophocles, Antigone",
       "source_url_or_reference": "https://www.gutenberg.org/cache/epub/31/pg31.txt",
-      "translation_status": "translation_rights_not_independently_verified_pending_review",
-      "unresolved_rights_question": "Translation-specific rights evidence remains unresolved; public source metadata has been recorded but does not approve translation rights, private-packet inspection, provider transmission, human coding, or model execution."
+      "translation_status": "translation_or_source_edition_evidence_documented_for_protocol_review",
+      "unresolved_rights_question": "L2 translation/source-edition evidence is documented for protocol review, but this does not approve private-packet inspection, provider transmission, human coding, model execution, or global/public redistribution beyond the documented source/provider basis."
     },
     {
       "author_or_source_tradition": "Herodotus",
@@ -345,8 +345,8 @@
       "source_provider": "Project Gutenberg",
       "source_title_or_identifier": "Herodotus, The Histories",
       "source_url_or_reference": "https://www.gutenberg.org/cache/epub/2707/pg2707.txt",
-      "translation_status": "translation_rights_not_independently_verified_pending_review",
-      "unresolved_rights_question": "Translation-specific rights evidence remains unresolved; public source metadata has been recorded but does not approve translation rights, private-packet inspection, provider transmission, human coding, or model execution."
+      "translation_status": "translation_edition_metadata_conflict_pending_review",
+      "unresolved_rights_question": "Public inventory/source status names a George Rawlinson translation, but Gutendex metadata for Project Gutenberg eBook #2707 identifies G. C. Macaulay as translator. The exact translation/edition used must be reconciled before the case can pass. No private-packet inspection, provider transmission, human coding, or model execution is approved."
     },
     {
       "author_or_source_tradition": "Biblical Hebrew tradition",
@@ -357,15 +357,15 @@
       "notes": "Metadata copied from public PR #18 manifests only; no packet text or private packet hash is included in this inventory.",
       "private_packet_inspection_blocked": true,
       "private_packet_model_transmission_blocked": true,
-      "public_domain_status": "public_domain_likely_by_publication_date_pending_jurisdiction_review",
+      "public_domain_status": "documented_translation_or_source_edition_evidence_recorded_for_protocol_review",
       "rights_evidence_path": "data/studies/human_llm_pilot/rights_evidence/L2_BIBLE_GENESIS_001.rights.json",
-      "rights_status": "RIGHTS_TRANSLATION_REVIEW_REQUIRED",
+      "rights_status": "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
       "source_packet_status": "CONTROLLED_PRIVATE_PACKET_TEXT_REDACTED_PENDING_RIGHTS_REVIEW",
       "source_provider": "Project Gutenberg",
       "source_title_or_identifier": "Genesis, King James Version",
       "source_url_or_reference": "https://www.gutenberg.org/files/10/10-0.txt",
-      "translation_status": "translation_rights_not_independently_verified_pending_review",
-      "unresolved_rights_question": "Translation-specific rights evidence remains unresolved; public source metadata has been recorded but does not approve translation rights, private-packet inspection, provider transmission, human coding, or model execution."
+      "translation_status": "translation_or_source_edition_evidence_documented_for_protocol_review",
+      "unresolved_rights_question": "L2 translation/source-edition evidence is documented for protocol review, but this does not approve private-packet inspection, provider transmission, human coding, model execution, or global/public redistribution beyond the documented source/provider basis."
     },
     {
       "author_or_source_tradition": "Biblical Hebrew tradition",
@@ -376,15 +376,15 @@
       "notes": "Metadata copied from public PR #18 manifests only; no packet text or private packet hash is included in this inventory.",
       "private_packet_inspection_blocked": true,
       "private_packet_model_transmission_blocked": true,
-      "public_domain_status": "public_domain_likely_by_publication_date_pending_jurisdiction_review",
+      "public_domain_status": "documented_translation_or_source_edition_evidence_recorded_for_protocol_review",
       "rights_evidence_path": "data/studies/human_llm_pilot/rights_evidence/L2_BIBLE_SAMUEL_001.rights.json",
-      "rights_status": "RIGHTS_TRANSLATION_REVIEW_REQUIRED",
+      "rights_status": "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
       "source_packet_status": "CONTROLLED_PRIVATE_PACKET_TEXT_REDACTED_PENDING_RIGHTS_REVIEW",
       "source_provider": "Project Gutenberg",
       "source_title_or_identifier": "2 Samuel, King James Version",
       "source_url_or_reference": "https://www.gutenberg.org/files/10/10-0.txt",
-      "translation_status": "translation_rights_not_independently_verified_pending_review",
-      "unresolved_rights_question": "Translation-specific rights evidence remains unresolved; public source metadata has been recorded but does not approve translation rights, private-packet inspection, provider transmission, human coding, or model execution."
+      "translation_status": "translation_or_source_edition_evidence_documented_for_protocol_review",
+      "unresolved_rights_question": "L2 translation/source-edition evidence is documented for protocol review, but this does not approve private-packet inspection, provider transmission, human coding, model execution, or global/public redistribution beyond the documented source/provider basis."
     },
     {
       "author_or_source_tradition": "Aesop / fable tradition",
@@ -395,15 +395,15 @@
       "notes": "Metadata copied from public PR #18 manifests only; no packet text or private packet hash is included in this inventory.",
       "private_packet_inspection_blocked": true,
       "private_packet_model_transmission_blocked": true,
-      "public_domain_status": "public_domain_likely_by_publication_date_pending_jurisdiction_review",
+      "public_domain_status": "documented_translation_or_source_edition_evidence_recorded_for_protocol_review",
       "rights_evidence_path": "data/studies/human_llm_pilot/rights_evidence/L2_AESOP_001.rights.json",
-      "rights_status": "RIGHTS_TRANSLATION_REVIEW_REQUIRED",
+      "rights_status": "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
       "source_packet_status": "CONTROLLED_PRIVATE_PACKET_TEXT_REDACTED_PENDING_RIGHTS_REVIEW",
       "source_provider": "Project Gutenberg",
       "source_title_or_identifier": "Aesop, The Fox and the Grapes",
       "source_url_or_reference": "https://www.gutenberg.org/cache/epub/21/pg21.txt",
-      "translation_status": "translation_rights_not_independently_verified_pending_review",
-      "unresolved_rights_question": "Translation-specific rights evidence remains unresolved; public source metadata has been recorded but does not approve translation rights, private-packet inspection, provider transmission, human coding, or model execution."
+      "translation_status": "translation_or_source_edition_evidence_documented_for_protocol_review",
+      "unresolved_rights_question": "L2 translation/source-edition evidence is documented for protocol review, but this does not approve private-packet inspection, provider transmission, human coding, model execution, or global/public redistribution beyond the documented source/provider basis."
     },
     {
       "author_or_source_tradition": "Ovid",
@@ -414,15 +414,15 @@
       "notes": "Metadata copied from public PR #18 manifests only; no packet text or private packet hash is included in this inventory.",
       "private_packet_inspection_blocked": true,
       "private_packet_model_transmission_blocked": true,
-      "public_domain_status": "public_domain_likely_by_publication_date_pending_jurisdiction_review",
+      "public_domain_status": "documented_translation_or_source_edition_evidence_recorded_for_protocol_review",
       "rights_evidence_path": "data/studies/human_llm_pilot/rights_evidence/L2_OVID_DAPHNE_001.rights.json",
-      "rights_status": "RIGHTS_TRANSLATION_REVIEW_REQUIRED",
+      "rights_status": "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
       "source_packet_status": "CONTROLLED_PRIVATE_PACKET_TEXT_REDACTED_PENDING_RIGHTS_REVIEW",
       "source_provider": "Project Gutenberg",
       "source_title_or_identifier": "Ovid, Metamorphoses, Daphne episode",
       "source_url_or_reference": "https://www.gutenberg.org/cache/epub/21765/pg21765.txt",
-      "translation_status": "translation_rights_not_independently_verified_pending_review",
-      "unresolved_rights_question": "Translation-specific rights evidence remains unresolved; public source metadata has been recorded but does not approve translation rights, private-packet inspection, provider transmission, human coding, or model execution."
+      "translation_status": "translation_or_source_edition_evidence_documented_for_protocol_review",
+      "unresolved_rights_question": "L2 translation/source-edition evidence is documented for protocol review, but this does not approve private-packet inspection, provider transmission, human coding, model execution, or global/public redistribution beyond the documented source/provider basis."
     },
     {
       "author_or_source_tradition": "Thomas Malory",
@@ -433,15 +433,15 @@
       "notes": "Metadata copied from public PR #18 manifests only; no packet text or private packet hash is included in this inventory.",
       "private_packet_inspection_blocked": true,
       "private_packet_model_transmission_blocked": true,
-      "public_domain_status": "public_domain_likely_by_publication_date_pending_jurisdiction_review",
+      "public_domain_status": "documented_translation_or_source_edition_evidence_recorded_for_protocol_review",
       "rights_evidence_path": "data/studies/human_llm_pilot/rights_evidence/L2_MALORY_MORTE_001.rights.json",
-      "rights_status": "RIGHTS_TRANSLATION_REVIEW_REQUIRED",
+      "rights_status": "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
       "source_packet_status": "CONTROLLED_PRIVATE_PACKET_TEXT_REDACTED_PENDING_RIGHTS_REVIEW",
       "source_provider": "Project Gutenberg",
       "source_title_or_identifier": "Thomas Malory, Le Morte d’Arthur",
       "source_url_or_reference": "https://www.gutenberg.org/cache/epub/1251/pg1251.txt",
-      "translation_status": "translation_rights_not_independently_verified_pending_review",
-      "unresolved_rights_question": "Translation-specific rights evidence remains unresolved; public source metadata has been recorded but does not approve translation rights, private-packet inspection, provider transmission, human coding, or model execution."
+      "translation_status": "translation_or_source_edition_evidence_documented_for_protocol_review",
+      "unresolved_rights_question": "L2 translation/source-edition evidence is documented for protocol review, but this does not approve private-packet inspection, provider transmission, human coding, model execution, or global/public redistribution beyond the documented source/provider basis."
     },
     {
       "author_or_source_tradition": "anonymous Old English poet/tradition",
@@ -459,8 +459,8 @@
       "source_provider": "Project Gutenberg",
       "source_title_or_identifier": "Beowulf",
       "source_url_or_reference": "https://www.gutenberg.org/cache/epub/16328/pg16328.txt",
-      "translation_status": "translation_rights_not_independently_verified_pending_review",
-      "unresolved_rights_question": "Translation-specific rights evidence remains unresolved; public source metadata has been recorded but does not approve translation rights, private-packet inspection, provider transmission, human coding, or model execution."
+      "translation_status": "translation_edition_metadata_conflict_pending_review",
+      "unresolved_rights_question": "Public inventory/source status names a Francis B. Gummere translation, but Gutendex metadata for Project Gutenberg eBook #16328 identifies J. Lesslie Hall as translator. The exact translation/edition used must be reconciled before the case can pass. No private-packet inspection, provider transmission, human coding, or model execution is approved."
     },
     {
       "author_or_source_tradition": "Arabic/Persian frame-tale tradition",
@@ -471,21 +471,21 @@
       "notes": "Metadata copied from public PR #18 manifests only; no packet text or private packet hash is included in this inventory.",
       "private_packet_inspection_blocked": true,
       "private_packet_model_transmission_blocked": true,
-      "public_domain_status": "public_domain_likely_by_publication_date_pending_jurisdiction_review",
+      "public_domain_status": "documented_translation_or_source_edition_evidence_recorded_for_protocol_review",
       "rights_evidence_path": "data/studies/human_llm_pilot/rights_evidence/L2_ARABIAN_NIGHTS_001.rights.json",
-      "rights_status": "RIGHTS_TRANSLATION_REVIEW_REQUIRED",
+      "rights_status": "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
       "source_packet_status": "CONTROLLED_PRIVATE_PACKET_TEXT_REDACTED_PENDING_RIGHTS_REVIEW",
       "source_provider": "Project Gutenberg",
       "source_title_or_identifier": "The Arabian Nights Entertainments, frame tale of Scheherazade",
       "source_url_or_reference": "https://www.gutenberg.org/cache/epub/128/pg128.txt",
-      "translation_status": "translation_rights_not_independently_verified_pending_review",
-      "unresolved_rights_question": "Translation-specific rights evidence remains unresolved; public source metadata has been recorded but does not approve translation rights, private-packet inspection, provider transmission, human coding, or model execution."
+      "translation_status": "translation_or_source_edition_evidence_documented_for_protocol_review",
+      "unresolved_rights_question": "L2 translation/source-edition evidence is documented for protocol review, but this does not approve private-packet inspection, provider transmission, human coding, model execution, or global/public redistribution beyond the documented source/provider basis."
     }
   ],
   "rights_inventory_version": "human_llm_rights_inventory_v0_1",
   "rights_status_summary": {
-    "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN": 15,
-    "RIGHTS_TRANSLATION_REVIEW_REQUIRED": 10
+    "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN": 23,
+    "RIGHTS_TRANSLATION_REVIEW_REQUIRED": 2
   },
   "selected_case_count": 25,
   "source_pr18_reference": {
@@ -496,5 +496,5 @@
     "sample_manifest_hash": "1ebcaef44ac560622f9c56a91c9534d46929f2e9d5bbb5e722107188c9adf7a6"
   },
   "source_rights_unresolved_count": 0,
-  "translation_rights_unresolved_count": 10
+  "translation_rights_unresolved_count": 2
 }

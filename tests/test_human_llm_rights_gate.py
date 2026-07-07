@@ -173,11 +173,11 @@ def test_rights_statuses_keep_execution_blocked():
     manifest = load_json("data/studies/human_llm_pilot/rights_inventory_manifest.json")
     gate_manifest = load_json("data/studies/human_llm_pilot/gate_status_manifest.json")
 
-    assert manifest["translation_rights_unresolved_count"] == 10
+    assert manifest["translation_rights_unresolved_count"] == 2
     assert manifest["source_rights_unresolved_count"] == 0
     assert manifest["rights_status_summary"] == {
-        "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN": 15,
-        "RIGHTS_TRANSLATION_REVIEW_REQUIRED": 10,
+        "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN": 23,
+        "RIGHTS_TRANSLATION_REVIEW_REQUIRED": 2,
     }
     assert manifest["overall_execution_status"] == OVERALL_BLOCKED_STATUS
     gate_status = {gate["gate"]: gate["status"] for gate in gate_manifest["gates"]}
@@ -190,11 +190,10 @@ def test_rights_statuses_keep_execution_blocked():
         for record in manifest["records"]
         if record["case_id"].startswith("L1_")
     )
-    assert all(
-        record["rights_status"] == "RIGHTS_TRANSLATION_REVIEW_REQUIRED"
-        for record in manifest["records"]
-        if record["case_id"].startswith("L2_")
-    )
+    l2_status = {record["case_id"]: record["rights_status"] for record in manifest["records"] if record["case_id"].startswith("L2_")}
+    assert sum(status == "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN" for status in l2_status.values()) == 8
+    assert l2_status["L2_HERODOTUS_SCYTHIAN_001"] == "RIGHTS_TRANSLATION_REVIEW_REQUIRED"
+    assert l2_status["L2_BEOWULF_DRAGON_001"] == "RIGHTS_TRANSLATION_REVIEW_REQUIRED"
 
 
 def test_blocked_rights_evidence_record_can_exist_without_documentary_evidence():
@@ -214,15 +213,16 @@ def test_blocked_translation_rights_evidence_record_remains_valid():
     assert validate_rights_evidence_record(record) == []
 
 
-def test_l2_translation_records_remain_blocked():
+def test_l2_translation_records_have_documented_or_blocked_statuses():
     manifest = load_json("data/studies/human_llm_pilot/rights_inventory_manifest.json")
 
     l2_records = [record for record in manifest["records"] if record["case_id"].startswith("L2_")]
     assert len(l2_records) == 10
-    assert all(record["rights_status"] == "RIGHTS_TRANSLATION_REVIEW_REQUIRED" for record in l2_records)
+    assert sum(record["rights_status"] == "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN" for record in l2_records) == 8
+    assert sum(record["rights_status"] == "RIGHTS_TRANSLATION_REVIEW_REQUIRED" for record in l2_records) == 2
     for inventory_record in l2_records:
         evidence = load_json(inventory_record["rights_evidence_path"])
-        assert evidence["status"] == "RIGHTS_TRANSLATION_REVIEW_REQUIRED"
+        assert evidence["status"] == inventory_record["rights_status"]
         assert validate_rights_evidence_record(evidence) == []
 
 
@@ -311,6 +311,72 @@ def test_translation_case_with_translation_specific_evidence_passes():
     record = passed_translation_record()
 
     assert validate_rights_evidence_record(record) == []
+
+
+def test_l2_documented_translation_records_include_translation_specific_evidence():
+    manifest = load_json("data/studies/human_llm_pilot/rights_inventory_manifest.json")
+
+    documented_l2 = [
+        record
+        for record in manifest["records"]
+        if record["case_id"].startswith("L2_") and record["rights_status"] == "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN"
+    ]
+    assert len(documented_l2) == 8
+    for inventory_record in documented_l2:
+        evidence = load_json(inventory_record["rights_evidence_path"])
+        evidence_text = "\n".join(evidence["evidence_urls_or_citations"]).lower()
+        assert "translation" in evidence["translation_rights_basis"].lower() or "edition" in evidence["translation_rights_basis"].lower()
+        assert "translation" in evidence_text or "source_edition" in evidence_text
+        assert validate_rights_evidence_record(evidence) == []
+
+
+def test_l2_original_only_evidence_without_translation_or_edition_basis_fails():
+    record = passed_translation_record(
+        translation_rights_basis="blocked_pending_translation_review",
+        evidence_documents=["rights/evidence/ancient_original_public_domain.md"],
+    )
+
+    assert any("blocked translation_rights_basis" in error for error in validate_rights_evidence_record(record))
+
+
+def test_kjv_records_use_conservative_jurisdiction_note():
+    for case_id in ["L2_BIBLE_GENESIS_001", "L2_BIBLE_SAMUEL_001"]:
+        evidence = load_json(f"data/studies/human_llm_pilot/rights_evidence/{case_id}.rights.json")
+        note = evidence["jurisdiction_note"].lower()
+        assert evidence["status"] == "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN"
+        assert "global copyright clearance" in note
+        assert "downstream gates remain blocked" in note
+        assert validate_rights_evidence_record(evidence) == []
+
+
+def test_beowulf_and_herodotus_translation_metadata_conflicts_remain_blocked():
+    for case_id in ["L2_BEOWULF_DRAGON_001", "L2_HERODOTUS_SCYTHIAN_001"]:
+        evidence = load_json(f"data/studies/human_llm_pilot/rights_evidence/{case_id}.rights.json")
+        assert evidence["status"] == "RIGHTS_TRANSLATION_REVIEW_REQUIRED"
+        assert "public_metadata_conflict" in evidence["translation_rights_basis"]
+        assert validate_rights_evidence_record(evidence) == []
+
+
+def test_beowulf_record_cannot_pass_without_translator_or_edition_evidence():
+    record = passed_translation_record(
+        case_id="L2_BEOWULF_DRAGON_001",
+        source_layer="English translation from Old English",
+        translation_rights_basis="blocked_pending_translation_review",
+        evidence_documents=["rights/evidence/old_english_original_public_domain.md"],
+    )
+
+    assert any("blocked translation_rights_basis" in error for error in validate_rights_evidence_record(record))
+
+
+def test_arabian_nights_record_cannot_pass_without_translation_or_edition_evidence():
+    record = passed_translation_record(
+        case_id="L2_ARABIAN_NIGHTS_001",
+        source_layer="English translation from Arabic/Persian narrative tradition",
+        evidence_documents=["rights/evidence/traditional_source_public_domain.md"],
+        evidence_urls_or_citations=[],
+    )
+
+    assert any("translation-specific evidence item" in error for error in validate_rights_evidence_record(record))
 
 
 def test_rights_record_hash_rule_remains_non_circular():
