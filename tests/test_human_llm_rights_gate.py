@@ -10,6 +10,7 @@ from scripts.validate_human_llm_rights_gate import (
     OVERALL_BLOCKED_STATUS,
     canonical_record_hash,
     validate_access_log_record,
+    validate_provider_verification_record,
     validate_rights_evidence_record,
 )
 
@@ -109,6 +110,50 @@ def access_record(**overrides):
         "authorization_reference": "AUTH-001",
         "notes": "authorized administrative event without packet text viewing",
         "record_hash": "",
+    }
+    record.update(overrides)
+    return with_hash(record)
+
+
+def provider_verification_record(**overrides):
+    record = {
+        "account_availability_status": "BLOCKED_NO_API_KEY_AVAILABLE_FOR_ACCOUNT_MODEL_LISTING",
+        "account_model_listing_result": "not_performed_no_api_key_present",
+        "account_verification_method": "Metadata-only account availability check attempted; no model call, prompt, packet text, or provider transmission occurred.",
+        "credentials_committed": False,
+        "date": "2026-07-07",
+        "explicit_boundary_statement": "Provider planning only; no execution authorization.",
+        "model_called": False,
+        "model_identifier": "gpt-5.4-mini",
+        "model_identifier_freeze_status": "OFFICIAL_DOCS_IDENTIFIED_ACCOUNT_UNVERIFIED",
+        "model_identifier_source": "OpenAI official API documentation source.",
+        "model_response_schema_compatibility": "Schema compatibility remains pending runtime verification.",
+        "outputs_generated": False,
+        "pricing_status": "BLOCKED_PENDING_SEPARATE_PRICING_RECORD",
+        "private_packet_text_transmitted": False,
+        "prompt_assembly_compatibility": "Prompt assembly remains frozen; no prompt submitted.",
+        "provider_data_handling_summary": "OpenAI provider data-handling documentation reviewed for protocol planning.",
+        "provider_documentation_citations": [
+            "https://developers.openai.com/api/docs/pricing",
+            "https://developers.openai.com/api/docs/guides/your-data",
+        ],
+        "provider_name": "OpenAI",
+        "provider_transmission_status": "BLOCKED",
+        "record_hash": "",
+        "record_version": "provider_model_account_verification_v0_1",
+        "request_preservation_feasibility": "Harness can preserve request representation before any future authorized call.",
+        "response_preservation_feasibility": "Harness can preserve raw response before parsing after any future authorized call.",
+        "reviewer": "provider gate reviewer",
+        "runtime_settings_status": "BLOCKED_PENDING_SEPARATE_RUNTIME_FREEZE",
+        "unresolved_downstream_gates": [
+            "provider_model_account_account_availability",
+            "runtime_settings",
+            "pricing",
+            "final_authorization",
+            "human_coding",
+            "model_execution",
+        ],
+        "verification_result": "BLOCKED_ACCOUNT_AVAILABILITY_NOT_VERIFIED",
     }
     record.update(overrides)
     return with_hash(record)
@@ -494,6 +539,107 @@ def test_controlled_private_packet_gate_requires_protocol_and_approval_in_valida
     assert "controlled private-packet approval record is required" in validator
     assert "private-packet approval must not authorize execution" in validator
     assert "private-packet approval must not inspect packet text" in validator
+
+
+def test_provider_model_account_verification_record_exists_but_gate_remains_blocked():
+    verification = load_json("data/studies/human_llm_pilot/provider_model_account_verification.json")
+    gate_manifest = load_json("data/studies/human_llm_pilot/gate_status_manifest.json")
+    gate_status = {gate["gate"]: gate for gate in gate_manifest["gates"]}
+
+    assert validate_provider_verification_record(verification) == []
+    assert verification["provider_name"] == "OpenAI"
+    assert verification["model_identifier"] == "gpt-5.4-mini"
+    assert verification["account_availability_status"].startswith("BLOCKED")
+    assert verification["model_called"] is False
+    assert verification["outputs_generated"] is False
+    assert verification["private_packet_text_transmitted"] is False
+    assert verification["credentials_committed"] is False
+    assert verification["record_hash"] == canonical_record_hash(verification)
+    assert gate_status["provider_model_account"]["status"] == "BLOCKED"
+    assert gate_status["provider_model_account"]["evidence_path"] == "data/studies/human_llm_pilot/provider_model_account_verification.json"
+    assert gate_status["provider_model_account"]["execution_remains_blocked"] is True
+
+
+def test_provider_model_account_cannot_pass_without_provider_verification_record():
+    validator = (ROOT / "scripts/validate_human_llm_rights_gate.py").read_text(encoding="utf-8")
+
+    assert "provider/model/account verification record is required" in validator
+    assert "provider/model/account gate must reference verification record" in validator
+
+
+def test_provider_verification_requires_provider_name_and_model_identifier():
+    assert any(
+        "provider_name" in error
+        for error in validate_provider_verification_record(provider_verification_record(provider_name=""))
+    )
+    assert any(
+        "model_identifier" in error
+        for error in validate_provider_verification_record(provider_verification_record(model_identifier=""))
+    )
+
+
+def test_provider_verification_requires_account_status_and_data_handling():
+    assert any(
+        "account_availability_status" in error
+        for error in validate_provider_verification_record(provider_verification_record(account_availability_status=""))
+    )
+    assert any(
+        "provider_data_handling_summary" in error
+        for error in validate_provider_verification_record(provider_verification_record(provider_data_handling_summary=""))
+    )
+
+
+def test_provider_verification_requires_request_and_response_preservation_feasibility():
+    assert any(
+        "request_preservation_feasibility" in error
+        for error in validate_provider_verification_record(provider_verification_record(request_preservation_feasibility=""))
+    )
+    assert any(
+        "response_preservation_feasibility" in error
+        for error in validate_provider_verification_record(provider_verification_record(response_preservation_feasibility=""))
+    )
+
+
+def test_provider_verification_rejects_credential_like_keys_or_secret_like_values():
+    with_key = provider_verification_record(api_key="not-a-real-key")
+    with_secret_value = provider_verification_record(account_verification_method="Bearer " + "a" * 24)
+
+    assert any("credential-like" in error for error in validate_provider_verification_record(with_key))
+    assert any("credential-like" in error for error in validate_provider_verification_record(with_secret_value))
+
+
+def test_provider_verification_requires_no_model_call_outputs_or_packet_transmission():
+    assert any(
+        "call a model" in error
+        for error in validate_provider_verification_record(provider_verification_record(model_called=True))
+    )
+    assert any(
+        "generate outputs" in error
+        for error in validate_provider_verification_record(provider_verification_record(outputs_generated=True))
+    )
+    assert any(
+        "transmit packet text" in error
+        for error in validate_provider_verification_record(provider_verification_record(private_packet_text_transmitted=True))
+    )
+
+
+def test_provider_model_account_block_does_not_unblock_downstream_gates():
+    gate_manifest = load_json("data/studies/human_llm_pilot/gate_status_manifest.json")
+    gate_status = {gate["gate"]: gate["status"] for gate in gate_manifest["gates"]}
+
+    assert gate_status["provider_model_account"] == "BLOCKED"
+    assert gate_status["runtime_settings"] == "BLOCKED"
+    assert gate_status["pricing"] == "BLOCKED"
+    assert gate_status["final_authorization"] == "BLOCKED"
+    assert gate_status["human_coding"] == "BLOCKED"
+    assert gate_status["model_execution"] == "BLOCKED"
+
+
+def test_provider_transmission_remains_blocked_after_provider_planning_record():
+    verification = load_json("data/studies/human_llm_pilot/provider_model_account_verification.json")
+
+    assert verification["provider_transmission_status"] == "BLOCKED"
+    assert verification["private_packet_text_transmitted"] is False
 
 
 def test_provider_transmission_without_export_flag_fails():

@@ -84,12 +84,12 @@
       "this_pr_changes_status": true
     },
     {
-      "dependency": "final execution remains blocked while any required gate is blocked",
-      "evidence_path": null,
+      "dependency": "provider and candidate model are documented, but account availability is not verified because no account model listing could be performed without credentials; final execution remains blocked while runtime, pricing, final authorization, human coding, and model execution gates are blocked",
+      "evidence_path": "data/studies/human_llm_pilot/provider_model_account_verification.json",
       "execution_remains_blocked": true,
       "gate": "provider_model_account",
-      "review_date": null,
-      "reviewer": "carried forward from PR #18 documentation",
+      "review_date": "2026-07-07",
+      "reviewer": "author-assisted internal provider/model/account gate review",
       "status": "BLOCKED",
       "this_pr_changes_status": false
     },

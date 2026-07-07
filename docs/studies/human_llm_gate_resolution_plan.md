@@ -1,6 +1,6 @@
 # Human-LLM gate resolution plan
 
-Status: planning document only. Rights evidence and controlled private-packet handling are documented for protocol review, but this PR does not authorize human coding, model execution, provider transmission, final execution, or empirical analysis.
+Status: planning document only. Rights evidence and controlled private-packet handling are documented for protocol review. Provider/model/account planning has been documented, but account availability remains unverified. This PR does not authorize human coding, model execution, provider transmission, final execution, or empirical analysis.
 
 This PR does not authorize coding or execution.
 
@@ -10,7 +10,7 @@ Overall execution status remains: `BLOCKED_PENDING_RIGHTS_PRIVATE_PACKETS_MODEL_
 
 1. Rights evidence has been documented for every selected case.
 2. Controlled private-packet handling has been approved for controlled storage, metadata-only public documentation, hash verification, and future separately authorized access logs only.
-3. Verify provider, model, account availability, data-handling terms, and endpoint compatibility.
+3. Provider/model/account planning record created at `data/studies/human_llm_pilot/provider_model_account_verification.json`; account availability remains blocked until a non-secret account model listing verifies access.
 4. Verify runtime and structured-output settings, including response mode, sampling controls, token limits, retry policy, and request/response preservation.
 5. Verify pricing immediately before execution and confirm the hard spending ceiling.
 6. Authorize a non-study dry run only after rights, private-packet, provider, runtime, pricing, and logging gates are ready for that limited purpose.

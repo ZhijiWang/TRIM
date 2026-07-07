@@ -96,6 +96,19 @@ ACTUAL_TRANSFORMATION_TYPES = {
     "provider_request_construction",
 }
 ISO_TIMESTAMP_RE = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|[+-]\d{2}:\d{2})$")
+SECRET_KEY_TOKENS = {
+    "api_key",
+    "authorization",
+    "bearer_token",
+    "billing_account",
+    "client_secret",
+    "credential",
+    "password",
+    "secret",
+    "token",
+}
+ALLOWED_SECRET_AUDIT_KEYS = {"credentials_committed"}
+SECRET_VALUE_RE = re.compile(r"(sk-[A-Za-z0-9_-]{20,}|Bearer\s+[A-Za-z0-9._-]{20,})")
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -125,6 +138,22 @@ def contains_private_text_markers(value: Any) -> bool:
     if isinstance(value, str):
         lower = value.lower()
         return any(pattern.lower() in lower for pattern in PRIVATE_TEXT_PATTERNS)
+    return False
+
+
+def contains_secret_markers(value: Any) -> bool:
+    if isinstance(value, dict):
+        for key, item in value.items():
+            key_text = str(key).lower()
+            if key_text not in ALLOWED_SECRET_AUDIT_KEYS and any(token in key_text for token in SECRET_KEY_TOKENS):
+                return True
+            if contains_secret_markers(item):
+                return True
+        return False
+    if isinstance(value, list):
+        return any(contains_secret_markers(item) for item in value)
+    if isinstance(value, str):
+        return SECRET_VALUE_RE.search(value) is not None
     return False
 
 
@@ -292,6 +321,62 @@ def validate_access_log_record(record: dict[str, Any]) -> list[str]:
     return errors
 
 
+def validate_provider_verification_record(record: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    for field in [
+        "record_version",
+        "date",
+        "reviewer",
+        "provider_name",
+        "model_identifier",
+        "model_identifier_source",
+        "account_availability_status",
+        "account_verification_method",
+        "provider_data_handling_summary",
+        "request_preservation_feasibility",
+        "response_preservation_feasibility",
+        "provider_transmission_status",
+        "explicit_boundary_statement",
+        "verification_result",
+    ]:
+        require(non_empty_text(record, field), f"provider verification requires non-empty {field}", errors)
+    require(
+        isinstance(record.get("provider_documentation_citations"), list)
+        and bool(record["provider_documentation_citations"])
+        and all(isinstance(item, str) and item.startswith("https://") for item in record["provider_documentation_citations"]),
+        "provider verification requires public documentation citations",
+        errors,
+    )
+    require(record.get("credentials_committed") is False, "provider verification must not commit credentials", errors)
+    require(record.get("model_called") is False, "provider verification must not call a model", errors)
+    require(record.get("outputs_generated") is False, "provider verification must not generate outputs", errors)
+    require(record.get("private_packet_text_transmitted") is False, "provider verification must not transmit packet text", errors)
+    require(record.get("provider_transmission_status") == "BLOCKED", "provider transmission must remain blocked", errors)
+    require(
+        isinstance(record.get("record_hash"), str)
+        and re.fullmatch(r"sha256:[a-f0-9]{64}", record["record_hash"]),
+        "provider verification record_hash must use sha256: convention",
+        errors,
+    )
+    require(record.get("record_hash") == canonical_record_hash(record), "provider verification record_hash mismatch", errors)
+    require(not contains_private_text_markers(record), "provider verification must not include private source text", errors)
+    require(not contains_secret_markers(record), "provider verification must not include credential-like keys or secret-like values", errors)
+    if str(record.get("verification_result", "")).startswith("PASSED"):
+        require(
+            str(record.get("account_availability_status", "")).startswith("AVAILABLE_VERIFIED"),
+            "passed provider verification requires verified account availability",
+            errors,
+        )
+    else:
+        require(
+            str(record.get("account_availability_status", "")).startswith("BLOCKED")
+            or "UNVERIFIED" in str(record.get("account_availability_status", "")),
+            "blocked provider verification requires blocked or unverified account availability status",
+            errors,
+        )
+    return errors
+
+
 def validate() -> list[str]:
     errors: list[str] = []
     docs = ROOT / "docs" / "studies"
@@ -303,6 +388,7 @@ def validate() -> list[str]:
     rights_evidence_dir = data / "rights_evidence"
     protocol_path = docs / "private_packet_handling_protocol.md"
     private_packet_approval_path = data / "private_packet_handling_approval.json"
+    provider_verification_path = data / "provider_model_account_verification.json"
     gate_manifest_path = data / "gate_status_manifest.json"
     plan_path = docs / "human_llm_gate_resolution_plan.md"
     rights_schema_path = schemas / "human_llm_rights_evidence.schema.json"
@@ -321,6 +407,7 @@ def validate() -> list[str]:
     access_schema = load_json(access_schema_path)
     protocol = protocol_path.read_text(encoding="utf-8")
     private_packet_approval = load_json(private_packet_approval_path) if private_packet_approval_path.exists() else {}
+    provider_verification = load_json(provider_verification_path) if provider_verification_path.exists() else {}
     plan = plan_path.read_text(encoding="utf-8")
     rights_doc_text = rights_doc.read_text(encoding="utf-8")
 
@@ -385,6 +472,11 @@ def validate() -> list[str]:
         require(private_packet_approval.get("outputs_generated") is False, "private-packet approval must not generate outputs", errors)
         require(private_packet_approval.get("record_hash") == canonical_record_hash(private_packet_approval), "private-packet approval hash mismatch", errors)
         require(not contains_private_text_markers(private_packet_approval), "private-packet approval contains private text marker", errors)
+    require(provider_verification_path.exists(), "provider/model/account verification record is required", errors)
+    if provider_verification:
+        for provider_error in validate_provider_verification_record(provider_verification):
+            errors.append(provider_error)
+        require(provider_verification.get("verification_result") == "BLOCKED_ACCOUNT_AVAILABILITY_NOT_VERIFIED", "provider/model/account verification must remain blocked until account availability is verified", errors)
 
     schema_names = {rights_schema["title"], access_schema["title"]}
     require("Human-LLM pilot rights evidence record" in schema_names, "rights evidence schema title mismatch", errors)
@@ -426,6 +518,16 @@ def validate() -> list[str]:
         else:
             require(gate_status[gate]["status"] == "BLOCKED", f"{gate}: expected blocked status", errors)
         require(gate_status[gate]["execution_remains_blocked"] is True, f"{gate}: execution must remain blocked", errors)
+    require(
+        gate_status["provider_model_account"]["evidence_path"] == "data/studies/human_llm_pilot/provider_model_account_verification.json",
+        "provider/model/account gate must reference verification record",
+        errors,
+    )
+    require(
+        gate_status["provider_model_account"]["status"] == "BLOCKED",
+        "provider/model/account must remain blocked without verified account availability",
+        errors,
+    )
 
     require(gate_manifest["overall_execution_status"] == OVERALL_BLOCKED_STATUS, "gate manifest overall status mismatch", errors)
     return errors

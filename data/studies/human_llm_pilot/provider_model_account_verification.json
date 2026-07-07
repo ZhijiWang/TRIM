@@ -1,0 +1,41 @@
+{
+  "account_availability_status": "BLOCKED_NO_API_KEY_AVAILABLE_FOR_ACCOUNT_MODEL_LISTING",
+  "account_model_listing_result": "not_performed_no_api_key_present",
+  "account_verification_method": "Metadata-only account availability check attempted on 2026-07-07 by checking for an OpenAI API credential and, if present, listing available models through the OpenAI /v1/models endpoint. OPENAI_API_KEY was not present in the local environment. No model call was made, no prompt was sent, and no source packet text was transmitted.",
+  "credentials_committed": false,
+  "date": "2026-07-07",
+  "explicit_boundary_statement": "This record documents provider/model/account planning only. It does not authorize provider transmission, runtime execution, pricing approval, final execution, human coding, model execution, source-packet inspection, or model-visible prompt generation.",
+  "model_called": false,
+  "model_identifier": "gpt-5.4-mini",
+  "model_identifier_freeze_status": "OFFICIAL_DOCS_IDENTIFIED_ACCOUNT_UNVERIFIED",
+  "model_identifier_source": "OpenAI official API pricing documentation identifies gpt-5.4-mini as an API model identifier; account availability remains unverified because no account model listing could be performed.",
+  "model_response_schema_compatibility": "PR #18 model response schema is the frozen response-shape target. Compatibility with provider structured-output mode still requires separate runtime-settings verification before any execution.",
+  "outputs_generated": false,
+  "pricing_status": "BLOCKED_PENDING_SEPARATE_PRICING_RECORD",
+  "private_packet_text_transmitted": false,
+  "prompt_assembly_compatibility": "PR #18 deterministic prompt assembly remains the frozen prompt-construction reference. No prompt was assembled for provider submission and no source content was transmitted.",
+  "provider_data_handling_summary": "Official OpenAI platform documentation was reviewed for protocol planning. The documented /v1/responses endpoint table states API data is not used for training and lists default abuse-monitoring/application-state retention behavior; final provider use still requires account-level configuration review, runtime settings, provider-transmission authorization, and final execution authorization.",
+  "provider_documentation_citations": [
+    "https://developers.openai.com/api/docs/pricing",
+    "https://developers.openai.com/api/docs/guides/your-data",
+    "https://developers.openai.com/api/docs/guides/migrate-to-responses",
+    "https://developers.openai.com/api/docs/guides/structured-outputs"
+  ],
+  "provider_name": "OpenAI",
+  "provider_transmission_status": "BLOCKED",
+  "record_hash": "sha256:7f025edb38dea36b94a3dcbc78d059694ce44f1dd349d5bcd7194af31ca395af",
+  "record_version": "provider_model_account_verification_v0_1",
+  "request_preservation_feasibility": "Feasible as a harness-side preservation requirement: before any authorized provider call, the exact provider-bound request representation can be serialized, hashed, and stored outside public artifacts. This was not exercised in this pass.",
+  "response_preservation_feasibility": "Feasible as a harness-side preservation requirement: after any future authorized provider response, raw response bytes/text and provider metadata can be preserved and hashed before parsing. This was not exercised in this pass.",
+  "reviewer": "author-assisted internal provider/model/account gate review",
+  "runtime_settings_status": "BLOCKED_PENDING_SEPARATE_RUNTIME_FREEZE",
+  "unresolved_downstream_gates": [
+    "provider_model_account_account_availability",
+    "runtime_settings",
+    "pricing",
+    "final_authorization",
+    "human_coding",
+    "model_execution"
+  ],
+  "verification_result": "BLOCKED_ACCOUNT_AVAILABILITY_NOT_VERIFIED"
+}
