@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ZhijiWang/TRIM/schemas/human_llm_provider_request_envelope.schema.json",
+  "title": "Human-LLM pilot provider request preservation envelope",
+  "description": "Public metadata and controlled-reference wrapper. Raw prompts, source text, credentials, and private packet content are not schema properties.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "case_id",
+    "condition",
+    "provider",
+    "model",
+    "runtime_settings_record_hash",
+    "prompt_template_hash",
+    "prompt_instance_hash",
+    "source_packet_hash",
+    "response_schema_hash",
+    "request_serialization_format",
+    "request_byte_hash",
+    "created_at",
+    "gate_snapshot",
+    "request_preserved",
+    "transmission_authorized",
+    "transmitted",
+    "provider_request_id",
+    "controlled_payload",
+    "record_hash"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "run_id": {"type": "string", "minLength": 1},
+    "case_id": {"type": "string", "minLength": 1},
+    "condition": {"type": "string", "minLength": 1},
+    "provider": {"type": "string", "minLength": 1},
+    "model": {"type": "string", "minLength": 1},
+    "runtime_settings_record_hash": {"$ref": "#/$defs/hash"},
+    "prompt_template_hash": {"$ref": "#/$defs/hash"},
+    "prompt_instance_hash": {"$ref": "#/$defs/hash"},
+    "source_packet_hash": {"$ref": "#/$defs/hash"},
+    "response_schema_hash": {"$ref": "#/$defs/hash"},
+    "request_serialization_format": {"const": "canonical_json_utf8"},
+    "request_byte_hash": {"$ref": "#/$defs/hash"},
+    "created_at": {"type": "string", "format": "date-time"},
+    "gate_snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["decision", "provider_model_account", "runtime_settings", "pricing", "final_authorization", "model_execution"],
+      "properties": {
+        "decision": {"const": "EXECUTION_BLOCKED"},
+        "provider_model_account": {"const": "BLOCKED"},
+        "runtime_settings": {"const": "BLOCKED"},
+        "pricing": {"const": "BLOCKED"},
+        "final_authorization": {"const": "BLOCKED"},
+        "model_execution": {"const": "BLOCKED"}
+      }
+    },
+    "request_preserved": {"const": true},
+    "transmission_authorized": {"const": false},
+    "transmitted": {"const": false},
+    "provider_request_id": {"type": "null"},
+    "controlled_payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "controlled_payload_reference",
+        "controlled_payload_hash",
+        "controlled_storage_location_class",
+        "private_packet_access_log_reference",
+        "provider_transmission_authorization_reference"
+      ],
+      "properties": {
+        "controlled_payload_reference": {"type": "string", "minLength": 1},
+        "controlled_payload_hash": {"$ref": "#/$defs/hash"},
+        "controlled_storage_location_class": {"type": "string", "minLength": 1},
+        "private_packet_access_log_reference": {"type": "string", "minLength": 1},
+        "provider_transmission_authorization_reference": {"const": "not_authorized"}
+      }
+    },
+    "record_hash": {"$ref": "#/$defs/hash"}
+  },
+  "$defs": {
+    "hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+  }
+}

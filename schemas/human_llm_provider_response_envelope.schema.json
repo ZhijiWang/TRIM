@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ZhijiWang/TRIM/schemas/human_llm_provider_response_envelope.schema.json",
+  "title": "Human-LLM pilot provider response preservation envelope",
+  "description": "Public metadata for controlled raw-response preservation. No raw or parsed response content is a public property.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "request_record_hash",
+    "provider",
+    "model",
+    "provider_response_id",
+    "response_received",
+    "raw_response_preserved",
+    "controlled_response_reference",
+    "raw_response_byte_hash",
+    "provider_metadata_hash",
+    "parsing_attempted",
+    "parsing_status",
+    "parsed_payload_hash",
+    "model_response_schema_validation_status",
+    "retry_metadata",
+    "error_class",
+    "error_message_summary",
+    "record_hash"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "run_id": {"type": "string", "minLength": 1},
+    "request_record_hash": {"$ref": "#/$defs/hash"},
+    "provider": {"type": "string", "minLength": 1},
+    "model": {"type": "string", "minLength": 1},
+    "provider_response_id": {"type": ["string", "null"]},
+    "response_received": {"type": "boolean"},
+    "raw_response_preserved": {"type": "boolean"},
+    "controlled_response_reference": {"type": ["string", "null"]},
+    "raw_response_byte_hash": {"anyOf": [{"$ref": "#/$defs/hash"}, {"type": "null"}]},
+    "provider_metadata_hash": {"anyOf": [{"$ref": "#/$defs/hash"}, {"type": "null"}]},
+    "parsing_attempted": {"type": "boolean"},
+    "parsing_status": {"enum": ["not_attempted", "parsed_json", "invalid_json"]},
+    "parsed_payload_hash": {"anyOf": [{"$ref": "#/$defs/hash"}, {"type": "null"}]},
+    "model_response_schema_validation_status": {"enum": ["not_attempted", "PASSED", "FAILED"]},
+    "retry_metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["retry_count", "retry_policy_status"],
+      "properties": {
+        "retry_count": {"type": "integer", "minimum": 0},
+        "retry_policy_status": {"type": "string", "minLength": 1}
+      }
+    },
+    "error_class": {"type": ["string", "null"]},
+    "error_message_summary": {"type": ["string", "null"], "maxLength": 1000},
+    "record_hash": {"$ref": "#/$defs/hash"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"response_received": {"const": false}}, "required": ["response_received"]},
+      "then": {
+        "properties": {
+          "provider_response_id": {"const": null},
+          "raw_response_preserved": {"const": false},
+          "controlled_response_reference": {"const": null},
+          "raw_response_byte_hash": {"const": null},
+          "provider_metadata_hash": {"const": null},
+          "parsing_attempted": {"const": false},
+          "parsing_status": {"const": "not_attempted"},
+          "parsed_payload_hash": {"const": null},
+          "model_response_schema_validation_status": {"const": "not_attempted"}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"raw_response_preserved": {"const": true}}, "required": ["raw_response_preserved"]},
+      "then": {
+        "required": ["controlled_response_reference", "raw_response_byte_hash"],
+        "properties": {
+          "controlled_response_reference": {"type": "string", "minLength": 1},
+          "raw_response_byte_hash": {"$ref": "#/$defs/hash"}
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+  }
+}

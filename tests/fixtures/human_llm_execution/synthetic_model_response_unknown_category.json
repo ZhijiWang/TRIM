@@ -1,0 +1,30 @@
+{
+  "selected_evidence": [],
+  "primary_label": null,
+  "friction_locus_proposed": "unresolved",
+  "rationale_mechanism": null,
+  "uncertainty": "not_supplied",
+  "alternative_pathways": [],
+  "counterfactual_tests": [],
+  "candidate_loci": [
+    {
+      "category": "invented_unknown_category",
+      "state": "insufficient_evidence",
+      "cited_evidence": [],
+      "rationale": "Invented invalid category fixture.",
+      "confidence": "not_applicable"
+    }
+  ],
+  "decision_path": ["Invented fixture decision step."],
+  "review_policy_applied": {
+    "category": "unresolved",
+    "status": "not_applicable",
+    "trigger": ["synthetic_fixture_trigger"],
+    "requires_human_review": true,
+    "final_label_before_review": "unresolved"
+  },
+  "escalation_required": true,
+  "escalation_reason": "Invented invalid fixture.",
+  "free_text_rationale": "Invented invalid fixture rationale.",
+  "unresolved_ambiguity": "Invented invalid fixture ambiguity."
+}

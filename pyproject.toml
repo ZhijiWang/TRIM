@@ -18,12 +18,16 @@ dependencies = []
 trim-haa = "trim_haa.cli:main"
 
 [project.optional-dependencies]
+llm = [
+  "jsonschema>=4.18"
+]
 reporting = [
   "pandas"
 ]
 test = [
   "pytest",
   "build",
+  "jsonschema>=4.18",
   "pandas"
 ]
 

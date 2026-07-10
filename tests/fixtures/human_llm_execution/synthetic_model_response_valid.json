@@ -1,0 +1,83 @@
+{
+  "selected_evidence": [],
+  "primary_label": null,
+  "friction_locus_proposed": "unresolved",
+  "rationale_mechanism": null,
+  "uncertainty": "not_supplied",
+  "alternative_pathways": [],
+  "counterfactual_tests": [],
+  "candidate_loci": [
+    {
+      "category": "cue_function",
+      "state": "insufficient_evidence",
+      "cited_evidence": [],
+      "rationale": "Invented fixture assessment for cue function.",
+      "confidence": "not_applicable"
+    },
+    {
+      "category": "warrant_attribution",
+      "state": "insufficient_evidence",
+      "cited_evidence": [],
+      "rationale": "Invented fixture assessment for warrant attribution.",
+      "confidence": "not_applicable"
+    },
+    {
+      "category": "warrant_relation",
+      "state": "insufficient_evidence",
+      "cited_evidence": [],
+      "rationale": "Invented fixture assessment for warrant relation.",
+      "confidence": "not_applicable"
+    },
+    {
+      "category": "operation_function",
+      "state": "insufficient_evidence",
+      "cited_evidence": [],
+      "rationale": "Invented fixture assessment for operation function.",
+      "confidence": "not_applicable"
+    },
+    {
+      "category": "boundary_setting",
+      "state": "insufficient_evidence",
+      "cited_evidence": [],
+      "rationale": "Invented fixture assessment for boundary setting.",
+      "confidence": "not_applicable"
+    },
+    {
+      "category": "temporal_layering",
+      "state": "insufficient_evidence",
+      "cited_evidence": [],
+      "rationale": "Invented fixture assessment for temporal layering.",
+      "confidence": "not_applicable"
+    },
+    {
+      "category": "perspective_assignment",
+      "state": "insufficient_evidence",
+      "cited_evidence": [],
+      "rationale": "Invented fixture assessment for perspective assignment.",
+      "confidence": "not_applicable"
+    },
+    {
+      "category": "context_inference",
+      "state": "insufficient_evidence",
+      "cited_evidence": [],
+      "rationale": "Invented fixture assessment for context inference.",
+      "confidence": "not_applicable"
+    }
+  ],
+  "decision_path": [
+    "Invented fixture decision step."
+  ],
+  "review_policy_applied": {
+    "category": "unresolved",
+    "status": "not_applicable",
+    "trigger": [
+      "synthetic_fixture_trigger"
+    ],
+    "requires_human_review": true,
+    "final_label_before_review": "unresolved"
+  },
+  "escalation_required": true,
+  "escalation_reason": "Invented fixture remains unresolved.",
+  "free_text_rationale": "Invented non-literary fixture rationale.",
+  "unresolved_ambiguity": "Invented fixture ambiguity."
+}

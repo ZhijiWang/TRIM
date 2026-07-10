@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ZhijiWang/TRIM/schemas/human_llm_runtime_settings.schema.json",
+  "title": "Human-LLM pilot runtime settings draft",
+  "description": "Metadata-only draft for future account-verified runtime settings. This schema does not authorize or freeze execution.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "record_status",
+    "provider",
+    "model_identifier",
+    "model_identifier_status",
+    "api_surface",
+    "execution_mode",
+    "structured_output_mode",
+    "response_schema_path",
+    "response_schema_hash",
+    "temperature",
+    "top_p",
+    "max_output_tokens",
+    "seed",
+    "reasoning_effort",
+    "timeout_seconds",
+    "retry_count",
+    "retry_policy",
+    "parallelism",
+    "store_setting",
+    "metadata_fields",
+    "request_preservation_required",
+    "response_preservation_required",
+    "provider_transmission_authorization_status",
+    "account_availability_status",
+    "structured_output_compatibility_status",
+    "runtime_verification_status",
+    "pricing_status",
+    "final_authorization_status",
+    "execution_allowed",
+    "record_hash"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "record_status": {"const": "DRAFT_BLOCKED_PENDING_ACCOUNT_AND_RUNTIME_VERIFICATION"},
+    "provider": {"const": "OpenAI"},
+    "model_identifier": {"const": "gpt-5.4-mini"},
+    "model_identifier_status": {"const": "candidate_only_account_unverified"},
+    "api_surface": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["candidate", "verification_status"],
+      "properties": {
+        "candidate": {"const": "responses"},
+        "verification_status": {"const": "pending_account_verification"}
+      }
+    },
+    "execution_mode": {"const": "dry_run_no_call"},
+    "structured_output_mode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["candidate", "verification_status"],
+      "properties": {
+        "candidate": {"const": "json_schema"},
+        "verification_status": {"const": "pending_provider_verification"}
+      }
+    },
+    "response_schema_path": {"const": "schemas/human_llm_model_response.schema.json@eac65f27bbe302a17e5f508ac1d516178e917aea"},
+    "response_schema_hash": {"$ref": "#/$defs/hash"},
+    "temperature": {"$ref": "#/$defs/pending_provider_setting"},
+    "top_p": {"$ref": "#/$defs/pending_provider_setting"},
+    "max_output_tokens": {"$ref": "#/$defs/pending_provider_setting"},
+    "seed": {"$ref": "#/$defs/pending_provider_setting"},
+    "reasoning_effort": {"$ref": "#/$defs/pending_provider_setting"},
+    "timeout_seconds": {"$ref": "#/$defs/pending_provider_setting"},
+    "retry_count": {"$ref": "#/$defs/pending_provider_setting"},
+    "retry_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "no_call_behavior"],
+      "properties": {
+        "status": {"const": "pending_provider_verification"},
+        "no_call_behavior": {"const": "no retries because provider execution is disabled"}
+      }
+    },
+    "parallelism": {"$ref": "#/$defs/pending_provider_setting"},
+    "store_setting": {"enum": ["pending_account_verification", "pending_provider_verification"]},
+    "metadata_fields": {
+      "type": "array",
+      "const": ["run_id", "case_id", "condition", "runtime_settings_record_hash"]
+    },
+    "request_preservation_required": {"const": true},
+    "response_preservation_required": {"const": true},
+    "provider_transmission_authorization_status": {"const": "BLOCKED"},
+    "account_availability_status": {"const": "BLOCKED_NO_API_KEY_AVAILABLE_FOR_ACCOUNT_MODEL_LISTING"},
+    "structured_output_compatibility_status": {"const": "UNVERIFIED_AT_ACCOUNT_AND_RUNTIME_LEVEL"},
+    "runtime_verification_status": {"const": "BLOCKED"},
+    "pricing_status": {"const": "BLOCKED_UNRESOLVED"},
+    "final_authorization_status": {"const": "BLOCKED"},
+    "execution_allowed": {"const": false},
+    "record_hash": {"$ref": "#/$defs/hash"}
+  },
+  "$defs": {
+    "hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "pending_provider_setting": {
+      "type": "string",
+      "enum": ["pending_account_verification", "pending_provider_verification"]
+    }
+  }
+}

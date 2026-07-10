@@ -1,0 +1,47 @@
+{
+  "account_availability_status": "BLOCKED_NO_API_KEY_AVAILABLE_FOR_ACCOUNT_MODEL_LISTING",
+  "api_surface": {
+    "candidate": "responses",
+    "verification_status": "pending_account_verification"
+  },
+  "execution_allowed": false,
+  "execution_mode": "dry_run_no_call",
+  "final_authorization_status": "BLOCKED",
+  "max_output_tokens": "pending_provider_verification",
+  "metadata_fields": [
+    "run_id",
+    "case_id",
+    "condition",
+    "runtime_settings_record_hash"
+  ],
+  "model_identifier": "gpt-5.4-mini",
+  "model_identifier_status": "candidate_only_account_unverified",
+  "parallelism": "pending_provider_verification",
+  "pricing_status": "BLOCKED_UNRESOLVED",
+  "provider": "OpenAI",
+  "provider_transmission_authorization_status": "BLOCKED",
+  "reasoning_effort": "pending_provider_verification",
+  "record_hash": "sha256:6bfa54803568f533e54aa34b49d95a34271707743ea62b7a7295055572aed2ec",
+  "record_status": "DRAFT_BLOCKED_PENDING_ACCOUNT_AND_RUNTIME_VERIFICATION",
+  "request_preservation_required": true,
+  "response_preservation_required": true,
+  "response_schema_hash": "sha256:84fbc5413951c712925d85738bc820d776c1ab06172382f143e48495d4a095ec",
+  "response_schema_path": "schemas/human_llm_model_response.schema.json@eac65f27bbe302a17e5f508ac1d516178e917aea",
+  "retry_count": "pending_provider_verification",
+  "retry_policy": {
+    "no_call_behavior": "no retries because provider execution is disabled",
+    "status": "pending_provider_verification"
+  },
+  "runtime_verification_status": "BLOCKED",
+  "schema_version": "1.0.0",
+  "seed": "pending_provider_verification",
+  "store_setting": "pending_account_verification",
+  "structured_output_compatibility_status": "UNVERIFIED_AT_ACCOUNT_AND_RUNTIME_LEVEL",
+  "structured_output_mode": {
+    "candidate": "json_schema",
+    "verification_status": "pending_provider_verification"
+  },
+  "temperature": "pending_provider_verification",
+  "timeout_seconds": "pending_provider_verification",
+  "top_p": "pending_provider_verification"
+}

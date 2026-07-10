@@ -94,8 +94,8 @@
       "this_pr_changes_status": false
     },
     {
-      "dependency": "final execution remains blocked while any required gate is blocked",
-      "evidence_path": null,
+      "dependency": "draft runtime metadata exists, but account availability, supported parameters, structured-output behavior, pricing, and execution authorization remain unverified",
+      "evidence_path": "data/studies/human_llm_pilot/runtime_settings_draft.json",
       "execution_remains_blocked": true,
       "gate": "runtime_settings",
       "review_date": null,
