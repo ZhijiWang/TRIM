@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ZhijiWang/TRIM/schemas/human_llm_coding_environment.schema.json",
+  "title": "Human-LLM pilot controlled coding environment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "environment_version",
+    "environment_status",
+    "environment_class",
+    "network_access_status",
+    "clipboard_policy",
+    "screenshot_policy",
+    "print_policy",
+    "export_policy",
+    "autosave_policy",
+    "encrypted_storage_status",
+    "packet_location_class",
+    "annotation_output_location_class",
+    "logging_enabled",
+    "access_log_schema_reference",
+    "manual_reference",
+    "record_locking_enabled",
+    "backup_policy",
+    "deletion_retention_policy",
+    "final_authorization_status",
+    "environment_verified",
+    "coding_allowed",
+    "selected_packet_mounted",
+    "real_coder_logged_in",
+    "record_hash"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "environment_version": {"type": "string", "minLength": 1},
+    "environment_status": {"enum": ["DRAFT_UNVERIFIED_BLOCKED", "VERIFIED_AUTHORIZED"]},
+    "environment_class": {"enum": ["local_controlled_candidate", "institutional_controlled_candidate"]},
+    "network_access_status": {"enum": ["DISABLED_NO_NETWORK", "CONTROLLED_RESTRICTED", "NOT_VERIFIED"]},
+    "clipboard_policy": {"enum": ["BLOCKED", "CONTROLLED_WITH_LOGGING", "NOT_VERIFIED"]},
+    "screenshot_policy": {"enum": ["BLOCKED", "CONTROLLED_WITH_LOGGING", "NOT_VERIFIED"]},
+    "print_policy": {"enum": ["BLOCKED", "CONTROLLED_WITH_LOGGING", "NOT_VERIFIED"]},
+    "export_policy": {"enum": ["BLOCKED", "CONTROLLED_WITH_LOGGING", "NOT_VERIFIED"]},
+    "autosave_policy": {"enum": ["DISABLED_DRY_RUN", "CONTROLLED_ENCRYPTED", "NOT_VERIFIED"]},
+    "encrypted_storage_status": {"enum": ["NOT_VERIFIED", "VERIFIED"]},
+    "packet_location_class": {"enum": ["NO_PACKET_MOUNTED", "CONTROLLED_LOCAL", "CONTROLLED_INSTITUTIONAL"]},
+    "annotation_output_location_class": {"enum": ["SYNTHETIC_TEMPORARY_ONLY", "CONTROLLED_ENCRYPTED"]},
+    "logging_enabled": {"type": "boolean"},
+    "access_log_schema_reference": {"type": "string", "minLength": 1},
+    "manual_reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "hash"],
+      "properties": {
+        "version": {"type": "string", "minLength": 1},
+        "hash": {"$ref": "#/$defs/hash"}
+      }
+    },
+    "record_locking_enabled": {"type": "boolean"},
+    "backup_policy": {"enum": ["NOT_CONFIGURED", "CONTROLLED_ENCRYPTED"]},
+    "deletion_retention_policy": {"enum": ["PENDING_POLICY_VERIFICATION", "VERIFIED_NO_DELETION_CORRECTIONS"]},
+    "final_authorization_status": {"enum": ["BLOCKED", "PASSED"]},
+    "environment_verified": {"type": "boolean"},
+    "coding_allowed": {"type": "boolean"},
+    "selected_packet_mounted": {"type": "boolean"},
+    "real_coder_logged_in": {"type": "boolean"},
+    "record_hash": {"$ref": "#/$defs/hash"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"environment_verified": {"const": false}}, "required": ["environment_verified"]},
+      "then": {
+        "properties": {
+          "environment_status": {"const": "DRAFT_UNVERIFIED_BLOCKED"},
+          "coding_allowed": {"const": false},
+          "selected_packet_mounted": {"const": false},
+          "real_coder_logged_in": {"const": false}
+        }
+      }
+    }
+  ],
+  "$defs": {"hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}}
+}

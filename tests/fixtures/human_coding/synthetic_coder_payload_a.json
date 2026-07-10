@@ -1,0 +1,100 @@
+{
+  "actor_type": "human",
+  "alternative_pathways": [],
+  "analyst_id_pseudonym": "SYNTHETIC_CODER_A",
+  "analyst_role": "researcher_analyst",
+  "candidate_loci": [
+    {
+      "category": "cue_function",
+      "cited_evidence": [],
+      "confidence": "not_applicable",
+      "rationale": "Invented neutral assessment for a synthetic fixture.",
+      "state": "insufficient_evidence"
+    },
+    {
+      "category": "warrant_attribution",
+      "cited_evidence": [],
+      "confidence": "not_applicable",
+      "rationale": "Invented neutral assessment for a synthetic fixture.",
+      "state": "insufficient_evidence"
+    },
+    {
+      "category": "warrant_relation",
+      "cited_evidence": [],
+      "confidence": "not_applicable",
+      "rationale": "Invented neutral assessment for a synthetic fixture.",
+      "state": "insufficient_evidence"
+    },
+    {
+      "category": "operation_function",
+      "cited_evidence": [],
+      "confidence": "not_applicable",
+      "rationale": "Invented neutral assessment for a synthetic fixture.",
+      "state": "insufficient_evidence"
+    },
+    {
+      "category": "boundary_setting",
+      "cited_evidence": [],
+      "confidence": "not_applicable",
+      "rationale": "Invented neutral assessment for a synthetic fixture.",
+      "state": "insufficient_evidence"
+    },
+    {
+      "category": "temporal_layering",
+      "cited_evidence": [],
+      "confidence": "not_applicable",
+      "rationale": "Invented neutral assessment for a synthetic fixture.",
+      "state": "insufficient_evidence"
+    },
+    {
+      "category": "perspective_assignment",
+      "cited_evidence": [],
+      "confidence": "not_applicable",
+      "rationale": "Invented neutral assessment for a synthetic fixture.",
+      "state": "insufficient_evidence"
+    },
+    {
+      "category": "context_inference",
+      "cited_evidence": [],
+      "confidence": "not_applicable",
+      "rationale": "Invented neutral assessment for a synthetic fixture.",
+      "state": "insufficient_evidence"
+    }
+  ],
+  "case_id": "SYNTHETIC_CASE_ALPHA",
+  "coding_session_id": "SYNTHETIC_SESSION_NOT_STARTED",
+  "counterfactual_tests": [],
+  "decision_path": [
+    "Synthetic lifecycle validation only."
+  ],
+  "escalation_reason": "Synthetic fixture remains unresolved.",
+  "escalation_required": true,
+  "exposure_status": "pre_ai",
+  "final_operational_label": "unresolved",
+  "free_text_rationale": "Invented non-source comment A excluded from automated agreement.",
+  "friction_locus_operational_status": "requires_human_review",
+  "friction_locus_proposed": "unresolved",
+  "manual_version": "friction_locus_manual_v0_1",
+  "primary_label": null,
+  "rationale_mechanism": null,
+  "record_hash": "dd58afbf8ee9d3fe88bcae15eaf5efd494cff9ffbeabd5828b7a38f0ad7532e1",
+  "record_id": "SYNTHETIC_PAYLOAD_A",
+  "record_type": "human_coder_record",
+  "review_of_record_hash": null,
+  "review_of_record_id": null,
+  "review_policy_applied": {
+    "category": null,
+    "final_label_before_review": "unresolved",
+    "requires_human_review": true,
+    "status": "not_applicable",
+    "trigger": [
+      "synthetic_fixture_unresolved"
+    ]
+  },
+  "selected_evidence": [],
+  "self_record_status": "researcher_generated",
+  "source_packet_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "timestamp": "2026-07-11T00:00:00+10:00",
+  "uncertainty": "not_supplied",
+  "unresolved_ambiguity": "Invented non-source ambiguity A excluded from automated agreement."
+}

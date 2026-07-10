@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ZhijiWang/TRIM/schemas/human_llm_coding_session_authorization.schema.json",
+  "title": "Human-LLM pilot coding-session authorization",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "authorization_id",
+    "coder_id",
+    "session_id",
+    "synthetic_only",
+    "scope",
+    "allowed_case_references",
+    "packet_access_authorization_reference",
+    "manual_version",
+    "manual_hash",
+    "coding_environment_record_hash",
+    "start_window",
+    "end_window",
+    "human_coding_gate_status",
+    "final_authorization_status",
+    "packet_hash_verification_status",
+    "authorization_status",
+    "coding_allowed",
+    "reviewer",
+    "notes",
+    "record_hash"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "authorization_id": {"type": "string", "minLength": 1},
+    "coder_id": {"type": "string", "minLength": 1},
+    "session_id": {"type": "string", "minLength": 1},
+    "synthetic_only": {"type": "boolean"},
+    "scope": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "allowed_case_references": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "packet_access_authorization_reference": {"type": ["string", "null"]},
+    "manual_version": {"type": "string", "minLength": 1},
+    "manual_hash": {"$ref": "#/$defs/hash"},
+    "coding_environment_record_hash": {"$ref": "#/$defs/hash"},
+    "start_window": {"type": ["string", "null"], "format": "date-time"},
+    "end_window": {"type": ["string", "null"], "format": "date-time"},
+    "human_coding_gate_status": {"enum": ["BLOCKED", "PASSED"]},
+    "final_authorization_status": {"enum": ["BLOCKED", "PASSED"]},
+    "packet_hash_verification_status": {"enum": ["NOT_PERFORMED", "FAILED", "VERIFIED"]},
+    "authorization_status": {"enum": ["ABSENT_BLOCKED", "PENDING_REVIEW", "PASSED"]},
+    "coding_allowed": {"type": "boolean"},
+    "reviewer": {"type": "string", "minLength": 1},
+    "notes": {"type": "string"},
+    "record_hash": {"$ref": "#/$defs/hash"}
+  },
+  "allOf": [
+    {
+      "if": {
+        "anyOf": [
+          {"properties": {"synthetic_only": {"const": true}}, "required": ["synthetic_only"]},
+          {"properties": {"human_coding_gate_status": {"const": "BLOCKED"}}, "required": ["human_coding_gate_status"]},
+          {"properties": {"final_authorization_status": {"const": "BLOCKED"}}, "required": ["final_authorization_status"]},
+          {"properties": {"packet_hash_verification_status": {"const": "NOT_PERFORMED"}}, "required": ["packet_hash_verification_status"]},
+          {"properties": {"authorization_status": {"const": "ABSENT_BLOCKED"}}, "required": ["authorization_status"]}
+        ]
+      },
+      "then": {"properties": {"coding_allowed": {"const": false}}}
+    },
+    {
+      "if": {"properties": {"coding_allowed": {"const": true}}, "required": ["coding_allowed"]},
+      "then": {
+        "properties": {
+          "synthetic_only": {"const": false},
+          "packet_access_authorization_reference": {"type": "string", "minLength": 1},
+          "human_coding_gate_status": {"const": "PASSED"},
+          "final_authorization_status": {"const": "PASSED"},
+          "packet_hash_verification_status": {"const": "VERIFIED"},
+          "authorization_status": {"const": "PASSED"},
+          "start_window": {"type": "string", "format": "date-time"},
+          "end_window": {"type": "string", "format": "date-time"},
+          "allowed_case_references": {"minItems": 1}
+        }
+      }
+    }
+  ],
+  "$defs": {"hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}}
+}

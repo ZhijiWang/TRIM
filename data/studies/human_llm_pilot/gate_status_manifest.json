@@ -124,8 +124,8 @@
       "this_pr_changes_status": false
     },
     {
-      "dependency": "final execution remains blocked while any required gate is blocked",
-      "evidence_path": null,
+      "dependency": "Human coding remains blocked pending coding-environment verification, coder eligibility, documented training, coder and session authorization, packet hash verification, record-locking readiness, and final authorization.",
+      "evidence_path": "data/studies/human_llm_pilot/human_coding_plan_dry_run.json",
       "execution_remains_blocked": true,
       "gate": "human_coding",
       "review_date": null,

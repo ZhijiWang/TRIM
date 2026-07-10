@@ -1,0 +1,18 @@
+{
+  "allocation_manifest_hash": "sha256:ce03def17f2e7aefee63e77f1296e5902de702fbea1d1748944327ea1f0a69e8",
+  "assignment_created_timestamp": "2026-07-11T00:00:00+10:00",
+  "assignment_id": "SYNTHETIC_ASSIGNMENT_ALPHA",
+  "assignment_order": 1,
+  "assignment_version": "1.0.0",
+  "blinded_case_reference": "SYNTHETIC_BLINDED_CASE_ALPHA",
+  "case_id_hidden_from_coder": true,
+  "coder_id": "SYNTHETIC_CODER_A",
+  "coding_allowed": false,
+  "condition_hidden_from_coder": true,
+  "packet_hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "packet_reference": "synthetic_non_resolving_packet_reference",
+  "record_hash": "sha256:23af0d61b54e2ddac6805352479a46aecfd5ae94cea9d12f034ec2fbe6ebf50c",
+  "session_authorization_reference": "SYNTHETIC_AUTHORIZATION_NOT_GRANTED",
+  "source_identity_hidden": true,
+  "synthetic_only": true
+}

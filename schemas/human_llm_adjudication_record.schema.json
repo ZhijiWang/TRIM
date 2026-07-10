@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ZhijiWang/TRIM/schemas/human_llm_adjudication_record.schema.json",
+  "title": "Human-LLM pilot adjudication metadata record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "adjudication_id",
+    "synthetic_only",
+    "adjudicator_id",
+    "case_id",
+    "source_annotation_record_hashes",
+    "disagreement_summary_hash",
+    "manual_version",
+    "manual_hash",
+    "adjudication_status",
+    "adjudicated_payload",
+    "rationale_metadata",
+    "created_timestamp",
+    "locked_timestamp",
+    "supersedes_adjudication_record",
+    "coding_allowed",
+    "record_hash"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "adjudication_id": {"type": "string", "minLength": 1},
+    "synthetic_only": {"type": "boolean"},
+    "adjudicator_id": {"type": "string", "minLength": 1},
+    "case_id": {"type": "string", "minLength": 1},
+    "source_annotation_record_hashes": {
+      "type": "array",
+      "minItems": 2,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/hash"}
+    },
+    "disagreement_summary_hash": {"$ref": "#/$defs/hash"},
+    "manual_version": {"type": "string", "minLength": 1},
+    "manual_hash": {"$ref": "#/$defs/hash"},
+    "adjudication_status": {"enum": ["DRAFT_BLOCKED", "PENDING_AUTHORIZATION", "ADJUDICATED_LOCKED"]},
+    "adjudicated_payload": {
+      "anyOf": [
+        {"$ref": "https://github.com/ZhijiWang/TRIM/schemas/human_llm_coder_output.schema.json#/$defs/human_coder_record"},
+        {"type": "null"}
+      ]
+    },
+    "rationale_metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rationale_code", "manual_section_reference"],
+      "properties": {
+        "rationale_code": {"type": "string", "minLength": 1},
+        "manual_section_reference": {"type": "string", "minLength": 1}
+      }
+    },
+    "created_timestamp": {"type": "string", "format": "date-time"},
+    "locked_timestamp": {"type": ["string", "null"], "format": "date-time"},
+    "supersedes_adjudication_record": {"anyOf": [{"$ref": "#/$defs/adjudication_reference"}, {"type": "null"}]},
+    "coding_allowed": {"type": "boolean"},
+    "record_hash": {"$ref": "#/$defs/hash"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"synthetic_only": {"const": true}}, "required": ["synthetic_only"]},
+      "then": {
+        "properties": {
+          "adjudication_status": {"enum": ["DRAFT_BLOCKED", "PENDING_AUTHORIZATION"]},
+          "adjudicated_payload": {"const": null},
+          "locked_timestamp": {"const": null},
+          "coding_allowed": {"const": false}
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "adjudication_reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["adjudication_id", "record_hash"],
+      "properties": {
+        "adjudication_id": {"type": "string", "minLength": 1},
+        "record_hash": {"$ref": "#/$defs/hash"}
+      }
+    }
+  }
+}

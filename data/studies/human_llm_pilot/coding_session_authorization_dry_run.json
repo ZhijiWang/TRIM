@@ -1,0 +1,27 @@
+{
+  "allowed_case_references": [
+    "SYNTHETIC_BLINDED_CASE_ALPHA"
+  ],
+  "authorization_id": "SYNTHETIC_AUTHORIZATION_NOT_GRANTED",
+  "authorization_status": "ABSENT_BLOCKED",
+  "coder_id": "SYNTHETIC_CODER_A",
+  "coding_allowed": false,
+  "coding_environment_record_hash": "sha256:7f29f950900db1496e68fb3cf307d1095261fa0a34a5c1f845ccb2bd52864f3f",
+  "end_window": null,
+  "final_authorization_status": "BLOCKED",
+  "human_coding_gate_status": "BLOCKED",
+  "manual_hash": "sha256:797d79fcdb29fc32850c3778c6afb029ac0768207ea33f66d714fe8fa8cb591a",
+  "manual_version": "friction_locus_manual_v0_1",
+  "notes": "Synthetic lifecycle validation only; this record authorizes no session and no packet access.",
+  "packet_access_authorization_reference": "synthetic_not_authorized",
+  "packet_hash_verification_status": "NOT_PERFORMED",
+  "record_hash": "sha256:3987906f63dc974050f5b1faefd8fa76d48ab3217474c3c72df21094c72aee64",
+  "reviewer": "synthetic_scaffold_validator",
+  "schema_version": "1.0.0",
+  "scope": [
+    "synthetic_lifecycle_validation_only"
+  ],
+  "session_id": "SYNTHETIC_SESSION_NOT_STARTED",
+  "start_window": null,
+  "synthetic_only": true
+}

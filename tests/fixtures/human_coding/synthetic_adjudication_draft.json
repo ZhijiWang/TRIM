@@ -1,0 +1,25 @@
+{
+  "adjudicated_payload": null,
+  "adjudication_id": "SYNTHETIC_ADJUDICATION_DRAFT_001",
+  "adjudication_status": "DRAFT_BLOCKED",
+  "adjudicator_id": "SYNTHETIC_ADJUDICATOR",
+  "case_id": "SYNTHETIC_CASE_ALPHA",
+  "coding_allowed": false,
+  "created_timestamp": "2026-07-11T00:05:00+10:00",
+  "disagreement_summary_hash": "sha256:948a93a208c5a16b9608d8e5ce3ee26632fd4a0b2ef4ce599dc7c84fb198b829",
+  "locked_timestamp": null,
+  "manual_hash": "sha256:797d79fcdb29fc32850c3778c6afb029ac0768207ea33f66d714fe8fa8cb591a",
+  "manual_version": "friction_locus_manual_v0_1",
+  "rationale_metadata": {
+    "manual_section_reference": "synthetic_reference_only",
+    "rationale_code": "SYNTHETIC_DISAGREEMENT_REVIEW_NOT_AUTHORIZED"
+  },
+  "record_hash": "sha256:b329ab407713c5a321b37f3585d35586850fbef17b782d88652b297bc2b0cb23",
+  "schema_version": "1.0.0",
+  "source_annotation_record_hashes": [
+    "sha256:9a75996b6a57592987d7f0c40e6aa6754f55feee1d1ddbdf33524646e206f636",
+    "sha256:b16ed013acaea0a3bce9c5d838e964bb5986f10b2a8c536d6ecc4834a28717b9"
+  ],
+  "supersedes_adjudication_record": null,
+  "synthetic_only": true
+}

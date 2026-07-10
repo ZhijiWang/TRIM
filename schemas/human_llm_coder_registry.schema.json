@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ZhijiWang/TRIM/schemas/human_llm_coder_registry.schema.json",
+  "title": "Human-LLM pilot metadata-only coder registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "registry_status",
+    "synthetic_only",
+    "no_real_coder_registered",
+    "no_private_packet_access",
+    "no_coding_authorization",
+    "no_coding_performed",
+    "coders",
+    "record_hash"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "registry_status": {"enum": ["SYNTHETIC_DRY_RUN_BLOCKED", "ACTIVE_AUTHORIZED"]},
+    "synthetic_only": {"type": "boolean"},
+    "no_real_coder_registered": {"type": "boolean"},
+    "no_private_packet_access": {"type": "boolean"},
+    "no_coding_authorization": {"type": "boolean"},
+    "no_coding_performed": {"type": "boolean"},
+    "coders": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/coder"}
+    },
+    "record_hash": {"$ref": "#/$defs/hash"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"synthetic_only": {"const": true}}, "required": ["synthetic_only"]},
+      "then": {
+        "properties": {
+          "registry_status": {"const": "SYNTHETIC_DRY_RUN_BLOCKED"},
+          "no_real_coder_registered": {"const": true},
+          "no_private_packet_access": {"const": true},
+          "no_coding_authorization": {"const": true},
+          "no_coding_performed": {"const": true},
+          "coders": {
+            "items": {
+              "allOf": [
+                {"$ref": "#/$defs/coder"},
+                {
+                  "properties": {
+                    "coding_eligibility": {"const": false},
+                    "private_packet_access_eligibility": {"const": false},
+                    "final_authorization_status": {"const": "ABSENT_BLOCKED"},
+                    "coding_performed": {"const": false}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "coder": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "coder_id",
+        "display_role",
+        "coder_type",
+        "affiliation_class",
+        "training_status",
+        "authorization_status",
+        "final_authorization_status",
+        "manual_version",
+        "manual_hash",
+        "coding_eligibility",
+        "conflict_of_interest_status",
+        "blinding_status",
+        "private_packet_access_eligibility",
+        "active_status",
+        "created_date",
+        "reviewer",
+        "notes",
+        "coding_performed",
+        "record_hash"
+      ],
+      "properties": {
+        "schema_version": {"const": "1.0.0"},
+        "coder_id": {"type": "string", "minLength": 1},
+        "display_role": {"type": "string", "minLength": 1},
+        "coder_type": {"enum": ["primary_coder", "secondary_coder", "adjudicator"]},
+        "affiliation_class": {"type": ["string", "null"]},
+        "training_status": {"enum": ["NOT_STARTED", "IN_PROGRESS", "PASSED_DOCUMENTED"]},
+        "authorization_status": {"enum": ["ABSENT_BLOCKED", "PENDING_REVIEW", "PASSED"]},
+        "final_authorization_status": {"enum": ["ABSENT_BLOCKED", "PASSED"]},
+        "manual_version": {"type": "string", "minLength": 1},
+        "manual_hash": {"$ref": "#/$defs/hash"},
+        "coding_eligibility": {"type": "boolean"},
+        "conflict_of_interest_status": {"enum": ["NOT_ASSESSED", "NO_CONFLICT_DOCUMENTED", "CONFLICT_BLOCKED"]},
+        "blinding_status": {"enum": ["PLANNED_NOT_VERIFIED", "VERIFIED", "NOT_APPLICABLE"]},
+        "private_packet_access_eligibility": {"type": "boolean"},
+        "active_status": {"enum": ["INACTIVE_DRY_RUN", "ACTIVE", "SUSPENDED"]},
+        "created_date": {"type": "string", "format": "date"},
+        "reviewer": {"type": "string", "minLength": 1},
+        "notes": {"type": "string"},
+        "coding_performed": {"type": "boolean"},
+        "record_hash": {"$ref": "#/$defs/hash"}
+      }
+    }
+  }
+}

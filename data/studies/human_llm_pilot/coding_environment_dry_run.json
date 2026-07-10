@@ -1,0 +1,30 @@
+{
+  "access_log_schema_reference": "schemas/private_packet_access_log.schema.json",
+  "annotation_output_location_class": "SYNTHETIC_TEMPORARY_ONLY",
+  "autosave_policy": "DISABLED_DRY_RUN",
+  "backup_policy": "NOT_CONFIGURED",
+  "clipboard_policy": "BLOCKED",
+  "coding_allowed": false,
+  "deletion_retention_policy": "PENDING_POLICY_VERIFICATION",
+  "encrypted_storage_status": "NOT_VERIFIED",
+  "environment_class": "local_controlled_candidate",
+  "environment_status": "DRAFT_UNVERIFIED_BLOCKED",
+  "environment_verified": false,
+  "environment_version": "human_llm_coding_environment_dry_run_v0_1",
+  "export_policy": "BLOCKED",
+  "final_authorization_status": "BLOCKED",
+  "logging_enabled": true,
+  "manual_reference": {
+    "hash": "sha256:797d79fcdb29fc32850c3778c6afb029ac0768207ea33f66d714fe8fa8cb591a",
+    "version": "friction_locus_manual_v0_1"
+  },
+  "network_access_status": "DISABLED_NO_NETWORK",
+  "packet_location_class": "NO_PACKET_MOUNTED",
+  "print_policy": "BLOCKED",
+  "real_coder_logged_in": false,
+  "record_hash": "sha256:7f29f950900db1496e68fb3cf307d1095261fa0a34a5c1f845ccb2bd52864f3f",
+  "record_locking_enabled": true,
+  "schema_version": "1.0.0",
+  "screenshot_policy": "BLOCKED",
+  "selected_packet_mounted": false
+}
