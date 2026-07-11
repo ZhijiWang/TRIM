@@ -2,7 +2,7 @@
 
 Status: evidence-record preparation only. This summary does not approve rights, private-packet inspection, provider transmission, human coding, model execution, or public redistribution.
 
-Overall execution status remains: `BLOCKED_PENDING_RIGHTS_PRIVATE_PACKETS_MODEL_ACCOUNT_RUNTIME_SETTINGS_PRICING_AND_FINAL_EXECUTION_AUTHORIZATION`.
+Overall execution status remains: `EXECUTION_BLOCKED`.
 
 ## Counts
 

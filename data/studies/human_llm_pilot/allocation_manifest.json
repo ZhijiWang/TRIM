@@ -1,0 +1,148 @@
+{
+  "ablation_subset": [
+    "L1_AUSTEN_PNP_001",
+    "L1_JAMES_TS_001",
+    "L1_MELVILLE_BARTLEBY_001",
+    "L2_HERODOTUS_SCYTHIAN_001",
+    "L2_BIBLE_SAMUEL_001",
+    "L2_AESOP_001"
+  ],
+  "allocation_freeze_status": "FROZEN_ARITHMETIC_CLARIFIED_EXECUTION_BLOCKED_PENDING_MANUAL_MODEL_RIGHTS",
+  "allocation_hash": "ce03def17f2e7aefee63e77f1296e5902de702fbea1d1748944327ea1f0a69e8",
+  "allocation_hash_canonicalization": "sha256_canonical_json_excluding_allocation_hash_v1",
+  "allocation_id": "human_llm_pilot_design_b_allocation_v0_1_2026_07_02",
+  "case_order": [
+    "L1_COLLINS_MOONSTONE_001",
+    "L1_JAMES_TS_001",
+    "L1_POE_TELLTALE_001",
+    "L1_SHELLEY_FRANK_001",
+    "L2_BIBLE_GENESIS_001",
+    "L2_HOMER_ODYSSEY_001",
+    "L1_AUSTEN_PNP_001",
+    "L1_CONRAD_SECRET_001",
+    "L1_MELVILLE_BARTLEBY_001",
+    "L2_SOPHOCLES_ANTIGONE_001",
+    "L1_WHARTON_MIRTH_001",
+    "L1_HAWTHORNE_SL_001",
+    "L1_DICKENS_GE_001",
+    "L2_BEOWULF_DRAGON_001",
+    "L2_HERODOTUS_SCYTHIAN_001",
+    "L1_HARDY_TESS_001",
+    "L2_BIBLE_SAMUEL_001",
+    "L2_AESOP_001",
+    "L1_STEVENSON_JH_001",
+    "L1_CHOPIN_AWAKENING_001",
+    "L2_ARABIAN_NIGHTS_001",
+    "L1_BRONTE_JE_001",
+    "L2_OVID_DAPHNE_001",
+    "L1_WILDE_DG_001",
+    "L2_MALORY_MORTE_001"
+  ],
+  "condition_assignment": {
+    "ablation_subset_conditions": {
+      "L1_AUSTEN_PNP_001": [
+        "A_short_definitions",
+        "B_concise_rules",
+        "C_full_manual"
+      ],
+      "L1_JAMES_TS_001": [
+        "A_short_definitions",
+        "B_concise_rules",
+        "C_full_manual"
+      ],
+      "L1_MELVILLE_BARTLEBY_001": [
+        "A_short_definitions",
+        "B_concise_rules",
+        "C_full_manual"
+      ],
+      "L2_AESOP_001": [
+        "A_short_definitions",
+        "B_concise_rules",
+        "C_full_manual"
+      ],
+      "L2_BIBLE_SAMUEL_001": [
+        "A_short_definitions",
+        "B_concise_rules",
+        "C_full_manual"
+      ],
+      "L2_HERODOTUS_SCYTHIAN_001": [
+        "A_short_definitions",
+        "B_concise_rules",
+        "C_full_manual"
+      ]
+    },
+    "primary_condition_all_cases": "C_full_manual_after_human_lock",
+    "stability_condition": "C_full_manual",
+    "visibility_constraints": "No model execution before human lock; no condition output visible to another condition; no session reuse."
+  },
+  "created_at": "2026-07-02T12:00:00+10:00",
+  "created_by": "author-assisted internal freeze preparation",
+  "human_record_completion_order": [
+    "L1_COLLINS_MOONSTONE_001",
+    "L1_JAMES_TS_001",
+    "L1_POE_TELLTALE_001",
+    "L1_SHELLEY_FRANK_001",
+    "L2_BIBLE_GENESIS_001",
+    "L2_HOMER_ODYSSEY_001",
+    "L1_AUSTEN_PNP_001",
+    "L1_CONRAD_SECRET_001",
+    "L1_MELVILLE_BARTLEBY_001",
+    "L2_SOPHOCLES_ANTIGONE_001",
+    "L1_WHARTON_MIRTH_001",
+    "L1_HAWTHORNE_SL_001",
+    "L1_DICKENS_GE_001",
+    "L2_BEOWULF_DRAGON_001",
+    "L2_HERODOTUS_SCYTHIAN_001",
+    "L1_HARDY_TESS_001",
+    "L2_BIBLE_SAMUEL_001",
+    "L2_AESOP_001",
+    "L1_STEVENSON_JH_001",
+    "L1_CHOPIN_AWAKENING_001",
+    "L2_ARABIAN_NIGHTS_001",
+    "L1_BRONTE_JE_001",
+    "L2_OVID_DAPHNE_001",
+    "L1_WILDE_DG_001",
+    "L2_MALORY_MORTE_001"
+  ],
+  "model_stability_cases": [
+    "L1_AUSTEN_PNP_001",
+    "L1_SHELLEY_FRANK_001",
+    "L1_DICKENS_GE_001",
+    "L1_BRONTE_JE_001",
+    "L1_WILDE_DG_001",
+    "L1_JAMES_TS_001",
+    "L1_STEVENSON_JH_001",
+    "L1_POE_TELLTALE_001",
+    "L1_HAWTHORNE_SL_001",
+    "L1_CHOPIN_AWAKENING_001",
+    "L1_HARDY_TESS_001",
+    "L1_MELVILLE_BARTLEBY_001",
+    "L1_WHARTON_MIRTH_001",
+    "L1_COLLINS_MOONSTONE_001",
+    "L1_CONRAD_SECRET_001",
+    "L2_HOMER_ODYSSEY_001",
+    "L2_SOPHOCLES_ANTIGONE_001",
+    "L2_HERODOTUS_SCYTHIAN_001",
+    "L2_BIBLE_GENESIS_001",
+    "L2_BIBLE_SAMUEL_001",
+    "L2_AESOP_001",
+    "L2_OVID_DAPHNE_001",
+    "L2_MALORY_MORTE_001",
+    "L2_BEOWULF_DRAGON_001",
+    "L2_ARABIAN_NIGHTS_001"
+  ],
+  "model_stability_run_count": 3,
+  "model_stability_run_count_interpretation": "three additional Condition C stability runs beyond the primary run for each selected case",
+  "planned_model_run_counts": {
+    "ablation_condition_runs": 18,
+    "primary_condition_C_runs": 25,
+    "primary_run_double_counted_in_stability_runs": false,
+    "stability_runs_additional_beyond_primary": 75,
+    "total_planned_model_runs_after_human_lock": 118
+  },
+  "primary_human_actor_id": "researcher_analyst_001",
+  "protocol_version": "Design B protocol at PR17 merge commit 6998175",
+  "random_seed": 20260702,
+  "sample_manifest_hash": "1ebcaef44ac560622f9c56a91c9534d46929f2e9d5bbb5e722107188c9adf7a6",
+  "second_human_component": "not_in_current_protocol"
+}

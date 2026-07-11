@@ -1,8 +1,8 @@
+import hashlib
 import http.client
 import json
 import os
 import socket
-import subprocess
 import sys
 import types
 import urllib.request
@@ -13,12 +13,8 @@ import pytest
 from jsonschema import Draft202012Validator
 
 from scripts import dry_run_human_coding
-from scripts.validate_human_coding_scaffold import (
-    PR18_PROTECTED_EXACT,
-    PR18_PROTECTED_PREFIXES,
-    STARTING_PR20_HEAD,
-    validate as validate_human_scaffold,
-)
+from scripts.validate_human_coding_scaffold import validate as validate_human_scaffold
+from scripts.validate_human_llm_execution_scaffold import UNCHANGED_BOUNDARY_HASHES, protected_boundary_errors
 from trim_haa.human_coding.disagreement import compare_annotations
 from trim_haa.human_coding.dry_run import build_synthetic_lifecycle, run_human_coding_dry_run
 from trim_haa.human_coding.gates import (
@@ -75,15 +71,6 @@ def blocked_decision(**overrides):
     values = all_pass_human_gate_inputs()
     values.update(overrides)
     return evaluate_human_coding_gate(**values)
-
-
-def git_bytes(revision: str, path: str):
-    return subprocess.run(
-        ["git", "show", f"{revision}:{path}"],
-        cwd=ROOT,
-        check=True,
-        capture_output=True,
-    ).stdout
 
 
 def test_synthetic_coder_registry_validates():
@@ -322,29 +309,21 @@ def test_human_coding_dry_run_succeeds_only_because_coding_is_blocked(capsys):
 
 
 def test_human_coding_dry_run_requires_no_network_or_provider_client(monkeypatch):
-    import trim_haa.llm.frozen_reference as frozen_reference
-
-    original_run = frozen_reference.subprocess.run
-    observed = []
-
-    def local_git_only(command, *args, **kwargs):
-        observed.append(command)
-        assert command[:2] == ["git", "show"]
-        return original_run(command, *args, **kwargs)
-
     def no_network(*args, **kwargs):
         raise AssertionError("network/provider access attempted")
+
+    def no_subprocess(*args, **kwargs):
+        raise AssertionError("subprocess access attempted")
 
     fake_openai = types.ModuleType("openai")
     fake_openai.OpenAI = no_network
     monkeypatch.setitem(sys.modules, "openai", fake_openai)
-    monkeypatch.setattr(frozen_reference.subprocess, "run", local_git_only)
+    monkeypatch.setattr("subprocess.run", no_subprocess)
     monkeypatch.setattr(socket, "socket", no_network)
     monkeypatch.setattr(socket, "create_connection", no_network)
     monkeypatch.setattr(urllib.request, "urlopen", no_network)
     monkeypatch.setattr(http.client.HTTPConnection, "connect", no_network)
     assert run_human_coding_dry_run(ROOT)["overall_status"] == "HUMAN_CODING_BLOCKED"
-    assert observed and all(command[0] not in {"curl", "openai"} for command in observed)
 
 
 def test_human_coding_dry_run_requires_no_api_key(monkeypatch):
@@ -380,18 +359,7 @@ def test_selected_case_order_is_unchanged():
 
 
 def test_pr18_artifacts_and_frozen_prompts_are_unchanged():
-    changed = subprocess.run(
-        ["git", "diff", "--name-only", STARTING_PR20_HEAD, "--"],
-        cwd=ROOT,
-        check=True,
-        text=True,
-        capture_output=True,
-    ).stdout.splitlines()
-    assert not {
-        path
-        for path in changed
-        if path in PR18_PROTECTED_EXACT or any(path.startswith(prefix) for prefix in PR18_PROTECTED_PREFIXES)
-    }
+    assert protected_boundary_errors() == []
 
 
 @pytest.mark.parametrize(
@@ -403,7 +371,7 @@ def test_pr18_artifacts_and_frozen_prompts_are_unchanged():
     ],
 )
 def test_authoritative_manual_is_unchanged(path):
-    assert (ROOT / path).read_bytes() == git_bytes(STARTING_PR20_HEAD, path)
+    assert hashlib.sha256((ROOT / path).read_bytes()).hexdigest() == UNCHANGED_BOUNDARY_HASHES[path]
 
 
 def test_no_force_unlock_environment_bypass_or_deletion_workflow_exists():

@@ -9,7 +9,7 @@ This scaffold prepares deterministic local machinery for the frozen Design B hum
 The scaffold lives under `src/trim_haa/llm/`, following the repository's existing Python package rather than creating a parallel `trim` package.
 
 - `hashing.py` defines compact, key-sorted UTF-8 JSON serialization; prefixed SHA-256 byte hashes; record hashing with `record_hash` excluded; and record-hash verification.
-- `frozen_reference.py` can read only six explicitly allowlisted public PR #18 metadata/schema paths from the pinned Git object `eac65f27bbe302a17e5f508ac1d516178e917aea`. It rejects every controlled source-packet path and has no fetch or network fallback.
+- `frozen_reference.py` can read only six explicitly allowlisted public metadata/schema files vendored byte-for-byte from PR #18 commit `eac65f27bbe302a17e5f508ac1d516178e917aea`. It verifies the frozen manifest, record, schema, and cross-manifest hashes, rejects every controlled source-packet path, and has no Git, fetch, or network fallback.
 - `gates.py` normalizes the public gate manifest. Restricted rights and controlled-access statuses are sufficient for preparation, but not execution.
 - `request_preservation.py` constructs and preserves only a fixed synthetic, provider-neutral placeholder representation.
 - `response_preservation.py` preserves raw synthetic bytes in controlled test storage, hashes those bytes, then parses and validates the preserved copy.
@@ -17,6 +17,8 @@ The scaffold lives under `src/trim_haa/llm/`, following the repository's existin
 - `dry_run.py` validates public freeze metadata, the 25 non-blocked rights records, controlled-packet approval, blocked execution gates, and the checked-in metadata-only plan.
 
 The planned provider is OpenAI and the candidate identifier is `gpt-5.4-mini`. Account availability remains unverified. The API surface and structured-output mode are candidate representations only; every account- or runtime-sensitive parameter remains `pending_account_verification` or `pending_provider_verification`.
+
+The scaffold is a source-checkout research component, not part of the distributable `trim-haa` wheel or Python sdist and not a stable public API. The source checkout or repository source archive must contain the study data, schemas, scripts, and the six vendored public freeze files. A `.git` directory and the non-ancestor PR #18 Git object are not required.
 
 ## Public and controlled data separation
 
@@ -87,11 +89,25 @@ DRY_RUN_VALID_EXECUTION_BLOCKED
 
 Success means only that public metadata is internally consistent and execution is correctly blocked. The command constructs no provider request, reads no private packet, performs no human coding, calls no provider, transmits nothing, receives no response, and generates no output.
 
-Tests disable sockets and environment lookup, restrict subprocess use during the dry-run to local `git show` reads of the public allowlist, and confirm that provider SDK/client construction, provider CLIs, and HTTP access are not used. OpenAI is not a dependency.
+Tests disable sockets, subprocesses, and environment lookup during the dry-run and confirm that provider SDK/client construction, provider CLIs, Git access, and HTTP access are not used. OpenAI is not a dependency.
+
+## Hash conventions
+
+The repository deliberately preserves several frozen conventions rather than silently rewriting them:
+
+| Context | Serialization | Stored form |
+| --- | --- | --- |
+| PR #20 public records | compact key-sorted UTF-8 JSON, excluding top-level `record_hash` | `sha256:<64 lowercase hex>` |
+| Frozen human coder payload | compact key-sorted UTF-8 JSON, excluding payload `record_hash` | unprefixed 64-hex |
+| PR #18 allocation/sample records | PR #18 canonical JSON excluding the named self-hash field | unprefixed 64-hex |
+| PR #18/manual schema and manifest files | SHA-256 over LF-normalized file bytes where the frozen manifest specifies it | unprefixed 64-hex |
+| Core annotation locks and released artifact byte hashes | their pre-existing Core/artifact rules | unprefixed 64-hex |
+
+These forms are intentionally distinct compatibility boundaries. New PR #20 envelope and lifecycle records use the prefixed convention; frozen Core, coder, PR #18, manual, and artifact hashes are not converted.
 
 ## Validation
 
-`scripts/validate_human_llm_execution_scaffold.py` verifies the blocked draft and plan, strict envelopes, canonical hashes, no-call adapter, dry-run outcome, pinned public freeze hashes, selected-case/order invariants, unchanged PR #18 artifact paths, unchanged authoritative manual, unchanged package version, unchanged Core/provenance boundaries, and synthetic-fixture content restrictions.
+`scripts/validate_human_llm_execution_scaffold.py` verifies the blocked draft and plan, strict envelopes, canonical hashes, no-call adapter, dry-run outcome, vendored public freeze hashes, selected-case/order invariants, absence of controlled PR #18 packets and prompts, unchanged authoritative manual, unchanged package version, unchanged Core/provenance boundaries, package exclusion of the study-only modules, and synthetic-fixture content restrictions. These checks use fixed hashes and current files rather than requiring historical Git objects.
 
 This validator supplements and does not weaken `scripts/validate_human_llm_rights_gate.py`.
 

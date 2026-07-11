@@ -3,7 +3,7 @@
   "content_policy": "metadata_only_no_private_text_no_private_packet_hashes",
   "created_at": "2026-07-04T00:00:00+10:00",
   "created_by": "author-assisted internal preparation",
-  "overall_execution_status": "BLOCKED_PENDING_RIGHTS_PRIVATE_PACKETS_MODEL_ACCOUNT_RUNTIME_SETTINGS_PRICING_AND_FINAL_EXECUTION_AUTHORIZATION",
+  "overall_execution_status": "EXECUTION_BLOCKED",
   "private_packet_inspection_blocked_count": 25,
   "records": [
     {

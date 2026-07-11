@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import json
 import re
-import subprocess
 import sys
 import tomllib
 from copy import deepcopy
@@ -19,8 +18,8 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "src"))
 
 from scripts.validate_human_llm_execution_scaffold import (  # noqa: E402
-    PR18_PROTECTED_EXACT,
-    PR18_PROTECTED_PREFIXES,
+    EXPECTED_PACKAGE_VERSION,
+    protected_boundary_errors,
 )
 from trim_haa.human_coding.dry_run import (  # noqa: E402
     CODER_SCHEMA_HASH,
@@ -35,22 +34,10 @@ from trim_haa.llm.frozen_reference import load_and_verify_public_freeze  # noqa:
 from trim_haa.llm.hashing import verify_record_hash  # noqa: E402
 
 
-STARTING_PR20_HEAD = "4e3007055e700a7ea25fcd3121bae0ea025b834e"
 EXPECTED_SYNTHETIC_CODERS = {
     "SYNTHETIC_CODER_A",
     "SYNTHETIC_CODER_B",
     "SYNTHETIC_ADJUDICATOR",
-}
-UNCHANGED_BOUNDARY_PATHS = {
-    "docs/manuals/friction_locus_manual_manifest.json",
-    "docs/manuals/friction_locus_manual_v0_1.json",
-    "docs/manuals/friction_locus_manual_v0_1.md",
-    "docs/core_schema.md",
-    "docs/provenance.md",
-    "src/trim_haa/schema.py",
-    "src/trim_haa/provenance.py",
-    "data/trim_haa_core_template.csv",
-    "data/trim_haa_assistance_provenance_template.csv",
 }
 PII_OR_SECRET_KEYS = {
     "address",
@@ -82,29 +69,6 @@ def _load_json(path: Path) -> dict[str, Any]:
 def _require(condition: bool, message: str, errors: list[str]) -> None:
     if not condition:
         errors.append(message)
-
-
-def _git_bytes(revision: str, path: str) -> bytes | None:
-    result = subprocess.run(
-        ["git", "show", f"{revision}:{path}"],
-        cwd=ROOT,
-        check=False,
-        capture_output=True,
-    )
-    return result.stdout if result.returncode == 0 else None
-
-
-def _changed_since_start() -> set[str]:
-    result = subprocess.run(
-        ["git", "diff", "--name-only", STARTING_PR20_HEAD, "--"],
-        cwd=ROOT,
-        check=False,
-        text=True,
-        capture_output=True,
-    )
-    if result.returncode != 0:
-        return set()
-    return {line for line in result.stdout.splitlines() if line}
 
 
 def _contains_forbidden_key(value: Any) -> bool:
@@ -246,17 +210,9 @@ def validate() -> list[str]:
     _require(not schema_errors(checked_adjudication, adjudication_schema, root=ROOT), "checked synthetic adjudication fixture fails schema", errors)
     _require(verify_record_hash(checked_adjudication), "checked synthetic adjudication fixture hash mismatch", errors)
 
-    changed = _changed_since_start()
-    protected_changes = {
-        path for path in changed if path in PR18_PROTECTED_EXACT or any(path.startswith(prefix) for prefix in PR18_PROTECTED_PREFIXES)
-    }
-    _require(not protected_changes, f"PR #18 artifacts or prompts changed: {sorted(protected_changes)}", errors)
-    for path in UNCHANGED_BOUNDARY_PATHS:
-        current = (ROOT / path).read_bytes() if (ROOT / path).exists() else None
-        _require(current == _git_bytes(STARTING_PR20_HEAD, path), f"protected manual/Core/provenance path changed: {path}", errors)
+    errors.extend(protected_boundary_errors())
     current_version = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))["project"]["version"]
-    starting_pyproject = _git_bytes(STARTING_PR20_HEAD, "pyproject.toml")
-    _require(starting_pyproject is not None and current_version == tomllib.loads(starting_pyproject.decode("utf-8"))["project"]["version"], "package version changed", errors)
+    _require(current_version == EXPECTED_PACKAGE_VERSION, "package version changed", errors)
 
     implementation_paths = list((ROOT / "src" / "trim_haa" / "human_coding").glob("*.py")) + [
         ROOT / "scripts" / "dry_run_human_coding.py"

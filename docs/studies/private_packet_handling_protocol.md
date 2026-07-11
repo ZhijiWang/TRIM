@@ -2,7 +2,7 @@
 
 Status: controlled-access protocol approved for metadata-only gate preparation. This document does not authorize unlogged private-packet inspection, human coding, model execution, provider transmission, or public redistribution.
 
-Overall execution status remains: `BLOCKED_PENDING_RIGHTS_PRIVATE_PACKETS_MODEL_ACCOUNT_RUNTIME_SETTINGS_PRICING_AND_FINAL_EXECUTION_AUTHORIZATION`.
+Overall execution status remains: `EXECUTION_BLOCKED`.
 
 Approval record: `data/studies/human_llm_pilot/private_packet_handling_approval.json`.
 

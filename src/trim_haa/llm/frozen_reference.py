@@ -1,16 +1,16 @@
-"""Read only allowlisted public metadata from the immutable PR #18 Git object."""
+"""Read the vendored, allowlisted public metadata frozen by PR #18."""
 
 from __future__ import annotations
 
 import hashlib
 import json
-import subprocess
 from copy import deepcopy
 from pathlib import Path
 from typing import Any
 
 
 PR18_HEAD = "eac65f27bbe302a17e5f508ac1d516178e917aea"
+PR18_FREEZE_PACKAGE_MANIFEST_HASH = "12aa1e729363b4c1071b7d5bb09c3c1b7331856727eb434f1d7e790621c7331b"
 PUBLIC_JSON_PATHS = {
     "data/studies/human_llm_pilot/allocation_manifest.json",
     "data/studies/human_llm_pilot/freeze_package_manifest.json",
@@ -33,20 +33,17 @@ def _require_allowlisted(path: str) -> None:
 
 
 def read_public_bytes(root: str | Path, path: str) -> bytes:
-    """Read one allowlisted blob locally; this function performs no fetch or network access."""
+    """Read one vendored allowlisted blob without Git, fetch, or network access."""
 
     _require_allowlisted(path)
-    result = subprocess.run(
-        ["git", "show", f"{PR18_HEAD}:{path}"],
-        cwd=Path(root),
-        check=False,
-        capture_output=True,
-    )
-    if result.returncode != 0:
+    local_path = Path(root) / path
+    try:
+        return local_path.read_bytes()
+    except FileNotFoundError as exc:
         raise FrozenReferenceError(
-            f"pinned PR #18 public artifact is unavailable locally: {path}; no network fallback is permitted"
-        )
-    return result.stdout
+            "vendored PR #18 public artifact is unavailable: "
+            f"{path}; use a PR #20 source checkout or source archive containing the public freeze bundle"
+        ) from exc
 
 
 def load_public_json(root: str | Path, path: str) -> dict[str, Any]:
@@ -91,6 +88,10 @@ def load_and_verify_public_freeze(root: str | Path) -> dict[str, dict[str, Any]]
     schema_bytes = read_public_bytes(root, schema_path)
     schema = json.loads(schema_bytes.decode("utf-8"))
 
+    if _canonical_unprefixed(freeze, "freeze_package_manifest_hash") != PR18_FREEZE_PACKAGE_MANIFEST_HASH:
+        raise FrozenReferenceError("PR #18 freeze package canonical hash mismatch")
+    if freeze.get("freeze_package_manifest_hash") != PR18_FREEZE_PACKAGE_MANIFEST_HASH:
+        raise FrozenReferenceError("PR #18 freeze package claimed hash mismatch")
     if _canonical_unprefixed(allocation, "allocation_hash") != allocation.get("allocation_hash"):
         raise FrozenReferenceError("PR #18 allocation canonical hash mismatch")
     if _canonical_unprefixed(sample, "sample_manifest_hash") != sample.get("sample_manifest_hash"):

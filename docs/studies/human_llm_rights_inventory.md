@@ -4,7 +4,7 @@ Status: preparation-only. This document does not approve rights, translations, p
 
 PR #18 freeze reference: `eac65f27bbe302a17e5f508ac1d516178e917aea`.
 
-Overall execution status remains: `BLOCKED_PENDING_RIGHTS_PRIVATE_PACKETS_MODEL_ACCOUNT_RUNTIME_SETTINGS_PRICING_AND_FINAL_EXECUTION_AUTHORIZATION`.
+Overall execution status remains: `EXECUTION_BLOCKED`.
 
 This inventory is built from public PR #18 metadata and public source/edition/license evidence only. It contains no private source-packet text and no private packet hashes. Project Gutenberg or other source metadata is treated as documentary protocol-review evidence for the recorded source/provider basis, not as final approval for private-packet inspection, provider transmission, or global public redistribution.
 

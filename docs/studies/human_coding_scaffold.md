@@ -17,6 +17,8 @@ The implementation follows the existing `trim_haa` package under `src/trim_haa/h
 
 The new annotation and adjudication schemas reference `schemas/human_llm_coder_output.schema.json#/$defs/human_coder_record`. They do not copy or modify the authoritative manual or frozen coder schema.
 
+This scaffold is source-checkout research code, not part of the distributable `trim-haa` wheel or Python sdist and not a stable public API. Its dry-run requires the checked-in study metadata, schemas, synthetic fixtures, and vendored public PR #18 freeze files from a source checkout or repository source archive. It does not require a `.git` directory or access to the PR #18 branch.
+
 ## Coder roles and registry
 
 The dry-run registry contains only:

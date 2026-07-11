@@ -1,0 +1,85 @@
+{
+  "prompt_assembly_version": "human_llm_pilot_prompt_assembly_v0_1",
+  "status": "PASSED_PROMPT_ASSEMBLY_SPECIFIED_EXECUTION_BLOCKED",
+  "assembly_order": [
+    "SYSTEM_PROMPT",
+    "CONDITION_PAYLOAD",
+    "SOURCE_PACKET_ENVELOPE",
+    "MODEL_RESPONSE_SCHEMA",
+    "CASE_AND_RUN_CONTEXT"
+  ],
+  "component_paths": {
+    "system_prompt": "prompts/human_llm_pilot/system_prompt.txt",
+    "condition_A": "prompts/human_llm_pilot/condition_A.txt",
+    "condition_B": "prompts/human_llm_pilot/condition_B.txt",
+    "condition_C_header": "prompts/human_llm_pilot/condition_C.txt",
+    "condition_C_manual_content": "docs/manuals/friction_locus_manual_v0_1.json",
+    "source_packet_envelope": "prompts/human_llm_pilot/source_packet_envelope.txt",
+    "model_response_schema": "schemas/human_llm_model_response.schema.json",
+    "case_and_run_context": "prompts/human_llm_pilot/case_and_run_context.txt"
+  },
+  "component_hashes": {
+    "system_prompt": "74f36915bf6139464b83338e53d4e6b137772e8a6b595e5fc28f2f235cf1275e",
+    "condition_A": "4846c78ae12f5f875acd6b99c9f951b1b2996d218995b0c3bed6d16e94c9b1fe",
+    "condition_B": "4d29d8ce3f9949601ab29a4b75d62fe8025095558093e48f0884e377aa5f1349",
+    "condition_C_header": "4807f2aaee6eff38ad3e7f680208e7176c9eb5aa2395334db6d52166b392b67b",
+    "condition_C_manual_content": "797d79fcdb29fc32850c3778c6afb029ac0768207ea33f66d714fe8fa8cb591a",
+    "source_packet_envelope": "37a1d1f9c26e27d34e9842ff1cc1d70436c6379b79c4536ba19660d9f2998163",
+    "model_response_schema": "84fbc5413951c712925d85738bc820d776c1ab06172382f143e48495d4a095ec",
+    "case_and_run_context": "18a9052fd8a9973b7b2a129540f02f27b62e60db991d368613dee153c8043a93"
+  },
+  "condition_C_manual_injection": {
+    "content_source": "authoritative_json_manual",
+    "source_path": "docs/manuals/friction_locus_manual_v0_1.json",
+    "source_sha256": "797d79fcdb29fc32850c3778c6afb029ac0768207ea33f66d714fe8fa8cb591a",
+    "encoding": "UTF-8",
+    "newline_normalization": "LF",
+    "serialization_rule": "inject LF-normalized file content verbatim",
+    "excluded_fields": [],
+    "begin_delimiter": "BEGIN_FULL_MANUAL_JSON",
+    "end_delimiter": "END_FULL_MANUAL_JSON",
+    "repository_or_tool_access_required_by_model": false
+  },
+  "condition_payload_hashes": {
+    "A": "4846c78ae12f5f875acd6b99c9f951b1b2996d218995b0c3bed6d16e94c9b1fe",
+    "B": "4d29d8ce3f9949601ab29a4b75d62fe8025095558093e48f0884e377aa5f1349",
+    "C": "0f9d7df2f47190dd2e7632dc616ded3dc1eba041e75c55a59d55b16483575cbf"
+  },
+  "assembled_prompt_template_hashes": {
+    "A": "c7cb293888304ae16dc6b2018e303e35e81bec507e1bf1f24fadb42786d21d84",
+    "B": "7535649eebca673901d284a958f4c4e64d5ce61d21f46e66e3e7097d31b41ae5",
+    "C": "7401410bc4edad4df74574ccd06c5d28d5f0f1153d2a496f6f025bcdc1f03825"
+  },
+  "component_joiner": "\\n\\n",
+  "component_trailing_newline_rule": "include exactly one final trailing LF after CASE_AND_RUN_CONTEXT",
+  "component_normalization_rule": "UTF-8 text with CRLF and CR normalized to LF; each top-level component is rstrip(\"\\n\") before joining",
+  "model_visible_context_fields": [
+    "case_id",
+    "instruction_condition",
+    "prompt_bundle_version"
+  ],
+  "harness_only_context_fields": [
+    "assembled_prompt_hash",
+    "source_packet_hash",
+    "provider",
+    "model",
+    "run_id",
+    "runtime_settings",
+    "retry_metadata",
+    "pricing_metadata"
+  ],
+  "assembled_prompt_hash_method": "Template hash is SHA-256 over UTF-8 LF-normalized complete assembled prompt with public placeholders unchanged. Instance hash is SHA-256 after controlled source packet and model-visible variables are substituted. Provider request hash, if used, is separate from the model-visible prompt hash.",
+  "prompt_hash_sequence": [
+    "load each source component",
+    "normalize CRLF and CR to LF",
+    "substitute controlled source packet, case ID, instruction condition, prompt bundle version, and any explicitly model-visible case variables",
+    "assemble the five components with component_joiner and final trailing LF",
+    "preserve the exact model-visible assembled text",
+    "compute SHA-256 over UTF-8 bytes",
+    "store the hash outside the prompt",
+    "submit the already-hashed exact text to the provider",
+    "preserve provider-visible request representation where available"
+  ],
+  "preservation_rule": "Before any model call, preserve exact shared system text, exact condition payload, exact source-packet text, exact model response schema text, exact case/run context, complete assembled input, complete assembled input hash stored outside the prompt, provider request hash separately where available, and provider-visible request representation where available.",
+  "execution_status": "BLOCKED_PENDING_RIGHTS_PRIVATE_PACKETS_MODEL_ACCOUNT_RUNTIME_SETTINGS_PRICING_AND_FINAL_AUTHORIZATION"
+}

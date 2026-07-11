@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import re
-import subprocess
 import sys
 import tomllib
 from copy import deepcopy
@@ -28,8 +28,9 @@ from trim_haa.llm.request_preservation import (  # noqa: E402
 )
 
 
-STARTING_PR20_HEAD = "b75fd781c52ba3508f250f56db3719b95a3a0876"
 PR18_HEAD = "eac65f27bbe302a17e5f508ac1d516178e917aea"
+EXPECTED_PACKAGE_VERSION = "0.3.0a1"
+EXPECTED_RIGHTS_RECORDS_HASH = "55181054871c4d10be0f56bcfcfbd57b01c5b813c77d6f15cbfb1ff707cfb179"
 EXPECTED_CASE_IDS = [
     "L1_AUSTEN_PNP_001",
     "L1_SHELLEY_FRANK_001",
@@ -97,16 +98,27 @@ PR18_PROTECTED_PREFIXES = (
     "data/studies/human_llm_pilot/source_packets/",
     "prompts/human_llm_pilot/",
 )
-UNCHANGED_BOUNDARY_PATHS = {
-    "docs/manuals/friction_locus_manual_manifest.json",
-    "docs/manuals/friction_locus_manual_v0_1.json",
-    "docs/manuals/friction_locus_manual_v0_1.md",
-    "docs/core_schema.md",
-    "docs/provenance.md",
-    "src/trim_haa/schema.py",
-    "src/trim_haa/provenance.py",
-    "data/trim_haa_core_template.csv",
-    "data/trim_haa_assistance_provenance_template.csv",
+VENDORED_PUBLIC_PR18_PATHS = {
+    "data/studies/human_llm_pilot/allocation_manifest.json",
+    "data/studies/human_llm_pilot/freeze_package_manifest.json",
+    "data/studies/human_llm_pilot/manual_freeze_manifest.json",
+    "data/studies/human_llm_pilot/prompt_assembly_manifest.json",
+    "data/studies/human_llm_pilot/sample_manifest.json",
+    "schemas/human_llm_model_response.schema.json",
+}
+PR18_BASELINE_PATH_HASHES = {
+    "templates/human_llm_run_manifest.json": "b8babe6aaa556673de947e67d8eddcbc4f7d54ead65cc923f8a69e818ee9f740",
+}
+UNCHANGED_BOUNDARY_HASHES = {
+    "docs/manuals/friction_locus_manual_manifest.json": "1b80c0931a0ed8159aaeeb6e7b348331beb33130776469f223ae2a8cfe89d8de",
+    "docs/manuals/friction_locus_manual_v0_1.json": "797d79fcdb29fc32850c3778c6afb029ac0768207ea33f66d714fe8fa8cb591a",
+    "docs/manuals/friction_locus_manual_v0_1.md": "f26f5de05819c4fd36c0d88e7d86320d7374c27185c36575b18b584fc5d9b426",
+    "docs/core_schema.md": "e2ee7e73bfc4239a69b3d3534af508525775a3840aa228cbcbe24389fcb0d6e4",
+    "docs/provenance.md": "66fbd4c679650797e8d4194c52527075c77b90734963389ce9226c9271774e74",
+    "src/trim_haa/schema.py": "bf0540c2c34e02e93f19f2559d5794f6fc59579a363e29a7858e478bb88a4264",
+    "src/trim_haa/provenance.py": "92e075aa74afd0661fb6446c1253863883b651df735aaec0ec073638af0fdd14",
+    "data/trim_haa_core_template.csv": "fb4392ed27fb943d5b05d35f889985806c54f1f2323965465756b64e9edca3a2",
+    "data/trim_haa_assistance_provenance_template.csv": "150124b1c928122fe7d06c6de128952c7e1731b9d53a307966da4b295fc30c62",
 }
 SECRET_VALUE_RE = re.compile(r"(sk-[A-Za-z0-9_-]{20,}|Bearer\s+[A-Za-z0-9._-]{20,})")
 
@@ -128,27 +140,33 @@ def _schema_errors(instance: Any, schema: dict[str, Any]) -> list[str]:
     return [error.message for error in Draft202012Validator(schema).iter_errors(instance)]
 
 
-def _git_bytes(revision: str, path: str) -> bytes | None:
-    result = subprocess.run(
-        ["git", "show", f"{revision}:{path}"],
-        cwd=ROOT,
-        check=False,
-        capture_output=True,
-    )
-    return result.stdout if result.returncode == 0 else None
+def _sha256(path: Path) -> str | None:
+    return hashlib.sha256(path.read_bytes()).hexdigest() if path.is_file() else None
 
 
-def _changed_since_start() -> set[str]:
-    result = subprocess.run(
-        ["git", "diff", "--name-only", STARTING_PR20_HEAD, "--"],
-        cwd=ROOT,
-        check=False,
-        text=True,
-        capture_output=True,
-    )
-    if result.returncode != 0:
-        return set()
-    return {line for line in result.stdout.splitlines() if line}
+def protected_boundary_errors(root: Path = ROOT) -> list[str]:
+    """Validate frozen boundaries without depending on Git history."""
+
+    errors: list[str] = []
+    for path in VENDORED_PUBLIC_PR18_PATHS:
+        if not (root / path).is_file():
+            errors.append(f"missing vendored public PR #18 artifact: {path}")
+    for path in PR18_PROTECTED_EXACT - VENDORED_PUBLIC_PR18_PATHS:
+        candidate = root / path
+        expected = PR18_BASELINE_PATH_HASHES.get(path)
+        if expected is not None:
+            if _sha256(candidate) != expected:
+                errors.append(f"protected PR #18 baseline path changed: {path}")
+        elif candidate.exists():
+            errors.append(f"unexpected non-vendored PR #18 artifact present: {path}")
+    for prefix in PR18_PROTECTED_PREFIXES:
+        directory = root / prefix
+        if directory.exists() and any(path.is_file() for path in directory.rglob("*")):
+            errors.append(f"controlled or prompt PR #18 prefix present: {prefix}")
+    for path, expected in UNCHANGED_BOUNDARY_HASHES.items():
+        if _sha256(root / path) != expected:
+            errors.append(f"protected manual/Core/provenance path changed: {path}")
+    return errors
 
 
 def _response_schema_has_no_content_property(schema: dict[str, Any]) -> bool:
@@ -268,20 +286,30 @@ def validate() -> list[str]:
     _require(BlockedOpenAIAdapter.network_enabled is False, "provider adapter reports network enabled", errors)
 
     _require([record.get("case_id") for record in rights_manifest["records"]] == EXPECTED_CASE_IDS, "selected case IDs/order changed", errors)
-    starting_rights = _git_bytes(STARTING_PR20_HEAD, "data/studies/human_llm_pilot/rights_inventory_manifest.json")
-    _require(starting_rights is not None and json.loads(starting_rights)["records"] == rights_manifest["records"], "rights inventory selected records changed from starting PR #20 head", errors)
+    rights_records_hash = hashlib.sha256(
+        json.dumps(rights_manifest["records"], ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+    _require(rights_records_hash == EXPECTED_RIGHTS_RECORDS_HASH, "rights inventory selected records changed from frozen PR #20 baseline", errors)
 
-    changed = _changed_since_start()
-    protected_changes = {
-        path for path in changed if path in PR18_PROTECTED_EXACT or any(path.startswith(prefix) for prefix in PR18_PROTECTED_PREFIXES)
-    }
-    _require(not protected_changes, f"PR #18 artifacts changed: {sorted(protected_changes)}", errors)
-    for path in UNCHANGED_BOUNDARY_PATHS:
-        current = (ROOT / path).read_bytes() if (ROOT / path).exists() else None
-        _require(current == _git_bytes(STARTING_PR20_HEAD, path), f"protected manual/Core/provenance path changed: {path}", errors)
-    current_version = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))["project"]["version"]
-    starting_pyproject = _git_bytes(STARTING_PR20_HEAD, "pyproject.toml")
-    _require(starting_pyproject is not None and current_version == tomllib.loads(starting_pyproject.decode("utf-8"))["project"]["version"], "package version changed", errors)
+    errors.extend(protected_boundary_errors())
+    pyproject = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
+    _require(pyproject["project"]["version"] == EXPECTED_PACKAGE_VERSION, "package version changed", errors)
+    package_find = pyproject["tool"]["setuptools"]["packages"]["find"]
+    excluded = set(package_find.get("exclude", []))
+    _require(
+        {
+            "trim_haa.llm",
+            "trim_haa.llm.*",
+            "trim_haa.human_coding",
+            "trim_haa.human_coding.*",
+        }.issubset(excluded),
+        "study-only modules must be excluded from package discovery",
+        errors,
+    )
+    _require("llm" not in pyproject["project"].get("optional-dependencies", {}), "wheel must not advertise an excluded llm extra", errors)
+    manifest_text = (ROOT / "MANIFEST.in").read_text(encoding="utf-8") if (ROOT / "MANIFEST.in").is_file() else ""
+    _require("prune src/trim_haa/llm" in manifest_text, "sdist must exclude the study-only llm module", errors)
+    _require("prune src/trim_haa/human_coding" in manifest_text, "sdist must exclude the study-only human-coding module", errors)
 
     fixture_dir = ROOT / "tests" / "fixtures" / "human_llm_execution"
     fixture_text = "\n".join(path.read_text(encoding="utf-8") for path in sorted(fixture_dir.iterdir()) if path.is_file())

@@ -2,6 +2,7 @@ import hashlib
 import os
 import subprocess
 import sys
+import tarfile
 import tomllib
 import zipfile
 from pathlib import Path
@@ -223,6 +224,7 @@ def test_version_and_pandas_dependency_classification_are_consistent():
     assert trim_haa.__version__ == "0.3.0a1"
     assert 'version: "0.3.0a1"' in citation
     assert pyproject["project"]["dependencies"] == []
+    assert "llm" not in pyproject["project"]["optional-dependencies"]
     assert pyproject["project"]["optional-dependencies"]["reporting"] == ["pandas"]
     assert "pandas" in pyproject["project"]["optional-dependencies"]["test"]
     assert src_imports == [ROOT / "src" / "trim_haa" / "reporting.py"]
@@ -231,9 +233,10 @@ def test_version_and_pandas_dependency_classification_are_consistent():
 
 def test_built_wheel_boundary_and_clean_install_smoke(tmp_path):
     dist = tmp_path / "dist"
-    build = _run(sys.executable, "-m", "build", "--wheel", "--outdir", str(dist))
+    build = _run(sys.executable, "-m", "build", "--outdir", str(dist))
     assert build.returncode == 0, build.stderr
     wheel = next(dist.glob("trim_haa-0.3.0a1-py3-none-any.whl"))
+    sdist = next(dist.glob("trim_haa-0.3.0a1.tar.gz"))
 
     with zipfile.ZipFile(wheel) as archive:
         names = archive.namelist()
@@ -242,12 +245,23 @@ def test_built_wheel_boundary_and_clean_install_smoke(tmp_path):
         assert not any(name.startswith(excluded) for name in names)
     assert not any("source_packet" in name for name in names)
     assert not any("TRIM_HAA_position_note" in name for name in names)
+    assert not any(name.startswith("trim_haa/llm/") for name in names)
+    assert not any(name.startswith("trim_haa/human_coding/") for name in names)
+
+    with tarfile.open(sdist, "r:gz") as archive:
+        sdist_names = archive.getnames()
+    assert not any("/src/trim_haa/llm/" in name for name in sdist_names)
+    assert not any("/src/trim_haa/human_coding/" in name for name in sdist_names)
 
     venv = tmp_path / "venv"
     assert _run(sys.executable, "-m", "venv", str(venv)).returncode == 0
     python = venv / "bin" / "python"
     cli = venv / "bin" / "trim-haa"
     assert _run(str(python), "-m", "pip", "install", str(wheel), cwd=tmp_path).returncode == 0
+    for study_module in ("trim_haa.llm", "trim_haa.human_coding"):
+        result = _run(str(python), "-c", f"import {study_module}", cwd=tmp_path)
+        assert result.returncode != 0
+        assert "ModuleNotFoundError" in result.stderr
 
     fixtures = tmp_path / "fixtures"
     fixtures.mkdir()

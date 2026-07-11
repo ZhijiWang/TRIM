@@ -1,8 +1,9 @@
-import json
+import hashlib
 import http.client
+import json
 import os
+from shutil import copyfile
 import socket
-import subprocess
 import sys
 import types
 import urllib.request
@@ -15,9 +16,9 @@ from jsonschema import Draft202012Validator
 from scripts import dry_run_human_llm_execution
 from scripts.validate_human_llm_execution_scaffold import (
     EXPECTED_CASE_IDS,
-    PR18_PROTECTED_EXACT,
-    PR18_PROTECTED_PREFIXES,
-    STARTING_PR20_HEAD,
+    UNCHANGED_BOUNDARY_HASHES,
+    VENDORED_PUBLIC_PR18_PATHS,
+    protected_boundary_errors,
     validate as validate_scaffold,
 )
 from trim_haa.llm.dry_run import build_execution_plan, run_dry_run
@@ -106,15 +107,6 @@ def hypothetical_authorized_envelope():
     envelope["transmission_authorized"] = True
     envelope["record_hash"] = compute_record_hash(envelope)
     return envelope
-
-
-def git_bytes(revision: str, path: str):
-    return subprocess.run(
-        ["git", "show", f"{revision}:{path}"],
-        cwd=ROOT,
-        check=True,
-        capture_output=True,
-    ).stdout
 
 
 def test_canonical_json_hashing_is_deterministic():
@@ -404,30 +396,32 @@ def test_dry_run_reports_zero_provider_calls_packets_and_outputs():
 
 
 def test_dry_run_works_with_network_and_provider_clis_disabled(monkeypatch):
-    import trim_haa.llm.frozen_reference as frozen_reference
-
-    original_run = frozen_reference.subprocess.run
-    observed = []
-
-    def local_git_only(command, *args, **kwargs):
-        observed.append(command)
-        assert command[0] == "git"
-        assert command[1] == "show"
-        return original_run(command, *args, **kwargs)
-
     def no_network(*args, **kwargs):
         raise AssertionError("network access attempted")
+
+    def no_subprocess(*args, **kwargs):
+        raise AssertionError("subprocess access attempted")
 
     fake_openai = types.ModuleType("openai")
     fake_openai.OpenAI = no_network
     monkeypatch.setitem(sys.modules, "openai", fake_openai)
-    monkeypatch.setattr(frozen_reference.subprocess, "run", local_git_only)
+    monkeypatch.setattr("subprocess.run", no_subprocess)
     monkeypatch.setattr(socket, "socket", no_network)
     monkeypatch.setattr(socket, "create_connection", no_network)
     monkeypatch.setattr(urllib.request, "urlopen", no_network)
     monkeypatch.setattr(http.client.HTTPConnection, "connect", no_network)
     assert run_dry_run(ROOT)["overall_execution_status"] == "EXECUTION_BLOCKED"
-    assert observed and all(command[0] not in {"curl", "openai"} for command in observed)
+
+
+def test_vendored_public_freeze_works_without_git_metadata(tmp_path):
+    for relative in VENDORED_PUBLIC_PR18_PATHS:
+        destination = tmp_path / relative
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        copyfile(ROOT / relative, destination)
+
+    frozen = load_and_verify_public_freeze(tmp_path)
+    assert frozen["sample"]["selected_case_ids"] == EXPECTED_CASE_IDS
+    assert not (tmp_path / ".git").exists()
 
 
 def test_no_api_key_or_environment_lookup_is_required(monkeypatch):
@@ -454,18 +448,7 @@ def test_selected_case_order_is_unchanged():
 
 
 def test_prompt_files_and_pr18_artifacts_are_unchanged():
-    changed = subprocess.run(
-        ["git", "diff", "--name-only", STARTING_PR20_HEAD, "--"],
-        cwd=ROOT,
-        check=True,
-        text=True,
-        capture_output=True,
-    ).stdout.splitlines()
-    assert not {
-        path
-        for path in changed
-        if path in PR18_PROTECTED_EXACT or any(path.startswith(prefix) for prefix in PR18_PROTECTED_PREFIXES)
-    }
+    assert protected_boundary_errors() == []
 
 
 @pytest.mark.parametrize(
@@ -477,7 +460,7 @@ def test_prompt_files_and_pr18_artifacts_are_unchanged():
     ],
 )
 def test_authoritative_manual_is_unchanged(path):
-    assert (ROOT / path).read_bytes() == git_bytes(STARTING_PR20_HEAD, path)
+    assert hashlib.sha256((ROOT / path).read_bytes()).hexdigest() == UNCHANGED_BOUNDARY_HASHES[path]
 
 
 def test_runtime_record_and_execution_plan_hashes_validate():

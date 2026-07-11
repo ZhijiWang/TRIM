@@ -4,7 +4,7 @@ Status: planning document only. Rights evidence and controlled private-packet ha
 
 This PR does not authorize coding or execution.
 
-Overall execution status remains: `BLOCKED_PENDING_RIGHTS_PRIVATE_PACKETS_MODEL_ACCOUNT_RUNTIME_SETTINGS_PRICING_AND_FINAL_EXECUTION_AUTHORIZATION`.
+Overall execution status remains: `EXECUTION_BLOCKED`.
 
 ## Remaining sequence
 
@@ -18,4 +18,4 @@ Overall execution status remains: `BLOCKED_PENDING_RIGHTS_PRIVATE_PACKETS_MODEL_
 8. Authorize model execution only after all provider-transmission, model/account/runtime/pricing, prompt, and preservation gates pass.
 9. Begin empirical analysis only after all human records and model records are created, locked, hashed, and validated under the frozen protocol.
 
-PR #18 remains the sample/prompt freeze reference. This PR prepares the rights/private-packet gate evidence framework only and does not start coding or execution.
+PR #18 remains the sample/prompt freeze provenance reference. This PR contains the rights/private-packet gate evidence plus the already-scoped no-call LLM and no-coding human scaffolds. It does not start coding or execution.
