@@ -1,0 +1,2 @@
+prune src/trim_haa/llm
+prune src/trim_haa/human_coding

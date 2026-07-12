@@ -1,0 +1,6 @@
+{
+  "actor_type": "human",
+  "case_id": "SYNTHETIC_CASE_INVALID",
+  "record_type": "human_coder_record",
+  "unexpected_secret_field": "synthetic_invalid_field"
+}

@@ -1,0 +1,149 @@
+{
+  "base_main_sha": "6364add9a89f3fe6d26043727b9d44cb21a76db0",
+  "created_at": "2026-07-04T00:00:00+10:00",
+  "gate_status_manifest_version": "human_llm_gate_status_v0_1",
+  "gates": [
+    {
+      "dependency": "final execution remains blocked while any required gate is blocked",
+      "evidence_path": "PR #18 and merged PR #19 authoritative manual reference",
+      "execution_remains_blocked": true,
+      "gate": "manual_compatibility",
+      "review_date": null,
+      "reviewer": "carried forward from PR #18 documentation",
+      "status": "PASSED",
+      "this_pr_changes_status": false
+    },
+    {
+      "dependency": "final execution remains blocked while any required gate is blocked",
+      "evidence_path": "PR #18 prompt assembly specification",
+      "execution_remains_blocked": true,
+      "gate": "prompt_assembly",
+      "review_date": null,
+      "reviewer": "carried forward from PR #18 documentation",
+      "status": "PASSED",
+      "this_pr_changes_status": false
+    },
+    {
+      "dependency": "final execution remains blocked while any required gate is blocked",
+      "evidence_path": "PR #18 model response schema",
+      "execution_remains_blocked": true,
+      "gate": "model_response_schema",
+      "review_date": null,
+      "reviewer": "carried forward from PR #18 documentation",
+      "status": "PASSED",
+      "this_pr_changes_status": false
+    },
+    {
+      "dependency": "final execution remains blocked while any required gate is blocked",
+      "evidence_path": "PR #18 model record enrichment contract",
+      "execution_remains_blocked": true,
+      "gate": "enrichment_contract",
+      "review_date": null,
+      "reviewer": "carried forward from PR #18 documentation",
+      "status": "PASSED",
+      "this_pr_changes_status": false
+    },
+    {
+      "dependency": "final execution remains blocked while any required gate is blocked",
+      "evidence_path": "PR #18 condition manipulation audit",
+      "execution_remains_blocked": true,
+      "gate": "condition_manipulation",
+      "review_date": null,
+      "reviewer": "carried forward from PR #18 documentation",
+      "status": "PASSED",
+      "this_pr_changes_status": false
+    },
+    {
+      "dependency": "final execution remains blocked while any required gate is blocked",
+      "evidence_path": "PR #18 prompt parity audit",
+      "execution_remains_blocked": true,
+      "gate": "human_model_content_comparability",
+      "review_date": null,
+      "reviewer": "carried forward from PR #18 documentation",
+      "status": "PASSED_WITH_DOCUMENTED_INTERFACE_ASYMMETRIES",
+      "this_pr_changes_status": false
+    },
+    {
+      "dependency": "rights evidence documented for all selected cases; final execution remains blocked while downstream gates are blocked",
+      "evidence_path": "docs/studies/human_llm_rights_evidence_summary.md",
+      "execution_remains_blocked": true,
+      "gate": "rights_evidence",
+      "review_date": null,
+      "reviewer": "author-assisted internal preparation",
+      "status": "PASSED_WITH_DOWNSTREAM_GATES_BLOCKED",
+      "this_pr_changes_status": true
+    },
+    {
+      "dependency": "controlled local storage and logged access are approved; final execution remains blocked while provider/model/account, runtime, pricing, final authorization, human coding, and model execution gates are blocked",
+      "evidence_path": "data/studies/human_llm_pilot/private_packet_handling_approval.json",
+      "execution_remains_blocked": true,
+      "gate": "controlled_private_packet_handling",
+      "review_date": "2026-07-07",
+      "reviewer": "author-assisted internal private-packet gate review",
+      "status": "PASSED_WITH_CONTROLLED_ACCESS_ONLY",
+      "this_pr_changes_status": true
+    },
+    {
+      "dependency": "provider and candidate model are documented, but account availability is not verified because no account model listing could be performed without credentials; final execution remains blocked while runtime, pricing, final authorization, human coding, and model execution gates are blocked",
+      "evidence_path": "data/studies/human_llm_pilot/provider_model_account_verification.json",
+      "execution_remains_blocked": true,
+      "gate": "provider_model_account",
+      "review_date": "2026-07-07",
+      "reviewer": "author-assisted internal provider/model/account gate review",
+      "status": "BLOCKED",
+      "this_pr_changes_status": false
+    },
+    {
+      "dependency": "draft runtime metadata exists, but account availability, supported parameters, structured-output behavior, pricing, and execution authorization remain unverified",
+      "evidence_path": "data/studies/human_llm_pilot/runtime_settings_draft.json",
+      "execution_remains_blocked": true,
+      "gate": "runtime_settings",
+      "review_date": null,
+      "reviewer": "carried forward from PR #18 documentation",
+      "status": "BLOCKED",
+      "this_pr_changes_status": false
+    },
+    {
+      "dependency": "final execution remains blocked while any required gate is blocked",
+      "evidence_path": null,
+      "execution_remains_blocked": true,
+      "gate": "pricing",
+      "review_date": null,
+      "reviewer": "carried forward from PR #18 documentation",
+      "status": "BLOCKED",
+      "this_pr_changes_status": false
+    },
+    {
+      "dependency": "final execution remains blocked while any required gate is blocked",
+      "evidence_path": null,
+      "execution_remains_blocked": true,
+      "gate": "final_authorization",
+      "review_date": null,
+      "reviewer": "carried forward from PR #18 documentation",
+      "status": "BLOCKED",
+      "this_pr_changes_status": false
+    },
+    {
+      "dependency": "Human coding remains blocked pending coding-environment verification, coder eligibility, documented training, coder and session authorization, packet hash verification, record-locking readiness, and final authorization.",
+      "evidence_path": "data/studies/human_llm_pilot/human_coding_plan_dry_run.json",
+      "execution_remains_blocked": true,
+      "gate": "human_coding",
+      "review_date": null,
+      "reviewer": "carried forward from PR #18 documentation",
+      "status": "BLOCKED",
+      "this_pr_changes_status": false
+    },
+    {
+      "dependency": "final execution remains blocked while any required gate is blocked",
+      "evidence_path": null,
+      "execution_remains_blocked": true,
+      "gate": "model_execution",
+      "review_date": null,
+      "reviewer": "carried forward from PR #18 documentation",
+      "status": "BLOCKED",
+      "this_pr_changes_status": false
+    }
+  ],
+  "overall_execution_status": "EXECUTION_BLOCKED",
+  "pr18_reference_head_sha": "eac65f27bbe302a17e5f508ac1d516178e917aea"
+}

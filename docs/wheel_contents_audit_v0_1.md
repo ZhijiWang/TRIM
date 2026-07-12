@@ -1,5 +1,7 @@
 # Wheel Contents Audit v0.1
 
+This file records the standalone-main wheel audit. PR #20 preserves this boundary explicitly: its study-only `trim_haa.llm` and `trim_haa.human_coding` source-checkout modules are excluded from package discovery, the wheel, and the sdist. They are not stable installed-package APIs. PR #20 tests build both distributions and enforce that exclusion.
+
 Wheel filename: `trim_haa-0.3.0a1-py3-none-any.whl`
 
 SHA-256: `842d9ceee38e08d4b6d33fdc675821e6a8bd766a067a53220844e0fe8a353ed1`

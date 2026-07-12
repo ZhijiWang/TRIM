@@ -24,6 +24,7 @@ reporting = [
 test = [
   "pytest",
   "build",
+  "jsonschema>=4.18",
   "pandas"
 ]
 
@@ -33,6 +34,12 @@ package-dir = {"" = "src"}
 [tool.setuptools.packages.find]
 where = ["src"]
 include = ["trim_haa*"]
+exclude = [
+  "trim_haa.llm",
+  "trim_haa.llm.*",
+  "trim_haa.human_coding",
+  "trim_haa.human_coding.*",
+]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

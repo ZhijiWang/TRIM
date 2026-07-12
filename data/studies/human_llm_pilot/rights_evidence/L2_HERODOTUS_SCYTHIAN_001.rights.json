@@ -1,0 +1,28 @@
+{
+  "case_id": "L2_HERODOTUS_SCYTHIAN_001",
+  "edition_rights_basis": "Project Gutenberg eBook #2707 is the public source/edition reference recorded for this case; public catalog metadata identifies the source title as \"The History of Herodotus — Volume 1\" and reports copyright=false. The prior inventory label naming George Rawlinson was stale for the recorded Project Gutenberg eBook #2707 source; public metadata consistently supports the G. C. Macaulay translation for this source reference. The study packet remains controlled and is not approved for inspection or provider transmission by this evidence record.",
+  "evidence_documents": [
+    "docs/studies/human_llm_rights_inventory.md",
+    "data/studies/human_llm_pilot/rights_inventory_manifest.json",
+    "docs/studies/human_llm_rights_evidence_summary.md"
+  ],
+  "evidence_urls_or_citations": [
+    "https://www.gutenberg.org/ebooks/2707",
+    "https://www.gutenberg.org/ebooks/2707.rdf",
+    "https://gutendex.com/books/2707",
+    "translation_or_source_edition_metadata:https://gutendex.com/books/2707",
+    "https://www.gutenberg.org/policy/license.html"
+  ],
+  "jurisdiction_note": "Conservative protocol-review note: the evidence supports the documented Project Gutenberg/Gutendex public-domain/source-provider basis for the recorded translation or edition. This record does not claim global copyright clearance and does not approve private-packet inspection, provider transmission, human coding, model execution, or public redistribution beyond the documented source/provider basis. Downstream gates remain blocked.",
+  "notes": "Two-case L2 reconciliation completed using public metadata and public source/provider citations only; no private source-packet text was inspected or committed. The prior inventory label naming George Rawlinson was stale for the recorded Project Gutenberg eBook #2707 source; public metadata consistently supports the G. C. Macaulay translation for this source reference. Private-packet inspection, controlled private-packet handling, provider transmission, provider/model/account verification, runtime settings, pricing, final authorization, human coding, and model execution remain blocked.",
+  "publication_or_death_date_evidence": "Public catalog metadata identifies the relevant translation/source edition as \"The History of Herodotus — Volume 1\" and records G. C. Macaulay (George Campbell Macaulay) with date evidence: 1852-1915. This is the translation/edition-specific date evidence used for protocol review.",
+  "record_hash": "sha256:3cddb6b5bf1d66ec6c952391d9b510e5bd902f767ac476efa2c9b2e7c5b495a3",
+  "review_date": "2026-07-07",
+  "reviewer": "author-assisted internal rights evidence preparation",
+  "rights_basis": "Documentary translation/source evidence recorded for protocol review: Public committed metadata for the case points to Project Gutenberg eBook #2707; Gutendex and Project Gutenberg metadata identify eBook #2707 as The History of Herodotus — Volume 1 translated by G. C. Macaulay, with copyright=false in public catalog metadata. The prior inventory label naming George Rawlinson was stale for the recorded Project Gutenberg eBook #2707 source; public metadata consistently supports the G. C. Macaulay translation for this source reference. The original/traditional source alone is not treated as sufficient; this record relies on the public translation/source-edition metadata for the selected Project Gutenberg source.",
+  "source_identifier": "Herodotus, The Histories",
+  "source_layer": "English translation from Ancient Greek",
+  "status": "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
+  "translation_rights_basis": "Translation/edition-specific evidence: G. C. Macaulay (George Campbell Macaulay); 1852-1915; Project Gutenberg/Gutendex eBook #2707 metadata for \"The History of Herodotus — Volume 1\" reports copyright=false. This translation/edition basis is documented for protocol review only and does not authorize downstream private-packet or provider use.",
+  "uncertainty": "medium"
+}

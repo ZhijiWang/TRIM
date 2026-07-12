@@ -1,0 +1,27 @@
+{
+  "case_id": "L1_CHOPIN_AWAKENING_001",
+  "edition_rights_basis": "Project Gutenberg eBook #160 is the public source/edition reference recorded for this case; public catalog metadata identifies the source title as \"The Awakening, and Selected Short Stories\" and reports copyright=false. The study packet remains controlled and is not approved for inspection or provider transmission by this evidence record.",
+  "evidence_documents": [
+    "docs/studies/human_llm_rights_inventory.md",
+    "data/studies/human_llm_pilot/rights_inventory_manifest.json",
+    "docs/studies/human_llm_rights_evidence_summary.md"
+  ],
+  "evidence_urls_or_citations": [
+    "https://www.gutenberg.org/ebooks/160",
+    "https://www.gutenberg.org/cache/epub/160/pg160.rdf",
+    "https://gutendex.com/books/160",
+    "https://www.gutenberg.org/policy/license.html"
+  ],
+  "jurisdiction_note": "Conservative protocol-review note: the evidence supports the documented Project Gutenberg/Gutendex public-domain/source basis, primarily a public-source and United States/public-domain metadata basis. This record does not claim global copyright clearance and does not approve private-packet inspection, provider transmission, human coding, model execution, or public redistribution beyond the documented source/provider basis.",
+  "notes": "L1 documentary evidence pass completed using public metadata and public source/provider citations only; no private source-packet text was inspected or committed. Private-packet inspection, controlled private-packet handling, provider transmission, provider/model/account verification, runtime settings, pricing, final authorization, human coding, and model execution remain blocked.",
+  "publication_or_death_date_evidence": "Public catalog metadata records Kate Chopin birth/death years as 1850-1904; the author death year 1904 supplies the documented date evidence for public-domain protocol review of this English-original L1 source.",
+  "record_hash": "sha256:130f4230c3e6522e36804ff79961d3c95c9a55de4a85afb0a9278312d187d803",
+  "review_date": "2026-07-06",
+  "reviewer": "author-assisted internal rights evidence preparation",
+  "rights_basis": "Documentary public-domain/source evidence recorded for protocol review: public catalog metadata identifies Kate Chopin (1850-1904) as author of the Project Gutenberg source for Kate Chopin, The Awakening; Gutendex metadata for Project Gutenberg eBook #160 reports copyright=false, and Project Gutenberg source metadata identifies the eBook as public-domain/source-provider material.",
+  "source_identifier": "Kate Chopin, The Awakening",
+  "source_layer": "English",
+  "status": "RIGHTS_DOCUMENTED_PUBLIC_DOMAIN",
+  "translation_rights_basis": "not_applicable",
+  "uncertainty": "medium"
+}

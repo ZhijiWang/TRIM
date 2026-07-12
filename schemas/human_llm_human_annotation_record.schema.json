@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ZhijiWang/TRIM/schemas/human_llm_human_annotation_record.schema.json",
+  "title": "Human-LLM pilot human annotation lifecycle record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "annotation_record_version",
+    "annotation_id",
+    "synthetic_only",
+    "coder_id",
+    "case_id",
+    "session_id",
+    "packet_hash",
+    "manual_version",
+    "manual_hash",
+    "coder_schema_hash",
+    "coding_condition",
+    "blinded_assignment_reference",
+    "annotation_lifecycle_status",
+    "coder_payload",
+    "created_timestamp",
+    "submitted_timestamp",
+    "locked_timestamp",
+    "amendment_count",
+    "supersedes_record",
+    "superseded_by_record",
+    "adjudication_status",
+    "private_packet_access_log_reference",
+    "record_hash"
+  ],
+  "properties": {
+    "annotation_record_version": {"const": "1.0.0"},
+    "annotation_id": {"type": "string", "minLength": 1},
+    "synthetic_only": {"type": "boolean"},
+    "coder_id": {"type": "string", "minLength": 1},
+    "case_id": {"type": "string", "minLength": 1},
+    "session_id": {"type": "string", "minLength": 1},
+    "packet_hash": {"$ref": "#/$defs/hash"},
+    "manual_version": {"type": "string", "minLength": 1},
+    "manual_hash": {"$ref": "#/$defs/hash"},
+    "coder_schema_hash": {"$ref": "#/$defs/hash"},
+    "coding_condition": {"enum": ["pre_ai_independent", "synthetic_dry_run"]},
+    "blinded_assignment_reference": {"type": "string", "minLength": 1},
+    "annotation_lifecycle_status": {
+      "enum": ["DRAFT", "SUBMITTED", "LOCKED", "AMENDED", "SUPERSEDED", "ADJUDICATION_PENDING", "ADJUDICATED"]
+    },
+    "coder_payload": {
+      "$ref": "https://github.com/ZhijiWang/TRIM/schemas/human_llm_coder_output.schema.json#/$defs/human_coder_record"
+    },
+    "created_timestamp": {"type": "string", "format": "date-time"},
+    "submitted_timestamp": {"type": ["string", "null"], "format": "date-time"},
+    "locked_timestamp": {"type": ["string", "null"], "format": "date-time"},
+    "amendment_count": {"type": "integer", "minimum": 0},
+    "supersedes_record": {"anyOf": [{"$ref": "#/$defs/record_reference"}, {"type": "null"}]},
+    "superseded_by_record": {"anyOf": [{"$ref": "#/$defs/record_reference"}, {"type": "null"}]},
+    "adjudication_status": {"enum": ["NOT_REQUIRED", "BLOCKED", "PENDING", "COMPLETED"]},
+    "private_packet_access_log_reference": {"type": "string", "minLength": 1},
+    "record_hash": {"$ref": "#/$defs/hash"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"annotation_lifecycle_status": {"const": "DRAFT"}}, "required": ["annotation_lifecycle_status"]},
+      "then": {"properties": {"submitted_timestamp": {"const": null}, "locked_timestamp": {"const": null}}}
+    },
+    {
+      "if": {"properties": {"annotation_lifecycle_status": {"const": "SUBMITTED"}}, "required": ["annotation_lifecycle_status"]},
+      "then": {"properties": {"submitted_timestamp": {"type": "string", "format": "date-time"}, "locked_timestamp": {"const": null}}}
+    },
+    {
+      "if": {
+        "properties": {"annotation_lifecycle_status": {"enum": ["LOCKED", "AMENDED", "SUPERSEDED", "ADJUDICATED"]}},
+        "required": ["annotation_lifecycle_status"]
+      },
+      "then": {
+        "properties": {
+          "submitted_timestamp": {"type": "string", "format": "date-time"},
+          "locked_timestamp": {"type": "string", "format": "date-time"}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"annotation_lifecycle_status": {"const": "AMENDED"}}, "required": ["annotation_lifecycle_status"]},
+      "then": {"properties": {"supersedes_record": {"$ref": "#/$defs/record_reference"}, "amendment_count": {"minimum": 1}}}
+    },
+    {
+      "if": {"properties": {"annotation_lifecycle_status": {"const": "SUPERSEDED"}}, "required": ["annotation_lifecycle_status"]},
+      "then": {"properties": {"superseded_by_record": {"$ref": "#/$defs/record_reference"}}}
+    }
+  ],
+  "$defs": {
+    "hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "record_reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["annotation_id", "record_hash"],
+      "properties": {
+        "annotation_id": {"type": "string", "minLength": 1},
+        "record_hash": {"$ref": "#/$defs/hash"}
+      }
+    }
+  }
+}

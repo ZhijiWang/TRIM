@@ -1,0 +1,30 @@
+{
+  "selected_evidence": [],
+  "primary_label": null,
+  "friction_locus_proposed": "unresolved",
+  "rationale_mechanism": null,
+  "uncertainty": "not_supplied",
+  "alternative_pathways": [],
+  "counterfactual_tests": [],
+  "candidate_loci": [
+    {
+      "category": "cue_function",
+      "state": "candidate_supported",
+      "cited_evidence": "not_an_array",
+      "rationale": "Invented malformed evidence fixture.",
+      "confidence": 1.5
+    }
+  ],
+  "decision_path": ["Invented fixture decision step."],
+  "review_policy_applied": {
+    "category": "unresolved",
+    "status": "not_applicable",
+    "trigger": ["synthetic_fixture_trigger"],
+    "requires_human_review": true,
+    "final_label_before_review": "unresolved"
+  },
+  "escalation_required": true,
+  "escalation_reason": "Invented malformed fixture.",
+  "free_text_rationale": "Invented malformed fixture rationale.",
+  "unresolved_ambiguity": "Invented malformed fixture ambiguity."
+}

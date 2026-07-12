@@ -1,0 +1,78 @@
+{
+  "candidate_manual_files": [
+    {
+      "assessment": "authoritative for protocol review",
+      "commit": "6364add9a89f3fe6d26043727b9d44cb21a76db0",
+      "hash": "f26f5de05819c4fd36c0d88e7d86320d7374c27185c36575b18b584fc5d9b426",
+      "path": "docs/manuals/friction_locus_manual_v0_1.md"
+    },
+    {
+      "assessment": "machine-readable authoritative manual",
+      "commit": "6364add9a89f3fe6d26043727b9d44cb21a76db0",
+      "hash": "797d79fcdb29fc32850c3778c6afb029ac0768207ea33f66d714fe8fa8cb591a",
+      "path": "docs/manuals/friction_locus_manual_v0_1.json"
+    },
+    {
+      "assessment": "study protocol; supporting material only",
+      "commit": "6998175eeca5d349072bf31012c69f2d568f28ec",
+      "hash": "5c070f988d69d6136fe7d7c35e409ae49c8ad287b613dd447a9662e36749fb99",
+      "path": "docs/studies/human_llm_friction_locus_pilot_protocol.md"
+    },
+    {
+      "assessment": "supporting lineage table, superseded for authority by manual v0.1",
+      "commit": "6998175eeca5d349072bf31012c69f2d568f28ec",
+      "hash": "0679a65fc13957f4f13931f31d840f9fbbbbb1ca71d568eda0c3d7e1f246252f",
+      "path": "docs/studies/friction_locus_lineage_table.csv"
+    }
+  ],
+  "category_definitions_hash": "0679a65fc13957f4f13931f31d840f9fbbbbb1ca71d568eda0c3d7e1f246252f",
+  "category_definitions_path": "docs/studies/friction_locus_lineage_table.csv",
+  "category_definitions_status": "supporting_table_superseded_by_authoritative_manual",
+  "category_set": [
+    "cue_function",
+    "warrant_attribution",
+    "warrant_relation",
+    "operation_function",
+    "boundary_setting",
+    "temporal_layering",
+    "perspective_assignment",
+    "context_inference"
+  ],
+  "claim_boundary": "Authoritative for protocol review only; not empirical validation, coder-reliability validation, ontology validation, or execution authorization.",
+  "freeze_status": "MANUAL_COMPATIBILITY_PASSED_EXECUTION_STILL_BLOCKED",
+  "frozen_at": "2026-07-03T13:45:00+10:00",
+  "gap_report_path": "docs/studies/human_llm_manual_gap_report.md",
+  "manual_file_hash": "f26f5de05819c4fd36c0d88e7d86320d7374c27185c36575b18b584fc5d9b426",
+  "manual_freeze_status": "MANUAL_COMPATIBILITY_PASSED_AUTHORITATIVE_FOR_PROTOCOL_REVIEW",
+  "manual_json_hash": "797d79fcdb29fc32850c3778c6afb029ac0768207ea33f66d714fe8fa8cb591a",
+  "manual_json_path": "docs/manuals/friction_locus_manual_v0_1.json",
+  "manual_manifest_hash": "1b80c0931a0ed8159aaeeb6e7b348331beb33130776469f223ae2a8cfe89d8de",
+  "manual_manifest_path": "docs/manuals/friction_locus_manual_manifest.json",
+  "manual_merge_commit": "6364add9a89f3fe6d26043727b9d44cb21a76db0",
+  "manual_path": "docs/manuals/friction_locus_manual_v0_1.md",
+  "manual_status": "AUTHORITATIVE_FOR_PROTOCOL_REVIEW",
+  "manual_version": "friction_locus_manual_v0_1",
+  "predicted_confusions_hash": "dc74ae5f84b626c4ad7fa598e50f0c6f52fced0e3bc7345d07ddbe308e4fb027",
+  "predicted_confusions_path": "docs/studies/predicted_confusions.csv",
+  "predicted_confusions_status": "supporting_table_reconciled_by_authoritative_manual",
+  "repository_commit": "6364add9a89f3fe6d26043727b9d44cb21a76db0",
+  "required_operational_components_missing": [],
+  "reserved_categories": [
+    "cue_function"
+  ],
+  "reserved_category_policy": "cue_function reserved; model proposals require human review, unresolved final label before review, and escalation.",
+  "review_sensitive_categories": [
+    "boundary_setting",
+    "context_inference"
+  ],
+  "schema_compatibility": "compatible",
+  "schema_hash": "2abdf5f5690aada67f1694f8d83dfe95236fbcba46c1bbcfca169567dbda7b12",
+  "schema_path": "schemas/human_llm_coder_output.schema.json",
+  "standard_categories": [
+    "warrant_attribution",
+    "warrant_relation",
+    "operation_function",
+    "temporal_layering",
+    "perspective_assignment"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ZhijiWang/TRIM/schemas/human_llm_blinded_assignment.schema.json",
+  "title": "Human-LLM pilot blinded assignment metadata",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "assignment_version",
+    "assignment_id",
+    "synthetic_only",
+    "coder_id",
+    "blinded_case_reference",
+    "case_id_hidden_from_coder",
+    "condition_hidden_from_coder",
+    "source_identity_hidden",
+    "packet_reference",
+    "packet_hash",
+    "assignment_order",
+    "allocation_manifest_hash",
+    "assignment_created_timestamp",
+    "session_authorization_reference",
+    "coding_allowed",
+    "record_hash"
+  ],
+  "properties": {
+    "assignment_version": {"const": "1.0.0"},
+    "assignment_id": {"type": "string", "minLength": 1},
+    "synthetic_only": {"type": "boolean"},
+    "coder_id": {"type": "string", "minLength": 1},
+    "blinded_case_reference": {"type": "string", "minLength": 1},
+    "case_id_hidden_from_coder": {"type": "boolean"},
+    "condition_hidden_from_coder": {"type": "boolean"},
+    "source_identity_hidden": {"type": "boolean"},
+    "packet_reference": {"type": "string", "minLength": 1},
+    "packet_hash": {"$ref": "#/$defs/hash"},
+    "assignment_order": {"type": "integer", "minimum": 1},
+    "allocation_manifest_hash": {"$ref": "#/$defs/hash"},
+    "assignment_created_timestamp": {"type": "string", "format": "date-time"},
+    "session_authorization_reference": {"type": "string", "minLength": 1},
+    "coding_allowed": {"type": "boolean"},
+    "record_hash": {"$ref": "#/$defs/hash"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"synthetic_only": {"const": true}}, "required": ["synthetic_only"]},
+      "then": {
+        "properties": {
+          "case_id_hidden_from_coder": {"const": true},
+          "condition_hidden_from_coder": {"const": true},
+          "source_identity_hidden": {"const": true},
+          "coding_allowed": {"const": false}
+        }
+      }
+    }
+  ],
+  "$defs": {"hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}}
+}
