@@ -73,12 +73,53 @@
       }
     },
     {
+      "if": {"properties": {"response_received": {"const": true}}, "required": ["response_received"]},
+      "then": {
+        "properties": {
+          "raw_response_preserved": {"const": true},
+          "controlled_response_reference": {"type": "string", "minLength": 1},
+          "raw_response_byte_hash": {"$ref": "#/$defs/hash"}
+        }
+      }
+    },
+    {
       "if": {"properties": {"raw_response_preserved": {"const": true}}, "required": ["raw_response_preserved"]},
       "then": {
         "required": ["controlled_response_reference", "raw_response_byte_hash"],
         "properties": {
           "controlled_response_reference": {"type": "string", "minLength": 1},
           "raw_response_byte_hash": {"$ref": "#/$defs/hash"}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"parsing_attempted": {"const": true}}, "required": ["parsing_attempted"]},
+      "then": {
+        "properties": {
+          "raw_response_preserved": {"const": true}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"parsed_payload_hash": {"$ref": "#/$defs/hash"}}, "required": ["parsed_payload_hash"]},
+      "then": {
+        "properties": {
+          "parsing_attempted": {"const": true},
+          "model_response_schema_validation_status": {"const": "PASSED"}
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "model_response_schema_validation_status": {"enum": ["PASSED", "FAILED"]}
+        },
+        "required": ["model_response_schema_validation_status"]
+      },
+      "then": {
+        "properties": {
+          "parsing_attempted": {"const": true},
+          "raw_response_preserved": {"const": true}
         }
       }
     }

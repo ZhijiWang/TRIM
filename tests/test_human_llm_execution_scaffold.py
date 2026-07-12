@@ -81,6 +81,30 @@ def synthetic_envelope():
     )
 
 
+def dry_response_envelope():
+    return {
+        "schema_version": "1.0.0",
+        "run_id": "synthetic_run",
+        "request_record_hash": "sha256:" + "1" * 64,
+        "provider": "OpenAI",
+        "model": "gpt-5.4-mini",
+        "provider_response_id": None,
+        "response_received": False,
+        "raw_response_preserved": False,
+        "controlled_response_reference": None,
+        "raw_response_byte_hash": None,
+        "provider_metadata_hash": None,
+        "parsing_attempted": False,
+        "parsing_status": "not_attempted",
+        "parsed_payload_hash": None,
+        "model_response_schema_validation_status": "not_attempted",
+        "retry_metadata": {"retry_count": 0, "retry_policy_status": "no_call"},
+        "error_class": None,
+        "error_message_summary": None,
+        "record_hash": "sha256:" + "2" * 64,
+    }
+
+
 def current_gate_manifest():
     return load_json(ROOT / "data" / "studies" / "human_llm_pilot" / "gate_status_manifest.json")
 
@@ -166,33 +190,54 @@ def test_synthetic_request_is_preserved_before_envelope_creation(tmp_path):
 
 def test_response_envelope_dry_run_requires_no_response():
     schema = load_schema("human_llm_provider_response_envelope.schema.json")
-    instance = {
-        "schema_version": "1.0.0",
-        "run_id": "synthetic_run",
-        "request_record_hash": "sha256:" + "1" * 64,
-        "provider": "OpenAI",
-        "model": "gpt-5.4-mini",
-        "provider_response_id": None,
-        "response_received": False,
-        "raw_response_preserved": False,
-        "controlled_response_reference": None,
-        "raw_response_byte_hash": None,
-        "provider_metadata_hash": None,
-        "parsing_attempted": False,
-        "parsing_status": "not_attempted",
-        "parsed_payload_hash": None,
-        "model_response_schema_validation_status": "not_attempted",
-        "retry_metadata": {"retry_count": 0, "retry_policy_status": "no_call"},
-        "error_class": None,
-        "error_message_summary": None,
-        "record_hash": "sha256:" + "2" * 64,
-    }
+    instance = dry_response_envelope()
     assert not list(Draft202012Validator(schema).iter_errors(instance))
 
+
+def test_response_received_requires_raw_response_preservation():
+    schema = load_schema("human_llm_provider_response_envelope.schema.json")
+    instance = dry_response_envelope()
     instance["response_received"] = True
-    assert not list(Draft202012Validator(schema).iter_errors(instance))
-    instance["response_received"] = False
+    assert list(Draft202012Validator(schema).iter_errors(instance))
+
+
+def test_parsing_attempted_requires_raw_response_preservation():
+    schema = load_schema("human_llm_provider_response_envelope.schema.json")
+    instance = dry_response_envelope()
+    instance["parsing_attempted"] = True
+    assert list(Draft202012Validator(schema).iter_errors(instance))
+
+
+def test_parsed_payload_hash_requires_raw_response_preservation():
+    schema = load_schema("human_llm_provider_response_envelope.schema.json")
+    instance = dry_response_envelope()
+    instance["parsed_payload_hash"] = "sha256:" + "3" * 64
+    assert list(Draft202012Validator(schema).iter_errors(instance))
+
+
+@pytest.mark.parametrize("validation_status", ["PASSED", "FAILED"])
+def test_validation_status_requires_raw_response_preservation(validation_status):
+    schema = load_schema("human_llm_provider_response_envelope.schema.json")
+    instance = dry_response_envelope()
+    instance["model_response_schema_validation_status"] = validation_status
+    assert list(Draft202012Validator(schema).iter_errors(instance))
+
+
+def test_preserved_raw_response_requires_controlled_reference():
+    schema = load_schema("human_llm_provider_response_envelope.schema.json")
+    instance = dry_response_envelope()
+    instance["response_received"] = True
     instance["raw_response_preserved"] = True
+    instance["raw_response_byte_hash"] = "sha256:" + "3" * 64
+    assert list(Draft202012Validator(schema).iter_errors(instance))
+
+
+def test_preserved_raw_response_requires_byte_hash():
+    schema = load_schema("human_llm_provider_response_envelope.schema.json")
+    instance = dry_response_envelope()
+    instance["response_received"] = True
+    instance["raw_response_preserved"] = True
+    instance["controlled_response_reference"] = "controlled://synthetic/response"
     assert list(Draft202012Validator(schema).iter_errors(instance))
 
 
