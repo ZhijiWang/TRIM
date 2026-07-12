@@ -22,7 +22,11 @@ from scripts.validate_human_llm_execution_scaffold import (
     validate as validate_scaffold,
 )
 from trim_haa.llm.dry_run import build_execution_plan, run_dry_run
-from trim_haa.llm.frozen_reference import load_and_verify_public_freeze
+from trim_haa.llm.frozen_reference import (
+    FrozenReferenceError,
+    load_and_verify_public_freeze,
+    read_public_bytes,
+)
 from trim_haa.llm.gates import (
     GateBlockedError,
     assert_human_coding_allowed,
@@ -422,6 +426,34 @@ def test_vendored_public_freeze_works_without_git_metadata(tmp_path):
     frozen = load_and_verify_public_freeze(tmp_path)
     assert frozen["sample"]["selected_case_ids"] == EXPECTED_CASE_IDS
     assert not (tmp_path / ".git").exists()
+
+
+def test_vendored_public_freeze_fails_closed_when_file_is_missing(tmp_path):
+    for relative in VENDORED_PUBLIC_PR18_PATHS:
+        destination = tmp_path / relative
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        copyfile(ROOT / relative, destination)
+    (tmp_path / "schemas" / "human_llm_model_response.schema.json").unlink()
+
+    with pytest.raises(FrozenReferenceError, match="vendored PR #18 public artifact is unavailable"):
+        load_and_verify_public_freeze(tmp_path)
+
+
+def test_vendored_public_freeze_fails_closed_when_file_is_altered(tmp_path):
+    for relative in VENDORED_PUBLIC_PR18_PATHS:
+        destination = tmp_path / relative
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        copyfile(ROOT / relative, destination)
+    schema_path = tmp_path / "schemas" / "human_llm_model_response.schema.json"
+    schema_path.write_bytes(schema_path.read_bytes() + b"\n")
+
+    with pytest.raises(FrozenReferenceError, match="model response schema hash mismatch"):
+        load_and_verify_public_freeze(tmp_path)
+
+
+def test_frozen_reference_rejects_source_packet_paths(tmp_path):
+    with pytest.raises(FrozenReferenceError, match="not an allowlisted PR #18 public metadata artifact"):
+        read_public_bytes(tmp_path, "data/studies/human_llm_pilot/source_packets/synthetic.json")
 
 
 def test_no_api_key_or_environment_lookup_is_required(monkeypatch):
