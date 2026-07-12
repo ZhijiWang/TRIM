@@ -6,6 +6,8 @@ Installed-package functionality covers record validation, lock verification, pro
 
 Start here:
 
+- [Repository Map](repository_map.md)
+- [Research and Study Index](studies/index.md)
 - [Quickstart](quickstart.md)
 - [Core Schema](core_schema.md)
 - [Provenance](provenance.md)
@@ -13,6 +15,10 @@ Start here:
 - [Exposure Audit](exposure_audit.md)
 - [Reporting Limits](reporting_limits.md)
 - [Research Status](research_status.md)
+- [Authoritative Manual Materials](manuals/)
+- [Active Design B Pilot Overview](studies/human_llm_pilot_readme.md)
+- [Blocked LLM Execution Scaffold](studies/human_llm_execution_scaffold.md)
+- [Blocked Human-Coding Scaffold](studies/human_coding_scaffold.md)
 - [Legacy History](legacy_history.md)
 
 The future human-study materials are drafts only. They are not approved for recruitment or data collection.

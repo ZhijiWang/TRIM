@@ -95,6 +95,13 @@ trim-haa run-synthetic
 - `research/future_human_study`: deferred human-study ethics and protocol drafts.
 - `artifacts`: frozen position-note and future-study packages.
 
+## Repository Map and Study Status
+
+- [Repository map](docs/repository_map.md)
+- [Research and study index](docs/studies/index.md)
+
+TRIM-HAA is the active software package. The Design B Human–LLM Friction-Locus Pilot is the active blocked study; merging its preparation layer did not authorize human coding or model execution.
+
 ## Research Status
 
 Implemented: Core schema objects, validation, provenance records, lock verification, comparison helpers, reporting helpers, synthetic dry run, and an author-only walkthrough.

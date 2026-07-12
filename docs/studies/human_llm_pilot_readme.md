@@ -1,7 +1,10 @@
-# Human-LLM Friction-Locus Pilot Planning Files
+# Human-LLM Friction-Locus Pilot
 
-This directory contains protocol-only materials for a future small-N
-demonstration study. The study asks:
+This directory began with protocol materials for a future small-N demonstration
+study and now documents the active Design B pilot lineage. PR #17 established
+the protocol, PR #18 remains the open/draft frozen dependency, PR #19
+established the authoritative manual, and PR #20 merged the blocked preparation
+layer. Human coding and model execution remain blocked. The study asks:
 
 What becomes visible when interpretive disagreement is represented
 procedurally rather than only as label divergence?
@@ -12,8 +15,8 @@ procedurally rather than only as label divergence?
 - `human_llm_friction_locus_analysis_plan.md`: analysis plan.
 - `friction_locus_lineage_table.csv`: provisional lineage and validity table.
 - `predicted_confusions.csv`: manual-derived predicted confusable pairs.
-- `human_llm_sample_selection_log.csv`: empty protocol-only selection log
-  template.
+- `human_llm_sample_selection_log.csv`: retained protocol-stage selection log;
+  the frozen public sample and order are represented by the study manifests.
 - `human_llm_protocol_freeze_checklist.md`: incomplete checklist for a later
   freeze task.
 
@@ -27,9 +30,10 @@ Related machine-readable planning files:
 
 ## Scope
 
-This is a design branch only. It adds no empirical case data, no model output,
-no results, no new framework layer, and no change to the released public
-walkthrough.
+This remains a preparation-only study line. It contains no empirical human
+coding, model execution, provider response, or study result. The merged
+preparation layer did not authorize packet inspection, coding, transmission, or
+execution and did not change the released public walkthrough.
 
 The protocol positions TRIM as a teachable and auditable
 disagreement-registration protocol for interpretation-intensive small-N work.
@@ -42,14 +46,14 @@ human-model comparison, not a human intercoder reliability study and not
 validation of human reproducibility. No external human recruitment is permitted
 under the current protocol.
 
-## Required later steps
+## Current blocked next steps
 
-Before implementation:
+Before any empirical activity:
 
-1. Independently audit this protocol.
-2. Freeze the sample and source packets.
-3. Freeze manual and prompt versions.
-4. Complete and lock human coding before any AI execution.
-5. Preserve raw model outputs before parsing.
-6. Analyze procedural disagreement without treating either record as a gold
-   standard.
+1. Keep provider/model/account availability blocked until separately verified.
+2. Verify and freeze runtime settings, then document pricing.
+3. Obtain final authorization for each separately governed activity.
+4. Verify packet hashes and access logging under controlled access.
+5. Authorize, complete, and lock human coding before any model execution.
+6. Authorize model execution separately and preserve raw responses before parsing.
+7. Analyze procedural disagreement without treating either record as a gold standard.
