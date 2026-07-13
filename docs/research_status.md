@@ -18,6 +18,8 @@ The Design B Human–LLM Friction-Locus Pilot is the active study. PR #20 has me
 
 Execution and human coding remain blocked. Provider/model/account availability, runtime verification, pricing, final authorization, human coding, and model execution are unresolved. No empirical execution has occurred, and no private packet content was merged into the public preparation layer.
 
+The metadata-only provider/runtime capability audit dated 2026-07-13 found no local API credential, so it made no provider request and did not verify account access to `gpt-5.4-mini`. Runtime candidates are documented but remain unfrozen pending separately authorized no-source synthetic inference verification; pricing and final authorization remain blocked.
+
 ## Demonstrated
 
 - Synthetic dry run with valid and invalid fixtures.

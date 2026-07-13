@@ -1,0 +1,197 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ZhijiWang/TRIM/schemas/human_llm_provider_account_verification.schema.json",
+  "title": "Human-LLM provider account metadata verification v0.2",
+  "description": "Metadata-only exact-model account verification. It cannot represent inference or execution authorization.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "record_version",
+    "audit_date",
+    "audit_status",
+    "provider",
+    "requested_model_identifier",
+    "metadata_endpoint_class",
+    "request_timestamp",
+    "credential_present",
+    "credential_committed",
+    "metadata_request_performed",
+    "http_result_class",
+    "account_access_result",
+    "returned_model_identifier",
+    "provider_owned_by",
+    "provider_owned_by_suppressed",
+    "sdk_version",
+    "python_version",
+    "operating_system_class",
+    "error_class",
+    "error_message_summary",
+    "inference_performed",
+    "responses_api_called",
+    "prompt_transmitted",
+    "private_content_transmitted",
+    "private_packet_accessed",
+    "credential_material_recorded",
+    "provider_account_gate_status",
+    "runtime_gate_status",
+    "pricing_status",
+    "final_authorization_status",
+    "human_coding_status",
+    "model_execution_status",
+    "overall_execution_status",
+    "documentation_sources",
+    "record_hash"
+  ],
+  "properties": {
+    "schema_version": {"const": "0.2.0"},
+    "record_version": {"const": "provider_model_account_verification_v0_2"},
+    "audit_date": {"type": "string", "format": "date"},
+    "audit_status": {
+      "enum": [
+        "BLOCKED_NO_CREDENTIAL_AVAILABLE",
+        "METADATA_ACCESS_VERIFIED_INFERENCE_NOT_AUTHORIZED",
+        "BLOCKED_MODEL_NOT_ACCESSIBLE",
+        "BLOCKED_AUTHENTICATION_FAILED",
+        "BLOCKED_PROVIDER_ERROR"
+      ]
+    },
+    "provider": {"const": "OpenAI"},
+    "requested_model_identifier": {"const": "gpt-5.4-mini"},
+    "metadata_endpoint_class": {"const": "GET /v1/models/{model}"},
+    "request_timestamp": {
+      "oneOf": [
+        {"type": "string", "format": "date-time"},
+        {"type": "null"}
+      ]
+    },
+    "credential_present": {"type": "boolean"},
+    "credential_committed": {"const": false},
+    "metadata_request_performed": {"type": "boolean"},
+    "http_result_class": {
+      "enum": [
+        "NOT_ATTEMPTED",
+        "SUCCESS",
+        "AUTHENTICATION_FAILURE",
+        "MODEL_NOT_ACCESSIBLE",
+        "RATE_LIMITED",
+        "PROVIDER_ERROR",
+        "NETWORK_ERROR",
+        "INVALID_METADATA_RESPONSE",
+        "UNEXPECTED_METADATA_RESPONSE"
+      ]
+    },
+    "account_access_result": {
+      "enum": [
+        "BLOCKED_NO_CREDENTIAL_AVAILABLE",
+        "EXACT_MODEL_METADATA_ACCESS_VERIFIED",
+        "EXACT_MODEL_NOT_ACCESSIBLE",
+        "EXACT_MODEL_METADATA_NOT_VERIFIED",
+        "AUTHENTICATION_FAILED",
+        "BLOCKED_PROVIDER_ERROR"
+      ]
+    },
+    "returned_model_identifier": {
+      "oneOf": [
+        {"type": "string", "maxLength": 128},
+        {"type": "null"}
+      ]
+    },
+    "provider_owned_by": {"enum": ["openai", null]},
+    "provider_owned_by_suppressed": {"type": "boolean"},
+    "sdk_version": {
+      "oneOf": [
+        {"type": "string", "maxLength": 64},
+        {"type": "null"}
+      ]
+    },
+    "python_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+(\\.[0-9]+)?$"},
+    "operating_system_class": {"type": "string", "minLength": 1, "maxLength": 64},
+    "error_class": {
+      "oneOf": [
+        {"type": "string", "maxLength": 80},
+        {"type": "null"}
+      ]
+    },
+    "error_message_summary": {
+      "oneOf": [
+        {"type": "string", "maxLength": 240},
+        {"type": "null"}
+      ]
+    },
+    "inference_performed": {"const": false},
+    "responses_api_called": {"const": false},
+    "prompt_transmitted": {"const": false},
+    "private_content_transmitted": {"const": false},
+    "private_packet_accessed": {"const": false},
+    "credential_material_recorded": {"const": false},
+    "provider_account_gate_status": {
+      "enum": ["BLOCKED", "PASSED_METADATA_ACCESS_VERIFIED_INFERENCE_NOT_AUTHORIZED"]
+    },
+    "runtime_gate_status": {"const": "BLOCKED_PENDING_SYNTHETIC_NO_SOURCE_INFERENCE_VERIFICATION"},
+    "pricing_status": {"const": "BLOCKED_PENDING_POINT_IN_TIME_PRICING_FREEZE"},
+    "final_authorization_status": {"const": "BLOCKED"},
+    "human_coding_status": {"const": "BLOCKED"},
+    "model_execution_status": {"const": "BLOCKED"},
+    "overall_execution_status": {"const": "EXECUTION_BLOCKED"},
+    "documentation_sources": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "format": "uri"}
+    },
+    "record_hash": {"$ref": "#/$defs/hash"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"credential_present": {"const": false}}, "required": ["credential_present"]},
+      "then": {
+        "properties": {
+          "audit_status": {"const": "BLOCKED_NO_CREDENTIAL_AVAILABLE"},
+          "request_timestamp": {"type": "null"},
+          "metadata_request_performed": {"const": false},
+          "http_result_class": {"const": "NOT_ATTEMPTED"},
+          "account_access_result": {"const": "BLOCKED_NO_CREDENTIAL_AVAILABLE"},
+          "returned_model_identifier": {"type": "null"},
+          "provider_owned_by": {"type": "null"},
+          "provider_owned_by_suppressed": {"const": false},
+          "error_class": {"type": "null"},
+          "error_message_summary": {"type": "null"},
+          "provider_account_gate_status": {"const": "BLOCKED"}
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {"audit_status": {"const": "METADATA_ACCESS_VERIFIED_INFERENCE_NOT_AUTHORIZED"}},
+        "required": ["audit_status"]
+      },
+      "then": {
+        "properties": {
+          "credential_present": {"const": true},
+          "request_timestamp": {"type": "string", "format": "date-time"},
+          "metadata_request_performed": {"const": true},
+          "http_result_class": {"const": "SUCCESS"},
+          "account_access_result": {"const": "EXACT_MODEL_METADATA_ACCESS_VERIFIED"},
+          "returned_model_identifier": {"const": "gpt-5.4-mini"},
+          "error_class": {"type": "null"},
+          "error_message_summary": {"type": "null"},
+          "provider_account_gate_status": {"const": "PASSED_METADATA_ACCESS_VERIFIED_INFERENCE_NOT_AUTHORIZED"}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"metadata_request_performed": {"const": false}}, "required": ["metadata_request_performed"]},
+      "then": {
+        "properties": {
+          "request_timestamp": {"type": "null"},
+          "returned_model_identifier": {"type": "null"},
+          "provider_owned_by": {"type": "null"}
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+  }
+}
