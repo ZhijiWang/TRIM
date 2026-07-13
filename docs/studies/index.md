@@ -22,6 +22,7 @@ Start with:
 - [Pilot overview](human_llm_pilot_readme.md)
 - [Gate-resolution plan](human_llm_gate_resolution_plan.md)
 - [No-call LLM execution scaffold](human_llm_execution_scaffold.md)
+- [Provider and runtime capability audit](provider_runtime_capability_audit.md)
 - [No-coding human annotation scaffold](human_coding_scaffold.md)
 - [Rights-evidence summary](human_llm_rights_evidence_summary.md)
 - [Controlled private-packet handling protocol](private_packet_handling_protocol.md)
@@ -32,6 +33,8 @@ Current gate interpretation:
 - controlled packet handling is `PASSED_WITH_CONTROLLED_ACCESS_ONLY`, sufficient only for controlled-access preparation;
 - provider/model/account, runtime settings, pricing, final authorization, human coding, and model execution remain `BLOCKED`;
 - merging PR #20 did not authorize packet inspection, provider transmission, human coding, or model execution.
+
+The versioned provider/runtime capability audit found no local API credential on 2026-07-13, made no provider request, and left account access unverified. Runtime settings remain unfrozen pending a separately authorized no-source synthetic inference verification; pricing and final authorization also remain blocked.
 
 ## Public demonstrations
 

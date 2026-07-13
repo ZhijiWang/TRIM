@@ -1,0 +1,137 @@
+{
+  "audit_date": "2026-07-13",
+  "candidate_request_policy": {
+    "api_surface": "Responses API",
+    "background_mode": "disabled",
+    "conversation_state": "none",
+    "file_inputs": "none",
+    "parallel_provider_calls": false,
+    "provider_transmission_authorization": "BLOCKED",
+    "raw_response_preservation_before_parsing_required": true,
+    "request_preservation_required": true,
+    "store": false,
+    "structured_output_mode": "text.format with type json_schema",
+    "structured_output_strict": true,
+    "tools": "none",
+    "web_search": "disabled"
+  },
+  "capabilities": {
+    "data_retention_account_controls": {
+      "candidate": null,
+      "evidence_scope": "none",
+      "note": "Organization/project retention controls were not inspected; Zero Data Retention is not claimed.",
+      "status": "BLOCKED"
+    },
+    "json_schema_structured_output": {
+      "candidate": "text.format with type json_schema and strict true",
+      "evidence_scope": "official_documentation_only",
+      "note": "Documented API shape only; exact-model behavior requires a separately authorized no-source synthetic inference test.",
+      "status": "REQUIRES_SYNTHETIC_INFERENCE_VERIFICATION"
+    },
+    "maximum_output_tokens": {
+      "candidate": null,
+      "evidence_scope": "official_documentation_only",
+      "note": "No study value is selected or frozen; exact behavior remains inference-unverified.",
+      "status": "REQUIRES_SYNTHETIC_INFERENCE_VERIFICATION"
+    },
+    "model_identifier": {
+      "candidate": "gpt-5.4-mini",
+      "evidence_scope": "official_documentation_only",
+      "note": "The model is publicly documented, but this account could not be checked without a credential.",
+      "status": "DOCUMENTED_CANDIDATE"
+    },
+    "parallelism": {
+      "candidate": false,
+      "evidence_scope": "local_policy",
+      "note": "Candidate policy is one provider request at a time; no provider calls are authorized in this audit.",
+      "status": "DOCUMENTED_CANDIDATE"
+    },
+    "prompt_cache_behavior": {
+      "candidate": null,
+      "evidence_scope": "official_documentation_only",
+      "note": "Caching and retention behavior require account-control and separately authorized runtime verification.",
+      "status": "REQUIRES_SYNTHETIC_INFERENCE_VERIFICATION"
+    },
+    "reasoning_effort": {
+      "candidate": null,
+      "evidence_scope": "official_documentation_only",
+      "note": "No reasoning-effort value is selected or frozen; exact-model support remains inference-unverified.",
+      "status": "REQUIRES_SYNTHETIC_INFERENCE_VERIFICATION"
+    },
+    "responses_api_access": {
+      "candidate": "Responses API",
+      "evidence_scope": "official_documentation_only",
+      "note": "No inference endpoint was called, so account/runtime access remains unverified.",
+      "status": "BLOCKED"
+    },
+    "retry_count_and_error_classes": {
+      "candidate": "bounded retries for explicitly classified transient errors; count not frozen",
+      "evidence_scope": "local_policy",
+      "note": "No retry count or final error-class list is frozen in this audit.",
+      "status": "DOCUMENTED_CANDIDATE"
+    },
+    "seed": {
+      "candidate": null,
+      "evidence_scope": "none",
+      "note": "Seed support is not assumed and no value is selected.",
+      "status": "REQUIRES_SYNTHETIC_INFERENCE_VERIFICATION"
+    },
+    "store": {
+      "candidate": false,
+      "evidence_scope": "official_documentation_only",
+      "note": "Candidate request policy is store false; this does not establish Zero Data Retention.",
+      "status": "DOCUMENTED_CANDIDATE"
+    },
+    "temperature": {
+      "candidate": null,
+      "evidence_scope": "none",
+      "note": "Temperature support is not assumed and no value is selected or frozen.",
+      "status": "REQUIRES_SYNTHETIC_INFERENCE_VERIFICATION"
+    },
+    "timeout": {
+      "candidate": null,
+      "evidence_scope": "local_policy",
+      "note": "A bounded client timeout will be selected only during a later runtime freeze.",
+      "status": "BLOCKED"
+    },
+    "top_p": {
+      "candidate": null,
+      "evidence_scope": "none",
+      "note": "top_p support is not assumed and no value is selected or frozen.",
+      "status": "REQUIRES_SYNTHETIC_INFERENCE_VERIFICATION"
+    }
+  },
+  "data_handling_boundary": {
+    "account_level_control_evidence_present": false,
+    "api_training_use_policy": "API inputs are not used for training unless the account opts in",
+    "application_state_retention_depends_on_storage_and_account_controls": true,
+    "standard_abuse_monitoring_retention_may_apply": true,
+    "zero_data_retention_claimed": false,
+    "zero_data_retention_status": "BLOCKED_UNVERIFIED_ACCOUNT_CONTROL"
+  },
+  "documentation_sources": [
+    "https://platform.openai.com/docs/api-reference/models/object",
+    "https://platform.openai.com/docs/guides/structured-outputs",
+    "https://platform.openai.com/docs/models/default-usage-policies-by-endpoint",
+    "https://openai.com/index/introducing-gpt-5-4-mini-and-nano/"
+  ],
+  "execution_allowed": false,
+  "final_authorization_status": "BLOCKED",
+  "historical_runtime_draft_byte_hash": "sha256:4382f806b125f9e28314d83f4e4e1c2f69072e34f9b1cea12c00bc62118e8534",
+  "historical_runtime_draft_path": "data/studies/human_llm_pilot/runtime_settings_draft.json",
+  "human_coding_status": "BLOCKED",
+  "model_execution_status": "BLOCKED",
+  "model_identifier": "gpt-5.4-mini",
+  "overall_execution_status": "EXECUTION_BLOCKED",
+  "pricing_status": "BLOCKED_PENDING_POINT_IN_TIME_PRICING_FREEZE",
+  "provider": "OpenAI",
+  "provider_verification_record_hash": "sha256:70f5ac736e2650db82cbbf87ec75d49ad176a2664f3f872d277f8cb93fd7a483",
+  "provider_verification_record_path": "data/studies/human_llm_pilot/provider_model_account_verification_v0_2.json",
+  "record_hash": "sha256:2d3ae6009aed571920a0d66f7796c3bdf3c288a3e2d415dfb13603adc0d696fd",
+  "record_status": "BLOCKED_PENDING_SYNTHETIC_NO_SOURCE_INFERENCE_VERIFICATION",
+  "record_version": "runtime_capability_audit_v0_1",
+  "runtime_frozen": false,
+  "runtime_gate_status": "BLOCKED_PENDING_SYNTHETIC_NO_SOURCE_INFERENCE_VERIFICATION",
+  "schema_version": "0.1.0",
+  "synthetic_inference_verification_performed": false
+}
