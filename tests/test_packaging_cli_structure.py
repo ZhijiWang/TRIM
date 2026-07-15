@@ -255,7 +255,9 @@ def test_built_wheel_boundary_and_clean_install_smoke(tmp_path):
     included_tests = sorted(
         name.split("/tests/", 1)[1]
         for name in sdist_names
-        if "/tests/" in name and name.endswith(".py")
+        if "/tests/" in name
+        and Path(name).name.startswith("test")
+        and name.endswith(".py")
     )
     assert included_tests == ["sdist/test_core_distribution.py"]
     for excluded in (
@@ -326,10 +328,21 @@ def test_built_wheel_boundary_and_clean_install_smoke(tmp_path):
         sys.executable,
         "-m",
         "venv",
-        "--system-site-packages",
         str(sdist_venv),
     ).returncode == 0
+    venv_configuration = (sdist_venv / "pyvenv.cfg").read_text(encoding="utf-8")
+    assert "include-system-site-packages = false" in venv_configuration.lower()
     sdist_python = sdist_venv / "bin" / "python"
+    isolation_check = _run(
+        str(sdist_python),
+        "-c",
+        (
+            "import importlib.util, sys; "
+            "assert sys.prefix != sys.base_prefix; "
+            "assert importlib.util.find_spec('pytest') is None"
+        ),
+    )
+    assert isolation_check.returncode == 0, isolation_check.stderr
     installed_sdist = _run(
         str(sdist_python),
         "-m",
@@ -343,9 +356,16 @@ def test_built_wheel_boundary_and_clean_install_smoke(tmp_path):
     sdist_tests = _run(
         str(sdist_python),
         "-m",
-        "pytest",
-        "-q",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test*.py",
+        "-v",
         cwd=extracted_root,
     )
     assert sdist_tests.returncode == 0, sdist_tests.stdout + sdist_tests.stderr
-    assert "2 passed" in sdist_tests.stdout
+    test_output = sdist_tests.stdout + sdist_tests.stderr
+    assert "Ran 2 tests" in test_output
+    assert "OK" in test_output
