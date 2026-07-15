@@ -1,6 +1,79 @@
 from trim_haa.provenance import AssistanceProvenance
 from trim_haa.schema import TrimHAAAnnotation
-from trim_haa.validator import validate_dataset
+from trim_haa.validator import validate_core_records, validate_dataset
+
+
+def _relationship_record(
+    annotation_id: str,
+    stage: str,
+    *,
+    case_id: str = "C-PARENT",
+    parent_annotation_id: str = "",
+    status: str = "locked",
+) -> TrimHAAAnnotation:
+    return TrimHAAAnnotation(
+        annotation_id=annotation_id,
+        case_id=case_id,
+        parent_annotation_id=parent_annotation_id,
+        actor_id="MODEL" if stage == "ai_independent" else "H01",
+        actor_type="model" if stage == "ai_independent" else "human",
+        annotation_stage=stage,
+        primary_evidence_segment_ids="S1",
+        function_label="label_a",
+        rationale_mechanism="supports",
+        uncertainty_flag="medium",
+        rationale_note="Synthetic rationale.",
+        alternative_pathway_present="no",
+        status=status,
+    )
+
+
+def test_human_post_ai_accepts_valid_locked_human_pre_parent():
+    pre = _relationship_record("PRE", "human_pre")
+    post = _relationship_record("POST", "human_post_ai", parent_annotation_id="PRE")
+
+    report = validate_core_records([pre, post])
+
+    assert not [issue for issue in report.errors if issue.field == "parent_annotation_id"]
+
+
+def test_human_post_ai_distinguishes_missing_and_unknown_parent():
+    missing = _relationship_record("POST-MISSING", "human_post_ai")
+    unknown = _relationship_record(
+        "POST-UNKNOWN", "human_post_ai", parent_annotation_id="UNKNOWN"
+    )
+
+    missing_messages = [
+        issue.message for issue in validate_core_records([missing]).errors
+        if issue.field == "parent_annotation_id"
+    ]
+    unknown_messages = [
+        issue.message for issue in validate_core_records([unknown]).errors
+        if issue.field == "parent_annotation_id"
+    ]
+
+    assert "human_post_ai requires parent_annotation_id." in missing_messages
+    assert "Parent annotation does not exist." in unknown_messages
+    assert "human_post_ai requires parent_annotation_id." not in unknown_messages
+
+
+def test_human_post_ai_rejects_cross_case_and_invalid_stage_parent():
+    cross_case_pre = _relationship_record("PRE-CROSS", "human_pre", case_id="C-OTHER")
+    cross_case_post = _relationship_record(
+        "POST-CROSS", "human_post_ai", parent_annotation_id="PRE-CROSS"
+    )
+    ai_parent = _relationship_record("AI-PARENT", "ai_independent")
+    invalid_stage_post = _relationship_record(
+        "POST-STAGE", "human_post_ai", parent_annotation_id="AI-PARENT"
+    )
+
+    report = validate_core_records(
+        [cross_case_pre, cross_case_post, ai_parent, invalid_stage_post]
+    )
+    messages = [issue.message for issue in report.errors]
+
+    assert "Parent and child must have the same case_id." in messages
+    assert "human_post_ai parent must be one of: human_pre." in messages
 
 
 def test_changed_flag_consistency_warning():

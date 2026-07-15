@@ -9,6 +9,7 @@ from trim_haa.comparison import (
     exposure_associated_convergence,
     independent_convergence,
     normalised_token_overlap,
+    normalised_tokens,
     rationale_comparison,
     segment_set_metrics,
 )
@@ -163,3 +164,19 @@ def test_construct_functions():
         records["H01_C04_POST"],
         "primary_evidence_segment_ids",
     )
+
+
+def test_unicode_rationale_tokenisation_preserves_meaningful_text():
+    assert normalised_tokens("Café déjà") == ["café", "déjà"]
+    assert normalised_tokens("根拠を比較")
+    assert normalised_tokens("证据对比")
+    assert normalised_tokens("evidenceの比較")
+    assert normalised_token_overlap("根拠を比較", "根拠を再検討") > 0
+    assert normalised_token_overlap("证据对比", "证据复核") > 0
+
+
+def test_unicode_overlap_does_not_create_false_perfect_scores():
+    assert normalised_token_overlap("ordinary English", "ordinary English") == 1.0
+    assert normalised_token_overlap("", "") == 1.0
+    assert normalised_token_overlap("!!!", "???") == 0.0
+    assert normalised_token_overlap("日本語", "中文") == 0.0

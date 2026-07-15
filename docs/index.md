@@ -18,6 +18,7 @@ Start here:
 - [Locking and Lineage](locking_and_lineage.md)
 - [Exposure Audit](exposure_audit.md)
 - [Reporting Limits](reporting_limits.md)
+- [Core Indexing Migration Note](core_indexing_migration_note.md)
 - [Research Status](research_status.md)
 - [Authoritative Manual Materials](manuals/)
 - [Active Design B Pilot Overview](studies/human_llm_pilot_readme.md)

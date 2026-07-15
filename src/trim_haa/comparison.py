@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-import re
+import unicodedata
 from collections import Counter
 from typing import Any, Callable, Mapping
 
@@ -161,19 +161,49 @@ def alternative_comparison(pre: Any, ai: Any, post: Any) -> dict[str, Any]:
 
 
 def normalised_tokens(text: str) -> list[str]:
-    return re.findall(r"[a-z0-9]+", clean_text(text).lower())
+    """Return dependency-free Unicode lexical units.
+
+    Latin and numeric runs remain word tokens. Characters from scripts that do
+    not conventionally use spaces (including Han and kana) become individual
+    lexical units so meaningful text cannot collapse to an empty token stream.
+    """
+
+    normalised = unicodedata.normalize("NFKC", clean_text(text).casefold())
+    tokens: list[str] = []
+    word_buffer: list[str] = []
+
+    def flush_word() -> None:
+        if word_buffer:
+            tokens.append("".join(word_buffer))
+            word_buffer.clear()
+
+    for character in normalised:
+        category = unicodedata.category(character)
+        if category.startswith(("L", "N")) and category != "Lo":
+            word_buffer.append(character)
+        elif category.startswith("M") and word_buffer:
+            word_buffer.append(character)
+        elif category == "Lo":
+            flush_word()
+            tokens.append(character)
+        else:
+            flush_word()
+    flush_word()
+    return tokens
 
 
 def normalised_token_overlap(left: str, right: str) -> float:
+    left_text = clean_text(left)
+    right_text = clean_text(right)
     left_tokens = Counter(normalised_tokens(left))
     right_tokens = Counter(normalised_tokens(right))
     if not left_tokens and not right_tokens:
-        return 1.0
+        return 1.0 if not left_text and not right_text else 0.0
     if not left_tokens or not right_tokens:
         return 0.0
     intersection = sum((left_tokens & right_tokens).values())
     union = sum((left_tokens | right_tokens).values())
-    return intersection / union if union else 1.0
+    return intersection / union if union else 0.0
 
 
 def copied_phrase_overlap(left: str, right: str, n: int = 4) -> float:

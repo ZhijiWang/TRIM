@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from datetime import datetime
+import re
 from typing import Any, Iterable, Mapping
 
 from trim_haa.comparison import copied_phrase_overlap
@@ -35,6 +36,11 @@ REQUIRED_CORE_FIELDS: tuple[str, ...] = (
     "alternative_pathway_present",
     "status",
 )
+
+PARENT_STAGE_REQUIREMENTS: dict[str, frozenset[str]] = {
+    "human_post_ai": frozenset({"human_pre"}),
+    "human_second_pass_control": frozenset({"human_pre"}),
+}
 
 
 @dataclass(frozen=True, slots=True)
@@ -110,6 +116,15 @@ def validate_core_record(record: TrimHAAAnnotation | Mapping[str, Any]) -> list[
                 annotation_id,
                 "parent_annotation_id",
                 "Independent records must not have parent_annotation_id.",
+            )
+        )
+
+    if annotation.annotation_stage == "human_post_ai" and not annotation.parent_annotation_id:
+        issues.append(
+            _issue(
+                annotation_id,
+                "parent_annotation_id",
+                "human_post_ai requires parent_annotation_id.",
             )
         )
 
@@ -203,6 +218,19 @@ def validate_provenance_record(record: AssistanceProvenance | Mapping[str, Any])
         if not clean_text(raw.get(field_name, "")):
             issues.append(_issue(annotation_id, field_name, f"{field_name} is required."))
 
+    retry_count: int | None = None
+    if provenance.retry_count:
+        if not re.fullmatch(r"[0-9]+", provenance.retry_count):
+            issues.append(
+                _issue(
+                    annotation_id,
+                    "retry_count",
+                    "retry_count must be a non-negative integer.",
+                )
+            )
+        else:
+            retry_count = int(provenance.retry_count)
+
     if provenance.annotation_stage == "ai_independent":
         for field_name in (
             "model_provider",
@@ -239,18 +267,15 @@ def validate_provenance_record(record: AssistanceProvenance | Mapping[str, Any])
                     severity="warning",
                 )
             )
-        try:
-            if int(provenance.retry_count) > 1:
-                issues.append(
-                    _issue(
-                        annotation_id,
-                        "retry_count",
-                        "Model output regenerated more than once.",
-                        severity="warning",
-                    )
+        if retry_count is not None and retry_count > 1:
+            issues.append(
+                _issue(
+                    annotation_id,
+                    "retry_count",
+                    "Model output regenerated more than once.",
+                    severity="warning",
                 )
-        except ValueError:
-            issues.append(_issue(annotation_id, "retry_count", "retry_count must be an integer."))
+            )
 
     if provenance.annotation_stage == "human_post_ai" and provenance.ai_output_exposed == "none":
         issues.append(
@@ -291,10 +316,16 @@ def validate_relationships(
             continue
         if parent.case_id != annotation.case_id:
             issues.append(_issue(annotation.annotation_id, "case_id", "Parent and child must have the same case_id."))
-        if annotation.annotation_stage in {"human_post_ai", "human_second_pass_control"}:
-            if parent.annotation_stage != "human_pre":
+        permitted_parent_stages = PARENT_STAGE_REQUIREMENTS.get(annotation.annotation_stage)
+        if permitted_parent_stages is not None:
+            if parent.annotation_stage not in permitted_parent_stages:
                 issues.append(
-                    _issue(annotation.annotation_id, "parent_annotation_id", f"{annotation.annotation_stage} parent must be human_pre.")
+                    _issue(
+                        annotation.annotation_id,
+                        "parent_annotation_id",
+                        f"{annotation.annotation_stage} parent must be one of: "
+                        f"{', '.join(sorted(permitted_parent_stages))}.",
+                    )
                 )
             if parent.status != "locked":
                 issues.append(
@@ -672,33 +703,67 @@ def _cycle_issues(index: dict[str, TrimHAAAnnotation]) -> list[ValidationIssue]:
 
 
 def _validate_timestamp_order(prov: AssistanceProvenance) -> list[ValidationIssue]:
-    if not prov.exposure_timestamp or not prov.post_edit_timestamp:
-        return []
-    exposure = _parse_timestamp(prov.exposure_timestamp)
-    post = _parse_timestamp(prov.post_edit_timestamp)
-    if exposure is None or post is None:
-        return []
+    issues: list[ValidationIssue] = []
+    exposure, exposure_issues = _validated_timestamp(
+        prov.exposure_timestamp,
+        prov.annotation_id,
+        "exposure_timestamp",
+    )
+    post, post_issues = _validated_timestamp(
+        prov.post_edit_timestamp,
+        prov.annotation_id,
+        "post_edit_timestamp",
+    )
+    issues.extend(exposure_issues)
+    issues.extend(post_issues)
+    if issues or exposure is None or post is None:
+        return issues
     if post < exposure:
-        return [
+        issues.append(
             _issue(
                 prov.annotation_id,
                 "post_edit_timestamp",
                 "post_edit_timestamp must not precede exposure_timestamp.",
             )
-        ]
-    return []
+        )
+    return issues
 
 
 def _validate_exposure_event_timestamp(event: ExposureEvent) -> list[ValidationIssue]:
-    if _parse_timestamp(event.exposure_timestamp) is None and event.exposure_timestamp:
-        return [
+    _, issues = _validated_timestamp(
+        event.exposure_timestamp,
+        event.exposure_event_id,
+        "exposure_timestamp",
+    )
+    return issues
+
+
+def _validated_timestamp(
+    value: str,
+    record_id: str,
+    field_name: str,
+) -> tuple[datetime | None, list[ValidationIssue]]:
+    text = clean_text(value)
+    if not text:
+        return None, []
+    parsed = _parse_timestamp(text)
+    if parsed is None:
+        return None, [
             _issue(
-                event.exposure_event_id,
-                "exposure_timestamp",
-                "Exposure event timestamp is not valid ISO format.",
+                record_id,
+                field_name,
+                f"{field_name} value {text!r} is not valid ISO 8601.",
             )
         ]
-    return []
+    if parsed.tzinfo is None or parsed.utcoffset() is None:
+        return None, [
+            _issue(
+                record_id,
+                field_name,
+                f"{field_name} must include a timezone offset.",
+            )
+        ]
+    return parsed, []
 
 
 def _parse_timestamp(value: str) -> datetime | None:

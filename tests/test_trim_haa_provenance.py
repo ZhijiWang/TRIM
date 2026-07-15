@@ -1,6 +1,8 @@
 import csv
 from pathlib import Path
 
+import pytest
+
 from trim_haa.exposure import ExposureEvent
 from trim_haa.hashing import looks_like_sha256, sha256_text
 from trim_haa.locking import LockRecord
@@ -42,6 +44,117 @@ def _load_lock(name):
             for row in csv.DictReader(handle)
             if row.get("lock_manifest_id")
         ]
+
+
+def _timestamp_provenance(**overrides):
+    values = {
+        "annotation_id": "AI-TIME",
+        "case_id": "C-TIME",
+        "actor_id": "MODEL",
+        "actor_type": "model",
+        "annotation_stage": "ai_independent",
+        "pre_ai_annotation_locked": "not_applicable",
+        "ai_output_exposed": "none",
+        "exposure_order": "none",
+        "interface_condition": "independent",
+        "model_provider": "synthetic",
+        "model_name": "synthetic-model",
+        "model_version_or_date": "synthetic-version",
+        "prompt_template_id": "SYNTHETIC",
+        "prompt_hash": "a" * 64,
+        "model_run_id": "RUN-SYNTHETIC",
+        "retry_count": "0",
+        "regenerated_output": "no",
+        "exposure_timestamp": "2026-07-01T10:00:00Z",
+        "post_edit_timestamp": "2026-07-01T10:05:00+00:00",
+        "changed_label": "not_applicable",
+        "changed_primary_evidence": "not_applicable",
+        "changed_rationale_mechanism": "not_applicable",
+        "changed_uncertainty": "not_applicable",
+        "changed_alternative": "not_applicable",
+        "self_reported_revision_reason": "not_applicable",
+        "lock_status": "locked",
+    }
+    values.update(overrides)
+    return AssistanceProvenance(**values)
+
+
+@pytest.mark.parametrize("retry_count", ["0", "1", 2])
+def test_retry_count_accepts_non_negative_integers(retry_count):
+    issues = validate_provenance_record(_timestamp_provenance(retry_count=retry_count))
+
+    assert not [issue for issue in issues if issue.field == "retry_count" and issue.severity == "error"]
+
+
+@pytest.mark.parametrize("retry_count", [-1, True, "1.5", "invalid"])
+def test_retry_count_rejects_negative_boolean_and_malformed_values(retry_count):
+    issues = validate_provenance_record(_timestamp_provenance(retry_count=retry_count))
+
+    assert any(
+        issue.field == "retry_count"
+        and issue.message == "retry_count must be a non-negative integer."
+        for issue in issues
+    )
+
+
+@pytest.mark.parametrize(
+    ("field_name", "value"),
+    [
+        ("exposure_timestamp", "not-a-date"),
+        ("post_edit_timestamp", "2026-99-99T25:61:00Z"),
+    ],
+)
+def test_malformed_timestamps_are_errors(field_name, value):
+    issues = validate_provenance_record(_timestamp_provenance(**{field_name: value}))
+
+    assert any(
+        issue.field == field_name and "not valid ISO 8601" in issue.message
+        for issue in issues
+    )
+
+
+def test_utc_z_and_aware_offset_timestamps_are_valid():
+    issues = validate_provenance_record(
+        _timestamp_provenance(
+            exposure_timestamp="2026-07-01T10:00:00Z",
+            post_edit_timestamp="2026-07-01T12:05:00+02:00",
+        )
+    )
+
+    assert not [
+        issue for issue in issues
+        if issue.field in {"exposure_timestamp", "post_edit_timestamp"}
+    ]
+
+
+def test_naive_and_mixed_timezone_timestamps_fail_without_type_error():
+    issues = validate_provenance_record(
+        _timestamp_provenance(
+            exposure_timestamp="2026-07-01T10:00:00",
+            post_edit_timestamp="2026-07-01T10:05:00Z",
+        )
+    )
+
+    assert any(
+        issue.field == "exposure_timestamp"
+        and issue.message == "exposure_timestamp must include a timezone offset."
+        for issue in issues
+    )
+
+
+def test_timestamp_chronology_violation_is_an_error():
+    issues = validate_provenance_record(
+        _timestamp_provenance(
+            exposure_timestamp="2026-07-01T10:05:00Z",
+            post_edit_timestamp="2026-07-01T10:00:00Z",
+        )
+    )
+
+    assert any(
+        issue.field == "post_edit_timestamp"
+        and issue.message == "post_edit_timestamp must not precede exposure_timestamp."
+        for issue in issues
+    )
 
 
 def test_parent_child_validity_and_lineage():
