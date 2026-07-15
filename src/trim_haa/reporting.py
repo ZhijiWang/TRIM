@@ -56,6 +56,7 @@ def case_level_report(
                     "pre_label": comparison["pre_label"],
                     "ai_label": comparison["ai_label"],
                     "post_label": comparison["post_label"],
+                    "label_changed": comparison["label_changed"],
                     "label_adoption": comparison["label_adopted_from_ai"],
                     "pre_ai_primary_jaccard": comparison["pre_ai_primary_jaccard"],
                     "pre_post_primary_jaccard": comparison["pre_post_primary_jaccard"],
@@ -110,7 +111,7 @@ def participant_level_report(
             {
                 "actor_id": participant_id,
                 "number_of_cases": len(case_ids),
-                "label_changes": _sum_bool(subset, "label_adoption"),
+                "label_changes": _sum_bool(subset, "label_changed"),
                 "label_adoptions": _sum_bool(subset, "label_adoption"),
                 "evidence_adoptions": _sum_bool(subset, "ai_evidence_incorporated"),
                 "mechanism_adoptions": _sum_bool(subset, "mechanism_adoption"),
@@ -196,6 +197,7 @@ CASE_LEVEL_COLUMNS: tuple[str, ...] = (
     "pre_label",
     "ai_label",
     "post_label",
+    "label_changed",
     "label_adoption",
     "pre_ai_primary_jaccard",
     "pre_post_primary_jaccard",
@@ -224,10 +226,13 @@ def _by_case(records: Iterable[TrimHAAAnnotation | Mapping[str, Any]]) -> dict[s
 
 
 def _first_stage(records: list[TrimHAAAnnotation], stage: str) -> TrimHAAAnnotation | None:
-    for record in records:
-        if record.annotation_stage == stage:
-            return record
-    return None
+    matches = [record for record in records if record.annotation_stage == stage]
+    if len(matches) > 1:
+        identifiers = ", ".join(record.annotation_id for record in matches)
+        raise ValueError(
+            f"Case {matches[0].case_id!r} has multiple {stage!r} records: {identifiers}."
+        )
+    return matches[0] if matches else None
 
 
 def _coerce(record: TrimHAAAnnotation | Mapping[str, Any]) -> TrimHAAAnnotation:
@@ -265,7 +270,17 @@ def _lock_by_annotation(
 def _sum_bool(df: pd.DataFrame, column: str) -> int:
     if column not in df:
         return 0
-    return sum(1 for value in df[column] if bool(value))
+    return sum(1 for value in df[column] if _is_explicit_true(value))
+
+
+def _is_explicit_true(value: Any) -> bool:
+    """Interpret report booleans without Python truthiness (for example, NaN)."""
+
+    if value is True:
+        return True
+    if isinstance(value, str):
+        return value.strip().lower() in {"true", "yes", "1"}
+    return False
 
 
 def _percent(df: pd.DataFrame, column: str) -> float | None:

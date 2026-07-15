@@ -73,7 +73,8 @@ LEGACY_COMPATIBLE_DEPTH_FIELDS: tuple[str, ...] = (
     "epistemic_support",
     "discourse_level",
     "temporal_orientation",
-    *SIGNATURE_FIELDS,
+    "rationale_mechanism",
+    "uncertainty_flag",
 )
 
 

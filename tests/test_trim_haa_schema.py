@@ -1,7 +1,7 @@
 import csv
 from pathlib import Path
 
-from trim_haa.depth import TrimHAADepth
+from trim_haa.depth import LEGACY_COMPATIBLE_DEPTH_FIELDS, TrimHAADepth
 from trim_haa.schema import TrimHAAAnnotation
 from trim_haa.validator import validate_core_record
 
@@ -78,3 +78,16 @@ def test_fixture_core_csv_loads():
     assert len(rows) >= 30
     assert TrimHAAAnnotation.from_record(rows[0]).annotation_id == "H01_C01_PRE"
 
+
+def test_legacy_compatible_depth_fields_are_unique_and_ordered():
+    assert LEGACY_COMPATIBLE_DEPTH_FIELDS == (
+        "friction_locus",
+        "epistemic_support",
+        "discourse_level",
+        "temporal_orientation",
+        "rationale_mechanism",
+        "uncertainty_flag",
+    )
+    assert len(LEGACY_COMPATIBLE_DEPTH_FIELDS) == len(
+        set(LEGACY_COMPATIBLE_DEPTH_FIELDS)
+    )

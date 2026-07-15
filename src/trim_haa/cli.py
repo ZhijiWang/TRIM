@@ -109,8 +109,24 @@ def cmd_verify_lock(args: argparse.Namespace) -> int:
         print(f"{args.lock_manifest_csv}: no lock rows found", file=sys.stderr)
         return 2
     annotation = TrimHAAAnnotation.from_record(annotations[0])
-    lock_by_id = {row.get("annotation_id", ""): row for row in locks}
-    lock_row = lock_by_id.get(annotation.annotation_id, locks[0])
+    matching_locks = [
+        row for row in locks if row.get("annotation_id", "") == annotation.annotation_id
+    ]
+    if not matching_locks:
+        print(
+            f"{args.lock_manifest_csv}: no lock row matches annotation_id "
+            f"{annotation.annotation_id!r}",
+            file=sys.stderr,
+        )
+        return 2
+    if len(matching_locks) > 1:
+        print(
+            f"{args.lock_manifest_csv}: multiple lock rows match annotation_id "
+            f"{annotation.annotation_id!r}; verification is ambiguous",
+            file=sys.stderr,
+        )
+        return 2
+    lock_row = matching_locks[0]
     verified = verify_locked_annotation(annotation, LockRecord.from_record(lock_row))
     print(f"{annotation.annotation_id}: verification={'passed' if verified else 'failed'}")
     return 0 if verified else 1
