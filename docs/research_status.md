@@ -18,7 +18,7 @@ The Design B Human–LLM Friction-Locus Pilot is the active study. PR #20 has me
 
 Execution and human coding remain blocked. Provider/model/account availability, runtime verification, pricing, final authorization, human coding, and model execution are unresolved. No empirical execution has occurred, and no private packet content was merged into the public preparation layer.
 
-The metadata-only provider/runtime capability audit dated 2026-07-13 found no local API credential, so it made no provider request and did not verify account access to `gpt-5.4-mini`. Runtime candidates are documented but remain unfrozen pending separately authorized no-source synthetic inference verification; pricing and final authorization remain blocked.
+The metadata-only provider/runtime capability audit dated 2026-07-13 found no local API credential, so it made no provider request and did not verify account access to `gpt-5.4-mini`. The [current evidence index](studies/human_llm_current_evidence_index.md) distinguishes this v0.2 audit from the historical v0.1 blocked records. Runtime candidates are documented but remain unfrozen pending separately authorized no-source synthetic inference verification; pricing and final authorization remain blocked.
 
 ## Demonstrated
 
@@ -38,7 +38,7 @@ The metadata-only provider/runtime capability audit dated 2026-07-13 found no lo
 - Institution-specific ethics application.
 - Independent participant-language review.
 - Empirical validation and reliability analysis.
-- Copyright and translation review before unrestricted public redistribution of the walkthrough packet.
+- A separate rights decision for the older author-only English walkthrough before unrestricted redistribution. The Japanese-canonical public walkthrough v0.2 has separate provenance and usage-guidance records.
 
 ## Not Established
 

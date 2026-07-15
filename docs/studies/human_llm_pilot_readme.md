@@ -2,9 +2,11 @@
 
 This directory began with protocol materials for a future small-N demonstration
 study and now documents the active Design B pilot lineage. PR #17 established
-the protocol, PR #18 remains the open/draft frozen dependency, PR #19
+the protocol, PR #18 is the closed, draft, unmerged frozen dependency, PR #19
 established the authoritative manual, and PR #20 merged the blocked preparation
-layer. Human coding and model execution remain blocked. The study asks:
+layer. PR #21 merged navigation and PR #22 merged the metadata-only
+provider/runtime audit. Human coding and model execution remain blocked. The
+study asks:
 
 What becomes visible when interpretive disagreement is represented
 procedurally rather than only as label divergence?
@@ -27,6 +29,9 @@ Related machine-readable planning files:
 - `templates/model_coder_record.json`
 - `templates/human_llm_run_manifest.json`
 - `templates/human_llm_allocation_manifest.json`
+
+The [current evidence index](human_llm_current_evidence_index.md) distinguishes
+historical v0.1 provider/runtime records from the current v0.2 metadata audit.
 
 ## Scope
 

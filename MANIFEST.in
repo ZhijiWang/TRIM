@@ -1,2 +1,18 @@
 prune src/trim_haa/llm
 prune src/trim_haa/human_coding
+prune artifacts
+prune data
+prune docs
+prune examples
+prune research
+prune schemas
+prune scripts
+prune templates
+prune tests
+
+recursive-include tests/sdist *.py
+
+include CHANGELOG.md
+include CITATION.cff
+include SECURITY.md
+include THIRD_PARTY_AND_CONTENT_RIGHTS.md

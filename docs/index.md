@@ -8,6 +8,10 @@ Start here:
 
 - [Repository Map](repository_map.md)
 - [Research and Study Index](studies/index.md)
+- [Third-Party and Content Rights](../THIRD_PARTY_AND_CONTENT_RIGHTS.md)
+- [Alpha Release Procedure](alpha_release_procedure.md)
+- [Changelog](../CHANGELOG.md)
+- [Security Policy](../SECURITY.md)
 - [Quickstart](quickstart.md)
 - [Core Schema](core_schema.md)
 - [Provenance](provenance.md)
@@ -17,6 +21,7 @@ Start here:
 - [Research Status](research_status.md)
 - [Authoritative Manual Materials](manuals/)
 - [Active Design B Pilot Overview](studies/human_llm_pilot_readme.md)
+- [Current Design B Evidence Index](studies/human_llm_current_evidence_index.md)
 - [Blocked LLM Execution Scaffold](studies/human_llm_execution_scaffold.md)
 - [Blocked Human-Coding Scaffold](studies/human_coding_scaffold.md)
 - [Legacy History](legacy_history.md)
