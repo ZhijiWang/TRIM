@@ -9,10 +9,30 @@ description = "TRIM-HAA provenance-aware human-AI annotation audit tools."
 readme = "README.md"
 requires-python = ">=3.11"
 license = "MIT"
+keywords = [
+  "annotation",
+  "human-ai",
+  "provenance",
+  "research-software",
+]
 authors = [
   { name = "Zhiji Wang" }
 ]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: Information Analysis",
+]
 dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/ZhijiWang/TRIM"
+Documentation = "https://github.com/ZhijiWang/TRIM/tree/main/docs"
+Repository = "https://github.com/ZhijiWang/TRIM"
+Issues = "https://github.com/ZhijiWang/TRIM/issues"
 
 [project.scripts]
 trim-haa = "trim_haa.cli:main"

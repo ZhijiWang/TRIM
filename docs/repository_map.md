@@ -17,7 +17,7 @@ This page maps the repository as it exists on `main`. It is a navigation aid, no
 
 | Path | Purpose | Status | Authoritative? | Notes |
 |---|---|---|---|---|
-| Root metadata (`README.md`, `pyproject.toml`, `CITATION.cff`, `LICENSE`, `MANIFEST.in`) | Package identity, installation, citation, licensing, and distribution boundaries | `AUTHORITATIVE_ACTIVE` | Yes | `README.md` is the top-level entry point; packaging metadata defines the `trim-haa` distribution. |
+| Root metadata (`README.md`, `pyproject.toml`, `CITATION.cff`, `LICENSE`, `MANIFEST.in`, `CHANGELOG.md`, `SECURITY.md`, `THIRD_PARTY_AND_CONTENT_RIGHTS.md`) | Package identity, installation, citation, licensing, security, content rights, and distribution boundaries | `AUTHORITATIVE_ACTIVE` | Yes | `README.md` is the top-level entry point; packaging metadata defines the `trim-haa` distribution. |
 | `src/trim_haa/` | Active TRIM-HAA Python implementation | `AUTHORITATIVE_ACTIVE` | Yes | Core installed-package namespace for validation, locking, provenance, comparison, and reporting. |
 | `src/trim_haa/llm/` | No-call request, response-preservation, hashing, and execution-gate scaffold for the active study | `ACTIVE_SCAFFOLD` | No; study implementation | Source-checkout-only experimental study module. It is excluded from wheel and sdist. |
 | `src/trim_haa/human_coding/` | No-coding authorization, lifecycle, locking, disagreement, and adjudication scaffold | `ACTIVE_SCAFFOLD` | No; study implementation | Source-checkout-only experimental study module. It is excluded from wheel and sdist. |
@@ -29,7 +29,7 @@ This page maps the repository as it exists on `main`. It is a navigation aid, no
 | `data/studies/human_llm_pilot/` | Public study metadata, vendored public freeze references, and blocked preparation records | `ACTIVE_BLOCKED_STUDY` | Yes for current public study state | Controlled packet text is not part of the merged public preparation layer. Execution and human coding remain blocked. |
 | `templates/` | Human/model record and run/allocation templates | `ACTIVE_SCAFFOLD` | Mixed | Some paths are referenced by frozen manifests or validators and require dependency review before migration. |
 | `examples/synthetic_dry_run/` | Valid and invalid synthetic technical fixtures and rebuilt outputs | `PUBLIC_DEMONSTRATION` | No | Demonstrates deterministic validation behavior; it is not empirical validation. |
-| `examples/in_a_grove_walkthrough/` | Repository-bound author-only walkthrough | `PUBLIC_DEMONSTRATION` | No | Demonstration material requiring a source checkout; it is not a human-subject study. |
+| `examples/in_a_grove_walkthrough/` | Repository-bound author-only walkthrough | `PUBLIC_DEMONSTRATION` | No | Demonstration material requiring a source checkout; it is not a human-subject study. Its English translation remains `NOT_AUTHORIZED_FOR_UNRESTRICTED_REDISTRIBUTION` and the directory is excluded from manually assembled public release bundles. |
 | `examples/in_a_grove_walkthrough_public_v0_2/` | Frozen Japanese-canonical public walkthrough with locked author/model records and descriptive comparison | `PUBLIC_DEMONSTRATION` | Yes, as a frozen public demonstration | Tagged `in-a-grove-public-v0.2.0`; not empirical validation or a truth verdict. |
 | `research/position_note/` | Position-note drafts, claim boundaries, manifests, and review response | `DEFERRED` | No | Separate research line; not the active Design B study. |
 | `research/future_human_study/` | Ethics and protocol drafts for a future exposure/instrumentation pilot | `DEFERRED` | No | Not approved for recruitment, data collection, or current Design B execution. |
@@ -37,7 +37,9 @@ This page maps the repository as it exists on `main`. It is a navigation aid, no
 | `tests/` | Package, demonstration, frozen-boundary, and blocked-study tests | `AUTHORITATIVE_ACTIVE` | Yes for verification | Tests enforce package boundaries, frozen references, zero-call/zero-coding states, and schema behavior. |
 | `artifacts/` | Frozen ZIP packages and checksum sidecars for position-note and future-study releases | `AUTHORITATIVE_FROZEN` | Yes for preserved artifacts | Treat ZIP/checksum pairs as immutable release evidence. |
 | `docs/legacy_history.md` and tag `legacy-trim-v0.2.1` | Navigation to the removed Legacy TRIM External-Coder Retest v0.2.x runtime | `HISTORICAL_RETAINED` | Yes as history | Legacy runtime is retained through Git history/tag, not the active tree. |
-| Frozen packet and prompt references associated with PR #18 | Controlled/frozen dependency references for the Design B study | `PRIVATE_OR_CONTROLLED_REFERENCE_ONLY` | Yes as frozen references | PR #18 remains open and draft. Controlled packet text is not present in the merged public preparation layer. |
+| Frozen packet and prompt references associated with PR #18 | Controlled/frozen dependency references for the Design B study | `PRIVATE_OR_CONTROLLED_REFERENCE_ONLY` | Yes as frozen references | PR #18 is closed, draft, and unmerged at the frozen reference head. Controlled packet text is not present in the merged public preparation layer. |
+
+Release artifacts have a narrower boundary than the complete tracked tree. See the [alpha release procedure](alpha_release_procedure.md) and the root [content-rights disclosure](../THIRD_PARTY_AND_CONTENT_RIGHTS.md). The older English walkthrough remains tracked but is excluded from manually assembled public release bundles pending a separate rights decision; GitHub-generated source snapshots still contain the full tracked tree.
 
 ## Distribution boundary
 

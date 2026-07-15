@@ -99,8 +99,12 @@ trim-haa run-synthetic
 
 - [Repository map](docs/repository_map.md)
 - [Research and study index](docs/studies/index.md)
+- [Third-party and content rights](THIRD_PARTY_AND_CONTENT_RIGHTS.md)
+- [Alpha release procedure](docs/alpha_release_procedure.md)
 
 TRIM-HAA is the active software package. The Design B Human–LLM Friction-Locus Pilot is the active blocked study; merging its preparation layer did not authorize human coding or model execution.
+
+The root MIT license does not automatically relicense third-party texts or translations. In particular, the older author-only English *In a Grove* walkthrough is not authorized for unrestricted redistribution; consult the rights document before assembling any release bundle.
 
 ## Research Status
 

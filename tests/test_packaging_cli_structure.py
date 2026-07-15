@@ -252,6 +252,31 @@ def test_built_wheel_boundary_and_clean_install_smoke(tmp_path):
         sdist_names = archive.getnames()
     assert not any("/src/trim_haa/llm/" in name for name in sdist_names)
     assert not any("/src/trim_haa/human_coding/" in name for name in sdist_names)
+    included_tests = sorted(
+        name.split("/tests/", 1)[1]
+        for name in sdist_names
+        if "/tests/" in name and name.endswith(".py")
+    )
+    assert included_tests == ["sdist/test_core_distribution.py"]
+    for excluded in (
+        "/artifacts/",
+        "/data/",
+        "/docs/",
+        "/examples/",
+        "/research/",
+        "/schemas/",
+        "/scripts/",
+        "/templates/",
+    ):
+        assert not any(excluded in name for name in sdist_names)
+    assert not any("source_packet" in name or "prompt" in name for name in sdist_names)
+    for required_root_file in (
+        "CHANGELOG.md",
+        "CITATION.cff",
+        "SECURITY.md",
+        "THIRD_PARTY_AND_CONTENT_RIGHTS.md",
+    ):
+        assert any(name.endswith("/" + required_root_file) for name in sdist_names)
 
     venv = tmp_path / "venv"
     assert _run(sys.executable, "-m", "venv", str(venv)).returncode == 0
@@ -290,3 +315,37 @@ def test_built_wheel_boundary_and_clean_install_smoke(tmp_path):
         assert result.returncode != 0
         assert SOURCE_CHECKOUT_MESSAGE in combined
         assert "Traceback" not in combined
+
+    extracted = tmp_path / "sdist-extracted"
+    extracted.mkdir()
+    with tarfile.open(sdist, "r:gz") as archive:
+        archive.extractall(extracted, filter="data")
+    extracted_root = next(extracted.glob("trim_haa-0.3.0a1"))
+    sdist_venv = tmp_path / "sdist-venv"
+    assert _run(
+        sys.executable,
+        "-m",
+        "venv",
+        "--system-site-packages",
+        str(sdist_venv),
+    ).returncode == 0
+    sdist_python = sdist_venv / "bin" / "python"
+    installed_sdist = _run(
+        str(sdist_python),
+        "-m",
+        "pip",
+        "install",
+        "--no-deps",
+        str(sdist),
+        cwd=tmp_path,
+    )
+    assert installed_sdist.returncode == 0, installed_sdist.stderr
+    sdist_tests = _run(
+        str(sdist_python),
+        "-m",
+        "pytest",
+        "-q",
+        cwd=extracted_root,
+    )
+    assert sdist_tests.returncode == 0, sdist_tests.stdout + sdist_tests.stderr
+    assert "2 passed" in sdist_tests.stdout
