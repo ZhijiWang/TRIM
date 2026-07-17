@@ -5,6 +5,9 @@ boundaries; they do not authorize research execution or human coding.
 
 ## Unreleased
 
+- Add a version-1 strict annotation-indexing API for new development while
+  preserving the frozen legacy behavior; historical caller migration remains
+  staged and deferred.
 - Fix non-frozen Core validation for parent relationships, retry counts, and
   timezone-aware chronological timestamps.
 - Correct report label-change and explicit-boolean aggregation semantics, reject

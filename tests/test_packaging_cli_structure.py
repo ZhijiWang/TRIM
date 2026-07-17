@@ -44,6 +44,7 @@ def test_public_python_api_and_version_exist():
         TrimHAAAnnotation,
         compare_annotations,
         lock_annotation,
+        strict_annotation_index,
         validate_core_record,
         validate_provenance_record,
         verify_locked_annotation,
@@ -55,6 +56,7 @@ def test_public_python_api_and_version_exist():
     assert validate_core_record
     assert validate_provenance_record
     assert lock_annotation
+    assert strict_annotation_index
     assert verify_locked_annotation
     assert compare_annotations
 
@@ -247,11 +249,13 @@ def test_built_wheel_boundary_and_clean_install_smoke(tmp_path):
     assert not any("TRIM_HAA_position_note" in name for name in names)
     assert not any(name.startswith("trim_haa/llm/") for name in names)
     assert not any(name.startswith("trim_haa/human_coding/") for name in names)
+    assert "trim_haa/indexing.py" in names
 
     with tarfile.open(sdist, "r:gz") as archive:
         sdist_names = archive.getnames()
     assert not any("/src/trim_haa/llm/" in name for name in sdist_names)
     assert not any("/src/trim_haa/human_coding/" in name for name in sdist_names)
+    assert any(name.endswith("/src/trim_haa/indexing.py") for name in sdist_names)
     included_tests = sorted(
         name.split("/tests/", 1)[1]
         for name in sdist_names
