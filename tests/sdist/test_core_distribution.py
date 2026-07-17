@@ -14,6 +14,7 @@ from trim_haa import (
     TrimHAAAnnotation,
     compare_annotations,
     lock_annotation,
+    strict_annotation_index,
     validate_core_record,
     verify_locked_annotation,
 )
@@ -64,6 +65,10 @@ class CoreDistributionTests(unittest.TestCase):
         )
         self.assertTrue(verify_locked_annotation(human, lock))
         self.assertTrue(compare_annotations(human, model)["label"]["match"])
+        self.assertEqual(
+            list(strict_annotation_index([human, model])),
+            ["SDIST_HUMAN", "SDIST_MODEL"],
+        )
 
     def test_module_cli_works_with_self_contained_records(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_directory:
