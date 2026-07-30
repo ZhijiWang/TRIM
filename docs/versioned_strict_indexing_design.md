@@ -53,6 +53,11 @@ prints full records, rationales, source text, or other annotation content.
 available from both `trim_haa.indexing` and the top-level `trim_haa` namespace.
 No existing export is removed.
 
+For validation-report APIs, fail-closed indexing prevents checks that would
+require choosing an ambiguous record; it does not abort unrelated validation.
+Record-only errors that do not depend on the unavailable index continue to be
+collected in the same report.
+
 ## Other index risks
 
 The active-index audit confirmed that provenance rows, exposure events, lock

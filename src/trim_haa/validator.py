@@ -378,14 +378,14 @@ def validate_dataset(
         report.extend(
             _validate_exposed_ai_links(annotations, provenance, annotation_by_id)
         )
-        report.extend(
-            _validate_exposure_events(
-                annotations,
-                provenance,
-                exposures,
-                annotation_by_id,
-            )
+    report.extend(
+        _validate_exposure_events(
+            provenance,
+            exposures,
+            annotation_by_id,
         )
+    )
+    if annotation_by_id is not None:
         report.extend(
             _validate_locks(annotations, provenance, locks, annotation_by_id)
         )
@@ -581,10 +581,9 @@ def _validate_exposed_ai_links(
 
 
 def _validate_exposure_events(
-    annotations: list[TrimHAAAnnotation],
     provenance: list[AssistanceProvenance],
     events: list[ExposureEvent],
-    annotation_by_id: dict[str, TrimHAAAnnotation],
+    annotation_by_id: dict[str, TrimHAAAnnotation] | None,
 ) -> list[ValidationIssue]:
     issues: list[ValidationIssue] = []
     prov_by_id = {record.annotation_id: record for record in provenance}
@@ -595,36 +594,62 @@ def _validate_exposure_events(
             issues.append(_issue(event.exposure_event_id, "exposure_event_id", "Duplicate exposure_event_id."))
         seen.add(event.exposure_event_id)
         events_by_post.setdefault(event.human_post_annotation_id, []).append(event)
-        post = annotation_by_id.get(event.human_post_annotation_id)
-        pre = annotation_by_id.get(event.human_pre_annotation_id)
-        ai = annotation_by_id.get(event.ai_annotation_id)
-        ai_prov = prov_by_id.get(event.ai_annotation_id)
-        if post is None:
-            issues.append(_issue(event.exposure_event_id, "human_post_annotation_id", "Exposure event points to unknown human-post record."))
-            continue
-        if pre is None or post.parent_annotation_id != event.human_pre_annotation_id:
-            issues.append(_issue(event.exposure_event_id, "human_pre_annotation_id", "Exposure event points to wrong human-pre record."))
-        if post.case_id != event.case_id:
-            issues.append(_issue(event.exposure_event_id, "case_id", "Exposure event points to wrong case."))
-        if ai is None:
-            issues.append(_issue(event.exposure_event_id, "ai_annotation_id", "Exposure event points to unknown AI record."))
-        elif ai.annotation_stage != "ai_independent":
-            issues.append(_issue(event.exposure_event_id, "ai_annotation_id", "Exposure event AI record must be ai_independent."))
-        elif ai.case_id != event.case_id:
-            issues.append(_issue(event.exposure_event_id, "case_id", "Exposure event AI record has wrong case_id."))
-        if ai_prov is not None and event.model_run_id != ai_prov.model_run_id:
-            issues.append(_issue(event.exposure_event_id, "model_run_id", "Exposure event model_run_id must match AI provenance."))
-        post_prov = prov_by_id.get(event.human_post_annotation_id)
-        if post_prov and (
-            event.ai_annotation_id != post_prov.exposed_ai_annotation_id
-            or event.model_run_id != post_prov.exposed_model_run_id
-        ):
-            issues.append(_issue(event.exposure_event_id, "ai_annotation_id", "Exposure event disagrees with human-post provenance exposure linkage."))
+        if annotation_by_id is not None:
+            link_issues, post_found = _validate_exposure_event_links(
+                event,
+                prov_by_id,
+                annotation_by_id,
+            )
+            issues.extend(link_issues)
+            if not post_found:
+                continue
         issues.extend(_validate_exposure_event_timestamp(event))
     for post_id, post_events in events_by_post.items():
         if len(post_events) > 1:
             issues.append(_issue(post_id, "exposure_event_id", "Multiple exposure events for one human-post record.", severity="warning"))
     return issues
+
+
+def _validate_exposure_event_links(
+    event: ExposureEvent,
+    prov_by_id: dict[str, AssistanceProvenance],
+    annotation_by_id: dict[str, TrimHAAAnnotation],
+) -> tuple[list[ValidationIssue], bool]:
+    issues: list[ValidationIssue] = []
+    post = annotation_by_id.get(event.human_post_annotation_id)
+    pre = annotation_by_id.get(event.human_pre_annotation_id)
+    ai = annotation_by_id.get(event.ai_annotation_id)
+    ai_prov = prov_by_id.get(event.ai_annotation_id)
+    if post is None:
+        return (
+            [
+                _issue(
+                    event.exposure_event_id,
+                    "human_post_annotation_id",
+                    "Exposure event points to unknown human-post record.",
+                )
+            ],
+            False,
+        )
+    if pre is None or post.parent_annotation_id != event.human_pre_annotation_id:
+        issues.append(_issue(event.exposure_event_id, "human_pre_annotation_id", "Exposure event points to wrong human-pre record."))
+    if post.case_id != event.case_id:
+        issues.append(_issue(event.exposure_event_id, "case_id", "Exposure event points to wrong case."))
+    if ai is None:
+        issues.append(_issue(event.exposure_event_id, "ai_annotation_id", "Exposure event points to unknown AI record."))
+    elif ai.annotation_stage != "ai_independent":
+        issues.append(_issue(event.exposure_event_id, "ai_annotation_id", "Exposure event AI record must be ai_independent."))
+    elif ai.case_id != event.case_id:
+        issues.append(_issue(event.exposure_event_id, "case_id", "Exposure event AI record has wrong case_id."))
+    if ai_prov is not None and event.model_run_id != ai_prov.model_run_id:
+        issues.append(_issue(event.exposure_event_id, "model_run_id", "Exposure event model_run_id must match AI provenance."))
+    post_prov = prov_by_id.get(event.human_post_annotation_id)
+    if post_prov and (
+        event.ai_annotation_id != post_prov.exposed_ai_annotation_id
+        or event.model_run_id != post_prov.exposed_model_run_id
+    ):
+        issues.append(_issue(event.exposure_event_id, "ai_annotation_id", "Exposure event disagrees with human-post provenance exposure linkage."))
+    return issues, True
 
 
 def _validate_locks(

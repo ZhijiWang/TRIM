@@ -1,5 +1,10 @@
+import csv
+from pathlib import Path
+
 import pytest
 
+from trim_haa.exposure import ExposureEvent
+from trim_haa.locking import LockRecord
 from trim_haa.provenance import AssistanceProvenance
 from trim_haa.schema import TrimHAAAnnotation
 from trim_haa.validator import (
@@ -7,6 +12,8 @@ from trim_haa.validator import (
     validate_dataset,
     validate_relationships,
 )
+
+FIXTURE_DIR = Path(__file__).parent / "fixtures" / "trim_haa"
 
 
 def _relationship_record(
@@ -32,6 +39,15 @@ def _relationship_record(
         alternative_pathway_present="no",
         status=status,
     )
+
+
+def _fixture_records(filename, record_type, identifier_field):
+    with (FIXTURE_DIR / filename).open(newline="", encoding="utf-8") as handle:
+        return [
+            record_type.from_record(row)
+            for row in csv.DictReader(handle)
+            if row.get(identifier_field)
+        ]
 
 
 def test_human_post_ai_accepts_valid_locked_human_pre_parent():
@@ -185,6 +201,119 @@ def test_relationship_index_issue_redacts_annotation_content():
     assert secret not in issues[0].message
     assert "DUP" in issues[0].message
     assert "positions 0 and 1" in issues[0].message
+
+
+def test_invalid_core_index_preserves_independent_exposure_event_errors():
+    secret = "DO_NOT_EXPOSE_MIXED_INVALID_CONTENT"
+    duplicate_core = [
+        _relationship_record("DUP", "human_pre", case_id="C-FIRST"),
+        _relationship_record("DUP", "human_pre", case_id="C-SECOND"),
+    ]
+    for record in duplicate_core:
+        record.rationale_note = secret
+    events = [
+        ExposureEvent(
+            exposure_event_id="E-DUP",
+            human_post_annotation_id="POST",
+            human_pre_annotation_id="PRE",
+            ai_annotation_id="AI",
+            case_id="C-FIRST",
+            exposure_timestamp="not-a-timestamp",
+            notes=secret,
+        ),
+        ExposureEvent(
+            exposure_event_id="E-DUP",
+            human_post_annotation_id="POST",
+            human_pre_annotation_id="PRE",
+            ai_annotation_id="AI",
+            case_id="C-FIRST",
+            exposure_timestamp="2026-07-01T00:00:00Z",
+            notes=secret,
+        ),
+    ]
+
+    report = validate_dataset(duplicate_core, exposure_events=events)
+    messages = [issue.message for issue in report.issues]
+
+    assert messages.count("annotation_id must be globally unique.") == 1
+    assert messages.count("Duplicate exposure_event_id.") == 1
+    assert (
+        messages.count(
+            "exposure_timestamp value 'not-a-timestamp' is not valid ISO 8601."
+        )
+        == 1
+    )
+    assert not any(message.startswith("Exposure event points") for message in messages)
+    assert not any(secret in message for message in messages)
+
+
+def test_invalid_core_index_preserves_multiple_exposure_event_warning():
+    duplicate_core = [
+        _relationship_record("DUP", "human_pre", case_id="C-FIRST"),
+        _relationship_record("DUP", "human_pre", case_id="C-SECOND"),
+    ]
+    events = [
+        ExposureEvent(
+            exposure_event_id=event_id,
+            human_post_annotation_id="POST",
+            exposure_timestamp="2026-07-01T00:00:00Z",
+        )
+        for event_id in ("E-ONE", "E-TWO")
+    ]
+
+    report = validate_dataset(duplicate_core, exposure_events=events)
+    warnings = [
+        issue
+        for issue in report.warnings
+        if issue.message == "Multiple exposure events for one human-post record."
+    ]
+
+    assert len(warnings) == 1
+    assert warnings[0].annotation_id == "POST"
+
+
+def test_valid_exposure_dataset_results_remain_unchanged():
+    core = [
+        record
+        for record in _fixture_records(
+            "core_valid.csv",
+            TrimHAAAnnotation,
+            "annotation_id",
+        )
+        if record.case_id == "C01"
+    ]
+
+    report = validate_dataset(
+        core,
+        _fixture_records(
+            "provenance_valid.csv",
+            AssistanceProvenance,
+            "annotation_id",
+        ),
+        _fixture_records(
+            "exposure_valid.csv",
+            ExposureEvent,
+            "exposure_event_id",
+        ),
+        _fixture_records(
+            "lock_valid.csv",
+            LockRecord,
+            "lock_manifest_id",
+        ),
+    )
+
+    assert report.valid
+    assert [issue.to_dict() for issue in report.issues] == [
+        {
+            "annotation_id": "AI_C01",
+            "field": "model_version_or_date",
+            "severity": "warning",
+            "message": (
+                "AI record uses a date label rather than exact provider-side "
+                "version."
+            ),
+        }
+    ]
 
 
 def test_changed_flag_consistency_warning():

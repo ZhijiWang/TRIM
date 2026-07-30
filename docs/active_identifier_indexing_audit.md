@@ -182,6 +182,13 @@ without API changes, are active and non-frozen, and do not provide a documented
 last-record-wins guarantee. The migration does not alter data transformation,
 return types, package exports, exception fields, or frozen historical callers.
 
+Strict Core-index failure prevents validation that would require choosing an
+ambiguous Core record, but it does not abort unrelated validation.
+Core-independent exposure-event checks still report duplicate event IDs,
+malformed timestamps, and multiple events for one human-post identifier. Link
+checks alone are skipped, no Core winner is selected, and independently
+detectable errors remain cumulative in the validation report.
+
 No new generic indexing abstraction or record-type helper was added.
 
 ## Non-findings
