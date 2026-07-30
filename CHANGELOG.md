@@ -5,6 +5,8 @@ boundaries; they do not authorize research execution or human coding.
 
 ## Unreleased
 
+- Define the future Core record versioning and explicit legacy compatibility
+  policy without changing schemas, records, runtime behavior, or study gates.
 - Audit active identifier-indexing paths and migrate proven non-frozen Core
   annotation lookups in reporting, validation, and the synthetic dry-run to the
   version-1 strict contract, retain independent exposure-event findings when
