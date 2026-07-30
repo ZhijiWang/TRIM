@@ -7,7 +7,7 @@ import csv
 import sys
 from collections import Counter, defaultdict
 from pathlib import Path
-from typing import Any
+from typing import Any, Iterable, Mapping
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
@@ -16,6 +16,7 @@ DEFAULT_DRY_RUN = PROJECT_ROOT / "examples" / "synthetic_dry_run" / "valid"
 
 from trim_haa.comparison import compare_pre_ai_post, compare_pre_control
 from trim_haa.exposure import ExposureEvent
+from trim_haa.indexing import strict_annotation_index
 from trim_haa.locking import LockRecord, verify_locked_annotation
 from trim_haa.provenance import AssistanceProvenance, export_lineage_rows
 from trim_haa.schema import TrimHAAAnnotation
@@ -47,7 +48,7 @@ def run_dry_run(root: Path, *, expect_invalid: bool = False) -> dict[str, Any]:
     validation = validate_dataset(core, provenance, exposures, locks)
     _write_csv(outputs / "validation_report.csv", [issue.to_dict() for issue in validation.issues], fieldnames=["annotation_id", "field", "severity", "message"])
 
-    core_by_id = {record.annotation_id: record for record in core}
+    core_by_id = _core_by_id(core)
     prov_by_id = {record.annotation_id: record for record in provenance}
     locks_by_id = {record.annotation_id: record for record in locks}
     assignments_by_pair = {(row["participant_id"], row["case_id"]): row for row in assignments}
@@ -95,7 +96,7 @@ def _observation_report(
     assignments_by_pair: dict[tuple[str, str], dict[str, str]],
     issues: list[ValidationIssue],
 ) -> list[dict[str, Any]]:
-    by_id = {record.annotation_id: record for record in core}
+    by_id = _core_by_id(core)
     ai_by_case = {record.case_id: record for record in core if record.annotation_stage == "ai_independent"}
     warning_counts = Counter(issue.annotation_id for issue in issues if issue.severity == "warning")
     error_counts = Counter(issue.annotation_id for issue in issues if issue.severity == "error")
@@ -222,7 +223,12 @@ def _study_report(
     stage_counts = Counter(record.annotation_stage for record in core)
     warnings = [issue for issue in issues if issue.severity == "warning"]
     warning_counts = Counter(issue.field for issue in warnings)
-    lock_success = sum(1 for lock in locks if verify_locked_annotation(_core_by_id(core)[lock.annotation_id], lock))
+    core_by_id = _core_by_id(core)
+    lock_success = sum(
+        1
+        for lock in locks
+        if verify_locked_annotation(core_by_id[lock.annotation_id], lock)
+    )
     ai_rows = [row for row in case_report if row["condition"] == "ai_exposure"]
     exposed_posts = {
         event.human_post_annotation_id
@@ -522,8 +528,10 @@ def _write_text(path: Path, text: str) -> None:
     path.write_text(text, encoding="utf-8")
 
 
-def _core_by_id(core: list[TrimHAAAnnotation]) -> dict[str, TrimHAAAnnotation]:
-    return {record.annotation_id: record for record in core}
+def _core_by_id(
+    core: Iterable[TrimHAAAnnotation | Mapping[str, Any]],
+) -> dict[str, TrimHAAAnnotation]:
+    return strict_annotation_index(core)
 
 
 def _sum_bool(rows: list[dict[str, Any]], field: str) -> int:

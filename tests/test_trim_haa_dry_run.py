@@ -6,6 +6,10 @@ from pathlib import Path
 
 import pytest
 
+from scripts.run_trim_haa_synthetic_dry_run import _core_by_id
+from trim_haa.indexing import DuplicateIdentifierError, InvalidIdentifierError
+from trim_haa.schema import TrimHAAAnnotation
+
 
 ROOT = Path(__file__).parents[1]
 VALID_ROOT = ROOT / "examples" / "synthetic_dry_run" / "valid"
@@ -45,6 +49,28 @@ def _build_and_run_dry_runs():
 def _rows(path: Path) -> list[dict[str, str]]:
     with path.open(newline="", encoding="utf-8") as handle:
         return list(csv.DictReader(handle))
+
+
+def _annotation(
+    annotation_id: str = "A1",
+    *,
+    case_id: str = "C1",
+    rationale_note: str = "Synthetic rationale.",
+) -> TrimHAAAnnotation:
+    return TrimHAAAnnotation(
+        annotation_id=annotation_id,
+        case_id=case_id,
+        actor_id="H01",
+        actor_type="human",
+        annotation_stage="human_pre",
+        primary_evidence_segment_ids="S1",
+        function_label="label_a",
+        rationale_mechanism="supports",
+        uncertainty_flag="medium",
+        rationale_note=rationale_note,
+        alternative_pathway_present="no",
+        status="locked",
+    )
 
 
 def test_dry_run_package_loads_and_counts_match_expected_totals():
@@ -174,3 +200,89 @@ def test_output_generation_is_deterministic():
     }
 
     assert after == before
+
+
+def test_dry_run_core_lookup_preserves_unique_order_and_identity():
+    records = [_annotation("A2", case_id="C2"), _annotation("A1", case_id="C1")]
+
+    result = _core_by_id(record for record in records)
+
+    assert list(result) == ["A2", "A1"]
+    assert result["A2"] is records[0]
+    assert result["A1"] is records[1]
+
+
+@pytest.mark.parametrize(
+    "records, first_position, second_position",
+    [
+        ([_annotation("DUP"), _annotation("DUP")], 0, 1),
+        (
+            [
+                _annotation("DUP", rationale_note="First."),
+                _annotation("DUP", rationale_note="Conflicting."),
+            ],
+            0,
+            1,
+        ),
+        (
+            [
+                _annotation("DUP", case_id="C1"),
+                _annotation("DUP", case_id="C2"),
+            ],
+            0,
+            1,
+        ),
+        (
+            [_annotation("DUP"), _annotation("OTHER"), _annotation("DUP")],
+            0,
+            2,
+        ),
+    ],
+)
+def test_dry_run_core_lookup_rejects_duplicate_ids(
+    records, first_position, second_position
+):
+    with pytest.raises(DuplicateIdentifierError) as caught:
+        _core_by_id(records)
+
+    assert caught.value.identifier == "DUP"
+    assert caught.value.first_position == first_position
+    assert caught.value.second_position == second_position
+
+
+def test_dry_run_core_lookup_rejects_generator_duplicates():
+    records = (_annotation(identifier) for identifier in ("A1", "A2", "A1"))
+
+    with pytest.raises(DuplicateIdentifierError) as caught:
+        _core_by_id(records)
+
+    assert (caught.value.first_position, caught.value.second_position) == (0, 2)
+
+
+@pytest.mark.parametrize(
+    "record",
+    [
+        _annotation(""),
+        _annotation("   "),
+        {"case_id": "C-MISSING"},
+    ],
+)
+def test_dry_run_core_lookup_rejects_invalid_ids(record):
+    with pytest.raises(InvalidIdentifierError) as caught:
+        _core_by_id([record])
+
+    assert caught.value.position == 0
+
+
+def test_dry_run_core_lookup_error_redacts_annotation_content():
+    secret = "DO_NOT_EXPOSE_DRY_RUN_RATIONALE"
+    records = [
+        _annotation("DUP", case_id="C-FIRST", rationale_note=secret),
+        _annotation("DUP", case_id="C-SECOND", rationale_note=secret),
+    ]
+
+    with pytest.raises(DuplicateIdentifierError) as caught:
+        _core_by_id(records)
+
+    assert secret not in str(caught.value)
+    assert secret not in repr(vars(caught.value))

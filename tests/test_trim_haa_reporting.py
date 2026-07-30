@@ -4,6 +4,7 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
+from trim_haa.indexing import DuplicateIdentifierError, InvalidIdentifierError
 from trim_haa.locking import LockRecord
 from trim_haa.provenance import AssistanceProvenance
 from trim_haa.reporting import case_level_report, participant_level_report, study_level_report
@@ -121,3 +122,104 @@ def test_duplicate_stage_rows_fail_instead_of_selecting_first():
 
     with pytest.raises(ValueError, match="multiple 'human_pre' records"):
         case_level_report(records)
+
+
+def test_case_report_preserves_unique_case_insertion_order():
+    records = [
+        _report_record("C2-PRE", "C2", "human_pre", "a"),
+        _report_record("C1-PRE", "C1", "human_pre", "b"),
+    ]
+
+    report = case_level_report(record for record in records)
+
+    assert list(report["case_id"]) == ["C2", "C1"]
+
+
+@pytest.mark.parametrize(
+    "records, first_position, second_position",
+    [
+        (
+            [
+                _report_record("DUP", "C1", "human_pre", "a"),
+                _report_record("DUP", "C1", "human_pre", "a"),
+            ],
+            0,
+            1,
+        ),
+        (
+            [
+                _report_record("DUP", "C1", "human_pre", "a"),
+                _report_record("DUP", "C1", "ai_independent", "b"),
+            ],
+            0,
+            1,
+        ),
+        (
+            [
+                _report_record("DUP", "C1", "human_pre", "a"),
+                _report_record("DUP", "C2", "human_pre", "a"),
+            ],
+            0,
+            1,
+        ),
+        (
+            [
+                _report_record("DUP", "C1", "human_pre", "a"),
+                _report_record("OTHER", "C2", "human_pre", "a"),
+                _report_record("DUP", "C3", "human_pre", "a"),
+            ],
+            0,
+            2,
+        ),
+    ],
+)
+def test_case_report_rejects_duplicate_annotation_ids(
+    records, first_position, second_position
+):
+    with pytest.raises(DuplicateIdentifierError) as caught:
+        case_level_report(records)
+
+    assert caught.value.identifier == "DUP"
+    assert caught.value.first_position == first_position
+    assert caught.value.second_position == second_position
+
+
+def test_case_report_rejects_generator_duplicates():
+    records = (
+        _report_record(identifier, f"C{position}", "human_pre", "a")
+        for position, identifier in enumerate(("A1", "A2", "A1"), start=1)
+    )
+
+    with pytest.raises(DuplicateIdentifierError) as caught:
+        case_level_report(records)
+
+    assert (caught.value.first_position, caught.value.second_position) == (0, 2)
+
+
+@pytest.mark.parametrize(
+    "record",
+    [
+        _report_record("", "C1", "human_pre", "a"),
+        _report_record("   ", "C1", "human_pre", "a"),
+        {"case_id": "C-MISSING"},
+    ],
+)
+def test_case_report_rejects_invalid_annotation_ids(record):
+    with pytest.raises(InvalidIdentifierError) as caught:
+        case_level_report([record])
+
+    assert caught.value.position == 0
+
+
+def test_case_report_duplicate_error_redacts_rationale():
+    secret = "DO_NOT_EXPOSE_REPORT_RATIONALE"
+    first = _report_record("DUP", "C1", "human_pre", "a")
+    second = _report_record("DUP", "C2", "human_pre", "a")
+    first.rationale_note = secret
+    second.rationale_note = secret
+
+    with pytest.raises(DuplicateIdentifierError) as caught:
+        case_level_report([first, second])
+
+    assert secret not in str(caught.value)
+    assert secret not in repr(vars(caught.value))

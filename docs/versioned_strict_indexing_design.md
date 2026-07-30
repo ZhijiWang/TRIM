@@ -17,9 +17,13 @@ reinterpreted.
 - Historical verification continues to use the frozen legacy implementation.
 - New development must use `strict_annotation_index()`.
 - Frozen artifacts and historical hashes remain reproducible.
-- No historical caller is migrated by this design PR.
+- No historical caller is migrated.
 - `annotation_index()` retains its silent last-record-wins behavior only as a
   legacy compatibility boundary.
+
+The reviewed active, non-frozen Core-annotation callers now use the strict API.
+The repository-wide classification and migration decisions are recorded in the
+[active identifier indexing audit](active_identifier_indexing_audit.md).
 
 ## API contract
 
@@ -49,38 +53,51 @@ prints full records, rationales, source text, or other annotation content.
 available from both `trim_haa.indexing` and the top-level `trim_haa` namespace.
 No existing export is removed.
 
+For validation-report APIs, fail-closed indexing prevents checks that would
+require choosing an ambiguous record; it does not abort unrelated validation.
+Record-only errors that do not depend on the unavailable index continue to be
+collected in the same report.
+
 ## Other index risks
 
-Provenance rows, exposure events, lock manifests, and stage-keyed reporting also
-use identifier-based lookup patterns. Some active validators already detect
-particular duplicates, while other dictionary-building paths may still select a
-later value. This PR does not generalize an abstraction before each record type's
-identifier and compatibility contract is reviewed. It therefore adds only the
-strict annotation index and does not claim that all duplicate-index risks are
-resolved.
+The active-index audit confirmed that provenance rows, exposure events, lock
+manifests, gate maps, and composite stage or assignment lookups also use
+identifier-based patterns. Some active validators already detect particular
+duplicates, while other dictionary-building paths may still select a later
+value. These paths remain deferred for record-type-specific contract design.
+They are not forced through the annotation contract, and this design does not
+claim that all duplicate-index risks are resolved.
 
 ## Migration phases
 
-### Phase 0: current state
+### Phase 0: compatibility preservation
 
 - The legacy function remains frozen.
-- The strict version-1 helper is introduced.
-- No historical or active caller is migrated.
-- A source guard prevents new non-frozen production modules from importing or
-  calling the legacy helper.
+- Frozen historical workflows retain their explicit legacy paths.
+- Frozen historical callers are never migrated solely because they use the
+  legacy helper.
 
-### Phase 1: new-call-site adoption
+### Phase 1: new-call-site adoption — complete
 
 - All new modules use the strict helper.
-- The compatibility guard continues to reject new reliance on the legacy helper.
+- The recursive compatibility guard rejects new production imports or calls of
+  the legacy helper except for a function-scoped compatibility allowlist.
+- The guard is independent of line numbers, permits the strict API, and has a
+  regression proving that a new production legacy import fails.
 - Additional record-type helpers are introduced only after their contracts are
   separately reviewed.
 
-### Phase 2: non-frozen caller migration
+### Phase 2: non-frozen caller migration — reviewed Core callers complete
 
-- Active non-frozen paths are audited and migrated in a separate PR.
-- Each migration receives duplicate, empty-ID, ordering, and compatibility tests.
+- The active-index audit reviewed production, test, script, validator, and
+  documentation candidates.
+- Proven active non-frozen Core annotation lookups in reporting, validation,
+  and the synthetic dry-run use `strict_annotation_index()`.
+- Caller regressions cover unique, duplicate, invalid, generator, order, and
+  redaction behavior.
 - Frozen workflows retain an explicit legacy path.
+- Non-annotation indexes remain deferred rather than being forced through the
+  annotation contract.
 
 ### Phase 3: Core record version boundary
 
@@ -97,18 +114,19 @@ resolved.
 
 ## Caller guidance
 
-New code should import `strict_annotation_index` from `trim_haa` or
-`trim_haa.indexing`. Code that verifies frozen historical workflows may continue
-to use `trim_haa.provenance.annotation_index()` and should label that dependency
-as legacy compatibility behavior. Active callers should migrate only through the
-phases above, with an explicit Core version decision before strict indexing
-becomes the default.
+New Core-annotation indexing code should import `strict_annotation_index` from
+`trim_haa` or `trim_haa.indexing`. All audited active non-frozen Core-annotation
+callers have migrated. Code that verifies frozen historical workflows may
+continue to use `trim_haa.provenance.annotation_index()` and should label that
+dependency as legacy compatibility behavior. Non-annotation record indexes
+require separate contract-specific design before migration.
 
 ## Non-goals
 
-This PR does not:
+This design does not:
 
-- migrate existing historical or active callers;
+- migrate frozen historical callers;
+- migrate non-annotation record indexes;
 - change `provenance.py`, frozen files, manifests, or hashes;
 - resolve every provenance, exposure, lock, or report-index duplicate risk;
 - change future-state schemas or study gates;
