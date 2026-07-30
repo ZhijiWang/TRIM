@@ -200,4 +200,7 @@ changed.
 
 This audit resolves the reviewed active Core annotation lookup risks. It does
 not establish repository-wide duplicate safety, and it does not resolve the
-deferred non-annotation contracts.
+deferred non-annotation contracts. The future boundary between explicit Core
+record versions, legacy-unversioned records, and those separately deferred
+contracts is defined in the
+[Core Record Versioning Policy](core_record_versioning_policy.md).

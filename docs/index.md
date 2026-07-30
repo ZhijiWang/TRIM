@@ -21,6 +21,8 @@ Start here:
 - [Core Indexing Migration Note](core_indexing_migration_note.md)
 - [Versioned Strict Indexing Design](versioned_strict_indexing_design.md)
 - [Active Identifier Indexing Audit](active_identifier_indexing_audit.md)
+- [Core Record Versioning Policy](core_record_versioning_policy.md)
+- [ADR: Core Record Versioning](adr/ADR_core_record_versioning.md)
 - [Research Status](research_status.md)
 - [Authoritative Manual Materials](manuals/)
 - [Active Design B Pilot Overview](studies/human_llm_pilot_readme.md)

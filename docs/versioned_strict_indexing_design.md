@@ -53,6 +53,11 @@ prints full records, rationales, source text, or other annotation content.
 available from both `trim_haa.indexing` and the top-level `trim_haa` namespace.
 No existing export is removed.
 
+Indexing API version `"1"` is not itself a Core record version. The future
+mapping between these independent contracts is defined in the
+[Core Record Versioning Policy](core_record_versioning_policy.md); no current
+record receives version metadata through the indexing API.
+
 For validation-report APIs, fail-closed indexing prevents checks that would
 require choosing an ambiguous record; it does not abort unrelated validation.
 Record-only errors that do not depend on the unavailable index continue to be
