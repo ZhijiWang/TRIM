@@ -19,6 +19,7 @@ Start here:
 - [Exposure Audit](exposure_audit.md)
 - [Reporting Limits](reporting_limits.md)
 - [Core Indexing Migration Note](core_indexing_migration_note.md)
+- [Versioned Strict Indexing Design](versioned_strict_indexing_design.md)
 - [Research Status](research_status.md)
 - [Authoritative Manual Materials](manuals/)
 - [Active Design B Pilot Overview](studies/human_llm_pilot_readme.md)
