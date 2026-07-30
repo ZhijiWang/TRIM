@@ -26,6 +26,14 @@ artifacts.
   reporting, and relationships require explicit compatibility rules.
 - Validation will use an explicit version-dispatch registry; it will not guess
   from shape or package version.
+- Explicit legacy routing and classification of every existing public and
+  internal Core reader or validator are Phase 1 prerequisites to Core version
+  `"1"`.
+- Phase 2 MUST NOT begin while an active non-frozen entrypoint can implicitly
+  accept legacy-unversioned input.
+- Creating `trim_haa.compat.legacy_unversioned`, or an equivalent explicitly
+  named compatibility entrypoint, belongs to Phase 1 infrastructure; active
+  caller and wrapper consolidation may occur later.
 - Migration creates a new artifact, hash, lock, and provenance manifest while
   preserving the source.
 - The preferred future compatibility namespace is
@@ -41,9 +49,11 @@ The full binding requirements are in the
 ## Consequences
 
 Future implementation must build explicit reader dispatch before adding the
-first version field. Versioned canonical payloads and locks include version
-metadata. Partial migration yields a declared mixed dataset, not an in-place
-rewrite. Unsupported versions cannot enter semantic validation or reports.
+first version field. Existing APIs may remain importable, but their permitted
+future call contexts must be classified before versioned records exist.
+Versioned canonical payloads and locks include version metadata. Partial
+migration yields a declared mixed dataset, not an in-place rewrite. Unsupported
+versions cannot enter semantic validation or reports.
 
 ## Alternatives rejected
 

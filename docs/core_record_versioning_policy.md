@@ -172,9 +172,28 @@ Shared, version-independent checks MAY be reused behind dispatch. Version
 orchestration MUST remain explicit so implementations do not duplicate all
 validators or apply newest rules to older records.
 
-The existing public validation functions MUST remain unchanged until a separate
-implementation PR defines and tests their transition. Frozen validation MUST
-not be weakened or routed through new rules.
+Before any explicit Core version is introduced, future implementation MUST
+inventory and classify every existing public and internal Core reader or
+validator as exactly one of:
+
+- a version-aware active entrypoint;
+- an explicit legacy compatibility entrypoint; or
+- a frozen historical entrypoint.
+
+Future routing MUST prevent new active workflows from reaching
+legacy-unversioned semantics implicitly. A supported explicit Core version MUST
+NOT be introduced while any active non-frozen entrypoint can accept missing
+version metadata and silently apply legacy-unversioned semantics.
+
+Existing public APIs MAY remain importable for compatibility, but importability
+MUST NOT imply that every call context remains valid for new active workflows.
+Frozen behavior MUST remain unchanged. Active non-frozen callers MAY be routed
+through version-aware dispatch only in a separately reviewed implementation PR
+after their contexts are classified and tested.
+
+The existing public validation functions remain unchanged in this design PR.
+Their future transition MUST be defined and tested before Core version `"1"` is
+introduced. Frozen validation MUST not be weakened or routed through new rules.
 
 ## Missing-version policy
 
@@ -184,6 +203,11 @@ A missing `core_record_version` MUST be interpreted as legacy-unversioned only
 when the artifact is frozen historical material or the caller explicitly
 selects the legacy-unversioned compatibility adapter. The original legacy
 semantics, serializer, hashes, and verification behavior MUST be preserved.
+
+A named adapter MUST NOT be a user-selectable escape hatch for arbitrary
+malformed or new input. The caller MUST declare genuine frozen historical
+provenance or migration-source context that the adapter can validate. Merely
+requesting "legacy mode" MUST NOT transform new input into historical input.
 
 ### New active workflow
 
@@ -331,6 +355,11 @@ historical serialization, and compatibility validation MAY live there. Each
 adapter MUST identify the historical contract it preserves. The namespace MUST
 NOT become an implicit fallback for malformed new input.
 
+Phase 1 MUST create `trim_haa.compat.legacy_unversioned`, or an equivalent
+explicitly named legacy compatibility entrypoint, before Phase 2 may begin. The
+preferred implementation is the named namespace. Later consolidation of active
+callers and wrappers does not defer this initial compatibility boundary.
+
 `trim_haa.provenance.annotation_index` MUST remain frozen indefinitely while
 protected historical workflows depend on it. It is not recommended for new
 development. A future compatibility wrapper MAY delegate to it, but the original
@@ -455,18 +484,39 @@ by this policy.
 - Frozen historical paths retain legacy behavior.
 - No explicit Core record-version field exists.
 
-### Phase 1: version-aware reader infrastructure
+### Phase 1: dispatch and compatibility boundary
 
-Future work MUST add version constants, an explicit dispatch registry, missing
-and unknown-version errors, and preservation-only handling. It MUST preserve
-current public APIs and MUST NOT migrate records.
+Before any explicit Core version field is introduced, future work MUST:
+
+- add version constants and an explicit dispatch registry;
+- add deterministic missing-version and unsupported-version errors;
+- add preservation-only handling for unsupported versions;
+- create `trim_haa.compat.legacy_unversioned`, or an equivalent explicitly
+  named legacy compatibility entrypoint;
+- inventory and classify every existing public and internal Core reader or
+  validator as version-aware active, explicit legacy compatibility, or frozen
+  historical;
+- establish routing rules that prevent new active workflows from reaching
+  legacy-unversioned semantics implicitly;
+- prove with compatibility tests that frozen historical workflows remain
+  unchanged; and
+- prove with active-call-site tests that new unversioned input fails closed.
+
+Phase 1 MUST NOT migrate records or add an explicit Core version field. Existing
+APIs MAY remain importable, but their permitted future call contexts MUST be
+classified and enforced before Phase 2.
 
 ### Phase 2: first explicit Core version
 
-Future work MUST introduce `core_record_version`, version `"1"` schemas and
-serializers, canonical hash rules, version-aware validators, lock metadata, and
-new synthetic fixtures. It MUST begin only after Phase 1 dispatch and
-compatibility tests pass.
+Phase 2 MUST NOT begin until every Phase 1 compatibility-boundary and routing
+test passes. Core version `"1"` MUST NOT be added to any production schema,
+serializer, fixture, lock format, or record while any active non-frozen
+entrypoint can accept missing version metadata and silently apply
+legacy-unversioned semantics.
+
+Only after that hard prerequisite is satisfied MAY future work introduce
+`core_record_version`, version `"1"` schemas and serializers, canonical hash
+rules, version-aware validators, lock metadata, and new synthetic fixtures.
 
 ### Phase 3: migration tooling
 
@@ -474,11 +524,14 @@ Future work MUST require explicit source and target versions, immutable sources,
 migration manifests, deterministic output, dry-run support, and no automatic
 overwrite. Human-review gates MUST follow the migration classifications above.
 
-### Phase 4: compatibility namespace
+### Phase 4: active caller transition and compatibility consolidation
 
-Future work MAY add explicit legacy adapters under
-`trim_haa.compat.legacy_unversioned`. Frozen original imports MUST remain.
-Active non-frozen callers may move only after separate compatibility review.
+After the Phase 1 boundary exists, future work MAY migrate reviewed active
+non-frozen callers, consolidate compatibility wrappers under
+`trim_haa.compat.legacy_unversioned`, and document versioned transition paths.
+Each caller transition requires separate compatibility review. Frozen original
+imports MUST remain. Phase 4 MUST NOT be described as the first availability of
+explicit legacy compatibility.
 
 ### Phase 5: stable release policy
 

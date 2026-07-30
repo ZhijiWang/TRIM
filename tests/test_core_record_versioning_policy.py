@@ -43,6 +43,23 @@ def test_policy_and_adr_are_linked_from_documentation():
     assert "(../core_record_versioning_policy.md)" in _read(ADR)
 
 
+def test_phase_one_establishes_legacy_boundary_before_core_version_one():
+    policy = _read(POLICY)
+    adr = _read(ADR)
+
+    assert "### Phase 1: dispatch and compatibility boundary" in policy
+    assert "`trim_haa.compat.legacy_unversioned`, or an equivalent explicitly" in policy
+    assert "every existing public and internal Core reader or" in policy
+    assert (
+        "Phase 2 MUST NOT begin until every Phase 1 compatibility-boundary and routing"
+        in policy
+    )
+    assert 'Core version `"1"` MUST NOT be added to any production schema' in policy
+    assert "entrypoint can accept missing version metadata" in policy
+    assert "Phase 1 prerequisites to Core version" in adr
+    assert "Phase 2 MUST NOT begin while an active non-frozen entrypoint" in adr
+
+
 def test_design_does_not_prematurely_change_runtime_boundaries():
     project = tomllib.loads(_read(ROOT / "pyproject.toml"))
 
