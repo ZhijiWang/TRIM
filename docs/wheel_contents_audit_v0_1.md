@@ -1,6 +1,16 @@
 # Wheel Contents Audit v0.1
 
-This file records the standalone-main wheel audit. PR #20 preserves this boundary explicitly: its study-only `trim_haa.llm` and `trim_haa.human_coding` source-checkout modules are excluded from package discovery, the wheel, and the sdist. They are not stable installed-package APIs. PR #20 tests build both distributions and enforce that exclusion.
+This file records the historical standalone-main wheel snapshot taken for PR
+#20. Its filename, checksum, and module list describe that snapshot, not the
+current branch build. PR #20 established the continuing boundary that the
+study-only `trim_haa.llm` and `trim_haa.human_coding` source-checkout modules
+are excluded from package discovery, the wheel, and the sdist. They are not
+stable installed-package APIs.
+
+Later alpha work added `trim_haa/indexing.py` to both wheel and sdist without
+changing package version `0.3.0a1`. Current packaging tests, rather than the
+historical checksum below, are authoritative for current contents. See the
+[repository maintenance boundary](repository_maintenance_boundary.md).
 
 Wheel filename: `trim_haa-0.3.0a1-py3-none-any.whl`
 

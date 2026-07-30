@@ -75,6 +75,11 @@ claim that all duplicate-index risks are resolved.
 
 ## Migration phases
 
+These are strict-indexing adoption phases. Their Phase 1 is not Phase 1 of the
+[Core Record Versioning Policy](core_record_versioning_policy.md): the indexing
+new-call-site phase below is complete, while Core version-aware dispatch and
+its compatibility boundary remain unimplemented.
+
 ### Phase 0: compatibility preservation
 
 - The legacy function remains frozen.

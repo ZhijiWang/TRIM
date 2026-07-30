@@ -2,6 +2,11 @@
 
 This page maps the repository as it exists on `main`. It is a navigation aid, not a migration plan. No current file movement is recommended.
 
+The current alpha software infrastructure is in
+[maintenance mode](repository_maintenance_boundary.md). This status preserves
+active maintenance and blocked research lines while deferring speculative
+versioning and record-contract work until a concrete reopening trigger exists.
+
 ## Stable naming hierarchy
 
 - **Repository:** TRIM

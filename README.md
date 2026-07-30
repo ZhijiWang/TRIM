@@ -61,6 +61,13 @@ lock = lock_annotation(
 )
 ```
 
+## Current Alpha Format
+
+The current Core records are legacy-unversioned. The existing validators and
+CLI operate on that current alpha format. Future explicit Core record
+versioning is designed but unimplemented. Core version `"1"` is not implemented,
+and users MUST NOT add `core_record_version="1"` to current records.
+
 ## Installed-Package CLI
 
 The installed package provides validation, locking, provenance, and comparison utilities.
@@ -105,6 +112,15 @@ trim-haa run-synthetic
 TRIM-HAA is the active software package. The Design B Human–LLM Friction-Locus Pilot is the active blocked study; merging its preparation layer did not authorize human coding or model execution.
 
 The root MIT license does not automatically relicense third-party texts or translations. In particular, the older author-only English *In a Grove* walkthrough is not authorized for unrestricted redistribution; consult the rights document before assembling any release bundle.
+
+## Maintenance Status
+
+The current alpha infrastructure is in
+[maintenance mode](docs/repository_maintenance_boundary.md). Speculative Core
+versioning and deferred identifier contracts are not active implementation
+work. Confirmed correctness, security, reproducibility, packaging, dependency,
+documentation, and rights fixes remain welcome. This status does not make the
+package stable or the research complete.
 
 ## Research Status
 
