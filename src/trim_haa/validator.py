@@ -10,6 +10,12 @@ from typing import Any, Iterable, Mapping
 from trim_haa.comparison import copied_phrase_overlap
 from trim_haa.exposure import ExposureEvent
 from trim_haa.hashing import looks_like_sha256
+from trim_haa.indexing import (
+    DuplicateIdentifierError,
+    IdentifierIndexError,
+    InvalidIdentifierError,
+    strict_annotation_index,
+)
 from trim_haa.locking import LockRecord, verify_locked_annotation
 from trim_haa.provenance import (
     AssistanceProvenance,
@@ -175,7 +181,11 @@ def validate_core_records(records: Iterable[TrimHAAAnnotation | Mapping[str, Any
                     "Locked records are immutable; duplicate locked annotation_id with differing rows is invalid.",
                 )
         seen[annotation.annotation_id] = annotation
-    report.extend(validate_relationships(annotations))
+    try:
+        index = strict_annotation_index(annotations)
+    except IdentifierIndexError:
+        return report
+    report.extend(_validate_relationships_with_index(annotations, index))
     return report
 
 
@@ -302,7 +312,17 @@ def validate_relationships(
     records: Iterable[TrimHAAAnnotation | Mapping[str, Any]],
 ) -> list[ValidationIssue]:
     annotations = [_coerce_annotation(record) for record in records]
-    index = {annotation.annotation_id: annotation for annotation in annotations}
+    try:
+        index = strict_annotation_index(annotations)
+    except IdentifierIndexError as error:
+        return [_strict_index_validation_issue(error)]
+    return _validate_relationships_with_index(annotations, index)
+
+
+def _validate_relationships_with_index(
+    annotations: list[TrimHAAAnnotation],
+    index: dict[str, TrimHAAAnnotation],
+) -> list[ValidationIssue]:
     issues: list[ValidationIssue] = []
 
     for annotation in annotations:
@@ -346,14 +366,36 @@ def validate_dataset(
     exposures = [_coerce_exposure_event(record) for record in exposure_events]
     locks = [_coerce_lock_record(record) for record in lock_records]
     report = validate_core_records(annotations)
+    try:
+        annotation_by_id = strict_annotation_index(annotations)
+    except IdentifierIndexError:
+        annotation_by_id = None
     for record in provenance:
         report.extend(validate_provenance_record(record))
     report.extend(_validate_provenance_completeness(annotations, provenance))
     report.extend(_validate_stage_condition_matrix(annotations, provenance))
-    report.extend(_validate_exposed_ai_links(annotations, provenance))
-    report.extend(_validate_exposure_events(annotations, provenance, exposures))
-    report.extend(_validate_locks(annotations, provenance, locks))
-    report.extend(_validate_changed_flag_consistency(annotations, provenance))
+    if annotation_by_id is not None:
+        report.extend(
+            _validate_exposed_ai_links(annotations, provenance, annotation_by_id)
+        )
+        report.extend(
+            _validate_exposure_events(
+                annotations,
+                provenance,
+                exposures,
+                annotation_by_id,
+            )
+        )
+        report.extend(
+            _validate_locks(annotations, provenance, locks, annotation_by_id)
+        )
+        report.extend(
+            _validate_changed_flag_consistency(
+                annotations,
+                provenance,
+                annotation_by_id,
+            )
+        )
     report.extend(_copying_warnings(annotations))
     return report
 
@@ -506,9 +548,9 @@ def _require_stage_values(
 def _validate_exposed_ai_links(
     annotations: list[TrimHAAAnnotation],
     provenance: list[AssistanceProvenance],
+    annotation_by_id: dict[str, TrimHAAAnnotation],
 ) -> list[ValidationIssue]:
     issues: list[ValidationIssue] = []
-    annotation_by_id = {record.annotation_id: record for record in annotations}
     prov_by_id = {record.annotation_id: record for record in provenance}
     for annotation in annotations:
         prov = prov_by_id.get(annotation.annotation_id)
@@ -542,9 +584,9 @@ def _validate_exposure_events(
     annotations: list[TrimHAAAnnotation],
     provenance: list[AssistanceProvenance],
     events: list[ExposureEvent],
+    annotation_by_id: dict[str, TrimHAAAnnotation],
 ) -> list[ValidationIssue]:
     issues: list[ValidationIssue] = []
-    annotation_by_id = {record.annotation_id: record for record in annotations}
     prov_by_id = {record.annotation_id: record for record in provenance}
     seen: set[str] = set()
     events_by_post: dict[str, list[ExposureEvent]] = {}
@@ -589,9 +631,9 @@ def _validate_locks(
     annotations: list[TrimHAAAnnotation],
     provenance: list[AssistanceProvenance],
     locks: list[LockRecord],
+    annotation_by_id: dict[str, TrimHAAAnnotation],
 ) -> list[ValidationIssue]:
     issues: list[ValidationIssue] = []
-    annotation_by_id = {record.annotation_id: record for record in annotations}
     prov_by_id = {record.annotation_id: record for record in provenance}
     lock_by_annotation = {record.annotation_id: record for record in locks}
     required_parent_ids = {
@@ -620,8 +662,8 @@ def _validate_locks(
 def _validate_changed_flag_consistency(
     annotations: list[TrimHAAAnnotation],
     provenance: list[AssistanceProvenance],
+    annotation_by_id: dict[str, TrimHAAAnnotation],
 ) -> list[ValidationIssue]:
-    index = {annotation.annotation_id: annotation for annotation in annotations}
     prov_by_id = {record.annotation_id: record for record in provenance}
     issues: list[ValidationIssue] = []
     field_pairs = {
@@ -634,7 +676,7 @@ def _validate_changed_flag_consistency(
     for annotation in annotations:
         if not annotation.parent_annotation_id:
             continue
-        parent = index.get(annotation.parent_annotation_id)
+        parent = annotation_by_id.get(annotation.parent_annotation_id)
         prov = prov_by_id.get(annotation.annotation_id)
         if parent is None or prov is None:
             continue
@@ -683,6 +725,33 @@ def _copying_warnings(annotations: list[TrimHAAAnnotation]) -> list[ValidationIs
                         )
                     )
     return issues
+
+
+def _strict_index_validation_issue(
+    error: IdentifierIndexError,
+) -> ValidationIssue:
+    if isinstance(error, DuplicateIdentifierError):
+        return _issue(
+            error.identifier,
+            error.identifier_type,
+            (
+                f"Duplicate {error.identifier_type} {error.identifier!r} at "
+                f"positions {error.first_position} and {error.second_position} "
+                f"(case_ids {error.first_case_id!r} and "
+                f"{error.second_case_id!r}); no record was selected."
+            ),
+        )
+    if isinstance(error, InvalidIdentifierError):
+        return _issue(
+            "<missing annotation_id>",
+            error.identifier_type,
+            (
+                f"{error.identifier_type} must be non-empty at position "
+                f"{error.position} (case_id={error.case_id!r}); no record was "
+                "selected."
+            ),
+        )
+    raise TypeError(f"Unsupported strict indexing error: {type(error).__name__}")
 
 
 def _cycle_issues(index: dict[str, TrimHAAAnnotation]) -> list[ValidationIssue]:

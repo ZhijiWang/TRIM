@@ -1,6 +1,12 @@
+import pytest
+
 from trim_haa.provenance import AssistanceProvenance
 from trim_haa.schema import TrimHAAAnnotation
-from trim_haa.validator import validate_core_records, validate_dataset
+from trim_haa.validator import (
+    validate_core_records,
+    validate_dataset,
+    validate_relationships,
+)
 
 
 def _relationship_record(
@@ -74,6 +80,111 @@ def test_human_post_ai_rejects_cross_case_and_invalid_stage_parent():
 
     assert "Parent and child must have the same case_id." in messages
     assert "human_post_ai parent must be one of: human_pre." in messages
+
+
+def test_relationship_validation_preserves_unique_generator_behavior():
+    pre = _relationship_record("PRE", "human_pre")
+    post = _relationship_record("POST", "human_post_ai", parent_annotation_id="PRE")
+
+    issues = validate_relationships(record for record in (pre, post))
+
+    assert issues == []
+
+
+@pytest.mark.parametrize(
+    "records, first_position, second_position",
+    [
+        (
+            [
+                _relationship_record("DUP", "human_pre"),
+                _relationship_record("DUP", "human_pre"),
+            ],
+            0,
+            1,
+        ),
+        (
+            [
+                _relationship_record("DUP", "human_pre"),
+                _relationship_record("DUP", "ai_independent"),
+            ],
+            0,
+            1,
+        ),
+        (
+            [
+                _relationship_record("DUP", "human_pre", case_id="C-FIRST"),
+                _relationship_record("DUP", "human_pre", case_id="C-SECOND"),
+            ],
+            0,
+            1,
+        ),
+        (
+            [
+                _relationship_record("DUP", "human_pre"),
+                _relationship_record("OTHER", "human_pre"),
+                _relationship_record("DUP", "human_pre"),
+            ],
+            0,
+            2,
+        ),
+    ],
+)
+def test_relationship_validation_rejects_duplicate_ids_without_a_winner(
+    records, first_position, second_position
+):
+    issues = validate_relationships(records)
+
+    assert len(issues) == 1
+    issue = issues[0]
+    assert issue.field == "annotation_id"
+    assert issue.severity == "error"
+    assert "Duplicate annotation_id 'DUP'" in issue.message
+    assert f"positions {first_position} and {second_position}" in issue.message
+    assert "no record was selected" in issue.message
+
+
+def test_relationship_validation_rejects_generator_duplicates():
+    records = (
+        _relationship_record(identifier, "human_pre")
+        for identifier in ("A1", "A2", "A1")
+    )
+
+    issues = validate_relationships(records)
+
+    assert len(issues) == 1
+    assert "positions 0 and 2" in issues[0].message
+
+
+@pytest.mark.parametrize(
+    "record",
+    [
+        _relationship_record("", "human_pre"),
+        _relationship_record("   ", "human_pre"),
+        {"case_id": "C-MISSING"},
+    ],
+)
+def test_relationship_validation_rejects_invalid_ids_with_position(record):
+    issues = validate_relationships([record])
+
+    assert len(issues) == 1
+    assert issues[0].field == "annotation_id"
+    assert "position 0" in issues[0].message
+    assert "no record was selected" in issues[0].message
+
+
+def test_relationship_index_issue_redacts_annotation_content():
+    secret = "DO_NOT_EXPOSE_VALIDATOR_RATIONALE"
+    first = _relationship_record("DUP", "human_pre")
+    second = _relationship_record("DUP", "human_pre")
+    first.rationale_note = secret
+    second.rationale_note = secret
+
+    issues = validate_relationships([first, second])
+
+    assert len(issues) == 1
+    assert secret not in issues[0].message
+    assert "DUP" in issues[0].message
+    assert "positions 0 and 1" in issues[0].message
 
 
 def test_changed_flag_consistency_warning():

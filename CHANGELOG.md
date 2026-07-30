@@ -5,6 +5,10 @@ boundaries; they do not authorize research execution or human coding.
 
 ## Unreleased
 
+- Audit active identifier-indexing paths and migrate proven non-frozen Core
+  annotation lookups in reporting, validation, and the synthetic dry-run to the
+  version-1 strict contract while preserving frozen legacy behavior and
+  deferring provenance, lock, exposure, gate, and composite-key contracts.
 - Add a version-1 strict annotation-indexing API for new development while
   preserving the frozen legacy behavior; historical caller migration remains
   staged and deferred.

@@ -9,6 +9,7 @@ if TYPE_CHECKING:
     import pandas as pd
 
 from trim_haa.comparison import compare_pre_ai_post
+from trim_haa.indexing import strict_annotation_index
 from trim_haa.locking import LockRecord, verify_locked_annotation
 from trim_haa.provenance import AssistanceProvenance
 from trim_haa.schema import TrimHAAAnnotation
@@ -22,7 +23,7 @@ def case_level_report(
 ) -> pd.DataFrame:
     pd = _pandas()
     rows: list[dict[str, Any]] = []
-    prepared = [_coerce(record) for record in annotations]
+    prepared = list(strict_annotation_index(annotations).values())
     by_case = _by_case(prepared)
     prov_by_id = _provenance_by_id(provenance_records)
     lock_by_id = _lock_by_annotation(lock_records)
