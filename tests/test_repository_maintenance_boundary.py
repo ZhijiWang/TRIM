@@ -72,3 +72,12 @@ def test_boundary_records_maintenance_reopening_and_research_limits():
     assert "Phase 1 is implemented" not in boundary
     assert "Empirical validation exists." not in boundary
     assert "Execution is authorized." not in boundary
+
+
+def test_strict_indexing_release_phase_preserves_frozen_legacy_support():
+    design = _read(ROOT / "docs" / "versioned_strict_indexing_design.md")
+
+    assert "active non-frozen convenience surfaces" in design
+    assert "Frozen historical imports and verification paths remain supported" in design
+    assert "receive no removal timeline" in design
+    assert "legacy deprecation timeline" not in design

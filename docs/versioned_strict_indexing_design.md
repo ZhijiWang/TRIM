@@ -118,7 +118,16 @@ its compatibility boundary remain unimplemented.
 
 ### Phase 4: stable release
 
-- Release documentation defines the legacy deprecation timeline.
+- Release documentation MAY define a transition or deprecation policy only for
+  active non-frozen convenience surfaces after replacements exist,
+  compatibility tests pass, affected active callers are identified, and a
+  separately reviewed public transition is approved.
+- Frozen historical imports and verification paths remain supported
+  indefinitely and receive no removal timeline. They retain their original
+  semantics and import paths wherever protected historical workflows depend on
+  them.
+- Frozen historical paths MUST NOT be redirected in a way that changes output
+  or emit warnings that alter checksum-sensitive or frozen behavior.
 - Historical verification support is preserved indefinitely.
 - Frozen records are never rewritten or reinterpreted.
 
