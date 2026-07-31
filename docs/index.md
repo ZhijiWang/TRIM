@@ -23,6 +23,8 @@ Start here:
 - [Active Identifier Indexing Audit](active_identifier_indexing_audit.md)
 - [Core Record Versioning Policy](core_record_versioning_policy.md)
 - [ADR: Core Record Versioning](adr/ADR_core_record_versioning.md)
+- [Repository Maintenance Boundary](repository_maintenance_boundary.md)
+- [ADR: Repository Maintenance Boundary](adr/ADR_repository_maintenance_boundary.md)
 - [Research Status](research_status.md)
 - [Authoritative Manual Materials](manuals/)
 - [Active Design B Pilot Overview](studies/human_llm_pilot_readme.md)

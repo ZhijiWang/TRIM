@@ -5,6 +5,9 @@ boundaries; they do not authorize research execution or human coding.
 
 ## Unreleased
 
+- Record the current alpha infrastructure maintenance boundary, including
+  deliberately deferred work and concrete reopening triggers, without changing
+  runtime code, schemas, records, study gates, or package version.
 - Define the future Core record versioning and explicit legacy compatibility
   policy, requiring compatibility routing and entrypoint classification before
   the first explicit version without changing schemas, records, runtime

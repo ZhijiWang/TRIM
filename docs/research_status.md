@@ -12,6 +12,15 @@
 
 The software package is standalone for record validation, lock verification, provenance handling, and comparison. Demonstrations remain repository-bound and require a source checkout.
 
+## Software Maintenance Status
+
+The current alpha software infrastructure is in
+[maintenance mode](repository_maintenance_boundary.md). This is an intentional
+boundary for speculative infrastructure expansion, not an archival shutdown,
+stable-release declaration, empirical validation claim, or study
+authorization. Correctness, reproducibility, packaging, documentation, and
+rights maintenance continues.
+
 ## Active Blocked Study
 
 The Design B Human–LLM Friction-Locus Pilot is the active study. PR #20 has merged into `main` as a blocked preparation layer covering rights evidence, controlled packet handling, provider planning, no-call LLM preservation, and no-coding human annotation scaffolds.
